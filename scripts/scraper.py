@@ -5,11 +5,7 @@ import json
 import time
 import os
 
-# Optional streamlit import for web interface
-try:
-    import streamlit as st
-except ImportError:
-    st = None
+# Streamlit removed - not needed for automation scripts
 
 HEADERS = {
             "User-Agent": (
