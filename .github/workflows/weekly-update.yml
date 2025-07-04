@@ -1,9 +1,9 @@
-name: Daily Data Update
+name: Weekly Data Update
 
 on:
   schedule:
-    # Run daily at 2:00 AM UTC
-    - cron: "0 2 * * *"
+    # Run weekly on Saturday at 2:00 AM UTC (Friday night to Saturday)
+    - cron: "0 2 * * 6"
   workflow_dispatch: # Allow manual triggering
     inputs:
       force_rescan:
@@ -49,7 +49,7 @@ jobs:
 
       - name: Update exam data
         run: |
-          echo "🚀 Starting automated exam data update..."
+          echo "🚀 Starting automated weekly exam data update..."
 
           # Build command with options
           COMMAND="python scripts/update_all_exams.py"
@@ -87,7 +87,7 @@ jobs:
           git add -A
 
           # Build commit message
-          COMMIT_MSG="🤖 Automated exam data update
+          COMMIT_MSG="🤖 Automated weekly exam data update
 
           - Updated exam questions and answers
           - Timestamp: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
@@ -112,7 +112,7 @@ jobs:
       - name: Generate summary
         if: always()
         run: |
-          echo "## 📊 Daily Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## 📊 Weekly Update Summary" >> $GITHUB_STEP_SUMMARY
           echo "**Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
