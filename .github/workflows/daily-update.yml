@@ -1,0 +1,141 @@
+name: Daily Data Update
+
+on:
+  schedule:
+    # Run daily at 2:00 AM UTC
+    - cron: "0 2 * * *"
+  workflow_dispatch: # Allow manual triggering
+    inputs:
+      force_rescan:
+        description: "Force rescan of all links (ignores existing complete status)"
+        required: false
+        default: false
+        type: boolean
+      specific_exam:
+        description: "Update only a specific exam code (leave empty for all exams)"
+        required: false
+        default: ""
+        type: string
+
+# Required permissions for the workflow
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Update exam data
+        run: |
+          echo "🚀 Starting automated exam data update..."
+
+          # Build command with options
+          COMMAND="python scripts/update_all_exams.py"
+
+          # Add force rescan option if enabled
+          if [ "${{ github.event.inputs.force_rescan }}" == "true" ]; then
+            COMMAND="$COMMAND --force-rescan"
+            echo "🔄 Force rescan enabled - will rescan all links"
+          fi
+
+          # Add specific exam option if provided
+          if [ -n "${{ github.event.inputs.specific_exam }}" ]; then
+            COMMAND="$COMMAND --exam ${{ github.event.inputs.specific_exam }}"
+            echo "📋 Updating only exam: ${{ github.event.inputs.specific_exam }}"
+          fi
+
+          echo "🔧 Running command: $COMMAND"
+          $COMMAND
+          echo "✅ Update process completed"
+
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "📊 Changes detected in exam data"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "📋 No changes detected"
+          fi
+
+      - name: Commit and push changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git add -A
+
+          # Build commit message
+          COMMIT_MSG="🤖 Automated exam data update
+
+          - Updated exam questions and answers
+          - Timestamp: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          - Automated via GitHub Actions"
+
+          # Add force rescan info to commit message
+          if [ "${{ github.event.inputs.force_rescan }}" == "true" ]; then
+            COMMIT_MSG="$COMMIT_MSG
+          - Force rescan enabled"
+          fi
+
+          # Add specific exam info to commit message
+          if [ -n "${{ github.event.inputs.specific_exam }}" ]; then
+            COMMIT_MSG="$COMMIT_MSG
+          - Updated only exam: ${{ github.event.inputs.specific_exam }}"
+          fi
+
+          git commit -m "$COMMIT_MSG"
+          git push
+          echo "✅ Changes committed and pushed successfully"
+
+      - name: Generate summary
+        if: always()
+        run: |
+          echo "## 📊 Daily Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Add input options to summary
+          if [ "${{ github.event.inputs.force_rescan }}" == "true" ]; then
+            echo "**Options:** Force rescan enabled" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ -n "${{ github.event.inputs.specific_exam }}" ]; then
+            echo "**Target:** Only exam ${{ github.event.inputs.specific_exam }}" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f "update_log.json" ]; then
+            echo "**Results:**" >> $GITHUB_STEP_SUMMARY
+            python -c "import json; data=json.load(open('update_log.json')); print(f'- Total exams processed: {data[\"total_exams\"]}'); print(f'- Successful updates: {data[\"successful_updates\"]}'); print(f'- Failed updates: {data[\"failed_updates\"]}'); print(f'- Total questions: {data[\"total_questions\"]}'); print(f'- Force rescan: {data.get(\"force_rescan\", False)}') if data.get('force_rescan') else None" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ❌ Update log not found" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ steps.verify-changed-files.outputs.changed }}" == "true" ]; then
+            echo "- ✅ Data updated and committed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- 📋 No changes to commit" >> $GITHUB_STEP_SUMMARY
+          fi

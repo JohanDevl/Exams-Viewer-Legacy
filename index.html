@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exams Viewer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1>Exams Viewer</h1>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Exam Code Input Section -->
+        <div class="input-section">
+          <div class="input-group">
+            <button
+              id="homeBtn"
+              class="home-btn"
+              title="Return to Home"
+              style="display: none"
+            >
+              <i class="fas fa-home"></i>
+            </button>
+            <select id="examCode" class="exam-input">
+              <option value="">Select an exam...</option>
+            </select>
+            <button id="settingsBtn" class="settings-btn" title="Open Settings">
+              <i class="fas fa-cog"></i>
+            </button>
+          </div>
+          <button id="exportBtn" class="export-btn" style="display: none">
+            <i class="fas fa-file-pdf"></i> Export Questions to PDF
+          </button>
+        </div>
+
+        <!-- Loading Section -->
+        <div id="loadingSection" class="loading-section" style="display: none">
+          <div class="spinner"></div>
+          <p>Loading questions...</p>
+        </div>
+
+        <!-- Question Navigation -->
+        <div
+          id="navigationSection"
+          class="navigation-section"
+          style="display: none"
+        >
+          <div class="nav-controls">
+            <button id="prevBtn" class="nav-btn">
+              <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <div class="question-info">
+              <span id="questionCounter">Question 1 of 0</span>
+            </div>
+            <button id="nextBtn" class="nav-btn">
+              Next <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <div class="nav-controls-secondary">
+            <button id="randomBtn" class="nav-btn secondary">
+              <i class="fas fa-random"></i> Random
+            </button>
+            <div class="question-jump">
+              <input
+                type="number"
+                id="questionJump"
+                placeholder="Question number..."
+                min="1"
+              />
+              <button id="jumpBtn" class="nav-btn secondary">Go</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Display -->
+        <div
+          id="questionSection"
+          class="question-section"
+          style="display: none"
+        >
+          <div class="question-header">
+            <h2 id="questionTitle">Question 1</h2>
+            <a id="examTopicsLink" href="#" target="_blank" class="exam-link">
+              <i class="fas fa-external-link-alt"></i> View on ExamTopics
+            </a>
+          </div>
+
+          <div class="question-content">
+            <div id="questionText" class="question-text"></div>
+          </div>
+
+          <!-- Answer Options -->
+          <div class="answers-section">
+            <div id="answerInstructions" class="answer-instructions">
+              <i class="fas fa-info-circle"></i>
+              <span id="instructionText"
+                >Click on the answers to select them</span
+              >
+            </div>
+            <div id="answersList" class="answers-list"></div>
+            <div class="answer-controls">
+              <button id="validateBtn" class="validate-btn">
+                <i class="fas fa-check"></i> Validate Answers
+              </button>
+              <button id="resetBtn" class="reset-btn" style="display: none">
+                <i class="fas fa-redo"></i> Reset
+              </button>
+              <button id="highlightBtn" class="highlight-btn">
+                <i class="fas fa-lightbulb"></i> Toggle Highlight
+              </button>
+            </div>
+          </div>
+
+          <!-- Discussion Section -->
+          <div class="discussion-section">
+            <button id="discussionToggle" class="discussion-toggle">
+              <i class="fas fa-comments"></i> Show Discussion
+            </button>
+            <div
+              id="discussionContent"
+              class="discussion-content"
+              style="display: none"
+            >
+              <h3>Discussion</h3>
+              <div id="discussionList"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Available Exams -->
+        <div id="availableExams" class="available-exams">
+          <h3>Available Pre-Scraped Exams</h3>
+          <div id="examsList" class="exams-list"></div>
+        </div>
+      </main>
+
+      <!-- Settings Modal -->
+      <div id="settingsModal" class="modal" style="display: none">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Settings</h2>
+            <button id="closeModal" class="close-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="setting-group">
+              <h3><i class="fas fa-palette"></i> Display Preferences</h3>
+              <label class="toggle-label">
+                <input type="checkbox" id="showDiscussionDefault" />
+                <span class="toggle-slider"></span>
+                Show discussion by default
+              </label>
+              <label class="toggle-label">
+                <input type="checkbox" id="highlightDefault" />
+                <span class="toggle-slider"></span>
+                Highlight correct answers by default
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error Messages -->
+      <div id="errorMessage" class="error-message" style="display: none"></div>
+      <div
+        id="successMessage"
+        class="success-message"
+        style="display: none"
+      ></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
