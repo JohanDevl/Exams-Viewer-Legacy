@@ -218,7 +218,9 @@ Contributions are welcome! Please:
 
 ## 📜 License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is for educational purposes only. All exam content belongs to their respective owners.
+
+This project is licensed under a custom Educational Use License. See the `LICENSE` file for details.
 
 ## 🆘 Support
 
