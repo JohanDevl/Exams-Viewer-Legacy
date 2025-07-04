@@ -1,10 +1,15 @@
 from bs4 import BeautifulSoup
 import requests
 import re
-import streamlit as st
 import json
 import time
 import os
+
+# Optional streamlit import for web interface
+try:
+    import streamlit as st
+except ImportError:
+    st = None
 
 HEADERS = {
             "User-Agent": (
