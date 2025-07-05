@@ -1,124 +1,124 @@
 # GitHub Templates for Exams-Viewer
 
-Ce répertoire contient des modèles d'issues et de pull requests pour le projet Exams-Viewer afin d'améliorer la collaboration et la qualité des contributions.
+This directory contains issue and pull request templates for the Exams-Viewer project to improve collaboration and contribution quality.
 
-## 📋 Modèles d'Issues
+## 📋 Issue Templates
 
-### Types d'Issues Disponibles
+### Available Issue Types
 
 1. **🐛 Bug Report** (`bug_report.md`)
 
-   - Pour signaler des bugs dans l'application
-   - Inclut des sections pour l'environnement, les étapes de reproduction, et les détails d'erreur
+   - For reporting bugs in the application
+   - Includes sections for environment, reproduction steps, and error details
 
 2. **✨ Feature Request** (`feature_request.md`)
 
-   - Pour proposer de nouvelles fonctionnalités
-   - Inclut des catégories et des critères d'acceptation
+   - For proposing new features
+   - Includes categories and acceptance criteria
 
 3. **🔧 Scraping Issue** (`scraping_issue.md`)
 
-   - Pour les problèmes spécifiques au scraping
-   - Inclut des sections pour les codes d'examen affectés et les formats de données
+   - For scraping-specific problems
+   - Includes sections for affected exam codes and data formats
 
 4. **📚 New Exam Request** (`new_exam_request.md`)
 
-   - Pour demander l'ajout de nouveaux examens
-   - Inclut la validation des URLs et les informations sur l'examen
+   - For requesting new exams to be added
+   - Includes URL validation and exam information
 
 5. **🎨 UI/UX Improvement** (`ui_improvement.md`)
-   - Pour les améliorations de l'interface utilisateur
-   - Inclut des considérations techniques et d'accessibilité
+   - For user interface improvements
+   - Includes technical and accessibility considerations
 
-## 🔄 Modèles de Pull Requests
+## 🔄 Pull Request Templates
 
-### Types de PR Disponibles
+### Available PR Types
 
-1. **📝 Modèle Général** (`pull_request_template.md`)
+1. **📝 General Template** (`pull_request_template.md`)
 
-   - Modèle par défaut pour toutes les PR
-   - Comprend des sections pour les tests, la compatibilité, et les considérations de sécurité
+   - Default template for all PRs
+   - Includes sections for testing, compatibility, and security considerations
 
 2. **🐛 Bug Fix** (`PULL_REQUEST_TEMPLATE/bug_fix.md`)
 
-   - Pour les corrections de bugs
-   - Inclut l'analyse des causes profondes et les tests de régression
+   - For bug fixes
+   - Includes root cause analysis and regression testing
 
 3. **✨ New Feature** (`PULL_REQUEST_TEMPLATE/new_feature.md`)
 
-   - Pour les nouvelles fonctionnalités
-   - Inclut les détails d'implémentation et les tests de compatibilité
+   - For new features
+   - Includes implementation details and compatibility testing
 
 4. **🔧 Scraper Improvement** (`PULL_REQUEST_TEMPLATE/scraper_improvement.md`)
-   - Pour les améliorations du scraper
-   - Inclut les métriques de performance et la validation des données
+   - For scraper improvements
+   - Includes performance metrics and data validation
 
-## 🚀 Comment Utiliser
+## 🚀 How to Use
 
-### Pour les Issues
+### For Issues
 
-1. Allez sur la page "Issues" du projet
-2. Cliquez sur "New Issue"
-3. Sélectionnez le type d'issue approprié
-4. Remplissez le modèle avec vos informations
+1. Go to the project's "Issues" page
+2. Click "New Issue"
+3. Select the appropriate issue type
+4. Fill out the template with your information
 
-### Pour les Pull Requests
+### For Pull Requests
 
-1. Créez votre branche et faites vos modifications
-2. Allez sur la page "Pull Requests" du projet
-3. Cliquez sur "New Pull Request"
-4. Sélectionnez le modèle approprié (ou utilisez le modèle par défaut)
-5. Remplissez toutes les sections du modèle
+1. Create your branch and make your changes
+2. Go to the project's "Pull Requests" page
+3. Click "New Pull Request"
+4. Select the appropriate template (or use the default template)
+5. Fill out all sections of the template
 
-## 📝 Bonnes Pratiques
+## 📝 Best Practices
 
-### Pour les Issues
+### For Issues
 
-- **Soyez spécifique** : Incluez tous les détails pertinents
-- **Utilisez des captures d'écran** : Elles aident à comprendre le problème
-- **Testez d'abord** : Vérifiez que le problème n'est pas déjà signalé
-- **Codes d'examen** : Précisez quels examens sont affectés
+- **Be specific**: Include all relevant details
+- **Use screenshots**: They help understand the problem
+- **Test first**: Verify the issue hasn't already been reported
+- **Exam codes**: Specify which exams are affected
 
-### Pour les Pull Requests
+### For Pull Requests
 
-- **Tests complets** : Testez sur plusieurs navigateurs et appareils
-- **Ordre alphabétique** : Vérifiez que les listes d'examens restent alphabétiques
-- **Performance** : Considérez l'impact sur les performances
-- **Documentation** : Mettez à jour la documentation si nécessaire
+- **Comprehensive testing**: Test on multiple browsers and devices
+- **Alphabetical order**: Verify exam lists remain alphabetically sorted
+- **Performance**: Consider performance impact
+- **Documentation**: Update documentation if necessary
 
-## 🔍 Spécificités du Projet
+## 🔍 Project Specifics
 
-### Exigences Critiques
+### Critical Requirements
 
-- **Ordre alphabétique** : Les listes d'examens DOIVENT être alphabétiques
-- **Compatibilité mobile** : Testez sur les appareils mobiles
-- **Scraping éthique** : Respectez les limites de taux d'ExamTopics.com
-- **Format JSON** : Maintenez la cohérence du format des données
+- **Alphabetical order**: Exam lists MUST be alphabetically sorted
+- **Mobile compatibility**: Test on mobile devices
+- **Ethical scraping**: Respect ExamTopics.com rate limits
+- **JSON format**: Maintain data format consistency
 
-### Tests Requis
+### Required Tests
 
-- Tests sur Chrome, Firefox, Safari, Edge
-- Tests sur mobile et desktop
-- Vérification du tri alphabétique
-- Tests de fonctionnalité d'export
-- Tests de scraping (si applicable)
+- Tests on Chrome, Firefox, Safari, Edge
+- Tests on mobile and desktop
+- Alphabetical sorting verification
+- Export functionality tests
+- Scraping tests (if applicable)
 
 ## 🤝 Contribution
 
-Ces modèles sont conçus pour :
+These templates are designed to:
 
-- Améliorer la qualité des contributions
-- Accélérer le processus de révision
-- Assurer la cohérence du projet
-- Faciliter la maintenance
+- Improve contribution quality
+- Speed up the review process
+- Ensure project consistency
+- Facilitate maintenance
 
-N'hésitez pas à suggérer des améliorations à ces modèles en créant une issue !
+Feel free to suggest improvements to these templates by creating an issue!
 
 ## 📞 Support
 
-Si vous avez des questions sur l'utilisation de ces modèles :
+If you have questions about using these templates:
 
-1. Consultez d'abord la documentation du projet
-2. Recherchez dans les issues existantes
-3. Créez une nouvelle issue avec le modèle approprié
-4. Utilisez les discussions GitHub pour les questions générales
+1. Check the project documentation first
+2. Search existing issues
+3. Create a new issue with the appropriate template
+4. Use GitHub discussions for general questions
