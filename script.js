@@ -277,7 +277,8 @@ async function populateExamDropdown() {
   // Get exam data with question counts
   const examOptions = [];
 
-  for (const examCode of Object.keys(availableExams)) {
+  const sortedExamCodes = Object.keys(availableExams).sort();
+  for (const examCode of sortedExamCodes) {
     try {
       const response = await fetch(`data/${examCode}.json`);
       if (response.ok) {
@@ -377,8 +378,9 @@ async function displayAvailableExams() {
     return;
   }
 
-  // Create cards for each available exam
-  for (const code of Object.keys(availableExams)) {
+  // Create cards for each available exam (sorted alphabetically)
+  const sortedExamCodes = Object.keys(availableExams).sort();
+  for (const code of sortedExamCodes) {
     const examCard = document.createElement("div");
     examCard.className = "exam-card";
 
