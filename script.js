@@ -51,38 +51,56 @@ async function discoverAvailableExams() {
       );
     }
 
-    // Method 2: Use _links.json files to discover available exams
-    console.log("Discovering exams by checking for _links.json files...");
+    // Method 2: Auto-discover by scanning for _links.json files
+    console.log("Auto-discovering exams by scanning for _links.json files...");
 
-    // First, scan for all _links.json files to determine available exam codes
-    const potentialCodes = [
-      "CAD",
-      "CSA",
-      "CAS-PA",
-      "CIS-CSM",
-      "CIS-Discovery",
-      "CIS-HR",
-      "CIS-ITSM",
-      "CIS-PPM",
-      "CIS-RC",
-      "CIS-SIR",
-      "CIS-SPM",
-      "CIS-EM",
-      "CIS-APM",
-      "CIS-VR",
-      "CIS-SAM",
-      "CIS-FSM",
+    // Generate potential exam codes based on common patterns
+    const examPrefixes = ["CAD", "CSA", "CAS-PA"];
+    const cisModules = [
+      "APM",
+      "CPG",
+      "CSM",
+      "Discovery",
+      "EM",
+      "FSM",
+      "HAM",
+      "HR",
+      "ITSM",
+      "PPM",
+      "RC",
+      "SAM",
+      "SIR",
+      "SM",
+      "SPM",
+      "VR",
+      "VRM",
+    ];
+
+    // Add CIS- prefixed modules
+    for (const module of cisModules) {
+      examPrefixes.push(`CIS-${module}`);
+    }
+
+    // Also try some common variations and new modules that might be added
+    const additionalPatterns = [
       "CIS-WSD",
       "CIS-TMG",
-      "CIS-SM",
       "CIS-SP",
       "CIS-RIM",
-      "CIS-HAM",
+      "CIS-GRC",
+      "CIS-TSOM",
+      "CIS-SecOps",
+      "CIS-CAB",
+      "CIS-CIM",
+      "CIS-CSM-PRO",
+      "CIS-ITAM",
     ];
+
+    const allPotentialCodes = [...examPrefixes, ...additionalPatterns];
 
     // Check for _links.json files to discover what exams are available
     const availableCodes = [];
-    for (const code of potentialCodes) {
+    const checkPromises = allPotentialCodes.map(async (code) => {
       try {
         const linkResponse = await fetch(`data/${code}_links.json`, {
           method: "HEAD",
@@ -91,12 +109,14 @@ async function discoverAvailableExams() {
           availableCodes.push(code);
         }
       } catch (error) {
-        continue;
+        // Ignore errors for non-existent files
       }
-    }
+    });
+
+    await Promise.all(checkPromises);
 
     // Now check if corresponding .json files exist for discovered codes
-    for (const examCode of availableCodes) {
+    const examCheckPromises = availableCodes.map(async (examCode) => {
       try {
         const response = await fetch(`data/${examCode}.json`, {
           method: "HEAD",
@@ -105,14 +125,17 @@ async function discoverAvailableExams() {
           discoveredExams[examCode] = examCode;
         }
       } catch (error) {
-        continue;
+        // Ignore errors for non-existent files
       }
-    }
+    });
 
-    // Method 3: If still no exams found, try direct file checking
+    await Promise.all(examCheckPromises);
+
+    // Method 3: If still no exams found, try brute force approach
     if (Object.keys(discoveredExams).length === 0) {
-      console.log("Fallback: checking for .json files directly...");
-      for (const examCode of potentialCodes) {
+      console.log("Fallback: brute force checking for .json files...");
+
+      const bruteForcePromises = allPotentialCodes.map(async (examCode) => {
         try {
           const response = await fetch(`data/${examCode}.json`, {
             method: "HEAD",
@@ -121,8 +144,37 @@ async function discoverAvailableExams() {
             discoveredExams[examCode] = examCode;
           }
         } catch (error) {
-          continue;
+          // Ignore errors for non-existent files
         }
+      });
+
+      await Promise.all(bruteForcePromises);
+    }
+
+    // Method 4: Try to discover by attempting to load a manifest file (if it exists)
+    if (Object.keys(discoveredExams).length === 0) {
+      console.log("Attempting to load manifest file...");
+      try {
+        const manifestResponse = await fetch("data/manifest.json");
+        if (manifestResponse.ok) {
+          const manifest = await manifestResponse.json();
+          if (manifest.exams && Array.isArray(manifest.exams)) {
+            for (const examCode of manifest.exams) {
+              try {
+                const response = await fetch(`data/${examCode}.json`, {
+                  method: "HEAD",
+                });
+                if (response.ok) {
+                  discoveredExams[examCode] = examCode;
+                }
+              } catch (error) {
+                // Ignore errors for non-existent files
+              }
+            }
+          }
+        }
+      } catch (error) {
+        console.log("No manifest file found");
       }
     }
 
