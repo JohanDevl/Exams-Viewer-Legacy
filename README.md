@@ -75,11 +75,22 @@ pip install -r requirements.txt
 
 ### 🌐 Web Interface
 
-1. Visit the GitHub Pages URL
-2. Select an exam from the dropdown
-3. Browse questions with navigation controls
-4. Search and filter as needed
-5. Export questions to PDF if necessary
+**Online**: Visit the GitHub Pages URL directly
+
+**Local Development**:
+
+```bash
+# Serve the application locally to avoid CORS issues
+python -m http.server 8000
+# Then open http://localhost:8000 in your browser
+```
+
+**Usage**:
+
+1. Select an exam from the dropdown
+2. Browse questions with navigation controls
+3. Search and filter as needed
+4. Export questions to PDF if necessary
 
 ### 🔧 Manual Scraping
 
