@@ -465,6 +465,9 @@ async function loadExam(examCode) {
     document.getElementById("exportBtn").style.display = "flex";
     document.getElementById("homeBtn").style.display = "inline-block";
 
+    // Update question jump field max value
+    updateQuestionJumpMaxValue();
+
     displayCurrentQuestion();
     showSuccess(`Loaded ${currentQuestions.length} questions for ${examCode}`);
   } catch (error) {
@@ -538,6 +541,9 @@ function goToHome() {
   document.getElementById("exportBtn").style.display = "none";
   document.getElementById("homeBtn").style.display = "none";
 
+  // Reset question jump field max value
+  updateQuestionJumpMaxValue();
+
   // Hide any messages
   document.getElementById("errorMessage").style.display = "none";
   document.getElementById("successMessage").style.display = "none";
@@ -563,6 +569,23 @@ function jumpToQuestion() {
     document.getElementById("questionJump").value = "";
   } else {
     showError(`Question ${questionNumber} not found`);
+  }
+}
+
+// Update question jump field max value
+function updateQuestionJumpMaxValue() {
+  const questionJumpField = document.getElementById("questionJump");
+  if (currentQuestions.length > 0) {
+    // Find the highest question number in the current exam
+    const maxQuestionNumber = Math.max(
+      ...currentQuestions.map((q) => parseInt(q.question_number) || 0)
+    );
+    questionJumpField.setAttribute("max", maxQuestionNumber);
+    console.log(`Updated question jump max value to: ${maxQuestionNumber}`);
+  } else {
+    // Reset to default when no questions are loaded
+    questionJumpField.setAttribute("max", "1");
+    console.log("Reset question jump max value to: 1");
   }
 }
 
