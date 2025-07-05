@@ -470,6 +470,11 @@ async function loadExam(examCode) {
     // Update question jump field max value with a slight delay to ensure DOM is ready
     setTimeout(() => {
       updateQuestionJumpMaxValue();
+      // Also make the test function available in console
+      window.testQuestionJumpField = testQuestionJumpField;
+      console.log(
+        "💡 You can run 'testQuestionJumpField()' in console to check field state"
+      );
     }, 100);
     showSuccess(`Loaded ${currentQuestions.length} questions for ${examCode}`);
   } catch (error) {
@@ -583,6 +588,17 @@ function updateQuestionJumpMaxValue() {
       ...currentQuestions.map((q) => parseInt(q.question_number) || 0)
     );
 
+    console.log(`🔍 DEBUG: About to update max value to: ${maxQuestionNumber}`);
+    console.log(
+      `🔍 DEBUG: Current questions count: ${currentQuestions.length}`
+    );
+    console.log(
+      `🔍 DEBUG: Question numbers: ${currentQuestions
+        .slice(0, 5)
+        .map((q) => q.question_number)
+        .join(", ")}...`
+    );
+
     // Force update with multiple methods to ensure it works
     questionJumpField.setAttribute("max", maxQuestionNumber);
     questionJumpField.max = maxQuestionNumber;
@@ -590,17 +606,43 @@ function updateQuestionJumpMaxValue() {
     // Also update the step attribute to ensure proper spinner behavior
     questionJumpField.setAttribute("step", "1");
 
-    console.log(`Updated question jump max value to: ${maxQuestionNumber}`);
+    // Force a refresh of the element
+    questionJumpField.style.display = "none";
+    questionJumpField.offsetHeight; // trigger reflow
+    questionJumpField.style.display = "";
+
+    console.log(`✅ Updated question jump max value to: ${maxQuestionNumber}`);
     console.log(
-      `Current max attribute: ${questionJumpField.getAttribute("max")}`
+      `✅ Current max attribute: ${questionJumpField.getAttribute("max")}`
     );
-    console.log(`Current max property: ${questionJumpField.max}`);
+    console.log(`✅ Current max property: ${questionJumpField.max}`);
+    console.log(
+      `✅ Current min attribute: ${questionJumpField.getAttribute("min")}`
+    );
+    console.log(
+      `✅ Current step attribute: ${questionJumpField.getAttribute("step")}`
+    );
   } else {
     // Reset to default when no questions are loaded
     questionJumpField.setAttribute("max", "1");
     questionJumpField.max = "1";
-    console.log("Reset question jump max value to: 1");
+    console.log("🔄 Reset question jump max value to: 1");
   }
+}
+
+// Test function to check field state (for debugging)
+function testQuestionJumpField() {
+  const field = document.getElementById("questionJump");
+  console.log("=== QUESTION JUMP FIELD TEST ===");
+  console.log(`Max attribute: ${field.getAttribute("max")}`);
+  console.log(`Max property: ${field.max}`);
+  console.log(`Min attribute: ${field.getAttribute("min")}`);
+  console.log(`Min property: ${field.min}`);
+  console.log(`Step attribute: ${field.getAttribute("step")}`);
+  console.log(`Step property: ${field.step}`);
+  console.log(`Value: ${field.value}`);
+  console.log(`Type: ${field.type}`);
+  console.log("============================");
 }
 
 // Display current question
