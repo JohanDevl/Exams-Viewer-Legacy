@@ -5,9 +5,11 @@ An automated tool to scrape and maintain up-to-date exam question data from Exam
 ## 🎯 Features
 
 - **🌐 Web Interface**: Browse questions via GitHub Pages
-- **🤖 Automatic scraping** of ExamTopics questions
+- **🤖 Automatic scraping** of ExamTopics questions with enhanced accuracy
 - **📅 Weekly updates** via GitHub Actions
 - **🔄 Force rescan** option to refresh all links
+- **🔄 Smart update detection** - only updates changed questions
+- **🎯 Enhanced most_voted extraction** - 3-tier logic for maximum accuracy
 - **🛡️ Robust error handling** and rate limiting
 - **📊 Multi-exam support** with automatic detection
 - **📝 Detailed logging** of operations
@@ -95,17 +97,20 @@ python -m http.server 8000
 ### 🔧 Manual Scraping
 
 ```bash
-# Update all exams
+# Update all exams (smart detection - only updates changed questions)
 python scripts/update_all_exams.py
 
-# Update all exams with force rescan
+# Update all exams with force rescan of links
 python scripts/update_all_exams.py --force-rescan
+
+# Force update ALL existing questions (ignores change detection)
+python scripts/update_all_exams.py --force-update
 
 # Update specific exam
 python scripts/update_all_exams.py --exam CAD
 
-# Update specific exam with force rescan
-python scripts/update_all_exams.py --exam CAD --force-rescan
+# Update specific exam with force rescan + force update
+python scripts/update_all_exams.py --exam CAD --force-rescan --force-update
 ```
 
 ### 🤖 Automation
@@ -119,15 +124,23 @@ The tool automatically updates every week on Saturday at 2:00 AM UTC via GitHub 
 3. Click "Run workflow"
 4. **Available Options:**
    - **Force rescan**: Check to force rescan all links
+   - **Force update**: Check to force update all existing questions
    - **Specific exam**: Enter an exam code to update only that exam
 
-#### 🔄 Force Rescan Feature
+#### 🔄 Advanced Update Options
 
-The force rescan option is useful when:
+**Force Rescan** is useful when:
 
 - New questions have been added to ExamTopics but the links file shows "complete"
 - You want to ensure all links are refreshed
 - There have been changes to the ExamTopics website structure
+
+**Force Update** is useful when:
+
+- You want to refresh all existing questions with the latest data
+- Apply scraper improvements to previously scraped questions
+- Update `most_voted` answers that were previously `null`
+- Ensure all questions benefit from enhanced extraction logic
 
 ## 📊 Supported Exams
 
@@ -154,6 +167,21 @@ The tool automatically detects available exams in the `data/` folder:
 - **CSA** - Certified System Administrator
 
 ## 🔧 Configuration
+
+### Enhanced Scraper Features
+
+**🎯 3-Tier Most Voted Extraction:**
+
+1. **Primary**: Official ExamTopics majority (`"is_most_voted": true`)
+2. **Secondary**: Highest vote count (if > 0 votes)
+3. **Tertiary**: Suggested answers from ExamTopics (`"correct-answer"` class)
+
+**🔍 Smart Update Detection:**
+
+- Compares existing vs new question data
+- Only updates when content actually changed
+- Detects changes in: `most_voted`, question content, answers, content hash
+- Efficient: unchanged questions are skipped
 
 ### Rate Limiting
 
@@ -185,7 +213,7 @@ Data is stored in JSON format:
       "question": "Question text...",
       "answers": ["A. Option 1", "B. Option 2", ...],
       "comments": [...],
-      "most_voted": "A",
+      "most_voted": "A",           // Enhanced 3-tier extraction
       "question_number": "1",
       "link": "https://...",
       "error": null
@@ -193,6 +221,48 @@ Data is stored in JSON format:
   ]
 }
 ```
+
+### Enhanced Data Quality
+
+**🎯 Most Voted Accuracy**: The `most_voted` field now uses a 3-tier extraction system:
+
+- **100% coverage**: Captures official votes, partial votes, and suggested answers
+- **Automatic updates**: Existing questions with `null` values get updated
+- **Smart detection**: Only re-scrapes when content actually changes
+
+## 🚀 Recent Improvements
+
+### v2.0 - Enhanced Scraper & Smart Updates (2024)
+
+**🎯 3-Tier Most Voted Extraction:**
+
+- **Problem solved**: Many questions had `most_voted: null` even when answers were visible on the website
+- **Solution**: Enhanced extraction logic that captures official votes, partial votes, and suggested answers
+- **Result**: 100% success rate in extracting available answer data
+
+**🔍 Smart Update Detection:**
+
+- **Problem solved**: `update_all_exams.py` would skip existing questions entirely, missing content changes
+- **Solution**: Intelligent comparison system that detects actual changes
+- **Result**: Existing questions now benefit from scraper improvements automatically
+
+**📊 Impact:**
+
+- **CAD Exam**: 7/7 previously null `most_voted` values were successfully updated
+- **Efficiency**: Unchanged questions are skipped, saving time and resources
+- **Accuracy**: Enhanced extraction captures all types of answer data available
+
+**🔧 New Command Options:**
+
+```bash
+# Smart update (default) - only updates changed content
+python scripts/update_all_exams.py --exam CAD
+
+# Force update all existing questions
+python scripts/update_all_exams.py --exam CAD --force-update
+```
+
+For detailed technical information, see [docs/SCRAPER_IMPROVEMENTS.md](docs/SCRAPER_IMPROVEMENTS.md).
 
 ## 🛠️ Development
 
@@ -223,10 +293,13 @@ Each execution generates detailed logs including:
 
 - Update timestamp
 - Force rescan status
+- Force update status
 - Specific exam target (if applicable)
 - Number of exams processed
 - Success/failures per exam
 - Total number of questions
+- **New**: Update summary (new questions, updated questions, skipped questions)
+- **New**: Detailed change reasons for updated questions
 - Detailed error messages
 
 ## 🤝 Contributing

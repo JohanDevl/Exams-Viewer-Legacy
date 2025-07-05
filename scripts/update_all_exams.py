@@ -41,16 +41,18 @@ def get_available_exam_codes():
     print(f"📋 Found {len(exam_codes)} exams: {sorted(exam_codes)}")
     return sorted(exam_codes)
 
-def update_single_exam(exam_code, progress_tracker, force_rescan=False):
+def update_single_exam(exam_code, progress_tracker, force_rescan=False, force_update=False):
     """Update a single exam and return results"""
     print(f"\n🔄 Updating exam: {exam_code}")
     if force_rescan:
         print(f"🔄 Force rescanning links for {exam_code}")
+    if force_update:
+        print(f"🔄 Force updating existing questions for {exam_code}")
     
     try:
         # Use rapid scraping mode for automation (no delays)
         # update_exam_data returns a tuple (questions, error_message)
-        questions, error_message = update_exam_data(exam_code, progress_tracker, rapid_scraping=True, force_rescan=force_rescan)
+        questions, error_message = update_exam_data(exam_code, progress_tracker, rapid_scraping=True, force_rescan=force_rescan, force_update=force_update)
         
         if error_message:
             print(f"❌ {exam_code}: Update failed - {error_message}")
@@ -85,6 +87,8 @@ def main():
     parser = argparse.ArgumentParser(description='Update ExamTopics exam data')
     parser.add_argument('--force-rescan', action='store_true', 
                         help='Force rescan of links even if they are marked as complete')
+    parser.add_argument('--force-update', action='store_true', 
+                        help='Force update of existing questions even if they seem unchanged')
     parser.add_argument('--exam', type=str, 
                         help='Update only a specific exam code')
     
@@ -95,6 +99,8 @@ def main():
     
     if args.force_rescan:
         print("🔄 Force rescan mode enabled - will rescan all links")
+    if args.force_update:
+        print("🔄 Force update mode enabled - will update existing questions")
     
     # Get available exam codes
     exam_codes = get_available_exam_codes()
@@ -126,7 +132,7 @@ def main():
         print(f"\n📊 Progress: {i}/{len(exam_codes)} exams")
         
         # Update the exam
-        result = update_single_exam(exam_code, progress_tracker, force_rescan=args.force_rescan)
+        result = update_single_exam(exam_code, progress_tracker, force_rescan=args.force_rescan, force_update=args.force_update)
         results.append(result)
         
         # Update counters
@@ -154,6 +160,7 @@ def main():
     log_data = {
         'timestamp': datetime.now().isoformat(),
         'force_rescan': args.force_rescan,
+        'force_update': args.force_update,
         'specific_exam': args.exam,
         'total_exams': len(exam_codes),
         'successful_updates': successful_updates,

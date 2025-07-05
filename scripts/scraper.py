@@ -4,8 +4,24 @@ import re
 import json
 import time
 import os
+import hashlib
 
 # Streamlit removed - not needed for automation scripts
+
+# IMPROVEMENTS: Enhanced scraper with smart update logic
+# 
+# 1. ENHANCED MOST_VOTED EXTRACTION (3-tier approach):
+#    - Primary: Look for answers with "is_most_voted": true (ExamTopics official majority)
+#    - Secondary: If none found, take the answer with the highest vote count (if > 0)
+#    - Tertiary: If no votes, extract suggested answer from "correct-answer" class
+#    This ensures we capture all types of answers: voted, partially voted, and suggested.
+#
+# 2. SMART UPDATE DETECTION:
+#    - Compare existing vs new question data before updating
+#    - Only update questions when content actually changed
+#    - Detect changes in: most_voted, question content, answers, content hash
+#    - Support force_update mode for complete refresh
+#    This ensures existing questions benefit from scraper improvements automatically.
 
 HEADERS = {
             "User-Agent": (
@@ -148,7 +164,7 @@ def scrape_page(link):
     except Exception:
         pass
 
-    # Extract most voted answers
+    # Extract most voted answers (improved logic)
     most_voted = None
     try:
         voted_answers = soup.find("div", class_="voted-answers-tally")
@@ -156,11 +172,32 @@ def scrape_page(link):
             script_content = voted_answers.find("script")
             if script_content and script_content.string:
                 voted_json = json.loads(script_content.string)
+                
+                # First try: Look for officially marked most_voted (original logic)
                 most_voted_object = next((item for item in voted_json if item.get('is_most_voted')), None)
                 if most_voted_object:
                     most_voted = most_voted_object.get("voted_answers", None)
+                else:
+                    # Improved logic: Take the answer with the most votes (if > 0)
+                    if voted_json:
+                        # Sort by vote_count in descending order
+                        sorted_votes = sorted(voted_json, key=lambda x: x.get('vote_count', 0), reverse=True)
+                        top_answer = sorted_votes[0]
+                        
+                        # Only if it has at least 1 vote
+                        if top_answer.get('vote_count', 0) > 0:
+                            most_voted = top_answer.get("voted_answers", None)
     except Exception:
         pass
+    
+    # Third tier: Extract suggested answer if no votes found
+    if most_voted is None:
+        try:
+            suggested_answer = soup.find("span", class_="correct-answer")
+            if suggested_answer:
+                most_voted = suggested_answer.text.strip()
+        except Exception:
+            pass
 
     # Extract answer options
     answers = []
@@ -225,34 +262,137 @@ def scrape_page(link):
 
     return question_object
 
+
+def calculate_question_hash(question_data):
+    """
+    Calculate hash to detect changes in a question
+    Includes: question, answers, most_voted
+    Excludes: comments (too volatile), link, error
+    """
+    relevant_data = {
+        'question': question_data.get('question', ''),
+        'answers': question_data.get('answers', []),
+        'most_voted': question_data.get('most_voted', None)
+    }
+    
+    # Convert to normalized JSON string for hashing
+    json_str = json.dumps(relevant_data, sort_keys=True, ensure_ascii=False)
+    return hashlib.md5(json_str.encode('utf-8')).hexdigest()
+
+
+def needs_update(existing_question, new_question):
+    """
+    Determine if a question needs to be updated
+    """
+    # Case 1: most_voted null in existing but not in new
+    if existing_question.get('most_voted') is None and new_question.get('most_voted') is not None:
+        return True, "most_voted was null, now has value"
+    
+    # Case 2: most_voted different
+    if existing_question.get('most_voted') != new_question.get('most_voted'):
+        return True, f"most_voted changed: {existing_question.get('most_voted')} -> {new_question.get('most_voted')}"
+    
+    # Case 3: question content different
+    if existing_question.get('question') != new_question.get('question'):
+        return True, "question content changed"
+    
+    # Case 4: answers different
+    if existing_question.get('answers') != new_question.get('answers'):
+        return True, "answers changed"
+    
+    # Case 5: hash different (general detection)
+    existing_hash = calculate_question_hash(existing_question)
+    new_hash = calculate_question_hash(new_question)
+    if existing_hash != new_hash:
+        return True, f"content hash changed: {existing_hash[:8]} -> {new_hash[:8]}"
+    
+    return False, "no changes detected"
+
         
-def scrape_questions(question_links, json_path, progress, rapid_scraping=False):
+def scrape_questions(question_links, json_path, progress, rapid_scraping=False, force_update=False):
     questions_obj = load_json(json_path)
     if questions_obj:
         questions = questions_obj.get("questions", [])
     else:
         questions = []
+    
+    # Create dictionary for quick access by question number
+    existing_questions_dict = {q["question_number"]: q for q in questions}
+    
     prefix = "https://www.examtopics.com"
     questions_num = len(question_links)
     error_string = ""
+    
+    updated_count = 0
+    new_count = 0
+    skipped_count = 0
+    
     for i, link in enumerate(question_links):
         question_number_match = re.search(r"question-(\d+)", link)
         question_number = question_number_match.group(1) if question_number_match else "unknown"
-        if question_number in [q["question_number"] for q in questions]:
-            progress.progress((i+1)/(questions_num), text=f"{i+1}/{questions_num} - Skipping {prefix+link}")
-            continue
-        progress.progress((i+1)/(questions_num), text=f"{i+1}/{questions_num} - Scraping {prefix+link}")
-        question_object = scrape_page(prefix+link)
-        if question_object["error"]:
-            error_string = (f"Error: {question_object['error']}")
-            break
-        questions.append(question_object)
+        
+        # Check if question already exists
+        existing_question = existing_questions_dict.get(question_number)
+        
+        if existing_question and not force_update:
+            # Scrape new version for comparison
+            progress.progress((i+1)/(questions_num), text=f"{i+1}/{questions_num} - Checking {prefix+link}")
+            new_question = scrape_page(prefix+link)
+            
+            if new_question["error"]:
+                error_string = f"Error: {new_question['error']}"
+                break
+            
+            # Check if update is needed
+            update_needed, reason = needs_update(existing_question, new_question)
+            
+            if update_needed:
+                # Update existing question
+                for j, q in enumerate(questions):
+                    if q["question_number"] == question_number:
+                        questions[j] = new_question
+                        updated_count += 1
+                        progress.progress((i+1)/(questions_num), text=f"{i+1}/{questions_num} - Updated {prefix+link} ({reason})")
+                        break
+            else:
+                skipped_count += 1
+                progress.progress((i+1)/(questions_num), text=f"{i+1}/{questions_num} - Skipped {prefix+link} (no changes)")
+        else:
+            # New question or force_update enabled
+            progress.progress((i+1)/(questions_num), text=f"{i+1}/{questions_num} - Scraping {prefix+link}")
+            question_object = scrape_page(prefix+link)
+            
+            if question_object["error"]:
+                error_string = f"Error: {question_object['error']}"
+                break
+            
+            if existing_question:
+                # Replace existing question (force_update)
+                for j, q in enumerate(questions):
+                    if q["question_number"] == question_number:
+                        questions[j] = question_object
+                        updated_count += 1
+                        break
+            else:
+                # Add new question
+                questions.append(question_object)
+                new_count += 1
+        
         if not rapid_scraping:
             time.sleep(5)
+    
     questions.sort(key=lambda x: int(x["question_number"]) if x["question_number"].isdigit() else float('inf'))
     status = "complete" if len(questions) == questions_num else "in progress"
     questions_obj = {"status": status, "error": error_string, "questions": questions}
     save_json(questions_obj, json_path)
+    
+    # Print summary if there were updates
+    if updated_count > 0 or new_count > 0:
+        print(f"\n📊 Update Summary:")
+        print(f"   ✅ New questions added: {new_count}")
+        print(f"   🔄 Existing questions updated: {updated_count}")
+        print(f"   ⏭️  Questions skipped (no changes): {skipped_count}")
+    
     return questions_obj
     
 
@@ -376,7 +516,7 @@ def check_for_updates(exam_code, progress, skip_online_check=False):
     return False, "Files up to date"
 
 
-def update_exam_data(exam_code, progress, rapid_scraping=False, force_rescan=False):
+def update_exam_data(exam_code, progress, rapid_scraping=False, force_rescan=False, force_update=False):
     """
     Updates exam data by scraping new questions
     """
@@ -391,7 +531,7 @@ def update_exam_data(exam_code, progress, rapid_scraping=False, force_rescan=Fal
             return [], "No questions found. Please check the exam code and try again."
         
         # Scrape questions
-        questions_obj = scrape_questions(links, questions_path, progress, rapid_scraping)
+        questions_obj = scrape_questions(links, questions_path, progress, rapid_scraping, force_update)
         questions = questions_obj.get("questions", [])
         
         if questions_obj.get("error", "") != "":
