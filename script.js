@@ -467,7 +467,10 @@ async function loadExam(examCode) {
 
     displayCurrentQuestion();
 
-    // Update question jump field max value with a slight delay to ensure DOM is ready
+    // Update question jump field max value immediately and with delay
+    updateQuestionJumpMaxValue();
+
+    // Also try with a delay to ensure DOM is ready
     setTimeout(() => {
       updateQuestionJumpMaxValue();
       // Also make the test function available in console
@@ -476,6 +479,12 @@ async function loadExam(examCode) {
         "💡 You can run 'testQuestionJumpField()' in console to check field state"
       );
     }, 100);
+
+    // And one more time with a longer delay
+    setTimeout(() => {
+      updateQuestionJumpMaxValue();
+      console.log("🔄 Final attempt to update max value");
+    }, 500);
     showSuccess(`Loaded ${currentQuestions.length} questions for ${examCode}`);
   } catch (error) {
     showError(`Error loading exam: ${error.message}`);
@@ -694,6 +703,9 @@ function displayCurrentQuestion() {
   }
 
   updateInstructions();
+
+  // Ensure question jump field max value is always up to date
+  updateQuestionJumpMaxValue();
 }
 
 // Display answers
