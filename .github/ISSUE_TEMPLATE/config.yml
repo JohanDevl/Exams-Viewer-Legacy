@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/JohanDevl/Exams-Viewer/blob/main/README.md
+    about: Check the project documentation for setup and usage instructions
+  - name: 🚀 Development Guide
+    url: https://github.com/JohanDevl/Exams-Viewer/blob/main/docs/DEVELOPMENT.md
+    about: Learn how to contribute to the project
+  - name: 🔍 Search Existing Issues
+    url: https://github.com/JohanDevl/Exams-Viewer/issues
+    about: Please search existing issues before creating a new one
+  - name: 💬 Discussions
+    url: https://github.com/JohanDevl/Exams-Viewer/discussions
+    about: Ask questions and discuss ideas with the community

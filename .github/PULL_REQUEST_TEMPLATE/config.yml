@@ -1,0 +1,10 @@
+templates:
+  - name: 🐛 Bug Fix
+    about: Fix a bug in the application
+    template: bug_fix.md
+  - name: ✨ New Feature
+    about: Add a new feature to the application
+    template: new_feature.md
+  - name: 🔧 Scraper Improvement
+    about: Improve the scraping functionality
+    template: scraper_improvement.md
