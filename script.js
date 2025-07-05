@@ -150,6 +150,7 @@ async function discoverAvailableExams() {
           });
           if (response.ok) {
             discoveredExams[examCode] = examCode;
+            console.log(`Brute force found: ${examCode}`);
           }
         } catch (error) {
           // Ignore errors for non-existent files
@@ -158,6 +159,27 @@ async function discoverAvailableExams() {
 
       await Promise.all(bruteForcePromises);
     }
+
+    // Method 3.5: Always try brute force as additional check (in case _links.json approach missed some)
+    console.log("Additional brute force check for any missed exams...");
+    const additionalPromises = allPotentialCodes.map(async (examCode) => {
+      // Only check if not already discovered
+      if (!discoveredExams[examCode]) {
+        try {
+          const response = await fetch(`data/${examCode}.json`, {
+            method: "HEAD",
+          });
+          if (response.ok) {
+            discoveredExams[examCode] = examCode;
+            console.log(`Additional check found: ${examCode}`);
+          }
+        } catch (error) {
+          // Ignore errors for non-existent files
+        }
+      }
+    });
+
+    await Promise.all(additionalPromises);
 
     // Method 4: Try to discover by attempting to load a manifest file (if it exists)
     if (Object.keys(discoveredExams).length === 0) {
