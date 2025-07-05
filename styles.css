@@ -661,10 +661,23 @@ body {
   .question-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.5rem;
   }
 
   .exam-link {
-    display: none;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    background-color: #f8f9fa;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    color: #495057;
+    transition: all 0.2s ease;
+  }
+
+  .exam-link:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
   }
 
   .nav-controls {
