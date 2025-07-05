@@ -11,6 +11,11 @@ on:
         required: false
         default: false
         type: boolean
+      force_update:
+        description: "Force update of existing questions with improved scraper logic"
+        required: false
+        default: true
+        type: boolean
       specific_exam:
         description: "Update only a specific exam code (leave empty for all exams)"
         required: false
@@ -60,6 +65,12 @@ jobs:
             echo "🔄 Force rescan enabled - will rescan all links"
           fi
 
+          # Add force update option (default enabled for weekly runs)
+          if [ "${{ github.event.inputs.force_update }}" == "true" ] || [ "${{ github.event_name }}" == "schedule" ]; then
+            COMMAND="$COMMAND --force-update"
+            echo "🔧 Force update enabled - will update existing questions with improved logic"
+          fi
+
           # Add specific exam option if provided
           if [ -n "${{ github.event.inputs.specific_exam }}" ]; then
             COMMAND="$COMMAND --exam ${{ github.event.inputs.specific_exam }}"
@@ -89,7 +100,7 @@ jobs:
           # Build commit message
           COMMIT_MSG="🤖 Automated weekly exam data update
 
-          - Updated exam questions and answers
+          - Updated exam questions and answers with enhanced scraper v2.0
           - Timestamp: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
           - Automated via GitHub Actions"
 
@@ -97,6 +108,12 @@ jobs:
           if [ "${{ github.event.inputs.force_rescan }}" == "true" ]; then
             COMMIT_MSG="$COMMIT_MSG
           - Force rescan enabled"
+          fi
+
+          # Add force update info to commit message
+          if [ "${{ github.event.inputs.force_update }}" == "true" ] || [ "${{ github.event_name }}" == "schedule" ]; then
+            COMMIT_MSG="$COMMIT_MSG
+          - Force update enabled (3-tier answer extraction)"
           fi
 
           # Add specific exam info to commit message
@@ -114,22 +131,30 @@ jobs:
         run: |
           echo "## 📊 Weekly Update Summary" >> $GITHUB_STEP_SUMMARY
           echo "**Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Scraper Version:** Enhanced v2.0 (3-tier answer extraction)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
           # Add input options to summary
+          echo "**Options:**" >> $GITHUB_STEP_SUMMARY
           if [ "${{ github.event.inputs.force_rescan }}" == "true" ]; then
-            echo "**Options:** Force rescan enabled" >> $GITHUB_STEP_SUMMARY
+            echo "- 🔄 Force rescan enabled" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ github.event.inputs.force_update }}" == "true" ] || [ "${{ github.event_name }}" == "schedule" ]; then
+            echo "- 🔧 Force update enabled" >> $GITHUB_STEP_SUMMARY
           fi
 
           if [ -n "${{ github.event.inputs.specific_exam }}" ]; then
-            echo "**Target:** Only exam ${{ github.event.inputs.specific_exam }}" >> $GITHUB_STEP_SUMMARY
+            echo "- 📋 Target: Only exam ${{ github.event.inputs.specific_exam }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- 📚 Target: All available exams" >> $GITHUB_STEP_SUMMARY
           fi
 
           echo "" >> $GITHUB_STEP_SUMMARY
 
           if [ -f "update_log.json" ]; then
             echo "**Results:**" >> $GITHUB_STEP_SUMMARY
-            python -c "import json; data=json.load(open('update_log.json')); print(f'- Total exams processed: {data[\"total_exams\"]}'); print(f'- Successful updates: {data[\"successful_updates\"]}'); print(f'- Failed updates: {data[\"failed_updates\"]}'); print(f'- Total questions: {data[\"total_questions\"]}'); print(f'- Force rescan: {data.get(\"force_rescan\", False)}') if data.get('force_rescan') else None" >> $GITHUB_STEP_SUMMARY
+            python3 -c 'import json; data=json.load(open("update_log.json")); print("- Total exams processed:", data.get("total_exams", 0)); print("- Successful updates:", data.get("successful_updates", 0)); print("- Failed updates:", data.get("failed_updates", 0)); print("- Total questions:", data.get("total_questions", 0)); print("- Questions updated:", data["updated_questions"]) if data.get("updated_questions", 0) > 0 else None; print("- Force rescan:", data["force_rescan"]) if data.get("force_rescan") else None; print("- Force update:", data["force_update"]) if data.get("force_update") else None' >> $GITHUB_STEP_SUMMARY 2>/dev/null || echo "- Error reading update log" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ❌ Update log not found" >> $GITHUB_STEP_SUMMARY
           fi
@@ -139,3 +164,9 @@ jobs:
           else
             echo "- 📋 No changes to commit" >> $GITHUB_STEP_SUMMARY
           fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Features:**" >> $GITHUB_STEP_SUMMARY
+          echo "- 🎯 3-tier answer extraction (official votes → vote count → suggested answers)" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔍 Smart change detection for existing questions" >> $GITHUB_STEP_SUMMARY
+          echo "- 📈 Enhanced accuracy for most_voted answers" >> $GITHUB_STEP_SUMMARY
