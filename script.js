@@ -465,10 +465,12 @@ async function loadExam(examCode) {
     document.getElementById("exportBtn").style.display = "flex";
     document.getElementById("homeBtn").style.display = "inline-block";
 
-    // Update question jump field max value
-    updateQuestionJumpMaxValue();
-
     displayCurrentQuestion();
+
+    // Update question jump field max value with a slight delay to ensure DOM is ready
+    setTimeout(() => {
+      updateQuestionJumpMaxValue();
+    }, 100);
     showSuccess(`Loaded ${currentQuestions.length} questions for ${examCode}`);
   } catch (error) {
     showError(`Error loading exam: ${error.message}`);
@@ -580,11 +582,23 @@ function updateQuestionJumpMaxValue() {
     const maxQuestionNumber = Math.max(
       ...currentQuestions.map((q) => parseInt(q.question_number) || 0)
     );
+
+    // Force update with multiple methods to ensure it works
     questionJumpField.setAttribute("max", maxQuestionNumber);
+    questionJumpField.max = maxQuestionNumber;
+
+    // Also update the step attribute to ensure proper spinner behavior
+    questionJumpField.setAttribute("step", "1");
+
     console.log(`Updated question jump max value to: ${maxQuestionNumber}`);
+    console.log(
+      `Current max attribute: ${questionJumpField.getAttribute("max")}`
+    );
+    console.log(`Current max property: ${questionJumpField.max}`);
   } else {
     // Reset to default when no questions are loaded
     questionJumpField.setAttribute("max", "1");
+    questionJumpField.max = "1";
     console.log("Reset question jump max value to: 1");
   }
 }
