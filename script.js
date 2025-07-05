@@ -97,6 +97,7 @@ async function discoverAvailableExams() {
     ];
 
     const allPotentialCodes = [...examPrefixes, ...additionalPatterns];
+    console.log("Checking potential codes:", allPotentialCodes);
 
     // Check for _links.json files to discover what exams are available
     const availableCodes = [];
@@ -107,6 +108,7 @@ async function discoverAvailableExams() {
         });
         if (linkResponse.ok) {
           availableCodes.push(code);
+          console.log(`Found _links.json for: ${code}`);
         }
       } catch (error) {
         // Ignore errors for non-existent files
@@ -114,6 +116,7 @@ async function discoverAvailableExams() {
     });
 
     await Promise.all(checkPromises);
+    console.log("Available codes with _links.json:", availableCodes);
 
     // Now check if corresponding .json files exist for discovered codes
     const examCheckPromises = availableCodes.map(async (examCode) => {
@@ -123,9 +126,14 @@ async function discoverAvailableExams() {
         });
         if (response.ok) {
           discoveredExams[examCode] = examCode;
+          console.log(`Confirmed exam file exists for: ${examCode}`);
+        } else {
+          console.log(
+            `Exam file not found for: ${examCode} (status: ${response.status})`
+          );
         }
       } catch (error) {
-        // Ignore errors for non-existent files
+        console.log(`Failed to check exam file for: ${examCode}`, error);
       }
     });
 
