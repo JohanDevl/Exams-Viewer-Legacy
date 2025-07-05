@@ -100,11 +100,6 @@
           "replies": []
         },
         {
-          "content": "The answer is A because have de order 100",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
           "content": "the rules run in the order from lowest to highest.",
           "selected_answer": "B",
           "replies": []
@@ -705,7 +700,7 @@
       ],
       "question_number": "15",
       "link": "https://www.examtopics.com/discussions/servicenow/view/142439-exam-cis-discovery-topic-1-question-15-discussion/",
-      "most_voted": null,
+      "most_voted": "AD",
       "error": null
     },
     {
@@ -782,11 +777,6 @@
           "replies": []
         },
         {
-          "content": "https://docs.servicenow.com/bundle/vancouver-it-operations-management/page/product/discovery/reference/credential-less-app-discovery.html",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
           "content": "If the instance fails to identify a configuration item (CI) because of authentication failure, Discovery or Service Mapping can run selected Network Mapper (Nmap) commands with a MID Server to collect some basic information about the CI without using credentials.\n\nFrom: https://docs.servicenow.com/bundle/washingtondc-it-operations-management/page/product/discovery/concept/nmap-credential-less-discovery.html",
           "selected_answer": "",
           "replies": []
@@ -828,11 +818,6 @@
         },
         {
           "content": "Credential affinity has nothing to do with choosing the order of ports/services to probe.",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "https://docs.servicenow.com/bundle/utah-it-operations-management/page/product/credentials/task/t_CheckIPServiceAffinity.html",
           "selected_answer": "D",
           "replies": []
         },
@@ -1097,7 +1082,7 @@
       ],
       "question_number": "27",
       "link": "https://www.examtopics.com/discussions/servicenow/view/117942-exam-cis-discovery-topic-1-question-27-discussion/",
-      "most_voted": null,
+      "most_voted": "BD",
       "error": null
     },
     {
@@ -1248,7 +1233,7 @@
       ],
       "question_number": "33",
       "link": "https://www.examtopics.com/discussions/servicenow/view/117944-exam-cis-discovery-topic-1-question-33-discussion/",
-      "most_voted": null,
+      "most_voted": "ABC",
       "error": null
     },
     {
@@ -1602,11 +1587,6 @@
       ],
       "comments": [
         {
-          "content": "A. Is de correct answer",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
           "content": "https://docs.servicenow.com/en-US/bundle/vancouver-it-operations-management/page/product/discovery/concept/c-UsingPatternsForHorizontalDiscovery.html#:~:text=discovery%20with%20probes-,Horizontal%20discovery%20with%20patterns,probes%20to%20kick%20off%20discovery",
           "selected_answer": "A",
           "replies": []
@@ -1862,11 +1842,6 @@
           "replies": []
         },
         {
-          "content": "https://docs.servicenow.com/bundle/washingtondc-it-operations-management/page/product/service-mapping/reference/r_PatternVariables.html",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
           "content": "It is D",
           "selected_answer": "D",
           "replies": []
@@ -2040,7 +2015,7 @@
       ],
       "question_number": "59",
       "link": "https://www.examtopics.com/discussions/servicenow/view/132715-exam-cis-discovery-topic-1-question-59-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -2216,6 +2191,11 @@
           "replies": []
         },
         {
+          "content": "B & D Choose 2",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "b and d",
           "selected_answer": "B",
           "replies": []
@@ -2286,11 +2266,6 @@
           "replies": [
             "Sorry, Change to C,D"
           ]
-        },
-        {
-          "content": "https://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/mid-server/reference/mid-server-parameters.html\nhttps://docs.servicenow.com/bundle/washingtondc-servicenow-platform/page/product/mid-server/task/enable-winRM-MID-servers.html",
-          "selected_answer": "BC",
-          "replies": []
         },
         {
           "content": "B and C.",
@@ -2817,7 +2792,7 @@
       ],
       "question_number": "82",
       "link": "https://www.examtopics.com/discussions/servicenow/view/134114-exam-cis-discovery-topic-1-question-82-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -2982,7 +2957,7 @@
       ],
       "question_number": "88",
       "link": "https://www.examtopics.com/discussions/servicenow/view/134117-exam-cis-discovery-topic-1-question-88-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -3067,7 +3042,7 @@
       ],
       "question_number": "92",
       "link": "https://www.examtopics.com/discussions/servicenow/view/132746-exam-cis-discovery-topic-1-question-92-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -3087,7 +3062,7 @@
       ],
       "question_number": "93",
       "link": "https://www.examtopics.com/discussions/servicenow/view/132747-exam-cis-discovery-topic-1-question-93-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -3182,7 +3157,7 @@
       ],
       "question_number": "97",
       "link": "https://www.examtopics.com/discussions/servicenow/view/132792-exam-cis-discovery-topic-1-question-97-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -3292,7 +3267,7 @@
       ],
       "question_number": "106",
       "link": "https://www.examtopics.com/discussions/servicenow/view/134143-exam-cis-discovery-topic-1-question-106-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -3379,7 +3354,7 @@
       ],
       "question_number": "110",
       "link": "https://www.examtopics.com/discussions/servicenow/view/148636-exam-cis-discovery-topic-1-question-110-discussion/",
-      "most_voted": null,
+      "most_voted": "E",
       "error": null
     },
     {
@@ -3412,6 +3387,11 @@
         "D. Fingerprinting, Classifiers, Discovery Pattern"
       ],
       "comments": [
+        {
+          "content": "C is correct Answer",
+          "selected_answer": "C",
+          "replies": []
+        },
         {
           "content": "C is correct Answer",
           "selected_answer": "C",

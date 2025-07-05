@@ -662,6 +662,11 @@
       ],
       "comments": [
         {
+          "content": "AC are correct",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
           "content": "Control Objective (sn_compliance_policy_statement), Citation (sn_compliance_citation) and Risk Statement (sn_risk_statement) are extensions of content (sn_grc_content)\n\nPlease refer the GRC table architecture",
           "selected_answer": "AC",
           "replies": []
@@ -779,7 +784,7 @@
       ],
       "question_number": "18",
       "link": "https://www.examtopics.com/discussions/servicenow/view/142693-exam-cis-rc-topic-1-question-18-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -824,7 +829,7 @@
       ],
       "question_number": "20",
       "link": "https://www.examtopics.com/discussions/servicenow/view/157078-exam-cis-rc-topic-1-question-20-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -1195,7 +1200,7 @@
       ],
       "question_number": "29",
       "link": "https://www.examtopics.com/discussions/servicenow/view/157089-exam-cis-rc-topic-1-question-29-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -1749,21 +1754,16 @@
           "replies": []
         },
         {
-          "content": "ACD is the correct answer",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "It is CD",
-          "selected_answer": "ACD",
-          "replies": []
-        },
-        {
           "content": "ACD. Also found on Page 19 in the book. Under both the \"managed\" and \"optimized\" sections.",
           "selected_answer": "AC",
           "replies": [
             "ACD* I may have forgotten to Check the D"
           ]
+        },
+        {
+          "content": "It is CD",
+          "selected_answer": "ACD",
+          "replies": []
         },
         {
           "content": "It should be ACD",
@@ -2592,7 +2592,7 @@
       ],
       "question_number": "71",
       "link": "https://www.examtopics.com/discussions/servicenow/view/115580-exam-cis-rc-topic-1-question-71-discussion/",
-      "most_voted": null,
+      "most_voted": "CD",
       "error": null
     },
     {
@@ -2824,11 +2824,6 @@
           "replies": []
         },
         {
-          "content": "ACE is correct",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
           "content": "ACE IS CORRECT",
           "selected_answer": "",
           "replies": []
@@ -2888,11 +2883,6 @@
         {
           "content": "Answer: A. Control Objective\nExplanation: Control Objective[sn_compliance_policy_statement] doesn't seem to have a lifecycle attached, while Policy[sn_compliance_policy], Policy Exception[sn_compliance_policy_exception] and control[sn_compliance_control] all have a lilfecycle\nSource: PDI, run <table_name>.do against those tables you can see the lifecycle on all but Control Objective[sn_compliance_policy_statement]",
           "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "A is the correct answer",
-          "selected_answer": "",
           "replies": []
         },
         {
@@ -3018,16 +3008,6 @@
           "replies": []
         },
         {
-          "content": "ABC are the correct chooices",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "ABC since data breaches and audit failures are consequences not understanding current",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
           "content": "No, we dont need to understand Data breaches.",
           "selected_answer": "CDE",
           "replies": [
@@ -3141,11 +3121,6 @@
           "replies": []
         },
         {
-          "content": "AD are the correct choices",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
           "content": "ebook: GRC: Integrated Risk Management (IRM) Implementation - San Diego, Page 140\nPolicy is extended from Document. Risk and Control extend from the Item table.",
           "selected_answer": "AD",
           "replies": []
@@ -3249,6 +3224,11 @@
         "E. Basic"
       ],
       "comments": [
+        {
+          "content": "answer D",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "Reference is not an control indicator.\nPA Indicator related list is available within a Risk or Control based on enablement of Performance Analytics.\nEither the question is incorrectly framed or choice values.",
           "selected_answer": "D",
@@ -3636,11 +3616,6 @@
           "content": "Answer:\n\tA. They would like efficiency\n\tB. They would like integrated reporting\n\tC. They would like transparency\n\tF. They would like workflow driven processes\nExplanation: D. customer service is more of a CMS thing and E. custom website isn't SN's strong side.....\nSource: trust me bro.",
           "selected_answer": "AC",
           "replies": []
-        },
-        {
-          "content": "ABCF are the correct choices",
-          "selected_answer": "",
-          "replies": []
         }
       ],
       "question_number": "103",
@@ -3734,6 +3709,26 @@
       "question_number": "107",
       "link": "https://www.examtopics.com/discussions/servicenow/view/95831-exam-cis-rc-topic-1-question-107-discussion/",
       "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following are a part of the GRC: Advanced Risk scope? (Choose two.)",
+      "answers": [
+        "A. Risk Hierarchy",
+        "B. Risk Assessment Methodologies",
+        "C. Risk Criteria Matrix",
+        "D. Risk Framework"
+      ],
+      "comments": [
+        {
+          "content": "yes A and B",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "108",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/147568-exam-cis-rc-topic-1-question-108-discussion/",
+      "most_voted": "AB",
       "error": null
     },
     {
@@ -4084,7 +4079,7 @@
       ],
       "question_number": "122",
       "link": "https://www.examtopics.com/discussions/servicenow/view/116498-exam-cis-rc-topic-1-question-122-discussion/",
-      "most_voted": "ABE",
+      "most_voted": "BDE",
       "error": null
     },
     {
@@ -4254,7 +4249,7 @@
       ],
       "question_number": "128",
       "link": "https://www.examtopics.com/discussions/servicenow/view/142084-exam-cis-rc-topic-1-question-128-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -4321,16 +4316,6 @@
         {
           "content": "B is correct",
           "selected_answer": "B",
-          "replies": []
-        },
-        {
-          "content": "B is the correct answer",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "B. Risk Criteria Matrix",
-          "selected_answer": "",
           "replies": []
         },
         {
@@ -4496,7 +4481,7 @@
       ],
       "question_number": "138",
       "link": "https://www.examtopics.com/discussions/servicenow/view/142861-exam-cis-rc-topic-1-question-138-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -4522,7 +4507,7 @@
       ],
       "question_number": "139",
       "link": "https://www.examtopics.com/discussions/servicenow/view/115879-exam-cis-rc-topic-1-question-139-discussion/",
-      "most_voted": null,
+      "most_voted": "BD",
       "error": null
     },
     {
@@ -4567,7 +4552,7 @@
       ],
       "question_number": "141",
       "link": "https://www.examtopics.com/discussions/servicenow/view/147574-exam-cis-rc-topic-1-question-141-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -4644,7 +4629,7 @@
       ],
       "question_number": "144",
       "link": "https://www.examtopics.com/discussions/servicenow/view/147576-exam-cis-rc-topic-1-question-144-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -4731,7 +4716,7 @@
       ],
       "question_number": "147",
       "link": "https://www.examtopics.com/discussions/servicenow/view/142863-exam-cis-rc-topic-1-question-147-discussion/",
-      "most_voted": null,
+      "most_voted": "BCD",
       "error": null
     },
     {
@@ -4989,6 +4974,11 @@
       ],
       "comments": [
         {
+          "content": "In the ServiceNow Quantitative risk method, the risk likelihood is referred to as Annual Rate of Occurrence (ARO). ARO represents the estimated number of times a specific risk might occur within a given period, typically one year, and is a key component in calculating Annual Loss Exposure (ALE)",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "Likelihood - Qualitative\nSLE - Single Loss Expectancy, not risk likelihood.\nARO - Annualized Rate of Occurence - Expected Annual Rate of e.g., the SLE occurring. Not risk likelihood.\nTherefore Answer is B - Calculated Score\n\nhttps://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0692108",
           "selected_answer": "B",
           "replies": []
@@ -4996,7 +4986,7 @@
       ],
       "question_number": "157",
       "link": "https://www.examtopics.com/discussions/servicenow/view/169692-exam-cis-rc-topic-1-question-157-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -5038,11 +5028,6 @@
         {
           "content": "Either Different or Same responses\nhttps://docs.servicenow.com/en-US/bundle/vancouver-governance-risk-compliance/page/product/grc-policy-and-compliance/concept/c_Attestations.html",
           "selected_answer": "CD",
-          "replies": []
-        },
-        {
-          "content": "CD are the correct choices",
-          "selected_answer": "",
           "replies": []
         }
       ],
@@ -5101,11 +5086,6 @@
         {
           "content": "Answer: C. It processes data from individuals in the European Union\nExplanation: \"The General Data Protection Regulation (GDPR) is a European Union law that applies to any company that processes personal data of individuals residing in the EU, regardless of the company's location.\"\nSource: Gemini",
           "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "C is the correct answer",
-          "selected_answer": "",
           "replies": []
         },
         {
@@ -5185,6 +5165,392 @@
       "question_number": "169",
       "link": "https://www.examtopics.com/discussions/servicenow/view/147586-exam-cis-rc-topic-1-question-169-discussion/",
       "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What tables can leverage the SLA definition n the baseline? (Choose two.)",
+      "answers": [
+        "A. Risk table",
+        "B. Issue table",
+        "C. Indicator task table",
+        "D. Control table",
+        "E. Control objective table"
+      ],
+      "comments": [
+        {
+          "content": "I would say only B as per inkling page:  /p/497cebf3293a4853857931009583e571",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "170",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303872-exam-cis-rc-topic-1-question-170-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which tables extend from the Task table? (Choose two.)",
+      "answers": [
+        "A. Risk Response Task",
+        "B. Risk",
+        "C. Control",
+        "D. RCM Action Task",
+        "E. Risk Statement"
+      ],
+      "comments": [
+        {
+          "content": "yes AD",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "171",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304174-exam-cis-rc-topic-1-question-171-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "The compliance or non-compliance of a control impacts the compliance score on records in which tables? (Choose three.)",
+      "answers": [
+        "A. Audit engagement table",
+        "B. Risk table",
+        "C. Risk statement table",
+        "D. Authority document table",
+        "E. Policy table",
+        "F. Citation table"
+      ],
+      "comments": [
+        {
+          "content": "correct",
+          "selected_answer": "DEF",
+          "replies": []
+        }
+      ],
+      "question_number": "172",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304175-exam-cis-rc-topic-1-question-172-discussion/",
+      "most_voted": "DEF",
+      "error": null
+    },
+    {
+      "question": "Which of the following is not a type of compliance indicator?",
+      "answers": [
+        "A. Performance Analytics",
+        "B. Manual",
+        "C. Scripted",
+        "D. Reference",
+        "E. Basic"
+      ],
+      "comments": [
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "173",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304176-exam-cis-rc-topic-1-question-173-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "The content table (sn_grc_content) is a parent table of:",
+      "answers": [
+        "A. sn_risk_framework",
+        "B. sn_grc_profile",
+        "C. sn_risk_defmition",
+        "D. sn_risk_risk"
+      ],
+      "comments": [
+        {
+          "content": ".A. sn_risk_framework >> risk frame work\n    B. sn_grc_profile >> entities\n    C. sn_risk_defimition >> risk statement\n    D. sn_risk_risk >>> risks",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "176",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303918-exam-cis-rc-topic-1-question-176-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What table is an implementer’s starting point to meet a customer requirement to generate a report related to a specific policy acknowledgement campaign?",
+      "answers": [
+        "A. sn_compliance_policy_acknowledgement_instance",
+        "B. sn_grc_audience",
+        "C. sn_compliance_policy_acknowledgement",
+        "D. sn_compliance_policy"
+      ],
+      "comments": [
+        {
+          "content": "[A]Acknowledgements\n[B]Audiences \n[C]Acknowledgement Campaigns \n[D]Policies",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "184",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303935-exam-cis-rc-topic-1-question-184-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What tables are a part of the GRC: Advanced Risk scope? (Choose two.)",
+      "answers": [
+        "A. Risk Framework",
+        "B. Manual Factor",
+        "C. Risk Criteria Matrix",
+        "D. Risk Assessment Methodologies"
+      ],
+      "comments": [
+        {
+          "content": "Confirmed in PDI- Manual Factor and Risk Assessment Methodology are tables under GRC: Advanced Risk",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "188",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305350-exam-cis-rc-topic-1-question-188-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "What choices do implementers have when configuring an audience for policy acknowledgements? (Choose three.)",
+      "answers": [
+        "A. Select specific users",
+        "B. Define conditions against the User table",
+        "C. Select specific groups",
+        "D. ACLs",
+        "E. Define conditions against the Group table",
+        "F. User Criteria"
+      ],
+      "comments": [
+        {
+          "content": "Validated in PDI, audience can be configured by choosing users, groups or creating a user filter to be run against the User [sys_user] table",
+          "selected_answer": "ABC",
+          "replies": []
+        }
+      ],
+      "question_number": "199",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305351-exam-cis-rc-topic-1-question-199-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "What rules can be set up to manage policy exceptions? (Choose two.)",
+      "answers": [
+        "A. Alert rule",
+        "B. Verification rule",
+        "C. Entity class rule",
+        "D. Initial Approval rule",
+        "E. Approval rule",
+        "F. Notification rule"
+      ],
+      "comments": [
+        {
+          "content": "I would say BE",
+          "selected_answer": "BE",
+          "replies": []
+        }
+      ],
+      "question_number": "200",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304805-exam-cis-rc-topic-1-question-200-discussion/",
+      "most_voted": "BE",
+      "error": null
+    },
+    {
+      "question": "Which ServiceNow applications outside of the GRC suite of applications provide indicator templates when activated? (Choose two.)",
+      "answers": [
+        "A. Event Management",
+        "B. Customer Service Management",
+        "C. Vulnerability Response",
+        "D. Configuration Compliance",
+        "E. Security Incident Response"
+      ],
+      "comments": [
+        {
+          "content": "I would say AC",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "201",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304362-exam-cis-rc-topic-1-question-201-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "What is the technical name of the table that contains entities?",
+      "answers": [
+        "A. sn_compliance_entities",
+        "B. sn_grc_profiles",
+        "C. sn_grc_entities",
+        "D. sn_compliance_profiles"
+      ],
+      "comments": [
+        {
+          "content": "Confirmed in PDI",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "203",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305352-exam-cis-rc-topic-1-question-203-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What must an implementer configure to allow users to submit a policy exception from a non-GRC application like HR? (Choose two.)",
+      "answers": [
+        "A. Integration registry",
+        "B. Approval rules",
+        "C. Exception risk rules",
+        "D. Exception questionnaire",
+        "E. Verification rules"
+      ],
+      "comments": [
+        {
+          "content": "AD must be",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "208",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305037-exam-cis-rc-topic-1-question-208-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "What actions can be executed by a user with the GRC Business User Lite role? (Choose two.)",
+      "answers": [
+        "A. Group control attestations",
+        "B. Respond to GRC issues assigned to them",
+        "C. Approve an advanced risk assessment",
+        "D. Create a risk assessment",
+        "E. Take a risk assessment"
+      ],
+      "comments": [
+        {
+          "content": "BE I would say",
+          "selected_answer": "BE",
+          "replies": []
+        }
+      ],
+      "question_number": "214",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304804-exam-cis-rc-topic-1-question-214-discussion/",
+      "most_voted": "BE",
+      "error": null
+    },
+    {
+      "question": "Which indicator type uses platform automation to collect records for continuous monitoring?",
+      "answers": [
+        "A. Manual",
+        "B. Scripted",
+        "C. Automatic",
+        "D. Basic"
+      ],
+      "comments": [
+        {
+          "content": "It's D\n\nAutomatic. All evidence is in the NOW platform. Binary\ntest. The execute can be very frequent (hourly).",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Atomatic Factors but indicator Scripted",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "220",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304802-exam-cis-rc-topic-1-question-220-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What feature does the GRC: Advanced Risk application have that is not available in the GRC: Risk Management (Classic Risk) application?",
+      "answers": [
+        "A. Risk indicator management",
+        "B. Risk Response",
+        "C. Risk Rollup",
+        "D. Risk Score tracking"
+      ],
+      "comments": [
+        {
+          "content": "ok it's C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "221",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305038-exam-cis-rc-topic-1-question-221-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What tables can be related to the Control Objective table with a many-to-many relationship? (Choose two.)",
+      "answers": [
+        "A. Authority Document",
+        "B. Control",
+        "C. Citation",
+        "D. Risk",
+        "E. Policy"
+      ],
+      "comments": [
+        {
+          "content": "Should be Citation and Policy",
+          "selected_answer": "CE",
+          "replies": []
+        }
+      ],
+      "question_number": "224",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305353-exam-cis-rc-topic-1-question-224-discussion/",
+      "most_voted": "CE",
+      "error": null
+    },
+    {
+      "question": "What is located in the GRC Properties module under the Policy and Compliance application menu?",
+      "answers": [
+        "A. System Properties for GRC: Entities scope",
+        "B. System Properties for all GRC application scopes",
+        "C. System Properties for the GRC: Profiles scope",
+        "D. System Properties for the GRC: Policy and Compliance scope"
+      ],
+      "comments": [
+        {
+          "content": "Should be GRC: Profiles",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "225",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305354-exam-cis-rc-topic-1-question-225-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What state do controls enter once all control attestations are completed?",
+      "answers": [
+        "A. Review",
+        "B. Attest",
+        "C. Draft",
+        "D. Retired",
+        "E. Monitor"
+      ],
+      "comments": [
+        {
+          "content": "Review",
+          "selected_answer": "A",
+          "replies": [
+            "no way"
+          ]
+        },
+        {
+          "content": "Monitor",
+          "selected_answer": "E",
+          "replies": []
+        }
+      ],
+      "question_number": "229",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303859-exam-cis-rc-topic-1-question-229-discussion/",
+      "most_voted": "E",
       "error": null
     }
   ]

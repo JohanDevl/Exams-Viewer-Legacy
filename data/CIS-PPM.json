@@ -179,11 +179,6 @@
           "replies": []
         },
         {
-          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/concept/c_Teamspaces.html",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
           "content": "c is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/concept/c_Teamspaces.html",
           "selected_answer": "C",
           "replies": []
@@ -581,11 +576,6 @@
       ],
       "comments": [
         {
-          "content": "In this article, is explicitly said that the domain separation level is \"Basic\":\nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-portfolio-suite-with-financials/concept/domain-separation-project-portfolio-financials.html\n\nIn this article, it explains what the basic level means, but uses the word \"customer\" instead of \"tenant\":\nhttps://docs.servicenow.com/bundle/utah-platform-security/page/administer/company-and-domain-separation/reference/bp-domain-levels.html",
-          "selected_answer": "B",
-          "replies": []
-        },
-        {
           "content": "Correct answer is B or D.\nI can't tell from the documentation.\nhttps://docs.servicenow.com/ja-JP/bundle/utah-it-business-management/page/product/project-portfolio-suite-with-financials/concept/domain-separation-project-portfolio-financials.html",
           "selected_answer": "",
           "replies": []
@@ -843,11 +833,6 @@
       ],
       "comments": [
         {
-          "content": "Answer should only be resource_user, resource_manager has this capability because it contains resource_user",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
           "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/concept/c_ResourceManagement.html",
           "selected_answer": "CD",
           "replies": []
@@ -927,11 +912,6 @@
         "D. Only if the capability is enabled in the Time Sheet Policies"
       ],
       "comments": [
-        {
-          "content": "https://docs.servicenow.com/bundle/washingtondc-application-development/page/administer/task-table/task/create-time-sheet-policy.html",
-          "selected_answer": "D",
-          "replies": []
-        },
         {
           "content": "D is correct",
           "selected_answer": "",
@@ -1389,11 +1369,6 @@
           "replies": []
         },
         {
-          "content": "The answer is wrong, the correct answer is only C, you can see it in this link https://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/concept/c_DemandWorkbench.html\n\nAs it is said there, \"With the demand manager role, you can view and evaluate demands\", so stakeholders cannot see those demands, they are not managers",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
           "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/concept/c_DemandWorkbench.html",
           "selected_answer": "",
           "replies": []
@@ -1474,11 +1449,6 @@
         "D. scrum_master."
       ],
       "comments": [
-        {
-          "content": "it should only be pps admin, system_admin can do this because it has pps_admin role included",
-          "selected_answer": "A",
-          "replies": []
-        },
         {
           "content": "AC is correct",
           "selected_answer": "AC",
@@ -1635,18 +1605,6 @@
         "D. Planned resource plan."
       ],
       "comments": [
-        {
-          "content": "In this link is clearly stated that events are only created when the resource goes from confirmed to allocated https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/resource-management/concept/c_ResourceEvents.html",
-          "selected_answer": "B",
-          "replies": []
-        },
-        {
-          "content": "Approved and planned are not states for a resource plan. \nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/resource-management/concept/c_ResourcePlans.html",
-          "selected_answer": "BC",
-          "replies": [
-            "the answer is not BC, is only C, i made a mistake, look for the other comment I wrote. If any admin can delete this previous answer, please do it"
-          ]
-        },
         {
           "content": "Allocated resource plan & Confirmed resource plan are the answers.",
           "selected_answer": "",
@@ -2173,11 +2131,6 @@
           "replies": []
         },
         {
-          "content": "B & D are correct! The lowest role being given this ability is it_pps_admin, but admin is also given it by extension",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
           "content": "B is correct",
           "selected_answer": "B",
           "replies": []
@@ -2238,11 +2191,6 @@
       ],
       "comments": [
         {
-          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/resource-management/reference/rsrc-form.html",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
           "content": "https://docs.servicenow.com/ja-JP/bundle/vancouver-it-business-management/page/product/resource-management/reference/rsrc-form.html",
           "selected_answer": "",
           "replies": []
@@ -2268,11 +2216,6 @@
         "E. Day"
       ],
       "comments": [
-        {
-          "content": "Hours, FTE and person days. https://docs.servicenow.com/bundle/utah-it-business-management/page/product/resource-management/concept/c_ResourcePlans.html",
-          "selected_answer": "BCD",
-          "replies": []
-        },
         {
           "content": "reference：Request type\nhttps://docs.servicenow.com/ja-JP/bundle/utah-it-business-management/page/product/resource-management/concept/c_ResourcePlans.html",
           "selected_answer": "BCD",
@@ -2316,30 +2259,8 @@
           "replies": []
         },
         {
-          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/concept/cost-plan-breakdown.html\n\n\"A cost plan breakdown captures the estimated cost and actual cost for every fiscal period. Cost plan, project, demand, program, and portfolio are the breakdowns types that are available.\"",
-          "selected_answer": "ACEF",
-          "replies": []
-        },
-        {
-          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/concept/cost-plan-breakdown.html",
-          "selected_answer": "BDEF",
-          "replies": [
-            "This answer is mine and is wrong, if an admin can delete it, please do it"
-          ]
-        },
-        {
           "content": "The cost plan breakdown has a field breakdown type with the values- requirement, task, program and portfolio",
           "selected_answer": "BDEF",
-          "replies": []
-        },
-        {
-          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/concept/cost-plan-breakdown.html\n\nMoreover, if you go to your PDI, look for a cost_plan_breakdown and you look at the choice list of the field \"breakdown type\", the string available are requirement, task, portfolio and program",
-          "selected_answer": "BDEF",
-          "replies": []
-        },
-        {
-          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/concept/cost-plan-breakdown.html\n\nMoreover, if you go to your PDI, look for a cost_plan_breakdown and you look at the choice list of the field \"breakdown type\", the string available are requirement, task, portfolio and program",
-          "selected_answer": "BCEF",
           "replies": []
         },
         {
@@ -2408,11 +2329,6 @@
       "comments": [
         {
           "content": "Planned cost is rolled up from Requested Allocations for plans in the Planning or Requested state and from Resource allocations for plans in the Confirmed or Allocated state. While requesting resources from a group, if a resource role is specified, the planned cost is calculated from the hourly rate of the specified role.\n\nSource; https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/resource-management/reference/rsrc-plan-form-tabs.html",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "B is not what we want, we are asked about planned cost on resource request, and distribution of costs is about distributing costs among a group of records. Look for \"planned cost\" in the table of the article I'm linking\n\nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/resource-management/reference/rsrc-plan-form-tabs.html",
           "selected_answer": "C",
           "replies": []
         },
@@ -2529,11 +2445,6 @@
       ],
       "comments": [
         {
-          "content": "This question is ambiguous. Depending on what you understand on importing \"assessment\", A and C could be correct. Nonetheless, I think A is a clearer answer, here I have the info https://www.servicenow.com/community/spm-articles/demand-to-project-conversion/ta-p/2300270",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
           "content": "sorry, I'm wrong! My comments is related to another question :-(",
           "selected_answer": "",
           "replies": []
@@ -2568,11 +2479,6 @@
         "D. No Limit."
       ],
       "comments": [
-        {
-          "content": "I cannot find any limit on servicenow documentation, so I can conclude there is no limit. In this article is shown and example with different levels, I suppose one could check on a PDI https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-management/task/t_AccessTheWBSAsARelatedList.html",
-          "selected_answer": "D",
-          "replies": []
-        },
         {
           "content": "Is there any mention in the ServiceNow documentation?",
           "selected_answer": "",
@@ -2871,7 +2777,7 @@
       ],
       "question_number": "89",
       "link": "https://www.examtopics.com/discussions/servicenow/view/105867-exam-cis-ppm-topic-1-question-89-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -2883,11 +2789,6 @@
         "D. Program."
       ],
       "comments": [
-        {
-          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-management/task/t_CreateAExpenseLine.html\n\nExpense line could be associated to user (resource), fixed assets or CI (software). The only option that does not coincide with any of these categories is program, so D is the answer",
-          "selected_answer": "D",
-          "replies": []
-        },
         {
           "content": "Totally wrong question \"except for\" should be replaced with such as and then answer is B",
           "selected_answer": "",
@@ -2938,7 +2839,7 @@
       ],
       "question_number": "91",
       "link": "https://www.examtopics.com/discussions/servicenow/view/105869-exam-cis-ppm-topic-1-question-91-discussion/",
-      "most_voted": null,
+      "most_voted": "AB",
       "error": null
     },
     {
@@ -2958,7 +2859,7 @@
       ],
       "question_number": "92",
       "link": "https://www.examtopics.com/discussions/servicenow/view/105870-exam-cis-ppm-topic-1-question-92-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -3082,11 +2983,6 @@
       "comments": [
         {
           "content": "The Category field selection determines the selections available in this field.\nThe Story, Epic,Enhancement, and Defect options only appear if the administrator has activated the Agile Development 2.0 plugin.\n\nSource; https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/planning-and-policy/reference/demand-form.html",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/agile-development/reference/components-installed-with-agile-2.0.html",
           "selected_answer": "A",
           "replies": []
         }
@@ -3435,11 +3331,6 @@
           "replies": []
         },
         {
-          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/itbm-portfolio-planning/concept/portfolio-planning-overview.html",
-          "selected_answer": "B",
-          "replies": []
-        },
-        {
           "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/concept/c_PortfolioManagement.html#:~:text=The%20Scenario%20Planning%20for%20PPM%20application%20provides,roadmap%20for%20project%20execution%20for%20a%20given",
           "selected_answer": "B",
           "replies": []
@@ -3652,7 +3543,7 @@
       ],
       "question_number": "120",
       "link": "https://www.examtopics.com/discussions/servicenow/view/124907-exam-cis-ppm-topic-1-question-120-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -3881,11 +3772,6 @@
           "replies": []
         },
         {
-          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/planning-and-policy/reference/demand-form.html\n\n\"Demand score is calculated based on risk, value, and size attributes in the base system.\"",
-          "selected_answer": "BC",
-          "replies": []
-        },
-        {
           "content": "The default demand assessment contains a series of risk and alignment questions . ( SPM book, point assessment recipients and trigger",
           "selected_answer": "",
           "replies": []
@@ -3932,16 +3818,6 @@
       "comments": [
         {
           "content": "From the training course documentation: Project Administration > Settings > Workbench Config - Demand",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "The wording is terribly bad, please rewrite the question",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/planning-and-policy/task/t_CreatingBubbleCharts.html\n\nNonetheless, the wording of the question needs to be reviewed, it's not clear.",
           "selected_answer": "A",
           "replies": []
         },
@@ -4148,7 +4024,7 @@
       ],
       "question_number": "134",
       "link": "https://www.examtopics.com/discussions/servicenow/view/127567-exam-cis-ppm-topic-1-question-134-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -4160,11 +4036,6 @@
         "D. Value Score"
       ],
       "comments": [
-        {
-          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/planning-and-policy/reference/demand-form.html\n\n\"Demand score is calculated based on risk, value, and size attributes in the base system.\"",
-          "selected_answer": "BD",
-          "replies": []
-        },
         {
           "content": "Checked on PDI instance",
           "selected_answer": "BD",
@@ -4196,16 +4067,6 @@
           "replies": []
         },
         {
-          "content": "wording is confusing, try to clarify it",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "The question is not clear, one can understand either how many possibilities are there for a relation or how many relations can one apply at a time.",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
           "content": "Attention: question is how many relationships can exists between to tasks.\nDoc: \"Note: Only one relationship can exist between two tasks.\"\nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-management/concept/c_ProjectTaskRelationDepend.html",
           "selected_answer": "A",
           "replies": []
@@ -4220,7 +4081,7 @@
       ],
       "question_number": "136",
       "link": "https://www.examtopics.com/discussions/servicenow/view/124909-exam-cis-ppm-topic-1-question-136-discussion/",
-      "most_voted": "D",
+      "most_voted": "A",
       "error": null
     },
     {
@@ -4810,11 +4671,6 @@
       ],
       "comments": [
         {
-          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-management/concept/forecast-plan-for-portfolio.html\nAs a project or portfolio manager, you can forecast the future costs of projects and portfolios based on the actual cost and changed project requirements.",
-          "selected_answer": "AB",
-          "replies": []
-        },
-        {
           "content": "As a project or portfolio manager, you can forecast the future costs of projects and portfolios based on the actual cost and changed project requirements.",
           "selected_answer": "AB",
           "replies": []
@@ -4922,7 +4778,7 @@
       ],
       "question_number": "157",
       "link": "https://www.examtopics.com/discussions/servicenow/view/109126-exam-cis-ppm-topic-1-question-157-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -4941,11 +4797,6 @@
           "replies": [
             "- Add demand tasks.\n- Add stakeholders.\n- Add requirements.\n- Add resource plans."
           ]
-        },
-        {
-          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/planning-and-policy/concept/c_EnhancingDemands.html\nABE is correct",
-          "selected_answer": "ABE",
-          "replies": []
         },
         {
           "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/planning-and-policy/concept/c_EnhancingDemands.html",
@@ -5170,11 +5021,6 @@
       ],
       "comments": [
         {
-          "content": "https://docs.servicenow.com/bundle/washingtondc-platform-administration/page/administer/time/task/t_DefineASchedule.html\n\nRole required: admin",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
           "content": "始める前に、必要なロール：it_pps_admin\nhttps://docs.servicenow.com/ja-JP/bundle/vancouver-it-business-management/page/product/resource-management/concept/c_UsingResourceSchedules.html",
           "selected_answer": "",
           "replies": []
@@ -5182,7 +5028,7 @@
       ],
       "question_number": "164",
       "link": "https://www.examtopics.com/discussions/servicenow/view/129824-exam-cis-ppm-topic-1-question-164-discussion/",
-      "most_voted": "C",
+      "most_voted": "C -",
       "error": null
     },
     {
@@ -5277,11 +5123,6 @@
         "D. No, this can only be done by a system admin."
       ],
       "comments": [
-        {
-          "content": "Here you can see that an it_project_manager can create a milestone: https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-management/task/t_CreateMilestones.html\n\nHere you can see you can create it right-clicking on planning console: https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-management/reference/r_PlanningConsoleTasks.html",
-          "selected_answer": "B",
-          "replies": []
-        },
         {
           "content": "https://docs.servicenow.com/ja-JP/bundle/vancouver-it-business-management/page/product/project-management/task/t_CreateMilestones.html",
           "selected_answer": "",

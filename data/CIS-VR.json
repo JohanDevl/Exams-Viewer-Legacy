@@ -3,23 +3,38 @@
   "error": "",
   "questions": [
     {
-      "question": "Select the three components of a Filter Condition: (Choose three.)",
+      "question": "Which of the following is an objective of Vendor Risk Management? (Choose two.)",
       "answers": [
-        "A. Field",
-        "B. Sum",
-        "C. Operator",
-        "D. Value"
+        "A. To help vendors improve their security posture and preparedness",
+        "B. To assess and manage the risk from interactions with vendors and third parties",
+        "C. To help negotiate the best possible price for a product or service from the vendor",
+        "D. To verify that vendors have adequate measures and processes in place to ensure profitability of vendor"
       ],
       "comments": [
         {
-          "content": "Agree\nhttps://docs.servicenow.com/bundle/vancouver-mobile/page/administer/tablet-mobile-ui/reference/filter-condition-attributes.html",
-          "selected_answer": "ACD",
+          "content": "I have the same question:\nAre the exam questions here still relevant for TPRM?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Are the exam questions here still relevant for TPRM?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A&B are correct",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "I think A&B are correct",
+          "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "1",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/128123-exam-cis-vr-topic-1-question-1-discussion/",
-      "most_voted": "ACD",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118489-exam-cis-vrm-topic-1-question-1-discussion/",
+      "most_voted": "AB",
       "error": null
     },
     {
@@ -53,77 +68,54 @@
       "error": null
     },
     {
-      "question": "What is the minimum role required to create and change Service Level Agreements for Vulnerability Response groups?",
+      "question": "Internal roles include: (Choose three.)",
       "answers": [
-        "A. sla_manager",
-        "B. admin",
-        "C. sn_vul.vulnerability_write",
-        "D. sn_vul.admin"
+        "A. Vendor Contact sn_vdr_risk.vendor_contact",
+        "B. Vendor Risk Manager sn_vdr_risk_asmt.vendor_risk_manager",
+        "C. Primary Vendor Contact sn_vdr_risk_asmt.prim_vendor_contact",
+        "D. Vendor Risk Assessor sn_vdr_risk_asmt.vendor_assessor",
+        "E. Vendor Risk Reviewer sn_vdr_risk_asmt.vendor_assessment_reviewer"
       ],
       "comments": [
         {
-          "content": "Role required: sn_vul.vulnerability_admin or sn_vul.admin (deprecated)\n\nhttps://docs.servicenow.com/bundle/washingtondc-security-management/page/product/vulnerability-response/task/t_CreateVulnSLA.html",
-          "selected_answer": "",
+          "content": "BDE  Is correct",
+          "selected_answer": "BDE",
           "replies": []
         },
         {
-          "content": "B is the right answer",
+          "content": "Vendor contact roles cannot be internal as they represent the person on the other side of the table. BDE are correct I think",
           "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "3",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/135228-exam-cis-vr-topic-1-question-3-discussion/",
-      "most_voted": null,
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118527-exam-cis-vrm-topic-1-question-3-discussion/",
+      "most_voted": "BDE",
       "error": null
     },
     {
-      "question": "Changes made within a named Update Set in a different application scope:",
+      "question": "Roles preceded by sn_vdr_risk are for which scope?",
       "answers": [
-        "A. Will be captured",
-        "B. Will throw errors",
-        "C. Will not be captured",
-        "D. Will be partially captured"
+        "A. GRC: Vendor Risk Remediation",
+        "B. GRC: Vendor Risk Core",
+        "C. GRC: Risk Management",
+        "D. GRC: Vendor Risk Management"
       ],
       "comments": [
         {
-          "content": "C is the correct answer.\nCustomizations captured in update sets are restricted to the scope for the application being changed.  A scope may contain several update sets, but an update set cannot cross application scopes.  Consequently, an update set name could appear identical in more than one scope, but is actually different (due to the namespace), a consideration for the naming policy.",
+          "content": "D is correct",
           "selected_answer": "",
-          "replies": [
-            "This seems very logical, will test it out"
-          ]
-        },
-        {
-          "content": "The question is a bit of a gotcha. It says, \"Named update set within a different application scope.\" It doesn't say that you've got one update set in one scope and a change in another.",
-          "selected_answer": "A",
           "replies": []
         },
         {
-          "content": "I actually think this is B. The updates will be captured but will throw errors when promoting. I have seen this happen multiple times in code promotion.",
-          "selected_answer": "B",
-          "replies": [
-            "Actually, I tested this in my PDI and it does not allow you to have an update set for another application open in a separate scope, so I agree with the others who said C."
-          ]
-        },
-        {
-          "content": "Changes made within a named Update Set in a different application scope are not captured because each application scope in ServiceNow is designed to be a separate and isolated environment.",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "\"1. Limitations of update sets: The biggest limitation is that an update set cannot capture updates across the different application scopes. In order to capture updates across different application scopes, you need to create multiple update sets catering to each application scope.\"",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "A is the correct answer.\nThe change is indeed captured by ServiceNow, even though it may be in a separate Update Set due to scope differences. The question likely aims to assess whether the change is tracked at all, rather than the specifics of how it's managed across scopes (batches and children)",
-          "selected_answer": "A",
+          "content": "D is correct: \n\nhttps://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-sig-questionnaire/task/install-grc-sig-plugin.html",
+          "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "4",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/142057-exam-cis-vr-topic-1-question-4-discussion/",
-      "most_voted": "A",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118528-exam-cis-vrm-topic-1-question-4-discussion/",
+      "most_voted": "D",
       "error": null
     },
     {
@@ -152,54 +144,43 @@
       "error": null
     },
     {
-      "question": "In regard to the Security Operations Process, which of the following statements defines the “Identify” phase?",
+      "question": "What is the definition of ‘Risk Management’?",
       "answers": [
-        "A. What processes and assets need protection?",
-        "B. What techniques can identify incidents?",
-        "C. What safeguards are available?",
-        "D. What techniques can restore capabilities?",
-        "E. What techniques can contain impacts of incidents?"
+        "A. Policies/Standards/Procedures established to ensure an organization is aligned with corporate strategy and expectations are clearly defined",
+        "B. The process of conforming to standards, policies, and remediation of audit findings",
+        "C. The elimination of vulnerable surface area in an enterprise environment",
+        "D. Process to identify, assess, and respond to risks, threats and vulnerabilities that could compromise the business"
       ],
       "comments": [
         {
-          "content": "Check the secops process five steps on google",
-          "selected_answer": "A",
+          "content": "D is correct",
+          "selected_answer": "D",
           "replies": []
         }
       ],
       "question_number": "6",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/127961-exam-cis-vr-topic-1-question-6-discussion/",
-      "most_voted": "A",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122973-exam-cis-vrm-topic-1-question-6-discussion/",
+      "most_voted": "D",
       "error": null
     },
     {
-      "question": "Which module is used to adjust the frequency in which CVEs are updated?",
+      "question": "Which of the following is the main benefit of using the Vendor Portal?",
       "answers": [
-        "A. NVD Auto-update",
-        "B. Update",
-        "C. CVE Auto-update",
-        "D. On-demand update"
+        "A. Assessments are performed via the Vendor Portal and spreadsheets",
+        "B. More efficiently communicating Assessments with a single contact",
+        "C. Assessments are shared through the Vendor Portal and email",
+        "D. More efficiently completing Assessments via the Vendor Portal"
       ],
       "comments": [
         {
-          "content": "https://store.servicenow.com/sn_appstore_store.do#!/store/application/1c7480a9e81ce81080a59cc8eb19602a",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "None of these modules can be found anywhere in the actual VR modules. Not a single one. The other comment on this post also appears to be AI generated, which is notorious for answering with hallucinations when no real answer is to be found.",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "The module within the ServiceNow Vulnerability Response application that can be used to get information from the National Vulnerability Database (NVD) at any moment is NVD Auto-update. This module allows for the automated updating of CVEs and other vulnerability data from the NVD, ensuring that the information in ServiceNow is current and accurate.",
-          "selected_answer": "A",
+          "content": "D is correct",
+          "selected_answer": "D",
           "replies": []
         }
       ],
       "question_number": "7",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/135361-exam-cis-vr-topic-1-question-7-discussion/",
-      "most_voted": "A",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122974-exam-cis-vrm-topic-1-question-7-discussion/",
+      "most_voted": "D",
       "error": null
     },
     {
@@ -258,176 +239,218 @@
       "error": null
     },
     {
-      "question": "If a customer expects to ingest 2 million vulnerabilities during its initial load, which instance size should you recommend?",
+      "question": "What can a vendor contact do in the Vendor Portal? (Choose four.)",
       "answers": [
-        "A. L",
-        "B. XL",
-        "C. XXL",
-        "D. Ultra"
+        "A. Update answers to returned questionnaires",
+        "B. Communicate or share information with other vendors of the assessing organization",
+        "C. Create new issues and tasks for the vendor risk assessor team",
+        "D. Review and respond to issues created by the assessing organization",
+        "E. Manage vendor contacts and task assignments within the vendor organization",
+        "F. Respond to assessments sent by the assessing organization"
       ],
       "comments": [
         {
-          "content": "https://docs.qualys.com/en/integration/vmdr-itsm/get_started/prerequisites.htm",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "Note: Request an instance size based on the following guidelines: •   Instance size XL for less than 1 million vulnerabilities •   Instance size XXL for 1 - 2.5 million vulnerabilities •   Instance size Ultra for more than 2.5 million vulnerabilities",
-          "selected_answer": "C",
+          "content": "ADEF is correct",
+          "selected_answer": "ADEF",
           "replies": []
         }
       ],
       "question_number": "10",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/128010-exam-cis-vr-topic-1-question-10-discussion/",
-      "most_voted": "C",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122977-exam-cis-vrm-topic-1-question-10-discussion/",
+      "most_voted": "ADEF",
       "error": null
     },
     {
-      "question": "Which functions can be performed in the Vendor Portal? (Choose three.)",
+      "question": "What Business Rule creates a Configuration Item from a Vulnerable Item record?",
       "answers": [
-        "A. Assessment response",
-        "B. Contact Management",
-        "C. Issue remediation",
-        "D. Schedule web meetings",
-        "E. Requests via virtual agent"
+        "A. Create CI from Vulnerable Group Details",
+        "B. Create CI from Closed Item Details",
+        "C. Determine CI from Network Details",
+        "D. Create CI from Vulnerable Item Details"
       ],
       "comments": [
         {
-          "content": "ABC is correct",
-          "selected_answer": "ABC",
-          "replies": []
-        },
-        {
-          "content": "ABC\nhttps://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-vendor-risk-implementation/task/vendor-risk-portal.html",
+          "content": "Determine CI from Network Details",
           "selected_answer": "",
           "replies": []
         },
         {
-          "content": "Correct answer is ABC",
-          "selected_answer": "",
+          "content": "Determine CI from Network Details exists on sn_vul_vulnerable_item table which run on insert and update with the condition \"Configuration item is empty\", \"IP address is not empty\" OR \"DNS name is not empty\" OR \"NETBIOS name is not empty\".",
+          "selected_answer": "C",
           "replies": []
         },
         {
-          "content": "I think ABC.",
-          "selected_answer": "",
+          "content": "Determine CI from Network Details \tvar ci = (new sn_sec_cmn.SecOpsCILocation()).locateCIByNetwork({\n\t\tfqdn: current.netbios,\n\t\tdns: current.dns,\n\t\tip_address: current.ip_address\n\t});",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Determine CI from Network Details",
+          "selected_answer": "C",
           "replies": []
         }
       ],
       "question_number": "11",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/109200-exam-cis-vrm-topic-1-question-11-discussion/",
-      "most_voted": "ABC",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128012-exam-cis-vr-topic-1-question-11-discussion/",
+      "most_voted": "C",
       "error": null
     },
     {
-      "question": "The components installed with Vulnerability Response include:",
+      "question": "Where do vendors manage issues, respond to requests, and fulfill tasks assigned to them?",
       "answers": [
-        "A. Tables, Scheduled Jobs, Security Operations Common",
-        "B. Business Rules, Roles, Workflows",
-        "C. Properties, Client Scripts, Wizards",
-        "D. UI Pages, Business Rules, Vulnerability Scanners"
+        "A. Spreadsheets",
+        "B. Vendor Portal",
+        "C. ServiceNow Platform",
+        "D. Email"
       ],
       "comments": [
         {
-          "content": "https://docs.servicenow.com/bundle/vancouver-security-management/page/product/vulnerability-response/reference/installed-with-vr.html",
-          "selected_answer": "",
+          "content": "B is correct",
+          "selected_answer": "B",
           "replies": []
         },
         {
-          "content": "Do not see Scheduled Jobs or Security Operations Common. I do see Flows, Roles and Business Rules installed as part of VR.",
+          "content": "B is Correct",
           "selected_answer": "B",
           "replies": []
         }
       ],
       "question_number": "12",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/129592-exam-cis-vr-topic-1-question-12-discussion/",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112179-exam-cis-vrm-topic-1-question-12-discussion/",
       "most_voted": "B",
       "error": null
     },
     {
-      "question": "What is the purpose of Scoped Applications?",
+      "question": "Which statements most accurately describe assignments to vendor contacts? (Choose two.)",
       "answers": [
-        "A. Suppliers can only charge for applications when they are scoped",
-        "B. Scoped applications are scalable, Global applications are not",
-        "C. Scoping encapsulates and protects data and functionality",
-        "D. An application needs to be scoped in order to be deployed as a plugin"
+        "A. Individual sections in the questionnaire or document request can be assigned",
+        "B. A questionnaire or document request cannot be assigned to multiple vendor contacts",
+        "C. A questionnaire can be read by vendor contacts that are not assigned",
+        "D. A questionnaire can only be completed by assigned vendor contacts"
       ],
       "comments": [
         {
-          "content": "Application scoping protects applications by encapsulating and protecting their data and functionality, preventing interference from another application scope, including the Global scope.  This is achieved with a unique identifier (e.g. sn_vul).",
+          "content": "CD is correct. refer the ebook page 274 https://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/274",
           "selected_answer": "",
           "replies": []
         },
         {
-          "content": "https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0716626#mcetoc_1h8uvm0eb1h",
+          "content": "CD is correct",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Individual sections cannot be assigned, correct answer is C,D",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is C and D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Sorry, I ment C & D.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think its A and C.",
           "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "13",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/130355-exam-cis-vr-topic-1-question-13-discussion/",
-      "most_voted": null,
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109688-exam-cis-vrm-topic-1-question-13-discussion/",
+      "most_voted": "CD",
       "error": null
     },
     {
-      "question": "What is the ID associated with the Vulnerability Response plugin?",
+      "question": "What are the baseline mandatory fields when creating a new Vendor Contact? (Choose three.)",
       "answers": [
-        "A. com.snc.threat.intelligence",
-        "B. com.snc.vulnerability",
-        "C. com.snc.threat.feeds",
-        "D. com.snc.security_incident"
+        "A. Name (First and Last)",
+        "B. Vendor",
+        "C. Department",
+        "D. Email",
+        "E. Role"
       ],
       "comments": [
         {
-          "content": "Check servicenow document: https://docs.servicenow.com/bundle/vancouver-security-management/page/product/vulnerability-response/task/install-and-configure-vr.html",
-          "selected_answer": "B",
+          "content": "It's ABD.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is ABD",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "ABD is correct",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "ABD [First name. Last name, Email and vendor]",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "ABD [First name. Last name, Email and vendor]",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is ABD.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Its ABD.",
+          "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "14",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/128013-exam-cis-vr-topic-1-question-14-discussion/",
-      "most_voted": "B",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109201-exam-cis-vrm-topic-1-question-14-discussion/",
+      "most_voted": "ABD",
       "error": null
     },
     {
-      "question": "Where can you find information related to the Common Vulnerabilities and Exposures (CVE)?",
+      "question": "Which of these options can be used in data cleansing when importing vendor data? (Choose three.)",
       "answers": [
-        "A. Tenable",
-        "B. MITRE",
-        "C. NIST",
-        "D. Qualys"
+        "A. Data Policies",
+        "B. Access Control Lists",
+        "C. Field Normalization Rules",
+        "D. Fix Scripts",
+        "E. Data Import or Data Source Transform",
+        "F. UI Policies"
       ],
       "comments": [
         {
-          "content": "cve.mitre.org",
-          "selected_answer": "B",
+          "content": "CDE is correct",
+          "selected_answer": "CDE",
           "replies": []
         },
         {
-          "content": "On the book says \"CVE – Vulnerabilities defined by NIST - NVD\"",
-          "selected_answer": "C",
+          "content": "CDE is correct",
+          "selected_answer": "CDE",
           "replies": []
         },
         {
-          "content": "From the textbook:\nCVE - Vulnerabilities defined by NIST",
-          "selected_answer": "C",
-          "replies": [
-            "But the internet seems to indicate B, MITRE. I hate these types of questions."
-          ]
-        },
-        {
-          "content": "B is the correct answer",
-          "selected_answer": "",
+          "content": "Correct",
+          "selected_answer": "CDE",
           "replies": []
         },
         {
-          "content": "https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures",
-          "selected_answer": "",
+          "content": "Correct",
+          "selected_answer": "CDE",
           "replies": []
         }
       ],
       "question_number": "15",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/129594-exam-cis-vr-topic-1-question-15-discussion/",
-      "most_voted": "B",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112938-exam-cis-vrm-topic-1-question-15-discussion/",
+      "most_voted": "CDE",
       "error": null
     },
     {
@@ -492,66 +515,61 @@
       "error": null
     },
     {
-      "question": "Filter Groups provide a way to:",
+      "question": "What is the no code option to cleaning data being loaded into the Vendor Risk application?",
       "answers": [
-        "A. Decouple the use of the grouping from the definition of the grouping",
-        "B. Build criteria once",
-        "C. Reuse criteria in a variety of places",
-        "D. All of the above"
+        "A. Fix Scripts",
+        "B. Field Normalization",
+        "C. Import"
       ],
       "comments": [
         {
-          "content": "D\n\nLooks like D, but unsure",
-          "selected_answer": "D",
+          "content": "Reference: ServiceNow's Third-party Risk Management Implementation eBook > Clean Data",
+          "selected_answer": "B",
           "replies": []
         },
         {
-          "content": "I think the correct answer is D",
+          "content": "B is correct.",
           "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct - https://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/55",
+          "selected_answer": "B",
           "replies": []
         }
       ],
       "question_number": "18",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/143214-exam-cis-vr-topic-1-question-18-discussion/",
-      "most_voted": null,
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112941-exam-cis-vrm-topic-1-question-18-discussion/",
+      "most_voted": "B",
       "error": null
     },
     {
-      "question": "When will the tiering value appear on the Vendor record?",
+      "question": "Which module within the Vulnerability Response application could be used to get information from the National Vulnerability Database (NVD) at any moment?",
       "answers": [
-        "A. When the Tiering Assessment record state is closed",
-        "B. When the Tiering Assessment record state is Tiering Assessment",
-        "C. When all tiering assessments have been completed"
+        "A. On-Demand Update",
+        "B. NVD Auto-Update",
+        "C. Vulnerable Software",
+        "D. NVD Patch"
       ],
       "comments": [
         {
-          "content": "https://docs.servicenow.com/ja-JP/bundle/xanadu-governance-risk-compliance/page/product/grc-workspace-vrm/reference/manage-risk-tiering-assessments.html",
+          "content": "question secret is on \"any time\" so its on demand",
           "selected_answer": "A",
           "replies": []
         },
         {
-          "content": "A is correct. \nhttps://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/108",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "A is correct",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "Correct Answer = A, The vendor record will be updated with the tier value when the assessment has been closed.\n\nhttps://evantage.gilmoreglobal.com/reader/books/SN-VRMI-R010-PG-E/pageid/107",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "Should be A >>> This tier is assigned to the vendor when the tiering assessment is closed.\n\nFrom <https://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-vendor-risk/reference/manage-risk-tiering-assessments.html> \n\nVRM",
+          "content": "I belive its A: On-Demand Update",
           "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "19",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/112265-exam-cis-vrm-topic-1-question-19-discussion/",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/124870-exam-cis-vr-topic-1-question-19-discussion/",
       "most_voted": "A",
       "error": null
     },
@@ -783,47 +801,162 @@
       "error": null
     },
     {
-      "question": "In order for Vulnerability admins to configure integrations, they must have the following Role(s):",
+      "question": "Where can the score for each Assessment Metric or Metric Category be configured?",
       "answers": [
-        "A. admin only",
-        "B. sn_vul.admin only",
-        "C. sn_vul.vulnerability_write",
-        "D. admin and sn_vul_qualys.admin"
+        "A. Assessment Metric Category record",
+        "B. Assessment Template record",
+        "C. Assessment record",
+        "D. Assessment Metric Type record"
       ],
       "comments": [
         {
-          "content": "This question is rough, but as written, I believe it is B. Only sn_vul.admin (or sn_vul.vulnerability.admin) is needed to configure. admin is needed to install.",
-          "selected_answer": "B",
-          "replies": []
-        },
-        {
-          "content": "https://www.servicenow.com/docs/bundle/yokohama-security-management/page/product/secops-integration-vr/qualys/reference/qualys-installed-with.html\n\nThe wording of the question is suspect. You don't need both 'admin' and 'sn_vul_qualys.admin' -- you need either of the roles.  The 'sn_vul_qualys.admin' role has description:  \"Administrator for Qualys Vulnerability Integration. For example, you can modify integration start dates and perform some advanced configuration settings.\"\n\nOf course, 'admin' can do anything.",
+          "content": "> ServiceNow official eBook: Third-party Risk Management Implementation > Metric Category and Assessment Metric",
           "selected_answer": "D",
           "replies": []
         },
         {
-          "content": "I would say D is correct",
+          "content": "Correct answer is D.\nhttps://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/142",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "eBook: Vendor Risk Management (VRM) Implementation - San Diego, Page 143",
           "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is D\n\nModule 3: Assessment configuration (Page 134)\nhttps://evantage.gilmoreglobal.com/reader/books/SN-VRMI-R010-PG-E/pageid/131",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "I think Correct answer is A. Assessment Metric Category record",
+          "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "26",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/143216-exam-cis-vr-topic-1-question-26-discussion/",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112182-exam-cis-vrm-topic-1-question-26-discussion/",
       "most_voted": "D",
       "error": null
     },
     {
-      "question": "In order to evaluate a vendor on a recurring basis, configure a record in this table:",
+      "question": "In order to more easily manage large sets of Vulnerable Items, what should you create?",
       "answers": [
-        "A. Repeating Surveys",
-        "B. Assessment Metric",
-        "C. Repeating Assessments",
-        "D. Assessment Metric Type"
+        "A. Vulnerability Groups",
+        "B. Calculator Group",
+        "C. Filter Group",
+        "D. Vulnerable Item Conditions"
       ],
       "comments": [
         {
-          "content": "C is correct answer.",
+          "content": "Remediation Task",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "this is out dated question \"remediation task \" is the answer",
           "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "27",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128677-exam-cis-vr-topic-1-question-27-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "This functionality provides a simple way to build criteria once, which can be reused in other platform areas.",
+      "answers": [
+        "A. Conditions",
+        "B. Favorites",
+        "C. Filter Group",
+        "D. Filters"
+      ],
+      "comments": [
+        {
+          "content": "Filter Group",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "\"Create and use filter groups to locate records from any table on your instance. For example, you can create a group of all computers by the same manufacturer. You can also filter configuration items (CIs) that have similar vulnerabilities or that fall within a particular subnet IP address range.\"\nhttps://docs.servicenow.com/bundle/washingtondc-security-management/page/product/security-operations-common/task/create-filter-group.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Filter Groups are an additional way to create advanced filters that can be saved, reused and shared.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "is c the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "28",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127147-exam-cis-vr-topic-1-question-28-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "To facilitate the remediation of a Vulnerable Item what type of item is most commonly used?",
+      "answers": [
+        "A. Create a Problem",
+        "B. Create a Security Incident",
+        "C. Create a KB article",
+        "D. Create a Change"
+      ],
+      "comments": [
+        {
+          "content": "Change Button from VIT",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D. Create a Change",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "In many cases, removing vulnerable software involves deploying an upgrade or a patch, as recommended by the vendor of the affected software.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "the principal porpouse of VR is to avoid sec incident so how can sec incident be the best way to achieve, the correct answer is change",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "the principal porpouse of VR is to avoid sec incident so how can sec incident be the best way to achieve, the correct answer is change",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "29",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128679-exam-cis-vr-topic-1-question-29-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which statement best describes the SIG Lite?",
+      "answers": [
+        "A. The SIG Lite is a company specific questionnaire",
+        "B. The SIG Lite is a ServiceNow developed questionnaire",
+        "C. The SIG Lite assesses basic levels of due diligence and provides a broad but high-level understanding about internal security controls",
+        "D. The SIG Lite assesses service providers that store or manage highly sensitive or regulated information"
+      ],
+      "comments": [
+        {
+          "content": "> ServiceNow official eBook: Third-party Risk Management Implementation > Standard Information Gathering（SIG）",
+          "selected_answer": "C",
           "replies": []
         },
         {
@@ -832,139 +965,14 @@
           "replies": []
         },
         {
-          "content": "Correct",
+          "content": "https://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/147",
           "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "correct - https://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/23",
-          "selected_answer": "C",
-          "replies": []
-        }
-      ],
-      "question_number": "27",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/112946-exam-cis-vrm-topic-1-question-27-discussion/",
-      "most_voted": "C",
-      "error": null
-    },
-    {
-      "question": "A Document Request Template is a record in which table?",
-      "answers": [
-        "A. Document request item [sn_document_template]",
-        "B. Vendor risk assessment [sn_vdr_risk_asmt_assessment]",
-        "C. Assessment metric category [asmt_metric_category]",
-        "D. Assessment metric type [asmt_metric type]"
-      ],
-      "comments": [
-        {
-          "content": "Correct Ans D",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "Correct answer is D.\nQuestionnaire Templates and Document Request Templates are referred and stored in as “Assessment Metric Types”.",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "> ServiceNow official eBook: Third-party Risk Management Implementation > Questionnaire Template: Table Examples",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "Correct answer is D.",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "Correct answer: D",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "D is correct",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "Correct Answer is D",
-          "selected_answer": "D",
-          "replies": []
-        }
-      ],
-      "question_number": "28",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/109105-exam-cis-vrm-topic-1-question-28-discussion/",
-      "most_voted": "D",
-      "error": null
-    },
-    {
-      "question": "From an Assessment record, the vendor risk assessor can click on “View Responses” to see which of the following?",
-      "answers": [
-        "A. Issue Responses",
-        "B. Email Responses",
-        "C. Task Responses",
-        "D. Assessment Responses"
-      ],
-      "comments": [
-        {
-          "content": "D is correct",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "correct - https://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/192",
-          "selected_answer": "D",
-          "replies": []
-        }
-      ],
-      "question_number": "29",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/112947-exam-cis-vrm-topic-1-question-29-discussion/",
-      "most_voted": "D",
-      "error": null
-    },
-    {
-      "question": "After closing the Vulnerable Item (VI), it is recommended to:",
-      "answers": [
-        "A. Update the values in the Vulnerability Score Indicator (VSI) based on the critically of the Vulnerability",
-        "B. The VI remains active and in place until the Scanner rescans and closes the VI",
-        "C. Mark the CI as exempt from the Vulnerability if the vulnerability was remediated",
-        "D. Compare the Vulnerability with subsequent scans"
-      ],
-      "comments": [
-        {
-          "content": "The question asks what is recommended AFTER closure. In that case, I would say D is the answer.",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "On the book says \"Compare subsequent scans to verify closure\"",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "CI remains open and auto close after rescan and vulnerability cant be found on CI",
-          "selected_answer": "B",
-          "replies": []
-        },
-        {
-          "content": "The VI remains active until scanned",
-          "selected_answer": "B",
-          "replies": []
-        },
-        {
-          "content": "In the E-book (vancouver), part 5.3 - closing the vulnerability, there are five steps defined. \n1. VI created by scanner and assigned, \n2. Team decide if change is needed,\n3. Change is moved to completion after successful change,\n4. VIT remains in place until the scanner rescans CI,\n5. VIT is closed after scanner successfully reports CI without vulnerability.\nStep 4 and 5 make it sound to me that the answer should be B.",
-          "selected_answer": "B",
-          "replies": []
-        },
-        {
-          "content": "Think its D.",
-          "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "30",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/124839-exam-cis-vr-topic-1-question-30-discussion/",
-      "most_voted": "B",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112949-exam-cis-vrm-topic-1-question-30-discussion/",
+      "most_voted": "C",
       "error": null
     },
     {
@@ -1052,65 +1060,58 @@
       "error": null
     },
     {
-      "question": "Ignoring a Vulnerable Item:",
+      "question": "For each questionnaire template/assessment metric type, how many vendor risk areas can be designated?",
       "answers": [
-        "A. Permanently removes the item from the list of Active Vulnerable Items",
-        "B. Move the item to the Slushbucket",
-        "C. Has no impact on the list of Active Vulnerable Items",
-        "D. Temporarily removes the item from the list of Active Vulnerable Items"
+        "A. One",
+        "B. As many as desired",
+        "C. None",
+        "D. Two"
       ],
       "comments": [
         {
-          "content": "I think its D\nhttps://docs.servicenow.com/bundle/washingtondc-security-management/page/product/vulnerability-response/task/defer-vul-item.html",
-          "selected_answer": "D",
-          "replies": [
-            "I think you are right"
-          ]
+          "content": "> ServiceNow official eBook: Third-party Risk Management Implementation > Risk Areas Definitions",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A risk area can be tied to multiple questionnaire templates, but not the other way around i.e. a questionnaire template can only be tied to one risk area\neBook: Vendor Risk Management (VRM) Implementation - San Diego, Page 178",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Each questionnaire template/document request can only have 1 vendor risk area per record.\nA vendor assessment can therefore have as many as wanted.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "One or many?\nhttps://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/177",
+          "selected_answer": "",
+          "replies": []
         }
       ],
       "question_number": "34",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/143218-exam-cis-vr-topic-1-question-34-discussion/",
-      "most_voted": "D",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112958-exam-cis-vrm-topic-1-question-34-discussion/",
+      "most_voted": "A",
       "error": null
     },
     {
-      "question": "What do Vulnerability Exceptions require?",
+      "question": "To what type of assessment record can a vendor contact respond?",
       "answers": [
-        "A. An Approval by default",
-        "B. An Exception Workflow",
-        "C. A GRC integration",
-        "D. A Filter Group"
+        "A. Vendor tiering assessment",
+        "B. Vendor risk assessment",
+        "C. Customer assessment",
+        "D. External monitoring assessment"
       ],
       "comments": [
         {
-          "content": "Verified in PDI. In order to request an exception, an approval is required.",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "I agree with Ravn888 that its not C nor D.\nAn approval flow is provided OOTB for the Vulnerability Exception process as well, making B a possible answer.\nHowever I would argue that what's actually needed by default to move a Remediation task to any exception states is an approval. Therefore I think A is correct.",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "It's neither C nor D.\nA sounds right, but one could argue that B is needed in order to have an A.",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "https://docs.servicenow.com/bundle/vancouver-security-management/page/product/vulnerability-response/task/add-exception-approver.html\nI think option B is correct.",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "GRC is not mandatory for an exception, it can be work without it",
-          "selected_answer": "",
+          "content": "B is correct",
+          "selected_answer": "B",
           "replies": []
         }
       ],
       "question_number": "35",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/128680-exam-cis-vr-topic-1-question-35-discussion/",
-      "most_voted": "A",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122982-exam-cis-vrm-topic-1-question-35-discussion/",
+      "most_voted": "B",
       "error": null
     },
     {
@@ -1146,30 +1147,34 @@
       "error": null
     },
     {
-      "question": "Approvals within the Vulnerability Application are created based on:",
+      "question": "In addition to the “Design canvas”, which elements does the Template Designer contain? (Choose three.)",
       "answers": [
-        "A. The sys_approval and the sn_vul_vulnerable_item tables",
-        "B. The sn_vul_vulnerable_item and sn_vul_vulnerability tables",
-        "C. The sn_vul_change_approval table",
-        "D. The sys_approval table"
+        "A. Header bar which contains tabs that display different view and a menu of various functions",
+        "B. Controls for the supported question data types",
+        "C. FAQ Page and Tour option",
+        "D. Question and Categories tabs that contain question/categories that were added to the Question Bank",
+        "E. Risk criteria to identity conditions and risk areas"
       ],
       "comments": [
         {
-          "content": "C is the best answer.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-security-management/page/product/vulnerability-response/reference/installed-with-vr.html\n\n'sn_vul_change_approval' is a table that \"tracks the approval process for vulnerabilities.\"  (i.e. it governs what approvals are needed. it doesn't track the approvals, which would be in the approval table.)  And besides, the actual approval table name is \"sysapproval_approver.\"",
-          "selected_answer": "C",
+          "content": "> Third-party Risk Management Implementation ServiceNow official eBook > Questionnaire Template Designer Overview",
+          "selected_answer": "ABD",
           "replies": []
         },
         {
-          "content": "The sys_approval and the sn_vul_vulnerable_item tables. These tables are used to manage and track approval processes within the Vulnerability Application.",
-          "selected_answer": "A",
-          "replies": [
-            "But does not exist any sys_approval table. When you are in Vulnerable Item table if you open script related the table is the sn_vul_change_approval table"
-          ]
+          "content": "ABD is correct",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "correct - https://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/136",
+          "selected_answer": "",
+          "replies": []
         }
       ],
       "question_number": "37",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/153857-exam-cis-vr-topic-1-question-37-discussion/",
-      "most_voted": null,
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112961-exam-cis-vrm-topic-1-question-37-discussion/",
+      "most_voted": "ABD",
       "error": null
     },
     {
@@ -1200,27 +1205,32 @@
       "error": null
     },
     {
-      "question": "When an approval is rejected for a Vulnerable Item exception, what happens to the State field for that record?",
+      "question": "Vendor Risk Tasks are saved to which one of the following tables?",
       "answers": [
-        "A. It reverts to ‘Analysis’",
-        "B. It is set to ‘New’",
-        "C. It is set to ‘In Review’",
-        "D. It will be set back to its previous value"
+        "A. [task]",
+        "B. [planned_task]",
+        "C. [sn_vendor_risk_task]",
+        "D. [sn_vdr_risk_asmt_task]"
       ],
       "comments": [
         {
-          "content": "See diagram https://docs.servicenow.com/en-US/bundle/vancouver-security-management/page/product/vulnerability-response/concept/vr-exception-management.html",
+          "content": "D is correct",
           "selected_answer": "D",
           "replies": []
         },
         {
-          "content": "Verified in PDI",
-          "selected_answer": "D",
+          "content": "D is Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Its D.",
+          "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "39",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/124037-exam-cis-vr-topic-1-question-39-discussion/",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109131-exam-cis-vrm-topic-1-question-39-discussion/",
       "most_voted": "D",
       "error": null
     },
@@ -1260,63 +1270,73 @@
       "error": null
     },
     {
-      "question": "What must Vulnerability Exceptions be supplied by default?",
+      "question": "What are the features of Vendor Risk Issues? (Choose two.)",
       "answers": [
-        "A. A reason for the exception",
-        "B. Integrations with GRC to handle the exception",
-        "C. Requirement Actions for the exception",
-        "D. A manual approval authority for the exception"
+        "A. Generate audit tasks for the vendor risk team",
+        "B. Can only be seen by the customer’s vendor risk team",
+        "C. Provide vendor direct access to update and respond to Issues",
+        "D. Can be generated on-demand or automatically due to an incorrect answer"
       ],
       "comments": [
         {
-          "content": "Think its A.",
-          "selected_answer": "",
+          "content": "> Third-party Risk Management Implementation ServiceNow official eBook > Third-party Risk Issues",
+          "selected_answer": "CD",
           "replies": []
         },
         {
-          "content": "Definitely Reason. Reason, Until and Additional Information are required.",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "It's A",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "Justification is mandatory for exception",
-          "selected_answer": "A",
+          "content": "CD is correct",
+          "selected_answer": "CD",
           "replies": []
         }
       ],
       "question_number": "41",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/124842-exam-cis-vr-topic-1-question-41-discussion/",
-      "most_voted": "A",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122985-exam-cis-vrm-topic-1-question-41-discussion/",
+      "most_voted": "CD",
       "error": null
     },
     {
-      "question": "Which of the following best describes a Vulnerability Group?",
+      "question": "Vendor Risk Issues are usually created in which stage of an Assessment?",
       "answers": [
-        "A. Groups VIs using a Filter against Vulnerable Item Fields",
-        "B. A Filter defining a sub-set of CIs to be treated as a group",
-        "C. The User Group assigned to resolving the Vulnerable Item",
-        "D. Must have a corresponding filter group"
+        "A. Responses Received",
+        "B. Generating Observations",
+        "C. Submitted to Vendor",
+        "D. Finalizing with Vendor"
       ],
       "comments": [
         {
-          "content": "Not necessary to have filter group",
-          "selected_answer": "A",
+          "content": "> ServiceNow official eBook: Third-party Risk Management Implementation > Third-party Risk Issues",
+          "selected_answer": "B",
           "replies": []
         },
         {
-          "content": "Think its A, it is definitely not D.",
+          "content": "An assessor begins Generating Observations which may include creating Issues\neBook: Vendor Risk Management (VRM) Implementation - San Diego, Page 192",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B. Generating Observations",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Never mind, its A - Generating Observations.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I would think A is correct.",
           "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "42",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/124793-exam-cis-vr-topic-1-question-42-discussion/",
-      "most_voted": "A",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109136-exam-cis-vrm-topic-1-question-42-discussion/",
+      "most_voted": "B",
       "error": null
     },
     {
@@ -1350,93 +1370,93 @@
       "error": null
     },
     {
-      "question": "Which of the following is the property that controls whether Vulnerability Groups are created by default based on Vulnerabilities in the system?",
+      "question": "What are some of the purposes of a Vendor Risk Issue? (Choose two.)",
       "answers": [
-        "A. sn_vul.autocreate_vul_centric_group",
-        "B. sn_vul.autocreate_groups",
-        "C. sn_vul.autocreate_vul_grouping",
-        "D. sn_vul.create_default_vul_groups"
+        "A. Log access-related incidents for the vendor portal",
+        "B. Indicate vendors that need further assessment",
+        "C. Accept risks identified in the assessment",
+        "D. Track remediation of compliance gaps"
       ],
       "comments": [
         {
-          "content": "A is the only actual system property",
-          "selected_answer": "A",
+          "content": "ServiceNow official eBook: Third-party Risk Management Implementation > Third-party Risk Issues",
+          "selected_answer": "CD",
           "replies": []
         },
         {
-          "content": "Correct\n\"When true, automatically creates a Remediation Task when a vulnerable item is created for a vulnerability entry that does not yet have a group (for Vulnerability Centric functionality)\"",
-          "selected_answer": "A",
+          "content": "BD is correct",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "correct - Issues are created to document observations, remediations, and/or to accept risks.",
+          "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "44",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/143220-exam-cis-vr-topic-1-question-44-discussion/",
-      "most_voted": "A",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112963-exam-cis-vrm-topic-1-question-44-discussion/",
+      "most_voted": "BD",
       "error": null
     },
     {
-      "question": "The VRM issue management process is frequently unique to an organization. What two ServiceNow provided building blocks were covered in this course to help with customer needs that might arise during the lifecycle of VRM issues? (Choose two.)",
+      "question": "What system property allows for the auto creation of Vulnerability Groups based on the Vulnerable Item’s Vulnerability?",
       "answers": [
-        "A. Flow Designer",
-        "B. Service Management",
-        "C. Workflow Editor",
-        "D. Incident Management"
+        "A. sn_vul.autocreate_vul_filter_group",
+        "B. sn_vul.autocreate_vul_approval_group",
+        "C. sn_vul.autocreate_vul_group_item",
+        "D. sn_vul.autocreate_vul_centric_group"
       ],
       "comments": [
         {
-          "content": "> ServiceNow official eBook: Third-party Risk Management Implementation > Hypothetical Customer Requirements",
-          "selected_answer": "AC",
+          "content": "Its D\n\"When true, automatically creates a Remediation Task when a vulnerable item is created for a vulnerability entry that does not yet have a group (for Vulnerability Centric functionality)\"",
+          "selected_answer": "D",
           "replies": []
         },
         {
-          "content": "AC is correct",
-          "selected_answer": "AC",
+          "content": "sn_vul.autocreate_vul_centric_group",
+          "selected_answer": "",
           "replies": []
         },
         {
-          "content": "A. Flow Designer and C. Workflow Editor\nhttps://evantage.gilmoreglobal.com/reader/books/SN-VRMI-S010-PG-E/pageid/243",
+          "content": "Should be D.",
           "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "45",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/112211-exam-cis-vrm-topic-1-question-45-discussion/",
-      "most_voted": "AC",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/124844-exam-cis-vr-topic-1-question-45-discussion/",
+      "most_voted": "D",
       "error": null
     },
     {
-      "question": "Where in the platform can you create Filter Groups?",
+      "question": "In the Vendor Portal, who can reassign Assessments?",
       "answers": [
-        "A. Vulnerability > Administration > Filter Groups",
-        "B. Vulnerability > Groups > Filter Groups",
-        "C. Security Operations > Administration > Filter Groups",
-        "D. Security Operations > Groups > Filter Groups"
+        "A. Vendor Business Owner",
+        "B. Vendor",
+        "C. Primary Contact",
+        "D. Vendor Manager"
       ],
       "comments": [
         {
-          "content": "It should be D. \n\nNavigate to: All > Security Operations > Groups > Filter Groups.\nSource: https://docs.servicenow.com/en-US/bundle/vancouver-security-management/page/product/security-operations-common/task/create-filter-group.html",
+          "content": "https://docs.servicenow.com/ja-JP/bundle/xanadu-source-to-pay-operations/page/product/supplier-lifecycle-operations/task/set-supp-primary-contact.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is C. Primary Contact.\nThere is No such role Vendor manager and its Vendor Risk Manager",
           "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "Verified in PDI",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "D https://docs.servicenow.com/en-US/bundle/vancouver-security-management/page/product/security-operations-common/task/create-filter-group.html",
-          "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "Its D.",
-          "selected_answer": "D",
           "replies": []
         }
       ],
       "question_number": "46",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/124871-exam-cis-vr-topic-1-question-46-discussion/",
-      "most_voted": "D",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112190-exam-cis-vrm-topic-1-question-46-discussion/",
+      "most_voted": "C",
       "error": null
     },
     {
@@ -1456,7 +1476,7 @@
       ],
       "question_number": "47",
       "link": "https://www.examtopics.com/discussions/servicenow/view/112968-exam-cis-vrm-topic-1-question-47-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -1505,28 +1525,33 @@
       "error": null
     },
     {
-      "question": "Which of the following is a common integration point between Vulnerability and GRC?",
+      "question": "The assessment page provides an area to import what kind of a completed questionnaire?",
       "answers": [
-        "A. Security Incident Response",
-        "B. Change",
-        "C. Problem",
-        "D. Risk Indicators"
+        "A. GDPR",
+        "B. SOC1 & SOC2",
+        "C. SIG",
+        "D. SOX"
       ],
       "comments": [
         {
-          "content": "It should be D as per textbook p58",
-          "selected_answer": "D",
+          "content": "C is the correct answer",
+          "selected_answer": "C",
           "replies": []
         },
         {
-          "content": "Think it is D.",
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Its C. SIG",
           "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "51",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/124845-exam-cis-vr-topic-1-question-51-discussion/",
-      "most_voted": "D",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/112192-exam-cis-vrm-topic-1-question-51-discussion/",
+      "most_voted": "C",
       "error": null
     },
     {
@@ -1595,88 +1620,74 @@
       "error": null
     },
     {
-      "question": "To ensure that Vulnerabilities are processed correctly, you can define a Service Level Agreement (SLA) for Vulnerability Response. To achieve this, you would:",
+      "question": "Which of these must be true in order for a vendor risk issue to be visible in the Vendor Portal?",
       "answers": [
-        "A. Create a custom workflow to monitor the time between States",
-        "B. Log in as a system admin, and using the globally scoped baseline SLA Modules",
-        "C. Have the role of Vulnerability admin, but only in the Vulnerability Scope",
-        "D. Make sure you have at least the sn_vul.vulnerability_write role and using the baseline SLA Application Modules"
+        "A. There must be at least one secondary contact for the vendor",
+        "B. The primary vendor contact must have the sn_vdr_issues role",
+        "C. Issues are always visible in the vendor portal",
+        "D. The Visible in vendor portal field must have a value of true"
       ],
       "comments": [
         {
-          "content": "I think it should be C as per ServiceNow documentation.\nhttps://docs.servicenow.com/bundle/vancouver-security-management/page/product/vulnerability-response/task/t_CreateVulnSLA.html",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "Make sure you have at least the sn_vul.vulnerability_write role and use the baseline SLA Application Modules1.\n\nThis ensures you have the necessary permissions and access to the appropriate modules to set up and manage SLAs effectively.",
+          "content": "https://docs.servicenow.com/ja-JP/bundle/xanadu-governance-risk-compliance/page/product/grc-vendor-risk/task/tprm-ws-issue-create.html",
           "selected_answer": "D",
           "replies": []
         },
         {
-          "content": "Think its B.",
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
           "selected_answer": "",
           "replies": []
         }
       ],
       "question_number": "54",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/124794-exam-cis-vr-topic-1-question-54-discussion/",
-      "most_voted": "C",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109203-exam-cis-vrm-topic-1-question-54-discussion/",
+      "most_voted": "D",
       "error": null
     },
     {
-      "question": "What role is required to view the Vulnerability Overview Dashboard?",
+      "question": "Which GRC records can be related to an Entity? (Choose three.)",
       "answers": [
-        "A. sn_vul.vulnerability.read",
-        "B. sn_vul.manager",
-        "C. sn_vul.ciso",
-        "D. sn_vul.vulnerability.write"
+        "A. Entity Types",
+        "B. Vendors",
+        "C. Risks",
+        "D. Policies",
+        "E. Controls"
       ],
       "comments": [
         {
-          "content": "Its A.",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "Definitely A. B & C do not exist OOTB and you don't need write access to view.",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "Its A.",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "A\n\nsn_vul.vulnerability_read in the Roles table assigned to a user gives access to the Vulnerability Overview Dashboard",
-          "selected_answer": "A",
+          "content": "Policies are not linked to entities directly",
+          "selected_answer": "ACE",
           "replies": []
         }
       ],
       "question_number": "55",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/124797-exam-cis-vr-topic-1-question-55-discussion/",
-      "most_voted": "A",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122988-exam-cis-vrm-topic-1-question-55-discussion/",
+      "most_voted": "ACE",
       "error": null
     },
     {
-      "question": "Managers should have access to which role-based data access and visualizations? (Choose three.)",
+      "question": "A vendor is assessed and responds to a question which impacts one of the Controls applied to them. When is the Control Status updated?",
       "answers": [
-        "A. Aggregations for priority and workload",
-        "B. Time period views",
-        "C. Up-to-the-minute views",
-        "D. Drill-down to granularity"
+        "A. When the Vendor Risk Assessment State is Responses Received",
+        "B. When the Vendor Risk Assessment State is Finalizing with Vendor or Closed",
+        "C. When the Vendor Risk Assessment response is saved",
+        "D. When all Questions in the Vendor Risk Assessment have a response"
       ],
       "comments": [
         {
-          "content": "Its ABD.",
-          "selected_answer": "",
+          "content": "B is correct",
+          "selected_answer": "B",
           "replies": []
         }
       ],
       "question_number": "56",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/124799-exam-cis-vr-topic-1-question-56-discussion/",
-      "most_voted": null,
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122989-exam-cis-vrm-topic-1-question-56-discussion/",
+      "most_voted": "B",
       "error": null
     },
     {

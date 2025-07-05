@@ -12,6 +12,16 @@
       ],
       "comments": [
         {
+          "content": "A B and C are correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is not true.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "Since \"Section\" is under Components and not Fields. You have Annotation and Section under Components.",
           "selected_answer": "D",
           "replies": []
@@ -62,6 +72,16 @@
       ],
       "comments": [
         {
+          "content": "A B and C are valid tabs on the email notifications.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "When, Who, what",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "I think all a, b, c and d are valid. \"d\" is valid answer as we define how we send the notification: by \"how\" I mean it's content type, to include or not a push notification as well as SMS and to choose to make a it a part of digest.",
           "selected_answer": "",
           "replies": [
@@ -105,6 +125,16 @@
       "comments": [
         {
           "content": "this is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is most accurate scenario to check the existing development of a published application. The update sets and global search option can also be used to see what different types of development the specific application contains.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
           "selected_answer": "C",
           "replies": []
         },
@@ -153,6 +183,16 @@
         "D. gs.log()"
       ],
       "comments": [
+        {
+          "content": "gs is server side",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "gs is server side",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "gs.log",
           "selected_answer": "D",
@@ -541,6 +581,11 @@
         {
           "content": "Question should be asking about async business rules",
           "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A display BR is Before the form is presented to the user, just after the data is read from the database, so there will be always the current data not the previous data which was stored in the database, however the previous object available, but not sure it holds any value to it.\nAs per the definition of Display BR it should not hold any previous data.",
+          "selected_answer": "A",
           "replies": []
         },
         {
@@ -1195,6 +1240,11 @@
           "replies": []
         },
         {
+          "content": "g_user.hasRole('client_script_admin');\nThe example script checks to see if the currently logged in user has the capability to create and edit Client Scripts (client_script_admin role). Note that the script returns true not only when the currently logged in user has the role assigned but also if the currently logged in user has the admin role. The admin user has all roles implicitly assigned. To test whether the currently logged in user has the role explicitly assigned, use the hasRoleExactly() method:\n\ng_user.hasRoleExactly('client_script_admin');",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "Take a look of this\n\nhttps://servicenow.read.inkling.com/a/b/969eb76959534a84af3d0c2c58ba13ff/p/7b1eee5b6af844d08eeea8ccbecb08d5",
           "selected_answer": "B",
           "replies": []
@@ -1262,11 +1312,6 @@
         {
           "content": "let it b, let it b...",
           "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "Should be B",
-          "selected_answer": "B",
           "replies": []
         }
       ],
@@ -1749,6 +1794,11 @@
           "replies": []
         },
         {
+          "content": "When deciding whether to grant or deny access, the ACL is searched from the most specific to the most generic match. For example, when determining whether to grant access to the NeedIt table Short description field, the search order is:",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "Whenever a session requests data, the system searches for access control rules that match the requested object and operation. If there is a matching access control rule, then the system evaluates if the user has the permissions required to access the object and operation. If an access control rule specifies more than one permission, then the user must meet all permissions to gain access to the object and operation. Failing any one permission check prevents the user from accessing the matching object and operation.\nIf a user does not meet the permissions of the first matching rule, the system evaluates the permissions of the next matching access control rule as specified by the access control processing order. If the user fails to meet the permissions of any matching access control rule, the system denies access to the requested object and operation.",
           "selected_answer": "C",
           "replies": []
@@ -2086,6 +2136,11 @@
         {
           "content": "Correct is indeed D:\nhttps://docs.servicenow.com/bundle/rome-application-development/page/build/applications/concept/c_DefaultDesignAccessPermissions.html",
           "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Like many said before, reading is possible, editing is not",
+          "selected_answer": "D",
           "replies": []
         },
         {
@@ -3204,6 +3259,11 @@
       ],
       "comments": [
         {
+          "content": "Select the check box and then complete the Add module to menu field to create a list module in the application menu.\n\nThis option is available only when creating a table.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "List of records is the default",
           "selected_answer": "D",
           "replies": []
@@ -3236,6 +3296,11 @@
         {
           "content": "Correct answer is D. When Accessible from is set to \"This app scope only\", then \"Allow configuration\" is unchecked and read-only",
           "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Accessible and create are not same. The question here is about creation and not to block access on the records.",
+          "selected_answer": "B",
           "replies": []
         },
         {
@@ -3799,11 +3864,6 @@
         "D. Map source report"
       ],
       "comments": [
-        {
-          "content": "・tables: schema map\n・CI: Dependency view",
-          "selected_answer": "",
-          "replies": []
-        },
         {
           "content": "A. Schema map is correct",
           "selected_answer": "",
@@ -4518,6 +4578,11 @@
         {
           "content": "Must have email, must have notification enabled and should be active",
           "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "Locked out users cannot receive emails",
+          "selected_answer": "ADE",
           "replies": []
         },
         {
@@ -5913,6 +5978,11 @@
           ]
         },
         {
+          "content": "After watching the counter evidence from AnnaHr, the video clearly mentions subflows not flows. KathQ gives a clear explanation with sources, no sense to repeat it, thank you KathQ",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "B is incorrect because you can call flow from flow. See here: https://www.youtube.com/watch?v=WVu8mZeHImo",
           "selected_answer": "D",
           "replies": []
@@ -6525,6 +6595,11 @@
       ],
       "comments": [
         {
+          "content": "Array.Reference is not exist",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
           "content": "https://docs.servicenow.com/bundle/washingtondc-build-workflows/page/administer/flow-designer/reference/action-inputs-outputs.html",
           "selected_answer": "BDE",
           "replies": []
@@ -6593,6 +6668,67 @@
       "error": null
     },
     {
+      "question": "How is access to Application Menus and Modules controlled?",
+      "answers": [
+        "A. Access Control",
+        "B. Client Scripts",
+        "C. Roles",
+        "D. Application Rules"
+      ],
+      "comments": [
+        {
+          "content": "Answer C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "152",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303599-exam-cad-topic-1-question-152-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is the ServiceNow App Repository?",
+      "answers": [
+        "A. A Request table",
+        "B. A database containing ServiceNow apps",
+        "C. A collection of files in a Git database",
+        "D. Another name for update sets"
+      ],
+      "comments": [
+        {
+          "content": "https://www.servicenow.com/docs/ja-JP/bundle/yokohama-application-development/page/build/applications/concept/app-repo.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "153",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304194-exam-cad-topic-1-question-153-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What data types of Flow Variables are supported to store record data? (Choose three.)",
+      "answers": [
+        "A. Choice",
+        "B. Date",
+        "C. Array",
+        "D. Integer",
+        "E. String"
+      ],
+      "comments": [
+        {
+          "content": "In ServiceNow Flow Designer, Flow Variables can store various data types, including record data. Of the options given, the three supported data types that can be used to store record data are:\n\t- Array (array)\n\t- Integer (integer)\n\t- String (string)\nThese types are available when creating flow variables and allow you to store and pass values between steps within a flow",
+          "selected_answer": "CDE",
+          "replies": []
+        }
+      ],
+      "question_number": "156",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304109-exam-cad-topic-1-question-156-discussion/",
+      "most_voted": "CDE",
+      "error": null
+    },
+    {
       "question": "In a privately-scoped application, which methods are used for logging messages in server-side scripts? (Choose two.)",
       "answers": [
         "A. gs.logError()",
@@ -6603,6 +6739,16 @@
       ],
       "comments": [
         {
+          "content": "CDE are all available in scoped applications. gs.log() is global scope only. gs.logError() does not exist",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CDE are correct. see https://www.servicenow.com/community/itsm-forum/server-side-script/m-p/2776438",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
           "content": "CDE all are correct answers. \n\nGlideSystem debugging methods: gs.info(), gs.error(), gs.warn(), gs.debug() and gs.log()\nAlso the below sends debuding information to the top of the form\n1. gs.addInfoMessage()\n2. gs.addErrorMessage()\n\nFYI: gs.log() is only used in global scope and cannot be used for a privately scoped application.",
           "selected_answer": "CD",
           "replies": []
@@ -6611,6 +6757,54 @@
       "question_number": "159",
       "link": "https://www.examtopics.com/discussions/servicenow/view/302937-exam-cad-topic-1-question-159-discussion/",
       "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "When creating an application through the Guided Application Creator, what are the options for creating a table? (Choose three.)",
+      "answers": [
+        "A. Run import jobs",
+        "B. Use API calls",
+        "C. Create a table from a template",
+        "D. Create a table from scratch",
+        "E. Link to external tables",
+        "F. Extend a table",
+        "G. Upload a spreadsheet"
+      ],
+      "comments": [
+        {
+          "content": "Correct Answers are DFG. Create a table from a template is not an option.",
+          "selected_answer": "DFG",
+          "replies": []
+        },
+        {
+          "content": "Correct Answers are DFG",
+          "selected_answer": "DFG",
+          "replies": []
+        }
+      ],
+      "question_number": "160",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303600-exam-cad-topic-1-question-160-discussion/",
+      "most_voted": "DFG",
+      "error": null
+    },
+    {
+      "question": "Which one of the following database operations can be controlled with Application Access? (Choose two.)",
+      "answers": [
+        "A. Query",
+        "B. Update",
+        "C. Create",
+        "D. Delete"
+      ],
+      "comments": [
+        {
+          "content": "BCD are correct:\nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/xanadu/new_to_servicenow/app_store_learnv2_securingapps_xanadu_application_access",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "161",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303601-exam-cad-topic-1-question-161-discussion/",
+      "most_voted": "BC",
       "error": null
     },
     {
@@ -6624,6 +6818,11 @@
         "F. Caller Permission"
       ],
       "comments": [
+        {
+          "content": "ACE are the Caller Access options available for an app",
+          "selected_answer": "ACE",
+          "replies": []
+        },
         {
           "content": "Check in the Caller Access, within Application Access when creating a table in Studio.",
           "selected_answer": "ACE",

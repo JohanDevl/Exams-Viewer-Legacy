@@ -12,6 +12,11 @@
       ],
       "comments": [
         {
+          "content": "E-book: Add Playbook action allows users to add Playbooks to the Security Incident even if they do not match the trigger conditions, provided the selected Playbooks are not in running state.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "Vancouver p. 219: \"For a Playbook to be invoked automatically, [...] trigger condition must be met [...] and then the playbook tab is rendered.\"",
           "selected_answer": "B",
           "replies": []
@@ -48,6 +53,11 @@
         "D. To ensure one at maximum will run per group"
       ],
       "comments": [
+        {
+          "content": "E-book: Calculator groups are used to group specific calculators together, for which only one (at maximum) will run.",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "Calculator groups are used to group specific calculators together, for which only one will run",
           "selected_answer": "D",
@@ -109,6 +119,11 @@
         "E. Event"
       ],
       "comments": [
+        {
+          "content": "E-book: Security Events --> Any observable occurrence in a system or network that is related to the security of that system or network.",
+          "selected_answer": "E",
+          "replies": []
+        },
         {
           "content": "an indication that something notable has occurred.",
           "selected_answer": "E",
@@ -202,6 +217,11 @@
       ],
       "comments": [
         {
+          "content": "E-book: The risk score is calculated as an arithmic mean, representing the risk based on CI Business Impact, Security Incident Business Impact, Security Incident Priority, Security Incident Severity and User Business Impact.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "Vancouver, p. 259: \"The risk score is calculated as an arithmetic mean, representing the risk based on CI Business Impact, Security Incident Business Impact, Security Incident Priority, SI Severity and User Business Impact",
           "selected_answer": "A",
           "replies": []
@@ -232,13 +252,13 @@
           "replies": []
         },
         {
-          "content": "A & C are correct",
+          "content": "The E-book gives 3 Reporting Audiences:\n- Analysts\n- Managers\n- CIO/CISO\n\nSince it is managers in general and not specifically Vulnerability Managers, I'm going for A & C.",
           "selected_answer": "AC",
           "replies": []
         },
         {
-          "content": "A & C is the correct one",
-          "selected_answer": "",
+          "content": "A & C are correct",
+          "selected_answer": "AC",
           "replies": []
         },
         {
@@ -267,6 +287,11 @@
         "E. Navigate to the sys_playbook_flow.list table"
       ],
       "comments": [
+        {
+          "content": "Not found in the E-book, but on http://servicenow.com/docs/bundle/yokohama-security-management/page/product/security-incident-response/concept/sir-new-ui-add-playbook.html\n\nAfter you have created a playbook using Flow Designer, follow these steps to include it in the Selected Playbook choice list:\n\nNavigate to sys_hub_flow table.\nSearch for the new playbook you have created using Flow Designer.\nAdd the sir_playbook tag to the playbooks that you want to include in the Selected Playbook choice list.",
+          "selected_answer": "BCE",
+          "replies": []
+        },
         {
           "content": "1. Navigate to sys_hub_flow table.\n2. Search for the new playbook you have created using Flow Designer.\n3. Add the sir_playbook tag to the playbooks that you want to include in the Selected Playbook choice list.",
           "selected_answer": "BCD",
@@ -297,6 +322,11 @@
         "D. Incident Analysis"
       ],
       "comments": [
+        {
+          "content": "E-book: As mentioned before, ServiceNow added two further stages to the NIST/SANS Security Incident Response process:\n- Review - post-incident analysis\n- Prepare - priorities for action, drivers for change arising from the review etc.\n\nBoth of these are learning and improvement opportunities that contribute towards process maturity and strengthen the overall security posture of the customer.",
+          "selected_answer": "A",
+          "replies": []
+        },
         {
           "content": "Definitely A",
           "selected_answer": "A",
@@ -338,6 +368,11 @@
           "replies": []
         },
         {
+          "content": "Found this: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0793438\n\nThe records are Catalog Items for the Security Incident Catalog.\nThese were likely installed with Demo Data when you installed the \"Security Incident Response\" Plugin.\n\nThese are there to provide sample security incident products and services within the customer-facing Security Incident Catalog view:\nhttps://docs.servicenow.com/csh?topicname=sir-landing-page.html&version=latest\n\nYou can Deactivate these by following the steps below.\n\nNEXT STEPS:\n\n1. Navigate to Security Incident > Catalog & Knowledge > Maintain Catalog Items\n2. Select the ones you would like to Deactivate in the List View\n3. Scroll down to the bottom of the List View and click the red \"Deactivate\" button",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "By impersonating a Security Incident Admin I was able to remove it just by clicking on the X on the top of the widget. And the answer talks about widgets and not items. So I think it doesn't make sense to deactivate the catalog items",
           "selected_answer": "A",
           "replies": []
@@ -365,6 +400,11 @@
       ],
       "comments": [
         {
+          "content": "https://www.servicenow.com/docs/bundle/yokohama-security-management/page/product/security-operations-integrations/concept/secops-integration-get-running-processes-workflow.html\n\nThe Security Operations - Get Running Processes flow is a high-level flow independent of integrations. It retrieves a list of running processes on a configuration item (CI) from a host. Use it to fulfill an integration, such as Carbon Black, or for a Windows-based security incident.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "https://www.servicenow.com/docs/bundle/xanadu-security-management/page/product/security-operations-common/concept/get-running-processes-capability.html",
           "selected_answer": "C",
           "replies": []
@@ -390,6 +430,11 @@
       ],
       "comments": [
         {
+          "content": "E-book: Security Incident [sn_si_incident]",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "D is correct",
           "selected_answer": "D",
           "replies": []
@@ -414,6 +459,11 @@
         "D. Email parsing"
       ],
       "comments": [
+        {
+          "content": "Because A & D also fall under the 'Automatically' category.",
+          "selected_answer": "BC",
+          "replies": []
+        },
         {
           "content": "Security incidents can be created manually using the form or automatically from security events received from integrated third-party alert monitoring tools such as Splunk.",
           "selected_answer": "BC",
@@ -503,11 +553,6 @@
         },
         {
           "content": "A and D correct",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "Are answers are correct?",
           "selected_answer": "",
           "replies": []
         },
@@ -2735,7 +2780,7 @@
       ],
       "question_number": "91",
       "link": "https://www.examtopics.com/discussions/servicenow/view/129027-exam-cis-sir-topic-1-question-91-discussion/",
-      "most_voted": null,
+      "most_voted": "BCD",
       "error": null
     },
     {
@@ -3438,7 +3483,7 @@
       ],
       "question_number": "123",
       "link": "https://www.examtopics.com/discussions/servicenow/view/143036-exam-cis-sir-topic-1-question-123-discussion/",
-      "most_voted": null,
+      "most_voted": "CDE",
       "error": null
     },
     {
@@ -3458,7 +3503,7 @@
       ],
       "question_number": "124",
       "link": "https://www.examtopics.com/discussions/servicenow/view/153345-exam-cis-sir-topic-1-question-124-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     }
   ]

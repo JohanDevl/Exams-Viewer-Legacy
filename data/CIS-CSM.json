@@ -1,5 +1,5 @@
 {
-  "status": "complete",
+  "status": "in progress",
   "error": "",
   "questions": [
     {
@@ -137,6 +137,11 @@
           ]
         },
         {
+          "content": "ABC is the correct answer, this seems to be word play. Look at the latest information in CSM essentials, it is mentioned how agent & customer can create the case.\nIf Interaction was mentioned instead of \"Chat\" then all 4 will be correct.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
           "content": "Section 6.2 from the course materials has a diagram that shows a Case can be created via an interaction, from within the Customer Service application, and by selecting Create Case from any of these data entities (Account, Contact, Consumer)\n\nWhen a live agent is connected via a chat, an interaction is automatically triggered.  The Case is created via the interaction, not via the chat.",
           "selected_answer": "ABC",
           "replies": []
@@ -211,11 +216,6 @@
         {
           "content": "I just read that it is ACD. Page 205 Fundamental",
           "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "how can you create case from contact record?",
-          "selected_answer": "ACD",
           "replies": []
         }
       ],
@@ -384,6 +384,16 @@
       ],
       "comments": [
         {
+          "content": "Answer: D. Predicting Case values without manual intervention\n\nExplanation: From either Agent Workspace or the platform interface, agents can use this feature when creating cases by providing the short description. Based on the information entered in the Short description field, the Predictive Intelligence feature predicts the category, priority, and assignment group, and routes the case to the correct queue. \n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/agent-intelligence-case-mgmt.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "From either Agent Workspace or the platform interface, agents can use this feature when creating cases by providing the short description. Based on the information entered in the Short description field, the Predictive Intelligence feature predicts the category, priority, and assignment group, and routes the case to the correct queue.\n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/agent-intelligence-case-mgmt.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "E-book,",
           "selected_answer": "D",
           "replies": []
@@ -391,11 +401,6 @@
         {
           "content": "E-book,",
           "selected_answer": "B",
-          "replies": []
-        },
-        {
-          "content": "Answer: D. Predicting Case values without manual intervention\n\nExplanation: From either Agent Workspace or the platform interface, agents can use this feature when creating cases by providing the short description. Based on the information entered in the Short description field, the Predictive Intelligence feature predicts the category, priority, and assignment group, and routes the case to the correct queue. \n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/agent-intelligence-case-mgmt.html",
-          "selected_answer": "D",
           "replies": []
         },
         {
@@ -464,6 +469,11 @@
       ],
       "comments": [
         {
+          "content": "Section 5.1 - Case Overview from the guide book.\nService Level Agreement Timelines",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "B is correct",
           "selected_answer": "",
           "replies": []
@@ -523,6 +533,11 @@
         "D. Update Case Entitlement"
       ],
       "comments": [
+        {
+          "content": "- Auto assessment business rule.\n- Update case entitlement on Close.\n\nSource: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/r_BRIWCustomerService.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
         {
           "content": "- Auto assessment business rule.\n- Update case entitlement on Close.\n\nSource: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/r_BRIWCustomerService.html",
           "selected_answer": "BD",
@@ -601,6 +616,11 @@
       "comments": [
         {
           "content": "It should be ABC",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "✅ A. Minimize customizations\nServiceNow Best Practice: Excessive customizations lead to technical debt, upgrade challenges, and higher maintenance costs.\n\n✅ B. Focus Out-of-the-box functionality\nServiceNow Best Practice: Always leverage native platform features before considering configuration or custom development.\n\n✅ C. Design for Scalability\nDesign Principle: Architect solutions to scale across processes, users, and global operations.\n\n❌ D. Mobile friendly functionality\nWhile mobile is important, it is typically a contextual design consideration, not a top-three principle unless mobile-first is a core requirement. It's secondary to maintainability, scalability, and platform alignment.",
           "selected_answer": "ABC",
           "replies": []
         },
@@ -710,6 +730,11 @@
           "replies": []
         },
         {
+          "content": "The Scoping Guide is the most critical piece of pre-engagement collateral because it:\nEstablishes alignment on project goals, functional areas, and high-level requirements.\nHelps identify what’s in scope vs. out of scope before deeper engagement begins.\nIs a standard artifact in ServiceNow’s pre-sales and delivery readiness process.\n\n❌ Why the Others Are Less Suitable:\nA. FAQ – Helpful, but not always required or standardized for pre-engagement.\n\nC. Customer Service roles template – Typically used after engagement begins during discovery or design.\n\nD. SKU and pricing sheet – Belongs to sales/procurement, not implementation prep.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "B is correct",
           "selected_answer": "B",
           "replies": []
@@ -770,6 +795,11 @@
           "replies": []
         },
         {
+          "content": "In the Service Portal, when users enter queries into search fields (such as \"Ask a Question\"), the Contextual Search Framework dynamically suggests relevant Knowledge Base (KB) articles.\n\nWithin Record Producers, as users input information to create records (e.g., incidents or requests), the Contextual Search Framework can suggest relevant KB articles based on the entered data.\n\n📘 Supporting Documentation:\nWhile specific documentation detailing the Contextual Search Framework's application in both scenarios is limited, the general behavior of the framework suggests its utilization in enhancing user interactions across various components, including portal entries and Record Producers.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "Answer: C. Both portal question entry and Record Producer Most Voted\n\nExplanation: \"Contextual search displays related results within a form or record producer based on the text you enter in a field.\" feels like both the portal question entry and the record producer.... \n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-platform-administration/page/administer/contextual-search/concept/c_ContextualSearch.html",
           "selected_answer": "C",
           "replies": []
@@ -794,11 +824,6 @@
         {
           "content": "Correct is C",
           "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "It\"s B\nhttps://docs.servicenow.com/en-US/bundle/tokyo-platform-administration/page/administer/contextual-search/concept/c_ContextualSearch.html",
-          "selected_answer": "",
           "replies": []
         }
       ],
@@ -913,6 +938,11 @@
       ],
       "comments": [
         {
+          "content": "A. Reduces call volume\nWhen customers can self-serve using knowledge articles relevant to their specific products, they are less likely to open support cases.\n\nProduct entitlements ensure they see only what is applicable to them, improving self-resolution rates.\n\nB. Makes it easier for Agents to manage case volume\nCustomers resolve more issues on their own, reducing inbound volume and allowing agents to focus on more complex or higher-priority cases.\n\nAlso, when agents access knowledge filtered by product entitlements, they retrieve the most relevant guidance faster.\n\nC. Allows access to Knowledge Articles that are related to products owned by a customer\nThis is the core function of Knowledge Product Entitlement — it restricts or grants visibility to knowledge content based on products or assets tied to a user or account.\n\nEnsures customers only see applicable articles, improving accuracy and user experience.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
           "content": "ABC are the right answers",
           "selected_answer": "ABC",
           "replies": []
@@ -937,6 +967,11 @@
         "D. Shareable across KBs: Yes ; Multi-Level: Yes"
       ],
       "comments": [
+        {
+          "content": "| **Shareable across Knowledge Bases** | ❌ **No** – Categories are specific to a single Knowledge Base.                   |\n\n| **Supports Multi-Level Hierarchies** | ✅ **Yes** – Categories can be nested into multiple levels to create a hierarchy. |\n\n📚 Source:\nServiceNow Docs – Organize Knowledge Articles Using Categories\n\n“You can create a multi-level category hierarchy for each knowledge base. Categories are not shared across knowledge bases.”\nhttps://docs.servicenow.com/bundle/washington-servicenow-platform/page/product/knowledge-management/task/t_CreateKnowledgeCategory.html",
+          "selected_answer": "B",
+          "replies": []
+        },
         {
           "content": "New ServiceNow version",
           "selected_answer": "D",
@@ -1036,6 +1071,16 @@
           "replies": []
         },
         {
+          "content": "Double check the web and with chatgpt. Confirmed the answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A. Publishing the workflow\t✅ Yes\tRequired to make the workflow available for use in catalog items.\n\nB. Defining workflow activities\t✅ Yes\tCore part of the workflow; defines the actual steps the workflow will perform.\n\nC. Approving the workflow\t❌ No\tWorkflows do not require approval before being used. Approvals can be included within the workflow as activities, but the workflow itself doesn't need to go through an approval process to be created or published.\n\nD. Managing workflow versions\t✅ Yes\tWorkflow versioning is automatic when changes are published, but managing versions is essential to maintain control over updates.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "It has to be C.. there is no approval needed to create a workflow. Versions dont really exist, you cant go back in workflows or flows..\na and b are mandatory anyways otherwise you wont have a workflow..\nC is the only option left..",
           "selected_answer": "C",
           "replies": []
@@ -1092,6 +1137,11 @@
         "D. Maintain Records"
       ],
       "comments": [
+        {
+          "content": "Record Producers are a type of Service Catalog item used to create records in any table, including the Case [sn_customerservice_case] table in Customer Service Management (CSM).\n\nTo create a Case Record Producer, you go to the Record Producers module and specify:\n- The target table as sn_customerservice_case\n- The fields and variables to capture input from the user\n- Optional scripting to customize behavior",
+          "selected_answer": "C",
+          "replies": []
+        },
         {
           "content": "Answer: C. Record Producers\n\nExplanation: \"A record producer is a specific type of catalog item that allows end users to create task-based records, such as incident records, from the service catalog.\"\n\nSource: https://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/service-catalog-management/concept/c_RecordProducer.html",
           "selected_answer": "C",
@@ -1301,6 +1351,11 @@
       ],
       "comments": [
         {
+          "content": "sn_openframe_configuration.do - the form itself gives the hint \"User Group: selecting no group is equivalent to selecting all groups\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "B. Selecting none of the groups\n\nIn ServiceNow's OpenFrame configuration, when you configure multiple active configurations, not selecting any group effectively means that the configuration applies to all users, as there are no restrictions based on group membership. This is equivalent to the behavior of selecting all groups.",
           "selected_answer": "B",
           "replies": []
@@ -1465,6 +1520,11 @@
       "comments": [
         {
           "content": "This should be correct",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "Types of forum user\nPublic     Public users can view the community without logging in. By default, public users have content_read access to questions and answers in public forums.\n\nRegistered\tUsers who have signed up to the community and accepted the Terms & Conditions. Once logged in, their access to forum content depends on the permissions set up for each specific forum.\n\nCustom\tSpecific users and user groups that are added as members to the current forum user.\n\nMembership\tA group of members who have joined a specific forum. Once logged in, their access to forums depends on the permissions set up for each specific forum.\n\nhttps://www.servicenow.com/docs/bundle/xanadu-customer-service-management/page/product/customer-communities/task/add-user.html?state=seamless",
           "selected_answer": "BCD",
           "replies": []
         },
@@ -1865,7 +1925,7 @@
       ],
       "question_number": "41",
       "link": "https://www.examtopics.com/discussions/servicenow/view/128131-exam-cis-csm-topic-1-question-41-discussion/",
-      "most_voted": null,
+      "most_voted": "",
       "error": null
     },
     {
@@ -1964,6 +2024,11 @@
       ],
       "comments": [
         {
+          "content": "✅ Explanation:\nServiceNow allows you to have multiple active OpenFrame configurations on an instance. This enables different groups or use cases to have their own OpenFrame setup, such as:\n\nDifferent CTI (Computer Telephony Integration) providers for different business units\n\nSpecialized configurations for support tiers, languages, or locations\n\nEach configuration can be:\n\nTargeted to specific user groups\n\nActivated or deactivated independently\n\nCustomized to open different URLs, pass different parameters, or launch different workspaces",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "B is correct",
           "selected_answer": "B",
           "replies": []
@@ -1998,6 +2063,11 @@
         "D. Case"
       ],
       "comments": [
+        {
+          "content": "When migrating from one system to ServiceNow the most critical aspects are the ability to execute the process and provide the same or better level of service to customers.  This is only possible if you migrate Accounts and Knowledge.\n\nMigrating Case data does not enable you to deliver service, just to lookup historical information.  It is not often recommended to migrate historical data because of differences in data structure.  It is often the case that fields from one system do not map to ServiceNow.",
+          "selected_answer": "AB",
+          "replies": []
+        },
         {
           "content": "when we talk about migration, the current and closed cases should be migrated (for auditing and reporting purposes). Accounts should be definitely imported. KBAs are supporting the case resolution, but not such important as above 2",
           "selected_answer": "BD",
@@ -2171,6 +2241,16 @@
       ],
       "comments": [
         {
+          "content": "Email - is not a function of the \"Customer Support Portal\"\nUsing the \"Customer Support Portal\" you can:\n- use the catalog item to generate a case\n- chat with the agent",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "Explanation:\nThe Customer Support Portal in ServiceNow (usually accessible via /customer) provides out-of-the-box (OOB) channels that enable customers to interact with support teams. The default configuration includes:\n\nA. Web\nThis is the primary interaction channel.\nCustomers use the portal to:\nSubmit cases\nSearch knowledge articles\nBrowse the service catalog\nTrack their support history\n\nC. Chat\nLive Chat or Virtual Agent is provided OOB.\nThis enables real-time assistance through:\nPredefined scripts and FAQs (via Virtual Agent)\nLive agent handoff (via Connect Support or third-party chat integrations)",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
           "content": "I think a,c",
           "selected_answer": "AC",
           "replies": []
@@ -2255,7 +2335,7 @@
       ],
       "question_number": "50",
       "link": "https://www.examtopics.com/discussions/servicenow/view/128142-exam-cis-csm-topic-1-question-50-discussion/",
-      "most_voted": null,
+      "most_voted": "",
       "error": null
     },
     {
@@ -2360,6 +2440,11 @@
         "D. When we have new marketing material for a customer"
       ],
       "comments": [
+        {
+          "content": "Direct quote from the CSM Essentials Course Materials\nSection 5.1 - Case Overview\nUnder \"What is a Case\"\nAn Agent creates a new case to record a customer's question or issue as well as to track the activities related to resolving the issue.",
+          "selected_answer": "C",
+          "replies": []
+        },
         {
           "content": "here we are talking about opening a case from interaction, so when a customer has a question or issue, it can be resolved within the interaction, but if there is an internal problem, that would require followup support, which means creating a case (and may be incident/problem out of it)",
           "selected_answer": "B",
@@ -2513,6 +2598,11 @@
       "comments": [
         {
           "content": "This should be right",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I did not find any costs info's in the dashboards:\n- Customer Service Agent\n- Customer Service Manager\n- Customer Service Overview",
           "selected_answer": "B",
           "replies": []
         },
@@ -3472,11 +3562,6 @@
           "replies": []
         },
         {
-          "content": "D , E \n\nhttps://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/c_CreateAnEntitlement.html",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
           "content": "DE is Correct",
           "selected_answer": "BE",
           "replies": []
@@ -3570,11 +3655,6 @@
           "replies": []
         },
         {
-          "content": "https://docs.servicenow.com/en-US/bundle/vancouver-servicenow-platform/page/administer/advanced-work-assignment/concept/awa-agent-affinity-concept.html",
-          "selected_answer": "BCD",
-          "replies": []
-        },
-        {
           "content": "BCD\n\nThe affinity types are: • Historical: Identifies the best agent based on the agent's history of serving the same customer. • Related task: Identifies the best agent based on the agent's past assignments of related tasks. • Account team responsibility: Identifies the best agent based on the agent's responsibility or role in the account team\n CSM Implementation ebook page (129)",
           "selected_answer": "BCD",
           "replies": []
@@ -3611,11 +3691,6 @@
       "comments": [
         {
           "content": "r\t\tUses Response templates to insert as text in a conversation.\nNote: Only response templates that have a condition of [Type][is][Chat] are available in Agent Chat.\nAvailable response templates\n\nSource: https://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/administer/conversational-interfaces/concept/ci-quick-actions.html",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "R: C \n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-servicenow-platform/page/administer/conversational-interfaces/concept/ci-quick-actions.html",
           "selected_answer": "C",
           "replies": []
         },
@@ -3671,11 +3746,6 @@
       "comments": [
         {
           "content": "Query rules are used to filter the records in CSM-related tables that are accessible by users with CSM roles. These filters, which are applied in query business rules and READ ACLs on CSM-related tables, are stored in a metadata table.\n\nhttps://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/csm-query-rules.html",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "A is correct !\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/csm-query-rules.html",
           "selected_answer": "A",
           "replies": []
         },
@@ -3791,11 +3861,6 @@
       "comments": [
         {
           "content": "The Auto Close Resolved Cases Flow Designer Flow identifies cases in the Resolved state that are waiting for a customer response and takes the following actions:7\n\nhttps://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/auto-close-customer-service-case.html",
-          "selected_answer": "B",
-          "replies": []
-        },
-        {
-          "content": "Automatically close cases in the Resolved state\nUse the Auto Close Resolved Cases Flow Designer flow to automatically close resolved cases if customers do not respond within a specified time.",
           "selected_answer": "B",
           "replies": []
         },
@@ -4027,11 +4092,6 @@
           ]
         },
         {
-          "content": "Answer:\nB. Scripted\nC. Advanced\nD. Simple\nF. Selection Criteria\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/t_CreateARoutingRule.html",
-          "selected_answer": "BCDF",
-          "replies": []
-        },
-        {
           "content": "Answer:\n\tB. Scripted\n\tC. Advanced\n\tD. Simple\n\tF. Selection Criteria\n\nExplanation: \"The type of resource matching method to use for this rule: Simple, Advanced, Scripted, Selection Criteria.\"\n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/t_CreateARoutingRule.html",
           "selected_answer": "BCDF",
           "replies": []
@@ -4161,11 +4221,6 @@
       "comments": [
         {
           "content": "A, C, D is Correct.",
-          "selected_answer": "ACD",
-          "replies": []
-        },
-        {
-          "content": "ACD is Correct. ( Case Playbook for Onboarding, Case Playbook for Complaints, Case Playbook for Product Support )\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/concept/customer-service-case-playbooks.html",
           "selected_answer": "ACD",
           "replies": []
         },
@@ -6205,6 +6260,11 @@
           "replies": []
         },
         {
+          "content": "A & B:  the \"sn_customerservice_manager\" can alsoe create  the \"Registration Code\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "https://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/concept/c_PortalSelfRegistration.html",
           "selected_answer": "B",
           "replies": []
@@ -6281,11 +6341,6 @@
         "D. Blocked by internally"
       ],
       "comments": [
-        {
-          "content": "C y D are correct",
-          "selected_answer": "CD",
-          "replies": []
-        },
         {
           "content": "A red indicator highlights cases that are blocked, such as cases that have open related task records or are waiting for customer feedback. In CSM Agent Workspace, cases that are blocked also use a red field highlight. Blocked cases can have the following status:\nBlocked internally\nBlocked by customer\nBlocked internally and by customer\n\nSource: https://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/concept/customer-service-case-action-status.html",
           "selected_answer": "CD",
@@ -7192,6 +7247,11 @@
       ],
       "comments": [
         {
+          "content": "It's related to FSM not directly to CSM.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "Known limitations\nThere is no synchronization between the Work Order form and the associated Case form. If information changes on the Case form, it does not get updated on the Work Order form.\n\nhttps://docs.servicenow.com/bundle/washingtondc-field-service-management/page/product/field-service-management/concept/customer-service-integration.html",
           "selected_answer": "A",
           "replies": []
@@ -7377,6 +7437,11 @@
         "D. Customer Service Case Data Collection"
       ],
       "comments": [
+        {
+          "content": "[CS] Customer Service Historic Data Collection",
+          "selected_answer": "A",
+          "replies": []
+        },
         {
           "content": "About this task\n\nPerformance Analytics regularly collects scores from your data on an ongoing basis. When you first set up Performance Analytics for an application, or when you create new indicators or indicator sources, run historical data collection to collect scores on your existing data. Historical data collection enables you to analyze data that existed prior to setting up Performance Analytics.\n\nhttps://docs.servicenow.com/bundle/washingtondc-now-intelligence/page/use/performance-analytics/task/t_RunHistoricalDataCollection.html",
           "selected_answer": "A",
@@ -8170,6 +8235,11 @@
       ],
       "comments": [
         {
+          "content": "For me:  B & D - would be valid answers",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "Interactions provide a centralized location for all communication channels in the platform. Each interaction represents a request for assistance through a given channel, for example, a call or a chat.\n\nSource: https://docs.servicenow.com/bundle/washingtondc-servicenow-platform/page/administer/interaction/concept/interaction-management.html",
           "selected_answer": "D",
           "replies": []
@@ -8662,11 +8732,6 @@
           "content": "Enable this feature by activating the Auto Close Resolved Cases Flow Designer flow. You can also create a configuration that enables both the system and agents to exclude cases from auto closure.\n\nhttps://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/task/configure-auto-close-resolved-cases.html",
           "selected_answer": "C",
           "replies": []
-        },
-        {
-          "content": "C is correct.\nhttps://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/auto-close-customer-service-case.html",
-          "selected_answer": "C",
-          "replies": []
         }
       ],
       "question_number": "230",
@@ -8734,7 +8799,7 @@
       ],
       "question_number": "233",
       "link": "https://www.examtopics.com/discussions/servicenow/view/168936-exam-cis-csm-topic-1-question-233-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -8747,18 +8812,8 @@
       ],
       "comments": [
         {
-          "content": "C is correct",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
           "content": "Customer (Accounts)\n \n\nB2B Model\n\nWith the B2B model, both accounts and contacts can be supported. Customer relationships, especially primary contacts, and account teams must be set up to ensure the account can be managed and supported as formally agreed with the customer.\n\nAccount Data\n\nThe Account [customer_account] table stores the Account’s information, such as name, account number, primary contact, phone number, address, and company website address.\n\nAccount [customer_account] extends the Core Company [core_company]table in ServiceNow.\nAn account can have one or more associated cases, contacts, assets, service contracts, entitlements, relationships, etc.\nAssociated entities appear in related lists on the account form.",
           "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "C is the correct",
-          "selected_answer": "",
           "replies": []
         },
         {
@@ -8969,7 +9024,7 @@
       ],
       "question_number": "240",
       "link": "https://www.examtopics.com/discussions/servicenow/view/168937-exam-cis-csm-topic-1-question-240-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -8989,7 +9044,7 @@
       ],
       "question_number": "241",
       "link": "https://www.examtopics.com/discussions/servicenow/view/168938-exam-cis-csm-topic-1-question-241-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     }
   ]

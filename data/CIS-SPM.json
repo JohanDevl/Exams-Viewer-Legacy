@@ -1,5 +1,5 @@
 {
-  "status": "complete",
+  "status": "in progress",
   "error": "",
   "questions": [
     {
@@ -44,7 +44,7 @@
       ],
       "question_number": "2",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155098-exam-cis-spm-topic-1-question-2-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -64,7 +64,7 @@
       ],
       "question_number": "3",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155099-exam-cis-spm-topic-1-question-3-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -117,6 +117,11 @@
       ],
       "comments": [
         {
+          "content": "The first step in configuring Portfolio Planning to work with ServiceNow® Project Portfolio Management (PPM) is to create an alignment integration.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "A should by the first step:\nConfiguration workflow\nUse the following steps as guidelines for your Portfolio Planning with Project Portfolio Management (PPM) setup process. Some of these steps require the admin role (sn_align_core.apw_admin) and some require the user role (sn_align_core.apw_user).\n\nCreate an alignment integration.\nGenerate default mapping configurations.\nCreate custom mapping configurations.\nGuided Setup\nAfter installing Portfolio Planning, you can use the guided setup to help you with the required configuration. To open the guided setup, navigate to Portfolio Planning > Guided Setup.",
           "selected_answer": "A",
           "replies": []
@@ -129,7 +134,7 @@
       ],
       "question_number": "6",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155962-exam-cis-spm-topic-1-question-6-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -154,7 +159,47 @@
       ],
       "question_number": "7",
       "link": "https://www.examtopics.com/discussions/servicenow/view/169084-exam-cis-spm-topic-1-question-7-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which plugin activates the Ideas module to gather and evaluate ideas efficiently, and quickly identify ideas for implementation?",
+      "answers": [
+        "A. Ideation with PPM",
+        "B. Agile Development 2.0",
+        "C. Resource Management",
+        "D. Test Management 2.0"
+      ],
+      "comments": [
+        {
+          "content": "Ideation with PPM\n[com.snc.ppm_innovation_management]\n\nEnables your organization to collect new ideas, collaborate on ideas, and identify great ideas for implementation. Convert selected ideas to demands, stories, projects, and epics.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-portfolio-suite-with-financials/reference/plugins-installed-with-PPS-finance.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "8",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155213-exam-cis-spm-topic-1-question-8-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "In order to map custom fields from Microsoft Project to ServiceNow when importing a project, you must first:",
+      "answers": [
+        "A. Export the project to XML format",
+        "B. Create custom fields in your ServiceNow instance",
+        "C. Configure the Project form",
+        "D. Import your project"
+      ],
+      "comments": [
+        {
+          "content": "Map custom fields from Microsoft Project to ServiceNow fields before importing a project.\n\nCreate custom fields in your ServiceNow instance before mapping them with Microsoft Project.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/task/map-custom-fields-msp-project.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "9",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155963-exam-cis-spm-topic-1-question-9-discussion/",
+      "most_voted": "B",
       "error": null
     },
     {
@@ -174,7 +219,7 @@
       ],
       "question_number": "10",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155214-exam-cis-spm-topic-1-question-10-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -203,6 +248,26 @@
       "error": null
     },
     {
+      "question": "As a demand manager, you can view an artifact from a demand. What artifacts are part of a demand?",
+      "answers": [
+        "A. Stories, Vulnerability Tasks, Enhancements.",
+        "B. Project, Defect, Requests.",
+        "C. Incidents, Problems, Change.",
+        "D. Decision, Risk, Requirements."
+      ],
+      "comments": [
+        {
+          "content": "B is correct.\n\n\"The available artifact types are project, enhancement, change, defect, or scrum and SAFe entities such as epic, story, or feature.\" \n\n https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/planning-and-policy/task/t_CrtArtftDmdMnu.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "12",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155964-exam-cis-spm-topic-1-question-12-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
       "question": "If an it_project_manager does not want to equally distribute hours across the resource plan time frame, what allocation spread should be used?",
       "answers": [
         "A. Front Load.",
@@ -214,6 +279,11 @@
         {
           "content": "https://www.servicenow.com/community/spm-articles/operational-resource-plan-all-that-you-need-to-know/ta-p/2299471\n\nAllocation Spread: It has two values:\n     i. Even\n    ii. Front load\n    Default Value: Even\n\n    \n     If the requirement is to evenly allocate the hours, then select Even otherwise select Front load.",
           "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "If an it_project_manager does not want to equally distribute hours across the resource plan time frame, the allocation spread should be set to Any. This option allows the it_project_manager to manually enter the hours for each month or quarter in the resource plan.",
+          "selected_answer": "C",
           "replies": []
         },
         {
@@ -229,7 +299,7 @@
       ],
       "question_number": "14",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155428-exam-cis-spm-topic-1-question-14-discussion/",
-      "most_voted": "D",
+      "most_voted": "A",
       "error": null
     },
     {
@@ -243,6 +313,11 @@
       "comments": [
         {
           "content": "It is AB. Open and Pending states ARE moved WIP and closed state are NOT moved which is what the question is asking for.\nIf set to true, this property enables you to move the projects which are in WIP state.\nNote: When a project is moved, only tasks in open and pending state are moved and the project takes the rolled up dates from all the project tasks.\nDefault value: false",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "A & B are correct\n\nEnable move project for WIP projects (com.snc.project.move_project.wip), If set to true, this property enables you to move the projects which are in WIP state.\n\nNote: When a project is moved, only tasks in open and pending state are moved and the project takes the rolled up dates from all the project tasks.\nDefault value: false\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/reference/r_InstalledWithProjectManagement.html",
           "selected_answer": "AB",
           "replies": []
         },
@@ -263,6 +338,127 @@
       "error": null
     },
     {
+      "question": "The Project management application supports two types of external dependencies. What are they? (Choose two.)",
+      "answers": [
+        "A. Change Dependency.",
+        "B. Hard Dependency.",
+        "C. Task Dependency.",
+        "D. Soft Dependency.",
+        "E. Milestone Dependency."
+      ],
+      "comments": [
+        {
+          "content": "The Project management application supports two types of external dependencies - hard and soft.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/concept/external-dependency-types.html",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "17",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304036-exam-cis-spm-topic-1-question-17-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "The combination of the user and the assigned portfolio must be unique when adding a user to which registry?",
+      "answers": [
+        "A. Stakeholder Registry.",
+        "B. Application Registry.",
+        "C. UX Page Registry.",
+        "D. Event Registry."
+      ],
+      "comments": [
+        {
+          "content": "When adding a user to the stakeholder registry, the combination of the user and the assigned portfolio must be unique. However, there can be more records for the same user but with different portfolio.\n\nhttps://www.servicenow.com/docs/bundle/washingtondc-it-business-management/page/product/planning-and-policy/task/t_PopulatingTheStakeholderRegistry.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "18",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304038-exam-cis-spm-topic-1-question-18-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Where is planned cost calculated from when requesting resources from a group and when resource role is specified?",
+      "answers": [
+        "A. The task rate cards.",
+        "B. The distribution costs.",
+        "C. The hourly rate of the specified role.",
+        "D. The CI rate cards."
+      ],
+      "comments": [
+        {
+          "content": "Planned cost is rolled up from Requested Allocations for plans in the Planning or Requested state and from Resource allocations for plans in the Confirmed or Allocated state. While requesting resources from a group, if a resource role is specified, the planned cost is calculated from the hourly rate of the specified role. \n\nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/resource-management/reference/rsrc-plan-form-tabs.html",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "20",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304040-exam-cis-spm-topic-1-question-20-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is a data copy of the current project's task, schedule, or structure that can be used for comparison reporting later?",
+      "answers": [
+        "A. Commitment",
+        "B. Baseline",
+        "C. Accrual",
+        "D. Forecast"
+      ],
+      "comments": [
+        {
+          "content": "Compare baselines to review variance between tasks and identify which task has variance from the current planned end date and the baseline end date. The baseline variance column displays the amount of variance between the two date comparisons.\n\nCreate schedule baselines at various stages of a project, for example, at the end of each phase or after every calendar month or quarter. Each baseline captures the schedule information of project tasks at a particular moment. This snapshot provides a basis for comparison and helps you to identify and review the changes made to the project. Having multiple baselines and comparing them helps you track the performance of your projects.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/task/compare-schedule-baselines-prj.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "22",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304041-exam-cis-spm-topic-1-question-22-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "If a lens has four entities, which entity within the lens structure would not have a parent reference?",
+      "answers": [
+        "A. Second-level entity",
+        "B. Bottom entity",
+        "C. Top-level entity",
+        "D. Third-level entity"
+      ],
+      "comments": [
+        {
+          "content": "Parent entity - Entity that is one level above this entity in your current lens structure.\nThis field is available only if the Top entity field isn’t selected.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/alignment-planner-workspace/reference/lens-structure-form-alignment-planner-workspace.html",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "23",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304042-exam-cis-spm-topic-1-question-23-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which role can configure the parameters of the demand workbench that is provided with the base system?",
+      "answers": [
+        "A. it_pps_admin.",
+        "B. it_project_manager.",
+        "C. All roles.",
+        "D. business_stakeholder."
+      ],
+      "comments": [
+        {
+          "content": "Role required: it_pps_admin\n\nYou can configure the parameters of the demand workbench provided with the base system.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/planning-and-policy/task/t_CreatingBubbleCharts.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "24",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304043-exam-cis-spm-topic-1-question-24-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
       "question": "What are the default project template configuration records available in the Template Config module? (Choose three.)",
       "answers": [
         "A. Project template",
@@ -272,6 +468,11 @@
         "E. Task"
       ],
       "comments": [
+        {
+          "content": "https://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/concept/c_ProjectTemplateConfiguration.html",
+          "selected_answer": "BCD",
+          "replies": []
+        },
         {
           "content": "BCD is correct. Refer to training notes for optional config in Project Management.",
           "selected_answer": "BCD",
@@ -294,6 +495,26 @@
       "error": null
     },
     {
+      "question": "What is the default table that stores the idea categories that a user can select from when submitting an idea?",
+      "answers": [
+        "A. im_idea_core",
+        "B. im_category",
+        "C. im_module",
+        "D. dmn_demand"
+      ],
+      "comments": [
+        {
+          "content": "The default Idea Category [im_category] table stores the user-defined idea categories.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/innovation-management/task/define-idea-categories.html?state=seamless",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "26",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304075-exam-cis-spm-topic-1-question-26-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
       "question": "A user's availability is calculated as:",
       "answers": [
         "A. Allocated hours divided by the total capacity",
@@ -302,6 +523,11 @@
         "D. Capacity minus allocation"
       ],
       "comments": [
+        {
+          "content": "The total time that the resources are available after both hard and soft allocations. Availability is capacity minus allocation.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/resource-management/concept/c_UsingResourceManagementReports.html",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "https://servicenow.read.inkling.com/a/b/2b71009b0dcb4d56a848625c9c5a313d/p/6d98a02298004860836854f0e1cd9957",
           "selected_answer": "D",
@@ -323,6 +549,11 @@
       ],
       "comments": [
         {
+          "content": "Update actual effort from time card -\tDetermines whether the Actual effort field on the Dates tab should be updated based on the hours entered in the time cards for the project.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/task/t_CreateAProject.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "https://www.servicenow.com/docs/bundle/xanadu-it-business-management/page/product/project-management/task/t_CreateAProject.html\nSee field \"Update actual effort from time card\" which can be set on Project level",
           "selected_answer": "C",
           "replies": []
@@ -330,7 +561,7 @@
       ],
       "question_number": "29",
       "link": "https://www.examtopics.com/discussions/servicenow/view/302732-exam-cis-spm-topic-1-question-29-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -440,7 +671,7 @@
       ],
       "question_number": "36",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155523-exam-cis-spm-topic-1-question-36-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -458,6 +689,11 @@
           "replies": []
         },
         {
+          "content": "The correct answer is C\n\nA - Prepare  & B - Transition, do not exist stages in the now create methodology\n\nThe 5 phases are: \n1. Initiate: Transition, Mobilize, Prepare, Conduct \n2. Plan: Workshop, Processes, issues addressed, backlog, release planning, update \n3. Execute: Configure, Agile, Engagement, Reporting \n4. Deliver: UAT, Training, Go Live, Support, Transition \n5. Close: Feedback, Summaries, Assessments",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "Prepare is the correct answer.",
           "selected_answer": "A",
           "replies": []
@@ -465,7 +701,48 @@
       ],
       "question_number": "37",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155524-exam-cis-spm-topic-1-question-37-discussion/",
-      "most_voted": "A",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Using the Request type field on a resource plan, which options can be used to request a resource? (Choose three.)",
+      "answers": [
+        "A. Day",
+        "B. Person Days",
+        "C. Hours",
+        "D. FTE",
+        "E. Month"
+      ],
+      "comments": [
+        {
+          "content": "Hours, FTE and person days. \n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/resource-management/concept/c_ResourcePlans.html",
+          "selected_answer": "BCD",
+          "replies": []
+        }
+      ],
+      "question_number": "40",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304155-exam-cis-spm-topic-1-question-40-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "A checklist item record provides a name and what other element?",
+      "answers": [
+        "A. Status field.",
+        "B. Percent complete field.",
+        "C. Complete field.",
+        "D. Short description field."
+      ],
+      "comments": [
+        {
+          "content": "By default, a checklist item record provides only a name and a Complete field, which can be set to true or false.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-platform-user-interface/page/use/using-forms/concept/c_Checklists.html?state=seamless",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "42",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304156-exam-cis-spm-topic-1-question-42-discussion/",
+      "most_voted": "C",
       "error": null
     },
     {
@@ -496,6 +773,27 @@
       "question_number": "45",
       "link": "https://www.examtopics.com/discussions/servicenow/view/153925-exam-cis-spm-topic-1-question-45-discussion/",
       "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When copying a source project to a target project, what fields are copied by default? (Choose three.)",
+      "answers": [
+        "A. Planned dates.",
+        "B. Number.",
+        "C. Short description.",
+        "D. Duration fields.",
+        "E. State."
+      ],
+      "comments": [
+        {
+          "content": "By default only the short description, planned dates and duration fields are copied from source project to the target project. \n\nIf additional columns must be copied, they should be declared in the project property List of attributes that will be copied from the originating project task.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/task/t_CopyAProject.html",
+          "selected_answer": "ACD",
+          "replies": []
+        }
+      ],
+      "question_number": "46",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304158-exam-cis-spm-topic-1-question-46-discussion/",
+      "most_voted": "ACD",
       "error": null
     },
     {
@@ -536,6 +834,11 @@
           "content": "C is correct. The im_idea_core table extends the task table.",
           "selected_answer": "C",
           "replies": []
+        },
+        {
+          "content": "Idea\n[im_idea_core]\n\nDefault table which stores all the information related to the Idea portal. Extends the Task table.\n\nhttps://www.servicenow.com/docs/bundle/xanadu-it-business-management/page/product/project-portfolio-suite-with-financials/reference/table-installed-with-PPS-finance.html",
+          "selected_answer": "C",
+          "replies": []
         }
       ],
       "question_number": "54",
@@ -561,6 +864,319 @@
       "question_number": "58",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155970-exam-cis-spm-topic-1-question-58-discussion/",
       "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What are the allocation types available under the Allocation Config tab on a resource plan? (Choose three.)",
+      "answers": [
+        "A. Plan duration",
+        "B. Weekly",
+        "C. Daily",
+        "D. Yearly",
+        "E. Monthly"
+      ],
+      "comments": [
+        {
+          "content": "Checked PDI, I can only see Weekly, Monthly, and Plan Duration choices within the Allocation Type field, so correct answers are A, B and E",
+          "selected_answer": "ABE",
+          "replies": []
+        }
+      ],
+      "question_number": "61",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304185-exam-cis-spm-topic-1-question-61-discussion/",
+      "most_voted": "ABE",
+      "error": null
+    },
+    {
+      "question": "What role is required to view the Details tab of a project in Project Workspace?",
+      "answers": [
+        "A. it_proiect_workspace_user",
+        "B. it_project_manager",
+        "C. it_project_user",
+        "D. it_project"
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is C\n\nRole required: it_project_user\n\nThe Details tab in project workspace displays the project form for the selected project.\nProcedure\n\n1. Open the required project in Project Workspace.\n2. Click the Details tab to display the project form.\n3. Edit the project record as required.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/task/define-project-in-project-workspace.html",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "65",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304186-exam-cis-spm-topic-1-question-65-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What must a resource plan contain if a resource plan is associated with a time card?",
+      "answers": [
+        "A. Front load allocation spread.",
+        "B. Hard allocation bookings.",
+        "C. Even allocation spread.",
+        "D. Soft allocation bookings."
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is B\n\nA resource plan can be associated with a time card only if the resource plan contains hard allocations for the user.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/resource-management/task/t_AssocATimeCardWithAResourcePlan.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "67",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304188-exam-cis-spm-topic-1-question-67-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which work artifacts can be used to define the scope of a release? (Choose three.)",
+      "answers": [
+        "A. Portfolios",
+        "B. Defects",
+        "C. Enhancements",
+        "D. Projects",
+        "E. Demands"
+      ],
+      "comments": [
+        {
+          "content": "Add projects, epics, stories, enhancements, and defects to define the scope of a release.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-service-management/page/product/release-management/task/t_ScopeARelease.html",
+          "selected_answer": "BCD",
+          "replies": []
+        }
+      ],
+      "question_number": "71",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304192-exam-cis-spm-topic-1-question-71-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "When creating a program, which of the following cannot be part of multiple programs? (Choose two.)",
+      "answers": [
+        "A. Tasks.",
+        "B. Portfolio.",
+        "C. Project.",
+        "D. Demand."
+      ],
+      "comments": [
+        {
+          "content": "C & D are the correct answers \n\nA project or demand cannot be part of multiple programs.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/program-management/concept/c_ProgramManagement.html#:~:text=A%20project%20or%20demand%20cannot%20be%20part%20of%20multiple%20programs.",
+          "selected_answer": "CD",
+          "replies": []
+        }
+      ],
+      "question_number": "72",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304193-exam-cis-spm-topic-1-question-72-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "Which of the following defines a parent-child relationship? (Choose two.)",
+      "answers": [
+        "A. A parent-child task must finish before another begins.",
+        "B. Parent-child task relationships do not have any effect on task time constraints.",
+        "C. Any number of child tasks can be nested under a parent task with or without any dependencies.",
+        "D. A parent-child relationship is not saved as a record in any table."
+      ],
+      "comments": [
+        {
+          "content": "A parent-child relationship is different from a dependency relationship. In a dependency, one task must finish before another begins. -->In a parent-child relationship, any number of tasks can be nested under a parent task with or without any dependencies<--. When you create a parent-child relationship, the parent task number is saved in the Parent field in the Project Tasks table. All project management tasks have a parent: either another project task or the project itself.\n\nUnlike a dependency, -->a parent-child relationship is not saved as a record in any table<--. The only modification that takes place when a parent-child relationship is modified is the Parent field in the child task record.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/concept/c_Parent-ChildTaskRelationships.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "I think D is correct due to no records created",
+          "selected_answer": "CD",
+          "replies": []
+        }
+      ],
+      "question_number": "79",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303712-exam-cis-spm-topic-1-question-79-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "Project score is calculated based on the individual scores of the following attributes: (Choose two.)",
+      "answers": [
+        "A. Value Score.",
+        "B. Risk Score.",
+        "C. Alignment Score.",
+        "D. Strategy Score."
+      ],
+      "comments": [
+        {
+          "content": "A and B due to my understanding...",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "risk and value score are correct I think",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "87",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303713-exam-cis-spm-topic-1-question-87-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "Which is an example of an offset type on a monetary benefit plan?",
+      "answers": [
+        "A. Start Date",
+        "B. Rate Card",
+        "C. Risk",
+        "D. Cost"
+      ],
+      "comments": [
+        {
+          "content": "Asnwer is \"A\" - Start Date\n\nField to indicate when the benefits start realizing. Select any of the following options: \nNone: The default value is None. When you select None, you need to manually enter the benefit plan start and end fiscal periods. \nMilestone: After completion of a milestone. \nStart Date: At the start of the project. \nEnd Date: After the project ends.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/task/create-project-benefit-plan.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "88",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304304-exam-cis-spm-topic-1-question-88-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "A customer requires five (5) teamspaces to support different departments. What should you do?",
+      "answers": [
+        "A. Contact the Account Representative to activate the teamspaces.",
+        "B. Activate via each teamspace plugin.",
+        "C. Use UI Policies and Business Rules to enable teamspaces.",
+        "D. Enable the teamspace property."
+      ],
+      "comments": [
+        {
+          "content": "B is correct answer\n\nYou must activate a teamspace plugin to use the teamspace feature\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/project-management/task/t_ActivateTeamspaces.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "89",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304306-exam-cis-spm-topic-1-question-89-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following is the default schedule for the Project Management application?",
+      "answers": [
+        "A. Repeats every week on weekdays Monday through Friday. Includes the child schedule U.S. Holidays.",
+        "B. Repeats every week on weekdays Monday through Friday from 8:00am to noon and 1:00-5:00pm.",
+        "C. Repeats every week on weekdays Monday through Friday from 9:00am to 5:00pm.",
+        "D. Repeats every week on weekdays Monday through Friday."
+      ],
+      "comments": [
+        {
+          "content": "Correct B\nhttps://www.servicenow.com/community/spm-forum/project-management-schedule-explanation-on-the-different-fields/m-p/2611137#:~:text=The%20default%20schedule%20for%20all%20new%20projects%2C%20which,total%20of%208%20hours%29%2C%20not%20including%20weekends.%20https%3A%2F%2Fdocs.servicenow.com%2Fbundle%2Futah-it-business-management%2Fpage%2Fproduct%2Fresource-management%2Fconc",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is B checked my PDI:\n\nProcedure:\n1. Open a project.\n2. If the Default view is active, right-click the header bar and select View > Advanced.\n3. Select a schedule in the Schedule field.\n\nProject Management Schedule\t\nThe default schedule for all new projects which is Monday to Friday 8 A.M. to 12 P.M. and 1 P.M. to 5 P.M. (for a total of 8 hours), not including weekends.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I tthink it is B\nhttps://www.servicenow.com/community/spm-forum/project-management-schedule-explanation-on-the-different-fields/m-p/2611137#:~:text=The%20default%20schedule%20for%20all%20new%20projects%2C%20which,total%20of%208%20hours%29%2C%20not%20including%20weekends.%20https%3A%2F%2Fdocs.servicenow.com%2Fbundle%2Futah-it-business-management%2Fpage%2Fproduct%2Fresource-management%2Fconc",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "95",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304147-exam-cis-spm-topic-1-question-95-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which role should be given to users such as portfolio or product managers, so they can create, update, and delete, portfolio plans?",
+      "answers": [
+        "A. Portfolio Planning admin [sn_align_core.apw_admin]",
+        "B. Milestones editor [sn_milestones.milestone_editor]",
+        "C. Milestones viewer [sn_milestones.milestone_viewer]",
+        "D. Portfolio Planning user [sn_align_core.apw_user]"
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is D\n\nPortfolio Planning user [sn_align_core.apw_user]\n\nCan create, update, and delete portfolio plans, free-form roadmaps, and planning items.\n\nThis role can be given to users such as portfolio or product managers, business unit leads, and other planning personas.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/portfolio-planning/reference/installed-with-portfolio-planning.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "96",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303869-exam-cis-spm-topic-1-question-96-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What are some basics of Demand Management? (Choose two.)",
+      "answers": [
+        "A. Promote demands to defects",
+        "B. Use the Project Workspace to compare and assess demands",
+        "C. Create stakeholders",
+        "D. Submit ideas"
+      ],
+      "comments": [
+        {
+          "content": "Based on the below, the answer should be A & C\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/planning-and-policy/concept/c_DemandManagement.html\n\nBasics of Demand Management\n•\tSet up the application: Plan, create stakeholders and assessment categories, and create bubble charts.\n•\tAssess ideas: Review and analyze submitted ideas before promoting ideas to demands.\n•\tCreate and add details to the demands: Create demands and add demand tasks, stakeholders and assessments, and evaluate and qualify demands.\n•\tUse the Demand Management application or the demand workbench to compare and assess demands, and promote demands to projects, enhancements, changes, or defects.",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "99",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304506-exam-cis-spm-topic-1-question-99-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "What is the formula for Forecasted Utilization?",
+      "answers": [
+        "A. Assigned Hours/Capacity",
+        "B. Confirmed Hours/Capacity",
+        "C. (Allocated Hours + Confirmed Hours)/Capacity",
+        "D. Allocated Hours/Capacity"
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is C\n\nForecasted Utilization\n\nPercentage of forecasted resource time utilization. It is calculated as sum of allocated and confirmed hours, divided by the total capacity.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/resource-management/concept/c_UsingResourceManagementReports.html#:~:text=Forecasted%20Utilization,the%20total%20capacity.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Forecasted Utilization\nPercentage of forecasted resource time utilization. It is calculated as sum of allocated and confirmed hours, divided by the total capacity.\n\nref: https://www.servicenow.com/docs/bundle/xanadu-it-business-management/page/product/resource-management/concept/c_UsingResourceManagementReports.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "100% is C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "102",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303715-exam-cis-spm-topic-1-question-102-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Resource plan costs are divided into: (Choose three.)",
+      "answers": [
+        "A. Planned Cost",
+        "B. Allocated Cost",
+        "C. Actual Cost",
+        "D. Expense Cost",
+        "E. Forecast Cost"
+      ],
+      "comments": [
+        {
+          "content": "ABC: Resource plan costs can be tracked directly in the resource plan record. Resource plan costs are divided into planned, allocated, and actual.\n\nref: https://www.servicenow.com/docs/bundle/yokohama-it-business-management/page/product/resource-management/concept/c_ResourcePlans.html",
+          "selected_answer": "ABC",
+          "replies": []
+        }
+      ],
+      "question_number": "104",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/304313-exam-cis-spm-topic-1-question-104-discussion/",
+      "most_voted": "ABC",
       "error": null
     }
   ]

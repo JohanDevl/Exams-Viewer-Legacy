@@ -12,12 +12,17 @@
       ],
       "comments": [
         {
-          "content": "Standard catalog items\n\nRecord producers: giving alternative ways of adding information, such as Incidents via the service catalog.\nOrder guides: to group multiple catalog items in one request.\n\nClick Here: https://zig.ht/ServiceNowCSA\n\nThe overall catalog is made up of a collection of discrete catalog items.",
+          "content": "D is the correct answer IT EXAMS PRO",
           "selected_answer": "D",
           "replies": []
         },
         {
-          "content": "Thanks Really Helpful Questions:  https://lc.cx/8SiYW1",
+          "content": "D is the correct answer for this question",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Standard catalog items\n\nRecord producers: giving alternative ways of adding information, such as Incidents via the service catalog.\nOrder guides: to group multiple catalog items in one request.\n\nClick Here: https://zig.ht/ServiceNowCSA\n\nThe overall catalog is made up of a collection of discrete catalog items.",
           "selected_answer": "D",
           "replies": []
         },
@@ -29,11 +34,6 @@
         {
           "content": "Perfect example of a question I hate.  I know how to setup service catalogs, including flows for fulfilling requests. Don't know the exact terminology of the parts so I have to fail the exam over this.",
           "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "Yeah D is the rite answer thank you topic .",
-          "selected_answer": "",
           "replies": []
         },
         {
@@ -810,6 +810,11 @@
           "replies": []
         },
         {
+          "content": "Correct answer",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
           "content": "Just drop the menu :)",
           "selected_answer": "BCD",
           "replies": []
@@ -886,11 +891,6 @@
           "content": "Correct",
           "selected_answer": "",
           "replies": []
-        },
-        {
-          "content": "correct",
-          "selected_answer": "BCD",
-          "replies": []
         }
       ],
       "question_number": "10",
@@ -907,6 +907,16 @@
         "D. UI Policy"
       ],
       "comments": [
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
         {
           "content": "B is correct",
           "selected_answer": "B",
@@ -993,6 +1003,16 @@
           "replies": []
         },
         {
+          "content": "Selected Answer: B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "Service Catalog Items are considered the fundamental components or building blocks of the Service Catalog. They represent individual services or products that can be requested by users.",
           "selected_answer": "B",
           "replies": []
@@ -1061,16 +1081,6 @@
           "content": "B is the correct answer",
           "selected_answer": "",
           "replies": []
-        },
-        {
-          "content": "correct",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "Correct",
-          "selected_answer": "",
-          "replies": []
         }
       ],
       "question_number": "12",
@@ -1095,6 +1105,16 @@
         {
           "content": "most specific to most generously",
           "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "1.ACL name matches table ? \n2.ACL name matches parent table ? \n3.ACL name matches *?",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer",
+          "selected_answer": "B",
           "replies": []
         },
         {
@@ -1165,6 +1185,11 @@
         {
           "content": "It should be D sys_user, no sys_users in SNOW",
           "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer",
+          "selected_answer": "D",
           "replies": []
         },
         {
@@ -1240,11 +1265,6 @@
         {
           "content": "its D sys_user",
           "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "D. sys_user",
-          "selected_answer": "D",
           "replies": []
         }
       ],
@@ -1382,6 +1402,11 @@
       ],
       "comments": [
         {
+          "content": "Correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "The default update set captures changes made to the instance without adding those changes to any user-created update sets. It is recommended to avoid using the Default Update Set for moving customizations between instances. Instead, use a named Update Set (user-created).",
           "selected_answer": "A",
           "replies": []
@@ -1452,6 +1477,11 @@
       ],
       "comments": [
         {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "A.  The trigger specifies the conditions that start running the flow. When the trigger conditions are met, the system starts running the flow. \n \nhttps://docs.servicenow.com/bundle/sandiego-application-development/page/administer/flow-designer/reference/flow-triggers.html",
           "selected_answer": "",
           "replies": []
@@ -1521,6 +1551,11 @@
         "D. Service Catalog variables are global by default"
       ],
       "comments": [
+        {
+          "content": "Correct answer",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "Variables are Global by default. They can define available options and affect the order price.",
           "selected_answer": "D",
@@ -1605,11 +1640,6 @@
           "replies": [
             "Variable\nService Catalog variables are global by default, display in all the tasks of a Requested Item, and provide options to tailor a catalog item to the customer's needs. For example, a computer might be available with different operating systems.\nThe Service Catalog lets you attach variables either to a catalog item or to an execution plan.\nQuestion choices can define the available options and might affect the order price."
           ]
-        },
-        {
-          "content": "It is not global by default, when creating a device catalog variable, you have to select if you’d like it to be global or not. Otherwise it won’t be global",
-          "selected_answer": "",
-          "replies": []
         }
       ],
       "question_number": "19",
@@ -1812,6 +1842,11 @@
         "D. The CMDB contains ITIL process data pertaining to configuration items"
       ],
       "comments": [
+        {
+          "content": "Answer",
+          "selected_answer": "A",
+          "replies": []
+        },
         {
           "content": "A is the correct answer.",
           "selected_answer": "A",
@@ -2180,6 +2215,11 @@
       ],
       "comments": [
         {
+          "content": "Answer is",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "C is correct.",
           "selected_answer": "C",
           "replies": []
@@ -2231,6 +2271,11 @@
       "comments": [
         {
           "content": "A is correct but this question is deprecated since connect chat no longer exists. Now we have sidebar discussions, which is not the same.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Its been depreciated, but is correct for previous versions",
           "selected_answer": "A",
           "replies": []
         },
@@ -2310,11 +2355,6 @@
           "content": "A is correct",
           "selected_answer": "",
           "replies": []
-        },
-        {
-          "content": "A is the correct answer",
-          "selected_answer": "",
-          "replies": []
         }
       ],
       "question_number": "29",
@@ -2332,6 +2372,11 @@
         "E. The Dependency View"
       ],
       "comments": [
+        {
+          "content": "correct answer",
+          "selected_answer": "ACDE",
+          "replies": []
+        },
         {
           "content": "the correct choices are A, C, D, and E.",
           "selected_answer": "ACDE",
@@ -3376,6 +3421,11 @@
         {
           "content": "Admin can define individual catalog items using Service Catalog > Catalog Definition > Maintain Item application. You can create, edit, and copy catalog items.\n\nMaintain items is an application module that list few types of request items like catalog item, record producer, standard change templates, software catalog, hardware catalog etc. All of these are extended from the base sc_cat_item table and used for request fulfillment from your service catalog. They do create new records ie request or RITM from catalog items or a task based record from a record producer or a change from standard template.",
           "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is: B. Maintain Items\nWhy not the others:\nA. Maintain Categories: Used to manage and organize catalog categories, not individual items.\nC. Content Items: Used for informational items, not for creating standard requestable catalog items.\nD. Items: Not a standalone module — \"Maintain Items\" is the correct full module name.",
+          "selected_answer": "B",
           "replies": []
         },
         {
@@ -4507,6 +4557,11 @@
       ],
       "comments": [
         {
+          "content": "sys_user_role.list is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "A and C are written the same",
           "selected_answer": "A",
           "replies": []
@@ -4606,6 +4661,11 @@
         "D. Guided boards"
       ],
       "comments": [
+        {
+          "content": "In XANADU release we know only Freeform Board and Data Driven Board",
+          "selected_answer": "C",
+          "replies": []
+        },
         {
           "content": "In Washington DC release we know only Freeform Board and Data Driven Board",
           "selected_answer": "C",
@@ -5191,6 +5251,11 @@
           ]
         },
         {
+          "content": "Answer is B \nHere is the process:\n1. Load Data\n– Upload the spreadsheet (usually CSV or Excel).\n– This creates an Import Set Table.\n2. Create Transform Map\n– Define how fields in the import set map to fields in the target table.\n3. Run Transform\n– Apply the transform map to move data from the import set to the target table.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "\"from a spreadsheet\"\nSo B is correct",
           "selected_answer": "B",
           "replies": []
@@ -5258,11 +5323,6 @@
         {
           "content": "Select Import Set, Select Transform Map, Run Transform : would be correct if specify import set TABLE and next load data...",
           "selected_answer": "B",
-          "replies": []
-        },
-        {
-          "content": "It has to be B",
-          "selected_answer": "",
           "replies": []
         }
       ],
@@ -5709,16 +5769,6 @@
           "replies": []
         },
         {
-          "content": "You can actually look in the eBook provided for the CSA Exam at page 429.\nIt says that at Table Level: Most specific to most general, Field Level: Most specific to most general.",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "It's C.\nPage 319 in Utah SNAF eBook near the bottom of the page.\nAlso throws A out the door right off bat by saying \"Specific to General\" is how ACLs are evaluated.",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
           "content": "I think SN switched from \"general-to-specific\" to \"specific-to-general\" somewhere between San Diego and Tokyo.\n\nIn San Diego:\nThis processing order ensures that users gain access to more general objects before gaining access to more specific objects. A user must pass both table and field ACL rules to access a record object.\n\nIn Tokyo:\nThis processing order ensures that users gain access to more specific objects before gaining access to more general objects. A user must pass both table and field ACL rules to access a record object.\n\nIn my \"Additional ServiceNow Fundamentals Content for System Administrators and Developers course\" (San Diego edition), it says:\nWhen a session requests data, the system looks for matching access control rules.\nRecord ACL rules are processed in the following order:\n1.\tMatch the object against table ACL rules - most specific to most general.\n2.\tMatch the object against field ACL rules - most specific to most general.",
           "selected_answer": "",
           "replies": []
@@ -5765,6 +5815,16 @@
         },
         {
           "content": "what is the correct answer?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "the correct statement is A. Table access rules are evaluated from the general to the specific.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I think A is correct. \nhttps://docs.servicenow.com/bundle/tokyo-platform-security/page/administer/contextual-security/concept/acl-rule-types.html\nRecord ACL rules are processed in the following order:\nMatch the object against table ACL rules.\nMatch the object against field ACL rules.\nThis processing order ensures that users gain access to more general objects before gaining access to more specific objects. A user must pass both table and field ACL rules to access a record object.\nIf a user fails a table ACL rule, the user is denied access to all fields in the table, even if the user passes a field ACL rule.\nIf a user passes a table ACL rule, but fails a field ACL rule, the user cannot access the field described by the field ACL rule.",
           "selected_answer": "",
           "replies": []
         }
@@ -5815,6 +5875,11 @@
           "replies": [
             "Exactly, it's D. I work as a SD operator in SN."
           ]
+        },
+        {
+          "content": "My Groups Work when selected in PDI is showing a filter where:\n* matches the assignment group\n* active = true\n* assigned to is empty\n* state != pending\n\nSince the question mentions that the team is working on many items, this implies those items are assigned.  I think the answer is A since the assigned to for these items is not empty",
+          "selected_answer": "A",
+          "replies": []
         },
         {
           "content": "I have checked it in PDA correct anser is A",
@@ -5892,16 +5957,11 @@
           "content": "The answer should be D.\n\nThe user applying a filter in the Tasks table where Assignment group is either Network or Hardware, this suggests that the tasks are filtered based on these assignment groups.\nIn this context, the correct option would likely be:\nD. The manager is not a member of the Network and Hardware groups.\nIf the manager is not a member of the Network and Hardware groups, they might not have visibility into the tasks assigned to those groups, especially if a filter is applied explicitly based on these assignment groups.",
           "selected_answer": "D",
           "replies": []
-        },
-        {
-          "content": "I tested it in my instance just now.\nIf the user has the itil role, the tasks assigned to the group appear, regardless if the task is assigned or if the manager is the member of the group.\nIf the user does not have the itil role, the menu \"My Groups Work\" does not appear at all.\nSo, D is not correct, because the group membership isn't needed, the itil role does the trick.\nB is not correct, because without the itil role, the list is not accessible at all. \nA is not correct, because with the itil role, all tasks appear.",
-          "selected_answer": "",
-          "replies": []
         }
       ],
       "question_number": "87",
       "link": "https://www.examtopics.com/discussions/servicenow/view/77737-exam-csa-topic-1-question-87-discussion/",
-      "most_voted": "D",
+      "most_voted": "A",
       "error": null
     },
     {
@@ -6633,16 +6693,6 @@
           "content": "It's B: https://docs.servicenow.com/ja-JP/bundle/vancouver-application-development/page/administer/task-table/reference/r_ToolsForDrivingTasks.html :\nService levels\nService level agreements can track the amount of time that a task has been open, to ensure that tasks are completed within an allotted time.",
           "selected_answer": "B",
           "replies": []
-        },
-        {
-          "content": "Sorry.. I meant C",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "The correct answer imo is B.\nYou can set an inactivity monitor that triggers an event for a task record when the task has been inactive for a certain amount of time.\nhttps://docs.servicenow.com/bundle/vancouver-platform-administration/page/administer/time/task/t_SetAnInactivityMonitor.html",
-          "selected_answer": "B",
-          "replies": []
         }
       ],
       "question_number": "99",
@@ -6986,11 +7036,6 @@
         {
           "content": "It is AEG",
           "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "juhkukjb",
-          "selected_answer": "B",
           "replies": []
         },
         {
@@ -7504,6 +7549,11 @@
       ],
       "comments": [
         {
+          "content": "Small letters  and underscore are key items in this question",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
           "content": "what's the difference between A and E ??? looks same/",
           "selected_answer": "",
           "replies": [
@@ -7586,6 +7636,11 @@
         {
           "content": "In Tokyo, you select Elevate Role under the user menu then uncheck security_admin and click update.  So, while the terminology is wrong, A is (now) the most correct answer",
           "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "None of these answers seem to match the actual situation but A and B seem to the the closest.",
+          "selected_answer": "A",
           "replies": []
         },
         {
@@ -7779,6 +7834,11 @@
       ],
       "comments": [
         {
+          "content": "A is still a valid answer, but workflow design studio is replacing this functionality.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "Workflow editor is also an option but it does not comes under Process automation application.",
           "selected_answer": "",
           "replies": []
@@ -7959,11 +8019,6 @@
       ],
       "comments": [
         {
-          "content": "it's actually none of these, it's the SUBMIT button on LOAD DATA module that stages the data, then it's RUN TRANSFORM to actually load the data using a transform map",
-          "selected_answer": "B",
-          "replies": []
-        },
-        {
           "content": "\"When all fields are matched properly, click Transform in the related links to begin transforming data onto the destination table.\"\nSection 4.3 Import Data > Transform Maps",
           "selected_answer": "A",
           "replies": []
@@ -8048,6 +8103,11 @@
           "content": "A run Transform",
           "selected_answer": "A",
           "replies": []
+        },
+        {
+          "content": "A. Run Transform",
+          "selected_answer": "",
+          "replies": []
         }
       ],
       "question_number": "120",
@@ -8102,11 +8162,6 @@
       ],
       "comments": [
         {
-          "content": "In Next Experience it is now called sidebar discussions. But on older versions, yeah, it would be connect chat",
-          "selected_answer": "",
-          "replies": []
-        },
-        {
           "content": "its called sidebar in Utah release",
           "selected_answer": "",
           "replies": []
@@ -8119,7 +8174,7 @@
       ],
       "question_number": "122",
       "link": "https://www.examtopics.com/discussions/servicenow/view/76509-exam-csa-topic-1-question-122-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -8132,11 +8187,6 @@
         "E. Read Only"
       ],
       "comments": [
-        {
-          "content": "A - there is no \"CANNOT CONTRIBUTE\" option, for read-only option E it's actuall \"CAN READ\"",
-          "selected_answer": "A",
-          "replies": []
-        },
         {
           "content": "C is the correct answer, double checked on the Washington PDI instance.",
           "selected_answer": "C",
@@ -8326,6 +8376,11 @@
         "H. Knowledge Taxonomy Owner"
       ],
       "comments": [
+        {
+          "content": "Knowledge owners and Knowledge managers is the correct answer",
+          "selected_answer": "DG",
+          "replies": []
+        },
         {
           "content": "From the ebook, chapter 5.1: Knowledge mangers can define knowledge categories to pre-populate the list of available categories, and knowledge contributors can select categories, and add or edit categories, if enabled, for a Knowledge base.\n\nB for sure, D is questionable but the only other answer which would fit",
           "selected_answer": "BD",
@@ -9395,11 +9450,6 @@
           "replies": []
         },
         {
-          "content": "The key to this question is the 2nd part \"Right click on Priority and select what?\" When right clicking priority (from a form) options are \"Configure Label, Configure Dictionary, Configure Styles, Configure Choices, Show Choice List, Show - 'priority'\" .. so ..  Show Choice List can be the only correct answer.",
-          "selected_answer": "E",
-          "replies": []
-        },
-        {
           "content": "E is accurate",
           "selected_answer": "",
           "replies": []
@@ -9715,34 +9765,85 @@
       "error": null
     },
     {
-      "question": "What are the functions of a journey template owner? (Choose three.)",
+      "question": "From a form, what would you click to add additional fields to the form? (Choose two.)<br/>",
       "answers": [
-        "A. Manage the order and flow of the journey stages and tasks",
-        "B. Create task templates for their audience in a simple, user-friendly experience",
-        "C. Add owners and approvers to journey configurations",
-        "D. Change only the task templates that they own",
-        "E. Maintain oversight of journey templates and approval flows"
+        "A. Context Menu > Form > Layout",
+        "B. Context Menu > Configure > Form Layout",
+        "C. Context Menu > Configure > Form Design",
+        "D. Right click on header > Add > Field",
+        "E. Context Menu > Form > Designer",
+        "F. Right click on header > Configure > UX Dashboard"
       ],
       "comments": [
         {
-          "content": "Change only the task templates that they own. is for the Co-Owners only",
-          "selected_answer": "ABC",
+          "content": "The second half of these questions have the majority of answers WRONG",
+          "selected_answer": "BC",
           "replies": []
         },
         {
-          "content": "According to docs:\nJourney owner\nMaintain plan configurations and initiate the approval workflow for plan configuration.\nUpdate and publish changes to plan configurations.\nCreate and change task templates for your audience.\nAdd or update stages in a journey.\n\nhttps://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/jny-process-owners-maint.html\n\nI don’t know how to answer it correctly :).",
+          "content": "BC... Most of the questions got wrong answweres",
           "selected_answer": "",
           "replies": []
         },
         {
-          "content": "Journey template owners, who are enabled to manage and create journeys templates for assigned audiences, can do the following actions:\nCreate task templates for their audience in a simple, user-friendly experience.\nChange only the task templates that they own.\nManage the order and flow of the journey stages and tasks.\n\nSo it's ABD",
-          "selected_answer": "ABD",
+          "content": "Form Layout and Form Design are the correct answers.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "ummm ikke veldig cash money",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Why are there not more incorrect answers? Boring.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I just confirmed this on the test dev instance. These are the only options to available to complete the task as described in the question specifically.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "B and C are corect.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Maybe in Rome the answers are \"B, D\", but in Tokyo, \"B, C\".",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-it-service-management/page/product/change-management/task/t_CreateCustomField.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Det riktige svaret er B og C.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "B & C are correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "right BC",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BC correct here",
+          "selected_answer": "BC",
           "replies": []
         }
       ],
       "question_number": "146",
-      "link": "https://www.examtopics.com/discussions/servicenow/view/132472-exam-cis-hr-topic-1-question-146-discussion/",
-      "most_voted": "ABD",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/82448-exam-csa-topic-1-question-146-discussion/",
+      "most_voted": "BC",
       "error": null
     },
     {
@@ -9772,7 +9873,7 @@
       ],
       "question_number": "147",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82711-exam-csa-topic-1-question-147-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -10215,7 +10316,7 @@
       ],
       "question_number": "156",
       "link": "https://www.examtopics.com/discussions/servicenow/view/100236-exam-csa-topic-1-question-156-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -10699,7 +10800,7 @@
       ],
       "question_number": "165",
       "link": "https://www.examtopics.com/discussions/servicenow/view/83458-exam-csa-topic-1-question-165-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -10895,7 +10996,7 @@
       ],
       "question_number": "170",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106896-exam-csa-topic-1-question-170-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -10967,7 +11068,7 @@
       ],
       "question_number": "172",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106897-exam-csa-topic-1-question-172-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -11133,7 +11234,7 @@
       ],
       "question_number": "175",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106900-exam-csa-topic-1-question-175-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -11250,7 +11351,7 @@
       ],
       "question_number": "178",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106902-exam-csa-topic-1-question-178-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -11392,6 +11493,11 @@
           "replies": []
         },
         {
+          "content": "Field then table (specific to general)",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "from more specific to general, A is the correct answer ,  field first, then table.",
           "selected_answer": "A",
           "replies": []
@@ -11472,11 +11578,6 @@
         {
           "content": "Table and then Field",
           "selected_answer": "D",
-          "replies": []
-        },
-        {
-          "content": "D is the answer",
-          "selected_answer": "",
           "replies": []
         }
       ],
@@ -11654,7 +11755,7 @@
       ],
       "question_number": "185",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106903-exam-csa-topic-1-question-185-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -12155,7 +12256,7 @@
       ],
       "question_number": "199",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106910-exam-csa-topic-1-question-199-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -12186,7 +12287,7 @@
       ],
       "question_number": "200",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106911-exam-csa-topic-1-question-200-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -12227,7 +12328,7 @@
       ],
       "question_number": "201",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106912-exam-csa-topic-1-question-201-discussion/",
-      "most_voted": null,
+      "most_voted": "ACEF",
       "error": null
     },
     {
@@ -12701,7 +12802,7 @@
       ],
       "question_number": "213",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106921-exam-csa-topic-1-question-213-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -12911,7 +13012,7 @@
       ],
       "question_number": "218",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106925-exam-csa-topic-1-question-218-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -12936,7 +13037,7 @@
       ],
       "question_number": "219",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106927-exam-csa-topic-1-question-219-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -12966,7 +13067,7 @@
       ],
       "question_number": "220",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106928-exam-csa-topic-1-question-220-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -13189,7 +13290,7 @@
       ],
       "question_number": "225",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106930-exam-csa-topic-1-question-225-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -13201,6 +13302,16 @@
         "D. Can import"
       ],
       "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/community/training-and-certifications/that-access-does-a-user-need-to-be-able-to-import-articles-to-a/td-p/3134613",
+          "selected_answer": "C",
+          "replies": []
+        },
         {
           "content": "C. What ‘’access” not “role”",
           "selected_answer": "",
@@ -13220,16 +13331,11 @@
           "content": "A is correct",
           "selected_answer": "",
           "replies": []
-        },
-        {
-          "content": "C is correct",
-          "selected_answer": "",
-          "replies": []
         }
       ],
       "question_number": "226",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106931-exam-csa-topic-1-question-226-discussion/",
-      "most_voted": "A",
+      "most_voted": "C",
       "error": null
     },
     {
@@ -13395,7 +13501,7 @@
       ],
       "question_number": "229",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106932-exam-csa-topic-1-question-229-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -13976,6 +14082,11 @@
       ],
       "comments": [
         {
+          "content": "The icon is preview but the question is \"what type of field > Reference field is the answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "C - Reference field. It's a trick question, the button is preview but there is no Preview Field Type in ServiceNow. So the only logical answer is Reference.",
           "selected_answer": "C",
           "replies": []
@@ -13987,11 +14098,6 @@
         },
         {
           "content": "C. Reference",
-          "selected_answer": "C",
-          "replies": []
-        },
-        {
-          "content": "The icon is preview but the question is \"what type of field > Reference field is the answer",
           "selected_answer": "C",
           "replies": []
         },
@@ -14148,6 +14254,11 @@
       ],
       "comments": [
         {
+          "content": "A is correct. B is not correct- they are not *automatically* captured in an update set like other development items but still can be moved via update set if they are manually added.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "B- don’t be fooled they ain’t part of a update set",
           "selected_answer": "B",
           "replies": []
@@ -14301,6 +14412,26 @@
           "replies": []
         },
         {
+          "content": "I think it's A. I did 2 tests. \nKnowledge > Administration > Knowledge Bases.=> open a record. \n1.Trying to add a role to both 'can read' and 'can contribute'. It worked.  \n   So I think just setting 'can read' does not have full control to remove a write access. \n2.On 'Can contribute', I see we can add filter options like 'OR users does not contain xx'. \n   So this at least a way to let a user/users are NOT able to write. \nSo my conclusion, either 'able to'/'not able to' is controlled in the same tab 'can contribute' for writing access. Just my opinion at the moment.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The answer choices are wrong. The answer is \"cannot contribute\" and it is not listed",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "CAN READ means they can’t contribute",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Can contribute refers to users that CAN actually contribute to the article, so the answer C because can read CANNOT contribute to the attribute, they can only read",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "Cannot Contribute would be the perfect answer.\nFor this question, if we add them to Can Read, this will limit their ability to create new articles (I think).\nAnyway, it;s the closest thing to correct answer",
           "selected_answer": "C",
           "replies": []
@@ -14359,16 +14490,11 @@
           "content": "Should be can contribute. \nIf the user is not on the list, then they cannot contribute",
           "selected_answer": "A",
           "replies": []
-        },
-        {
-          "content": "answer should be 'cannot contribute'",
-          "selected_answer": "",
-          "replies": []
         }
       ],
       "question_number": "248",
       "link": "https://www.examtopics.com/discussions/servicenow/view/88609-exam-csa-topic-1-question-248-discussion/",
-      "most_voted": "A",
+      "most_voted": "C",
       "error": null
     },
     {
@@ -15286,6 +15412,11 @@
           "replies": []
         },
         {
+          "content": "Correct answer B: key word here is \"easy\" which would be to use a module rather than creating business rules.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "Even not knowing for sure if there's a \"System Upgraded\" notification out of the box, I would go with B - First of all notifications are available in System Notification -> E-mail -> Notifications (so that rules out A), second of all why would the administrator want to send a notification for a completed upgrade (through a Client Script or a Business Rule) to himself? That rules out C and D. So B is the only plausible one.\nBut to confirm my logic I also went in and checked in my out of the box personal development instance and there is indeed a \"System Upgraded\" notification in System Notification -> E-mail -> Notifications",
           "selected_answer": "B",
           "replies": []
@@ -15296,11 +15427,6 @@
           "replies": [
             "Meant B Sorry"
           ]
-        },
-        {
-          "content": "Correct answer is D",
-          "selected_answer": "D",
-          "replies": []
         },
         {
           "content": "D is correct \"system upgraded\" is not an out of box notification",
@@ -15549,7 +15675,7 @@
       ],
       "question_number": "274",
       "link": "https://www.examtopics.com/discussions/servicenow/view/95537-exam-csa-topic-1-question-274-discussion/",
-      "most_voted": null,
+      "most_voted": "ABD",
       "error": null
     },
     {
@@ -15902,6 +16028,11 @@
       ],
       "comments": [
         {
+          "content": "Testing update 'glide.ui.advanced' to 'true', 'save' button comes up at form header.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "I initially picked B. \n\nC is the most correct answer, although B is also true. At least in the Washington PDI, you get the option to \"Show Save, Insert, Insert and Stay\" Buttons. It is also the glide property, but in the tool options you see it as Save Button.",
           "selected_answer": "C",
           "replies": []
@@ -15983,11 +16114,6 @@
         {
           "content": "C is correct \nhttps://docs.servicenow.com/bundle/utah-platform-user-interface/page/administer/navigation-and-ui/reference/customizing-instance-appearance.html#d17975e107",
           "selected_answer": "",
-          "replies": []
-        },
-        {
-          "content": "C is the correct answer.",
-          "selected_answer": "C",
           "replies": []
         }
       ],
@@ -16473,7 +16599,7 @@
       ],
       "question_number": "293",
       "link": "https://www.examtopics.com/discussions/servicenow/view/108512-exam-csa-topic-1-question-293-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -16675,7 +16801,7 @@
       ],
       "question_number": "298",
       "link": "https://www.examtopics.com/discussions/servicenow/view/94127-exam-csa-topic-1-question-298-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -16950,7 +17076,7 @@
       ],
       "question_number": "304",
       "link": "https://www.examtopics.com/discussions/servicenow/view/105354-exam-csa-topic-1-question-304-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -17007,7 +17133,7 @@
       ],
       "question_number": "306",
       "link": "https://www.examtopics.com/discussions/servicenow/view/105352-exam-csa-topic-1-question-306-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -17153,7 +17279,7 @@
       ],
       "question_number": "309",
       "link": "https://www.examtopics.com/discussions/servicenow/view/136130-exam-csa-topic-1-question-309-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -17183,7 +17309,7 @@
       ],
       "question_number": "310",
       "link": "https://www.examtopics.com/discussions/servicenow/view/105349-exam-csa-topic-1-question-310-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -17214,7 +17340,7 @@
       ],
       "question_number": "311",
       "link": "https://www.examtopics.com/discussions/servicenow/view/105348-exam-csa-topic-1-question-311-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -17369,7 +17495,7 @@
       ],
       "question_number": "315",
       "link": "https://www.examtopics.com/discussions/servicenow/view/105342-exam-csa-topic-1-question-315-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -17751,7 +17877,7 @@
       ],
       "question_number": "326",
       "link": "https://www.examtopics.com/discussions/servicenow/view/136129-exam-csa-topic-1-question-326-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -17776,7 +17902,7 @@
       ],
       "question_number": "327",
       "link": "https://www.examtopics.com/discussions/servicenow/view/136131-exam-csa-topic-1-question-327-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -17802,7 +17928,7 @@
       ],
       "question_number": "328",
       "link": "https://www.examtopics.com/discussions/servicenow/view/136132-exam-csa-topic-1-question-328-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -18002,7 +18128,7 @@
       ],
       "question_number": "334",
       "link": "https://www.examtopics.com/discussions/servicenow/view/136303-exam-csa-topic-1-question-334-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -18022,7 +18148,7 @@
       ],
       "question_number": "335",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155799-exam-csa-topic-1-question-335-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -18077,7 +18203,7 @@
       ],
       "question_number": "337",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155801-exam-csa-topic-1-question-337-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -18102,7 +18228,7 @@
       ],
       "question_number": "338",
       "link": "https://www.examtopics.com/discussions/servicenow/view/150153-exam-csa-topic-1-question-338-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -18155,7 +18281,7 @@
       ],
       "question_number": "340",
       "link": "https://www.examtopics.com/discussions/servicenow/view/150154-exam-csa-topic-1-question-340-discussion/",
-      "most_voted": null,
+      "most_voted": "E",
       "error": null
     },
     {
@@ -18288,7 +18414,7 @@
       ],
       "question_number": "344",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155804-exam-csa-topic-1-question-344-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -18410,7 +18536,7 @@
       ],
       "question_number": "348",
       "link": "https://www.examtopics.com/discussions/servicenow/view/142117-exam-csa-topic-1-question-348-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -18486,7 +18612,7 @@
       ],
       "question_number": "350",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155808-exam-csa-topic-1-question-350-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -18564,7 +18690,7 @@
       ],
       "question_number": "353",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155810-exam-csa-topic-1-question-353-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -18748,7 +18874,7 @@
       ],
       "question_number": "360",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155812-exam-csa-topic-1-question-360-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -18768,7 +18894,7 @@
       ],
       "question_number": "361",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155813-exam-csa-topic-1-question-361-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -18788,7 +18914,7 @@
       ],
       "question_number": "362",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155815-exam-csa-topic-1-question-362-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -18808,7 +18934,7 @@
       ],
       "question_number": "363",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155816-exam-csa-topic-1-question-363-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -18828,7 +18954,7 @@
       ],
       "question_number": "364",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155817-exam-csa-topic-1-question-364-discussion/",
-      "most_voted": null,
+      "most_voted": "D",
       "error": null
     },
     {
@@ -18848,7 +18974,7 @@
       ],
       "question_number": "366",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155819-exam-csa-topic-1-question-366-discussion/",
-      "most_voted": null,
+      "most_voted": "A",
       "error": null
     },
     {
@@ -18868,7 +18994,7 @@
       ],
       "question_number": "367",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155820-exam-csa-topic-1-question-367-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -18888,7 +19014,7 @@
       ],
       "question_number": "369",
       "link": "https://www.examtopics.com/discussions/servicenow/view/155835-exam-csa-topic-1-question-369-discussion/",
-      "most_voted": null,
+      "most_voted": "B",
       "error": null
     },
     {
@@ -18939,7 +19065,7 @@
       ],
       "question_number": "376",
       "link": "https://www.examtopics.com/discussions/servicenow/view/156801-exam-csa-topic-1-question-376-discussion/",
-      "most_voted": null,
+      "most_voted": "C",
       "error": null
     },
     {
@@ -18951,6 +19077,11 @@
         "D. ServiceNow Spoke Store"
       ],
       "comments": [
+        {
+          "content": "NO such thing as a ServiceNow spoke store.",
+          "selected_answer": "A",
+          "replies": []
+        },
         {
           "content": "The answer is A. There is no such thing as a ServiceNow Spoke Store dfec26e is a degenerate providing wrong answers.",
           "selected_answer": "A",
