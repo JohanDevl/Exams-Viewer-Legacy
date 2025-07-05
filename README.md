@@ -6,7 +6,7 @@ An automated tool to scrape and maintain up-to-date exam question data from Exam
 
 - **🌐 Web Interface**: Browse questions via GitHub Pages
 - **🤖 Automatic scraping** of ExamTopics questions
-- **📅 Daily updates** via GitHub Actions
+- **📅 Weekly updates** via GitHub Actions
 - **🔄 Force rescan** option to refresh all links
 - **🛡️ Robust error handling** and rate limiting
 - **📊 Multi-exam support** with automatic detection
@@ -35,7 +35,7 @@ Exams-Viewer/
 │   ├── API.md            # 📋 API documentation
 │   └── DEVELOPMENT.md    # 🛠️ Development guide
 └── .github/workflows/     # ⚙️ GitHub Actions
-    └── daily-update.yml  # 📅 Daily automation
+    └── weekly-update.yml  # 📅 Weekly automation
 ```
 
 ## 🌐 Web Interface
@@ -110,12 +110,12 @@ python scripts/update_all_exams.py --exam CAD --force-rescan
 
 ### 🤖 Automation
 
-The tool automatically updates every day at 2:00 AM UTC via GitHub Actions.
+The tool automatically updates every week on Saturday at 2:00 AM UTC via GitHub Actions.
 
 **Manual trigger with options:**
 
 1. Go to the "Actions" tab on GitHub
-2. Select "Daily Data Update"
+2. Select "Weekly Data Update"
 3. Click "Run workflow"
 4. **Available Options:**
    - **Force rescan**: Check to force rescan all links
@@ -167,7 +167,7 @@ The scraper includes delays to respect servers:
 
 The automation workflow:
 
-- Runs daily at 2:00 AM UTC
+- Runs weekly on Saturday at 2:00 AM UTC
 - Can be triggered manually with options
 - Generates detailed logs
 - Automatically commits changes
@@ -197,6 +197,18 @@ Data is stored in JSON format:
 ## 🛠️ Development
 
 See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for detailed development instructions.
+
+### 🎯 Cursor Rules
+
+This project includes comprehensive **Cursor Rules** (`.cursor/rules/exams-viewer.mdc`) that automatically enforce:
+
+- **Critical requirement**: Exam lists must be in alphabetical order
+- Code style guidelines for JavaScript, Python, HTML/CSS
+- Architecture patterns and common development practices
+- Security guidelines and performance considerations
+- Comprehensive code review checklist
+
+The rules are automatically applied when using Cursor IDE and help maintain consistency across all contributions.
 
 ### Quick Start
 
