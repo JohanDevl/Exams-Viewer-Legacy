@@ -5,6 +5,8 @@ import json
 import time
 import os
 import hashlib
+import random
+import urllib.robotparser
 
 # Streamlit removed - not needed for automation scripts
 
@@ -35,6 +37,35 @@ HEADERS = {
             "Connection": "keep-alive",
         }
 PREFIX = "https://www.examtopics.com/discussions/"
+
+def respectful_request(url, headers=None, timeout=30):
+    """
+    Make a respectful HTTP request with built-in delays and error handling
+    """
+    if headers is None:
+        headers = HEADERS
+    
+    try:
+        response = requests.get(url, headers=headers, timeout=timeout)
+        response.raise_for_status()
+        return response
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed for {url}: {e}")
+        return None
+
+def check_robots_txt(base_url):
+    """
+    Check if robots.txt allows scraping of the given URL
+    """
+    try:
+        rp = urllib.robotparser.RobotFileParser()
+        rp.set_url(f"{base_url}/robots.txt")
+        rp.read()
+        user_agent = HEADERS.get("User-Agent", "*")
+        return rp.can_fetch(user_agent, base_url)
+    except Exception:
+        # If robots.txt check fails, assume it's allowed but be cautious
+        return True
 
 def load_json(json_path):
     if not os.path.exists(json_path):
@@ -82,8 +113,14 @@ def get_question_links(exam_code, progress, json_path, force_rescan=False):
         raise ValueError(f"Exam code {exam_code} not found.")
 
     url = f"{PREFIX}{category}/"
+    # Check robots.txt before proceeding
+    if not check_robots_txt(url):
+        raise ValueError(f"Robots.txt disallows scraping of {url}")
+    
     # Get the first page to find number of pages
-    response = requests.get(url, headers=HEADERS)
+    response = respectful_request(url)
+    if not response:
+        raise ValueError("Failed to access the website")
     soup = BeautifulSoup(response.content, "html.parser")
 
     # Find number of pages
@@ -118,7 +155,9 @@ def get_question_links(exam_code, progress, json_path, force_rescan=False):
         progress.progress((i) / num_pages, text=f"Extracting question links - page {i} of {num_pages}...")
         page_url = url + f"{i}/"
 
-        page_response = requests.get(page_url, headers=HEADERS)
+        page_response = respectful_request(page_url)
+        if not page_response:
+            continue  # Skip this page if request fails
         soup = BeautifulSoup(page_response.content, "html.parser")
         titles = soup.find_all("div", class_="dicussion-title-container")
         for title in titles:
@@ -128,6 +167,11 @@ def get_question_links(exam_code, progress, json_path, force_rescan=False):
                     a_tag = title.find("a")
                     if a_tag and "href" in a_tag.attrs:
                         question_links.append(a_tag["href"])
+        
+        # Add delay between pages (except for the last page)
+        if i < num_pages:
+            delay = random.uniform(2, 5)  # Shorter delay for page navigation
+            time.sleep(delay)
     sorted_links = sorted(question_links, key=lambda link: int(re.search(r'question-(\d+)', link).group(1)))
     question_links_obj = {"page_num": i, "status": "complete", "links": sorted_links}
     save_json(question_links_obj, json_path)
@@ -137,8 +181,9 @@ def scrape_page(link):
     question_object = {}
 
     try:
-        response = requests.get(link, headers=HEADERS)
-        response.raise_for_status()
+        response = respectful_request(link)
+        if not response:
+            raise Exception("Failed to get response")
         soup = BeautifulSoup(response.content, "html.parser")
     except Exception as e:
         return {
@@ -379,7 +424,9 @@ def scrape_questions(question_links, json_path, progress, rapid_scraping=False, 
                 new_count += 1
         
         if not rapid_scraping:
-            time.sleep(5)
+            # Random delay between 5-10 seconds to be more respectful and less predictable
+            delay = random.uniform(5, 10)
+            time.sleep(delay)
     
     questions.sort(key=lambda x: int(x["question_number"]) if x["question_number"].isdigit() else float('inf'))
     status = "complete" if len(questions) == questions_num else "in progress"

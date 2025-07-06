@@ -50,9 +50,9 @@ def update_single_exam(exam_code, progress_tracker, force_rescan=False, force_up
         print(f"🔄 Force updating existing questions for {exam_code}")
     
     try:
-        # Use rapid scraping mode for automation (no delays)
+        # Use respectful scraping mode (with delays) for better compliance
         # update_exam_data returns a tuple (questions, error_message)
-        questions, error_message = update_exam_data(exam_code, progress_tracker, rapid_scraping=True, force_rescan=force_rescan, force_update=force_update)
+        questions, error_message = update_exam_data(exam_code, progress_tracker, rapid_scraping=False, force_rescan=force_rescan, force_update=force_update)
         
         if error_message:
             print(f"❌ {exam_code}: Update failed - {error_message}")
@@ -144,8 +144,8 @@ def main():
         
         # Add delay between exams to be respectful
         if i < len(exam_codes):  # Don't wait after the last exam
-            print(f"⏳ Waiting 10 seconds before next exam...")
-            time.sleep(10)
+            print(f"⏳ Waiting 15 seconds before next exam...")
+            time.sleep(15)
     
     # Generate summary
     print(f"\n📈 Update Summary:")
