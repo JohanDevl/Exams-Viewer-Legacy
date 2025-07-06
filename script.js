@@ -679,7 +679,26 @@ function displayCurrentQuestion() {
     question.question_number || currentQuestionIndex + 1
   }`;
   document.getElementById("examTopicsLink").href = question.link || "#";
-  document.getElementById("questionText").innerHTML = question.question || "";
+
+  // Fix image paths to point to ExamTopics.com
+  let questionText = question.question || "";
+  const originalText = questionText;
+  questionText = questionText.replace(
+    /src="\/assets\/media\/exam-media\//g,
+    'src="https://www.examtopics.com/assets/media/exam-media/'
+  );
+
+  // Debug log to confirm the fix is working
+  if (originalText !== questionText) {
+    console.log(
+      "🔧 Image path fixed:",
+      originalText.length,
+      "→",
+      questionText.length
+    );
+  }
+
+  document.getElementById("questionText").innerHTML = questionText;
 
   // Display answers
   displayAnswers(question);
@@ -719,7 +738,13 @@ function displayAnswers(question) {
 
   answers.forEach((answer) => {
     const answerLetter = answer.charAt(0);
-    const answerText = answer.substring(3);
+    let answerText = answer.substring(3);
+
+    // Fix image paths in answers too (just in case)
+    answerText = answerText.replace(
+      /src="\/assets\/media\/exam-media\//g,
+      'src="https://www.examtopics.com/assets/media/exam-media/'
+    );
 
     const answerElement = document.createElement("div");
     answerElement.className = "answer-option";
@@ -948,8 +973,10 @@ function exportToPDF() {
                 .question { margin-bottom: 30px; page-break-inside: avoid; }
                 .question-header { font-weight: bold; font-size: 18px; margin-bottom: 10px; }
                 .question-text { margin-bottom: 15px; }
+                .question-text img { max-width: 100%; height: auto; margin: 10px 0; border: 1px solid #ddd; }
                 .answers { margin-left: 20px; }
                 .answer { margin-bottom: 5px; }
+                .answer img { max-width: 100%; height: auto; margin: 5px 0; }
                 .correct-answer { background-color: #d4edda; padding: 2px 5px; border-radius: 3px; }
                                  .discussion { margin-top: 15px; padding: 10px; background-color: #f8f9fa; border-radius: 5px; }
                  .comment { margin-bottom: 10px; padding: 8px; background-color: white; border-radius: 3px; }
@@ -971,7 +998,14 @@ function exportToPDF() {
 
   currentQuestions.forEach((question, index) => {
     const questionNumber = question.question_number || index + 1;
-    const questionText = question.question || "";
+
+    // Fix image paths for PDF export too
+    let questionText = question.question || "";
+    questionText = questionText.replace(
+      /src="\/assets\/media\/exam-media\//g,
+      'src="https://www.examtopics.com/assets/media/exam-media/'
+    );
+
     const answers = question.answers || [];
     const mostVoted = question.most_voted || "";
     const correctAnswers = new Set(mostVoted.split(""));
@@ -986,12 +1020,20 @@ function exportToPDF() {
 
     answers.forEach((answer) => {
       const answerLetter = answer.charAt(0);
-      const answerText = answer.substring(3);
+      let answerText = answer.substring(3);
+
+      // Fix image paths in answers for PDF export too
+      answerText = answerText.replace(
+        /src="\/assets\/media\/exam-media\//g,
+        'src="https://www.examtopics.com/assets/media/exam-media/'
+      );
+
       const isCorrect = correctAnswers.has(answerLetter);
+      const fullAnswer = answerLetter + ". " + answerText;
 
       printDocument.write(`
                 <div class="answer ${isCorrect ? "correct-answer" : ""}">
-                    ${answer} ${isCorrect ? "✓" : ""}
+                    ${fullAnswer} ${isCorrect ? "✓" : ""}
                 </div>
             `);
     });
