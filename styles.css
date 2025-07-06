@@ -275,6 +275,23 @@ body {
   color: #721c24;
 }
 
+.disclaimer-message {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  border-left: 4px solid #ffc107;
+}
+
+.disclaimer-message i {
+  color: #ffc107;
+}
+
 .answers-list {
   margin-bottom: 1rem;
 }
