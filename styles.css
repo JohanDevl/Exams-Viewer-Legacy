@@ -883,23 +883,25 @@ body {
 
 /* Legal Disclaimer */
 .legal-disclaimer {
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   margin-bottom: 2rem;
   overflow: hidden;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .disclaimer-content {
   display: flex;
   align-items: center;
   padding: 1rem;
-  background: #fff3cd;
-  border-bottom: 1px solid #ffeaa7;
+  background: rgba(255, 193, 7, 0.1);
+  border-bottom: 1px solid rgba(255, 193, 7, 0.3);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .disclaimer-content i {
-  color: #856404;
+  color: var(--warning-color);
   font-size: 1.2rem;
   margin-right: 0.75rem;
   flex-shrink: 0;
@@ -908,12 +910,13 @@ body {
 .disclaimer-content div {
   flex: 1;
   font-size: 0.9rem;
-  color: #856404;
+  color: var(--text-primary);
 }
 
 .disclaimer-content a {
   text-decoration: none;
   font-weight: 500;
+  color: var(--text-primary);
 }
 
 .disclaimer-content a:hover {
@@ -922,13 +925,14 @@ body {
 
 .legal-info-expanded {
   padding: 1.5rem;
-  background: white;
-  border-top: 1px solid #e9ecef;
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .legal-info-expanded h4 {
   margin: 0 0 1rem 0;
-  color: #495057;
+  color: var(--text-primary);
   font-size: 1.1rem;
 }
 
@@ -939,7 +943,7 @@ body {
 
 .legal-info-expanded li {
   margin-bottom: 0.5rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.4;
 }
@@ -947,9 +951,21 @@ body {
 .legal-info-expanded p {
   margin: 1rem 0 0 0;
   padding: 0.75rem;
-  background: #e3f2fd;
+  background: rgba(33, 150, 243, 0.1);
   border-left: 4px solid #2196f3;
   border-radius: 4px;
   font-size: 0.9rem;
-  color: #1565c0;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode specific styles for legal disclaimer */
+[data-theme="dark"] .disclaimer-content {
+  background: rgba(255, 152, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+[data-theme="dark"] .legal-info-expanded p {
+  background: rgba(100, 181, 246, 0.15);
+  border-left: 4px solid #64b5f6;
 }
