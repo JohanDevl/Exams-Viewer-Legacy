@@ -37,8 +37,55 @@ Exams-Viewer/
 │   ├── API.md            # 📋 API documentation
 │   └── DEVELOPMENT.md    # 🛠️ Development guide
 └── .github/workflows/     # ⚙️ GitHub Actions
-    └── weekly-update.yml  # 📅 Weekly automation
+    └── manual-update.yml  # 🔧 Manual update workflow
 ```
+
+## ⚖️ Legal Compliance & Disclaimers
+
+### 📋 Educational Use Only
+
+This tool is designed **exclusively for educational purposes** and personal study. Commercial use is strictly prohibited.
+
+### 🔒 Content Ownership
+
+- All exam questions and content belong to their respective owners
+- ExamTopics.com is the original source of the scraped content
+- This tool does not claim ownership of any exam materials
+- Content is used under fair use principles for educational purposes
+
+### 🚨 Important Legal Notices
+
+**⚠️ Terms of Service Compliance**
+
+- Users should be aware that web scraping may conflict with ExamTopics.com's Terms of Service
+- We recommend users seek permission from content owners before using this tool
+- Use this tool at your own risk and responsibility
+
+**🛡️ GDPR Compliance**
+
+- This tool does not intentionally collect personal data
+- Any personal information found in scraped content is not processed or stored separately
+- Users in the EU should ensure their usage complies with GDPR requirements
+
+**📞 Contact for Removal**
+
+- Content owners can request removal of their content by contacting the repository owner
+- We will promptly respond to legitimate takedown requests
+- Abuse reports will be handled according to our abuse policy
+
+### 🔧 Rate Limiting & Respectful Scraping
+
+- Built-in delays (5-10 seconds) between requests to respect server resources
+- Automatic detection of rate limiting and respectful retry mechanisms
+- Monitoring of server response times to avoid overloading
+
+### 📝 Recommended Best Practices
+
+1. **Seek Permission**: Contact ExamTopics.com for explicit permission before large-scale scraping
+2. **Respect robots.txt**: Check and follow website crawling guidelines
+3. **Educational Use Only**: Never use scraped content for commercial purposes
+4. **Attribution**: Always credit the original source (ExamTopics.com)
+5. **Responsible Usage**: Use reasonable request rates and respect server resources
 
 ## 🌐 Web Interface
 
@@ -113,14 +160,14 @@ python scripts/update_all_exams.py --exam CAD
 python scripts/update_all_exams.py --exam CAD --force-rescan --force-update
 ```
 
-### 🤖 Automation
+### 🤖 Manual Updates
 
-The tool automatically updates every week on Saturday at 2:00 AM UTC via GitHub Actions.
+The tool can be updated manually via GitHub Actions (automatic weekly updates have been disabled).
 
 **Manual trigger with options:**
 
 1. Go to the "Actions" tab on GitHub
-2. Select "Weekly Data Update"
+2. Select "Manual Data Update"
 3. Click "Run workflow"
 4. **Available Options:**
    - **Force rescan**: Check to force rescan all links

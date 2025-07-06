@@ -1,10 +1,7 @@
-name: Weekly Data Update
+name: Manual Data Update
 
 on:
-  schedule:
-    # Run weekly on Saturday at 2:00 AM UTC (Friday night to Saturday)
-    - cron: "0 2 * * 6"
-  workflow_dispatch: # Allow manual triggering
+  workflow_dispatch: # Manual triggering only
     inputs:
       force_rescan:
         description: "Force rescan of all links (ignores existing complete status)"
@@ -54,7 +51,7 @@ jobs:
 
       - name: Update exam data
         run: |
-          echo "🚀 Starting automated weekly exam data update..."
+          echo "🚀 Starting manual exam data update..."
 
           # Build command with options
           COMMAND="python scripts/update_all_exams.py"
@@ -65,8 +62,8 @@ jobs:
             echo "🔄 Force rescan enabled - will rescan all links"
           fi
 
-          # Add force update option (default enabled for weekly runs)
-          if [ "${{ github.event.inputs.force_update }}" == "true" ] || [ "${{ github.event_name }}" == "schedule" ]; then
+          # Add force update option
+          if [ "${{ github.event.inputs.force_update }}" == "true" ]; then
             COMMAND="$COMMAND --force-update"
             echo "🔧 Force update enabled - will update existing questions with improved logic"
           fi
@@ -98,11 +95,11 @@ jobs:
           git add -A
 
           # Build commit message
-          COMMIT_MSG="🤖 Automated weekly exam data update
+          COMMIT_MSG="🤖 Manual exam data update
 
           - Updated exam questions and answers with enhanced scraper v2.0
           - Timestamp: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
-          - Automated via GitHub Actions"
+          - Triggered manually via GitHub Actions"
 
           # Add force rescan info to commit message
           if [ "${{ github.event.inputs.force_rescan }}" == "true" ]; then
@@ -111,7 +108,7 @@ jobs:
           fi
 
           # Add force update info to commit message
-          if [ "${{ github.event.inputs.force_update }}" == "true" ] || [ "${{ github.event_name }}" == "schedule" ]; then
+          if [ "${{ github.event.inputs.force_update }}" == "true" ]; then
             COMMIT_MSG="$COMMIT_MSG
           - Force update enabled (3-tier answer extraction)"
           fi
@@ -129,7 +126,7 @@ jobs:
       - name: Generate summary
         if: always()
         run: |
-          echo "## 📊 Weekly Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## 📊 Manual Update Summary" >> $GITHUB_STEP_SUMMARY
           echo "**Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
           echo "**Scraper Version:** Enhanced v2.0 (3-tier answer extraction)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -140,7 +137,7 @@ jobs:
             echo "- 🔄 Force rescan enabled" >> $GITHUB_STEP_SUMMARY
           fi
 
-          if [ "${{ github.event.inputs.force_update }}" == "true" ] || [ "${{ github.event_name }}" == "schedule" ]; then
+          if [ "${{ github.event.inputs.force_update }}" == "true" ]; then
             echo "- 🔧 Force update enabled" >> $GITHUB_STEP_SUMMARY
           fi
 

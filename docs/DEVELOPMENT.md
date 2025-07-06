@@ -21,7 +21,7 @@ Exams-Viewer/
 │   ├── API.md            # API documentation
 │   └── DEVELOPMENT.md    # This file
 └── .github/workflows/     # GitHub Actions
-    └── weekly-update.yml  # Weekly automation
+    └── manual-update.yml  # Manual update workflow
 ```
 
 ## 🔧 Development Setup
@@ -91,18 +91,18 @@ The project serves a web interface via GitHub Pages:
 - Customizable settings
 - Random navigation
 
-## 🤖 Automation
+## 🤖 Manual Updates
 
 ### GitHub Actions Workflow
 
-- **Trigger**: Weekly on Saturday at 2:00 AM UTC
+- **Trigger**: Manual execution only (automatic weekly updates disabled)
 - **Script**: `scripts/update_all_exams.py`
-- **Process**: Automatically updates all exam data
+- **Process**: Updates all exam data when manually triggered
 
 ### Manual Triggers
 
 1. Go to repository "Actions" tab
-2. Select "Weekly Data Update"
+2. Select "Manual Data Update"
 3. Click "Run workflow"
 4. Configure options if needed
 
@@ -132,7 +132,7 @@ The project serves a web interface via GitHub Pages:
 
 1. Run scraper for new exam code
 2. Commit generated JSON files
-3. Automation will include in weekly updates
+3. Manually trigger update workflow to include new exams
 
 ## 🚀 Deployment
 

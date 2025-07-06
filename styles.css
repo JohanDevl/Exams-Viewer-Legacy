@@ -74,14 +74,25 @@ body {
 
 /* Header */
 .header {
+  text-align: center;
   margin-bottom: 2rem;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .header h1 {
+  margin: 0;
   font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.header p {
+  margin: 0.5rem 0 0 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
 }
 
 /* Input Section */
@@ -868,4 +879,77 @@ body {
 
 .highlight-animation {
   animation: highlight 1s ease-in-out;
+}
+
+/* Legal Disclaimer */
+.legal-disclaimer {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.disclaimer-content {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #fff3cd;
+  border-bottom: 1px solid #ffeaa7;
+}
+
+.disclaimer-content i {
+  color: #856404;
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.disclaimer-content div {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #856404;
+}
+
+.disclaimer-content a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.disclaimer-content a:hover {
+  text-decoration: underline;
+}
+
+.legal-info-expanded {
+  padding: 1.5rem;
+  background: white;
+  border-top: 1px solid #e9ecef;
+}
+
+.legal-info-expanded h4 {
+  margin: 0 0 1rem 0;
+  color: #495057;
+  font-size: 1.1rem;
+}
+
+.legal-info-expanded ul {
+  margin: 0 0 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.legal-info-expanded li {
+  margin-bottom: 0.5rem;
+  color: #6c757d;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.legal-info-expanded p {
+  margin: 1rem 0 0 0;
+  padding: 0.75rem;
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #1565c0;
 }
