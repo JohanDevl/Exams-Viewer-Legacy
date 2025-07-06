@@ -8,6 +8,7 @@ let isHighlightEnabled = false;
 let settings = {
   showDiscussionDefault: false,
   highlightDefault: false,
+  darkMode: false,
 };
 
 // Available exams mapping (will be populated dynamically)
@@ -225,6 +226,20 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadSettings();
   setupEventListeners();
 
+  // Listen for system theme changes
+  if (window.matchMedia) {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", (e) => {
+      // Only auto-switch if user hasn't explicitly set a preference
+      const savedSettings = localStorage.getItem("examViewerSettings");
+      if (!savedSettings) {
+        settings.darkMode = e.matches;
+        document.getElementById("darkModeToggle").checked = e.matches;
+        applyTheme(e.matches);
+      }
+    });
+  }
+
   // Show loading message
   const examsList = document.getElementById("examsList");
   examsList.innerHTML =
@@ -252,7 +267,19 @@ function loadSettings() {
       settings.showDiscussionDefault;
     document.getElementById("highlightDefault").checked =
       settings.highlightDefault;
+    document.getElementById("darkModeToggle").checked = settings.darkMode;
     isHighlightEnabled = settings.highlightDefault;
+    applyTheme(settings.darkMode);
+  } else {
+    // If no saved settings, check system preference
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (prefersDark) {
+      settings.darkMode = true;
+      document.getElementById("darkModeToggle").checked = true;
+      applyTheme(true);
+    }
   }
 }
 
@@ -263,8 +290,31 @@ function saveSettings() {
   ).checked;
   settings.highlightDefault =
     document.getElementById("highlightDefault").checked;
+  settings.darkMode = document.getElementById("darkModeToggle").checked;
   localStorage.setItem("examViewerSettings", JSON.stringify(settings));
   isHighlightEnabled = settings.highlightDefault;
+  applyTheme(settings.darkMode);
+}
+
+// Apply dark/light theme
+function applyTheme(isDark) {
+  const body = document.body;
+  const darkModeBtn = document.getElementById("darkModeBtn");
+  const icon = darkModeBtn?.querySelector("i");
+
+  if (isDark) {
+    body.setAttribute("data-theme", "dark");
+    if (icon) {
+      icon.className = "fas fa-sun";
+      darkModeBtn.title = "Switch to Light Mode";
+    }
+  } else {
+    body.removeAttribute("data-theme");
+    if (icon) {
+      icon.className = "fas fa-moon";
+      darkModeBtn.title = "Switch to Dark Mode";
+    }
+  }
 }
 
 // Populate exam dropdown with available exams
@@ -330,6 +380,18 @@ function setupEventListeners() {
 
   document.getElementById("closeModal").addEventListener("click", () => {
     document.getElementById("settingsModal").style.display = "none";
+    saveSettings();
+  });
+
+  // Dark mode toggle
+  document.getElementById("darkModeToggle").addEventListener("change", () => {
+    saveSettings();
+  });
+
+  // Quick dark mode toggle button
+  document.getElementById("darkModeBtn").addEventListener("click", () => {
+    const currentMode = document.getElementById("darkModeToggle").checked;
+    document.getElementById("darkModeToggle").checked = !currentMode;
     saveSettings();
   });
 

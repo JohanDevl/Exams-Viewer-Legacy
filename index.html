@@ -35,6 +35,13 @@
             <select id="examCode" class="exam-input">
               <option value="">Select an exam...</option>
             </select>
+            <button
+              id="darkModeBtn"
+              class="dark-mode-btn"
+              title="Toggle Dark Mode"
+            >
+              <i class="fas fa-moon"></i>
+            </button>
             <button id="settingsBtn" class="settings-btn" title="Open Settings">
               <i class="fas fa-cog"></i>
             </button>
@@ -110,14 +117,6 @@
                 >Click on the answers to select them</span
               >
             </div>
-            <div class="disclaimer-message">
-              <i class="fas fa-exclamation-triangle"></i>
-              <span
-                >Disclaimer: The displayed answers may contain errors based on
-                the scraped data. Please verify if something seems
-                incorrect.</span
-              >
-            </div>
             <div id="answersList" class="answers-list"></div>
             <div class="answer-controls">
               <button id="validateBtn" class="validate-btn">
@@ -129,6 +128,14 @@
               <button id="highlightBtn" class="highlight-btn">
                 <i class="fas fa-lightbulb"></i> Toggle Highlight
               </button>
+            </div>
+            <div class="disclaimer-message">
+              <i class="fas fa-exclamation-triangle"></i>
+              <span
+                >Disclaimer: The displayed answers may contain errors based on
+                the scraped data. Please verify if something seems
+                incorrect.</span
+              >
             </div>
           </div>
 
@@ -167,6 +174,11 @@
           <div class="modal-body">
             <div class="setting-group">
               <h3><i class="fas fa-palette"></i> Display Preferences</h3>
+              <label class="toggle-label">
+                <input type="checkbox" id="darkModeToggle" />
+                <span class="toggle-slider"></span>
+                Dark mode
+              </label>
               <label class="toggle-label">
                 <input type="checkbox" id="showDiscussionDefault" />
                 <span class="toggle-slider"></span>
