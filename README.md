@@ -279,7 +279,7 @@ Data is stored in JSON format:
 
 ## 🚀 Recent Improvements
 
-### v2.0 - Enhanced Scraper & Smart Updates (2024)
+### v2.0 - Enhanced Scraper & Smart Updates
 
 **🎯 3-Tier Most Voted Extraction:**
 
