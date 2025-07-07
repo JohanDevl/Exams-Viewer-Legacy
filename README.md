@@ -89,7 +89,7 @@ This tool is designed **exclusively for educational purposes** and personal stud
 
 ## 🌐 Web Interface
 
-**Live Demo**: `https://JohanDevl.github.io/Exams-Viewer/`
+**Live Demo**: [https://JohanDevl.github.io/Exams-Viewer/](https://JohanDevl.github.io/Exams-Viewer/)
 
 ### Interface Features
 
