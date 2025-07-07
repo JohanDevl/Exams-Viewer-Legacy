@@ -14,6 +14,28 @@ let settings = {
 // Available exams mapping (will be populated dynamically)
 let availableExams = {};
 
+// Development mode detection
+const isDevelopmentMode = () => {
+  return (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1" ||
+    window.location.hostname === "" ||
+    window.location.protocol === "file:"
+  );
+};
+
+// Console log wrapper for development mode only
+const devLog = (...args) => {
+  if (isDevelopmentMode()) {
+    console.log(...args);
+  }
+};
+
+// Console error wrapper (always show errors)
+const devError = (...args) => {
+  console.error(...args);
+};
+
 // Dynamically discover available exams from data folder
 async function discoverAvailableExams() {
   try {
@@ -38,7 +60,7 @@ async function discoverAvailableExams() {
         }
 
         if (Object.keys(discoveredExams).length > 0) {
-          console.log(
+          devLog(
             "Discovered exams from directory listing:",
             Object.keys(discoveredExams)
           );
@@ -47,13 +69,11 @@ async function discoverAvailableExams() {
         }
       }
     } catch (error) {
-      console.log(
-        "Directory listing not available, trying alternative methods"
-      );
+      devLog("Directory listing not available, trying alternative methods");
     }
 
     // Method 2: Auto-discover by scanning for _links.json files
-    console.log("Auto-discovering exams by scanning for _links.json files...");
+    devLog("Auto-discovering exams by scanning for _links.json files...");
 
     // Generate potential exam codes based on common patterns
     const examPrefixes = ["CAD", "CSA", "CAS-PA"];
@@ -98,7 +118,7 @@ async function discoverAvailableExams() {
     ];
 
     const allPotentialCodes = [...examPrefixes, ...additionalPatterns];
-    console.log("Checking potential codes:", allPotentialCodes);
+    devLog("Checking potential codes:", allPotentialCodes);
 
     // Check for _links.json files to discover what exams are available
     const availableCodes = [];
@@ -109,7 +129,7 @@ async function discoverAvailableExams() {
         });
         if (linkResponse.ok) {
           availableCodes.push(code);
-          console.log(`Found _links.json for: ${code}`);
+          devLog(`Found _links.json for: ${code}`);
         }
       } catch (error) {
         // Ignore errors for non-existent files
@@ -117,7 +137,7 @@ async function discoverAvailableExams() {
     });
 
     await Promise.all(checkPromises);
-    console.log("Available codes with _links.json:", availableCodes);
+    devLog("Available codes with _links.json:", availableCodes);
 
     // Now check if corresponding .json files exist for discovered codes
     const examCheckPromises = availableCodes.map(async (examCode) => {
@@ -127,14 +147,14 @@ async function discoverAvailableExams() {
         });
         if (response.ok) {
           discoveredExams[examCode] = examCode;
-          console.log(`Confirmed exam file exists for: ${examCode}`);
+          devLog(`Confirmed exam file exists for: ${examCode}`);
         } else {
-          console.log(
+          devLog(
             `Exam file not found for: ${examCode} (status: ${response.status})`
           );
         }
       } catch (error) {
-        console.log(`Failed to check exam file for: ${examCode}`, error);
+        devLog(`Failed to check exam file for: ${examCode}`, error);
       }
     });
 
@@ -142,7 +162,7 @@ async function discoverAvailableExams() {
 
     // Method 3: If still no exams found, try brute force approach
     if (Object.keys(discoveredExams).length === 0) {
-      console.log("Fallback: brute force checking for .json files...");
+      devLog("Fallback: brute force checking for .json files...");
 
       const bruteForcePromises = allPotentialCodes.map(async (examCode) => {
         try {
@@ -151,7 +171,7 @@ async function discoverAvailableExams() {
           });
           if (response.ok) {
             discoveredExams[examCode] = examCode;
-            console.log(`Brute force found: ${examCode}`);
+            devLog(`Brute force found: ${examCode}`);
           }
         } catch (error) {
           // Ignore errors for non-existent files
@@ -162,7 +182,7 @@ async function discoverAvailableExams() {
     }
 
     // Method 3.5: Always try brute force as additional check (in case _links.json approach missed some)
-    console.log("Additional brute force check for any missed exams...");
+    devLog("Additional brute force check for any missed exams...");
     const additionalPromises = allPotentialCodes.map(async (examCode) => {
       // Only check if not already discovered
       if (!discoveredExams[examCode]) {
@@ -172,7 +192,7 @@ async function discoverAvailableExams() {
           });
           if (response.ok) {
             discoveredExams[examCode] = examCode;
-            console.log(`Additional check found: ${examCode}`);
+            devLog(`Additional check found: ${examCode}`);
           }
         } catch (error) {
           // Ignore errors for non-existent files
@@ -184,7 +204,7 @@ async function discoverAvailableExams() {
 
     // Method 4: Try to discover by attempting to load a manifest file (if it exists)
     if (Object.keys(discoveredExams).length === 0) {
-      console.log("Attempting to load manifest file...");
+      devLog("Attempting to load manifest file...");
       try {
         const manifestResponse = await fetch("data/manifest.json");
         if (manifestResponse.ok) {
@@ -205,16 +225,16 @@ async function discoverAvailableExams() {
           }
         }
       } catch (error) {
-        console.log("No manifest file found");
+        devLog("No manifest file found");
       }
     }
 
     availableExams = discoveredExams;
-    console.log("Final discovered exams:", Object.keys(availableExams));
+    devLog("Final discovered exams:", Object.keys(availableExams));
 
     return availableExams;
   } catch (error) {
-    console.error("Error discovering exams:", error);
+    devError("Error discovering exams:", error);
     // Fallback: return empty object if discovery fails
     availableExams = {};
     return availableExams;
@@ -518,11 +538,11 @@ async function loadExam(examCode) {
     currentQuestionIndex = 0;
 
     // Debug: Log first few questions to verify sorting
-    console.log(
+    devLog(
       "First 10 questions after sorting:",
       currentQuestions.slice(0, 10).map((q) => q.question_number)
     );
-    console.log("Total questions loaded:", currentQuestions.length);
+    devLog("Total questions loaded:", currentQuestions.length);
 
     // Update UI
     document.getElementById("availableExams").style.display = "none";
@@ -540,16 +560,18 @@ async function loadExam(examCode) {
     setTimeout(() => {
       updateQuestionJumpMaxValue();
       // Also make the test function available in console
-      window.testQuestionJumpField = testQuestionJumpField;
-      console.log(
-        "💡 You can run 'testQuestionJumpField()' in console to check field state"
-      );
+      if (isDevelopmentMode()) {
+        window.testQuestionJumpField = testQuestionJumpField;
+        devLog(
+          "💡 You can run 'testQuestionJumpField()' in console to check field state"
+        );
+      }
     }, 100);
 
     // And one more time with a longer delay
     setTimeout(() => {
       updateQuestionJumpMaxValue();
-      console.log("🔄 Final attempt to update max value");
+      devLog("🔄 Final attempt to update max value");
     }, 500);
     showSuccess(`Loaded ${currentQuestions.length} questions for ${examCode}`);
   } catch (error) {
@@ -663,11 +685,9 @@ function updateQuestionJumpMaxValue() {
       ...currentQuestions.map((q) => parseInt(q.question_number) || 0)
     );
 
-    console.log(`🔍 DEBUG: About to update max value to: ${maxQuestionNumber}`);
-    console.log(
-      `🔍 DEBUG: Current questions count: ${currentQuestions.length}`
-    );
-    console.log(
+    devLog(`🔍 DEBUG: About to update max value to: ${maxQuestionNumber}`);
+    devLog(`🔍 DEBUG: Current questions count: ${currentQuestions.length}`);
+    devLog(
       `🔍 DEBUG: Question numbers: ${currentQuestions
         .slice(0, 5)
         .map((q) => q.question_number)
@@ -686,38 +706,38 @@ function updateQuestionJumpMaxValue() {
     questionJumpField.offsetHeight; // trigger reflow
     questionJumpField.style.display = "";
 
-    console.log(`✅ Updated question jump max value to: ${maxQuestionNumber}`);
-    console.log(
+    devLog(`✅ Updated question jump max value to: ${maxQuestionNumber}`);
+    devLog(
       `✅ Current max attribute: ${questionJumpField.getAttribute("max")}`
     );
-    console.log(`✅ Current max property: ${questionJumpField.max}`);
-    console.log(
+    devLog(`✅ Current max property: ${questionJumpField.max}`);
+    devLog(
       `✅ Current min attribute: ${questionJumpField.getAttribute("min")}`
     );
-    console.log(
+    devLog(
       `✅ Current step attribute: ${questionJumpField.getAttribute("step")}`
     );
   } else {
     // Reset to default when no questions are loaded
     questionJumpField.setAttribute("max", "1");
     questionJumpField.max = "1";
-    console.log("🔄 Reset question jump max value to: 1");
+    devLog("🔄 Reset question jump max value to: 1");
   }
 }
 
 // Test function to check field state (for debugging)
 function testQuestionJumpField() {
   const field = document.getElementById("questionJump");
-  console.log("=== QUESTION JUMP FIELD TEST ===");
-  console.log(`Max attribute: ${field.getAttribute("max")}`);
-  console.log(`Max property: ${field.max}`);
-  console.log(`Min attribute: ${field.getAttribute("min")}`);
-  console.log(`Min property: ${field.min}`);
-  console.log(`Step attribute: ${field.getAttribute("step")}`);
-  console.log(`Step property: ${field.step}`);
-  console.log(`Value: ${field.value}`);
-  console.log(`Type: ${field.type}`);
-  console.log("============================");
+  devLog("=== QUESTION JUMP FIELD TEST ===");
+  devLog(`Max attribute: ${field.getAttribute("max")}`);
+  devLog(`Max property: ${field.max}`);
+  devLog(`Min attribute: ${field.getAttribute("min")}`);
+  devLog(`Min property: ${field.min}`);
+  devLog(`Step attribute: ${field.getAttribute("step")}`);
+  devLog(`Step property: ${field.step}`);
+  devLog(`Value: ${field.value}`);
+  devLog(`Type: ${field.type}`);
+  devLog("============================");
 }
 
 // Display current question
@@ -756,7 +776,7 @@ function displayCurrentQuestion() {
 
   // Debug log to confirm the fix is working
   if (originalText !== questionText) {
-    console.log(
+    devLog(
       "🔧 Image path fixed:",
       originalText.length,
       "→",
@@ -1156,19 +1176,19 @@ function exportToPDF() {
 
 // Toggle legal information display
 function toggleLegalInfo() {
-  console.log("toggleLegalInfo called"); // Debug log
+  devLog("toggleLegalInfo called"); // Debug log
   const legalInfo = document.getElementById("legal-info");
   if (!legalInfo) {
-    console.error("Legal info element not found");
+    devError("Legal info element not found");
     return;
   }
 
   if (legalInfo.style.display === "none" || legalInfo.style.display === "") {
     legalInfo.style.display = "block";
-    console.log("Legal info shown");
+    devLog("Legal info shown");
   } else {
     legalInfo.style.display = "none";
-    console.log("Legal info hidden");
+    devLog("Legal info hidden");
   }
 }
 
