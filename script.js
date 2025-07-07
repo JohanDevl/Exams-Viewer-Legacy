@@ -498,7 +498,11 @@ async function loadExam(examCode) {
       throw new Error("Invalid exam data format");
     }
 
-    currentExam = examCode;
+    // Store the complete exam data object
+    currentExam = {
+      exam_name: data.exam_name || examCode,
+      questions: data.questions,
+    };
     // Sort questions by question_number numerically with robust comparison
     currentQuestions = data.questions.sort((a, b) => {
       const numA = parseInt(a.question_number, 10);
@@ -1016,59 +1020,138 @@ function displayDiscussion(question) {
 
 // Export questions to PDF
 function exportToPDF() {
-  if (
-    !currentExam ||
-    !currentExam.questions ||
-    currentExam.questions.length === 0
-  ) {
-    showError("No questions available to export");
+  if (!currentQuestions.length) {
+    showError("No questions loaded to export");
     return;
   }
 
-  try {
-    showLoading(true, "Generating PDF...");
+  // Create a printable version
+  const printWindow = window.open("", "_blank");
+  const printDocument = printWindow.document;
 
-    // Create PDF content
-    let pdfContent = `${currentExam.exam_name} - Exam Questions\n\n`;
+  printDocument.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${currentExam.exam_name} - Questions Export</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+                .question { margin-bottom: 30px; page-break-inside: avoid; }
+                .question-header { font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+                .question-text { margin-bottom: 15px; }
+                .question-text img { max-width: 100%; height: auto; margin: 10px 0; border: 1px solid #ddd; }
+                .answers { margin-left: 20px; }
+                .answer { margin-bottom: 5px; }
+                .answer img { max-width: 100%; height: auto; margin: 5px 0; }
+                .correct-answer { background-color: #d4edda; padding: 2px 5px; border-radius: 3px; }
+                .discussion { margin-top: 15px; padding: 10px; background-color: #f8f9fa; border-radius: 5px; }
+                .comment { margin-bottom: 10px; padding: 8px; background-color: white; border-radius: 3px; }
+                .comment-header { font-weight: bold; font-size: 12px; color: #666; }
+                .comment a { color: #007bff; text-decoration: none; word-break: break-all; }
+                .comment a:hover { text-decoration: underline; }
+                @media print {
+                    body { margin: 0; }
+                    .question { page-break-inside: avoid; }
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Exam Questions - ${currentExam.exam_name}</h1>
+            <p>Total Questions: ${currentQuestions.length}</p>
+            <p>Generated on: ${new Date().toLocaleDateString()}</p>
+            <hr>
+    `);
 
-    currentExam.questions.forEach((question, index) => {
-      pdfContent += `Question ${index + 1}:\n`;
-      pdfContent += `${question.question}\n\n`;
+  currentQuestions.forEach((question, index) => {
+    const questionNumber = question.question_number || index + 1;
 
-      if (question.answers && question.answers.length > 0) {
-        pdfContent += "Answers:\n";
-        question.answers.forEach((answer, ansIndex) => {
-          const letter = String.fromCharCode(65 + ansIndex);
-          pdfContent += `${letter}. ${answer}\n`;
-        });
-        pdfContent += "\n";
-      }
+    // Fix image paths for PDF export too
+    let questionText = question.question || "";
+    questionText = questionText.replace(
+      /src="\/assets\/media\/exam-media\//g,
+      'src="https://www.examtopics.com/assets/media/exam-media/'
+    );
 
-      if (question.most_voted) {
-        pdfContent += `Most Voted Answer: ${question.most_voted}\n\n`;
-      }
+    const answers = question.answers || [];
+    const mostVoted = question.most_voted || "";
+    const correctAnswers = new Set(mostVoted.split(""));
+    const comments = question.comments || [];
 
-      pdfContent += "---\n\n";
+    printDocument.write(`
+            <div class="question">
+                <div class="question-header">Question ${questionNumber}</div>
+                <div class="question-text">${questionText}</div>
+                <div class="answers">
+        `);
+
+    answers.forEach((answer) => {
+      const answerLetter = answer.charAt(0);
+      let answerText = answer.substring(3);
+
+      // Fix image paths in answers for PDF export too
+      answerText = answerText.replace(
+        /src="\/assets\/media\/exam-media\//g,
+        'src="https://www.examtopics.com/assets/media/exam-media/'
+      );
+
+      const isCorrect = correctAnswers.has(answerLetter);
+      const fullAnswer = answerLetter + ". " + answerText;
+
+      printDocument.write(`
+                <div class="answer ${isCorrect ? "correct-answer" : ""}">
+                    ${fullAnswer} ${isCorrect ? "✓" : ""}
+                </div>
+            `);
     });
 
-    // Create blob and download
-    const blob = new Blob([pdfContent], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${currentExam.exam_name.replace(/\s+/g, "_")}_questions.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    printDocument.write("</div>");
 
-    showSuccess("Questions exported successfully!");
-  } catch (error) {
-    console.error("Export error:", error);
-    showError("Failed to export questions");
-  } finally {
-    showLoading(false);
-  }
+    if (mostVoted) {
+      printDocument.write(`
+                <div style="margin-top: 10px; font-weight: bold; color: #28a745;">
+                    Most Voted Answer(s): ${mostVoted}
+                </div>
+            `);
+    }
+
+    if (comments.length > 0) {
+      printDocument.write(`
+                <div class="discussion">
+                    <strong>Discussion:</strong>
+            `);
+
+      comments.slice(0, 5).forEach((comment) => {
+        printDocument.write(`
+                     <div class="comment">
+                         <div class="comment-header">Selected: ${
+                           comment.selected_answer || "N/A"
+                         }</div>
+                         <div>${formatCommentText(
+                           comment.content || comment.comment || ""
+                         )}</div>
+                     </div>
+                 `);
+      });
+
+      printDocument.write("</div>");
+    }
+
+    printDocument.write("</div>");
+  });
+
+  printDocument.write(`
+        </body>
+        </html>
+    `);
+
+  printDocument.close();
+
+  // Wait for content to load, then print
+  setTimeout(() => {
+    printWindow.print();
+  }, 1000);
+
+  showSuccess('Print dialog opened. Choose "Save as PDF" to export.');
 }
 
 // Toggle legal information display
