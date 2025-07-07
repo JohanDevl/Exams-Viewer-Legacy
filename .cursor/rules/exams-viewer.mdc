@@ -53,6 +53,7 @@ This is an automated exam questions scraper and viewer for ExamTopics.com with a
 - Maintain responsive design principles
 - Use flexbox/grid for layouts
 - Keep vendor prefixes for compatibility
+- Support dark mode using CSS custom properties and prefers-color-scheme media queries
 
 ## Architecture Patterns
 
@@ -215,6 +216,7 @@ examOptions.sort((a, b) => a.code.localeCompare(b.code));
 - [ ] JSON data format is consistent
 - [ ] Performance optimizations are applied
 - [ ] Security best practices are followed
+- [ ] Dark mode is supported
 
 ## Common Issues and Solutions
 
