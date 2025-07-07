@@ -41,7 +41,53 @@ async function discoverAvailableExams() {
   try {
     const discoveredExams = {};
 
-    // Method 1: Try to get file listing from directory (if server supports it)
+    // Method 1: Try to load manifest file first (most efficient, no 404 errors)
+    devLog("Attempting to load manifest file...");
+    try {
+      const manifestResponse = await fetch("data/manifest.json");
+      if (manifestResponse.ok) {
+        const manifest = await manifestResponse.json();
+        if (manifest.exams && Array.isArray(manifest.exams)) {
+          devLog("Found manifest file with exams:", manifest.exams);
+
+          // Verify each exam file exists
+          const verifyPromises = manifest.exams.map(async (examCode) => {
+            try {
+              const response = await fetch(`data/${examCode}.json`, {
+                method: "HEAD",
+              });
+              if (response.ok) {
+                discoveredExams[examCode] = examCode;
+                devLog(`Confirmed exam file exists for: ${examCode}`);
+              } else {
+                devLog(
+                  `Exam file not found for: ${examCode} (status: ${response.status})`
+                );
+              }
+            } catch (error) {
+              devLog(`Failed to verify exam file for: ${examCode}`, error);
+            }
+          });
+
+          await Promise.all(verifyPromises);
+
+          if (Object.keys(discoveredExams).length > 0) {
+            availableExams = discoveredExams;
+            devLog(
+              "Successfully loaded exams from manifest:",
+              Object.keys(availableExams)
+            );
+            return availableExams;
+          }
+        }
+      }
+    } catch (error) {
+      devLog(
+        "Manifest file not found or invalid, falling back to directory discovery"
+      );
+    }
+
+    // Method 2: Try to get file listing from directory (if server supports it)
     try {
       const dirResponse = await fetch("data/");
       if (dirResponse.ok) {
@@ -53,7 +99,11 @@ async function discoverAvailableExams() {
         while ((match = jsonFileRegex.exec(dirText)) !== null) {
           const filename = match[1];
           // Skip _links.json files, only get main exam files
-          if (!filename.includes("_links") && filename.endsWith(".json")) {
+          if (
+            !filename.includes("_links") &&
+            filename.endsWith(".json") &&
+            filename !== "manifest.json"
+          ) {
             const examCode = filename.replace(".json", "");
             discoveredExams[examCode] = examCode;
           }
@@ -72,10 +122,10 @@ async function discoverAvailableExams() {
       devLog("Directory listing not available, trying alternative methods");
     }
 
-    // Method 2: Auto-discover by scanning for _links.json files
+    // Method 3: Auto-discover by scanning for _links.json files (only if previous methods failed)
     devLog("Auto-discovering exams by scanning for _links.json files...");
 
-    // Generate potential exam codes based on common patterns
+    // Generate potential exam codes based on common patterns (only the ones that actually exist)
     const examPrefixes = ["CAD", "CSA", "CAS-PA"];
     const cisModules = [
       "APM",
@@ -102,22 +152,7 @@ async function discoverAvailableExams() {
       examPrefixes.push(`CIS-${module}`);
     }
 
-    // Also try some common variations and new modules that might be added
-    const additionalPatterns = [
-      "CIS-WSD",
-      "CIS-TMG",
-      "CIS-SP",
-      "CIS-RIM",
-      "CIS-GRC",
-      "CIS-TSOM",
-      "CIS-SecOps",
-      "CIS-CAB",
-      "CIS-CIM",
-      "CIS-CSM-PRO",
-      "CIS-ITAM",
-    ];
-
-    const allPotentialCodes = [...examPrefixes, ...additionalPatterns];
+    const allPotentialCodes = [...examPrefixes];
     devLog("Checking potential codes:", allPotentialCodes);
 
     // Check for _links.json files to discover what exams are available
@@ -159,75 +194,6 @@ async function discoverAvailableExams() {
     });
 
     await Promise.all(examCheckPromises);
-
-    // Method 3: If still no exams found, try brute force approach
-    if (Object.keys(discoveredExams).length === 0) {
-      devLog("Fallback: brute force checking for .json files...");
-
-      const bruteForcePromises = allPotentialCodes.map(async (examCode) => {
-        try {
-          const response = await fetch(`data/${examCode}.json`, {
-            method: "HEAD",
-          });
-          if (response.ok) {
-            discoveredExams[examCode] = examCode;
-            devLog(`Brute force found: ${examCode}`);
-          }
-        } catch (error) {
-          // Ignore errors for non-existent files
-        }
-      });
-
-      await Promise.all(bruteForcePromises);
-    }
-
-    // Method 3.5: Always try brute force as additional check (in case _links.json approach missed some)
-    devLog("Additional brute force check for any missed exams...");
-    const additionalPromises = allPotentialCodes.map(async (examCode) => {
-      // Only check if not already discovered
-      if (!discoveredExams[examCode]) {
-        try {
-          const response = await fetch(`data/${examCode}.json`, {
-            method: "HEAD",
-          });
-          if (response.ok) {
-            discoveredExams[examCode] = examCode;
-            devLog(`Additional check found: ${examCode}`);
-          }
-        } catch (error) {
-          // Ignore errors for non-existent files
-        }
-      }
-    });
-
-    await Promise.all(additionalPromises);
-
-    // Method 4: Try to discover by attempting to load a manifest file (if it exists)
-    if (Object.keys(discoveredExams).length === 0) {
-      devLog("Attempting to load manifest file...");
-      try {
-        const manifestResponse = await fetch("data/manifest.json");
-        if (manifestResponse.ok) {
-          const manifest = await manifestResponse.json();
-          if (manifest.exams && Array.isArray(manifest.exams)) {
-            for (const examCode of manifest.exams) {
-              try {
-                const response = await fetch(`data/${examCode}.json`, {
-                  method: "HEAD",
-                });
-                if (response.ok) {
-                  discoveredExams[examCode] = examCode;
-                }
-              } catch (error) {
-                // Ignore errors for non-existent files
-              }
-            }
-          }
-        }
-      } catch (error) {
-        devLog("No manifest file found");
-      }
-    }
 
     availableExams = discoveredExams;
     devLog("Final discovered exams:", Object.keys(availableExams));

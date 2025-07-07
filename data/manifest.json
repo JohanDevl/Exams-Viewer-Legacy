@@ -1,0 +1,26 @@
+{
+  "exams": [
+    "CAD",
+    "CAS-PA",
+    "CIS-APM",
+    "CIS-CPG",
+    "CIS-CSM",
+    "CIS-Discovery",
+    "CIS-EM",
+    "CIS-FSM",
+    "CIS-HAM",
+    "CIS-HR",
+    "CIS-ITSM",
+    "CIS-PPM",
+    "CIS-RC",
+    "CIS-SAM",
+    "CIS-SIR",
+    "CIS-SM",
+    "CIS-SPM",
+    "CIS-VR",
+    "CIS-VRM",
+    "CSA"
+  ],
+  "last_updated": "2025-07-07",
+  "total_exams": 20
+}
