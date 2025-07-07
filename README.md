@@ -242,7 +242,7 @@ The scraper includes delays to respect servers:
 
 The automation workflow:
 
-- Runs weekly on Saturday at 2:00 AM UTC
+- Manual trigger only
 - Can be triggered manually with options
 - Generates detailed logs
 - Automatically commits changes
