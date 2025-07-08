@@ -59,14 +59,22 @@ class QuestionAttempt {
     this.timeSpent = 0; // in seconds
     this.isCorrect = false;
     this.finalScore = 0; // 0-100 percentage
+    this.resetCount = 0; // Number of times the question was reset
+    this.highlightAnswers = []; // Array of answers given when highlight mode was active
   }
 
-  addAttempt(selectedAnswers, isCorrect, timeSpent) {
+  addAttempt(
+    selectedAnswers,
+    isCorrect,
+    timeSpent,
+    wasHighlightEnabled = false
+  ) {
     const attempt = {
       answers: Array.from(selectedAnswers),
       isCorrect: isCorrect,
       timestamp: new Date().toISOString(),
       timeSpent: timeSpent,
+      highlightEnabled: wasHighlightEnabled,
     };
     this.attempts.push(attempt);
     this.userAnswers = Array.from(selectedAnswers);
@@ -74,18 +82,32 @@ class QuestionAttempt {
     this.timeSpent += timeSpent;
     this.endTime = new Date().toISOString();
 
-    // Calculate final score based on correctness
-    if (isCorrect) {
-      this.finalScore = 100;
-    } else {
-      // Partial credit based on correct answers selected
-      const correctSelected = selectedAnswers.filter((answer) =>
-        this.correctAnswers.includes(answer)
-      ).length;
-      this.finalScore = Math.round(
-        (correctSelected / this.correctAnswers.length) * 100
-      );
+    // Track highlight answers separately
+    if (wasHighlightEnabled) {
+      this.highlightAnswers.push({
+        answers: Array.from(selectedAnswers),
+        timestamp: new Date().toISOString(),
+      });
     }
+
+    // Calculate final score based on correctness (only if highlight was not enabled)
+    if (!wasHighlightEnabled) {
+      if (isCorrect) {
+        this.finalScore = 100;
+      } else {
+        // Partial credit based on correct answers selected
+        const correctSelected = selectedAnswers.filter((answer) =>
+          this.correctAnswers.includes(answer)
+        ).length;
+        this.finalScore = Math.round(
+          (correctSelected / this.correctAnswers.length) * 100
+        );
+      }
+    }
+  }
+
+  addReset() {
+    this.resetCount++;
   }
 }
 
@@ -151,6 +173,8 @@ function recalculateTotalStats() {
     totalCorrect: 0,
     totalIncorrect: 0,
     totalTime: 0,
+    totalResets: 0,
+    totalHighlightAttempts: 0,
     examStats: {},
   };
 
@@ -160,6 +184,15 @@ function recalculateTotalStats() {
     statistics.totalStats.totalIncorrect += session.incorrectAnswers;
     statistics.totalStats.totalTime += session.totalTime;
 
+    // Calculate resets and highlight attempts from session questions
+    if (session.questions) {
+      session.questions.forEach((question) => {
+        statistics.totalStats.totalResets += question.resetCount || 0;
+        statistics.totalStats.totalHighlightAttempts +=
+          question.highlightAnswers ? question.highlightAnswers.length : 0;
+      });
+    }
+
     // Per-exam stats
     if (!statistics.totalStats.examStats[session.examCode]) {
       statistics.totalStats.examStats[session.examCode] = {
@@ -168,6 +201,8 @@ function recalculateTotalStats() {
         totalCorrect: 0,
         totalIncorrect: 0,
         totalTime: 0,
+        totalResets: 0,
+        totalHighlightAttempts: 0,
         sessions: 0,
         averageScore: 0,
         bestScore: 0,
@@ -181,6 +216,16 @@ function recalculateTotalStats() {
     examStats.totalIncorrect += session.incorrectAnswers;
     examStats.totalTime += session.totalTime;
     examStats.sessions++;
+
+    // Add resets and highlight attempts to exam stats
+    if (session.questions) {
+      session.questions.forEach((question) => {
+        examStats.totalResets += question.resetCount || 0;
+        examStats.totalHighlightAttempts += question.highlightAnswers
+          ? question.highlightAnswers.length
+          : 0;
+      });
+    }
 
     // Calculate scores
     const sessionScore =
@@ -253,7 +298,8 @@ function trackQuestionAttempt(
   mostVoted,
   selectedAnswers,
   isCorrect,
-  timeSpent
+  timeSpent,
+  wasHighlightEnabled = false
 ) {
   if (!statistics.currentSession) return;
 
@@ -273,13 +319,23 @@ function trackQuestionAttempt(
   }
 
   // Add the attempt
-  questionAttempt.addAttempt(selectedAnswers, isCorrect, timeSpent);
+  questionAttempt.addAttempt(
+    selectedAnswers,
+    isCorrect,
+    timeSpent,
+    wasHighlightEnabled
+  );
 
-  // Update session stats
+  // Update session stats (only count non-highlight attempts)
   updateSessionStats();
   saveStatistics();
 
-  devLog("Tracked question attempt:", questionAttempt);
+  devLog(
+    "Tracked question attempt:",
+    questionAttempt,
+    "Highlight enabled:",
+    wasHighlightEnabled
+  );
 }
 
 // Update session statistics
@@ -288,17 +344,27 @@ function updateSessionStats() {
 
   let correct = 0;
   let incorrect = 0;
+  let totalQuestions = 0;
 
   statistics.currentSession.questions.forEach((question) => {
-    if (question.isCorrect) {
-      correct++;
-    } else {
-      incorrect++;
+    // Only count questions that have non-highlight attempts
+    const hasNonHighlightAttempts = question.attempts.some(
+      (attempt) => !attempt.highlightEnabled
+    );
+
+    if (hasNonHighlightAttempts) {
+      totalQuestions++;
+      if (question.isCorrect) {
+        correct++;
+      } else {
+        incorrect++;
+      }
     }
   });
 
   statistics.currentSession.correctAnswers = correct;
   statistics.currentSession.incorrectAnswers = incorrect;
+  statistics.currentSession.totalQuestions = totalQuestions;
 }
 
 // Reset all statistics
@@ -375,6 +441,10 @@ function updateOverviewTab() {
   document.getElementById("totalCorrect").textContent = totalStats.totalCorrect;
   document.getElementById("totalIncorrect").textContent =
     totalStats.totalIncorrect;
+  document.getElementById("totalResets").textContent =
+    totalStats.totalResets || 0;
+  document.getElementById("totalHighlightAttempts").textContent =
+    totalStats.totalHighlightAttempts || 0;
 
   // Create overview chart
   createOverviewChart();
@@ -1513,6 +1583,9 @@ function displayCurrentQuestion() {
   document.getElementById("validateBtn").style.display = "inline-flex";
   document.getElementById("resetBtn").style.display = "none";
 
+  // Update question statistics
+  updateQuestionStatistics();
+
   // Update discussion
   const showDiscussion = settings.showDiscussionDefault;
   const discussionContent = document.getElementById("discussionContent");
@@ -1582,6 +1655,44 @@ function toggleAnswerSelection(letter, element) {
   updateInstructions();
 }
 
+// Update question statistics display
+function updateQuestionStatistics() {
+  if (!statistics.currentSession || !currentQuestions.length) {
+    document.getElementById("questionStats").style.display = "none";
+    return;
+  }
+
+  const question = currentQuestions[currentQuestionIndex];
+  const questionNumber = question.question_number;
+
+  // Find the question attempt in statistics
+  const questionAttempt = statistics.currentSession.questions.find(
+    (q) => q.questionNumber === questionNumber
+  );
+
+  if (!questionAttempt) {
+    document.getElementById("resetCount").textContent = "0";
+    document.getElementById("highlightCount").textContent = "0";
+    document.getElementById("questionStats").style.display = "none";
+    return;
+  }
+
+  const resetCount = questionAttempt.resetCount || 0;
+  const highlightCount = questionAttempt.highlightAnswers
+    ? questionAttempt.highlightAnswers.length
+    : 0;
+
+  document.getElementById("resetCount").textContent = resetCount;
+  document.getElementById("highlightCount").textContent = highlightCount;
+
+  // Show stats only if there are any statistics to display
+  if (resetCount > 0 || highlightCount > 0) {
+    document.getElementById("questionStats").style.display = "flex";
+  } else {
+    document.getElementById("questionStats").style.display = "none";
+  }
+}
+
 // Update instructions
 function updateInstructions() {
   const instructions = document.getElementById("answerInstructions");
@@ -1591,17 +1702,25 @@ function updateInstructions() {
     instructions.className = "answer-instructions";
     instructions.innerHTML =
       '<i class="fas fa-info-circle"></i><span>Click on the answers to select them</span>';
+    // Hide reset button when no answers are selected and not validated
+    if (!isValidated) {
+      document.getElementById("resetBtn").style.display = "none";
+    }
   } else {
     instructions.className = "answer-instructions success";
     const selectedLetters = Array.from(selectedAnswers).sort();
     instructions.innerHTML = `<i class="fas fa-check-circle"></i><span>Selected: ${selectedLetters.join(
       ", "
     )}</span>`;
+    // Show reset button when answers are selected
+    document.getElementById("resetBtn").style.display = "inline-flex";
   }
 }
 
 // Validate answers
 function validateAnswers() {
+  devLog("🔍 validateAnswers() called");
+
   if (selectedAnswers.size === 0) {
     showError("Please select at least one answer");
     return;
@@ -1610,6 +1729,16 @@ function validateAnswers() {
   const question = currentQuestions[currentQuestionIndex];
   const mostVoted = question.most_voted || "";
   const correctAnswers = new Set(mostVoted.split(""));
+
+  devLog(
+    "📝 Question:",
+    question.question_number,
+    "Most voted:",
+    mostVoted,
+    "Correct answers:",
+    Array.from(correctAnswers)
+  );
+  devLog("👤 Selected answers:", Array.from(selectedAnswers));
 
   isValidated = true;
 
@@ -1651,21 +1780,40 @@ function validateAnswers() {
   const isCorrect =
     correctSelected.size === correctAnswers.size &&
     incorrectSelected.size === 0;
-  trackQuestionAttempt(
-    question.question_number,
-    question.question,
-    Array.from(correctAnswers),
-    question.most_voted,
-    selectedAnswers,
+
+  devLog(
+    "📊 Tracking question attempt - isCorrect:",
     isCorrect,
-    timeSpent
+    "highlight enabled:",
+    isHighlightEnabled
   );
 
+  try {
+    trackQuestionAttempt(
+      question.question_number,
+      question.question,
+      Array.from(correctAnswers),
+      question.most_voted,
+      selectedAnswers,
+      isCorrect,
+      timeSpent,
+      isHighlightEnabled
+    );
+    devLog("📊 Question attempt tracked successfully");
+  } catch (error) {
+    devError("❌ Error tracking question attempt:", error);
+  }
+
   // Update controls
+  devLog("🔘 Hiding validate button and showing reset button");
   document.getElementById("validateBtn").style.display = "none";
   document.getElementById("resetBtn").style.display = "inline-flex";
 
+  // Update question statistics display
+  updateQuestionStatistics();
+
   showValidationResults(correctAnswers);
+  devLog("✅ validateAnswers() completed successfully");
 }
 
 // Show validation results
@@ -1698,6 +1846,62 @@ function showValidationResults(correctAnswers) {
 // Reset answers
 function resetAnswers() {
   selectedAnswers.clear();
+
+  // Track reset count for the current question
+  if (statistics.currentSession) {
+    const question = currentQuestions[currentQuestionIndex];
+    const questionNumber = question.question_number;
+
+    // Find existing question attempt or create new one
+    let questionAttempt = statistics.currentSession.questions.find(
+      (q) => q.questionNumber === questionNumber
+    );
+
+    if (!questionAttempt) {
+      const mostVoted = question.most_voted || "";
+      const correctAnswers = Array.from(new Set(mostVoted.split("")));
+      questionAttempt = new QuestionAttempt(
+        questionNumber,
+        question.question,
+        correctAnswers,
+        question.most_voted
+      );
+      statistics.currentSession.questions.push(questionAttempt);
+    }
+
+    // Increment reset count
+    questionAttempt.addReset();
+
+    // If the question was already validated, remove the validation attempt
+    if (isValidated && questionAttempt.attempts.length > 0) {
+      // Remove the last attempt (the validated one)
+      questionAttempt.attempts.pop();
+
+      // Recalculate question state based on remaining attempts
+      if (questionAttempt.attempts.length > 0) {
+        const lastAttempt =
+          questionAttempt.attempts[questionAttempt.attempts.length - 1];
+        questionAttempt.isCorrect = lastAttempt.isCorrect;
+        questionAttempt.userAnswers = lastAttempt.answers;
+      } else {
+        questionAttempt.isCorrect = false;
+        questionAttempt.userAnswers = [];
+        questionAttempt.finalScore = 0;
+      }
+
+      updateSessionStats();
+      saveStatistics();
+      devLog(
+        "Reset question - removed validation attempt and incremented reset count:",
+        questionNumber
+      );
+    } else {
+      // Just save the reset count
+      saveStatistics();
+      devLog("Reset question - incremented reset count:", questionNumber);
+    }
+  }
+
   isValidated = false;
 
   const answerElements = document.querySelectorAll(".answer-option");
@@ -1707,6 +1911,9 @@ function resetAnswers() {
 
   document.getElementById("validateBtn").style.display = "inline-flex";
   document.getElementById("resetBtn").style.display = "none";
+
+  // Update question statistics display
+  updateQuestionStatistics();
 
   updateInstructions();
 }

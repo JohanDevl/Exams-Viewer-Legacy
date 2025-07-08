@@ -382,6 +382,35 @@ body {
   color: var(--warning-color);
 }
 
+/* Question Statistics */
+.question-stats {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.question-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.question-stat-item i {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.question-stat-item span {
+  font-weight: 500;
+}
+
 .answers-list {
   margin-bottom: 1rem;
 }
@@ -823,6 +852,11 @@ body {
   .exams-list {
     grid-template-columns: 1fr;
   }
+
+  .question-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 
 /* Image Styling */
@@ -1108,6 +1142,10 @@ body {
 
 .stat-icon.error {
   background-color: var(--error-color);
+}
+
+.stat-icon.warning {
+  background-color: var(--warning-color);
 }
 
 .stat-info {

@@ -175,6 +175,25 @@
                 >Click on the answers to select them</span
               >
             </div>
+
+            <!-- Question Statistics -->
+            <div
+              id="questionStats"
+              class="question-stats"
+              style="display: none"
+            >
+              <div class="question-stat-item">
+                <i class="fas fa-redo"></i>
+                <span>Resets: <span id="resetCount">0</span></span>
+              </div>
+              <div class="question-stat-item">
+                <i class="fas fa-lightbulb"></i>
+                <span
+                  >Highlight attempts: <span id="highlightCount">0</span></span
+                >
+              </div>
+            </div>
+
             <div id="answersList" class="answers-list"></div>
             <div class="answer-controls">
               <button id="validateBtn" class="validate-btn">
@@ -274,6 +293,26 @@
                     <div class="stat-info">
                       <div class="stat-value" id="totalIncorrect">0</div>
                       <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon">
+                      <i class="fas fa-redo"></i>
+                    </div>
+                    <div class="stat-info">
+                      <div class="stat-value" id="totalResets">0</div>
+                      <div class="stat-label">Total Resets</div>
+                    </div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon warning">
+                      <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="stat-info">
+                      <div class="stat-value" id="totalHighlightAttempts">
+                        0
+                      </div>
+                      <div class="stat-label">Highlight Attempts</div>
                     </div>
                   </div>
                 </div>
