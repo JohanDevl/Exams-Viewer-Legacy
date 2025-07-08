@@ -371,7 +371,7 @@ function updateSessionStats() {
 function resetAllStatistics() {
   if (
     confirm(
-      "Êtes-vous sûr de vouloir réinitialiser toutes les statistiques ? Cette action ne peut pas être annulée."
+      "Are you sure you want to reset all statistics? This action cannot be undone."
     )
   ) {
     statistics = {
@@ -387,7 +387,7 @@ function resetAllStatistics() {
     };
 
     localStorage.removeItem("examViewerStatistics");
-    showSuccess("Statistiques réinitialisées avec succès");
+    showSuccess("Statistics reset successfully");
 
     // Refresh statistics display if open
     if (document.getElementById("statisticsModal").style.display === "flex") {
@@ -457,12 +457,12 @@ function updateExamsTab() {
 
   if (Object.keys(examStats).length === 0) {
     examStatsList.innerHTML = `
-      <div class="stats-empty">
-        <i class="fas fa-chart-bar"></i>
-        <h3>Aucune statistique d'examen</h3>
-        <p>Commencez à répondre aux questions pour voir vos statistiques par examen.</p>
-      </div>
-    `;
+        <div class="stats-empty">
+          <i class="fas fa-chart-bar"></i>
+          <h3>No exam statistics</h3>
+          <p>Start answering questions to see your exam statistics.</p>
+        </div>
+      `;
     return;
   }
 
@@ -531,8 +531,8 @@ function updateSessionsTab() {
     sessionsList.innerHTML = `
       <div class="stats-empty">
         <i class="fas fa-history"></i>
-        <h3>Aucune session enregistrée</h3>
-        <p>Vos sessions d'examen apparaîtront ici une fois que vous aurez commencé à répondre aux questions.</p>
+        <h3>No recorded sessions</h3>
+        <p>Your exam sessions will appear here once you start answering questions.</p>
       </div>
     `;
     return;
@@ -614,11 +614,7 @@ function createOverviewChart() {
     ctx.fillStyle = "#6c757d";
     ctx.font = "16px Arial";
     ctx.textAlign = "center";
-    ctx.fillText(
-      "Aucune donnée disponible",
-      canvas.width / 2,
-      canvas.height / 2
-    );
+    ctx.fillText("No data available", canvas.width / 2, canvas.height / 2);
     return;
   }
 
@@ -658,12 +654,12 @@ function createOverviewChart() {
   ctx.fillStyle = "#262730";
   ctx.font = "14px Arial";
   ctx.textAlign = "left";
-  ctx.fillText(`Correctes: ${totalStats.totalCorrect}`, 45, 32);
+  ctx.fillText(`Correct: ${totalStats.totalCorrect}`, 45, 32);
 
   ctx.fillStyle = "#dc3545";
   ctx.fillRect(20, 45, 15, 15);
   ctx.fillStyle = "#262730";
-  ctx.fillText(`Incorrectes: ${totalStats.totalIncorrect}`, 45, 57);
+  ctx.fillText(`Incorrect: ${totalStats.totalIncorrect}`, 45, 57);
 }
 
 // Create progress chart
@@ -680,7 +676,7 @@ function createProgressChart() {
     ctx.font = "16px Arial";
     ctx.textAlign = "center";
     ctx.fillText(
-      "Aucune donnée de progression disponible",
+      "No progress data available",
       canvas.width / 2,
       canvas.height / 2
     );
@@ -801,7 +797,7 @@ function exportStatistics() {
   document.body.removeChild(link);
 
   URL.revokeObjectURL(url);
-  showSuccess("Statistiques exportées avec succès");
+  showSuccess("Statistics exported successfully");
 }
 
 // Development mode detection
