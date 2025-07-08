@@ -5,6 +5,7 @@ let currentQuestionIndex = 0;
 let selectedAnswers = new Set();
 let isValidated = false;
 let isHighlightEnabled = false;
+let isHighlightTemporaryOverride = false; // Track if user manually toggled highlight
 let questionStartTime = null; // Track when question was started
 let settings = {
   showDiscussionDefault: false,
@@ -1526,6 +1527,10 @@ async function loadExam(examCode) {
     // Start exam session for statistics
     startExamSession(examCode, currentExam.exam_name);
 
+    // Initialize highlight state from settings
+    isHighlightEnabled = settings.highlightDefault;
+    isHighlightTemporaryOverride = false; // Reset override flag for new exam
+
     // Update UI
     document.getElementById("availableExams").style.display = "none";
     document.getElementById("navigationSection").style.display = "block";
@@ -1597,6 +1602,10 @@ function navigateQuestion(direction) {
   const newIndex = currentQuestionIndex + direction;
   if (newIndex >= 0 && newIndex < currentQuestions.length) {
     currentQuestionIndex = newIndex;
+
+    // Reset highlight override when navigating to a new question
+    isHighlightTemporaryOverride = false;
+
     displayCurrentQuestion();
   }
 }
@@ -1607,6 +1616,10 @@ function navigateToRandomQuestion() {
 
   const randomIndex = Math.floor(Math.random() * currentQuestions.length);
   currentQuestionIndex = randomIndex;
+
+  // Reset highlight override when navigating to a new question
+  isHighlightTemporaryOverride = false;
+
   displayCurrentQuestion();
 }
 
@@ -1621,6 +1634,8 @@ function goToHome() {
   currentQuestionIndex = 0;
   selectedAnswers.clear();
   isValidated = false;
+  isHighlightEnabled = false;
+  isHighlightTemporaryOverride = false; // Reset override flag
   questionStartTime = null;
 
   // Reset UI
@@ -1655,6 +1670,10 @@ function jumpToQuestion() {
 
   if (questionIndex !== -1) {
     currentQuestionIndex = questionIndex;
+
+    // Reset highlight override when jumping to a new question
+    isHighlightTemporaryOverride = false;
+
     displayCurrentQuestion();
     document.getElementById("questionJump").value = "";
   } else {
@@ -1736,6 +1755,11 @@ function displayCurrentQuestion(fromToggleAction = false) {
   selectedAnswers.clear();
   isValidated = false;
   questionStartTime = new Date(); // Start timing the question
+
+  // Reset highlight to default setting unless user has manually overridden it
+  if (!isHighlightTemporaryOverride && !fromToggleAction) {
+    isHighlightEnabled = settings.highlightDefault;
+  }
 
   // Track highlight view if highlight is already enabled when viewing this question
   // But only if this is not from a toggle action (to avoid double counting)
@@ -1826,6 +1850,9 @@ function displayCurrentQuestion(fromToggleAction = false) {
   }
 
   updateInstructions();
+
+  // Update highlight button appearance
+  updateHighlightButton();
 
   // Ensure question jump field max value is always up to date
   updateQuestionJumpMaxValue();
@@ -2186,6 +2213,9 @@ function toggleHighlight() {
   const wasHighlightEnabled = isHighlightEnabled;
   isHighlightEnabled = !isHighlightEnabled;
 
+  // Mark that user has manually overridden the default setting
+  isHighlightTemporaryOverride = true;
+
   // Track highlight button click only when ACTIVATING highlight (not when deactivating)
   if (
     currentQuestions.length > 0 &&
@@ -2218,9 +2248,31 @@ function toggleHighlight() {
     devLog("Highlight activated on question:", questionNumber);
   }
 
+  // Update highlight button appearance
+  updateHighlightButton();
+
   if (currentQuestions.length > 0) {
     // Pass a flag to indicate this is from a toggle action to avoid double counting
     displayCurrentQuestion(true);
+  }
+}
+
+// Update highlight button appearance
+function updateHighlightButton() {
+  const highlightBtn = document.getElementById("highlightBtn");
+
+  if (isHighlightEnabled) {
+    highlightBtn.classList.add("active");
+    highlightBtn.innerHTML =
+      '<i class="fas fa-lightbulb"></i> Disable Highlight';
+    highlightBtn.style.backgroundColor = "#e0a800";
+    highlightBtn.style.color = "#212529";
+  } else {
+    highlightBtn.classList.remove("active");
+    highlightBtn.innerHTML =
+      '<i class="fas fa-lightbulb"></i> Enable Highlight';
+    highlightBtn.style.backgroundColor = "var(--warning-color)";
+    highlightBtn.style.color = "#212529";
   }
 }
 
