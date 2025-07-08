@@ -376,10 +376,6 @@ function updateOverviewTab() {
   document.getElementById("totalIncorrect").textContent =
     totalStats.totalIncorrect;
 
-  // Format total time
-  const totalTimeFormatted = formatTime(totalStats.totalTime);
-  document.getElementById("totalTime").textContent = totalTimeFormatted;
-
   // Create overview chart
   createOverviewChart();
 }
@@ -1642,6 +1638,14 @@ function validateAnswers() {
   const timeSpent = questionStartTime
     ? Math.floor((new Date() - questionStartTime) / 1000)
     : 0;
+
+  // Calculate correct and incorrect selections for statistics
+  const correctSelected = new Set(
+    [...selectedAnswers].filter((x) => correctAnswers.has(x))
+  );
+  const incorrectSelected = new Set(
+    [...selectedAnswers].filter((x) => !correctAnswers.has(x))
+  );
 
   // Track the question attempt for statistics
   const isCorrect =
