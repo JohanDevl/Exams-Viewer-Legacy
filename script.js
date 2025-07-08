@@ -61,6 +61,8 @@ class QuestionAttempt {
     this.finalScore = 0; // 0-100 percentage
     this.resetCount = 0; // Number of times the question was reset
     this.highlightAnswers = []; // Array of answers given when highlight mode was active
+    this.highlightButtonClicks = 0; // Number of times highlight button was clicked on this question
+    this.highlightViewCount = 0; // Number of times question was viewed with highlight already active
   }
 
   addAttempt(
@@ -109,6 +111,14 @@ class QuestionAttempt {
   addReset() {
     this.resetCount++;
   }
+
+  addHighlightButtonClick() {
+    this.highlightButtonClicks++;
+  }
+
+  addHighlightView() {
+    this.highlightViewCount++;
+  }
 }
 
 // Generate unique session ID
@@ -136,8 +146,54 @@ function loadStatistics() {
         },
       };
 
+      // Migrate existing sessions to include new properties
+      statistics.sessions.forEach((session) => {
+        // Ensure session has the new properties
+        if (session.totalResets === undefined) {
+          session.totalResets = 0;
+        }
+        if (session.totalHighlightAttempts === undefined) {
+          session.totalHighlightAttempts = 0;
+        }
+
+        // Calculate values from questions if they exist
+        if (session.questions) {
+          let totalResets = 0;
+          let totalHighlightAttempts = 0;
+
+          session.questions.forEach((question) => {
+            // Migrate old questions to have new properties
+            if (question.highlightButtonClicks === undefined) {
+              question.highlightButtonClicks = 0;
+            }
+            if (question.highlightViewCount === undefined) {
+              question.highlightViewCount = 0;
+            }
+
+            totalResets += question.resetCount || 0;
+            // Merge all highlight interactions
+            const highlightValidations = question.highlightAnswers
+              ? question.highlightAnswers.length
+              : 0;
+            const highlightClicks = question.highlightButtonClicks || 0;
+            const highlightViews = question.highlightViewCount || 0;
+            totalHighlightAttempts +=
+              highlightValidations + highlightClicks + highlightViews;
+          });
+
+          session.totalResets = totalResets;
+          session.totalHighlightAttempts = totalHighlightAttempts;
+        }
+      });
+
       // Recalculate total stats from sessions
       recalculateTotalStats();
+
+      // Clean any corrupted statistics data
+      cleanCorruptedStatistics();
+
+      // Save the migrated statistics
+      saveStatistics();
 
       devLog("Statistics loaded from localStorage:", statistics);
     }
@@ -188,8 +244,14 @@ function recalculateTotalStats() {
     if (session.questions) {
       session.questions.forEach((question) => {
         statistics.totalStats.totalResets += question.resetCount || 0;
+        // Merge all highlight interactions
+        const highlightValidations = question.highlightAnswers
+          ? question.highlightAnswers.length
+          : 0;
+        const highlightClicks = question.highlightButtonClicks || 0;
+        const highlightViews = question.highlightViewCount || 0;
         statistics.totalStats.totalHighlightAttempts +=
-          question.highlightAnswers ? question.highlightAnswers.length : 0;
+          highlightValidations + highlightClicks + highlightViews;
       });
     }
 
@@ -221,9 +283,14 @@ function recalculateTotalStats() {
     if (session.questions) {
       session.questions.forEach((question) => {
         examStats.totalResets += question.resetCount || 0;
-        examStats.totalHighlightAttempts += question.highlightAnswers
+        // Merge all highlight interactions
+        const highlightValidations = question.highlightAnswers
           ? question.highlightAnswers.length
           : 0;
+        const highlightClicks = question.highlightButtonClicks || 0;
+        const highlightViews = question.highlightViewCount || 0;
+        examStats.totalHighlightAttempts +=
+          highlightValidations + highlightClicks + highlightViews;
       });
     }
 
@@ -259,7 +326,7 @@ function startExamSession(examCode, examName) {
   }
 
   statistics.currentSession = new ExamSession(examCode, examName);
-  statistics.currentSession.totalQuestions = currentQuestions.length;
+  // Don't set totalQuestions here - it will be calculated dynamically based on actual attempts
 
   devLog("Started new exam session:", statistics.currentSession);
   saveStatistics();
@@ -345,12 +412,30 @@ function updateSessionStats() {
   let correct = 0;
   let incorrect = 0;
   let totalQuestions = 0;
+  let totalResets = 0;
+  let totalHighlightAttempts = 0;
+
+  devLog("🔍 DEBUG: updateSessionStats() called");
+  devLog(
+    "🔍 DEBUG: Current session questions:",
+    statistics.currentSession.questions.length
+  );
 
   statistics.currentSession.questions.forEach((question) => {
     // Only count questions that have non-highlight attempts
     const hasNonHighlightAttempts = question.attempts.some(
       (attempt) => !attempt.highlightEnabled
     );
+
+    devLog(`🔍 DEBUG: Question ${question.questionNumber}:`, {
+      hasNonHighlightAttempts,
+      isCorrect: question.isCorrect,
+      attempts: question.attempts.length,
+      attemptsDetails: question.attempts.map((a) => ({
+        isCorrect: a.isCorrect,
+        highlightEnabled: a.highlightEnabled,
+      })),
+    });
 
     if (hasNonHighlightAttempts) {
       totalQuestions++;
@@ -360,11 +445,32 @@ function updateSessionStats() {
         incorrect++;
       }
     }
+
+    // Count resets and highlight attempts for all questions
+    totalResets += question.resetCount || 0;
+    // Merge all highlight interactions
+    const highlightValidations = question.highlightAnswers
+      ? question.highlightAnswers.length
+      : 0;
+    const highlightClicks = question.highlightButtonClicks || 0;
+    const highlightViews = question.highlightViewCount || 0;
+    totalHighlightAttempts +=
+      highlightValidations + highlightClicks + highlightViews;
+  });
+
+  devLog("🔍 DEBUG: Final stats:", {
+    totalQuestions,
+    correct,
+    incorrect,
+    totalResets,
+    totalHighlightAttempts,
   });
 
   statistics.currentSession.correctAnswers = correct;
   statistics.currentSession.incorrectAnswers = incorrect;
   statistics.currentSession.totalQuestions = totalQuestions;
+  statistics.currentSession.totalResets = totalResets;
+  statistics.currentSession.totalHighlightAttempts = totalHighlightAttempts;
 }
 
 // Reset all statistics
@@ -393,6 +499,85 @@ function resetAllStatistics() {
     if (document.getElementById("statisticsModal").style.display === "flex") {
       displayStatistics();
     }
+  }
+}
+
+// Clean corrupted statistics data
+function cleanCorruptedStatistics() {
+  devLog("🧹 Cleaning corrupted statistics data...");
+
+  // Check if there are sessions with incorrect totalQuestions
+  let hasCorruptedData = false;
+
+  statistics.sessions.forEach((session, index) => {
+    // Check if totalQuestions is way higher than actual attempted questions
+    const actualQuestions = session.questions
+      ? session.questions.filter(
+          (q) => q.attempts && q.attempts.some((a) => !a.highlightEnabled)
+        ).length
+      : 0;
+
+    if (session.totalQuestions > actualQuestions * 10) {
+      // Threshold for corruption
+      devLog(
+        `🧹 Found corrupted session ${index}: totalQuestions=${session.totalQuestions}, actualQuestions=${actualQuestions}`
+      );
+      hasCorruptedData = true;
+    }
+  });
+
+  if (hasCorruptedData) {
+    devLog("🧹 Recalculating all session statistics...");
+
+    // Recalculate all session statistics
+    statistics.sessions.forEach((session) => {
+      if (session.questions) {
+        let correct = 0;
+        let incorrect = 0;
+        let totalQuestions = 0;
+        let totalResets = 0;
+        let totalHighlightAttempts = 0;
+
+        session.questions.forEach((question) => {
+          // Only count questions that have non-highlight attempts
+          const hasNonHighlightAttempts =
+            question.attempts &&
+            question.attempts.some((attempt) => !attempt.highlightEnabled);
+
+          if (hasNonHighlightAttempts) {
+            totalQuestions++;
+            if (question.isCorrect) {
+              correct++;
+            } else {
+              incorrect++;
+            }
+          }
+
+          // Count resets and highlight attempts for all questions
+          totalResets += question.resetCount || 0;
+          // Merge all highlight interactions
+          const highlightValidations = question.highlightAnswers
+            ? question.highlightAnswers.length
+            : 0;
+          const highlightClicks = question.highlightButtonClicks || 0;
+          const highlightViews = question.highlightViewCount || 0;
+          totalHighlightAttempts +=
+            highlightValidations + highlightClicks + highlightViews;
+        });
+
+        session.correctAnswers = correct;
+        session.incorrectAnswers = incorrect;
+        session.totalQuestions = totalQuestions;
+        session.totalResets = totalResets;
+        session.totalHighlightAttempts = totalHighlightAttempts;
+      }
+    });
+
+    // Recalculate total stats
+    recalculateTotalStats();
+    saveStatistics();
+
+    devLog("🧹 Statistics cleaning completed");
   }
 }
 
@@ -494,6 +679,12 @@ function updateExamsTab() {
           <span><i class="fas fa-times-circle"></i> ${
             stats.totalIncorrect
           } incorrect</span>
+          <span><i class="fas fa-redo"></i> ${
+            stats.totalResets || 0
+          } resets</span>
+          <span><i class="fas fa-lightbulb"></i> ${
+            stats.totalHighlightAttempts || 0
+          } previews</span>
           <span><i class="fas fa-clock"></i> ${formatTime(
             stats.totalTime
           )}</span>
@@ -574,6 +765,16 @@ function updateSessionsTab() {
         <div class="session-stat">
           <div class="session-stat-value">${session.incorrectAnswers}</div>
           <div class="session-stat-label">Incorrect</div>
+        </div>
+        <div class="session-stat">
+          <div class="session-stat-value">${session.totalResets || 0}</div>
+          <div class="session-stat-label">Resets</div>
+        </div>
+        <div class="session-stat">
+          <div class="session-stat-value">${
+            session.totalHighlightAttempts || 0
+          }</div>
+          <div class="session-stat-label">Previews</div>
         </div>
         <div class="session-stat">
           <div class="session-stat-value">${formatTime(session.totalTime)}</div>
@@ -1526,7 +1727,7 @@ function testQuestionJumpField() {
 }
 
 // Display current question
-function displayCurrentQuestion() {
+function displayCurrentQuestion(fromToggleAction = false) {
   if (!currentQuestions.length) return;
 
   const question = currentQuestions[currentQuestionIndex];
@@ -1535,6 +1736,34 @@ function displayCurrentQuestion() {
   selectedAnswers.clear();
   isValidated = false;
   questionStartTime = new Date(); // Start timing the question
+
+  // Track highlight view if highlight is already enabled when viewing this question
+  // But only if this is not from a toggle action (to avoid double counting)
+  if (isHighlightEnabled && statistics.currentSession && !fromToggleAction) {
+    const questionNumber = question.question_number;
+
+    // Find existing question attempt or create new one
+    let questionAttempt = statistics.currentSession.questions.find(
+      (q) => q.questionNumber === questionNumber
+    );
+
+    if (!questionAttempt) {
+      const mostVoted = question.most_voted || "";
+      const correctAnswers = Array.from(new Set(mostVoted.split("")));
+      questionAttempt = new QuestionAttempt(
+        questionNumber,
+        question.question,
+        correctAnswers,
+        question.most_voted
+      );
+      statistics.currentSession.questions.push(questionAttempt);
+    }
+
+    // Increment highlight view count
+    questionAttempt.addHighlightView();
+    saveStatistics();
+    devLog("Question viewed with highlight active:", questionNumber);
+  }
 
   // Update navigation
   const currentQuestionNumber =
@@ -1668,21 +1897,30 @@ function updateQuestionStatistics() {
 
   if (!questionAttempt) {
     document.getElementById("resetCount").textContent = "0";
-    document.getElementById("highlightCount").textContent = "0";
+    document.getElementById("highlightValidationsCount").textContent = "0";
     document.getElementById("questionStats").style.display = "none";
     return;
   }
 
   const resetCount = questionAttempt.resetCount || 0;
-  const highlightCount = questionAttempt.highlightAnswers
+  const highlightValidationsCount = questionAttempt.highlightAnswers
     ? questionAttempt.highlightAnswers.length
     : 0;
+  const highlightButtonClicksCount = questionAttempt.highlightButtonClicks || 0;
+  const highlightViewsCount = questionAttempt.highlightViewCount || 0;
+
+  // Merge all highlight interactions into one counter
+  const totalHighlightInteractions =
+    highlightValidationsCount +
+    highlightButtonClicksCount +
+    highlightViewsCount;
 
   document.getElementById("resetCount").textContent = resetCount;
-  document.getElementById("highlightCount").textContent = highlightCount;
+  document.getElementById("highlightValidationsCount").textContent =
+    totalHighlightInteractions;
 
   // Show stats only if there are any statistics to display
-  if (resetCount > 0 || highlightCount > 0) {
+  if (resetCount > 0 || totalHighlightInteractions > 0) {
     document.getElementById("questionStats").style.display = "flex";
   } else {
     document.getElementById("questionStats").style.display = "none";
@@ -1693,8 +1931,17 @@ function updateQuestionStatistics() {
 function updateInstructions() {
   const instructions = document.getElementById("answerInstructions");
   const selectedCount = selectedAnswers.size;
+  const validateBtn = document.getElementById("validateBtn");
 
-  if (selectedCount === 0) {
+  if (isHighlightEnabled) {
+    instructions.className = "answer-instructions warning";
+    instructions.innerHTML =
+      '<i class="fas fa-lightbulb"></i><span>Highlight mode is active - correct answers are shown. Disable highlight to validate your answers.</span>';
+    // Hide reset button when highlight is active
+    if (!isValidated) {
+      document.getElementById("resetBtn").style.display = "none";
+    }
+  } else if (selectedCount === 0) {
     instructions.className = "answer-instructions";
     instructions.innerHTML =
       '<i class="fas fa-info-circle"></i><span>Click on the answers to select them</span>';
@@ -1708,14 +1955,34 @@ function updateInstructions() {
     instructions.innerHTML = `<i class="fas fa-check-circle"></i><span>Selected: ${selectedLetters.join(
       ", "
     )}</span>`;
-    // Show reset button when answers are selected
-    document.getElementById("resetBtn").style.display = "inline-flex";
+    // Only show reset button after validation, not just when answers are selected
+    if (!isValidated) {
+      document.getElementById("resetBtn").style.display = "none";
+    }
+  }
+
+  // Disable validate button when highlight is active
+  if (isHighlightEnabled) {
+    validateBtn.disabled = true;
+    validateBtn.style.opacity = "0.5";
+    validateBtn.style.cursor = "not-allowed";
+    validateBtn.title = "Disable highlight mode to validate answers";
+  } else {
+    validateBtn.disabled = false;
+    validateBtn.style.opacity = "1";
+    validateBtn.style.cursor = "pointer";
+    validateBtn.title = "";
   }
 }
 
 // Validate answers
 function validateAnswers() {
   devLog("🔍 validateAnswers() called");
+
+  if (isHighlightEnabled) {
+    showError("Please disable highlight mode before validating answers");
+    return;
+  }
 
   if (selectedAnswers.size === 0) {
     showError("Please select at least one answer");
@@ -1916,9 +2183,44 @@ function resetAnswers() {
 
 // Toggle highlight
 function toggleHighlight() {
+  const wasHighlightEnabled = isHighlightEnabled;
   isHighlightEnabled = !isHighlightEnabled;
+
+  // Track highlight button click only when ACTIVATING highlight (not when deactivating)
+  if (
+    currentQuestions.length > 0 &&
+    statistics.currentSession &&
+    isHighlightEnabled
+  ) {
+    const question = currentQuestions[currentQuestionIndex];
+    const questionNumber = question.question_number;
+
+    // Find existing question attempt or create new one
+    let questionAttempt = statistics.currentSession.questions.find(
+      (q) => q.questionNumber === questionNumber
+    );
+
+    if (!questionAttempt) {
+      const mostVoted = question.most_voted || "";
+      const correctAnswers = Array.from(new Set(mostVoted.split("")));
+      questionAttempt = new QuestionAttempt(
+        questionNumber,
+        question.question,
+        correctAnswers,
+        question.most_voted
+      );
+      statistics.currentSession.questions.push(questionAttempt);
+    }
+
+    // Increment highlight button click count only when activating
+    questionAttempt.addHighlightButtonClick();
+    saveStatistics();
+    devLog("Highlight activated on question:", questionNumber);
+  }
+
   if (currentQuestions.length > 0) {
-    displayCurrentQuestion();
+    // Pass a flag to indicate this is from a toggle action to avoid double counting
+    displayCurrentQuestion(true);
   }
 }
 
