@@ -926,7 +926,11 @@ function createOverviewChart() {
 
   if (total === 0) {
     // Show empty state
-    ctx.fillStyle = "#6c757d";
+    const textColor =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--text-primary")
+        .trim() || "#6c757d";
+    ctx.fillStyle = textColor;
     ctx.font = "16px Arial";
     ctx.textAlign = "center";
     ctx.fillText("No data available", canvas.width / 2, canvas.height / 2);
@@ -999,10 +1003,16 @@ function createOverviewChart() {
   ctx.font = "14px Arial";
   ctx.textAlign = "left";
 
+  // Get text color based on current theme
+  const textColor =
+    getComputedStyle(document.documentElement)
+      .getPropertyValue("--text-primary")
+      .trim() || "#262730";
+
   if (totalStats.totalCorrect > 0) {
     ctx.fillStyle = "#28a745";
     ctx.fillRect(20, legendY, 15, 15);
-    ctx.fillStyle = "#262730";
+    ctx.fillStyle = textColor;
     ctx.fillText(`Correct: ${totalStats.totalCorrect}`, 45, legendY + 12);
     legendY += 25;
   }
@@ -1010,7 +1020,7 @@ function createOverviewChart() {
   if (totalStats.totalIncorrect > 0) {
     ctx.fillStyle = "#dc3545";
     ctx.fillRect(20, legendY, 15, 15);
-    ctx.fillStyle = "#262730";
+    ctx.fillStyle = textColor;
     ctx.fillText(`Incorrect: ${totalStats.totalIncorrect}`, 45, legendY + 12);
     legendY += 25;
   }
@@ -1018,7 +1028,7 @@ function createOverviewChart() {
   if (totalStats.totalPreview > 0) {
     ctx.fillStyle = "#ffc107";
     ctx.fillRect(20, legendY, 15, 15);
-    ctx.fillStyle = "#262730";
+    ctx.fillStyle = textColor;
     ctx.fillText(`Preview: ${totalStats.totalPreview}`, 45, legendY + 12);
   }
 }
@@ -1033,7 +1043,11 @@ function createProgressChart() {
 
   if (statistics.sessions.length === 0) {
     // Show empty state
-    ctx.fillStyle = "#6c757d";
+    const textColor =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--text-primary")
+        .trim() || "#6c757d";
+    ctx.fillStyle = textColor;
     ctx.font = "16px Arial";
     ctx.textAlign = "center";
     ctx.fillText(
@@ -1078,7 +1092,11 @@ function createProgressChart() {
   ctx.stroke();
 
   // Draw grid lines and labels
-  ctx.fillStyle = "#6c757d";
+  const textColor =
+    getComputedStyle(document.documentElement)
+      .getPropertyValue("--text-primary")
+      .trim() || "#6c757d";
+  ctx.fillStyle = textColor;
   ctx.font = "12px Arial";
   ctx.textAlign = "right";
 
