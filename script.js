@@ -24,6 +24,7 @@ let statistics = {
     totalQuestions: 0,
     totalCorrect: 0,
     totalIncorrect: 0,
+    totalPreview: 0, // New field for preview answers
     totalTime: 0,
     examStats: {}, // Per-exam statistics
   },
@@ -41,6 +42,7 @@ class ExamSession {
     this.totalQuestions = 0;
     this.correctAnswers = 0;
     this.incorrectAnswers = 0;
+    this.previewAnswers = 0; // New field for preview answers
     this.totalTime = 0; // in seconds
     this.completed = false;
   }
@@ -64,6 +66,8 @@ class QuestionAttempt {
     this.highlightAnswers = []; // Array of answers given when highlight mode was active
     this.highlightButtonClicks = 0; // Number of times highlight button was clicked on this question
     this.highlightViewCount = 0; // Number of times question was viewed with highlight already active
+    this.firstActionType = null; // Track first action: 'correct', 'incorrect', 'preview'
+    this.firstActionRecorded = false; // Flag to ensure only first action is counted
   }
 
   addAttempt(
@@ -84,6 +88,16 @@ class QuestionAttempt {
     this.isCorrect = isCorrect;
     this.timeSpent += timeSpent;
     this.endTime = new Date().toISOString();
+
+    // Track first action only
+    if (!this.firstActionRecorded) {
+      if (wasHighlightEnabled) {
+        this.firstActionType = "preview";
+      } else {
+        this.firstActionType = isCorrect ? "correct" : "incorrect";
+      }
+      this.firstActionRecorded = true;
+    }
 
     // Track highlight answers separately
     if (wasHighlightEnabled) {
@@ -109,16 +123,24 @@ class QuestionAttempt {
     }
   }
 
-  addReset() {
-    this.resetCount++;
-  }
-
   addHighlightButtonClick() {
     this.highlightButtonClicks++;
+
+    // Track first action if this is the first interaction
+    if (!this.firstActionRecorded) {
+      this.firstActionType = "preview";
+      this.firstActionRecorded = true;
+    }
   }
 
   addHighlightView() {
     this.highlightViewCount++;
+
+    // Track first action if this is the first interaction
+    if (!this.firstActionRecorded) {
+      this.firstActionType = "preview";
+      this.firstActionRecorded = true;
+    }
   }
 }
 
@@ -142,6 +164,7 @@ function loadStatistics() {
           totalQuestions: 0,
           totalCorrect: 0,
           totalIncorrect: 0,
+          totalPreview: 0,
           totalTime: 0,
           examStats: {},
         },
@@ -156,6 +179,9 @@ function loadStatistics() {
         if (session.totalHighlightAttempts === undefined) {
           session.totalHighlightAttempts = 0;
         }
+        if (session.previewAnswers === undefined) {
+          session.previewAnswers = 0;
+        }
 
         // Calculate values from questions if they exist
         if (session.questions) {
@@ -169,6 +195,25 @@ function loadStatistics() {
             }
             if (question.highlightViewCount === undefined) {
               question.highlightViewCount = 0;
+            }
+            if (question.firstActionType === undefined) {
+              question.firstActionType = null;
+            }
+            if (question.firstActionRecorded === undefined) {
+              question.firstActionRecorded = false;
+
+              // Try to determine first action from existing attempts
+              if (question.attempts && question.attempts.length > 0) {
+                const firstAttempt = question.attempts[0];
+                if (firstAttempt.highlightEnabled) {
+                  question.firstActionType = "preview";
+                } else {
+                  question.firstActionType = firstAttempt.isCorrect
+                    ? "correct"
+                    : "incorrect";
+                }
+                question.firstActionRecorded = true;
+              }
             }
 
             totalResets += question.resetCount || 0;
@@ -229,6 +274,7 @@ function recalculateTotalStats() {
     totalQuestions: 0,
     totalCorrect: 0,
     totalIncorrect: 0,
+    totalPreview: 0,
     totalTime: 0,
     totalResets: 0,
     totalHighlightAttempts: 0,
@@ -239,6 +285,7 @@ function recalculateTotalStats() {
     statistics.totalStats.totalQuestions += session.totalQuestions;
     statistics.totalStats.totalCorrect += session.correctAnswers;
     statistics.totalStats.totalIncorrect += session.incorrectAnswers;
+    statistics.totalStats.totalPreview += session.previewAnswers || 0;
     statistics.totalStats.totalTime += session.totalTime;
 
     // Calculate resets and highlight attempts from session questions
@@ -263,6 +310,7 @@ function recalculateTotalStats() {
         totalQuestions: 0,
         totalCorrect: 0,
         totalIncorrect: 0,
+        totalPreview: 0,
         totalTime: 0,
         totalResets: 0,
         totalHighlightAttempts: 0,
@@ -277,6 +325,7 @@ function recalculateTotalStats() {
     examStats.totalQuestions += session.totalQuestions;
     examStats.totalCorrect += session.correctAnswers;
     examStats.totalIncorrect += session.incorrectAnswers;
+    examStats.totalPreview += session.previewAnswers || 0;
     examStats.totalTime += session.totalTime;
     examStats.sessions++;
 
@@ -295,15 +344,18 @@ function recalculateTotalStats() {
       });
     }
 
-    // Calculate scores
+    // Calculate scores (excluding preview answers from score calculation)
+    const scorableQuestions = session.correctAnswers + session.incorrectAnswers;
     const sessionScore =
-      session.totalQuestions > 0
-        ? Math.round((session.correctAnswers / session.totalQuestions) * 100)
+      scorableQuestions > 0
+        ? Math.round((session.correctAnswers / scorableQuestions) * 100)
         : 0;
 
+    const examScorableQuestions =
+      examStats.totalCorrect + examStats.totalIncorrect;
     examStats.averageScore =
-      examStats.totalQuestions > 0
-        ? Math.round((examStats.totalCorrect / examStats.totalQuestions) * 100)
+      examScorableQuestions > 0
+        ? Math.round((examStats.totalCorrect / examScorableQuestions) * 100)
         : 0;
 
     if (sessionScore > examStats.bestScore) {
@@ -412,6 +464,7 @@ function updateSessionStats() {
 
   let correct = 0;
   let incorrect = 0;
+  let preview = 0;
   let totalQuestions = 0;
   let totalResets = 0;
   let totalHighlightAttempts = 0;
@@ -423,29 +476,29 @@ function updateSessionStats() {
   );
 
   statistics.currentSession.questions.forEach((question) => {
-    // Only count questions that have non-highlight attempts
-    const hasNonHighlightAttempts = question.attempts.some(
-      (attempt) => !attempt.highlightEnabled
-    );
-
-    devLog(`🔍 DEBUG: Question ${question.questionNumber}:`, {
-      hasNonHighlightAttempts,
-      isCorrect: question.isCorrect,
-      attempts: question.attempts.length,
-      attemptsDetails: question.attempts.map((a) => ({
-        isCorrect: a.isCorrect,
-        highlightEnabled: a.highlightEnabled,
-      })),
-    });
-
-    if (hasNonHighlightAttempts) {
+    // Only count questions that have any first action recorded
+    if (question.firstActionRecorded) {
       totalQuestions++;
-      if (question.isCorrect) {
-        correct++;
-      } else {
-        incorrect++;
+
+      // Count based on first action type only
+      switch (question.firstActionType) {
+        case "correct":
+          correct++;
+          break;
+        case "incorrect":
+          incorrect++;
+          break;
+        case "preview":
+          preview++;
+          break;
       }
     }
+
+    devLog(`🔍 DEBUG: Question ${question.questionNumber}:`, {
+      firstActionRecorded: question.firstActionRecorded,
+      firstActionType: question.firstActionType,
+      attempts: question.attempts.length,
+    });
 
     // Count resets and highlight attempts for all questions
     totalResets += question.resetCount || 0;
@@ -463,12 +516,14 @@ function updateSessionStats() {
     totalQuestions,
     correct,
     incorrect,
+    preview,
     totalResets,
     totalHighlightAttempts,
   });
 
   statistics.currentSession.correctAnswers = correct;
   statistics.currentSession.incorrectAnswers = incorrect;
+  statistics.currentSession.previewAnswers = preview;
   statistics.currentSession.totalQuestions = totalQuestions;
   statistics.currentSession.totalResets = totalResets;
   statistics.currentSession.totalHighlightAttempts = totalHighlightAttempts;
@@ -488,6 +543,7 @@ function resetAllStatistics() {
         totalQuestions: 0,
         totalCorrect: 0,
         totalIncorrect: 0,
+        totalPreview: 0,
         totalTime: 0,
         examStats: {},
       },
@@ -535,22 +591,27 @@ function cleanCorruptedStatistics() {
       if (session.questions) {
         let correct = 0;
         let incorrect = 0;
+        let preview = 0;
         let totalQuestions = 0;
         let totalResets = 0;
         let totalHighlightAttempts = 0;
 
         session.questions.forEach((question) => {
-          // Only count questions that have non-highlight attempts
-          const hasNonHighlightAttempts =
-            question.attempts &&
-            question.attempts.some((attempt) => !attempt.highlightEnabled);
-
-          if (hasNonHighlightAttempts) {
+          // Only count questions that have any first action recorded
+          if (question.firstActionRecorded) {
             totalQuestions++;
-            if (question.isCorrect) {
-              correct++;
-            } else {
-              incorrect++;
+
+            // Count based on first action type only
+            switch (question.firstActionType) {
+              case "correct":
+                correct++;
+                break;
+              case "incorrect":
+                incorrect++;
+                break;
+              case "preview":
+                preview++;
+                break;
             }
           }
 
@@ -568,6 +629,7 @@ function cleanCorruptedStatistics() {
 
         session.correctAnswers = correct;
         session.incorrectAnswers = incorrect;
+        session.previewAnswers = preview;
         session.totalQuestions = totalQuestions;
         session.totalResets = totalResets;
         session.totalHighlightAttempts = totalHighlightAttempts;
@@ -627,6 +689,8 @@ function updateOverviewTab() {
   document.getElementById("totalCorrect").textContent = totalStats.totalCorrect;
   document.getElementById("totalIncorrect").textContent =
     totalStats.totalIncorrect;
+  document.getElementById("totalPreview").textContent =
+    totalStats.totalPreview || 0;
   document.getElementById("totalResets").textContent =
     totalStats.totalResets || 0;
   document.getElementById("totalHighlightAttempts").textContent =
@@ -680,6 +744,9 @@ function updateExamsTab() {
           <span><i class="fas fa-times-circle"></i> ${
             stats.totalIncorrect
           } incorrect</span>
+          <span><i class="fas fa-eye"></i> ${
+            stats.totalPreview || 0
+          } preview</span>
           <span><i class="fas fa-redo"></i> ${
             stats.totalResets || 0
           } resets</span>
@@ -692,9 +759,11 @@ function updateExamsTab() {
           <span><i class="fas fa-calendar"></i> ${lastAttemptDate}</span>
         </div>
         <div class="exam-stat-progress">
-          <div class="exam-stat-progress-bar" style="width: ${
-            stats.averageScore
-          }%"></div>
+          ${createProgressBar(
+            stats.totalCorrect,
+            stats.totalIncorrect,
+            stats.totalPreview || 0
+          )}
         </div>
       </div>
       <div class="exam-stat-score">
@@ -768,6 +837,10 @@ function updateSessionsTab() {
           <div class="session-stat-label">Incorrect</div>
         </div>
         <div class="session-stat">
+          <div class="session-stat-value">${session.previewAnswers || 0}</div>
+          <div class="session-stat-label">Preview</div>
+        </div>
+        <div class="session-stat">
           <div class="session-stat-value">${session.totalResets || 0}</div>
           <div class="session-stat-label">Resets</div>
         </div>
@@ -787,7 +860,11 @@ function updateSessionsTab() {
         </div>
       </div>
       <div class="session-progress">
-        <div class="session-progress-bar" style="width: ${score}%"></div>
+        ${createProgressBar(
+          session.correctAnswers,
+          session.incorrectAnswers,
+          session.previewAnswers || 0
+        )}
       </div>
     `;
 
@@ -800,6 +877,39 @@ function updateProgressTab() {
   createProgressChart();
 }
 
+// Create progress bar with correct/incorrect/preview segments
+function createProgressBar(correct, incorrect, preview) {
+  const total = correct + incorrect + preview;
+
+  if (total === 0) {
+    return '<div class="exam-stat-progress-bar" style="width: 0%"></div>';
+  }
+
+  const correctPercent = (correct / total) * 100;
+  const incorrectPercent = (incorrect / total) * 100;
+  const previewPercent = (preview / total) * 100;
+
+  return `
+    <div class="multi-progress-bar">
+      ${
+        correct > 0
+          ? `<div class="progress-segment correct" style="width: ${correctPercent}%" title="Correct: ${correct}"></div>`
+          : ""
+      }
+      ${
+        incorrect > 0
+          ? `<div class="progress-segment incorrect" style="width: ${incorrectPercent}%" title="Incorrect: ${incorrect}"></div>`
+          : ""
+      }
+      ${
+        preview > 0
+          ? `<div class="progress-segment preview" style="width: ${previewPercent}%" title="Preview: ${preview}"></div>`
+          : ""
+      }
+    </div>
+  `;
+}
+
 // Create overview chart (simple canvas-based chart)
 function createOverviewChart() {
   const canvas = document.getElementById("overviewChart");
@@ -809,7 +919,10 @@ function createOverviewChart() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const totalStats = statistics.totalStats;
-  const total = totalStats.totalCorrect + totalStats.totalIncorrect;
+  const total =
+    totalStats.totalCorrect +
+    totalStats.totalIncorrect +
+    totalStats.totalPreview;
 
   if (total === 0) {
     // Show empty state
@@ -827,41 +940,87 @@ function createOverviewChart() {
 
   const correctAngle = (totalStats.totalCorrect / total) * 2 * Math.PI;
   const incorrectAngle = (totalStats.totalIncorrect / total) * 2 * Math.PI;
+  const previewAngle = (totalStats.totalPreview / total) * 2 * Math.PI;
+
+  let currentAngle = 0;
 
   // Draw correct answers slice
-  ctx.beginPath();
-  ctx.moveTo(centerX, centerY);
-  ctx.arc(centerX, centerY, radius, 0, correctAngle);
-  ctx.closePath();
-  ctx.fillStyle = "#28a745";
-  ctx.fill();
+  if (totalStats.totalCorrect > 0) {
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(
+      centerX,
+      centerY,
+      radius,
+      currentAngle,
+      currentAngle + correctAngle
+    );
+    ctx.closePath();
+    ctx.fillStyle = "#28a745";
+    ctx.fill();
+    currentAngle += correctAngle;
+  }
 
   // Draw incorrect answers slice
-  ctx.beginPath();
-  ctx.moveTo(centerX, centerY);
-  ctx.arc(
-    centerX,
-    centerY,
-    radius,
-    correctAngle,
-    correctAngle + incorrectAngle
-  );
-  ctx.closePath();
-  ctx.fillStyle = "#dc3545";
-  ctx.fill();
+  if (totalStats.totalIncorrect > 0) {
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(
+      centerX,
+      centerY,
+      radius,
+      currentAngle,
+      currentAngle + incorrectAngle
+    );
+    ctx.closePath();
+    ctx.fillStyle = "#dc3545";
+    ctx.fill();
+    currentAngle += incorrectAngle;
+  }
+
+  // Draw preview answers slice
+  if (totalStats.totalPreview > 0) {
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(
+      centerX,
+      centerY,
+      radius,
+      currentAngle,
+      currentAngle + previewAngle
+    );
+    ctx.closePath();
+    ctx.fillStyle = "#ffc107";
+    ctx.fill();
+  }
 
   // Draw legend
-  ctx.fillStyle = "#28a745";
-  ctx.fillRect(20, 20, 15, 15);
-  ctx.fillStyle = "#262730";
+  let legendY = 20;
   ctx.font = "14px Arial";
   ctx.textAlign = "left";
-  ctx.fillText(`Correct: ${totalStats.totalCorrect}`, 45, 32);
 
-  ctx.fillStyle = "#dc3545";
-  ctx.fillRect(20, 45, 15, 15);
-  ctx.fillStyle = "#262730";
-  ctx.fillText(`Incorrect: ${totalStats.totalIncorrect}`, 45, 57);
+  if (totalStats.totalCorrect > 0) {
+    ctx.fillStyle = "#28a745";
+    ctx.fillRect(20, legendY, 15, 15);
+    ctx.fillStyle = "#262730";
+    ctx.fillText(`Correct: ${totalStats.totalCorrect}`, 45, legendY + 12);
+    legendY += 25;
+  }
+
+  if (totalStats.totalIncorrect > 0) {
+    ctx.fillStyle = "#dc3545";
+    ctx.fillRect(20, legendY, 15, 15);
+    ctx.fillStyle = "#262730";
+    ctx.fillText(`Incorrect: ${totalStats.totalIncorrect}`, 45, legendY + 12);
+    legendY += 25;
+  }
+
+  if (totalStats.totalPreview > 0) {
+    ctx.fillStyle = "#ffc107";
+    ctx.fillRect(20, legendY, 15, 15);
+    ctx.fillStyle = "#262730";
+    ctx.fillText(`Preview: ${totalStats.totalPreview}`, 45, legendY + 12);
+  }
 }
 
 // Create progress chart
