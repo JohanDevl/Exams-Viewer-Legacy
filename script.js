@@ -113,7 +113,7 @@ class QuestionAttempt {
         this.finalScore = 100;
       } else {
         // Partial credit based on correct answers selected
-        const correctSelected = selectedAnswers.filter((answer) =>
+        const correctSelected = Array.from(selectedAnswers).filter((answer) =>
           this.correctAnswers.includes(answer)
         ).length;
         this.finalScore = Math.round(
@@ -131,6 +131,10 @@ class QuestionAttempt {
       this.firstActionType = "preview";
       this.firstActionRecorded = true;
     }
+  }
+
+  addReset() {
+    this.resetCount++;
   }
 
   addHighlightView() {
@@ -525,6 +529,13 @@ function updateSessionStats() {
   statistics.currentSession.incorrectAnswers = incorrect;
   statistics.currentSession.previewAnswers = preview;
   statistics.currentSession.totalQuestions = totalQuestions;
+
+  devLog("🔍 DEBUG: Session stats updated:", {
+    correctAnswers: correct,
+    incorrectAnswers: incorrect,
+    previewAnswers: preview,
+    totalQuestions: totalQuestions,
+  });
   statistics.currentSession.totalResets = totalResets;
   statistics.currentSession.totalHighlightAttempts = totalHighlightAttempts;
 }
@@ -681,7 +692,12 @@ function showStatsTab(tabName) {
 
 // Update overview tab
 function updateOverviewTab() {
+  // Recalculate total stats to ensure they're up to date
+  recalculateTotalStats();
+
   const totalStats = statistics.totalStats;
+
+  devLog("🔍 DEBUG: updateOverviewTab() - totalStats:", totalStats);
 
   // Update stat cards
   document.getElementById("totalQuestions").textContent =
@@ -691,13 +707,6 @@ function updateOverviewTab() {
     totalStats.totalIncorrect;
   document.getElementById("totalPreview").textContent =
     totalStats.totalPreview || 0;
-  document.getElementById("totalResets").textContent =
-    totalStats.totalResets || 0;
-  document.getElementById("totalHighlightAttempts").textContent =
-    totalStats.totalHighlightAttempts || 0;
-
-  // Create overview chart
-  createOverviewChart();
 }
 
 // Update exams tab
@@ -750,9 +759,6 @@ function updateExamsTab() {
           <span><i class="fas fa-redo"></i> ${
             stats.totalResets || 0
           } resets</span>
-          <span><i class="fas fa-lightbulb"></i> ${
-            stats.totalHighlightAttempts || 0
-          } previews</span>
           <span><i class="fas fa-clock"></i> ${formatTime(
             stats.totalTime
           )}</span>
@@ -845,12 +851,6 @@ function updateSessionsTab() {
           <div class="session-stat-label">Resets</div>
         </div>
         <div class="session-stat">
-          <div class="session-stat-value">${
-            session.totalHighlightAttempts || 0
-          }</div>
-          <div class="session-stat-label">Previews</div>
-        </div>
-        <div class="session-stat">
           <div class="session-stat-value">${formatTime(session.totalTime)}</div>
           <div class="session-stat-label">Time</div>
         </div>
@@ -926,10 +926,9 @@ function createOverviewChart() {
 
   if (total === 0) {
     // Show empty state
-    const textColor =
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--text-primary")
-        .trim() || "#6c757d";
+    const isDarkMode =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    const textColor = isDarkMode ? "#ffffff" : "#6c757d";
     ctx.fillStyle = textColor;
     ctx.font = "16px Arial";
     ctx.textAlign = "center";
@@ -940,7 +939,7 @@ function createOverviewChart() {
   // Draw pie chart
   const centerX = canvas.width / 2;
   const centerY = canvas.height / 2;
-  const radius = Math.min(centerX, centerY) - 20;
+  const radius = Math.min(centerX, centerY) - 60; // More space for legend
 
   const correctAngle = (totalStats.totalCorrect / total) * 2 * Math.PI;
   const incorrectAngle = (totalStats.totalIncorrect / total) * 2 * Math.PI;
@@ -998,38 +997,53 @@ function createOverviewChart() {
     ctx.fill();
   }
 
-  // Draw legend
-  let legendY = 20;
+  // Draw legend positioned below the chart
+  let legendX = centerX - 60;
+  let legendY = centerY + radius + 40;
   ctx.font = "14px Arial";
   ctx.textAlign = "left";
 
   // Get text color based on current theme
-  const textColor =
-    getComputedStyle(document.documentElement)
-      .getPropertyValue("--text-primary")
-      .trim() || "#262730";
+  const isDarkMode =
+    document.documentElement.getAttribute("data-theme") === "dark";
+  const textColor = isDarkMode ? "#ffffff" : "#262730";
+
+  // Draw legend items horizontally
+  let currentX = legendX;
 
   if (totalStats.totalCorrect > 0) {
     ctx.fillStyle = "#28a745";
-    ctx.fillRect(20, legendY, 15, 15);
+    ctx.fillRect(currentX, legendY, 15, 15);
     ctx.fillStyle = textColor;
-    ctx.fillText(`Correct: ${totalStats.totalCorrect}`, 45, legendY + 12);
-    legendY += 25;
+    ctx.fillText(
+      `Correct: ${totalStats.totalCorrect}`,
+      currentX + 20,
+      legendY + 12
+    );
+    currentX += 120;
   }
 
   if (totalStats.totalIncorrect > 0) {
     ctx.fillStyle = "#dc3545";
-    ctx.fillRect(20, legendY, 15, 15);
+    ctx.fillRect(currentX, legendY, 15, 15);
     ctx.fillStyle = textColor;
-    ctx.fillText(`Incorrect: ${totalStats.totalIncorrect}`, 45, legendY + 12);
-    legendY += 25;
+    ctx.fillText(
+      `Incorrect: ${totalStats.totalIncorrect}`,
+      currentX + 20,
+      legendY + 12
+    );
+    currentX += 120;
   }
 
   if (totalStats.totalPreview > 0) {
     ctx.fillStyle = "#ffc107";
-    ctx.fillRect(20, legendY, 15, 15);
+    ctx.fillRect(currentX, legendY, 15, 15);
     ctx.fillStyle = textColor;
-    ctx.fillText(`Preview: ${totalStats.totalPreview}`, 45, legendY + 12);
+    ctx.fillText(
+      `Preview: ${totalStats.totalPreview}`,
+      currentX + 20,
+      legendY + 12
+    );
   }
 }
 
@@ -1043,10 +1057,9 @@ function createProgressChart() {
 
   if (statistics.sessions.length === 0) {
     // Show empty state
-    const textColor =
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--text-primary")
-        .trim() || "#6c757d";
+    const isDarkMode =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    const textColor = isDarkMode ? "#ffffff" : "#6c757d";
     ctx.fillStyle = textColor;
     ctx.font = "16px Arial";
     ctx.textAlign = "center";
@@ -1092,10 +1105,9 @@ function createProgressChart() {
   ctx.stroke();
 
   // Draw grid lines and labels
-  const textColor =
-    getComputedStyle(document.documentElement)
-      .getPropertyValue("--text-primary")
-      .trim() || "#6c757d";
+  const isDarkMode =
+    document.documentElement.getAttribute("data-theme") === "dark";
+  const textColor = isDarkMode ? "#ffffff" : "#6c757d";
   ctx.fillStyle = textColor;
   ctx.font = "12px Arial";
   ctx.textAlign = "right";
@@ -1962,6 +1974,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
     // Increment highlight view count
     questionAttempt.addHighlightView();
+    updateSessionStats();
     saveStatistics();
     devLog("Question viewed with highlight active:", questionNumber);
   }
@@ -2183,9 +2196,72 @@ function updateInstructions() {
 function validateAnswers() {
   devLog("🔍 validateAnswers() called");
 
+  // If highlight is enabled, track this as a preview action and disable highlight
+  const wasHighlightEnabled = isHighlightEnabled;
+  devLog("🔍 DEBUG: isHighlightEnabled at start:", isHighlightEnabled);
+  devLog("🔍 DEBUG: selectedAnswers:", Array.from(selectedAnswers));
+  devLog(
+    "🔍 DEBUG: statistics.currentSession exists:",
+    !!statistics.currentSession
+  );
+
   if (isHighlightEnabled) {
-    showError("Please disable highlight mode before validating answers");
-    return;
+    devLog("🔍 DEBUG: Processing highlight validation");
+    isHighlightEnabled = false;
+    updateHighlightButton();
+
+    // Track highlight answers separately for statistics
+    if (statistics.currentSession) {
+      const question = currentQuestions[currentQuestionIndex];
+      const questionNumber = question.question_number;
+
+      devLog("🔍 DEBUG: Question number:", questionNumber);
+
+      // Find existing question attempt or create new one
+      let questionAttempt = statistics.currentSession.questions.find(
+        (q) => q.questionNumber === questionNumber
+      );
+
+      devLog("🔍 DEBUG: Existing question attempt:", !!questionAttempt);
+
+      if (!questionAttempt) {
+        const mostVoted = question.most_voted || "";
+        const correctAnswers = Array.from(new Set(mostVoted.split("")));
+        questionAttempt = new QuestionAttempt(
+          questionNumber,
+          question.question,
+          correctAnswers,
+          question.most_voted
+        );
+        statistics.currentSession.questions.push(questionAttempt);
+        devLog("🔍 DEBUG: Created new question attempt");
+      }
+
+      // Add highlight answer
+      questionAttempt.highlightAnswers.push({
+        answers: Array.from(selectedAnswers),
+        timestamp: new Date().toISOString(),
+      });
+
+      devLog(
+        "🔍 DEBUG: Before tracking first action - firstActionRecorded:",
+        questionAttempt.firstActionRecorded
+      );
+
+      // Track first action if this is the first interaction
+      if (!questionAttempt.firstActionRecorded) {
+        questionAttempt.firstActionType = "preview";
+        questionAttempt.firstActionRecorded = true;
+        devLog("🔍 DEBUG: Set first action to preview");
+      }
+
+      devLog("🔍 DEBUG: About to call updateSessionStats");
+      updateSessionStats();
+      saveStatistics();
+      devLog("✅ Highlight validation tracked as preview action");
+    } else {
+      devLog("❌ No current session found!");
+    }
   }
 
   if (selectedAnswers.size === 0) {
@@ -2251,8 +2327,8 @@ function validateAnswers() {
   devLog(
     "📊 Tracking question attempt - isCorrect:",
     isCorrect,
-    "highlight enabled:",
-    isHighlightEnabled
+    "highlight was enabled:",
+    wasHighlightEnabled
   );
 
   try {
@@ -2264,7 +2340,7 @@ function validateAnswers() {
       selectedAnswers,
       isCorrect,
       timeSpent,
-      isHighlightEnabled
+      wasHighlightEnabled
     );
     devLog("📊 Question attempt tracked successfully");
   } catch (error) {
@@ -2421,6 +2497,7 @@ function toggleHighlight() {
 
     // Increment highlight button click count only when activating
     questionAttempt.addHighlightButtonClick();
+    updateSessionStats();
     saveStatistics();
     devLog("Highlight activated on question:", questionNumber);
   }
