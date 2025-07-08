@@ -660,6 +660,7 @@ body {
   align-items: center;
   padding: 1.5rem;
   border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0;
 }
 
 .modal-header h2 {
@@ -682,6 +683,10 @@ body {
 
 .modal-body {
   padding: 1.5rem;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .setting-group {
@@ -987,9 +992,13 @@ body {
 
 /* Statistics Modal */
 .statistics-modal {
-  max-width: 900px;
-  max-height: 80vh;
-  overflow-y: auto;
+  max-width: 1000px;
+  width: 95vw;
+  max-height: 85vh;
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .stats-tabs {
@@ -998,6 +1007,31 @@ body {
   margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.stats-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.stats-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.stats-content::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+}
+
+.stats-content::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.stats-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }
 
 .stats-tab {
@@ -1263,9 +1297,10 @@ body {
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .export-stats-btn {
@@ -1377,6 +1412,8 @@ body {
 
   .statistics-modal {
     max-height: 90vh;
+    height: 85vh;
+    width: 98vw;
   }
 }
 
