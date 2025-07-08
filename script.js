@@ -5,6 +5,7 @@ let currentQuestionIndex = 0;
 let selectedAnswers = new Set();
 let isValidated = false;
 let isHighlightEnabled = false;
+let questionStartTime = null; // Track when question was started
 let settings = {
   showDiscussionDefault: false,
   highlightDefault: false,
@@ -13,6 +14,729 @@ let settings = {
 
 // Available exams mapping (will be populated dynamically)
 let availableExams = {};
+
+// Statistics system
+let statistics = {
+  sessions: [], // Array of session objects
+  currentSession: null,
+  totalStats: {
+    totalQuestions: 0,
+    totalCorrect: 0,
+    totalIncorrect: 0,
+    totalTime: 0,
+    examStats: {}, // Per-exam statistics
+  },
+};
+
+// Session data structure
+class ExamSession {
+  constructor(examCode, examName) {
+    this.id = generateSessionId();
+    this.examCode = examCode;
+    this.examName = examName;
+    this.startTime = new Date().toISOString();
+    this.endTime = null;
+    this.questions = []; // Array of question attempts
+    this.totalQuestions = 0;
+    this.correctAnswers = 0;
+    this.incorrectAnswers = 0;
+    this.totalTime = 0; // in seconds
+    this.completed = false;
+  }
+}
+
+// Question attempt data structure
+class QuestionAttempt {
+  constructor(questionNumber, questionText, correctAnswers, mostVoted) {
+    this.questionNumber = questionNumber;
+    this.questionText = questionText;
+    this.correctAnswers = correctAnswers; // Array of correct answer letters
+    this.mostVoted = mostVoted; // Most voted answer from community
+    this.userAnswers = []; // Array of user selected answers
+    this.attempts = []; // Array of attempt objects
+    this.startTime = new Date().toISOString();
+    this.endTime = null;
+    this.timeSpent = 0; // in seconds
+    this.isCorrect = false;
+    this.finalScore = 0; // 0-100 percentage
+  }
+
+  addAttempt(selectedAnswers, isCorrect, timeSpent) {
+    const attempt = {
+      answers: Array.from(selectedAnswers),
+      isCorrect: isCorrect,
+      timestamp: new Date().toISOString(),
+      timeSpent: timeSpent,
+    };
+    this.attempts.push(attempt);
+    this.userAnswers = Array.from(selectedAnswers);
+    this.isCorrect = isCorrect;
+    this.timeSpent += timeSpent;
+    this.endTime = new Date().toISOString();
+
+    // Calculate final score based on correctness
+    if (isCorrect) {
+      this.finalScore = 100;
+    } else {
+      // Partial credit based on correct answers selected
+      const correctSelected = selectedAnswers.filter((answer) =>
+        this.correctAnswers.includes(answer)
+      ).length;
+      this.finalScore = Math.round(
+        (correctSelected / this.correctAnswers.length) * 100
+      );
+    }
+  }
+}
+
+// Generate unique session ID
+function generateSessionId() {
+  return (
+    "session_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9)
+  );
+}
+
+// Statistics storage management
+function loadStatistics() {
+  try {
+    const savedStats = localStorage.getItem("examViewerStatistics");
+    if (savedStats) {
+      const parsed = JSON.parse(savedStats);
+      statistics = {
+        sessions: parsed.sessions || [],
+        currentSession: parsed.currentSession || null,
+        totalStats: parsed.totalStats || {
+          totalQuestions: 0,
+          totalCorrect: 0,
+          totalIncorrect: 0,
+          totalTime: 0,
+          examStats: {},
+        },
+      };
+
+      // Recalculate total stats from sessions
+      recalculateTotalStats();
+
+      devLog("Statistics loaded from localStorage:", statistics);
+    }
+  } catch (error) {
+    devError("Error loading statistics:", error);
+    // Reset to default if corrupted
+    statistics = {
+      sessions: [],
+      currentSession: null,
+      totalStats: {
+        totalQuestions: 0,
+        totalCorrect: 0,
+        totalIncorrect: 0,
+        totalTime: 0,
+        examStats: {},
+      },
+    };
+  }
+}
+
+function saveStatistics() {
+  try {
+    localStorage.setItem("examViewerStatistics", JSON.stringify(statistics));
+    devLog("Statistics saved to localStorage");
+  } catch (error) {
+    devError("Error saving statistics:", error);
+  }
+}
+
+function recalculateTotalStats() {
+  statistics.totalStats = {
+    totalQuestions: 0,
+    totalCorrect: 0,
+    totalIncorrect: 0,
+    totalTime: 0,
+    examStats: {},
+  };
+
+  statistics.sessions.forEach((session) => {
+    statistics.totalStats.totalQuestions += session.totalQuestions;
+    statistics.totalStats.totalCorrect += session.correctAnswers;
+    statistics.totalStats.totalIncorrect += session.incorrectAnswers;
+    statistics.totalStats.totalTime += session.totalTime;
+
+    // Per-exam stats
+    if (!statistics.totalStats.examStats[session.examCode]) {
+      statistics.totalStats.examStats[session.examCode] = {
+        examName: session.examName,
+        totalQuestions: 0,
+        totalCorrect: 0,
+        totalIncorrect: 0,
+        totalTime: 0,
+        sessions: 0,
+        averageScore: 0,
+        bestScore: 0,
+        lastAttempt: null,
+      };
+    }
+
+    const examStats = statistics.totalStats.examStats[session.examCode];
+    examStats.totalQuestions += session.totalQuestions;
+    examStats.totalCorrect += session.correctAnswers;
+    examStats.totalIncorrect += session.incorrectAnswers;
+    examStats.totalTime += session.totalTime;
+    examStats.sessions++;
+
+    // Calculate scores
+    const sessionScore =
+      session.totalQuestions > 0
+        ? Math.round((session.correctAnswers / session.totalQuestions) * 100)
+        : 0;
+
+    examStats.averageScore =
+      examStats.totalQuestions > 0
+        ? Math.round((examStats.totalCorrect / examStats.totalQuestions) * 100)
+        : 0;
+
+    if (sessionScore > examStats.bestScore) {
+      examStats.bestScore = sessionScore;
+    }
+
+    if (
+      !examStats.lastAttempt ||
+      new Date(session.startTime) > new Date(examStats.lastAttempt)
+    ) {
+      examStats.lastAttempt = session.startTime;
+    }
+  });
+}
+
+// Start a new exam session
+function startExamSession(examCode, examName) {
+  // End current session if exists
+  if (statistics.currentSession) {
+    endCurrentSession();
+  }
+
+  statistics.currentSession = new ExamSession(examCode, examName);
+  statistics.currentSession.totalQuestions = currentQuestions.length;
+
+  devLog("Started new exam session:", statistics.currentSession);
+  saveStatistics();
+}
+
+// End current session
+function endCurrentSession() {
+  if (statistics.currentSession) {
+    statistics.currentSession.endTime = new Date().toISOString();
+    statistics.currentSession.completed = true;
+
+    // Calculate total time
+    const startTime = new Date(statistics.currentSession.startTime);
+    const endTime = new Date(statistics.currentSession.endTime);
+    statistics.currentSession.totalTime = Math.floor(
+      (endTime - startTime) / 1000
+    );
+
+    // Add to sessions history
+    statistics.sessions.push(statistics.currentSession);
+    statistics.currentSession = null;
+
+    // Recalculate total stats
+    recalculateTotalStats();
+    saveStatistics();
+
+    devLog("Ended exam session");
+  }
+}
+
+// Track question attempt
+function trackQuestionAttempt(
+  questionNumber,
+  questionText,
+  correctAnswers,
+  mostVoted,
+  selectedAnswers,
+  isCorrect,
+  timeSpent
+) {
+  if (!statistics.currentSession) return;
+
+  // Find existing question attempt or create new one
+  let questionAttempt = statistics.currentSession.questions.find(
+    (q) => q.questionNumber === questionNumber
+  );
+
+  if (!questionAttempt) {
+    questionAttempt = new QuestionAttempt(
+      questionNumber,
+      questionText,
+      correctAnswers,
+      mostVoted
+    );
+    statistics.currentSession.questions.push(questionAttempt);
+  }
+
+  // Add the attempt
+  questionAttempt.addAttempt(selectedAnswers, isCorrect, timeSpent);
+
+  // Update session stats
+  updateSessionStats();
+  saveStatistics();
+
+  devLog("Tracked question attempt:", questionAttempt);
+}
+
+// Update session statistics
+function updateSessionStats() {
+  if (!statistics.currentSession) return;
+
+  let correct = 0;
+  let incorrect = 0;
+
+  statistics.currentSession.questions.forEach((question) => {
+    if (question.isCorrect) {
+      correct++;
+    } else {
+      incorrect++;
+    }
+  });
+
+  statistics.currentSession.correctAnswers = correct;
+  statistics.currentSession.incorrectAnswers = incorrect;
+}
+
+// Reset all statistics
+function resetAllStatistics() {
+  if (
+    confirm(
+      "Êtes-vous sûr de vouloir réinitialiser toutes les statistiques ? Cette action ne peut pas être annulée."
+    )
+  ) {
+    statistics = {
+      sessions: [],
+      currentSession: null,
+      totalStats: {
+        totalQuestions: 0,
+        totalCorrect: 0,
+        totalIncorrect: 0,
+        totalTime: 0,
+        examStats: {},
+      },
+    };
+
+    localStorage.removeItem("examViewerStatistics");
+    showSuccess("Statistiques réinitialisées avec succès");
+
+    // Refresh statistics display if open
+    if (document.getElementById("statisticsModal").style.display === "flex") {
+      displayStatistics();
+    }
+  }
+}
+
+// Display statistics modal
+function displayStatistics() {
+  const modal = document.getElementById("statisticsModal");
+  modal.style.display = "flex";
+
+  // Show overview tab by default
+  showStatsTab("overview");
+
+  // Update all statistics displays
+  updateOverviewTab();
+  updateExamsTab();
+  updateSessionsTab();
+  updateProgressTab();
+}
+
+// Show specific statistics tab
+function showStatsTab(tabName) {
+  // Update tab buttons
+  const tabs = document.querySelectorAll(".stats-tab");
+  tabs.forEach((tab) => {
+    tab.classList.remove("active");
+    if (tab.dataset.tab === tabName) {
+      tab.classList.add("active");
+    }
+  });
+
+  // Update tab content
+  const contents = document.querySelectorAll(".stats-tab-content");
+  contents.forEach((content) => {
+    content.classList.remove("active");
+  });
+
+  document.getElementById(`${tabName}Tab`).classList.add("active");
+}
+
+// Update overview tab
+function updateOverviewTab() {
+  const totalStats = statistics.totalStats;
+
+  // Update stat cards
+  document.getElementById("totalQuestions").textContent =
+    totalStats.totalQuestions;
+  document.getElementById("totalCorrect").textContent = totalStats.totalCorrect;
+  document.getElementById("totalIncorrect").textContent =
+    totalStats.totalIncorrect;
+
+  // Format total time
+  const totalTimeFormatted = formatTime(totalStats.totalTime);
+  document.getElementById("totalTime").textContent = totalTimeFormatted;
+
+  // Create overview chart
+  createOverviewChart();
+}
+
+// Update exams tab
+function updateExamsTab() {
+  const examStatsList = document.getElementById("examStatsList");
+  const examStats = statistics.totalStats.examStats;
+
+  if (Object.keys(examStats).length === 0) {
+    examStatsList.innerHTML = `
+      <div class="stats-empty">
+        <i class="fas fa-chart-bar"></i>
+        <h3>Aucune statistique d'examen</h3>
+        <p>Commencez à répondre aux questions pour voir vos statistiques par examen.</p>
+      </div>
+    `;
+    return;
+  }
+
+  examStatsList.innerHTML = "";
+
+  // Sort exams by average score (descending)
+  const sortedExams = Object.entries(examStats).sort(
+    ([, a], [, b]) => b.averageScore - a.averageScore
+  );
+
+  sortedExams.forEach(([examCode, stats]) => {
+    const examItem = document.createElement("div");
+    examItem.className = "exam-stat-item";
+
+    const lastAttemptDate = stats.lastAttempt
+      ? new Date(stats.lastAttempt).toLocaleDateString("fr-FR")
+      : "Jamais";
+
+    examItem.innerHTML = `
+      <div class="exam-stat-info">
+        <h4>${stats.examName || examCode}</h4>
+        <div class="exam-stat-details">
+          <span><i class="fas fa-question-circle"></i> ${
+            stats.totalQuestions
+          } questions</span>
+          <span><i class="fas fa-check-circle"></i> ${
+            stats.totalCorrect
+          } correctes</span>
+          <span><i class="fas fa-times-circle"></i> ${
+            stats.totalIncorrect
+          } incorrectes</span>
+          <span><i class="fas fa-clock"></i> ${formatTime(
+            stats.totalTime
+          )}</span>
+          <span><i class="fas fa-calendar"></i> ${lastAttemptDate}</span>
+        </div>
+        <div class="exam-stat-progress">
+          <div class="exam-stat-progress-bar" style="width: ${
+            stats.averageScore
+          }%"></div>
+        </div>
+      </div>
+      <div class="exam-stat-score">
+        <div class="score-value">${stats.averageScore}%</div>
+        <div class="score-label">Score moyen</div>
+        <div style="margin-top: 0.5rem;">
+          <div style="font-size: 0.875rem; color: var(--text-secondary);">
+            Meilleur: ${stats.bestScore}%
+          </div>
+          <div style="font-size: 0.875rem; color: var(--text-secondary);">
+            Sessions: ${stats.sessions}
+          </div>
+        </div>
+      </div>
+    `;
+
+    examStatsList.appendChild(examItem);
+  });
+}
+
+// Update sessions tab
+function updateSessionsTab() {
+  const sessionsList = document.getElementById("sessionsList");
+
+  if (statistics.sessions.length === 0) {
+    sessionsList.innerHTML = `
+      <div class="stats-empty">
+        <i class="fas fa-history"></i>
+        <h3>Aucune session enregistrée</h3>
+        <p>Vos sessions d'examen apparaîtront ici une fois que vous aurez commencé à répondre aux questions.</p>
+      </div>
+    `;
+    return;
+  }
+
+  sessionsList.innerHTML = "";
+
+  // Sort sessions by start time (most recent first)
+  const sortedSessions = [...statistics.sessions].sort(
+    (a, b) => new Date(b.startTime) - new Date(a.startTime)
+  );
+
+  sortedSessions.forEach((session) => {
+    const sessionItem = document.createElement("div");
+    sessionItem.className = "session-item";
+
+    const startDate = new Date(session.startTime);
+    const score =
+      session.totalQuestions > 0
+        ? Math.round((session.correctAnswers / session.totalQuestions) * 100)
+        : 0;
+
+    sessionItem.innerHTML = `
+      <div class="session-header">
+        <div class="session-title">${session.examName || session.examCode}</div>
+        <div class="session-date">${startDate.toLocaleDateString(
+          "fr-FR"
+        )} ${startDate.toLocaleTimeString("fr-FR")}</div>
+      </div>
+      <div class="session-stats">
+        <div class="session-stat">
+          <div class="session-stat-value">${session.totalQuestions}</div>
+          <div class="session-stat-label">Questions</div>
+        </div>
+        <div class="session-stat">
+          <div class="session-stat-value">${session.correctAnswers}</div>
+          <div class="session-stat-label">Correctes</div>
+        </div>
+        <div class="session-stat">
+          <div class="session-stat-value">${session.incorrectAnswers}</div>
+          <div class="session-stat-label">Incorrectes</div>
+        </div>
+        <div class="session-stat">
+          <div class="session-stat-value">${formatTime(session.totalTime)}</div>
+          <div class="session-stat-label">Temps</div>
+        </div>
+        <div class="session-stat">
+          <div class="session-stat-value">${score}%</div>
+          <div class="session-stat-label">Score</div>
+        </div>
+      </div>
+      <div class="session-progress">
+        <div class="session-progress-bar" style="width: ${score}%"></div>
+      </div>
+    `;
+
+    sessionsList.appendChild(sessionItem);
+  });
+}
+
+// Update progress tab
+function updateProgressTab() {
+  createProgressChart();
+}
+
+// Create overview chart (simple canvas-based chart)
+function createOverviewChart() {
+  const canvas = document.getElementById("overviewChart");
+  const ctx = canvas.getContext("2d");
+
+  // Clear canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const totalStats = statistics.totalStats;
+  const total = totalStats.totalCorrect + totalStats.totalIncorrect;
+
+  if (total === 0) {
+    // Show empty state
+    ctx.fillStyle = "#6c757d";
+    ctx.font = "16px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      "Aucune donnée disponible",
+      canvas.width / 2,
+      canvas.height / 2
+    );
+    return;
+  }
+
+  // Draw pie chart
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const radius = Math.min(centerX, centerY) - 20;
+
+  const correctAngle = (totalStats.totalCorrect / total) * 2 * Math.PI;
+  const incorrectAngle = (totalStats.totalIncorrect / total) * 2 * Math.PI;
+
+  // Draw correct answers slice
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY);
+  ctx.arc(centerX, centerY, radius, 0, correctAngle);
+  ctx.closePath();
+  ctx.fillStyle = "#28a745";
+  ctx.fill();
+
+  // Draw incorrect answers slice
+  ctx.beginPath();
+  ctx.moveTo(centerX, centerY);
+  ctx.arc(
+    centerX,
+    centerY,
+    radius,
+    correctAngle,
+    correctAngle + incorrectAngle
+  );
+  ctx.closePath();
+  ctx.fillStyle = "#dc3545";
+  ctx.fill();
+
+  // Draw legend
+  ctx.fillStyle = "#28a745";
+  ctx.fillRect(20, 20, 15, 15);
+  ctx.fillStyle = "#262730";
+  ctx.font = "14px Arial";
+  ctx.textAlign = "left";
+  ctx.fillText(`Correctes: ${totalStats.totalCorrect}`, 45, 32);
+
+  ctx.fillStyle = "#dc3545";
+  ctx.fillRect(20, 45, 15, 15);
+  ctx.fillStyle = "#262730";
+  ctx.fillText(`Incorrectes: ${totalStats.totalIncorrect}`, 45, 57);
+}
+
+// Create progress chart
+function createProgressChart() {
+  const canvas = document.getElementById("progressChart");
+  const ctx = canvas.getContext("2d");
+
+  // Clear canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (statistics.sessions.length === 0) {
+    // Show empty state
+    ctx.fillStyle = "#6c757d";
+    ctx.font = "16px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      "Aucune donnée de progression disponible",
+      canvas.width / 2,
+      canvas.height / 2
+    );
+    return;
+  }
+
+  // Sort sessions by date
+  const sortedSessions = [...statistics.sessions].sort(
+    (a, b) => new Date(a.startTime) - new Date(b.startTime)
+  );
+
+  // Calculate scores for each session
+  const scores = sortedSessions.map((session) => {
+    return session.totalQuestions > 0
+      ? Math.round((session.correctAnswers / session.totalQuestions) * 100)
+      : 0;
+  });
+
+  // Draw line chart
+  const padding = 40;
+  const chartWidth = canvas.width - 2 * padding;
+  const chartHeight = canvas.height - 2 * padding;
+
+  // Draw axes
+  ctx.strokeStyle = "#d1d5db";
+  ctx.lineWidth = 1;
+
+  // Y-axis
+  ctx.beginPath();
+  ctx.moveTo(padding, padding);
+  ctx.lineTo(padding, padding + chartHeight);
+  ctx.stroke();
+
+  // X-axis
+  ctx.beginPath();
+  ctx.moveTo(padding, padding + chartHeight);
+  ctx.lineTo(padding + chartWidth, padding + chartHeight);
+  ctx.stroke();
+
+  // Draw grid lines and labels
+  ctx.fillStyle = "#6c757d";
+  ctx.font = "12px Arial";
+  ctx.textAlign = "right";
+
+  // Y-axis labels (0-100%)
+  for (let i = 0; i <= 100; i += 20) {
+    const y = padding + chartHeight - (i / 100) * chartHeight;
+    ctx.fillText(`${i}%`, padding - 10, y + 4);
+
+    // Grid line
+    ctx.strokeStyle = "#e9ecef";
+    ctx.beginPath();
+    ctx.moveTo(padding, y);
+    ctx.lineTo(padding + chartWidth, y);
+    ctx.stroke();
+  }
+
+  // Draw progress line
+  if (scores.length > 1) {
+    ctx.strokeStyle = "#007bff";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    scores.forEach((score, index) => {
+      const x = padding + (index / (scores.length - 1)) * chartWidth;
+      const y = padding + chartHeight - (score / 100) * chartHeight;
+
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+
+    ctx.stroke();
+
+    // Draw points
+    ctx.fillStyle = "#007bff";
+    scores.forEach((score, index) => {
+      const x = padding + (index / (scores.length - 1)) * chartWidth;
+      const y = padding + chartHeight - (score / 100) * chartHeight;
+
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, 2 * Math.PI);
+      ctx.fill();
+    });
+  }
+}
+
+// Format time in seconds to readable format
+function formatTime(seconds) {
+  if (seconds < 60) {
+    return `${seconds}s`;
+  } else if (seconds < 3600) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}m ${remainingSeconds}s`;
+  } else {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    return `${hours}h ${minutes}m`;
+  }
+}
+
+// Export statistics to JSON
+function exportStatistics() {
+  const dataStr = JSON.stringify(statistics, null, 2);
+  const dataBlob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(dataBlob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `exam-statistics-${
+    new Date().toISOString().split("T")[0]
+  }.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+  showSuccess("Statistiques exportées avec succès");
+}
 
 // Development mode detection
 const isDevelopmentMode = () => {
@@ -210,6 +934,7 @@ async function discoverAvailableExams() {
 // Initialize app
 document.addEventListener("DOMContentLoaded", async function () {
   loadSettings();
+  loadStatistics();
   setupEventListeners();
 
   // Listen for system theme changes
@@ -357,6 +1082,31 @@ function setupEventListeners() {
     if (examCode) {
       loadExam(examCode);
     }
+  });
+
+  // Statistics
+  document.getElementById("statisticsBtn").addEventListener("click", () => {
+    displayStatistics();
+  });
+
+  document.getElementById("closeStatsModal").addEventListener("click", () => {
+    document.getElementById("statisticsModal").style.display = "none";
+  });
+
+  // Statistics tabs
+  document.querySelectorAll(".stats-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      showStatsTab(tab.dataset.tab);
+    });
+  });
+
+  // Statistics actions
+  document.getElementById("exportStatsBtn").addEventListener("click", () => {
+    exportStatistics();
+  });
+
+  document.getElementById("resetStatsBtn").addEventListener("click", () => {
+    resetAllStatistics();
   });
 
   // Settings
@@ -510,6 +1260,9 @@ async function loadExam(examCode) {
     );
     devLog("Total questions loaded:", currentQuestions.length);
 
+    // Start exam session for statistics
+    startExamSession(examCode, currentExam.exam_name);
+
     // Update UI
     document.getElementById("availableExams").style.display = "none";
     document.getElementById("navigationSection").style.display = "block";
@@ -596,12 +1349,16 @@ function navigateToRandomQuestion() {
 
 // Go to home page
 function goToHome() {
+  // End current session if exists
+  endCurrentSession();
+
   // Reset exam state
   currentExam = null;
   currentQuestions = [];
   currentQuestionIndex = 0;
   selectedAnswers.clear();
   isValidated = false;
+  questionStartTime = null;
 
   // Reset UI
   document.getElementById("examCode").value = "";
@@ -715,6 +1472,7 @@ function displayCurrentQuestion() {
   // Reset state
   selectedAnswers.clear();
   isValidated = false;
+  questionStartTime = new Date(); // Start timing the question
 
   // Update navigation
   const currentQuestionNumber =
@@ -879,6 +1637,25 @@ function validateAnswers() {
       element.classList.add("correct-not-selected");
     }
   });
+
+  // Calculate time spent on question
+  const timeSpent = questionStartTime
+    ? Math.floor((new Date() - questionStartTime) / 1000)
+    : 0;
+
+  // Track the question attempt for statistics
+  const isCorrect =
+    correctSelected.size === correctAnswers.size &&
+    incorrectSelected.size === 0;
+  trackQuestionAttempt(
+    question.question_number,
+    question.question,
+    Array.from(correctAnswers),
+    question.most_voted,
+    selectedAnswers,
+    isCorrect,
+    timeSpent
+  );
 
   // Update controls
   document.getElementById("validateBtn").style.display = "none";

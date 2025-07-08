@@ -93,6 +93,13 @@
             >
               <i class="fas fa-moon"></i>
             </button>
+            <button
+              id="statisticsBtn"
+              class="statistics-btn"
+              title="View Statistics"
+            >
+              <i class="fas fa-chart-bar"></i>
+            </button>
             <button id="settingsBtn" class="settings-btn" title="Open Settings">
               <i class="fas fa-cog"></i>
             </button>
@@ -212,6 +219,107 @@
           <div id="examsList" class="exams-list"></div>
         </div>
       </main>
+
+      <!-- Statistics Modal -->
+      <div id="statisticsModal" class="modal" style="display: none">
+        <div class="modal-content statistics-modal">
+          <div class="modal-header">
+            <h2><i class="fas fa-chart-bar"></i> Statistics</h2>
+            <button id="closeStatsModal" class="close-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="stats-tabs">
+              <button class="stats-tab active" data-tab="overview">
+                <i class="fas fa-chart-pie"></i> Overview
+              </button>
+              <button class="stats-tab" data-tab="exams">
+                <i class="fas fa-book"></i> By Exam
+              </button>
+              <button class="stats-tab" data-tab="sessions">
+                <i class="fas fa-history"></i> Sessions
+              </button>
+              <button class="stats-tab" data-tab="progress">
+                <i class="fas fa-chart-line"></i> Progress
+              </button>
+            </div>
+
+            <div class="stats-content">
+              <!-- Overview Tab -->
+              <div id="overviewTab" class="stats-tab-content active">
+                <div class="stats-grid">
+                  <div class="stat-card">
+                    <div class="stat-icon">
+                      <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                      <div class="stat-value" id="totalQuestions">0</div>
+                      <div class="stat-label">Total Questions</div>
+                    </div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon success">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                      <div class="stat-value" id="totalCorrect">0</div>
+                      <div class="stat-label">Correct Answers</div>
+                    </div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon error">
+                      <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                      <div class="stat-value" id="totalIncorrect">0</div>
+                      <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon">
+                      <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                      <div class="stat-value" id="totalTime">0</div>
+                      <div class="stat-label">Total Time</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="stats-chart">
+                  <canvas id="overviewChart" width="400" height="200"></canvas>
+                </div>
+              </div>
+
+              <!-- Exams Tab -->
+              <div id="examsTab" class="stats-tab-content">
+                <div id="examStatsList" class="exam-stats-list"></div>
+              </div>
+
+              <!-- Sessions Tab -->
+              <div id="sessionsTab" class="stats-tab-content">
+                <div id="sessionsList" class="sessions-list"></div>
+              </div>
+
+              <!-- Progress Tab -->
+              <div id="progressTab" class="stats-tab-content">
+                <div class="progress-charts">
+                  <canvas id="progressChart" width="400" height="200"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="stats-actions">
+              <button id="exportStatsBtn" class="export-stats-btn">
+                <i class="fas fa-download"></i> Export Statistics
+              </button>
+              <button id="resetStatsBtn" class="reset-stats-btn">
+                <i class="fas fa-trash"></i> Reset Statistics
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Settings Modal -->
       <div id="settingsModal" class="modal" style="display: none">
