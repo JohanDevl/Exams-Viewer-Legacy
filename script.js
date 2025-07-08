@@ -478,8 +478,8 @@ function updateExamsTab() {
     examItem.className = "exam-stat-item";
 
     const lastAttemptDate = stats.lastAttempt
-      ? new Date(stats.lastAttempt).toLocaleDateString("fr-FR")
-      : "Jamais";
+      ? new Date(stats.lastAttempt).toLocaleDateString("en-US")
+      : "Never";
 
     examItem.innerHTML = `
       <div class="exam-stat-info">
@@ -490,10 +490,10 @@ function updateExamsTab() {
           } questions</span>
           <span><i class="fas fa-check-circle"></i> ${
             stats.totalCorrect
-          } correctes</span>
+          } correct</span>
           <span><i class="fas fa-times-circle"></i> ${
             stats.totalIncorrect
-          } incorrectes</span>
+          } incorrect</span>
           <span><i class="fas fa-clock"></i> ${formatTime(
             stats.totalTime
           )}</span>
@@ -507,10 +507,10 @@ function updateExamsTab() {
       </div>
       <div class="exam-stat-score">
         <div class="score-value">${stats.averageScore}%</div>
-        <div class="score-label">Score moyen</div>
+        <div class="score-label">Average Score</div>
         <div style="margin-top: 0.5rem;">
           <div style="font-size: 0.875rem; color: var(--text-secondary);">
-            Meilleur: ${stats.bestScore}%
+            Best: ${stats.bestScore}%
           </div>
           <div style="font-size: 0.875rem; color: var(--text-secondary);">
             Sessions: ${stats.sessions}
@@ -559,8 +559,8 @@ function updateSessionsTab() {
       <div class="session-header">
         <div class="session-title">${session.examName || session.examCode}</div>
         <div class="session-date">${startDate.toLocaleDateString(
-          "fr-FR"
-        )} ${startDate.toLocaleTimeString("fr-FR")}</div>
+          "en-US"
+        )} ${startDate.toLocaleTimeString("en-US")}</div>
       </div>
       <div class="session-stats">
         <div class="session-stat">
@@ -569,15 +569,15 @@ function updateSessionsTab() {
         </div>
         <div class="session-stat">
           <div class="session-stat-value">${session.correctAnswers}</div>
-          <div class="session-stat-label">Correctes</div>
+          <div class="session-stat-label">Correct</div>
         </div>
         <div class="session-stat">
           <div class="session-stat-value">${session.incorrectAnswers}</div>
-          <div class="session-stat-label">Incorrectes</div>
+          <div class="session-stat-label">Incorrect</div>
         </div>
         <div class="session-stat">
           <div class="session-stat-value">${formatTime(session.totalTime)}</div>
-          <div class="session-stat-label">Temps</div>
+          <div class="session-stat-label">Time</div>
         </div>
         <div class="session-stat">
           <div class="session-stat-value">${score}%</div>
