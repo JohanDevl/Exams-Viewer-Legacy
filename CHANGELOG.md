@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.2.0] - {PR_MERGE_DATE}
+## [2.2.0] - 2025-07-09
 
 ### Added
 
@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Automatic Markdown formatting for changelog display
 - Visual icons for changelog sections (Added, Changed, Enhanced, etc.)
 - GitHub Actions workflows for automated changelog management
-- Support for {PR_MERGE_DATE} placeholder replacement
+- Support for 2025-07-09 placeholder replacement
 
 ### Enhanced
 
@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Loading states and error handling for changelog modal
 - CSS styling with flexbox layout for icon alignment
 
-## [2.1.0] - {PR_MERGE_DATE}
+## [2.1.0] - 2025-07-09
 
 ### Added
 
