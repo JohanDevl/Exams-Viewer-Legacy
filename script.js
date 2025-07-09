@@ -2822,6 +2822,17 @@ function setupEventListeners() {
   document
     .getElementById("resetFavoritesBtn")
     .addEventListener("click", resetFavoritesData);
+
+  // Changelog
+  document
+    .getElementById("changelogBtn")
+    .addEventListener("click", displayChangelog);
+
+  document
+    .getElementById("closeChangelogModal")
+    .addEventListener("click", () => {
+      document.getElementById("changelogModal").style.display = "none";
+    });
 }
 
 // Display available exams
@@ -4016,4 +4027,230 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   devLog("Application initialized successfully");
+});
+
+// Changelog functionality
+async function displayChangelog() {
+  const modal = document.getElementById("changelogModal");
+  const content = document.getElementById("changelogContent");
+
+  // Show modal
+  modal.style.display = "flex";
+
+  // Show loading state
+  content.innerHTML = `
+    <div class="loading-spinner">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>Loading changelog...</p>
+    </div>
+  `;
+
+  try {
+    // Fetch changelog content
+    const response = await fetch("CHANGELOG.md");
+    if (!response.ok) {
+      throw new Error(`Failed to load changelog: ${response.status}`);
+    }
+
+    const markdownText = await response.text();
+    const htmlContent = renderMarkdown(markdownText);
+
+    // Display rendered content
+    content.innerHTML = `<div class="markdown-content">${htmlContent}</div>`;
+  } catch (error) {
+    devError("Error loading changelog:", error);
+    content.innerHTML = `
+      <div class="error-state">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Error Loading Changelog</h3>
+        <p>Unable to load the changelog: ${error.message}</p>
+        <button onclick="displayChangelog()" class="retry-btn">
+          <i class="fas fa-redo"></i> Retry
+        </button>
+      </div>
+    `;
+  }
+}
+
+// Simple Markdown renderer
+function renderMarkdown(markdown) {
+  let html = markdown;
+
+  // Convert headers by counting # symbols
+  html = html.replace(/^(#{1,6})\s+(.*$)/gim, (match, hashes, content) => {
+    const level = hashes.length;
+
+    // Add icons for changelog sections (level 3 headers)
+    if (level === 3) {
+      const sectionIcons = {
+        Added:
+          '<i class="fas fa-plus-circle" style="color: var(--success-color);"></i>',
+        Changed:
+          '<i class="fas fa-edit" style="color: var(--accent-color);"></i>',
+        Enhanced:
+          '<i class="fas fa-arrow-up" style="color: var(--accent-color);"></i>',
+        Fixed:
+          '<i class="fas fa-wrench" style="color: var(--warning-color);"></i>',
+        Removed:
+          '<i class="fas fa-minus-circle" style="color: var(--error-color);"></i>',
+        Deprecated:
+          '<i class="fas fa-exclamation-triangle" style="color: var(--warning-color);"></i>',
+        Security:
+          '<i class="fas fa-shield-alt" style="color: var(--error-color);"></i>',
+        Features:
+          '<i class="fas fa-star" style="color: var(--accent-color);"></i>',
+        Technical:
+          '<i class="fas fa-cog" style="color: var(--text-muted);"></i>',
+        Infrastructure:
+          '<i class="fas fa-server" style="color: var(--text-muted);"></i>',
+      };
+
+      const sectionName = content.trim();
+      const icon = sectionIcons[sectionName];
+
+      if (icon) {
+        return `<h${level}>${icon} ${content}</h${level}>`;
+      }
+    }
+
+    return `<h${level}>${content}</h${level}>`;
+  });
+
+  // Convert version badges with dates (including {PR_MERGE_DATE})
+  html = html.replace(
+    /\[([^\]]+)\] - (\{PR_MERGE_DATE\}|\d{4}-\d{2}-\d{2})/g,
+    (match, version, date) => {
+      let badgeClass = "version-badge";
+
+      if (version.includes("Unreleased")) {
+        badgeClass += " unreleased";
+      } else if (version.match(/\d+\.0\.0/)) {
+        badgeClass += " major";
+      } else if (version.match(/\d+\.\d+\.0/)) {
+        badgeClass += " minor";
+      } else {
+        badgeClass += " patch";
+      }
+
+      // Handle {PR_MERGE_DATE} placeholder
+      const displayDate =
+        date === "{PR_MERGE_DATE}"
+          ? '<span style="color: var(--warning-color, #ff9800); font-style: italic;">Pending merge</span>'
+          : `<em>${date}</em>`;
+
+      return `<span class="${badgeClass}">${version}</span> ${displayDate}`;
+    }
+  );
+
+  // Convert [Unreleased] without date
+  html = html.replace(
+    /\[Unreleased\]/g,
+    '<span class="version-badge unreleased">Unreleased</span>'
+  );
+
+  // Convert bold text
+  html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+  // Convert italic text
+  html = html.replace(/\*(.*?)\*/g, "<em>$1</em>");
+
+  // Convert inline code
+  html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+
+  // Convert links
+  html = html.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    '<a href="$2" target="_blank">$1</a>'
+  );
+
+  // Convert horizontal rules
+  html = html.replace(/^---$/gm, "<hr>");
+
+  // Convert unordered lists (handle multi-line properly)
+  const lines = html.split("\n");
+  let inList = false;
+  let listItems = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const isListItem = /^- (.*)$/.test(line);
+
+    if (isListItem) {
+      if (!inList) {
+        inList = true;
+        listItems = [];
+      }
+      listItems.push(line.replace(/^- (.*)$/, "<li>$1</li>"));
+    } else {
+      if (inList) {
+        // End of list, replace the accumulated items
+        const listHtml = `<ul>${listItems.join("")}</ul>`;
+        const startIndex = i - listItems.length;
+        lines.splice(startIndex, listItems.length, listHtml);
+        i = startIndex; // Adjust index
+        inList = false;
+        listItems = [];
+      }
+    }
+  }
+
+  // Handle list at end of content
+  if (inList && listItems.length > 0) {
+    const listHtml = `<ul>${listItems.join("")}</ul>`;
+    const startIndex = lines.length - listItems.length;
+    lines.splice(startIndex, listItems.length, listHtml);
+  }
+
+  html = lines.join("\n");
+
+  // Convert line breaks to paragraphs
+  html = html
+    .split("\n\n")
+    .map((paragraph) => {
+      paragraph = paragraph.trim();
+      if (!paragraph) return "";
+
+      // Skip if already wrapped in HTML tags
+      if (paragraph.startsWith("<") && paragraph.endsWith(">")) {
+        return paragraph;
+      }
+
+      // Skip if it's a list
+      if (paragraph.includes("<ul>") || paragraph.includes("<ol>")) {
+        return paragraph;
+      }
+
+      // Skip if it's a header
+      if (paragraph.startsWith("<h")) {
+        return paragraph;
+      }
+
+      return `<p>${paragraph}</p>`;
+    })
+    .join("\n");
+
+  // Clean up extra line breaks
+  html = html.replace(/\n\s*\n/g, "\n");
+
+  return html;
+}
+
+// Close modal when clicking outside
+document.addEventListener("click", (e) => {
+  const modal = document.getElementById("changelogModal");
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+// Keyboard shortcut for changelog (Ctrl/Cmd + H)
+document.addEventListener("keydown", (e) => {
+  if (
+    (e.ctrlKey || e.metaKey) &&
+    e.key === "h" &&
+    !e.target.matches("input, textarea")
+  ) {
+    e.preventDefault();
+    displayChangelog();
+  }
 });

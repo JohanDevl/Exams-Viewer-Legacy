@@ -1,0 +1,86 @@
+name: Update Changelog Dates
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main, master]
+
+jobs:
+  update-changelog:
+    # Only run if the PR was merged (not just closed)
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Use the default token to allow pushing back to the repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Fetch full history to ensure we can push
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Update changelog dates
+        run: |
+          # Get current date in YYYY-MM-DD format
+          MERGE_DATE=$(date +'%Y-%m-%d')
+          echo "Updating changelog with merge date: $MERGE_DATE"
+
+          # Check if CHANGELOG.md exists
+          if [ ! -f "CHANGELOG.md" ]; then
+            echo "CHANGELOG.md not found, skipping update"
+            exit 0
+          fi
+
+          # Replace {PR_MERGE_DATE} with actual merge date
+          if grep -q "{PR_MERGE_DATE}" CHANGELOG.md; then
+            sed -i "s/{PR_MERGE_DATE}/$MERGE_DATE/g" CHANGELOG.md
+            echo "Updated {PR_MERGE_DATE} placeholders with $MERGE_DATE"
+          else
+            echo "No {PR_MERGE_DATE} placeholders found in CHANGELOG.md"
+            exit 0
+          fi
+
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in CHANGELOG.md"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          fi
+
+      - name: Commit and push changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git add CHANGELOG.md
+          git commit -m "chore: update changelog dates after PR #${{ github.event.pull_request.number }} merge
+
+          - Updated {PR_MERGE_DATE} placeholders with $(date +'%Y-%m-%d')
+          - Automated by GitHub Actions"
+
+          # Push to the default branch
+          git push origin ${{ github.event.repository.default_branch }}
+
+      - name: Create summary
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          echo "## 📅 Changelog Updated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Successfully updated CHANGELOG.md with merge date: **$(date +'%Y-%m-%d')**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Merged by: @${{ github.event.pull_request.merged_by.login }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All `{PR_MERGE_DATE}` placeholders in CHANGELOG.md have been replaced with the actual merge date." >> $GITHUB_STEP_SUMMARY

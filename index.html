@@ -111,6 +111,13 @@
             >
               <i class="fas fa-book"></i>
             </button>
+            <button
+              id="changelogBtn"
+              class="changelog-btn"
+              title="View Changelog"
+            >
+              <i class="fas fa-history"></i>
+            </button>
           </div>
           <button id="exportBtn" class="export-btn" style="display: none">
             <i class="fas fa-file-pdf"></i> Export Questions to PDF
@@ -477,6 +484,26 @@
             <div class="custom-categories-list">
               <h3>Custom Categories</h3>
               <div id="customCategoriesList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Changelog Modal -->
+      <div id="changelogModal" class="modal" style="display: none">
+        <div class="modal-content changelog-modal-content">
+          <div class="modal-header">
+            <h2><i class="fas fa-history"></i> Changelog</h2>
+            <button id="closeChangelogModal" class="close-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="changelogContent" class="changelog-content">
+              <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading changelog...</p>
+              </div>
             </div>
           </div>
         </div>

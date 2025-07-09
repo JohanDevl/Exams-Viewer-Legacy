@@ -20,6 +20,7 @@ No installation required! The interface automatically detects your system theme 
 - **🎯 Highlight mode** to preview answers
 - **📄 PDF and JSON export**
 - **📈 Progress tracking** with visual charts
+- **📝 Built-in changelog viewer** with Markdown rendering
 
 ### Automation
 
@@ -28,6 +29,7 @@ No installation required! The interface automatically detects your system theme 
 - **📅 Manual triggering** via GitHub Actions
 - **🛡️ Robust error handling**
 - **📝 Detailed logging** of operations
+- **📋 Automated changelog management** with GitHub Actions
 
 ## 📊 Supported Exams
 
@@ -96,6 +98,7 @@ Exams-Viewer/
 - **[📊 Statistics System](docs/STATISTICS.md)** - Statistics system documentation
 - **[📋 API Documentation](docs/API.md)** - Technical API documentation
 - **[🔧 Scraper Improvements](docs/SCRAPER_IMPROVEMENTS.md)** - Improvement details
+- **[📝 Changelog](CHANGELOG.md)** - Project version history and changes
 
 ## ⚖️ Legal Compliance
 

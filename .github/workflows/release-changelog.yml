@@ -1,0 +1,145 @@
+name: Release Changelog Management
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version number (e.g., 2.1.1)"
+        required: true
+        type: string
+      release_date:
+        description: "Release date (YYYY-MM-DD, leave empty for today)"
+        required: false
+        type: string
+
+jobs:
+  update-changelog-for-release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Determine version and date
+        id: release-info
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            # Extract version from release tag (remove 'v' prefix if present)
+            VERSION="${{ github.event.release.tag_name }}"
+            VERSION=${VERSION#v}
+            RELEASE_DATE=$(date +'%Y-%m-%d')
+            echo "Release triggered by GitHub release: $VERSION"
+          else
+            # Manual workflow dispatch
+            VERSION="${{ github.event.inputs.version }}"
+            if [ -n "${{ github.event.inputs.release_date }}" ]; then
+              RELEASE_DATE="${{ github.event.inputs.release_date }}"
+            else
+              RELEASE_DATE=$(date +'%Y-%m-%d')
+            fi
+            echo "Manual release workflow: $VERSION"
+          fi
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "date=$RELEASE_DATE" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION, Date: $RELEASE_DATE"
+
+      - name: Update changelog for release
+        run: |
+          VERSION="${{ steps.release-info.outputs.version }}"
+          RELEASE_DATE="${{ steps.release-info.outputs.date }}"
+
+          if [ ! -f "CHANGELOG.md" ]; then
+            echo "CHANGELOG.md not found, skipping update"
+            exit 0
+          fi
+
+          echo "Updating changelog for release $VERSION on $RELEASE_DATE"
+
+          # Replace [Unreleased] with the actual version and date
+          if grep -q "\[Unreleased\]" CHANGELOG.md; then
+            sed -i "s/\[Unreleased\]/[$VERSION] - $RELEASE_DATE/" CHANGELOG.md
+            echo "Updated [Unreleased] to [$VERSION] - $RELEASE_DATE"
+            
+            # Create a temporary file with the new Unreleased section
+            cat > temp_unreleased.txt << 'EOF'
+          ## [Unreleased]
+
+          ### Added
+
+          ### Changed
+
+          ### Fixed
+
+          EOF
+            
+            # Insert the new Unreleased section before the version we just updated
+            sed -i "/^## \[$VERSION\] - $RELEASE_DATE/e cat temp_unreleased.txt" CHANGELOG.md
+            rm temp_unreleased.txt
+            
+            echo "Added new [Unreleased] section"
+          else
+            echo "No [Unreleased] section found in CHANGELOG.md"
+          fi
+
+          # Also replace any remaining {PR_MERGE_DATE} placeholders
+          if grep -q "{PR_MERGE_DATE}" CHANGELOG.md; then
+            sed -i "s/{PR_MERGE_DATE}/$RELEASE_DATE/g" CHANGELOG.md
+            echo "Updated remaining {PR_MERGE_DATE} placeholders"
+          fi
+
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in CHANGELOG.md"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          fi
+
+      - name: Commit and push changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          VERSION="${{ steps.release-info.outputs.version }}"
+          RELEASE_DATE="${{ steps.release-info.outputs.date }}"
+
+          git add CHANGELOG.md
+          git commit -m "chore: prepare changelog for release v$VERSION
+
+          - Updated [Unreleased] to [$VERSION] - $RELEASE_DATE
+          - Added new [Unreleased] section for future changes
+          - Automated by GitHub Actions"
+
+          git push origin ${{ github.event.repository.default_branch }}
+
+      - name: Create summary
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          VERSION="${{ steps.release-info.outputs.version }}"
+          RELEASE_DATE="${{ steps.release-info.outputs.date }}"
+
+          echo "## 🚀 Release Changelog Updated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Successfully prepared CHANGELOG.md for release **v$VERSION**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Changes Made:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Updated \`[Unreleased]\` to \`[$VERSION] - $RELEASE_DATE\`" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Added new \`[Unreleased]\` section for future changes" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Replaced any remaining \`{PR_MERGE_DATE}\` placeholders" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The changelog is now ready for release v$VERSION! 🎉" >> $GITHUB_STEP_SUMMARY
