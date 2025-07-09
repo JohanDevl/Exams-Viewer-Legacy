@@ -1936,8 +1936,11 @@ function updateFavoritesUI() {
   if (revisionModeBtn) {
     revisionModeBtn.classList.toggle("active", favoritesData.isRevisionMode);
     revisionModeBtn.innerHTML = favoritesData.isRevisionMode
-      ? '<i class="fas fa-book-open"></i> Exit Revision'
-      : '<i class="fas fa-book"></i> Revision Mode';
+      ? '<i class="fas fa-book-open"></i>'
+      : '<i class="fas fa-book"></i>';
+    revisionModeBtn.title = favoritesData.isRevisionMode
+      ? "Exit Revision Mode"
+      : "Enter Revision Mode";
   }
 }
 
