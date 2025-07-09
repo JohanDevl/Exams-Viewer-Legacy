@@ -171,6 +171,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- **v2.3.x**: Toolbar visibility toggle and UI declutter option
 - **v2.2.x**: Changelog functionality and improvements
 - **v2.1.x**: Favorites and study management features
 - **v2.0.x**: Complete redesign with dark mode and statistics
