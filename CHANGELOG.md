@@ -9,8 +9,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Changelog functionality with Markdown rendering
-- Changelog accessible from main interface
+- Changelog accessible from main interface with keyboard shortcut (Ctrl/Cmd+H)
 - Automatic Markdown formatting for changelog display
+- Visual icons for changelog sections (Added, Changed, Enhanced, etc.)
+- GitHub Actions workflows for automated changelog management
+- Support for {PR_MERGE_DATE} placeholder replacement
+
+### Enhanced
+
+- Markdown parser with dynamic header counting (# symbols)
+- Improved list parsing with proper multi-line handling
+- Better spacing and alignment for changelog sections
+- Loading states and error handling for changelog modal
+- CSS styling with flexbox layout for icon alignment
 
 ## [2.1.0] - {PR_MERGE_DATE}
 
