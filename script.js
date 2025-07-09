@@ -11,6 +11,7 @@ let settings = {
   showDiscussionDefault: false,
   highlightDefault: false,
   darkMode: false,
+  showQuestionToolbar: false,
 };
 
 // Available exams mapping (will be populated dynamically)
@@ -2576,6 +2577,8 @@ function loadSettings() {
     document.getElementById("highlightDefault").checked =
       settings.highlightDefault;
     document.getElementById("darkModeToggle").checked = settings.darkMode;
+    document.getElementById("showQuestionToolbar").checked =
+      settings.showQuestionToolbar;
     isHighlightEnabled = settings.highlightDefault;
     applyTheme(settings.darkMode);
   } else {
@@ -2599,6 +2602,9 @@ function saveSettings() {
   settings.highlightDefault =
     document.getElementById("highlightDefault").checked;
   settings.darkMode = document.getElementById("darkModeToggle").checked;
+  settings.showQuestionToolbar = document.getElementById(
+    "showQuestionToolbar"
+  ).checked;
   localStorage.setItem("examViewerSettings", JSON.stringify(settings));
   isHighlightEnabled = settings.highlightDefault;
   applyTheme(settings.darkMode);
@@ -2832,6 +2838,13 @@ function setupEventListeners() {
     .getElementById("closeChangelogModal")
     .addEventListener("click", () => {
       document.getElementById("changelogModal").style.display = "none";
+    });
+
+  document
+    .getElementById("showQuestionToolbar")
+    .addEventListener("change", () => {
+      saveSettings();
+      displayCurrentQuestion();
     });
 }
 
@@ -3268,6 +3281,12 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
   // Ensure question jump field max value is always up to date
   updateQuestionJumpMaxValue();
+
+  // Affichage/masquage de la barre d'outils selon le paramètre
+  const toolbar = document.getElementById("questionToolbar");
+  if (toolbar) {
+    toolbar.style.display = settings.showQuestionToolbar ? "block" : "none";
+  }
 }
 
 // Display answers
