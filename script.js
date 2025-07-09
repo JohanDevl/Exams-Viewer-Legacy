@@ -33,41 +33,115 @@ let statistics = {
 // Session data structure
 class ExamSession {
   constructor(examCode, examName) {
-    this.id = generateSessionId();
-    this.examCode = examCode;
-    this.examName = examName;
-    this.startTime = new Date().toISOString();
-    this.endTime = null;
-    this.questions = []; // Array of question attempts
-    this.totalQuestions = 0;
-    this.correctAnswers = 0;
-    this.incorrectAnswers = 0;
-    this.previewAnswers = 0; // New field for preview answers
-    this.totalTime = 0; // in seconds
-    this.completed = false;
+    this.id = this.generateCompactId(); // Use shorter session ID
+    this.ec = examCode; // Exam code - shortened
+    this.en = examName; // Exam name - shortened
+    this.st = Date.now(); // Start time as timestamp - shortened
+    this.et = null; // End time - shortened
+    this.q = []; // Array of question attempts - shortened
+    this.tq = 0; // Total questions - shortened
+    this.ca = 0; // Correct answers - shortened
+    this.ia = 0; // Incorrect answers - shortened
+    this.pa = 0; // Preview answers - shortened
+    this.tt = 0; // Total time in seconds - shortened
+    this.c = false; // Completed flag - shortened
+  }
+
+  generateCompactId() {
+    // Generate a very compact session ID
+    const now = Date.now();
+    const random = Math.random().toString(36).substr(2, 3);
+    return `${now.toString(36)}${random}`;
+  }
+
+  // Backward compatibility getters for old property names
+  get examCode() {
+    return this.ec;
+  }
+  get examName() {
+    return this.en;
+  }
+  get startTime() {
+    return this.st;
+  }
+  get endTime() {
+    return this.et;
+  }
+  get questions() {
+    return this.q;
+  }
+  get totalQuestions() {
+    return this.tq;
+  }
+  get correctAnswers() {
+    return this.ca;
+  }
+  get incorrectAnswers() {
+    return this.ia;
+  }
+  get previewAnswers() {
+    return this.pa;
+  }
+  get totalTime() {
+    return this.tt;
+  }
+  get completed() {
+    return this.c;
+  }
+
+  // Backward compatibility setters
+  set examCode(value) {
+    this.ec = value;
+  }
+  set examName(value) {
+    this.en = value;
+  }
+  set startTime(value) {
+    this.st = value;
+  }
+  set endTime(value) {
+    this.et = value;
+  }
+  set questions(value) {
+    this.q = value;
+  }
+  set totalQuestions(value) {
+    this.tq = value;
+  }
+  set correctAnswers(value) {
+    this.ca = value;
+  }
+  set incorrectAnswers(value) {
+    this.ia = value;
+  }
+  set previewAnswers(value) {
+    this.pa = value;
+  }
+  set totalTime(value) {
+    this.tt = value;
+  }
+  set completed(value) {
+    this.c = value;
   }
 }
 
 // Question attempt data structure
 class QuestionAttempt {
-  constructor(questionNumber, questionText, correctAnswers, mostVoted) {
-    this.questionNumber = questionNumber;
-    this.questionText = questionText;
-    this.correctAnswers = correctAnswers; // Array of correct answer letters
-    this.mostVoted = mostVoted; // Most voted answer from community
-    this.userAnswers = []; // Array of user selected answers
-    this.attempts = []; // Array of attempt objects
-    this.startTime = new Date().toISOString();
-    this.endTime = null;
-    this.timeSpent = 0; // in seconds
-    this.isCorrect = false;
-    this.finalScore = 0; // 0-100 percentage
-    this.resetCount = 0; // Number of times the question was reset
-    this.highlightAnswers = []; // Array of answers given when highlight mode was active
-    this.highlightButtonClicks = 0; // Number of times highlight button was clicked on this question
-    this.highlightViewCount = 0; // Number of times question was viewed with highlight already active
-    this.firstActionType = null; // Track first action: 'correct', 'incorrect', 'preview'
-    this.firstActionRecorded = false; // Flag to ensure only first action is counted
+  constructor(questionNumber, correctAnswers) {
+    this.qn = questionNumber; // Shortened property name
+    this.ca = correctAnswers; // Array of correct answer letters - shortened
+    this.ua = []; // Array of user selected answers - shortened
+    this.att = []; // Array of attempt objects - shortened
+    this.st = Date.now(); // Start time as timestamp (seconds since epoch) - shortened
+    this.et = null; // End time - shortened
+    this.ts = 0; // Time spent in seconds - shortened
+    this.ic = false; // Is correct - shortened
+    this.fs = 0; // Final score 0-100 percentage - shortened
+    this.rc = 0; // Reset count - shortened
+    this.hbc = 0; // Highlight button clicks - shortened
+    this.hvc = 0; // Highlight view count - shortened
+    this.fat = null; // First action type: 'c', 'i', 'p' (correct, incorrect, preview) - shortened
+    this.far = false; // First action recorded flag - shortened
   }
 
   addAttempt(
@@ -77,82 +151,269 @@ class QuestionAttempt {
     wasHighlightEnabled = false
   ) {
     const attempt = {
-      answers: Array.from(selectedAnswers),
-      isCorrect: isCorrect,
-      timestamp: new Date().toISOString(),
-      timeSpent: timeSpent,
-      highlightEnabled: wasHighlightEnabled,
+      a: Array.from(selectedAnswers), // answers - shortened
+      c: isCorrect, // is correct - shortened
+      h: wasHighlightEnabled, // highlight enabled - shortened
     };
-    this.attempts.push(attempt);
-    this.userAnswers = Array.from(selectedAnswers);
-    this.isCorrect = isCorrect;
-    this.timeSpent += timeSpent;
-    this.endTime = new Date().toISOString();
+    this.att.push(attempt);
+    this.ua = Array.from(selectedAnswers);
+    this.ic = isCorrect;
+    this.ts += timeSpent;
+    this.et = Date.now();
 
     // Track first action only
-    if (!this.firstActionRecorded) {
+    if (!this.far) {
       if (wasHighlightEnabled) {
-        this.firstActionType = "preview";
+        this.fat = "p"; // preview
       } else {
-        this.firstActionType = isCorrect ? "correct" : "incorrect";
+        this.fat = isCorrect ? "c" : "i"; // correct or incorrect
       }
-      this.firstActionRecorded = true;
-    }
-
-    // Track highlight answers separately
-    if (wasHighlightEnabled) {
-      this.highlightAnswers.push({
-        answers: Array.from(selectedAnswers),
-        timestamp: new Date().toISOString(),
-      });
+      this.far = true;
     }
 
     // Calculate final score based on correctness (only if highlight was not enabled)
     if (!wasHighlightEnabled) {
       if (isCorrect) {
-        this.finalScore = 100;
+        this.fs = 100;
       } else {
         // Partial credit based on correct answers selected
         const correctSelected = Array.from(selectedAnswers).filter((answer) =>
-          this.correctAnswers.includes(answer)
+          this.ca.includes(answer)
         ).length;
-        this.finalScore = Math.round(
-          (correctSelected / this.correctAnswers.length) * 100
-        );
+        this.fs = Math.round((correctSelected / this.ca.length) * 100);
       }
     }
   }
 
   addHighlightButtonClick() {
-    this.highlightButtonClicks++;
+    this.hbc++;
 
     // Track first action if this is the first interaction
-    if (!this.firstActionRecorded) {
-      this.firstActionType = "preview";
-      this.firstActionRecorded = true;
+    if (!this.far) {
+      this.fat = "p"; // preview
+      this.far = true;
     }
   }
 
   addReset() {
-    this.resetCount++;
+    this.rc++;
   }
 
   addHighlightView() {
-    this.highlightViewCount++;
+    this.hvc++;
 
     // Track first action if this is the first interaction
-    if (!this.firstActionRecorded) {
-      this.firstActionType = "preview";
-      this.firstActionRecorded = true;
+    if (!this.far) {
+      this.fat = "p"; // preview
+      this.far = true;
     }
+  }
+
+  // Helper method to get total highlight interactions
+  getTotalHighlightInteractions() {
+    return this.hbc + this.hvc;
+  }
+
+  // Backward compatibility getters for old property names
+  get questionNumber() {
+    return this.qn;
+  }
+  get correctAnswers() {
+    return this.ca;
+  }
+  get userAnswers() {
+    return this.ua;
+  }
+  get attempts() {
+    return this.att;
+  }
+  get startTime() {
+    return this.st;
+  }
+  get endTime() {
+    return this.et;
+  }
+  get timeSpent() {
+    return this.ts;
+  }
+  get isCorrect() {
+    return this.ic;
+  }
+  get finalScore() {
+    return this.fs;
+  }
+  get resetCount() {
+    return this.rc;
+  }
+  get highlightButtonClicks() {
+    return this.hbc;
+  }
+  get highlightViewCount() {
+    return this.hvc;
+  }
+  get firstActionType() {
+    return this.fat;
+  }
+  get firstActionRecorded() {
+    return this.far;
+  }
+
+  // Backward compatibility for highlightAnswers - now calculated from attempts
+  get highlightAnswers() {
+    return this.att
+      .filter((a) => a.h)
+      .map((a) => ({
+        answers: a.a,
+        timestamp: this.st, // Use question start time as fallback
+      }));
   }
 }
 
-// Generate unique session ID
-function generateSessionId() {
-  return (
-    "session_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9)
-  );
+// Simple compression functions for localStorage
+function compressData(data) {
+  try {
+    const jsonString = JSON.stringify(data);
+
+    // Enhanced compression using character frequency replacement
+    const compressionMap = {
+      // Property names
+      '"questionNumber"': '"qn"',
+      '"correctAnswers"': '"ca"',
+      '"userAnswers"': '"ua"',
+      '"attempts"': '"att"',
+      '"startTime"': '"st"',
+      '"endTime"': '"et"',
+      '"timeSpent"': '"ts"',
+      '"isCorrect"': '"ic"',
+      '"finalScore"': '"fs"',
+      '"resetCount"': '"rc"',
+      '"highlightButtonClicks"': '"hbc"',
+      '"highlightViewCount"': '"hvc"',
+      '"firstActionType"': '"fat"',
+      '"firstActionRecorded"': '"far"',
+      '"examCode"': '"ec"',
+      '"examName"': '"en"',
+      '"questions"': '"q"',
+      '"totalQuestions"': '"tq"',
+      '"incorrectAnswers"': '"ia"',
+      '"previewAnswers"': '"pa"',
+      '"totalTime"': '"tt"',
+      '"completed"': '"c"',
+      '"answers"': '"a"',
+      '"timestamp"': '"t"',
+      '"highlightEnabled"': '"h"',
+      '"sessions"': '"s"',
+      '"currentSession"': '"cs"',
+      '"totalStats"': '"tst"',
+      '"examStats"': '"es"',
+      '"totalResets"': '"tr"',
+      '"totalHighlightAttempts"': '"tha"',
+      '"averageScore"': '"as"',
+      '"bestScore"': '"bs"',
+      '"lastAttempt"': '"la"',
+      // Common values
+      '"correct"': '"c"',
+      '"incorrect"': '"i"',
+      '"preview"': '"p"',
+      // Common patterns
+      ":true": ":1",
+      ":false": ":0",
+      ":null": ":n",
+    };
+
+    let compressed = jsonString;
+    for (const [original, replacement] of Object.entries(compressionMap)) {
+      compressed = compressed.replace(new RegExp(original, "g"), replacement);
+    }
+
+    return compressed;
+  } catch (error) {
+    devError("Error compressing data:", error);
+    return JSON.stringify(data);
+  }
+}
+
+function decompressData(compressedData) {
+  try {
+    // Reverse the compression mapping
+    const decompressionMap = {
+      // Property names
+      '"qn"': '"questionNumber"',
+      '"ca"': '"correctAnswers"',
+      '"ua"': '"userAnswers"',
+      '"att"': '"attempts"',
+      '"st"': '"startTime"',
+      '"et"': '"endTime"',
+      '"ts"': '"timeSpent"',
+      '"ic"': '"isCorrect"',
+      '"fs"': '"finalScore"',
+      '"rc"': '"resetCount"',
+      '"hbc"': '"highlightButtonClicks"',
+      '"hvc"': '"highlightViewCount"',
+      '"fat"': '"firstActionType"',
+      '"far"': '"firstActionRecorded"',
+      '"ec"': '"examCode"',
+      '"en"': '"examName"',
+      '"q"': '"questions"',
+      '"tq"': '"totalQuestions"',
+      '"ia"': '"incorrectAnswers"',
+      '"pa"': '"previewAnswers"',
+      '"tt"': '"totalTime"',
+      '"c"': '"completed"',
+      '"a"': '"answers"',
+      '"t"': '"timestamp"',
+      '"h"': '"highlightEnabled"',
+      '"s"': '"sessions"',
+      '"cs"': '"currentSession"',
+      '"tst"': '"totalStats"',
+      '"es"': '"examStats"',
+      '"tr"': '"totalResets"',
+      '"tha"': '"totalHighlightAttempts"',
+      '"as"': '"averageScore"',
+      '"bs"': '"bestScore"',
+      '"la"': '"lastAttempt"',
+      // Common patterns
+      ":1": ":true",
+      ":0": ":false",
+      ":n": ":null",
+    };
+
+    let decompressed = compressedData;
+    for (const [compressed, original] of Object.entries(decompressionMap)) {
+      decompressed = decompressed.replace(
+        new RegExp(compressed, "g"),
+        original
+      );
+    }
+
+    return JSON.parse(decompressed);
+  } catch (error) {
+    devError("Error decompressing data:", error);
+    // Try to parse as regular JSON if decompression fails
+    return JSON.parse(compressedData);
+  }
+}
+
+function saveStatistics() {
+  try {
+    const compressedData = compressData(statistics);
+    localStorage.setItem("examViewerStatistics", compressedData);
+
+    // Log compression ratio in development
+    if (isDevelopmentMode()) {
+      const originalSize = JSON.stringify(statistics).length;
+      const compressedSize = compressedData.length;
+      const ratio = (
+        ((originalSize - compressedSize) / originalSize) *
+        100
+      ).toFixed(1);
+      devLog(
+        `Statistics saved - Original: ${originalSize} bytes, Compressed: ${compressedSize} bytes, Saved: ${ratio}%`
+      );
+    }
+  } catch (error) {
+    devError("Error saving statistics:", error);
+  }
 }
 
 // Statistics storage management
@@ -160,7 +421,15 @@ function loadStatistics() {
   try {
     const savedStats = localStorage.getItem("examViewerStatistics");
     if (savedStats) {
-      const parsed = JSON.parse(savedStats);
+      // Try to decompress first, fall back to regular JSON parsing
+      let parsed;
+      try {
+        parsed = decompressData(savedStats);
+      } catch (error) {
+        devLog("Decompression failed, trying regular JSON parse:", error);
+        parsed = JSON.parse(savedStats);
+      }
+
       statistics = {
         sessions: parsed.sessions || [],
         currentSession: parsed.currentSession || null,
@@ -174,8 +443,44 @@ function loadStatistics() {
         },
       };
 
-      // Migrate existing sessions to include new properties
+      // Migrate existing sessions to new optimized format
       statistics.sessions.forEach((session) => {
+        // Migrate session properties to new format
+        if (session.examCode !== undefined && session.ec === undefined) {
+          session.ec = session.examCode;
+          session.en = session.examName;
+          session.st = session.startTime
+            ? typeof session.startTime === "string"
+              ? new Date(session.startTime).getTime()
+              : session.startTime
+            : Date.now();
+          session.et = session.endTime
+            ? typeof session.endTime === "string"
+              ? new Date(session.endTime).getTime()
+              : session.endTime
+            : null;
+          session.q = session.questions || [];
+          session.tq = session.totalQuestions || 0;
+          session.ca = session.correctAnswers || 0;
+          session.ia = session.incorrectAnswers || 0;
+          session.pa = session.previewAnswers || 0;
+          session.tt = session.totalTime || 0;
+          session.c = session.completed || false;
+
+          // Clean up old properties
+          delete session.examCode;
+          delete session.examName;
+          delete session.startTime;
+          delete session.endTime;
+          delete session.questions;
+          delete session.totalQuestions;
+          delete session.correctAnswers;
+          delete session.incorrectAnswers;
+          delete session.previewAnswers;
+          delete session.totalTime;
+          delete session.completed;
+        }
+
         // Ensure session has the new properties
         if (session.totalResets === undefined) {
           session.totalResets = 0;
@@ -183,56 +488,121 @@ function loadStatistics() {
         if (session.totalHighlightAttempts === undefined) {
           session.totalHighlightAttempts = 0;
         }
-        if (session.previewAnswers === undefined) {
-          session.previewAnswers = 0;
+        if (session.pa === undefined) {
+          session.pa = 0;
         }
 
-        // Calculate values from questions if they exist
-        if (session.questions) {
-          let totalResets = 0;
-          let totalHighlightAttempts = 0;
+        // Migrate questions to new format
+        if (session.q) {
+          session.q.forEach((question) => {
+            // Migrate question properties to new format
+            if (
+              question.questionNumber !== undefined &&
+              question.qn === undefined
+            ) {
+              question.qn = question.questionNumber;
+              question.ca = question.correctAnswers || [];
+              question.ua = question.userAnswers || [];
+              question.att = question.attempts || [];
+              question.st = question.startTime
+                ? typeof question.startTime === "string"
+                  ? new Date(question.startTime).getTime()
+                  : question.startTime
+                : Date.now();
+              question.et = question.endTime
+                ? typeof question.endTime === "string"
+                  ? new Date(question.endTime).getTime()
+                  : question.endTime
+                : null;
+              question.ts = question.timeSpent || 0;
+              question.ic = question.isCorrect || false;
+              question.fs = question.finalScore || 0;
+              question.rc = question.resetCount || 0;
+              question.hbc = question.highlightButtonClicks || 0;
+              question.hvc = question.highlightViewCount || 0;
 
-          session.questions.forEach((question) => {
+              // Migrate first action type to new format
+              if (question.firstActionType === "correct") question.fat = "c";
+              else if (question.firstActionType === "incorrect")
+                question.fat = "i";
+              else if (question.firstActionType === "preview")
+                question.fat = "p";
+              else question.fat = null;
+
+              question.far = question.firstActionRecorded || false;
+
+              // Clean up old properties
+              delete question.questionNumber;
+              delete question.questionText;
+              delete question.correctAnswers;
+              delete question.mostVoted;
+              delete question.userAnswers;
+              delete question.attempts;
+              delete question.startTime;
+              delete question.endTime;
+              delete question.timeSpent;
+              delete question.isCorrect;
+              delete question.finalScore;
+              delete question.resetCount;
+              delete question.highlightAnswers;
+              delete question.highlightButtonClicks;
+              delete question.highlightViewCount;
+              delete question.firstActionType;
+              delete question.firstActionRecorded;
+            }
+
             // Migrate old questions to have new properties
-            if (question.highlightButtonClicks === undefined) {
-              question.highlightButtonClicks = 0;
+            if (question.hbc === undefined) {
+              question.hbc = 0;
             }
-            if (question.highlightViewCount === undefined) {
-              question.highlightViewCount = 0;
+            if (question.hvc === undefined) {
+              question.hvc = 0;
             }
-            if (question.firstActionType === undefined) {
-              question.firstActionType = null;
+            if (question.fat === undefined) {
+              question.fat = null;
             }
-            if (question.firstActionRecorded === undefined) {
-              question.firstActionRecorded = false;
+            if (question.far === undefined) {
+              question.far = false;
 
               // Try to determine first action from existing attempts
-              if (question.attempts && question.attempts.length > 0) {
-                const firstAttempt = question.attempts[0];
-                if (firstAttempt.highlightEnabled) {
-                  question.firstActionType = "preview";
+              if (question.att && question.att.length > 0) {
+                const firstAttempt = question.att[0];
+                if (firstAttempt.h || firstAttempt.highlightEnabled) {
+                  question.fat = "p";
                 } else {
-                  question.firstActionType = firstAttempt.isCorrect
-                    ? "correct"
-                    : "incorrect";
+                  question.fat =
+                    firstAttempt.c || firstAttempt.isCorrect ? "c" : "i";
                 }
-                question.firstActionRecorded = true;
+                question.far = true;
               }
             }
 
-            totalResets += question.resetCount || 0;
-            // Merge all highlight interactions
-            const highlightValidations = question.highlightAnswers
-              ? question.highlightAnswers.length
-              : 0;
-            const highlightClicks = question.highlightButtonClicks || 0;
-            const highlightViews = question.highlightViewCount || 0;
-            totalHighlightAttempts +=
-              highlightValidations + highlightClicks + highlightViews;
-          });
+            // Migrate attempts to new format
+            if (question.att) {
+              question.att.forEach((attempt) => {
+                if (attempt.answers !== undefined && attempt.a === undefined) {
+                  attempt.a = attempt.answers;
+                  attempt.c = attempt.isCorrect;
+                  attempt.h = attempt.highlightEnabled || false;
 
-          session.totalResets = totalResets;
-          session.totalHighlightAttempts = totalHighlightAttempts;
+                  // Clean up old properties (including redundant timestamp and timeSpent)
+                  delete attempt.answers;
+                  delete attempt.isCorrect;
+                  delete attempt.timestamp;
+                  delete attempt.timeSpent;
+                  delete attempt.highlightEnabled;
+                }
+
+                // Clean up redundant timestamp and timeSpent from optimized attempts
+                if (attempt.t !== undefined) {
+                  delete attempt.t;
+                }
+                if (attempt.ts !== undefined) {
+                  delete attempt.ts;
+                }
+              });
+            }
+          });
         }
       });
 
@@ -245,7 +615,7 @@ function loadStatistics() {
       // Save the migrated statistics
       saveStatistics();
 
-      devLog("Statistics loaded from localStorage:", statistics);
+      devLog("Statistics loaded and migrated from localStorage:", statistics);
     }
   } catch (error) {
     devError("Error loading statistics:", error);
@@ -264,15 +634,6 @@ function loadStatistics() {
   }
 }
 
-function saveStatistics() {
-  try {
-    localStorage.setItem("examViewerStatistics", JSON.stringify(statistics));
-    devLog("Statistics saved to localStorage");
-  } catch (error) {
-    devError("Error saving statistics:", error);
-  }
-}
-
 function recalculateTotalStats() {
   statistics.totalStats = {
     totalQuestions: 0,
@@ -286,31 +647,38 @@ function recalculateTotalStats() {
   };
 
   statistics.sessions.forEach((session) => {
-    statistics.totalStats.totalQuestions += session.totalQuestions;
-    statistics.totalStats.totalCorrect += session.correctAnswers;
-    statistics.totalStats.totalIncorrect += session.incorrectAnswers;
-    statistics.totalStats.totalPreview += session.previewAnswers || 0;
-    statistics.totalStats.totalTime += session.totalTime;
+    statistics.totalStats.totalQuestions +=
+      session.tq || session.totalQuestions || 0;
+    statistics.totalStats.totalCorrect +=
+      session.ca || session.correctAnswers || 0;
+    statistics.totalStats.totalIncorrect +=
+      session.ia || session.incorrectAnswers || 0;
+    statistics.totalStats.totalPreview +=
+      session.pa || session.previewAnswers || 0;
+    statistics.totalStats.totalTime += session.tt || session.totalTime || 0;
 
     // Calculate resets and highlight attempts from session questions
-    if (session.questions) {
-      session.questions.forEach((question) => {
-        statistics.totalStats.totalResets += question.resetCount || 0;
-        // Merge all highlight interactions
-        const highlightValidations = question.highlightAnswers
-          ? question.highlightAnswers.length
-          : 0;
-        const highlightClicks = question.highlightButtonClicks || 0;
-        const highlightViews = question.highlightViewCount || 0;
-        statistics.totalStats.totalHighlightAttempts +=
-          highlightValidations + highlightClicks + highlightViews;
+    const questions = session.q || session.questions || [];
+    if (questions.length > 0) {
+      questions.forEach((question) => {
+        statistics.totalStats.totalResets +=
+          question.rc || question.resetCount || 0;
+        // Calculate total highlight interactions using new method or old way
+        const highlightInteractions = question.getTotalHighlightInteractions
+          ? question.getTotalHighlightInteractions()
+          : (question.hbc || question.highlightButtonClicks || 0) +
+            (question.hvc || question.highlightViewCount || 0) +
+            (question.highlightAnswers ? question.highlightAnswers.length : 0);
+        statistics.totalStats.totalHighlightAttempts += highlightInteractions;
       });
     }
 
     // Per-exam stats
-    if (!statistics.totalStats.examStats[session.examCode]) {
-      statistics.totalStats.examStats[session.examCode] = {
-        examName: session.examName,
+    const examCode = session.ec || session.examCode;
+    const examName = session.en || session.examName;
+    if (!statistics.totalStats.examStats[examCode]) {
+      statistics.totalStats.examStats[examCode] = {
+        examName: examName,
         totalQuestions: 0,
         totalCorrect: 0,
         totalIncorrect: 0,
@@ -325,52 +693,65 @@ function recalculateTotalStats() {
       };
     }
 
-    const examStats = statistics.totalStats.examStats[session.examCode];
-    examStats.totalQuestions += session.totalQuestions;
-    examStats.totalCorrect += session.correctAnswers;
-    examStats.totalIncorrect += session.incorrectAnswers;
-    examStats.totalPreview += session.previewAnswers || 0;
-    examStats.totalTime += session.totalTime;
+    const examStats = statistics.totalStats.examStats[examCode];
+    examStats.totalQuestions += session.tq || session.totalQuestions || 0;
+    examStats.totalCorrect += session.ca || session.correctAnswers || 0;
+    examStats.totalIncorrect += session.ia || session.incorrectAnswers || 0;
+    examStats.totalPreview += session.pa || session.previewAnswers || 0;
+    examStats.totalTime += session.tt || session.totalTime || 0;
     examStats.sessions++;
 
     // Add resets and highlight attempts to exam stats
-    if (session.questions) {
-      session.questions.forEach((question) => {
-        examStats.totalResets += question.resetCount || 0;
-        // Merge all highlight interactions
-        const highlightValidations = question.highlightAnswers
-          ? question.highlightAnswers.length
-          : 0;
-        const highlightClicks = question.highlightButtonClicks || 0;
-        const highlightViews = question.highlightViewCount || 0;
-        examStats.totalHighlightAttempts +=
-          highlightValidations + highlightClicks + highlightViews;
+    if (questions.length > 0) {
+      questions.forEach((question) => {
+        examStats.totalResets += question.rc || question.resetCount || 0;
+        // Calculate total highlight interactions using new method or old way
+        const highlightInteractions = question.getTotalHighlightInteractions
+          ? question.getTotalHighlightInteractions()
+          : (question.hbc || question.highlightButtonClicks || 0) +
+            (question.hvc || question.highlightViewCount || 0) +
+            (question.highlightAnswers ? question.highlightAnswers.length : 0);
+        examStats.totalHighlightAttempts += highlightInteractions;
       });
     }
 
-    // Calculate scores (excluding preview answers from score calculation)
-    const scorableQuestions = session.correctAnswers + session.incorrectAnswers;
+    // Calculate scores (including all attempted questions: correct + incorrect + preview)
+    const sessionCorrect = session.ca || session.correctAnswers || 0;
+    const sessionIncorrect = session.ia || session.incorrectAnswers || 0;
+    const sessionPreview = session.pa || session.previewAnswers || 0;
+    const totalAttemptedQuestions =
+      sessionCorrect + sessionIncorrect + sessionPreview;
     const sessionScore =
-      scorableQuestions > 0
-        ? Math.round((session.correctAnswers / scorableQuestions) * 100)
+      totalAttemptedQuestions > 0
+        ? Math.round((sessionCorrect / totalAttemptedQuestions) * 100)
         : 0;
 
-    const examScorableQuestions =
-      examStats.totalCorrect + examStats.totalIncorrect;
+    const examTotalAttempted =
+      examStats.totalCorrect +
+      examStats.totalIncorrect +
+      examStats.totalPreview;
     examStats.averageScore =
-      examScorableQuestions > 0
-        ? Math.round((examStats.totalCorrect / examScorableQuestions) * 100)
+      examTotalAttempted > 0
+        ? Math.round((examStats.totalCorrect / examTotalAttempted) * 100)
         : 0;
 
     if (sessionScore > examStats.bestScore) {
       examStats.bestScore = sessionScore;
     }
 
+    const sessionStartTime = session.st || session.startTime;
+    const sessionStartTimeMs =
+      typeof sessionStartTime === "string"
+        ? new Date(sessionStartTime).getTime()
+        : sessionStartTime;
     if (
       !examStats.lastAttempt ||
-      new Date(session.startTime) > new Date(examStats.lastAttempt)
+      sessionStartTimeMs >
+        (typeof examStats.lastAttempt === "string"
+          ? new Date(examStats.lastAttempt).getTime()
+          : examStats.lastAttempt)
     ) {
-      examStats.lastAttempt = session.startTime;
+      examStats.lastAttempt = sessionStartTime;
     }
   });
 }
@@ -392,14 +773,12 @@ function startExamSession(examCode, examName) {
 // End current session
 function endCurrentSession() {
   if (statistics.currentSession) {
-    statistics.currentSession.endTime = new Date().toISOString();
-    statistics.currentSession.completed = true;
+    statistics.currentSession.et = Date.now();
+    statistics.currentSession.c = true;
 
     // Calculate total time
-    const startTime = new Date(statistics.currentSession.startTime);
-    const endTime = new Date(statistics.currentSession.endTime);
-    statistics.currentSession.totalTime = Math.floor(
-      (endTime - startTime) / 1000
+    statistics.currentSession.tt = Math.floor(
+      (statistics.currentSession.et - statistics.currentSession.st) / 1000
     );
 
     // Add to sessions history
@@ -417,9 +796,7 @@ function endCurrentSession() {
 // Track question attempt
 function trackQuestionAttempt(
   questionNumber,
-  questionText,
   correctAnswers,
-  mostVoted,
   selectedAnswers,
   isCorrect,
   timeSpent,
@@ -433,12 +810,7 @@ function trackQuestionAttempt(
   );
 
   if (!questionAttempt) {
-    questionAttempt = new QuestionAttempt(
-      questionNumber,
-      questionText,
-      correctAnswers,
-      mostVoted
-    );
+    questionAttempt = new QuestionAttempt(questionNumber, correctAnswers);
     statistics.currentSession.questions.push(questionAttempt);
   }
 
@@ -476,44 +848,58 @@ function updateSessionStats() {
   devLog("🔍 DEBUG: updateSessionStats() called");
   devLog(
     "🔍 DEBUG: Current session questions:",
-    statistics.currentSession.questions.length
+    (statistics.currentSession.q || statistics.currentSession.questions || [])
+      .length
   );
 
-  statistics.currentSession.questions.forEach((question) => {
+  const questions =
+    statistics.currentSession.q || statistics.currentSession.questions || [];
+  questions.forEach((question) => {
     // Only count questions that have any first action recorded
-    if (question.firstActionRecorded) {
+    const firstActionRecorded =
+      question.far !== undefined ? question.far : question.firstActionRecorded;
+
+    // Declare firstActionType outside the if block so it's accessible in devLog
+    const firstActionType = question.fat || question.firstActionType;
+
+    if (firstActionRecorded) {
       totalQuestions++;
 
       // Count based on first action type only
-      switch (question.firstActionType) {
+      switch (firstActionType) {
+        case "c":
         case "correct":
           correct++;
           break;
+        case "i":
         case "incorrect":
           incorrect++;
           break;
+        case "p":
         case "preview":
           preview++;
           break;
       }
     }
 
-    devLog(`🔍 DEBUG: Question ${question.questionNumber}:`, {
-      firstActionRecorded: question.firstActionRecorded,
-      firstActionType: question.firstActionType,
-      attempts: question.attempts.length,
+    const questionNumber = question.qn || question.questionNumber;
+    const attempts = question.att || question.attempts || [];
+    devLog(`🔍 DEBUG: Question ${questionNumber}:`, {
+      firstActionRecorded: firstActionRecorded,
+      firstActionType: firstActionType,
+      attempts: attempts.length,
     });
 
     // Count resets and highlight attempts for all questions
-    totalResets += question.resetCount || 0;
-    // Merge all highlight interactions
-    const highlightValidations = question.highlightAnswers
-      ? question.highlightAnswers.length
-      : 0;
-    const highlightClicks = question.highlightButtonClicks || 0;
-    const highlightViews = question.highlightViewCount || 0;
-    totalHighlightAttempts +=
-      highlightValidations + highlightClicks + highlightViews;
+    totalResets += question.rc || question.resetCount || 0;
+
+    // Calculate total highlight interactions using new method or old way
+    const highlightInteractions = question.getTotalHighlightInteractions
+      ? question.getTotalHighlightInteractions()
+      : (question.hbc || question.highlightButtonClicks || 0) +
+        (question.hvc || question.highlightViewCount || 0) +
+        (question.highlightAnswers ? question.highlightAnswers.length : 0);
+    totalHighlightAttempts += highlightInteractions;
   });
 
   devLog("🔍 DEBUG: Final stats:", {
@@ -525,10 +911,10 @@ function updateSessionStats() {
     totalHighlightAttempts,
   });
 
-  statistics.currentSession.correctAnswers = correct;
-  statistics.currentSession.incorrectAnswers = incorrect;
-  statistics.currentSession.previewAnswers = preview;
-  statistics.currentSession.totalQuestions = totalQuestions;
+  statistics.currentSession.ca = correct;
+  statistics.currentSession.ia = incorrect;
+  statistics.currentSession.pa = preview;
+  statistics.currentSession.tq = totalQuestions;
 
   devLog("🔍 DEBUG: Session stats updated:", {
     correctAnswers: correct,
@@ -579,16 +965,17 @@ function cleanCorruptedStatistics() {
 
   statistics.sessions.forEach((session, index) => {
     // Check if totalQuestions is way higher than actual attempted questions
-    const actualQuestions = session.questions
-      ? session.questions.filter(
-          (q) => q.attempts && q.attempts.some((a) => !a.highlightEnabled)
-        ).length
-      : 0;
+    const questions = session.q || session.questions || [];
+    const actualQuestions = questions.filter((q) => {
+      const attempts = q.att || q.attempts || [];
+      return attempts.some((a) => !(a.h || a.highlightEnabled));
+    }).length;
 
-    if (session.totalQuestions > actualQuestions * 10) {
+    const totalQuestions = session.tq || session.totalQuestions || 0;
+    if (totalQuestions > actualQuestions * 10) {
       // Threshold for corruption
       devLog(
-        `🧹 Found corrupted session ${index}: totalQuestions=${session.totalQuestions}, actualQuestions=${actualQuestions}`
+        `🧹 Found corrupted session ${index}: totalQuestions=${totalQuestions}, actualQuestions=${actualQuestions}`
       );
       hasCorruptedData = true;
     }
@@ -599,7 +986,8 @@ function cleanCorruptedStatistics() {
 
     // Recalculate all session statistics
     statistics.sessions.forEach((session) => {
-      if (session.questions) {
+      const questions = session.q || session.questions || [];
+      if (questions.length > 0) {
         let correct = 0;
         let incorrect = 0;
         let preview = 0;
@@ -607,19 +995,30 @@ function cleanCorruptedStatistics() {
         let totalResets = 0;
         let totalHighlightAttempts = 0;
 
-        session.questions.forEach((question) => {
+        questions.forEach((question) => {
           // Only count questions that have any first action recorded
-          if (question.firstActionRecorded) {
+          const firstActionRecorded =
+            question.far !== undefined
+              ? question.far
+              : question.firstActionRecorded;
+
+          // Declare firstActionType outside the if block for consistency
+          const firstActionType = question.fat || question.firstActionType;
+
+          if (firstActionRecorded) {
             totalQuestions++;
 
             // Count based on first action type only
-            switch (question.firstActionType) {
+            switch (firstActionType) {
+              case "c":
               case "correct":
                 correct++;
                 break;
+              case "i":
               case "incorrect":
                 incorrect++;
                 break;
+              case "p":
               case "preview":
                 preview++;
                 break;
@@ -627,21 +1026,23 @@ function cleanCorruptedStatistics() {
           }
 
           // Count resets and highlight attempts for all questions
-          totalResets += question.resetCount || 0;
-          // Merge all highlight interactions
-          const highlightValidations = question.highlightAnswers
-            ? question.highlightAnswers.length
-            : 0;
-          const highlightClicks = question.highlightButtonClicks || 0;
-          const highlightViews = question.highlightViewCount || 0;
-          totalHighlightAttempts +=
-            highlightValidations + highlightClicks + highlightViews;
+          totalResets += question.rc || question.resetCount || 0;
+
+          // Calculate total highlight interactions using new method or old way
+          const highlightInteractions = question.getTotalHighlightInteractions
+            ? question.getTotalHighlightInteractions()
+            : (question.hbc || question.highlightButtonClicks || 0) +
+              (question.hvc || question.highlightViewCount || 0) +
+              (question.highlightAnswers
+                ? question.highlightAnswers.length
+                : 0);
+          totalHighlightAttempts += highlightInteractions;
         });
 
-        session.correctAnswers = correct;
-        session.incorrectAnswers = incorrect;
-        session.previewAnswers = preview;
-        session.totalQuestions = totalQuestions;
+        session.ca = correct;
+        session.ia = incorrect;
+        session.pa = preview;
+        session.tq = totalQuestions;
         session.totalResets = totalResets;
         session.totalHighlightAttempts = totalHighlightAttempts;
       }
@@ -777,9 +1178,6 @@ function updateExamsTab() {
         <div class="score-label">Average Score</div>
         <div style="margin-top: 0.5rem;">
           <div style="font-size: 0.875rem; color: var(--text-secondary);">
-            Best: ${stats.bestScore}%
-          </div>
-          <div style="font-size: 0.875rem; color: var(--text-secondary);">
             Sessions: ${stats.sessions}
           </div>
         </div>
@@ -809,49 +1207,60 @@ function updateSessionsTab() {
 
   // Sort sessions by start time (most recent first)
   const sortedSessions = [...statistics.sessions].sort(
-    (a, b) => new Date(b.startTime) - new Date(a.startTime)
+    (a, b) => (b.st || b.startTime) - (a.st || a.startTime)
   );
 
   sortedSessions.forEach((session) => {
     const sessionItem = document.createElement("div");
     sessionItem.className = "session-item";
 
-    const startDate = new Date(session.startTime);
+    // Handle both old and new property names
+    const startTime = session.st || session.startTime;
+    const examName = session.en || session.examName;
+    const examCode = session.ec || session.examCode;
+    const totalQuestions = session.tq || session.totalQuestions || 0;
+    const correctAnswers = session.ca || session.correctAnswers || 0;
+    const incorrectAnswers = session.ia || session.incorrectAnswers || 0;
+    const previewAnswers = session.pa || session.previewAnswers || 0;
+    const totalTime = session.tt || session.totalTime || 0;
+    const totalResets = session.totalResets || 0;
+
+    const startDate = new Date(startTime);
     const score =
-      session.totalQuestions > 0
-        ? Math.round((session.correctAnswers / session.totalQuestions) * 100)
+      totalQuestions > 0
+        ? Math.round((correctAnswers / totalQuestions) * 100)
         : 0;
 
     sessionItem.innerHTML = `
       <div class="session-header">
-        <div class="session-title">${session.examName || session.examCode}</div>
+        <div class="session-title">${examName || examCode}</div>
         <div class="session-date">${startDate.toLocaleDateString(
           "en-US"
         )} ${startDate.toLocaleTimeString("en-US")}</div>
       </div>
       <div class="session-stats">
         <div class="session-stat">
-          <div class="session-stat-value">${session.totalQuestions}</div>
+          <div class="session-stat-value">${totalQuestions}</div>
           <div class="session-stat-label">Questions</div>
         </div>
         <div class="session-stat">
-          <div class="session-stat-value">${session.correctAnswers}</div>
+          <div class="session-stat-value">${correctAnswers}</div>
           <div class="session-stat-label">Correct</div>
         </div>
         <div class="session-stat">
-          <div class="session-stat-value">${session.incorrectAnswers}</div>
+          <div class="session-stat-value">${incorrectAnswers}</div>
           <div class="session-stat-label">Incorrect</div>
         </div>
         <div class="session-stat">
-          <div class="session-stat-value">${session.previewAnswers || 0}</div>
+          <div class="session-stat-value">${previewAnswers}</div>
           <div class="session-stat-label">Preview</div>
         </div>
         <div class="session-stat">
-          <div class="session-stat-value">${session.totalResets || 0}</div>
+          <div class="session-stat-value">${totalResets}</div>
           <div class="session-stat-label">Resets</div>
         </div>
         <div class="session-stat">
-          <div class="session-stat-value">${formatTime(session.totalTime)}</div>
+          <div class="session-stat-value">${formatTime(totalTime)}</div>
           <div class="session-stat-label">Time</div>
         </div>
         <div class="session-stat">
@@ -860,11 +1269,7 @@ function updateSessionsTab() {
         </div>
       </div>
       <div class="session-progress">
-        ${createProgressBar(
-          session.correctAnswers,
-          session.incorrectAnswers,
-          session.previewAnswers || 0
-        )}
+        ${createProgressBar(correctAnswers, incorrectAnswers, previewAnswers)}
       </div>
     `;
 
@@ -1073,13 +1478,15 @@ function createProgressChart() {
 
   // Sort sessions by date
   const sortedSessions = [...statistics.sessions].sort(
-    (a, b) => new Date(a.startTime) - new Date(b.startTime)
+    (a, b) => (a.st || a.startTime) - (b.st || b.startTime)
   );
 
   // Calculate scores for each session
   const scores = sortedSessions.map((session) => {
-    return session.totalQuestions > 0
-      ? Math.round((session.correctAnswers / session.totalQuestions) * 100)
+    const totalQuestions = session.tq || session.totalQuestions || 0;
+    const correctAnswers = session.ca || session.correctAnswers || 0;
+    return totalQuestions > 0
+      ? Math.round((correctAnswers / totalQuestions) * 100)
       : 0;
   });
 
@@ -1963,12 +2370,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
     if (!questionAttempt) {
       const mostVoted = question.most_voted || "";
       const correctAnswers = Array.from(new Set(mostVoted.split("")));
-      questionAttempt = new QuestionAttempt(
-        questionNumber,
-        question.question,
-        correctAnswers,
-        question.most_voted
-      );
+      questionAttempt = new QuestionAttempt(questionNumber, correctAnswers);
       statistics.currentSession.questions.push(questionAttempt);
     }
 
@@ -2108,8 +2510,10 @@ function updateQuestionStatistics() {
   const questionNumber = question.question_number;
 
   // Find the question attempt in statistics
-  const questionAttempt = statistics.currentSession.questions.find(
-    (q) => q.questionNumber === questionNumber
+  const questions =
+    statistics.currentSession.q || statistics.currentSession.questions || [];
+  const questionAttempt = questions.find(
+    (q) => (q.qn || q.questionNumber) === questionNumber
   );
 
   if (!questionAttempt) {
@@ -2119,18 +2523,17 @@ function updateQuestionStatistics() {
     return;
   }
 
-  const resetCount = questionAttempt.resetCount || 0;
-  const highlightValidationsCount = questionAttempt.highlightAnswers
-    ? questionAttempt.highlightAnswers.length
-    : 0;
-  const highlightButtonClicksCount = questionAttempt.highlightButtonClicks || 0;
-  const highlightViewsCount = questionAttempt.highlightViewCount || 0;
+  const resetCount = questionAttempt.rc || questionAttempt.resetCount || 0;
 
-  // Merge all highlight interactions into one counter
+  // Calculate total highlight interactions using new method or old way
   const totalHighlightInteractions =
-    highlightValidationsCount +
-    highlightButtonClicksCount +
-    highlightViewsCount;
+    questionAttempt.getTotalHighlightInteractions
+      ? questionAttempt.getTotalHighlightInteractions()
+      : (questionAttempt.hbc || questionAttempt.highlightButtonClicks || 0) +
+        (questionAttempt.hvc || questionAttempt.highlightViewCount || 0) +
+        (questionAttempt.highlightAnswers
+          ? questionAttempt.highlightAnswers.length
+          : 0);
 
   document.getElementById("resetCount").textContent = resetCount;
   document.getElementById("highlightValidationsCount").textContent =
@@ -2227,21 +2630,13 @@ function validateAnswers() {
       if (!questionAttempt) {
         const mostVoted = question.most_voted || "";
         const correctAnswers = Array.from(new Set(mostVoted.split("")));
-        questionAttempt = new QuestionAttempt(
-          questionNumber,
-          question.question,
-          correctAnswers,
-          question.most_voted
-        );
+        questionAttempt = new QuestionAttempt(questionNumber, correctAnswers);
         statistics.currentSession.questions.push(questionAttempt);
         devLog("🔍 DEBUG: Created new question attempt");
       }
 
-      // Add highlight answer
-      questionAttempt.highlightAnswers.push({
-        answers: Array.from(selectedAnswers),
-        timestamp: new Date().toISOString(),
-      });
+      // Track highlight view (no need to store the actual answers)
+      questionAttempt.addHighlightView();
 
       devLog(
         "🔍 DEBUG: Before tracking first action - firstActionRecorded:",
@@ -2334,9 +2729,7 @@ function validateAnswers() {
   try {
     trackQuestionAttempt(
       question.question_number,
-      question.question,
       Array.from(correctAnswers),
-      question.most_voted,
       selectedAnswers,
       isCorrect,
       timeSpent,
@@ -2403,12 +2796,7 @@ function resetAnswers() {
     if (!questionAttempt) {
       const mostVoted = question.most_voted || "";
       const correctAnswers = Array.from(new Set(mostVoted.split("")));
-      questionAttempt = new QuestionAttempt(
-        questionNumber,
-        question.question,
-        correctAnswers,
-        question.most_voted
-      );
+      questionAttempt = new QuestionAttempt(questionNumber, correctAnswers);
       statistics.currentSession.questions.push(questionAttempt);
     }
 
@@ -2486,12 +2874,7 @@ function toggleHighlight() {
     if (!questionAttempt) {
       const mostVoted = question.most_voted || "";
       const correctAnswers = Array.from(new Set(mostVoted.split("")));
-      questionAttempt = new QuestionAttempt(
-        questionNumber,
-        question.question,
-        correctAnswers,
-        question.most_voted
-      );
+      questionAttempt = new QuestionAttempt(questionNumber, correctAnswers);
       statistics.currentSession.questions.push(questionAttempt);
     }
 
