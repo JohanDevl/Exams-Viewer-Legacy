@@ -16,6 +16,19 @@ let settings = {
 // Available exams mapping (will be populated dynamically)
 let availableExams = {};
 
+// Favorites and Notes system
+let favoritesData = {
+  favorites: {}, // { examCode: { questionNumber: { isFavorite: true, category: 'important', note: 'text', timestamp: timestamp } } }
+  categories: ["important", "review", "difficult", "custom"], // Default categories
+  customCategories: [], // User-defined categories
+  isRevisionMode: false, // Track if we're in revision mode
+  revisionFilter: {
+    showFavorites: true,
+    showCategories: [], // Categories to show in revision mode
+    showNotes: true, // Show only questions with notes
+  },
+};
+
 // Statistics system
 let statistics = {
   sessions: [], // Array of session objects
@@ -1598,6 +1611,493 @@ function exportStatistics() {
   showSuccess("Statistics exported successfully");
 }
 
+// Favorites and Notes system functions
+function saveFavorites() {
+  try {
+    localStorage.setItem("examViewerFavorites", JSON.stringify(favoritesData));
+    devLog("Favorites saved to localStorage");
+  } catch (error) {
+    devError("Error saving favorites:", error);
+  }
+}
+
+function loadFavorites() {
+  try {
+    const savedFavorites = localStorage.getItem("examViewerFavorites");
+    if (savedFavorites) {
+      const parsed = JSON.parse(savedFavorites);
+      favoritesData = {
+        favorites: parsed.favorites || {},
+        categories: parsed.categories || [
+          "important",
+          "review",
+          "difficult",
+          "custom",
+        ],
+        customCategories: parsed.customCategories || [],
+        isRevisionMode: parsed.isRevisionMode || false,
+        revisionFilter: parsed.revisionFilter || {
+          showFavorites: true,
+          showCategories: [],
+          showNotes: true,
+        },
+      };
+      devLog("Favorites loaded from localStorage:", favoritesData);
+    }
+  } catch (error) {
+    devError("Error loading favorites:", error);
+    // Reset to default if corrupted
+    favoritesData = {
+      favorites: {},
+      categories: ["important", "review", "difficult", "custom"],
+      customCategories: [],
+      isRevisionMode: false,
+      revisionFilter: {
+        showFavorites: true,
+        showCategories: [],
+        showNotes: true,
+      },
+    };
+  }
+}
+
+function toggleQuestionFavorite(examCode, questionNumber) {
+  if (!favoritesData.favorites[examCode]) {
+    favoritesData.favorites[examCode] = {};
+  }
+
+  if (!favoritesData.favorites[examCode][questionNumber]) {
+    favoritesData.favorites[examCode][questionNumber] = {
+      isFavorite: true,
+      category: null,
+      note: "",
+      timestamp: Date.now(),
+    };
+  } else {
+    favoritesData.favorites[examCode][questionNumber].isFavorite =
+      !favoritesData.favorites[examCode][questionNumber].isFavorite;
+    favoritesData.favorites[examCode][questionNumber].timestamp = Date.now();
+  }
+
+  saveFavorites();
+  updateFavoriteButton();
+  devLog(`Toggled favorite for ${examCode} question ${questionNumber}`);
+}
+
+function setQuestionNote(examCode, questionNumber, note) {
+  if (!favoritesData.favorites[examCode]) {
+    favoritesData.favorites[examCode] = {};
+  }
+
+  if (!favoritesData.favorites[examCode][questionNumber]) {
+    favoritesData.favorites[examCode][questionNumber] = {
+      isFavorite: false,
+      category: null,
+      note: note,
+      timestamp: Date.now(),
+    };
+  } else {
+    favoritesData.favorites[examCode][questionNumber].note = note;
+    favoritesData.favorites[examCode][questionNumber].timestamp = Date.now();
+  }
+
+  saveFavorites();
+  devLog(`Set note for ${examCode} question ${questionNumber}: ${note}`);
+}
+
+function setQuestionCategory(examCode, questionNumber, category) {
+  if (!favoritesData.favorites[examCode]) {
+    favoritesData.favorites[examCode] = {};
+  }
+
+  if (!favoritesData.favorites[examCode][questionNumber]) {
+    favoritesData.favorites[examCode][questionNumber] = {
+      isFavorite: false,
+      category: category,
+      note: "",
+      timestamp: Date.now(),
+    };
+  } else {
+    favoritesData.favorites[examCode][questionNumber].category = category;
+    favoritesData.favorites[examCode][questionNumber].timestamp = Date.now();
+  }
+
+  saveFavorites();
+  devLog(
+    `Set category for ${examCode} question ${questionNumber}: ${category}`
+  );
+}
+
+function getQuestionData(examCode, questionNumber) {
+  if (
+    favoritesData.favorites[examCode] &&
+    favoritesData.favorites[examCode][questionNumber]
+  ) {
+    return favoritesData.favorites[examCode][questionNumber];
+  }
+  return {
+    isFavorite: false,
+    category: null,
+    note: "",
+    timestamp: null,
+  };
+}
+
+function addCustomCategory(categoryName) {
+  if (categoryName && !favoritesData.customCategories.includes(categoryName)) {
+    favoritesData.customCategories.push(categoryName);
+    saveFavorites();
+    devLog(`Added custom category: ${categoryName}`);
+    return true;
+  }
+  return false;
+}
+
+function removeCustomCategory(categoryName) {
+  const index = favoritesData.customCategories.indexOf(categoryName);
+  if (index > -1) {
+    favoritesData.customCategories.splice(index, 1);
+
+    // Remove this category from all questions
+    Object.keys(favoritesData.favorites).forEach((examCode) => {
+      Object.keys(favoritesData.favorites[examCode]).forEach(
+        (questionNumber) => {
+          if (
+            favoritesData.favorites[examCode][questionNumber].category ===
+            categoryName
+          ) {
+            favoritesData.favorites[examCode][questionNumber].category = null;
+          }
+        }
+      );
+    });
+
+    saveFavorites();
+    devLog(`Removed custom category: ${categoryName}`);
+    return true;
+  }
+  return false;
+}
+
+function getAllCategories() {
+  return [...favoritesData.categories, ...favoritesData.customCategories];
+}
+
+function getFavoriteQuestions(examCode) {
+  if (!favoritesData.favorites[examCode]) return [];
+
+  return Object.keys(favoritesData.favorites[examCode])
+    .filter(
+      (questionNumber) =>
+        favoritesData.favorites[examCode][questionNumber].isFavorite
+    )
+    .map((questionNumber) => parseInt(questionNumber))
+    .sort((a, b) => a - b);
+}
+
+function getQuestionsWithNotes(examCode) {
+  if (!favoritesData.favorites[examCode]) return [];
+
+  return Object.keys(favoritesData.favorites[examCode])
+    .filter(
+      (questionNumber) =>
+        favoritesData.favorites[examCode][questionNumber].note.trim() !== ""
+    )
+    .map((questionNumber) => parseInt(questionNumber))
+    .sort((a, b) => a - b);
+}
+
+function getQuestionsByCategory(examCode, category) {
+  if (!favoritesData.favorites[examCode]) return [];
+
+  return Object.keys(favoritesData.favorites[examCode])
+    .filter(
+      (questionNumber) =>
+        favoritesData.favorites[examCode][questionNumber].category === category
+    )
+    .map((questionNumber) => parseInt(questionNumber))
+    .sort((a, b) => a - b);
+}
+
+function toggleRevisionMode() {
+  favoritesData.isRevisionMode = !favoritesData.isRevisionMode;
+  saveFavorites();
+
+  if (currentExam && currentQuestions.length > 0) {
+    if (favoritesData.isRevisionMode) {
+      filterQuestionsForRevision();
+    } else {
+      // Reload the full exam - get exam code from current exam
+      const examCode = Object.keys(availableExams).find(
+        (code) =>
+          availableExams[code] === currentExam.exam_name ||
+          code === currentExam.exam_name
+      );
+      if (examCode) {
+        loadExam(examCode);
+      }
+    }
+  }
+
+  updateFavoritesUI();
+  devLog(
+    `Revision mode ${favoritesData.isRevisionMode ? "enabled" : "disabled"}`
+  );
+}
+
+function filterQuestionsForRevision() {
+  if (!currentExam || !currentQuestions.length) return;
+
+  const examCode = currentExam.exam_name || "UNKNOWN";
+  const filteredQuestions = currentQuestions.filter((question) => {
+    const questionData = getQuestionData(examCode, question.question_number);
+
+    // Check if question matches revision filter criteria
+    const matchesFavorites =
+      favoritesData.revisionFilter.showFavorites && questionData.isFavorite;
+    const matchesNotes =
+      favoritesData.revisionFilter.showNotes && questionData.note.trim() !== "";
+    const matchesCategory =
+      favoritesData.revisionFilter.showCategories.length === 0 ||
+      favoritesData.revisionFilter.showCategories.includes(
+        questionData.category
+      );
+
+    return (matchesFavorites || matchesNotes) && matchesCategory;
+  });
+
+  if (filteredQuestions.length > 0) {
+    currentQuestions = filteredQuestions;
+    currentQuestionIndex = 0;
+    displayCurrentQuestion();
+    updateQuestionJumpMaxValue();
+    showSuccess(`Revision mode: ${filteredQuestions.length} questions found`);
+  } else {
+    showError("No questions found matching revision criteria");
+    favoritesData.isRevisionMode = false;
+    saveFavorites();
+    updateFavoritesUI();
+  }
+}
+
+function exportFavorites() {
+  const dataStr = JSON.stringify(favoritesData, null, 2);
+  const dataBlob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(dataBlob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `exam-favorites-${
+    new Date().toISOString().split("T")[0]
+  }.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+  showSuccess("Favorites exported successfully!");
+}
+
+// UI update functions for favorites system
+function updateFavoritesUI() {
+  if (!currentExam || !currentQuestions.length) return;
+
+  const question = currentQuestions[currentQuestionIndex];
+  const questionNumber = question.question_number;
+  const examCode = currentExam.exam_name || "UNKNOWN";
+
+  const questionData = getQuestionData(examCode, questionNumber);
+
+  // Update favorite button
+  const favoriteBtn = document.getElementById("favoriteBtn");
+  if (favoriteBtn) {
+    favoriteBtn.classList.toggle("active", questionData.isFavorite);
+    favoriteBtn.innerHTML = questionData.isFavorite
+      ? '<i class="fas fa-star"></i>'
+      : '<i class="far fa-star"></i>';
+  }
+
+  // Update category select
+  const categorySelect = document.getElementById("categorySelect");
+  if (categorySelect) {
+    categorySelect.value = questionData.category || "";
+  }
+
+  // Update note display
+  const noteText = document.getElementById("noteTextarea");
+  const noteBtn = document.getElementById("noteBtn");
+  if (noteText && noteBtn) {
+    noteText.value = questionData.note || "";
+    noteBtn.classList.toggle("active", !!questionData.note);
+  }
+
+  // Update revision mode button
+  const revisionModeBtn = document.getElementById("revisionModeBtn");
+  if (revisionModeBtn) {
+    revisionModeBtn.classList.toggle("active", favoritesData.isRevisionMode);
+    revisionModeBtn.innerHTML = favoritesData.isRevisionMode
+      ? '<i class="fas fa-book-open"></i> Exit Revision'
+      : '<i class="fas fa-book"></i> Revision Mode';
+  }
+}
+
+function updateCategoryModal() {
+  const categoryList = document.getElementById("customCategoriesList");
+  if (!categoryList) return;
+
+  categoryList.innerHTML = "";
+
+  favoritesData.customCategories.forEach((category) => {
+    const categoryItem = document.createElement("div");
+    categoryItem.className = "category-item";
+    categoryItem.innerHTML = `
+      <span>${category}</span>
+      <button class="delete-category-btn" data-category="${category}">
+        <i class="fas fa-trash"></i>
+      </button>
+    `;
+
+    // Add delete event listener
+    const deleteBtn = categoryItem.querySelector(".delete-category-btn");
+    deleteBtn.addEventListener("click", () => {
+      if (
+        confirm(`Are you sure you want to delete the category "${category}"?`)
+      ) {
+        removeCustomCategory(category);
+        updateCategoryModal();
+        updateCategoryDropdown();
+        showSuccess(`Category "${category}" deleted successfully`);
+      }
+    });
+
+    categoryList.appendChild(categoryItem);
+  });
+}
+
+function updateCategoryDropdown() {
+  const categorySelect = document.getElementById("categorySelect");
+  if (!categorySelect) return;
+
+  const currentValue = categorySelect.value;
+  const categories = getAllCategories();
+
+  categorySelect.innerHTML = '<option value="">Select category...</option>';
+
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    categorySelect.appendChild(option);
+  });
+
+  // Restore previous value if it still exists
+  if (categories.includes(currentValue)) {
+    categorySelect.value = currentValue;
+  }
+}
+
+function setupFavoritesEventListeners() {
+  // Favorite button
+  const favoriteBtn = document.getElementById("favoriteBtn");
+  if (favoriteBtn) {
+    favoriteBtn.addEventListener("click", () => {
+      if (!currentExam || !currentQuestions.length) return;
+
+      const question = currentQuestions[currentQuestionIndex];
+      const questionNumber = question.question_number;
+      const examCode = currentExam.exam_name || "UNKNOWN";
+
+      const wasToggled = toggleQuestionFavorite(examCode, questionNumber);
+      updateFavoritesUI();
+
+      if (wasToggled.isFavorite) {
+        showSuccess("Question added to favorites");
+      } else {
+        showSuccess("Question removed from favorites");
+      }
+    });
+  }
+
+  // Category select
+  const categorySelect = document.getElementById("categorySelect");
+  if (categorySelect) {
+    categorySelect.addEventListener("change", () => {
+      if (!currentExam || !currentQuestions.length) return;
+
+      const question = currentQuestions[currentQuestionIndex];
+      const questionNumber = question.question_number;
+      const examCode = currentExam.exam_name || "UNKNOWN";
+      const category = categorySelect.value;
+
+      setQuestionCategory(examCode, questionNumber, category);
+      updateFavoritesUI();
+
+      if (category) {
+        showSuccess(`Question categorized as "${category}"`);
+      } else {
+        showSuccess("Question category removed");
+      }
+    });
+  }
+
+  // Add custom category button
+  const addCustomCategoryBtn = document.getElementById("addCategoryBtn");
+  if (addCustomCategoryBtn) {
+    addCustomCategoryBtn.addEventListener("click", () => {
+      document.getElementById("categoryModal").style.display = "flex";
+      updateCategoryModal();
+    });
+  }
+
+  // Note button
+  const noteBtn = document.getElementById("noteBtn");
+  if (noteBtn) {
+    noteBtn.addEventListener("click", () => {
+      const noteSection = document.getElementById("questionNote");
+      if (noteSection) {
+        const isVisible = noteSection.style.display !== "none";
+        noteSection.style.display = isVisible ? "none" : "block";
+
+        if (!isVisible) {
+          document.getElementById("noteTextarea").focus();
+        }
+      }
+    });
+  }
+
+  // Note save button
+  const saveNoteBtn = document.getElementById("saveNoteBtn");
+  if (saveNoteBtn) {
+    saveNoteBtn.addEventListener("click", () => {
+      if (!currentExam || !currentQuestions.length) return;
+
+      const question = currentQuestions[currentQuestionIndex];
+      const questionNumber = question.question_number;
+      const examCode = currentExam.exam_name || "UNKNOWN";
+      const noteText = document.getElementById("noteTextarea").value.trim();
+
+      setQuestionNote(examCode, questionNumber, noteText);
+      document.getElementById("questionNote").style.display = "none";
+      updateFavoritesUI();
+
+      if (noteText) {
+        showSuccess("Note saved successfully");
+      } else {
+        showSuccess("Note removed");
+      }
+    });
+  }
+
+  // Note cancel button
+  const cancelNoteBtn = document.getElementById("cancelNoteBtn");
+  if (cancelNoteBtn) {
+    cancelNoteBtn.addEventListener("click", () => {
+      document.getElementById("questionNote").style.display = "none";
+      updateFavoritesUI(); // Restore original note text
+    });
+  }
+}
+
 // Development mode detection
 const isDevelopmentMode = () => {
   return (
@@ -2024,6 +2524,40 @@ function setupEventListeners() {
 
   // Export
   document.getElementById("exportBtn").addEventListener("click", exportToPDF);
+
+  // Favorites and revision mode
+  document
+    .getElementById("revisionModeBtn")
+    .addEventListener("click", toggleRevisionMode);
+
+  // Category modal
+  document
+    .getElementById("closeCategoryModal")
+    .addEventListener("click", () => {
+      document.getElementById("categoryModal").style.display = "none";
+    });
+
+  document.getElementById("addNewCategoryBtn").addEventListener("click", () => {
+    const input = document.getElementById("newCategoryInput");
+    const categoryName = input.value.trim();
+    if (categoryName) {
+      if (addCustomCategory(categoryName)) {
+        input.value = "";
+        updateCategoryModal();
+        showSuccess(`Category "${categoryName}" added successfully`);
+      } else {
+        showError(`Category "${categoryName}" already exists`);
+      }
+    }
+  });
+
+  document
+    .getElementById("newCategoryInput")
+    .addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        document.getElementById("addNewCategoryBtn").click();
+      }
+    });
 }
 
 // Display available exams
@@ -2445,6 +2979,9 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
   // Update highlight button appearance
   updateHighlightButton();
+
+  // Update favorites UI
+  updateFavoritesUI();
 
   // Ensure question jump field max value is always up to date
   updateQuestionJumpMaxValue();
@@ -3154,4 +3691,31 @@ document.addEventListener("keydown", function (e) {
       navigateToRandomQuestion();
       break;
   }
+});
+
+// Initialize app when DOM is loaded
+document.addEventListener("DOMContentLoaded", async function () {
+  devLog("DOM loaded, initializing application...");
+
+  // Load saved data
+  loadSettings();
+  loadStatistics();
+  loadFavorites();
+
+  // Apply theme
+  applyTheme(settings.darkMode);
+
+  // Setup event listeners
+  setupEventListeners();
+  setupFavoritesEventListeners();
+
+  // Initialize category dropdown
+  updateCategoryDropdown();
+
+  // Discover and populate available exams
+  await discoverAvailableExams();
+  await populateExamDropdown();
+  await displayAvailableExams();
+
+  devLog("Application initialized successfully");
 });

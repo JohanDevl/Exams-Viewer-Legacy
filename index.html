@@ -103,6 +103,13 @@
             <button id="settingsBtn" class="settings-btn" title="Open Settings">
               <i class="fas fa-cog"></i>
             </button>
+            <button
+              id="revisionModeBtn"
+              class="revision-mode-btn"
+              title="Toggle Revision Mode"
+            >
+              <i class="fas fa-bookmark"></i>
+            </button>
           </div>
           <button id="exportBtn" class="export-btn" style="display: none">
             <i class="fas fa-file-pdf"></i> Export Questions to PDF
@@ -161,6 +168,50 @@
             <a id="examTopicsLink" href="#" target="_blank" class="exam-link">
               <i class="fas fa-external-link-alt"></i> View on ExamTopics
             </a>
+          </div>
+
+          <!-- Favorites Section -->
+          <div class="favorites-section">
+            <div class="favorites-controls">
+              <button
+                id="favoriteBtn"
+                class="favorite-btn"
+                title="Toggle Favorite"
+              >
+                <i class="far fa-star"></i>
+              </button>
+              <select id="categorySelect" class="category-select">
+                <option value="">No Category</option>
+                <option value="important">Important</option>
+                <option value="review">Review</option>
+                <option value="difficult">Difficult</option>
+              </select>
+              <button
+                id="addCategoryBtn"
+                class="add-category-btn"
+                title="Add Custom Category"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+              <button id="noteBtn" class="note-btn" title="Add Note">
+                <i class="far fa-sticky-note"></i>
+              </button>
+            </div>
+            <div id="questionNote" class="question-note" style="display: none">
+              <textarea
+                id="noteTextarea"
+                placeholder="Add your note here..."
+                rows="3"
+              ></textarea>
+              <div class="note-actions">
+                <button id="saveNoteBtn" class="save-note-btn">
+                  <i class="fas fa-save"></i> Save
+                </button>
+                <button id="cancelNoteBtn" class="cancel-note-btn">
+                  <i class="fas fa-times"></i> Cancel
+                </button>
+              </div>
+            </div>
           </div>
 
           <div class="question-content">
@@ -365,6 +416,34 @@
                 <span class="toggle-slider"></span>
                 Highlight correct answers by default
               </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Category Modal -->
+      <div id="categoryModal" class="modal" style="display: none">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2><i class="fas fa-tags"></i> Manage Categories</h2>
+            <button id="closeCategoryModal" class="close-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="category-input-group">
+              <input
+                type="text"
+                id="newCategoryInput"
+                placeholder="Enter category name..."
+              />
+              <button id="addNewCategoryBtn" class="add-new-category-btn">
+                <i class="fas fa-plus"></i> Add
+              </button>
+            </div>
+            <div class="custom-categories-list">
+              <h3>Custom Categories</h3>
+              <div id="customCategoriesList"></div>
             </div>
           </div>
         </div>
