@@ -19,7 +19,7 @@ let availableExams = {};
 // Favorites and Notes system
 let favoritesData = {
   favorites: {}, // { examCode: { questionNumber: { isFavorite: true, category: 'important', note: 'text', timestamp: timestamp } } }
-  categories: ["important", "review", "difficult", "custom"], // Default categories
+  categories: ["Important", "Review", "Difficult"], // Default categories
   customCategories: [], // User-defined categories
   isRevisionMode: false, // Track if we're in revision mode
   revisionFilter: {
@@ -1621,6 +1621,133 @@ function saveFavorites() {
   }
 }
 
+function cleanupObsoleteData() {
+  // Remove "custom" from categories if it exists
+  if (favoritesData.categories.includes("custom")) {
+    favoritesData.categories = favoritesData.categories.filter(
+      (cat) => cat !== "custom"
+    );
+    devLog("Removed obsolete 'custom' category from default categories");
+  }
+
+  // Remove "custom" from customCategories if it exists
+  if (favoritesData.customCategories.includes("custom")) {
+    favoritesData.customCategories = favoritesData.customCategories.filter(
+      (cat) => cat !== "custom"
+    );
+    devLog("Removed obsolete 'custom' category from custom categories");
+  }
+
+  // Fix category capitalization - update default categories to proper case
+  const oldToNewCategoryMap = {
+    important: "Important",
+    review: "Review",
+    difficult: "Difficult",
+  };
+
+  // Update categories array to use proper capitalization
+  favoritesData.categories = ["Important", "Review", "Difficult"];
+
+  // Update any questions that had old lowercase categories
+  Object.keys(favoritesData.favorites).forEach((examCode) => {
+    Object.keys(favoritesData.favorites[examCode]).forEach((questionNumber) => {
+      const currentCategory =
+        favoritesData.favorites[examCode][questionNumber].category;
+
+      // Remove "custom" category
+      if (currentCategory === "custom") {
+        favoritesData.favorites[examCode][questionNumber].category = null;
+        devLog(
+          `Removed 'custom' category from ${examCode} question ${questionNumber}`
+        );
+      }
+      // Update lowercase categories to proper case
+      else if (currentCategory && oldToNewCategoryMap[currentCategory]) {
+        favoritesData.favorites[examCode][questionNumber].category =
+          oldToNewCategoryMap[currentCategory];
+        devLog(
+          `Updated category from '${currentCategory}' to '${oldToNewCategoryMap[currentCategory]}' for ${examCode} question ${questionNumber}`
+        );
+      }
+    });
+  });
+
+  // Save the cleaned data
+  saveFavorites();
+}
+
+function resetFavoritesData() {
+  // Show confirmation dialog
+  const totalFavorites = Object.keys(favoritesData.favorites).reduce(
+    (total, examCode) =>
+      total + Object.keys(favoritesData.favorites[examCode]).length,
+    0
+  );
+  const totalCustomCategories = favoritesData.customCategories.length;
+
+  const confirmMessage =
+    `⚠️ WARNING: This will permanently delete ALL favorites data!\n\n` +
+    `Current data:\n` +
+    `• ${totalFavorites} favorite questions\n` +
+    `• ${totalCustomCategories} custom categories\n` +
+    `• All question notes and categorizations\n\n` +
+    `This action cannot be undone. Are you sure you want to continue?`;
+
+  if (!confirm(confirmMessage)) {
+    return false;
+  }
+
+  // Second confirmation for extra safety
+  const secondConfirm = confirm(
+    "🔴 FINAL CONFIRMATION\n\nThis will delete ALL your favorites data permanently.\n\nType 'RESET' if you're absolutely sure:"
+  );
+
+  if (!secondConfirm) {
+    return false;
+  }
+
+  try {
+    // Clear localStorage and reset to defaults
+    localStorage.removeItem("examViewerFavorites");
+    favoritesData = {
+      favorites: {},
+      categories: ["Important", "Review", "Difficult"],
+      customCategories: [],
+      isRevisionMode: false,
+      revisionFilter: {
+        showFavorites: true,
+        showCategories: [],
+        showNotes: true,
+      },
+    };
+    saveFavorites();
+
+    // Update UI
+    updateFavoritesUI();
+    updateCategoryDropdown();
+    if (document.getElementById("categoryModal").style.display !== "none") {
+      updateCategoryModal();
+    }
+
+    // Exit revision mode if active
+    if (favoritesData.isRevisionMode) {
+      toggleRevisionMode();
+    }
+
+    showSuccess("All favorites data has been reset successfully");
+    devLog("Favorites data reset to defaults", {
+      deletedFavorites: totalFavorites,
+      deletedCategories: totalCustomCategories,
+    });
+
+    return true;
+  } catch (error) {
+    devError("Error resetting favorites data:", error);
+    showError(`Failed to reset favorites data: ${error.message}`);
+    return false;
+  }
+}
+
 function loadFavorites() {
   try {
     const savedFavorites = localStorage.getItem("examViewerFavorites");
@@ -1628,12 +1755,7 @@ function loadFavorites() {
       const parsed = JSON.parse(savedFavorites);
       favoritesData = {
         favorites: parsed.favorites || {},
-        categories: parsed.categories || [
-          "important",
-          "review",
-          "difficult",
-          "custom",
-        ],
+        categories: ["Important", "Review", "Difficult"], // Force correct capitalization
         customCategories: parsed.customCategories || [],
         isRevisionMode: parsed.isRevisionMode || false,
         revisionFilter: parsed.revisionFilter || {
@@ -1642,6 +1764,10 @@ function loadFavorites() {
           showNotes: true,
         },
       };
+
+      // Clean up obsolete data
+      cleanupObsoleteData();
+
       devLog("Favorites loaded from localStorage:", favoritesData);
     }
   } catch (error) {
@@ -1649,7 +1775,7 @@ function loadFavorites() {
     // Reset to default if corrupted
     favoritesData = {
       favorites: {},
-      categories: ["important", "review", "difficult", "custom"],
+      categories: ["Important", "Review", "Difficult"],
       customCategories: [],
       isRevisionMode: false,
       revisionFilter: {
@@ -1680,8 +1806,10 @@ function toggleQuestionFavorite(examCode, questionNumber) {
   }
 
   saveFavorites();
-  updateFavoriteButton();
+  updateFavoritesUI();
   devLog(`Toggled favorite for ${examCode} question ${questionNumber}`);
+
+  return favoritesData.favorites[examCode][questionNumber];
 }
 
 function setQuestionNote(examCode, questionNumber, note) {
@@ -1881,7 +2009,22 @@ function filterQuestionsForRevision() {
 }
 
 function exportFavorites() {
-  const dataStr = JSON.stringify(favoritesData, null, 2);
+  // Create export data with metadata
+  const exportData = {
+    metadata: {
+      version: "1.0",
+      exportDate: new Date().toISOString(),
+      totalFavorites: Object.keys(favoritesData.favorites).reduce(
+        (total, examCode) =>
+          total + Object.keys(favoritesData.favorites[examCode]).length,
+        0
+      ),
+      totalCustomCategories: favoritesData.customCategories.length,
+    },
+    data: favoritesData,
+  };
+
+  const dataStr = JSON.stringify(exportData, null, 2);
   const dataBlob = new Blob([dataStr], { type: "application/json" });
   const url = URL.createObjectURL(dataBlob);
 
@@ -1895,7 +2038,133 @@ function exportFavorites() {
   document.body.removeChild(link);
 
   URL.revokeObjectURL(url);
-  showSuccess("Favorites exported successfully!");
+  showSuccess(
+    `Favorites exported successfully! (${exportData.metadata.totalFavorites} favorites, ${exportData.metadata.totalCustomCategories} custom categories)`
+  );
+}
+
+function importFavorites(file) {
+  if (!file) {
+    showError("Please select a file to import");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    try {
+      const importedData = JSON.parse(e.target.result);
+
+      // Validate import data structure
+      let dataToImport;
+      if (importedData.data && importedData.metadata) {
+        // New format with metadata
+        dataToImport = importedData.data;
+        devLog("Importing favorites with metadata:", importedData.metadata);
+      } else if (importedData.favorites) {
+        // Legacy format (direct favorites data)
+        dataToImport = importedData;
+        devLog("Importing legacy format favorites");
+      } else {
+        throw new Error("Invalid file format");
+      }
+
+      // Validate required fields
+      if (
+        !dataToImport.favorites ||
+        typeof dataToImport.favorites !== "object"
+      ) {
+        throw new Error("Invalid favorites data structure");
+      }
+
+      // Merge imported data with existing data
+      const originalFavorites = { ...favoritesData.favorites };
+      const originalCustomCategories = [...favoritesData.customCategories];
+
+      // Merge favorites
+      Object.keys(dataToImport.favorites).forEach((examCode) => {
+        if (!favoritesData.favorites[examCode]) {
+          favoritesData.favorites[examCode] = {};
+        }
+        Object.assign(
+          favoritesData.favorites[examCode],
+          dataToImport.favorites[examCode]
+        );
+      });
+
+      // Merge custom categories (avoid duplicates)
+      if (
+        dataToImport.customCategories &&
+        Array.isArray(dataToImport.customCategories)
+      ) {
+        dataToImport.customCategories.forEach((category) => {
+          if (!favoritesData.customCategories.includes(category)) {
+            favoritesData.customCategories.push(category);
+          }
+        });
+      }
+
+      // Merge revision filter settings if present
+      if (dataToImport.revisionFilter) {
+        favoritesData.revisionFilter = {
+          ...favoritesData.revisionFilter,
+          ...dataToImport.revisionFilter,
+        };
+      }
+
+      // Clean up obsolete data
+      cleanupObsoleteData();
+
+      // Save the merged data
+      saveFavorites();
+
+      // Update UI
+      updateFavoritesUI();
+      updateCategoryDropdown();
+      if (document.getElementById("categoryModal").style.display !== "none") {
+        updateCategoryModal();
+      }
+
+      // Calculate import statistics
+      const newFavorites =
+        Object.keys(favoritesData.favorites).reduce(
+          (total, examCode) =>
+            total + Object.keys(favoritesData.favorites[examCode]).length,
+          0
+        ) -
+        Object.keys(originalFavorites).reduce(
+          (total, examCode) =>
+            total + Object.keys(originalFavorites[examCode] || {}).length,
+          0
+        );
+
+      const newCategories =
+        favoritesData.customCategories.length - originalCustomCategories.length;
+
+      showSuccess(
+        `Import successful! Added ${newFavorites} favorites and ${newCategories} custom categories.`
+      );
+
+      devLog("Import completed successfully", {
+        newFavorites,
+        newCategories,
+        totalFavorites: Object.keys(favoritesData.favorites).reduce(
+          (total, examCode) =>
+            total + Object.keys(favoritesData.favorites[examCode]).length,
+          0
+        ),
+        totalCategories: favoritesData.customCategories.length,
+      });
+    } catch (error) {
+      devError("Import failed:", error);
+      showError(`Import failed: ${error.message}`);
+    }
+  };
+
+  reader.onerror = function () {
+    showError("Failed to read the file");
+  };
+
+  reader.readAsText(file);
 }
 
 // UI update functions for favorites system
@@ -1917,7 +2186,8 @@ function updateFavoritesUI() {
       : '<i class="far fa-star"></i>';
   }
 
-  // Update category select
+  // Update category dropdown and select
+  updateCategoryDropdown();
   const categorySelect = document.getElementById("categorySelect");
   if (categorySelect) {
     categorySelect.value = questionData.category || "";
@@ -2511,6 +2781,7 @@ function setupEventListeners() {
       if (addCustomCategory(categoryName)) {
         input.value = "";
         updateCategoryModal();
+        updateCategoryDropdown();
         showSuccess(`Category "${categoryName}" added successfully`);
       } else {
         showError(`Category "${categoryName}" already exists`);
@@ -2525,6 +2796,32 @@ function setupEventListeners() {
         document.getElementById("addNewCategoryBtn").click();
       }
     });
+
+  // Favorites Import/Export
+  document
+    .getElementById("exportFavoritesBtn")
+    .addEventListener("click", exportFavorites);
+
+  document
+    .getElementById("importFavoritesBtn")
+    .addEventListener("click", () => {
+      document.getElementById("importFavoritesInput").click();
+    });
+
+  document
+    .getElementById("importFavoritesInput")
+    .addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        importFavorites(file);
+        // Reset the input so the same file can be selected again
+        e.target.value = "";
+      }
+    });
+
+  document
+    .getElementById("resetFavoritesBtn")
+    .addEventListener("click", resetFavoritesData);
 }
 
 // Display available exams
@@ -2646,8 +2943,16 @@ async function loadExam(examCode) {
       // Also make the test function available in console
       if (isDevelopmentMode()) {
         window.testQuestionJumpField = testQuestionJumpField;
+        window.resetFavoritesData = resetFavoritesData;
+        window.exportFavorites = exportFavorites;
         devLog(
           "💡 You can run 'testQuestionJumpField()' in console to check field state"
+        );
+        devLog(
+          "💡 You can run 'resetFavoritesData()' in console to reset favorites data"
+        );
+        devLog(
+          "💡 You can run 'exportFavorites()' in console to test export functionality"
         );
       }
     }, 100);

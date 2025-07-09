@@ -181,10 +181,7 @@
                 <i class="far fa-star"></i>
               </button>
               <select id="categorySelect" class="category-select">
-                <option value="">No Category</option>
-                <option value="important">Important</option>
-                <option value="review">Review</option>
-                <option value="difficult">Difficult</option>
+                <option value="">Select category...</option>
               </select>
               <button
                 id="addCategoryBtn"
@@ -416,6 +413,41 @@
                 <span class="toggle-slider"></span>
                 Highlight correct answers by default
               </label>
+            </div>
+
+            <div class="setting-group">
+              <h3><i class="fas fa-star"></i> Favorites Management</h3>
+              <div class="favorites-actions">
+                <button
+                  id="exportFavoritesBtn"
+                  class="settings-action-btn export-btn"
+                >
+                  <i class="fas fa-download"></i> Export Favorites
+                </button>
+                <button
+                  id="importFavoritesBtn"
+                  class="settings-action-btn import-btn"
+                >
+                  <i class="fas fa-upload"></i> Import Favorites
+                </button>
+                <button
+                  id="resetFavoritesBtn"
+                  class="settings-action-btn reset-btn"
+                >
+                  <i class="fas fa-trash-alt"></i> Reset All Data
+                </button>
+                <input
+                  type="file"
+                  id="importFavoritesInput"
+                  accept=".json"
+                  style="display: none"
+                />
+              </div>
+              <p class="setting-description">
+                Export, import, or reset your favorites, custom categories, and
+                question categorizations. Reset will permanently delete all
+                favorites data.
+              </p>
             </div>
           </div>
         </div>
