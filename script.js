@@ -2294,43 +2294,7 @@ async function discoverAvailableExams() {
   }
 }
 
-// Initialize app
-document.addEventListener("DOMContentLoaded", async function () {
-  loadSettings();
-  loadStatistics();
-  setupEventListeners();
-
-  // Listen for system theme changes
-  if (window.matchMedia) {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", (e) => {
-      // Only auto-switch if user hasn't explicitly set a preference
-      const savedSettings = localStorage.getItem("examViewerSettings");
-      if (!savedSettings) {
-        settings.darkMode = e.matches;
-        document.getElementById("darkModeToggle").checked = e.matches;
-        applyTheme(e.matches);
-      }
-    });
-  }
-
-  // Show loading message
-  const examsList = document.getElementById("examsList");
-  examsList.innerHTML =
-    '<div class="loading-exams"><div class="spinner"></div><p>Discovering available exams...</p></div>';
-
-  // Discover available exams first
-  await discoverAvailableExams();
-  await populateExamDropdown();
-  await displayAvailableExams();
-
-  // Auto-load exam if URL has hash
-  const hash = window.location.hash.slice(1);
-  if (hash && availableExams[hash.toUpperCase()]) {
-    document.getElementById("examCode").value = hash.toUpperCase();
-    loadExam(hash.toUpperCase());
-  }
-});
+// This initialization block has been moved to the end of the file to avoid duplicate event listeners
 
 // Load settings from localStorage
 function loadSettings() {
@@ -3708,17 +3672,43 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Apply theme
   applyTheme(settings.darkMode);
 
-  // Setup event listeners
+  // Setup event listeners (only once)
   setupEventListeners();
   setupFavoritesEventListeners();
 
   // Initialize category dropdown
   updateCategoryDropdown();
 
+  // Listen for system theme changes
+  if (window.matchMedia) {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", (e) => {
+      // Only auto-switch if user hasn't explicitly set a preference
+      const savedSettings = localStorage.getItem("examViewerSettings");
+      if (!savedSettings) {
+        settings.darkMode = e.matches;
+        document.getElementById("darkModeToggle").checked = e.matches;
+        applyTheme(e.matches);
+      }
+    });
+  }
+
+  // Show loading message
+  const examsList = document.getElementById("examsList");
+  examsList.innerHTML =
+    '<div class="loading-exams"><div class="spinner"></div><p>Discovering available exams...</p></div>';
+
   // Discover and populate available exams
   await discoverAvailableExams();
   await populateExamDropdown();
   await displayAvailableExams();
+
+  // Auto-load exam if URL has hash
+  const hash = window.location.hash.slice(1);
+  if (hash && availableExams[hash.toUpperCase()]) {
+    document.getElementById("examCode").value = hash.toUpperCase();
+    loadExam(hash.toUpperCase());
+  }
 
   devLog("Application initialized successfully");
 });
