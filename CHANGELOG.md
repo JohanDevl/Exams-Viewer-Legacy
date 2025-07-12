@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - {PR_MERGE_DATE}
+
+### Added
+
+- **Advanced Search & Filters System**: Comprehensive search functionality for questions
+  - Text search across questions, answers, and comments with multi-word support
+  - Question number search with real-time auto-completion suggestions
+  - Status filters: Answered, Unanswered, and Favorite questions
+  - Smart caching system for improved search performance
+  - Combined search and filter operations support
+- **Search Interface**: Collapsible search section with intuitive UX
+  - Collapsed by default with full header clickable area
+  - Smooth animations and visual feedback
+  - Real-time result counters and status indicators
+- **Settings Integration**: Optional advanced search display
+  - New setting to show/hide advanced search (disabled by default)
+  - Automatic state cleanup when disabling search functionality
+  - Persistent user preference storage
+
+### Enhanced
+
+- **Question Navigation**: Improved navigation compatibility with filtered results
+- **Filter Counts**: Dynamic counters showing answered/unanswered/favorite question counts
+- **User Experience**: Mobile-responsive design with touch-friendly interactions
+- **Performance**: Efficient question detection across current and previous sessions
+- **Interface**: Clean and professional search interface with proper state management
+
 ## [2.3.0] - 2025-07-09
 
 ### Added
@@ -171,6 +198,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- **v2.4.x**: Advanced search and filtering system with smart auto-completion
 - **v2.3.x**: Toolbar visibility toggle and UI declutter option
 - **v2.2.x**: Changelog functionality and improvements
 - **v2.1.x**: Favorites and study management features

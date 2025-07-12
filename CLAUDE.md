@@ -75,6 +75,7 @@ data/
 - **Statistics System**: Session tracking, progress metrics, performance analytics with local storage
 - **Export Functionality**: PDF and JSON export of questions and user data
 - **Settings Management**: Persistent settings for UI preferences and display options
+- **Advanced Search & Filters**: Comprehensive search system with text search, auto-completion, and status filters
 
 ### Backend Features
 - **Smart Scraping**: Incremental updates, change detection, robust error handling
@@ -147,6 +148,68 @@ def scrape_page(link):
 - Educational use only - all exam content belongs to respective owners
 - Implement proper input sanitization and data validation
 - No sensitive data should ever be committed to repository
+
+## Advanced Search & Filters System
+
+### Architecture
+- **State Management**: Global variables `allQuestions`, `filteredQuestions`, `isSearchActive`, `searchCache`
+- **Search Logic**: Text-based search across questions, answers, and comments with multi-word support
+- **Filter System**: Status-based filters (answered, unanswered, favorites) with dynamic counting
+- **Auto-completion**: Real-time question number suggestions with visual highlighting
+- **Integration**: Seamless integration with existing navigation and statistics systems
+
+### Key Components
+- **Search Interface**: Collapsible section with full header clickability (collapsed by default)
+- **Text Search**: `searchQuestions()` function with caching for performance optimization
+- **Status Detection**: Smart detection of answered questions across current and previous sessions
+- **Filter Application**: `applyFilters()` combines search results with status filters
+- **Settings Integration**: Optional display via `showAdvancedSearch` setting (false by default)
+
+### Critical Implementation Details
+- **Question Detection**: Uses `statistics.currentSession.questions` and `statistics.sessions` to track answered questions
+- **Search State**: Maintains separate arrays for original (`allQuestions`) and filtered (`currentQuestions`) states
+- **Cache Management**: Search results cached by query string for performance
+- **Mobile Responsive**: Adaptive UI for mobile devices with touch-friendly interactions
+- **State Cleanup**: Automatic reset of search state when disabling the feature
+
+### Developer Notes
+- Always call `updateFilterCounts()` after answer validation or favorite changes
+- Search section visibility controlled by `updateAdvancedSearchVisibility()`
+- Navigation functions work with current filtered results, not original question set
+- Auto-completion shows max 5 suggestions to avoid UI clutter
+
+## Documentation and Changelog Management
+
+### Changelog Structure (`CHANGELOG.md`)
+- **Format**: Follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) standard
+- **Sections**: Added, Enhanced, Changed, Fixed, Security, etc.
+- **Versioning**: Semantic versioning (MAJOR.MINOR.PATCH)
+- **Date Placeholder**: Use `{PR_MERGE_DATE}` for automated date replacement by GitHub Actions
+- **Version History Summary**: Always update the summary section at the end when adding new versions
+
+### Critical Changelog Requirements
+1. **Date Placeholder**: NEVER replace `{PR_MERGE_DATE}` manually - it's handled by automated workflows
+2. **Version History Summary**: Always add new version entries in the summary section (e.g., `v2.4.x: Advanced search and filtering system`)
+3. **User-Focused**: Describe impact and benefits, not implementation details
+4. **Consistent Format**: Group changes by type, use bullet points, maintain proper hierarchy
+5. **Workflow Integration**: The changelog is automatically processed by `.github/workflows/update-changelog.yml`
+
+### Example Changelog Entry
+```markdown
+## [2.4.0] - {PR_MERGE_DATE}
+
+### Added
+- **Feature Name**: Brief description
+  - Sub-feature 1
+  - Sub-feature 2
+
+### Enhanced
+- **Component**: Improvement description
+
+## Version History Summary
+- **v2.4.x**: Brief version summary
+- **v2.3.x**: Previous version...
+```
 
 ## File Locations
 

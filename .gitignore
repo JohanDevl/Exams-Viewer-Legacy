@@ -75,3 +75,5 @@ update_log.json
 # Temporary files
 *.tmp
 *.temp 
+
+.claude/
