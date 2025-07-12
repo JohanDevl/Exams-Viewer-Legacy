@@ -3626,6 +3626,11 @@ function validateAnswers() {
 
   showValidationResults(correctAnswers);
   devLog("✅ validateAnswers() completed successfully");
+  
+  // Update filter counts after answer validation
+  if (typeof updateFilterCounts === 'function') {
+    updateFilterCounts();
+  }
 }
 
 // Show validation results
@@ -4620,14 +4625,14 @@ function jumpToQuestionNumber(questionNumber) {
   }
 }
 
-// Override existing navigation to work with filtered results
-const originalNavigateToQuestion = window.navigateToQuestion || function() {};
-
-function navigateToQuestion(newIndex) {
+// Navigation helper functions work with current filtered results
+function navigateToQuestionIndex(newIndex) {
   if (!currentQuestions.length) return;
   
   if (newIndex >= 0 && newIndex < currentQuestions.length) {
     currentQuestionIndex = newIndex;
+    // Reset highlight override when navigating to a new question
+    isHighlightTemporaryOverride = false;
     displayCurrentQuestion();
   }
 }
