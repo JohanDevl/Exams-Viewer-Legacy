@@ -403,6 +403,11 @@
       ],
       "comments": [
         {
+          "content": "When you create new application files in a scoped application, cross-scope access is automatically enabled by default only for:\n\n🔹 Script Includes",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "The correct answer is \"B\".\nCross-scope privileges can be granted for: Table: Read, write, create, delete records",
           "selected_answer": "B",
           "replies": []
@@ -1959,6 +1964,11 @@
           "replies": []
         },
         {
+          "content": "Scoped apps only",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "Its for scoped apps only",
           "selected_answer": "B",
           "replies": []
@@ -2025,11 +2035,6 @@
         },
         {
           "content": "Administrators can grant non-admin users the ability to develop global applications.",
-          "selected_answer": "A",
-          "replies": []
-        },
-        {
-          "content": "Applies only to scoped apps",
           "selected_answer": "A",
           "replies": []
         }
@@ -4211,6 +4216,11 @@
         {
           "content": "The question is about table not the business rule, so the correct answer is C",
           "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "check your PDI\nOnly valid choices for ACL type (from this question) are Read, Write, Delete, Create\n\n[Your PDI].service-now.com/sys_security_operation_list.do?sysparm_query=&sysparm_first_row=1&sysparm_view=",
+          "selected_answer": "B",
           "replies": []
         },
         {
@@ -6414,6 +6424,11 @@
       ],
       "comments": [
         {
+          "content": "As per this KBA, AC are also correct. The correcr answers are ABC - https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0859406",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
           "content": "This reinforces question 86 - It looks like they updated the question. Correct = AB",
           "selected_answer": "",
           "replies": []
@@ -6428,7 +6443,7 @@
       ],
       "question_number": "139",
       "link": "https://www.examtopics.com/discussions/servicenow/view/141226-exam-cad-topic-1-question-139-discussion/",
-      "most_voted": "AB",
+      "most_voted": "AC",
       "error": null
     },
     {
@@ -6808,6 +6823,28 @@
       "error": null
     },
     {
+      "question": "Which method can be used to install an application on a ServiceNow instance? (Choose three.)",
+      "answers": [
+        "A. Install from the Google Play Store.",
+        "B. Download from Stack Overflow.",
+        "C. Download and install a third-party application from the ServiceNow Store.",
+        "D. Use the \"Install\" button on the application record.",
+        "E. Install an application from the Application Repository.",
+        "F. Import an application from an XML file."
+      ],
+      "comments": [
+        {
+          "content": "CEF is correct.",
+          "selected_answer": "CEF",
+          "replies": []
+        }
+      ],
+      "question_number": "166",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305866-exam-cad-topic-1-question-166-discussion/",
+      "most_voted": "CEF",
+      "error": null
+    },
+    {
       "question": "Which are valid caller access field options? (Choose three.)",
       "answers": [
         "A. Caller Tracking",
@@ -6837,6 +6874,68 @@
       "question_number": "168",
       "link": "https://www.examtopics.com/discussions/servicenow/view/302768-exam-cad-topic-1-question-168-discussion/",
       "most_voted": "ACE",
+      "error": null
+    },
+    {
+      "question": "Which items are valid UI Action types in ServiceNow? (Choose three.)",
+      "answers": [
+        "A. List banner button",
+        "B. Form button",
+        "C. Record navigation button",
+        "D. List choice",
+        "E. Form choice",
+        "F. Workflow action"
+      ],
+      "comments": [
+        {
+          "content": "A. Appears in the banner of a list view\nB. Appears at the top or bottom of a record form.\nD. Appears as an option in the list conext menu.",
+          "selected_answer": "ABD",
+          "replies": []
+        }
+      ],
+      "question_number": "169",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305867-exam-cad-topic-1-question-169-discussion/",
+      "most_voted": "ABD",
+      "error": null
+    },
+    {
+      "question": "What occurs when an existing table is extended in ServiceNow?",
+      "answers": [
+        "A. The parent table's Access Controls are ignored when determining access to the new table's records and fields.",
+        "B. The new table does not inherit any of the fields from the parent table.",
+        "C. You must script and configure all required behaviors.",
+        "D. The new table inherits the functionality built into the parent table."
+      ],
+      "comments": [
+        {
+          "content": "The new (child) table inherits all fields, business rules, UI policies, client scripts, and other behaviors from the parent table.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "170",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305868-exam-cad-topic-1-question-170-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "An application called My App has a table, MyAppTable, with this Application Access configuration:<br/><br/>Accessible from: All application scopes<br/><br/>Can read: Selected -<br/><br/>Can delete: Not selected -<br/><br/>Allow configuration: Selected -<br/><br/>Which of the following is true based on this configuration?",
+      "answers": [
+        "A. An application developer working in another privately scoped application can write a Business Rule for the MyAppTable table which successfully deletes all records from the MyAppTable table",
+        "B. An application developer working in the My App scope can write a Business Rule for the MyAppTable table which successfully deletes all records from the MyAppTable table",
+        "C. Any Application developer can write a Business Rule which successfully deletes all records from the MyAppTable",
+        "D. No Business Rule can be written which successfully deletes all records from the MyAppTable table"
+      ],
+      "comments": [
+        {
+          "content": "Developers within the same application scope (My App) have full control, including delete operations.\nThey can write Business Rules to delete records because deleting within the same scope is allowed.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "171",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305869-exam-cad-topic-1-question-171-discussion/",
+      "most_voted": "B",
       "error": null
     }
   ]
