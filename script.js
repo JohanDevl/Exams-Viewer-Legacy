@@ -3629,6 +3629,7 @@ function validateAnswers() {
   
   // Update filter counts after answer validation
   if (typeof updateFilterCounts === 'function') {
+    console.log('🔍 Updating filter counts after validation');
     updateFilterCounts();
   }
 }
@@ -4322,9 +4323,12 @@ document.addEventListener("keydown", (e) => {
 
 // Initialize search interface
 function initializeSearchInterface() {
-  updateFilterCounts();
-  document.getElementById("searchResultsCount").textContent = 
-    `Showing all ${currentQuestions.length} questions`;
+  // Small delay to ensure statistics are loaded
+  setTimeout(() => {
+    updateFilterCounts();
+    document.getElementById("searchResultsCount").textContent = 
+      `Showing all ${currentQuestions.length} questions`;
+  }, 100);
 }
 
 // Handle search input for auto-completion
@@ -4472,15 +4476,39 @@ function applyFilters() {
   
   // Apply status filters
   if (filterAnswered || filterUnanswered || filterFavorites) {
+    // Get all answered questions for this exam
+    const examCode = currentExam ? Object.keys(availableExams).find(code => 
+      availableExams[code] === currentExam.exam_name
+    ) : null;
+    
+    const answeredQuestions = new Set();
+    
+    // Add questions from current session
+    if (statistics.currentSession && statistics.currentSession.questions) {
+      statistics.currentSession.questions.forEach(q => {
+        answeredQuestions.add(q.questionNumber.toString());
+      });
+    }
+    
+    // Add questions from all previous sessions for this exam
+    statistics.sessions.forEach(session => {
+      const sessionExamCode = session.ec || session.examCode;
+      if (sessionExamCode === examCode) {
+        const sessionQuestions = session.q || session.questions || [];
+        sessionQuestions.forEach(q => {
+          const questionNum = q.questionNumber || q.qn;
+          if (questionNum) {
+            answeredQuestions.add(questionNum.toString());
+          }
+        });
+      }
+    });
+    
     questionsToFilter = questionsToFilter.filter(question => {
-      const questionNum = parseInt(question.question_number);
-      const examCode = currentExam ? Object.keys(availableExams).find(code => 
-        availableExams[code] === currentExam.exam_name
-      ) : null;
+      const questionNum = question.question_number;
       
-      // Check if answered
-      const isAnswered = examCode && statistics.totalStats.examStats[examCode] && 
-        statistics.totalStats.examStats[examCode].questions[questionNum];
+      // Check if answered (in any session)
+      const isAnswered = answeredQuestions.has(questionNum);
       
       // Check if favorite
       const isFavorite = examCode && 
@@ -4559,7 +4587,10 @@ function updateSearchResultsDisplay() {
 
 // Update filter counts
 function updateFilterCounts() {
-  if (!currentExam || !allQuestions.length) return;
+  if (!currentExam || !allQuestions.length) {
+    console.log('🔍 updateFilterCounts: No exam or questions', {currentExam, allQuestionsLength: allQuestions.length});
+    return;
+  }
   
   const examCode = Object.keys(availableExams).find(code => 
     availableExams[code] === currentExam.exam_name
@@ -4569,12 +4600,35 @@ function updateFilterCounts() {
   let unansweredCount = 0;
   let favoritesCount = 0;
   
+  // Get all answered questions from current session and all previous sessions
+  const answeredQuestions = new Set();
+  
+  // Add questions from current session
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    statistics.currentSession.questions.forEach(q => {
+      answeredQuestions.add(q.questionNumber.toString());
+    });
+  }
+  
+  // Add questions from all previous sessions for this exam
+  statistics.sessions.forEach(session => {
+    const sessionExamCode = session.ec || session.examCode;
+    if (sessionExamCode === examCode) {
+      const sessionQuestions = session.q || session.questions || [];
+      sessionQuestions.forEach(q => {
+        const questionNum = q.questionNumber || q.qn;
+        if (questionNum) {
+          answeredQuestions.add(questionNum.toString());
+        }
+      });
+    }
+  });
+  
   allQuestions.forEach(question => {
-    const questionNum = parseInt(question.question_number);
+    const questionNum = question.question_number;
     
-    // Check if answered
-    const isAnswered = examCode && statistics.totalStats.examStats[examCode] && 
-      statistics.totalStats.examStats[examCode].questions[questionNum];
+    // Check if answered (in any session)
+    const isAnswered = answeredQuestions.has(questionNum);
     
     // Check if favorite
     const isFavorite = examCode && 
@@ -4587,6 +4641,8 @@ function updateFilterCounts() {
     
     if (isFavorite) favoritesCount++;
   });
+  
+  console.log('🔍 Filter counts updated:', {answeredCount, unansweredCount, favoritesCount, examCode, totalQuestions: allQuestions.length});
   
   document.getElementById("answeredCount").textContent = answeredCount;
   document.getElementById("unansweredCount").textContent = unansweredCount;
