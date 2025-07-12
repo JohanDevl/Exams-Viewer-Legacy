@@ -165,6 +165,68 @@
           </div>
         </div>
 
+        <!-- Advanced Search Section -->
+        <div
+          id="searchSection"
+          class="search-section"
+          style="display: none"
+        >
+          <div class="search-header">
+            <h3><i class="fas fa-search"></i> Advanced Search & Filters</h3>
+            <button id="toggleSearchBtn" class="toggle-search-btn">
+              <i class="fas fa-chevron-up"></i>
+            </button>
+          </div>
+          <div id="searchContent" class="search-content">
+            <div class="search-controls">
+              <div class="search-input-group">
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Search in questions and answers..."
+                  class="search-input"
+                />
+                <button id="searchBtn" class="search-btn">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button id="clearSearchBtn" class="clear-search-btn">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <div class="search-filters">
+                <div class="filter-group">
+                  <label class="filter-label">Status Filters:</label>
+                  <div class="filter-options">
+                    <label class="filter-checkbox">
+                      <input type="checkbox" id="filterAnswered" />
+                      <span class="checkmark"></span>
+                      Answered (<span id="answeredCount">0</span>)
+                    </label>
+                    <label class="filter-checkbox">
+                      <input type="checkbox" id="filterUnanswered" />
+                      <span class="checkmark"></span>
+                      Unanswered (<span id="unansweredCount">0</span>)
+                    </label>
+                    <label class="filter-checkbox">
+                      <input type="checkbox" id="filterFavorites" />
+                      <span class="checkmark"></span>
+                      Favorites (<span id="favoritesCount">0</span>)
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="search-results-info">
+                <span id="searchResultsCount" class="results-count">
+                  Showing all questions
+                </span>
+                <button id="resetFiltersBtn" class="reset-filters-btn" style="display: none;">
+                  <i class="fas fa-undo"></i> Reset Filters
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Question Display -->
         <div
           id="questionSection"

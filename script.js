@@ -7,6 +7,12 @@ let isValidated = false;
 let isHighlightEnabled = false;
 let isHighlightTemporaryOverride = false; // Track if user manually toggled highlight
 let questionStartTime = null; // Track when question was started
+
+// Search and filter state
+let allQuestions = []; // Store original questions array
+let filteredQuestions = []; // Store filtered results
+let isSearchActive = false; // Track if search/filter is active
+let searchCache = {}; // Cache search results for performance
 let settings = {
   showDiscussionDefault: false,
   highlightDefault: false,
@@ -2846,6 +2852,27 @@ function setupEventListeners() {
       saveSettings();
       displayCurrentQuestion();
     });
+
+  // Search functionality
+  document.getElementById("searchBtn").addEventListener("click", performSearch);
+  document.getElementById("clearSearchBtn").addEventListener("click", clearSearch);
+  document.getElementById("searchInput").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      performSearch();
+    }
+  });
+  document.getElementById("searchInput").addEventListener("input", handleSearchInput);
+  
+  // Filter checkboxes
+  document.getElementById("filterAnswered").addEventListener("change", applyFilters);
+  document.getElementById("filterUnanswered").addEventListener("change", applyFilters);
+  document.getElementById("filterFavorites").addEventListener("change", applyFilters);
+  
+  // Reset filters
+  document.getElementById("resetFiltersBtn").addEventListener("click", resetAllFilters);
+  
+  // Toggle search section
+  document.getElementById("toggleSearchBtn").addEventListener("click", toggleSearchSection);
 }
 
 // Display available exams
@@ -2922,7 +2949,7 @@ async function loadExam(examCode) {
       questions: data.questions,
     };
     // Sort questions by question_number numerically with robust comparison
-    currentQuestions = data.questions.sort((a, b) => {
+    allQuestions = data.questions.sort((a, b) => {
       const numA = parseInt(a.question_number, 10);
       const numB = parseInt(b.question_number, 10);
 
@@ -2933,6 +2960,12 @@ async function loadExam(examCode) {
 
       return numA - numB;
     });
+    
+    // Initialize current questions and reset search state
+    currentQuestions = [...allQuestions];
+    filteredQuestions = [];
+    isSearchActive = false;
+    searchCache = {};
     currentQuestionIndex = 0;
 
     // Debug: Log first few questions to verify sorting
@@ -2952,10 +2985,14 @@ async function loadExam(examCode) {
     // Update UI
     document.getElementById("availableExams").style.display = "none";
     document.getElementById("navigationSection").style.display = "block";
+    document.getElementById("searchSection").style.display = "block";
     document.getElementById("questionSection").style.display = "block";
     document.getElementById("exportBtn").style.display = "flex";
     document.getElementById("homeBtn").style.display = "inline-block";
 
+    // Initialize search UI
+    initializeSearchInterface();
+    
     displayCurrentQuestion();
 
     // Update question jump field max value immediately and with delay
@@ -4273,3 +4310,338 @@ document.addEventListener("keydown", (e) => {
     displayChangelog();
   }
 });
+
+// ===========================================
+// SEARCH AND FILTER FUNCTIONALITY
+// ===========================================
+
+// Initialize search interface
+function initializeSearchInterface() {
+  updateFilterCounts();
+  document.getElementById("searchResultsCount").textContent = 
+    `Showing all ${currentQuestions.length} questions`;
+}
+
+// Handle search input for auto-completion
+function handleSearchInput() {
+  const searchInput = document.getElementById("searchInput");
+  const query = searchInput.value.trim();
+  
+  // If query looks like a number, show question number suggestions
+  if (/^\d+$/.test(query) && currentQuestions.length > 0) {
+    showQuestionNumberSuggestions(query);
+  } else {
+    hideAutocompleteSuggestions();
+  }
+}
+
+// Show question number auto-completion
+function showQuestionNumberSuggestions(query) {
+  const matchingQuestions = currentQuestions.filter(q => 
+    q.question_number && q.question_number.toString().startsWith(query)
+  ).slice(0, 5); // Limit to 5 suggestions
+  
+  if (matchingQuestions.length === 0) {
+    hideAutocompleteSuggestions();
+    return;
+  }
+  
+  let autocompleteDiv = document.getElementById("searchAutocomplete");
+  if (!autocompleteDiv) {
+    autocompleteDiv = document.createElement("div");
+    autocompleteDiv.id = "searchAutocomplete";
+    autocompleteDiv.className = "search-autocomplete";
+    document.querySelector(".search-input-group").style.position = "relative";
+    document.querySelector(".search-input-group").appendChild(autocompleteDiv);
+  }
+  
+  autocompleteDiv.innerHTML = matchingQuestions.map(q => 
+    `<div class="autocomplete-item" data-question-number="${q.question_number}">
+      Question <span class="question-number-highlight">#${q.question_number}</span>
+    </div>`
+  ).join("");
+  
+  // Add click handlers
+  autocompleteDiv.querySelectorAll(".autocomplete-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const questionNumber = item.dataset.questionNumber;
+      jumpToQuestionNumber(questionNumber);
+      hideAutocompleteSuggestions();
+    });
+  });
+  
+  autocompleteDiv.style.display = "block";
+}
+
+// Hide auto-completion suggestions
+function hideAutocompleteSuggestions() {
+  const autocompleteDiv = document.getElementById("searchAutocomplete");
+  if (autocompleteDiv) {
+    autocompleteDiv.style.display = "none";
+  }
+}
+
+// Perform search
+function performSearch() {
+  const searchInput = document.getElementById("searchInput");
+  const query = searchInput.value.trim().toLowerCase();
+  
+  hideAutocompleteSuggestions();
+  
+  if (!query) {
+    clearSearch();
+    return;
+  }
+  
+  // Check cache first
+  const cacheKey = `search_${query}`;
+  if (searchCache[cacheKey]) {
+    applySearchResults(searchCache[cacheKey], query);
+    return;
+  }
+  
+  // Perform search
+  const results = searchQuestions(query);
+  searchCache[cacheKey] = results;
+  applySearchResults(results, query);
+}
+
+// Search questions by text
+function searchQuestions(query) {
+  const words = query.split(/\s+/).filter(word => word.length > 0);
+  
+  return allQuestions.filter(question => {
+    // Search in question text
+    const questionText = (question.question || "").toLowerCase();
+    
+    // Search in answers
+    const answersText = (question.answers || []).join(" ").toLowerCase();
+    
+    // Search in comments
+    const commentsText = (question.comments || [])
+      .map(comment => comment.content || "")
+      .join(" ")
+      .toLowerCase();
+    
+    // Combined search text
+    const searchText = `${questionText} ${answersText} ${commentsText}`;
+    
+    // Check if all words are found
+    return words.every(word => searchText.includes(word));
+  });
+}
+
+// Apply search results
+function applySearchResults(results, query) {
+  filteredQuestions = results;
+  isSearchActive = true;
+  currentQuestionIndex = 0;
+  
+  // Apply any active filters on top of search results
+  applyFilters();
+  
+  updateSearchResultsDisplay();
+  
+  if (currentQuestions.length > 0) {
+    displayCurrentQuestion();
+  } else {
+    showError(`No questions found matching "${query}"`);
+  }
+}
+
+// Clear search
+function clearSearch() {
+  document.getElementById("searchInput").value = "";
+  hideAutocompleteSuggestions();
+  resetAllFilters();
+}
+
+// Apply filters based on status checkboxes
+function applyFilters() {
+  const filterAnswered = document.getElementById("filterAnswered").checked;
+  const filterUnanswered = document.getElementById("filterUnanswered").checked;
+  const filterFavorites = document.getElementById("filterFavorites").checked;
+  
+  // Start with either search results or all questions
+  let questionsToFilter = isSearchActive ? filteredQuestions : allQuestions;
+  
+  // Apply status filters
+  if (filterAnswered || filterUnanswered || filterFavorites) {
+    questionsToFilter = questionsToFilter.filter(question => {
+      const questionNum = parseInt(question.question_number);
+      const examCode = currentExam ? Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam.exam_name
+      ) : null;
+      
+      // Check if answered
+      const isAnswered = examCode && statistics.totalStats.examStats[examCode] && 
+        statistics.totalStats.examStats[examCode].questions[questionNum];
+      
+      // Check if favorite
+      const isFavorite = examCode && 
+        favoritesData.favorites[examCode] && 
+        favoritesData.favorites[examCode][questionNum] && 
+        favoritesData.favorites[examCode][questionNum].isFavorite;
+      
+      let matchesFilter = false;
+      
+      if (filterAnswered && isAnswered) matchesFilter = true;
+      if (filterUnanswered && !isAnswered) matchesFilter = true;
+      if (filterFavorites && isFavorite) matchesFilter = true;
+      
+      return matchesFilter;
+    });
+  }
+  
+  currentQuestions = questionsToFilter;
+  currentQuestionIndex = 0;
+  
+  updateSearchResultsDisplay();
+  updateFilterCounts();
+  
+  if (currentQuestions.length > 0) {
+    displayCurrentQuestion();
+  }
+}
+
+// Reset all filters
+function resetAllFilters() {
+  // Clear search
+  document.getElementById("searchInput").value = "";
+  
+  // Clear filter checkboxes
+  document.getElementById("filterAnswered").checked = false;
+  document.getElementById("filterUnanswered").checked = false;
+  document.getElementById("filterFavorites").checked = false;
+  
+  // Reset state
+  currentQuestions = [...allQuestions];
+  filteredQuestions = [];
+  isSearchActive = false;
+  searchCache = {};
+  currentQuestionIndex = 0;
+  
+  updateSearchResultsDisplay();
+  updateFilterCounts();
+  hideAutocompleteSuggestions();
+  
+  if (currentQuestions.length > 0) {
+    displayCurrentQuestion();
+  }
+}
+
+// Update search results display
+function updateSearchResultsDisplay() {
+  const resultsCount = document.getElementById("searchResultsCount");
+  const resetBtn = document.getElementById("resetFiltersBtn");
+  
+  const isFiltered = isSearchActive || 
+    document.getElementById("filterAnswered").checked ||
+    document.getElementById("filterUnanswered").checked ||
+    document.getElementById("filterFavorites").checked;
+  
+  if (isFiltered) {
+    resultsCount.textContent = 
+      `Showing ${currentQuestions.length} of ${allQuestions.length} questions`;
+    resultsCount.classList.add("filtered");
+    resetBtn.style.display = "flex";
+  } else {
+    resultsCount.textContent = `Showing all ${currentQuestions.length} questions`;
+    resultsCount.classList.remove("filtered");
+    resetBtn.style.display = "none";
+  }
+}
+
+// Update filter counts
+function updateFilterCounts() {
+  if (!currentExam || !allQuestions.length) return;
+  
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  let answeredCount = 0;
+  let unansweredCount = 0;
+  let favoritesCount = 0;
+  
+  allQuestions.forEach(question => {
+    const questionNum = parseInt(question.question_number);
+    
+    // Check if answered
+    const isAnswered = examCode && statistics.totalStats.examStats[examCode] && 
+      statistics.totalStats.examStats[examCode].questions[questionNum];
+    
+    // Check if favorite
+    const isFavorite = examCode && 
+      favoritesData.favorites[examCode] && 
+      favoritesData.favorites[examCode][questionNum] && 
+      favoritesData.favorites[examCode][questionNum].isFavorite;
+    
+    if (isAnswered) answeredCount++;
+    else unansweredCount++;
+    
+    if (isFavorite) favoritesCount++;
+  });
+  
+  document.getElementById("answeredCount").textContent = answeredCount;
+  document.getElementById("unansweredCount").textContent = unansweredCount;
+  document.getElementById("favoritesCount").textContent = favoritesCount;
+}
+
+// Toggle search section
+function toggleSearchSection() {
+  const searchContent = document.getElementById("searchContent");
+  const toggleBtn = document.getElementById("toggleSearchBtn");
+  
+  if (searchContent.classList.contains("collapsed")) {
+    searchContent.classList.remove("collapsed");
+    toggleBtn.classList.remove("collapsed");
+    searchContent.style.display = "block";
+  } else {
+    searchContent.classList.add("collapsed");
+    toggleBtn.classList.add("collapsed");
+    searchContent.style.display = "none";
+  }
+}
+
+// Jump to specific question number
+function jumpToQuestionNumber(questionNumber) {
+  const targetIndex = currentQuestions.findIndex(q => 
+    q.question_number === questionNumber.toString()
+  );
+  
+  if (targetIndex !== -1) {
+    currentQuestionIndex = targetIndex;
+    displayCurrentQuestion();
+    document.getElementById("searchInput").value = "";
+    showSuccess(`Jumped to question #${questionNumber}`);
+  } else {
+    showError(`Question #${questionNumber} not found in current view`);
+  }
+}
+
+// Override existing navigation to work with filtered results
+const originalNavigateToQuestion = window.navigateToQuestion || function() {};
+
+function navigateToQuestion(newIndex) {
+  if (!currentQuestions.length) return;
+  
+  if (newIndex >= 0 && newIndex < currentQuestions.length) {
+    currentQuestionIndex = newIndex;
+    displayCurrentQuestion();
+  }
+}
+
+// Override jump to question to work with current question set
+function jumpToQuestion() {
+  const jumpInput = document.getElementById("questionJump");
+  const questionNumber = parseInt(jumpInput.value);
+  
+  if (isNaN(questionNumber)) {
+    showError("Please enter a valid question number");
+    return;
+  }
+  
+  jumpToQuestionNumber(questionNumber.toString());
+  jumpInput.value = "";
+}
