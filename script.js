@@ -18,6 +18,7 @@ let settings = {
   highlightDefault: false,
   darkMode: false,
   showQuestionToolbar: false,
+  showAdvancedSearch: false,
 };
 
 // Available exams mapping (will be populated dynamically)
@@ -2585,6 +2586,8 @@ function loadSettings() {
     document.getElementById("darkModeToggle").checked = settings.darkMode;
     document.getElementById("showQuestionToolbar").checked =
       settings.showQuestionToolbar;
+    document.getElementById("showAdvancedSearch").checked =
+      settings.showAdvancedSearch;
     isHighlightEnabled = settings.highlightDefault;
     applyTheme(settings.darkMode);
   } else {
@@ -2610,6 +2613,9 @@ function saveSettings() {
   settings.darkMode = document.getElementById("darkModeToggle").checked;
   settings.showQuestionToolbar = document.getElementById(
     "showQuestionToolbar"
+  ).checked;
+  settings.showAdvancedSearch = document.getElementById(
+    "showAdvancedSearch"
   ).checked;
   localStorage.setItem("examViewerSettings", JSON.stringify(settings));
   isHighlightEnabled = settings.highlightDefault;
@@ -2852,6 +2858,13 @@ function setupEventListeners() {
       saveSettings();
       displayCurrentQuestion();
     });
+  
+  document
+    .getElementById("showAdvancedSearch")
+    .addEventListener("change", () => {
+      saveSettings();
+      updateAdvancedSearchVisibility();
+    });
 
   // Search functionality
   document.getElementById("searchBtn").addEventListener("click", performSearch);
@@ -2989,13 +3002,17 @@ async function loadExam(examCode) {
     // Update UI
     document.getElementById("availableExams").style.display = "none";
     document.getElementById("navigationSection").style.display = "block";
-    document.getElementById("searchSection").style.display = "block";
     document.getElementById("questionSection").style.display = "block";
     document.getElementById("exportBtn").style.display = "flex";
     document.getElementById("homeBtn").style.display = "inline-block";
 
-    // Initialize search UI
-    initializeSearchInterface();
+    // Show/hide advanced search based on settings
+    updateAdvancedSearchVisibility();
+    
+    // Initialize search UI if enabled
+    if (settings.showAdvancedSearch) {
+      initializeSearchInterface();
+    }
     
     displayCurrentQuestion();
 
@@ -4323,6 +4340,24 @@ document.addEventListener("keydown", (e) => {
 // ===========================================
 // SEARCH AND FILTER FUNCTIONALITY
 // ===========================================
+
+// Update advanced search visibility based on settings
+function updateAdvancedSearchVisibility() {
+  const searchSection = document.getElementById("searchSection");
+  if (settings.showAdvancedSearch) {
+    searchSection.style.display = "block";
+    // Initialize search UI if exam is loaded
+    if (currentExam && allQuestions.length > 0) {
+      initializeSearchInterface();
+    }
+  } else {
+    searchSection.style.display = "none";
+    // Reset search state when hiding
+    if (isSearchActive) {
+      resetAllFilters();
+    }
+  }
+}
 
 // Initialize search interface
 function initializeSearchInterface() {
