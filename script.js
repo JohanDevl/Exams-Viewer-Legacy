@@ -2871,8 +2871,12 @@ function setupEventListeners() {
   // Reset filters
   document.getElementById("resetFiltersBtn").addEventListener("click", resetAllFilters);
   
-  // Toggle search section
-  document.getElementById("toggleSearchBtn").addEventListener("click", toggleSearchSection);
+  // Toggle search section - both header and button should work
+  document.getElementById("searchHeader").addEventListener("click", toggleSearchSection);
+  document.getElementById("toggleSearchBtn").addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent double trigger
+    toggleSearchSection();
+  });
 }
 
 // Display available exams
@@ -3629,7 +3633,6 @@ function validateAnswers() {
   
   // Update filter counts after answer validation
   if (typeof updateFilterCounts === 'function') {
-    console.log('🔍 Updating filter counts after validation');
     updateFilterCounts();
   }
 }
@@ -4587,10 +4590,7 @@ function updateSearchResultsDisplay() {
 
 // Update filter counts
 function updateFilterCounts() {
-  if (!currentExam || !allQuestions.length) {
-    console.log('🔍 updateFilterCounts: No exam or questions', {currentExam, allQuestionsLength: allQuestions.length});
-    return;
-  }
+  if (!currentExam || !allQuestions.length) return;
   
   const examCode = Object.keys(availableExams).find(code => 
     availableExams[code] === currentExam.exam_name
@@ -4642,8 +4642,6 @@ function updateFilterCounts() {
     if (isFavorite) favoritesCount++;
   });
   
-  console.log('🔍 Filter counts updated:', {answeredCount, unansweredCount, favoritesCount, examCode, totalQuestions: allQuestions.length});
-  
   document.getElementById("answeredCount").textContent = answeredCount;
   document.getElementById("unansweredCount").textContent = unansweredCount;
   document.getElementById("favoritesCount").textContent = favoritesCount;
@@ -4654,11 +4652,15 @@ function toggleSearchSection() {
   const searchContent = document.getElementById("searchContent");
   const toggleBtn = document.getElementById("toggleSearchBtn");
   
-  if (searchContent.classList.contains("collapsed")) {
+  const isCollapsed = searchContent.classList.contains("collapsed");
+  
+  if (isCollapsed) {
+    // Expand the section
     searchContent.classList.remove("collapsed");
     toggleBtn.classList.remove("collapsed");
     searchContent.style.display = "block";
   } else {
+    // Collapse the section
     searchContent.classList.add("collapsed");
     toggleBtn.classList.add("collapsed");
     searchContent.style.display = "none";

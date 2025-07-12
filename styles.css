@@ -2451,6 +2451,7 @@ body {
   border-bottom: 1px solid var(--border-light);
   cursor: pointer;
   transition: background-color 0.2s ease;
+  user-select: none; /* Prevent text selection when clicking */
 }
 
 .search-header:hover {
@@ -2472,15 +2473,23 @@ body {
   color: var(--text-secondary);
   cursor: pointer;
   padding: 0.25rem;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color 0.2s ease;
   font-size: 1.2rem;
+}
+
+.toggle-search-btn i {
+  transition: transform 0.3s ease;
 }
 
 .toggle-search-btn:hover {
   color: var(--text-primary);
 }
 
-.toggle-search-btn.collapsed {
+.toggle-search-btn.collapsed i {
+  transform: rotate(0deg);
+}
+
+.toggle-search-btn:not(.collapsed) i {
   transform: rotate(180deg);
 }
 
