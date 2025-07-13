@@ -447,44 +447,91 @@ function decompressData(compressedData) {
 
 function saveStatistics() {
   try {
-    const compressedData = compressData(statistics);
-    localStorage.setItem("examViewerStatistics", compressedData);
+    // Use simple JSON stringify to avoid compression corruption issues
+    const dataToSave = JSON.stringify(statistics);
+    
+    // Check if data would exceed localStorage limits (roughly 5MB)
+    if (dataToSave.length > 4500000) { // 4.5MB threshold
+      console.warn("Statistics data is getting large, consider cleaning old sessions");
+      
+      // Keep only last 50 sessions to prevent storage overflow
+      if (statistics.sessions.length > 50) {
+        statistics.sessions = statistics.sessions.slice(-50);
+        console.log("Trimmed statistics to last 50 sessions");
+      }
+    }
+    
+    localStorage.setItem("examViewerStatistics", dataToSave);
 
-    // Log compression ratio in development
+    // Log size in development
     if (isDevelopmentMode()) {
-      const originalSize = JSON.stringify(statistics).length;
-      const compressedSize = compressedData.length;
-      const ratio = (
-        ((originalSize - compressedSize) / originalSize) *
-        100
-      ).toFixed(1);
-      devLog(
-        `Statistics saved - Original: ${originalSize} bytes, Compressed: ${compressedSize} bytes, Saved: ${ratio}%`
-      );
+      const sizeKB = (dataToSave.length / 1024).toFixed(1);
+      devLog(`Statistics saved - Size: ${sizeKB} KB, Sessions: ${statistics.sessions.length}`);
     }
   } catch (error) {
     devError("Error saving statistics:", error);
+    
+    // If save fails due to quota, try to clear old data
+    if (error.name === 'QuotaExceededError') {
+      console.warn("localStorage quota exceeded, clearing old statistics");
+      statistics.sessions = statistics.sessions.slice(-20); // Keep only last 20 sessions
+      try {
+        localStorage.setItem("examViewerStatistics", JSON.stringify(statistics));
+        showError("Storage limit reached. Cleared old statistics to free space.");
+      } catch (secondError) {
+        devError("Failed to save even after cleanup:", secondError);
+      }
+    }
   }
 }
 
 // Statistics storage management
 function clearCorruptedData() {
   try {
-    const items = ['examViewerStatistics', 'examViewerSettings', 'examViewerFavorites'];
+    const items = [
+      { key: 'examViewerStatistics', name: 'Statistics' },
+      { key: 'examViewerSettings', name: 'Settings' },
+      { key: 'examViewerFavorites', name: 'Favorites' }
+    ];
+    
     items.forEach(item => {
-      const data = localStorage.getItem(item);
+      const data = localStorage.getItem(item.key);
       if (data) {
         try {
-          JSON.parse(data);
+          const parsed = JSON.parse(data);
+          
+          // Additional validation for statistics
+          if (item.key === 'examViewerStatistics') {
+            if (parsed && typeof parsed === 'object') {
+              // Check if it has expected structure
+              if (!parsed.hasOwnProperty('sessions') && !parsed.hasOwnProperty('currentSession')) {
+                throw new Error('Invalid statistics structure');
+              }
+            }
+          }
+          
+          // Additional validation for settings
+          if (item.key === 'examViewerSettings') {
+            if (parsed && typeof parsed !== 'object') {
+              throw new Error('Invalid settings structure');
+            }
+          }
+          
         } catch (e) {
-          devError(`Corrupted ${item} detected, clearing...`);
-          localStorage.removeItem(item);
-          showError(`Corrupted data cleared: ${item}. Please refresh the page.`);
+          console.warn(`${item.name} data validation failed:`, e.message);
+          localStorage.removeItem(item.key);
+          
+          // Only show error for statistics, settings/favorites can be recreated silently
+          if (item.key === 'examViewerStatistics') {
+            showError(`${item.name} data was corrupted and has been reset.`);
+          } else {
+            console.log(`${item.name} reset to defaults due to corruption`);
+          }
         }
       }
     });
   } catch (error) {
-    devError("Error clearing corrupted data:", error);
+    devError("Error checking data integrity:", error);
   }
 }
 
@@ -492,13 +539,21 @@ function loadStatistics() {
   try {
     const savedStats = localStorage.getItem("examViewerStatistics");
     if (savedStats) {
-      // Try to decompress first, fall back to regular JSON parsing
+      // Try regular JSON parse first, then fall back to decompression for legacy data
       let parsed;
       try {
-        parsed = decompressData(savedStats);
-      } catch (error) {
-        devLog("Decompression failed, trying regular JSON parse:", error);
         parsed = JSON.parse(savedStats);
+      } catch (error) {
+        devLog("JSON parse failed, trying decompression for legacy data:", error);
+        try {
+          parsed = decompressData(savedStats);
+          devLog("Successfully loaded legacy compressed data");
+          // Save in new format immediately
+          setTimeout(() => saveStatistics(), 1000);
+        } catch (decompressionError) {
+          devError("Both JSON parse and decompression failed:", decompressionError);
+          throw decompressionError;
+        }
       }
 
       statistics = {
@@ -682,6 +737,13 @@ function loadStatistics() {
 
       // Clean any corrupted statistics data
       cleanCorruptedStatistics();
+
+      // Clean up old sessions if needed (keep last 100 sessions max)
+      if (statistics.sessions.length > 100) {
+        const oldCount = statistics.sessions.length;
+        statistics.sessions = statistics.sessions.slice(-100);
+        console.log(`Cleaned up old statistics: kept last 100 sessions (removed ${oldCount - 100})`);
+      }
 
       // Save the migrated statistics
       saveStatistics();
@@ -1806,6 +1868,90 @@ function resetFavoritesData() {
   }
 }
 
+// Clean old statistics to free up storage space
+function cleanOldStatistics() {
+  const currentCount = statistics.sessions.length;
+  
+  if (currentCount <= 20) {
+    showSuccess("No old sessions to clean. You have " + currentCount + " sessions.");
+    return;
+  }
+  
+  const toRemove = currentCount - 20;
+  const confirmMessage = 
+    `Clean old statistics data?\n\n` +
+    `Current sessions: ${currentCount}\n` +
+    `Sessions to remove: ${toRemove}\n` +
+    `Sessions to keep: 20 (most recent)\n\n` +
+    `This will free up storage space and improve performance.`;
+    
+  if (!confirm(confirmMessage)) {
+    return;
+  }
+  
+  try {
+    statistics.sessions = statistics.sessions.slice(-20);
+    recalculateTotalStats();
+    saveStatistics();
+    
+    showSuccess(`Cleaned ${toRemove} old sessions. Kept the last 20 sessions.`);
+    console.log(`Statistics cleaned: removed ${toRemove} old sessions`);
+  } catch (error) {
+    showError("Failed to clean statistics: " + error.message);
+    devError("Clean statistics error:", error);
+  }
+}
+
+// Reset all statistics data
+function resetAllStatistics() {
+  const currentCount = statistics.sessions.length;
+  const currentSessionActive = statistics.currentSession ? "Yes" : "No";
+  
+  const confirmMessage = 
+    `⚠️ WARNING: This will permanently delete ALL statistics data!\n\n` +
+    `Current data:\n` +
+    `• ${currentCount} exam sessions\n` +
+    `• Active session: ${currentSessionActive}\n` +
+    `• All exam performance data\n` +
+    `• All progress history\n\n` +
+    `This action cannot be undone. Are you sure you want to continue?`;
+    
+  if (!confirm(confirmMessage)) {
+    return;
+  }
+  
+  try {
+    // Reset to default statistics
+    statistics = {
+      sessions: [],
+      currentSession: null,
+      totalStats: {
+        totalQuestions: 0,
+        totalCorrect: 0,
+        totalIncorrect: 0,
+        totalPreview: 0,
+        totalTime: 0,
+        examStats: {},
+      },
+    };
+    
+    // Clear from localStorage
+    localStorage.removeItem("examViewerStatistics");
+    
+    showSuccess("All statistics have been reset successfully.");
+    console.log("All statistics data has been reset");
+    
+    // Refresh statistics display if visible
+    const statsModal = document.getElementById("statisticsModal");
+    if (statsModal && statsModal.style.display === "flex") {
+      displayStatistics();
+    }
+  } catch (error) {
+    showError("Failed to reset statistics: " + error.message);
+    devError("Reset statistics error:", error);
+  }
+}
+
 function loadFavorites() {
   try {
     const savedFavorites = localStorage.getItem("examViewerFavorites");
@@ -2907,6 +3053,15 @@ function setupEventListeners() {
   document
     .getElementById("resetFavoritesBtn")
     .addEventListener("click", resetFavoritesData);
+
+  // Statistics management
+  document
+    .getElementById("cleanOldStatisticsBtn")
+    .addEventListener("click", cleanOldStatistics);
+  
+  document
+    .getElementById("resetStatisticsBtn")
+    .addEventListener("click", resetAllStatistics);
 
   // Changelog
   document
