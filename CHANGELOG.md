@@ -4,6 +4,38 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.3] - {PR_MERGE_DATE}
+
+### Added
+
+- **Enhanced Progress Indicator**: Comprehensive animated progress tracking system
+  - Animated progress bar with smooth GPU-accelerated transitions and color gradients
+  - Real-time statistics display showing answered questions, favorites, and remaining count
+  - Dynamic percentage indicator with pulsing animations and milestone celebrations
+  - Milestone effects for 25%, 50%, 75%, and 100% completion with visual celebrations
+  - Current question position tracking with smooth indicator animations
+  - Session isolation ensuring fresh progress tracking for each exam load
+  - Optional display control via Settings > Display Preferences (enabled by default)
+  - Responsive design adapting perfectly to mobile and desktop layouts
+  - Full dark mode compatibility with optimized colors and animations
+  - Integration with existing navigation, favorites, and statistics systems
+
+### Enhanced
+
+- **Settings Management**: Improved toolbar and interface control
+  - Enhanced "Show question toolbar" setting now properly controls revision mode button visibility
+  - Real-time toggle updates without requiring page reload for all toolbar-related elements
+  - Improved settings organization with proper spacing and descriptions
+  - Dynamic interface updates when settings change for better user experience
+
+### Fixed
+
+- **Session Statistics**: Corrected progress tracking between exam sessions
+  - Fixed `isQuestionAnswered()` to only check current session instead of previous sessions
+  - Ensured each exam load starts with a fresh progress count (0 answered questions)
+  - Resolved issue where switching between exams showed incorrect answer counts
+  - Improved session isolation for accurate progress representation
+
 ## [2.5.2] - 2025-07-13
 
 ### Fixed
@@ -310,7 +342,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
-- **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, history, embedded image display fixes, and performance optimizations
+- **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, history, animated progress indicator, embedded image display fixes, and performance optimizations
 - **v2.4.x**: Advanced search and filtering system with smart auto-completion
 - **v2.3.x**: Toolbar visibility toggle and UI declutter option
 - **v2.2.x**: Changelog functionality and improvements

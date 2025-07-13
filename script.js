@@ -21,6 +21,7 @@ let settings = {
   showAdvancedSearch: false,
   sidebarOpen: false,
   enableLazyLoading: false, // Lazy loading disabled by default
+  showMainProgressBar: true, // Main progress bar enabled by default
 };
 
 // Available exams mapping (will be populated dynamically)
@@ -2795,8 +2796,13 @@ function loadSettings() {
       settings.showAdvancedSearch;
     document.getElementById("enableLazyLoading").checked =
       settings.enableLazyLoading;
+    document.getElementById("showMainProgressBar").checked =
+      settings.showMainProgressBar;
     isHighlightEnabled = settings.highlightDefault;
     applyTheme(settings.darkMode);
+    
+    // Apply toolbar visibility setting immediately
+    updateToolbarVisibility();
     
     // Restore sidebar state
     sidebarOpen = settings.sidebarOpen;
@@ -2830,9 +2836,15 @@ function saveSettings() {
   settings.enableLazyLoading = document.getElementById(
     "enableLazyLoading"
   ).checked;
+  settings.showMainProgressBar = document.getElementById(
+    "showMainProgressBar"
+  ).checked;
   localStorage.setItem("examViewerSettings", JSON.stringify(settings));
   isHighlightEnabled = settings.highlightDefault;
   applyTheme(settings.darkMode);
+  
+  // Update main progress bar visibility
+  updateMainProgressBarVisibility();
 }
 
 // Apply dark/light theme
@@ -3078,6 +3090,7 @@ function setupEventListeners() {
     .getElementById("showQuestionToolbar")
     .addEventListener("change", () => {
       saveSettings();
+      updateToolbarVisibility();
       displayCurrentQuestion();
     });
   
@@ -3093,6 +3106,13 @@ function setupEventListeners() {
     .addEventListener("change", () => {
       saveSettings();
       showSuccess("Lazy loading setting updated. Changes will apply when loading new exams.");
+    });
+
+  document
+    .getElementById("showMainProgressBar")
+    .addEventListener("change", () => {
+      saveSettings();
+      showSuccess("Progress indicator setting updated.");
     });
 
   // Search functionality
@@ -3596,6 +3616,9 @@ function goToHome() {
   document.getElementById("exportBtn").style.display = "none";
   document.getElementById("homeBtn").style.display = "none";
   
+  // Hide main progress bar
+  hideMainProgressBar();
+  
   // Reset enhanced navigation features
   clearNavigationHistory();
   closeSidebar();
@@ -3831,11 +3854,8 @@ function displayCurrentQuestion(fromToggleAction = false) {
   // Ensure question jump field max value is always up to date
   updateQuestionJumpMaxValue();
 
-  // Affichage/masquage de la barre d'outils selon le paramètre
-  const toolbar = document.getElementById("questionToolbar");
-  if (toolbar) {
-    toolbar.style.display = settings.showQuestionToolbar ? "block" : "none";
-  }
+  // Update toolbar visibility based on settings
+  updateToolbarVisibility();
 }
 
 // Display answers
@@ -4892,6 +4912,9 @@ function updateProgressSidebar() {
   // Update progress bar
   updateProgressBar();
   
+  // Update main progress bar
+  updateMainProgressBar();
+  
   // Scroll current question into view
   setTimeout(() => {
     const currentItem = questionList.querySelector(".question-item.current");
@@ -4919,6 +4942,175 @@ function updateProgressBar() {
   }
 }
 
+// Update main progress indicator in header
+function updateMainProgressBar() {
+  const mainProgressSection = document.getElementById("mainProgressSection");
+  if (!mainProgressSection || !currentQuestions.length) return;
+
+  // Check if the main progress bar is enabled in settings
+  if (!settings.showMainProgressBar) {
+    mainProgressSection.style.display = "none";
+    return;
+  }
+
+  // Show the progress section if it's hidden and enabled
+  if (mainProgressSection.style.display === "none") {
+    mainProgressSection.style.display = "block";
+  }
+
+  const progressFill = document.getElementById("mainProgressFill");
+  const progressText = document.getElementById("mainProgressText");
+  const progressPercentage = document.getElementById("mainProgressPercentage");
+  const answeredCountMain = document.getElementById("answeredCountMain");
+  const favoritesCountMain = document.getElementById("favoritesCountMain");
+  const remainingCountMain = document.getElementById("remainingCountMain");
+
+  if (!progressFill || !progressText || !progressPercentage) return;
+
+  // Calculate progress metrics
+  const totalQuestions = currentQuestions.length;
+  const answeredCount = getAnsweredQuestionsCount();
+  const favoritesCount = getFavoritesCount();
+  const remainingCount = totalQuestions - answeredCount;
+  const answerPercentage = (answeredCount / totalQuestions) * 100;
+
+  // Update progress bar with smooth animation
+  progressFill.style.width = `${answerPercentage}%`;
+  progressFill.setAttribute("aria-valuenow", answerPercentage.toFixed(1));
+
+  // Update text displays
+  progressText.textContent = `Question ${currentQuestionIndex + 1} of ${totalQuestions}`;
+  progressPercentage.textContent = `${answerPercentage.toFixed(1)}%`;
+
+  // Update statistics with smooth number transitions
+  if (answeredCountMain) animateNumberChange(answeredCountMain, answeredCount);
+  if (favoritesCountMain) animateNumberChange(favoritesCountMain, favoritesCount);
+  if (remainingCountMain) animateNumberChange(remainingCountMain, remainingCount);
+
+  // Add visual feedback for progress milestones
+  addProgressMilestoneEffects(answerPercentage);
+}
+
+// Get count of favorite questions in current exam
+function getFavoritesCount() {
+  if (!currentQuestions.length || !currentExam) return 0;
+  
+  let count = 0;
+  currentQuestions.forEach(question => {
+    if (isQuestionFavorite(question.question_number)) {
+      count++;
+    }
+  });
+  
+  return count;
+}
+
+// Add visual effects for progress milestones
+function addProgressMilestoneEffects(percentage) {
+  const progressFill = document.getElementById("mainProgressFill");
+  const progressPercentage = document.getElementById("mainProgressPercentage");
+  
+  if (!progressFill || !progressPercentage) return;
+
+  // Remove existing milestone classes
+  progressFill.classList.remove("milestone-25", "milestone-50", "milestone-75", "milestone-100");
+  progressPercentage.classList.remove("milestone-reached");
+
+  // Add milestone classes based on progress
+  if (percentage >= 100) {
+    progressFill.classList.add("milestone-100");
+    progressPercentage.classList.add("milestone-reached");
+    triggerMilestoneAnimation("completion");
+  } else if (percentage >= 75) {
+    progressFill.classList.add("milestone-75");
+  } else if (percentage >= 50) {
+    progressFill.classList.add("milestone-50");
+  } else if (percentage >= 25) {
+    progressFill.classList.add("milestone-25");
+  }
+}
+
+// Trigger celebration animation for major milestones
+function triggerMilestoneAnimation(type) {
+  const progressSection = document.getElementById("mainProgressSection");
+  if (!progressSection) return;
+
+  // Add celebration class temporarily
+  progressSection.classList.add(`milestone-${type}`);
+  
+  setTimeout(() => {
+    progressSection.classList.remove(`milestone-${type}`);
+  }, 2000);
+}
+
+// Enhanced function to hide main progress section when no exam is loaded
+function hideMainProgressBar() {
+  const mainProgressSection = document.getElementById("mainProgressSection");
+  if (mainProgressSection) {
+    mainProgressSection.style.display = "none";
+  }
+}
+
+// Update main progress bar visibility based on settings
+function updateMainProgressBarVisibility() {
+  const mainProgressSection = document.getElementById("mainProgressSection");
+  if (!mainProgressSection) return;
+
+  if (settings.showMainProgressBar && currentQuestions.length > 0) {
+    mainProgressSection.style.display = "block";
+    updateMainProgressBar(); // Update with current data
+  } else {
+    mainProgressSection.style.display = "none";
+  }
+}
+
+// Update toolbar visibility based on settings
+function updateToolbarVisibility() {
+  // Update revision mode button visibility
+  const revisionModeBtn = document.getElementById("revisionModeBtn");
+  if (revisionModeBtn) {
+    revisionModeBtn.style.display = settings.showQuestionToolbar ? "inline-block" : "none";
+  }
+  
+  // Update question toolbar visibility (if currently displayed)
+  const toolbar = document.getElementById("questionToolbar");
+  if (toolbar) {
+    toolbar.style.display = settings.showQuestionToolbar ? "block" : "none";
+  }
+}
+
+// Animate number changes for smooth visual feedback
+function animateNumberChange(element, newValue) {
+  if (!element) return;
+  
+  const currentValue = parseInt(element.textContent) || 0;
+  if (currentValue === newValue) return;
+  
+  const startValue = currentValue;
+  const difference = newValue - startValue;
+  const duration = 400; // Animation duration in ms
+  const startTime = performance.now();
+  
+  function updateNumber(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    // Use easing function for smooth animation
+    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+    const currentNumber = Math.round(startValue + (difference * easeOutQuart));
+    
+    element.textContent = currentNumber;
+    
+    if (progress < 1) {
+      requestAnimationFrame(updateNumber);
+    } else {
+      element.textContent = newValue; // Ensure final value is exact
+    }
+  }
+  
+  requestAnimationFrame(updateNumber);
+}
+
 // Get count of answered questions
 function getAnsweredQuestionsCount() {
   if (!currentQuestions.length) return 0;
@@ -4937,11 +5129,7 @@ function getAnsweredQuestionsCount() {
 function isQuestionAnswered(questionNumber) {
   if (!questionNumber) return false;
   
-  const examCode = currentExam ? Object.keys(availableExams).find(code => 
-    availableExams[code] === currentExam.exam_name
-  ) : null;
-  
-  // Check current session
+  // Only check current session - each exam load should start fresh
   if (statistics.currentSession && statistics.currentSession.questions) {
     const found = statistics.currentSession.questions.find(q => 
       q.questionNumber.toString() === questionNumber.toString()
@@ -4949,20 +5137,7 @@ function isQuestionAnswered(questionNumber) {
     if (found) return true;
   }
   
-  // Check previous sessions
-  const found = statistics.sessions.find(session => {
-    const sessionExamCode = session.ec || session.examCode;
-    if (sessionExamCode === examCode) {
-      const sessionQuestions = session.q || session.questions || [];
-      return sessionQuestions.find(q => {
-        const qNum = q.questionNumber || q.qn;
-        return qNum && qNum.toString() === questionNumber.toString();
-      });
-    }
-    return false;
-  });
-  
-  return !!found;
+  return false;
 }
 
 // Check if a question is favorited

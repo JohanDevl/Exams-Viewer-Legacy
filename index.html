@@ -186,6 +186,37 @@
           </div>
         </div>
 
+        <!-- Enhanced Progress Indicator -->
+        <div id="mainProgressSection" class="main-progress-section" style="display: none">
+          <div class="main-progress-container">
+            <div class="progress-header">
+              <div class="progress-info">
+                <span id="mainProgressText" class="progress-text">Question 1 of 0</span>
+                <span id="mainProgressPercentage" class="progress-percentage">0%</span>
+              </div>
+              <div class="progress-stats">
+                <span class="stat answered">
+                  <i class="fas fa-check-circle"></i>
+                  <span id="answeredCountMain">0</span>
+                </span>
+                <span class="stat favorites">
+                  <i class="fas fa-star"></i>
+                  <span id="favoritesCountMain">0</span>
+                </span>
+                <span class="stat remaining">
+                  <i class="far fa-circle"></i>
+                  <span id="remainingCountMain">0</span>
+                </span>
+              </div>
+            </div>
+            <div class="main-progress-bar-container">
+              <div class="main-progress-bar">
+                <div id="mainProgressFill" class="progress-fill main" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Progress Sidebar -->
         <div id="progressSidebar" class="progress-sidebar">
           <div class="sidebar-header">
@@ -574,6 +605,15 @@
               <p class="setting-description">
                 Lazy loading loads questions in chunks for better performance on large exams. 
                 May cause brief delays when navigating to unloaded questions.
+              </p>
+              <label class="toggle-label" style="margin-top: 1rem;">
+                <input type="checkbox" id="showMainProgressBar" />
+                <span class="toggle-slider"></span>
+                Show enhanced progress indicator
+              </label>
+              <p class="setting-description">
+                Display an animated progress bar with statistics in the header area. 
+                Shows answered questions, favorites count, and overall progress percentage.
               </p>
             </div>
 
