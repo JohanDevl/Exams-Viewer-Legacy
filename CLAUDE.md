@@ -69,12 +69,14 @@ data/
 ## Key Features
 
 ### Frontend Features
-- **Question Navigation**: Previous/Next with keyboard shortcuts, random question selection
+- **Enhanced Navigation System**: Comprehensive keyboard shortcuts (vim-style + standard), visual progress sidebar, navigation history with back/forward buttons
+- **Question Navigation**: Previous/Next with keyboard shortcuts, random question selection, direct question jumping (1-9 keys)
+- **Visual Progress Tracking**: Interactive sidebar with question list, status indicators, progress bar, and click-to-navigate functionality
 - **Answer Validation**: Compare user selections with correct answers, highlight mode for previewing
 - **Favorites & Notes**: Category-based organization with custom categories and text notes
 - **Statistics System**: Session tracking, progress metrics, performance analytics with local storage
 - **Export Functionality**: PDF and JSON export of questions and user data
-- **Settings Management**: Persistent settings for UI preferences and display options
+- **Settings Management**: Persistent settings for UI preferences, sidebar state, and display options
 - **Advanced Search & Filters**: Comprehensive search system with text search, auto-completion, and status filters
 
 ### Backend Features
@@ -177,6 +179,71 @@ def scrape_page(link):
 - Search section visibility controlled by `updateAdvancedSearchVisibility()`
 - Navigation functions work with current filtered results, not original question set
 - Auto-completion shows max 5 suggestions to avoid UI clutter
+
+## Enhanced Navigation System
+
+### Architecture Overview
+The enhanced navigation system provides comprehensive keyboard shortcuts, visual progress tracking, and navigation history functionality. It integrates seamlessly with existing features while maintaining performance and accessibility.
+
+### Key Components
+
+#### Keyboard Navigation System
+- **Comprehensive shortcuts**: Supports vim-style (`hjkl`), arrow keys, and special keys (`Space`, `Enter`, `Home`, `End`)
+- **Action shortcuts**: Direct access to validation (`v`), favorites (`f`), notes (`n`), and interface controls
+- **Navigation modes**: Basic movement, quick jumps (5/10 questions), and direct access (number keys 1-9)
+- **Context awareness**: Shortcuts disabled in input fields, proper focus management
+
+#### Progress Sidebar
+- **Visual overview**: Interactive question list with status indicators and progress bar
+- **Status tracking**: Current question (orange), answered (green), unanswered (gray), favorites (star)
+- **Direct navigation**: Click any question to navigate immediately
+- **Responsive design**: Full-screen on mobile, overlay on desktop
+- **Auto-scroll**: Current question automatically scrolled into view
+
+#### Navigation History
+- **Browser-like functionality**: Back/forward buttons with intelligent history tracking
+- **Smart deduplication**: Prevents consecutive identical entries
+- **Performance optimized**: Limited to 50 entries with automatic cleanup
+- **Universal integration**: Works with all navigation methods (clicks, keyboard, search)
+
+### Critical Implementation Details
+
+#### Function Architecture
+- **`navigateToQuestionIndex(index, addToHistory=true)`**: Central navigation function with history support
+- **`updateProgressSidebar()`**: Updates sidebar with current question states and progress
+- **`addToNavigationHistory(index)`**: Manages history stack with intelligent deduplication
+- **`toggleSidebar()`**: Controls sidebar visibility with state persistence
+
+#### State Management
+- **Navigation history**: `navigationHistory[]` array with `historyIndex` pointer
+- **Sidebar state**: `sidebarOpen` boolean with settings persistence
+- **Progress tracking**: Real-time updates via `isQuestionAnswered()` and `isQuestionFavorite()`
+
+#### Integration Points
+- **Answer validation**: Updates progress indicators automatically via `validateAnswers()`
+- **Favorites system**: Syncs with sidebar display via `toggleQuestionFavorite()`
+- **Search system**: Works with filtered question sets, maintains navigation context
+- **Settings system**: Persists sidebar state and navigation preferences
+
+### Performance Considerations
+- **Efficient DOM updates**: Batch operations and selective rendering
+- **Memory management**: Limited history size and proper cleanup
+- **Event delegation**: Optimized event handling for question list clicks
+- **Responsive updates**: Debounced scroll events and smooth animations
+
+### Critical Business Rules
+1. **Navigation history**: Always add to history before changing position (except when navigating through history)
+2. **Sidebar updates**: Must be called after any question state change (answered, favorited)
+3. **State persistence**: Sidebar open/close state must be saved to settings
+4. **Mobile responsiveness**: Full-screen sidebar on mobile, overlay on desktop
+5. **Accessibility**: All keyboard shortcuts must work without mouse interaction
+
+### Developer Guidelines
+- **Navigation functions**: Always use `navigateToQuestionIndex()` for programmatic navigation
+- **Sidebar updates**: Call `updateProgressSidebar()` after state changes affecting question status
+- **History management**: Never manipulate `navigationHistory` directly, use provided functions
+- **Event handling**: Ensure keyboard shortcuts don't interfere with input fields
+- **Responsive design**: Test sidebar functionality on both desktop and mobile viewports
 
 ## Documentation and Changelog Management
 

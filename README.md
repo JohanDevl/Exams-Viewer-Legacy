@@ -14,7 +14,9 @@ No installation required! The interface automatically detects your system theme 
 
 - **📱 Responsive design** for all devices
 - **🔍 Advanced search and filtering**
-- **📊 Intuitive question navigation**
+- **⌨️ Enhanced keyboard navigation** with vim-style shortcuts
+- **📊 Visual progress sidebar** with question overview
+- **📚 Navigation history** with back/forward buttons
 - **🌙 Dark mode** with automatic detection
 - **📊 Complete statistics system** with storage optimization
 - **🎯 Highlight mode** to preview answers
@@ -60,11 +62,14 @@ pip install -r requirements.txt
 
 ### Web Interface
 
-1. Select an exam from the dropdown list
-2. Navigate between questions using controls
-3. Use highlight mode to preview answers
-4. Check your statistics in the dedicated panel
-5. Export your data or questions to PDF
+1. **Select an exam** from the dropdown list
+2. **Navigate with keyboard shortcuts**: Use arrow keys, `hjkl` (vim-style), or `Space/Enter` for quick navigation
+3. **Open progress sidebar**: Press `Ctrl+S` or click the hamburger menu to see visual progress
+4. **Use navigation history**: Click Back/Forward buttons to return to previously visited questions
+5. **Access keyboard help**: Press `?` to see all available shortcuts
+6. **Use highlight mode** to preview answers before validation
+7. **Check statistics** in the dedicated panel with detailed analytics
+8. **Export data** to PDF or JSON format
 
 ### Manual Updates
 
@@ -96,6 +101,7 @@ Exams-Viewer/
 - **[🎯 Features](docs/FEATURES.md)** - Detailed description of all features
 - **[🛠️ Development Guide](docs/DEVELOPMENT.md)** - Instructions for developers
 - **[📊 Statistics System](docs/STATISTICS.md)** - Statistics system documentation
+- **[⌨️ Navigation Features](docs/NAVIGATION.md)** - Enhanced navigation and keyboard shortcuts
 - **[📋 API Documentation](docs/API.md)** - Technical API documentation
 - **[🔧 Scraper Improvements](docs/SCRAPER_IMPROVEMENTS.md)** - Improvement details
 - **[📝 Changelog](CHANGELOG.md)** - Project version history and changes
