@@ -76,4 +76,39 @@ update_log.json
 *.tmp
 *.temp 
 
+# Node.js (if ever needed for development tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Web development
+.sass-cache/
+*.css.map
+*.js.map
+
+# Local development
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Browser downloads/exports
+downloads/
+exports/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Claude AI
 .claude/
