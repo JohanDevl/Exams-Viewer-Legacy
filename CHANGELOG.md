@@ -4,7 +4,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.5.1] - {PR_MERGE_DATE}
+## [2.5.2] - {PR_MERGE_DATE}
+
+### Fixed
+
+- **Embedded Image Display**: Fixed display of compressed images in exam questions
+  - Implemented `processEmbeddedImages()` function to handle base64 image processing
+  - Fixed replacement of truncated base64 sources with complete image data
+  - Added support for `data-img-id` attributes from scraper compression system
+  - Enhanced image display in questions, answers, discussion comments, and PDF exports
+- **Update Status Messages**: Resolved confusing error messages during exam updates
+  - Modified `update_exam_data()` to return clear success/failure indicators
+  - Fixed chunking operations appearing as failures instead of success notifications
+  - Improved clarity of update status reporting with proper message separation
+
+### Enhanced
+
+- **Image Processing System**: Comprehensive improvements to embedded image handling
+  - WebP format prioritization with automatic JPEG fallback for better compression
+  - Added responsive styling and accessibility attributes for all processed images
+  - Implemented fallback support for original URLs when embedded data unavailable
+  - Enhanced PDF export to include properly formatted embedded images
+- **Performance Optimizations**: Continued improvements to large exam handling
+  - Refined chunking system with better status reporting
+  - Enhanced data integrity with improved image compression integration
+  - Optimized image loading with local base64 processing (no external requests)
+
+## [2.5.1] - 2025-07-13
 
 ### Fixed
 
@@ -19,6 +45,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Enhanced
 
 - **Data Recovery**: Improved robustness of data loading and error handling
+
   - Enhanced statistics data compression with proper special character handling
   - Added graceful fallbacks for corrupted or malformed data
   - Automatic cleanup prevents persistent error states
@@ -283,7 +310,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
-- **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, history, and console error fixes
+- **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, history, embedded image display fixes, and performance optimizations
 - **v2.4.x**: Advanced search and filtering system with smart auto-completion
 - **v2.3.x**: Toolbar visibility toggle and UI declutter option
 - **v2.2.x**: Changelog functionality and improvements
