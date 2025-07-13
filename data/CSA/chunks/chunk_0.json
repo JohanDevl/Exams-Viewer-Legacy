@@ -1,0 +1,3630 @@
+{
+  "chunk_id": 0,
+  "start_question": 1,
+  "end_question": 50,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "A Service Catalog may include which of the following components?<br/>",
+      "answers": [
+        "A. Order Guides, Exchange Rates, Calendars",
+        "B. Order Guides, Catalog Items, and Interceptors",
+        "C. Catalog Items, Asset Contracts, Task Surveys",
+        "D. Record Producers, Order Guides, and Catalog Items"
+      ],
+      "comments": [
+        {
+          "content": "D is the correct answer IT EXAMS PRO",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer for this question",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Standard catalog items\n\nRecord producers: giving alternative ways of adding information, such as Incidents via the service catalog.\nOrder guides: to group multiple catalog items in one request.\n\nClick Here: https://zig.ht/ServiceNowCSA\n\nThe overall catalog is made up of a collection of discrete catalog items.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "perfect example of a question I hate. I know how to setup service catalogs, including flows for fulfilling requests. Don't know the exact terminology of the parts so I have to fail the exam over",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Perfect example of a question I hate.  I know how to setup service catalogs, including flows for fulfilling requests. Don't know the exact terminology of the parts so I have to fail the exam over this.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It is.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "corret is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The correct answer to this question is definitely D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Record Producers - allows users to create records such as incidents or requests directly from the catalog. \nOrder guides - it allows users to create tasks or requests from service catalog. Guides users to fill all necessary information to order.\nCatalog Items: It represent individual services or products that users can request from the Service Catalog. item typically includes details about the service, such as a description, price, and any associated fulfillment process.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Record Producers, Order Guides, and Catalog Items",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Record Producers, Order Guides, and Catalog Items",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The overall catalog is made up of a collection of discrete catalog items.\n\nThe basic Service Catalog item types include:\n\nStandard catalog items\nRecord producers: giving alternative ways of adding information such as Incidents via the service catalog.\nOrder guides: to group multiple catalog items in one request.\nContent Items: catalog items which provide information instead of goods or services.\n\nhttps://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/service-catalog-management/concept/c_IntroductionToCatalogItems.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "1",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/71003-exam-csa-topic-1-question-1-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which one of the following statements applies to a set of fields when they are coalesced during an import?<br/>",
+      "answers": [
+        "A. If a match is found using the coalesce fields, the existing record is updated with the information being imported",
+        "B. If a match is not found using the coalesce fields, the system does not create a Transform Map",
+        "C. If a match is found using the coalesce fields, the system creates a new record",
+        "D. If a match is not found using the coalesce fields, the existing record is updated with the information being imported"
+      ],
+      "comments": [
+        {
+          "content": "If an existing record with a matching value in the target table is found, that record is updated. If no matching record is found, then a new record is created in the target table.\n\nhttps://docs.servicenow.com/bundle/utah-integrate-applications/page/administer/import-sets/concept/c_ImportSetCoalesce.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Explanation I wrote was rejected by the website. :-(",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct Answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "ans - A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A  is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "2",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/71305-exam-csa-topic-1-question-2-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "As it relates to ServiceNow reporting, which of the following statements describes what a metric can do?<br/>",
+      "answers": [
+        "A. A metric is a report gauge used on homepages to display real-time data",
+        "B. A metric is a time measurement used to report the effectiveness of workflows and SLAs",
+        "C. A metric is used to measure and evaluate the effectiveness of IT service management processes",
+        "D. A metric is a comparative measurement used to report the effectiveness of flows and SLAs."
+      ],
+      "comments": [
+        {
+          "content": "The correct answer to this question is definitely C. I broke up with my girlfriend. It is hard. I am already 36 years old. If I don't pass this exam, I won't have a future, so I want to do my best.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct. A metric is created to evaluate fields changes in tasks.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "the definition in SN Docs",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A metric measures and evaluates the effectiveness of IT service management processes.\n\nFor example, a metric could measure the effectiveness of the incident resolution process by calculating how long it takes to resolve an incident.\nFor example, a metric could measure the effectiveness of the incident resolution process by calculating how long it takes to resolve an incident.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "c is correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct. A metric is created to evaluate fields changes in tasks.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c. a metric is used to measure and evaluate IT service",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "the definition in SN Docs\nhttps://docs.servicenow.com/en-US/bundle/sandiego-platform-administration/page/use/reporting/concept/c_MetricDefinitionSupport.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "3",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73566-exam-csa-topic-1-question-3-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "The display sequence is controlled in a Service Catalog Item using which of the following?<br/>",
+      "answers": [
+        "A. The Default Value field in the Catalog Item form",
+        "B. The Sequence field in the Catalog Item form",
+        "C. The Order field in the Variable form",
+        "D. The Choice field in the Variable form"
+      ],
+      "comments": [
+        {
+          "content": "C: Correct https://docs.servicenow.com/bundle/sandiego-servicenow-platform/page/product/service-catalog-management/concept/c_DefineVariableSetLayout.html#d1331070e66\n\nhttps://www.servicenow.com/community/servicenow-impact-forum/best-csa-exam-tips/m-p/2791114",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is Correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0688324",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c. order field in the variable\n form",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Is correct answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C: Correct  https://docs.servicenow.com/bundle/sandiego-servicenow-platform/page/product/service-catalog-management/concept/c_DefineVariableSetLayout.html#d1331070e66",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "4",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/71306-exam-csa-topic-1-question-4-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Reports can be created from which different places in the platform? (Choose two.)<br/>",
+      "answers": [
+        "A. List column heading",
+        "B. Metrics module",
+        "C. Statistics module",
+        "D. View / Run module"
+      ],
+      "comments": [
+        {
+          "content": "The correct answers are A and D as per SN fundamental book in Module 5: enable productivity.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D are correct.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "what is statistics module?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A,D.  To approach 100%.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D are correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A and d",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D is correct",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D are correct",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Is correct answer",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D are correct",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D are correct",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D are correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A D is correct",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A and D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A and D are correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "5",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/71020-exam-csa-topic-1-question-5-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "Knowledge Base Search results can be sorted by which of the following? (Choose three.)<br/>",
+      "answers": [
+        "A. Most recent update",
+        "B. Popularity",
+        "C. Relevancy",
+        "D. Manager assignment",
+        "E. Number of views"
+      ],
+      "comments": [
+        {
+          "content": "ACE\npopularity\nrelevency\nnumber of views",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Is correct answer",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "A C E is correct",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "A C E is correct",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "A C E is correct",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "A, C, E is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct ACE",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Sort the items in a knowledge base or search results list using the Sort by options at the top of the list.\nViews: sorts by number of article views.\nNewest: sorts by the date created or updated.\nAlphabetical: sorts alphabetically by the article Short description field.\nRelevancy: sorts by relevance to the search term.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct. https://docs.servicenow.com/bundle/quebec-servicenow-platform/page/product/knowledge-management/concept/knowledge-service-portal-search.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "6",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/72122-exam-csa-topic-1-question-6-discussion/",
+      "most_voted": "ACE",
+      "error": null
+    },
+    {
+      "question": "What is the path an Administrator could take to view the fulfillment stage task list for an order placed by a user?<br/>",
+      "answers": [
+        "A. RITM (Number)>REQ (Number)>PROCUREMENT (Number)",
+        "B. REQ (Number)>RITM (Number)>PROCUREMENT (Number)",
+        "C. REQ (Number)>RITM (Number)>TASK (Number)",
+        "D. FULFILLMENT (Number)>RITM (Number)>TASK (Number)"
+      ],
+      "comments": [
+        {
+          "content": "REQ contains RITMs and RITM contains TASKs",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "'Task' is the parent table of all task-type records in the system.  It is the parent of REQ, RITM, and SCTASK.\n\nWhen you order a catalog item, the system generates a single RITM record for each item in the cart at the time you order.  These RITM records are all grouped underneath a parent REQ record.\n\nDepending on your workflow, you might also have SCTASK records that get generated as children of a RITM record",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is it",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is done",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Is correct answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "7",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73096-exam-csa-topic-1-question-7-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which term refers to application menus and modules which you may want to access quickly and often?<br/>",
+      "answers": [
+        "A. Breadcrumb",
+        "B. Favorite",
+        "C. Tag",
+        "D. Bookmark"
+      ],
+      "comments": [
+        {
+          "content": "B for sure",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Is correct answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "8",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/71308-exam-csa-topic-1-question-8-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What is generated from the Service Catalog once a user places an order for an item or service?<br/>",
+      "answers": [
+        "A. A change request",
+        "B. An Order Guide",
+        "C. A request",
+        "D. An SLA"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Is correct answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer.\nRequest is generated from Service Catalog once a user places an order for an item or service? The order could be placed in Production Environment or Service Portal (to produce a record).",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C - A request",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "9",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/71309-exam-csa-topic-1-question-9-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "From the User menu, which actions can a user select? (Choose three.)<br/>",
+      "answers": [
+        "A. Send Notifications",
+        "B. Log Out ServiceNow",
+        "C. Elevate Roles",
+        "D. Impersonate Users",
+        "E. Order from Service Catalog",
+        "F. Approve Records"
+      ],
+      "comments": [
+        {
+          "content": "badly worded...a *user cant select any!\na user with both admin and security roles can select the three answers they're seeking.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "Just drop the menu :)",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "\"um... actually...\"",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "From ChatGPT",
+          "selected_answer": "BEF",
+          "replies": []
+        },
+        {
+          "content": "B, D, E should be the answers",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B, D, E are correct answers.\n\nB. Log Out ServiceNow: Logging out is a common action available in user menus to securely sign out of the system.\n\nD. Impersonate Users: Impersonating users allows administrators or users with specific permissions to temporarily assume the identity of another user for troubleshooting or testing purposes.\n\nE. Order from Service Catalog: If the system includes a Service Catalog, users may have the option to order services or items from it through the User menu.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B, C, D is correct",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "Is correct answer",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "B C D is correct",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "A,C And D is correct",
+          "selected_answer": "ACD",
+          "replies": [
+            "This is a tricky question. You can modify how you get notifications through User menu => Preferences => Notifications.\nB,C,D is correct.",
+            "but you can not send notifications right?"
+          ]
+        },
+        {
+          "content": "B C D is correct",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "BCD are correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B C D is correct",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "B, C, D is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Confusing question as I thought it is asking about a generic ITIL user not an administrator.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "10",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/71310-exam-csa-topic-1-question-10-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "Buttons, form links, and context menu items are all examples of what type of functionality?<br/>",
+      "answers": [
+        "A. Business Rule",
+        "B. UI Action",
+        "C. Client Script",
+        "D. UI Policy"
+      ],
+      "comments": [
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-platform-administration/page/administer/list-administration/concept/c_UIActions.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://developer.servicenow.com/blog.do?p=/post/training-ui-action-101/",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "11",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/71311-exam-csa-topic-1-question-11-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following is true of Service Catalog Items in relation to the Service Catalog?<br/>",
+      "answers": [
+        "A. They run behind the scenes.",
+        "B. They are the building blocks.",
+        "C. They are optional.",
+        "D. They provide options."
+      ],
+      "comments": [
+        {
+          "content": "What kind of question is this?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Selected Answer: B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Service Catalog Items are considered the fundamental components or building blocks of the Service Catalog. They represent individual services or products that can be requested by users.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I verified that the correct answer is B per the SNAF book",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is 100% correct, I check it by myself in the material, which mention that items are building blocks of the service catalog include: Hardware, software, service etc....",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Doesn't make any sense.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "This question is kind of weird. As it is phrased, I would think rather of the variable Items as the building block and the service catalog Items as providing option",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "B. They are the building blocks.\n\nService Catalog Items are the building blocks of the Service Catalog. They represent the individual services or products that users can request through the catalog. Each catalog item defines a specific service or product, along with its associated form, workflow, and approval process.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Is anyone sure, this question is using the correct statement?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B. They are the building blocks.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Which of the following is true of Service Catalog Items in relation to the Service Catalog?\nA. They run behind the scenes.\nB. They are the building blocks.\nC. They are optional.\nD. They provide options.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "12",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73097-exam-csa-topic-1-question-12-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Table Access Control rules are processed in the following order:<br/>",
+      "answers": [
+        "A. any table name (wildcard), parent table name, table name",
+        "B. table name, parent table name, any table name (wildcard)",
+        "C. parent table name, table name, any table name (wildcard)",
+        "D. any table name (wildcard), table name, parent table name"
+      ],
+      "comments": [
+        {
+          "content": "able ACL rules are processed in the following order:\nMatch the table name. For example, incident.\nMatch the parent table name. For example, task.\nMatch any table name (*). For example, *.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "most specific to most generously",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "1.ACL name matches table ? \n2.ACL name matches parent table ? \n3.ACL name matches *?",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/community/itsm-articles/acl/ta-p/2308303#:~:text=Table%20ACL%20Rule,evaluates%20the%20field%20ACL%20rules.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "C. parent table name, table name, any table name (wildcard)\n\nTable Access Control (TAC) rules in ServiceNow are processed in the following order:\n\nFirst, ServiceNow checks for TAC rules associated with the parent table name.\nThen, it checks for TAC rules associated with the table name itself.\nFinally, if no specific rules are found for the parent table or table name, any TAC rules associated with a wildcard (any table name) are applied.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct!",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B\n\nRecord ACL rules consist of table and field names.\n\nThe table name is the table that you want to secure. If other tables extend from this table, then the table is considered a parent table. ACL rules for parent tables apply to any table that extends the parent table.\nThe field name is the field that you want to secure. Some fields are part of multiple tables because of table extension. ACL rules for fields in a parent table apply to any table that extends the parent table.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct. Specific to General",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "13",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/69693-exam-csa-topic-1-question-13-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What is the platform name for the User table?<br/>",
+      "answers": [
+        "A. u_users",
+        "B. sys_users",
+        "C. x_users",
+        "D. sys_user"
+      ],
+      "comments": [
+        {
+          "content": "It should be D sys_user, no sys_users in SNOW",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The platform name for the User table in ServiceNow is sys_user. This table stores information about the users in the system.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "sys_user",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "sys_user",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is Correct: User records are stored in the Users [sys_user] table.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "bas hai",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "d is the corred answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "sys_user",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The correct option is D that is sys_user not sys_users",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct sys_user",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct sys_user",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer should be D sys_user. Full command would be sys_user.list to go directly to the table",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "its D sys_user",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "14",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/61778-exam-csa-topic-1-question-14-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "A REQ number in the Service Catalog represents`¦<br/>",
+      "answers": [
+        "A. the order number.",
+        "B. the stage.",
+        "C. the task to complete.",
+        "D. the individual item in the order."
+      ],
+      "comments": [
+        {
+          "content": "REQ is the order number. multiple RITM (Requested Item) can be under one REQ",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "15",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73640-exam-csa-topic-1-question-15-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which would NOT appear in the History section of the Application Navigator?<br/>",
+      "answers": [
+        "A. Records",
+        "B. UI Pages",
+        "C. Lists",
+        "D. Forms"
+      ],
+      "comments": [
+        {
+          "content": "Records are not tracked",
+          "selected_answer": "",
+          "replies": [
+            "LOL :D"
+          ]
+        },
+        {
+          "content": "A has to be the correct one. If you search for a UI page, list or form, then when you go to history those will appear. The record is the table's entry and is not seen (tracked) individually but as part of the many entries in the table.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": [
+            "correction. \nUI pages are not tracked (although the back-end view of a UI page record is tracked)"
+          ]
+        },
+        {
+          "content": "UI pages and other non-standard interfaces not tracked",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct. UI pages and other non-standard interfaces not tracked",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "16",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73546-exam-csa-topic-1-question-16-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which one of the following statements is a recommendation from ServiceNow about Update Sets?<br/>",
+      "answers": [
+        "A. Avoid using the Default Update set as an Update Set for moving customizations from instance to instance",
+        "B. Before moving customizations from instance to instance with Update Sets, ensure that both instances are different versions",
+        "C. Use the Baseline Update Set to store the contents of items after they are changed the first time",
+        "D. Once an Update Set is closed as ג€Completeג€, change it back to ג€In Progressג€ until it is applied to another instance"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The default update set captures changes made to the instance without adding those changes to any user-created update sets. It is recommended to avoid using the Default Update Set for moving customizations between instances. Instead, use a named Update Set (user-created).",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct answer.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer\nD. is not the correct answer because:\nMark an update set as Complete only when it is ready to migrate. Once an update set is complete, do not change it back to In progress. Instead, create another update set for the rest of the changes, and be sure to commit them together in the order that they were created",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Create custom update set",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A seems correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "17",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73547-exam-csa-topic-1-question-17-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following is used to initiate a flow?<br/>",
+      "answers": [
+        "A. A Trigger",
+        "B. Core Action",
+        "C. A spoke",
+        "D. An Event"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A.  The trigger specifies the conditions that start running the flow. When the trigger conditions are met, the system starts running the flow. \n \nhttps://docs.servicenow.com/bundle/sandiego-application-development/page/administer/flow-designer/reference/flow-triggers.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the answer.  A trigger is used to initiate a flow.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A. https://developer.servicenow.com/dev.do#!/learn/courses/tokyo/app_store_learnv2_aescreateappfromscratch_tokyo_create_an_app_from_scratch_with_app_engine_studio/app_store_learnv2_aescreateappfromscratch_tokyo_automate_processes_with_flows/app_store_learnv2_aescreateappfromscratch_tokyo_flow_editor",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "18",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73548-exam-csa-topic-1-question-18-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "For Administrators creating new Service Catalog items, what is a characteristic they should know about Service Catalog variables?<br/>",
+      "answers": [
+        "A. Service Catalog variables can only be used in Record Producers",
+        "B. Service Catalog variables can only be used in Order Guides",
+        "C. Service Catalog variables cannot affect the order price",
+        "D. Service Catalog variables are global by default"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Variables are Global by default. They can define available options and affect the order price.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Catalog variables are not global by default",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A. Service Catalog variables can only be used in Record Producers -  No, vriables are used in Record Producers, Order Guides, and Catalog Items\nB. Service Catalog variables can only be used in Order Guides - No, variables can also be used in Catalog Items and Record Producers, not just Order Guides\nC. Service Catalog variables cannot affect the order price - Yes, variables collect user input, but do not change pricing unless scripted separately\nD. Service Catalog variables are global by default - No, variables are scoped to the specific Catalog Item unless manually set as global (a checkbox needs to be selected on variable creation form)",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the best answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Service Catalog variables may affect the price. SC variable is global by default. the definition is in the SN fundamental book.",
+          "selected_answer": "D",
+          "replies": [
+            "Why is the fact that they're global by default important???",
+            "Beacuse it can be security issue. You should protect variables with sensitive data."
+          ]
+        },
+        {
+          "content": "In general, Service Catalog variables do not directly affect the order price. Service Catalog variables are primarily used for collecting user input and customizing the behavior of catalog items or processes. The order price is typically determined by factors such as the pricing rules, configuration items, or pricing models associated with the catalog items or services being ordered.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Variable\nService Catalog variables are global by default, display in all the tasks of a Requested Item, and provide options to tailor a catalog item to the customer's needs. For example, a computer might be available with different operating systems.\nThe Service Catalog lets you attach variables either to a catalog item or to an execution plan.\nQuestion choices can define the available options and might affect the order price.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct. In the Catalog Administration module of Additional ServiceNow Fundamentals Content in the on demand course, it says:\n\n\"Service Catalog variables are flagged as \"Global\" by default and will display in all the execution tasks of a requested item.\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Not sure about D. If I am in my scoped app and create a new Cat Item Variable, the application field on the form is still the same scope (and protected). Unless they mean that the Cat Item app (and variables) is in the global scope.",
+          "selected_answer": "",
+          "replies": [
+            "Variable\nService Catalog variables are global by default, display in all the tasks of a Requested Item, and provide options to tailor a catalog item to the customer's needs. For example, a computer might be available with different operating systems.\nThe Service Catalog lets you attach variables either to a catalog item or to an execution plan.\nQuestion choices can define the available options and might affect the order price."
+          ]
+        }
+      ],
+      "question_number": "19",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73642-exam-csa-topic-1-question-19-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which one of the following statements is true about Column Context Menus?<br/>",
+      "answers": [
+        "A. It displays actions such as creating quick reports, configuring the list, and exporting data",
+        "B. It displays actions related to filtering options, assigning tags, and search",
+        "C. It displays actions related to viewing and filtering the entire list",
+        "D. It displays actions such as view form, view related task, and add relationship"
+      ],
+      "comments": [
+        {
+          "content": "Column Context Menus a.k.a Column Options – found on the header of each field (the 3 dots on the left of field header)\nB – Assigning tags is on “Actions on selected rows” tab and search is the tab with magnifying glass. Both is on the top right corner.\nC- This is actually true but A is more precise. So A is the answer\nD – these actions are on each row/record, on the “i” (info) icon not on Column Context Menu",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "DEFINITELY A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "20",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73641-exam-csa-topic-1-question-20-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which ServiceNow products can be used to discover and populate the CMDB? (Choose two.)<br/>",
+      "answers": [
+        "A. Discovery",
+        "B. IntegrationHub ETL",
+        "C. Finder",
+        "D. CMDB Plug-in",
+        "E. CMDB Integration Dashboard"
+      ],
+      "comments": [
+        {
+          "content": "A and B is the Correct Answer.\nhttps://docs.servicenow.com/bundle/sandiego-servicenow-platform/page/product/configuration-management/concept/c_OptionsToPopulateCMDB.html\n\nYou can populate the CMDB by using Discovery, by using the IntegrationHub ETL or Import Sets to import and integrate data from a third-party source, by integrating with an external CMDB, or by manually creating CIs.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "You can populate the CMDB by using Discovery, by using the IntegrationHub ETL or Import Sets to import and integrate data from a third-party source, by integrating with an external CMDB, or by manually creating CIs.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AB FOR SURE",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A and B",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "A and B\nhttps://docs.servicenow.com/bundle/washingtondc-servicenow-platform/page/product/configuration-management/concept/c_OptionsToPopulateCMDB.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AB is the correct answer.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "A &B are correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A and B are correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A B is correct",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "A, B is the correct answers",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A,B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "21",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73644-exam-csa-topic-1-question-21-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "When using the Load Data and Transform Map process, what is the Mapping Assist used for?<br/>",
+      "answers": [
+        "A. Mapping fields using the Import Log",
+        "B. Mapping fields using Transform History",
+        "C. Mapping fields using an SLA",
+        "D. Mapping fields using a Field Map"
+      ],
+      "comments": [
+        {
+          "content": "D is the correct answer.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/sandiego-platform-administration/page/script/server-scripting/concept/c_MappingOptions.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "22",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73549-exam-csa-topic-1-question-22-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which one of the following statements describes the contents of the Configuration Management Database (CMDB)?<br/>",
+      "answers": [
+        "A. The CMDB contains data about tangible and intangible business assets",
+        "B. The CMDB contains the Business Rules that direct the intangible, configurable assets used by a company",
+        "C. The CMDB archives all Service Management PaaS equipment metadata and usage statistics",
+        "D. The CMDB contains ITIL process data pertaining to configuration items"
+      ],
+      "comments": [
+        {
+          "content": "Answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The configurations are stored in a configuration management database (ServiceNow CMDB) which consists of entities, called Configuration Items (CI), that are part of your environment. A CI may be:\n\nA physical entity, such as a computer or router\nA logical entity, such as an instance of a database\nConceptual, such as a Requisition Service\n\nhttps://docs.servicenow.com/bundle/sandiego-servicenow-platform/page/product/configuration-management/concept/cnfig-mgmt-and-cmdb.html",
+          "selected_answer": "",
+          "replies": [
+            "The answer should be A. The answer D suggests CMDB contains process data of CI. I believe CMDB only has non-process data of physical/logical/conceptual entities."
+          ]
+        },
+        {
+          "content": "Per the SN Fundamentals book, Configuration Items can be tangible or intangible devices or applications in the CMDB such as firewalls, computers, email services, and services.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Shouldn't it be \"D. The CMDB contains ITIL process data pertaining to configuration items\"?",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "23",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73550-exam-csa-topic-1-question-23-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "In what order should filter elements be specified?<br/>",
+      "answers": [
+        "A. Field, Operator, then Value",
+        "B. Field, Operator, then Condition",
+        "C. Operator, Condition, then Value",
+        "D. Value, Operator, then Field"
+      ],
+      "comments": [
+        {
+          "content": "A is the correct answer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct:\n\nhttps://docs.servicenow.com/bundle/utah-platform-user-interface/page/use/using-lists/task/t_CreatingFilters.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct!",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "24",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73551-exam-csa-topic-1-question-24-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which statement is true about business rules?<br/>",
+      "answers": [
+        "A. A business rule must run before a database action occurs",
+        "B. A business rule can be a piece of Javascript",
+        "C. A business rule must not run before a database action occurs",
+        "D. A business rule monitors fields on a form"
+      ],
+      "comments": [
+        {
+          "content": "B is the correct answer,\nBR can be set to run BEFORE OR AFTER the database action has occurred.\nBR don't depends from form action. Other actions may have an impact on the table.\nBR stdby, but WHEN the operation is to be performed is set.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The wording of the answer is very important. A and C seem to have been correct if the MUST is not in the wording.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A business rule can run either before or after a database action and does not solely pertain to a form (can be applied to other SNow elements). It most definitely can be a script (js) on the server side. So, B is correct.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The question says what must be true of BRs.  A is true, but not necessarily the only truth about BRs. so A is acceptable.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "from: https://docs.servicenow.com/bundle/tokyo-application-development/page/script/business-rules/concept/c_BusinessRules.html\nBefore:  After the user submits the form but before any action is taken on the record in the database.\nAfter:\tAfter the user submits the form and after any action is taken on the record in the database.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A lot of answers here seem to be indicating A as the correct answer, but they selected B as the correct answer! The correct answer should be A.",
+          "selected_answer": "A",
+          "replies": [
+            "As stated by many, business rules can run BEFORE or AFTER the database action. So the only logical answer is B."
+          ]
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Business Rules can run before or after an action therefore the answer can only be B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer,\n* BR can be set to run before OR AFTER the database action has occurred.\n* BRs are server-side logic/script that execute when database records are queried, updated, inserted, or deleted. Business Rules respond to database interactions regardless of access method: for example, users interacting with records through forms or lists, web services, or data imports (configurable). Business Rules do not monitor forms or form fields but do execute their logic when forms interact with the database such as when a record is saved, updated, or submitted.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Business rule runs :\nAfter the user submits the form but before any action is taken on the record in the database.\nAfter the user submits the form and after any action is taken on the record in the database.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer: Based on SN Fundamentals course:\n\"Business Rules can be set to run before OR AFTER the database action has occurred.\" Need to be precise on wording. A) indicates it always has to run, before, but that`s not true.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "25",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/70194-exam-csa-topic-1-question-25-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following are a type of client scripts supported in ServiceNow? (Choose four.)<br/>",
+      "answers": [
+        "A. onSubmit",
+        "B. onUpdate",
+        "C. onCellEdit",
+        "D. onLoad",
+        "E. onEdit",
+        "F. onChange",
+        "G. onSave"
+      ],
+      "comments": [
+        {
+          "content": "ACDF CORRECT\nonSubmit when a form is submitted.\t\nonLoad execute script logic when forms are loaded\nonCellEdit Client Script is for lists rather than form\t\nonChange when a particular field's value changes\n\nhttps://developer.servicenow.com/dev.do#!/learn/courses/quebec/app_store_learnv2_scripting_quebec_scripting_in_servicenow/app_store_learnv2_scripting_quebec_client_side_scripting/app_store_learnv2_scripting_quebec_client_script_types",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "acdf is correct",
+          "selected_answer": "ACDF",
+          "replies": []
+        },
+        {
+          "content": "acdf is correct",
+          "selected_answer": "ACDF",
+          "replies": []
+        },
+        {
+          "content": "A,C,D,F is correct",
+          "selected_answer": "ACDF",
+          "replies": []
+        },
+        {
+          "content": "Confirmed, ACDF",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ACDF is correct",
+          "selected_answer": "ACDF",
+          "replies": []
+        },
+        {
+          "content": "ACDF is correct option",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ACDF\nClient Scripts are a specific kind of client-side script, which execute on forms (or in the case of onCellEdit Client Scripts, on the list view) of a record. Client Scripts come in four basic types: onLoad, onChange, onSubmit, and onCellEdit. Each type runs under different conditions, and often has a different use than the others.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A, C, D, F is the correct answers",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Given answer is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer: ACDF",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Sorry ACDF",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "good reponse ADF",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "26",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/66549-exam-csa-topic-1-question-26-discussion/",
+      "most_voted": "ACDF",
+      "error": null
+    },
+    {
+      "question": "Which type of tables may be extended by other tables, but do not extend another table?<br/>",
+      "answers": [
+        "A. Base Tables",
+        "B. Core Tables",
+        "C. Extended Tables",
+        "D. Custom Tables"
+      ],
+      "comments": [
+        {
+          "content": "the wording of the question does not make sense.  It should probably be: Which type of tables may be extended by other tables, but are not extended from another table?  Or 'do not extend from another table'.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Base tables are those tables which are extended, but itself is not an extended table.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "base tables like task",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "1. base class table: not extended from another table\n2. Parent class table: maybe extended from another table",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "B IS CORRECT ANS",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "This helped me:\nhttps://www.servicenow.com/community/itsm-forum/difference-between-quot-core-quot-table-and-quot-base-quot-table/m-p/574302",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "27",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73552-exam-csa-topic-1-question-27-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following statement describes the purpose of an Order Guide?<br/>",
+      "answers": [
+        "A. Order Guides restrict the number of items in an order to only one item per request",
+        "B. Order Guide provide a list of guidelines for Administrators on how to set up item variables",
+        "C. Order Guide provide the ability to order multiple, related items as one request",
+        "D. Order Guides take the user directly to the checkout without prompting for information"
+      ],
+      "comments": [
+        {
+          "content": "Answer is",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct:\nhttps://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/service-catalog-management/concept/c_ServiceCatalogOrderGuides.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "28",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73553-exam-csa-topic-1-question-28-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which tool is used to have conversations with logged-in users in real-time?<br/>",
+      "answers": [
+        "A. Connect Chat",
+        "B. Now Messenger",
+        "C. User Presence",
+        "D. Comments"
+      ],
+      "comments": [
+        {
+          "content": "A is correct but this question is deprecated since connect chat no longer exists. Now we have sidebar discussions, which is not the same.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Its been depreciated, but is correct for previous versions",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "DEPRECATED",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "deprecated",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "User Presence is not a \"tool\" like the question asks. Connect Chat is a tool. A is correct.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "ChatGPT - Connect Chat is a real-time messaging tool that enables users to chat with individuals and groups, quickly share files, and collaborate on any record by connecting with the right people instantly. It is not supported in Next Experience1. Agent Chat is the newer version of Connect Chat in ServiceNow. One of the first differences you’ll notice is that Agent Chat is not available in the standard ServiceNow user interface. Agents receive chats as well as other work items within Agent Workspace, which is a newer and more modern user interface (UI)2.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "According to SNow",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Connected Chat",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A -Connect Chat  is a correct Answer  \nhttps://docs.servicenow.com/en-US/bundle/utah-servicenow-platform/page/use/collaboration/concept/c_Collaboration.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-servicenow-platform/page/use/collaboration/concept/c_Collaboration.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the ServiceNow website: Connect Chat is a real-time messaging tool that enables users to chat with individuals and groups, quickly share files, and collaborate on any record by connecting with the right people instantly.\nhttps://docs.servicenow.com/en-US/bundle/tokyo-servicenow-platform/page/use/collaboration/concept/c_Collaboration.html\n\nAlso asked chatgpt:\nConnect Chat is a real-time communication tool in the Tokyo release of ServiceNow, which was released in 2018. It is a feature of ServiceNow's collaboration module, which is designed to improve communication and collaboration between users within the platform.\nUser Presence:\nThe user presence feature in Tokyo release is integrated with the Connect Chat tool, allowing users to see the status of their colleagues directly in the chat interface. When a user is available, their presence status is indicated with a green dot next to their name. When they are busy, the dot is orange, and when they are away, the dot is gray.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "From the ServiceNow website: Connect Chat is a real-time messaging tool that enables users to chat with individuals and groups, quickly share files, and collaborate on any record by connecting with the right people instantly.\nhttps://docs.servicenow.com/en-US/bundle/tokyo-servicenow-platform/page/use/collaboration/concept/c_Collaboration.html\n\nAlso asked chatgpt:\nConnect Chat is a real-time communication tool in the Tokyo release of ServiceNow, which was released in 2018. It is a feature of ServiceNow's collaboration module, which is designed to improve communication and collaboration between users within the platform.\nUser Presence:\nThe user presence feature in Tokyo release is integrated with the Connect Chat tool, allowing users to see the status of their colleagues directly in the chat interface. When a user is available, their presence status is indicated with a green dot next to their name. When they are busy, the dot is orange, and when they are away, the dot is gray.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "it is the User Presence. Connect chat is not in the latest update",
+          "selected_answer": "C",
+          "replies": [
+            "Didn't you mean Sidebar chat?"
+          ]
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-platform-user-interface/page/use/navigation/concept/c_UserPresence.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "it is the User Presence. Connect chat is not in the latest update",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "29",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73554-exam-csa-topic-1-question-29-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following concepts are associated with the ServiceNow CMDB? (Choose four.)<br/>",
+      "answers": [
+        "A. Service Processes",
+        "B. User Permissions",
+        "C. Tables and Fields",
+        "D. A Database",
+        "E. The Dependency View"
+      ],
+      "comments": [
+        {
+          "content": "correct answer",
+          "selected_answer": "ACDE",
+          "replies": []
+        },
+        {
+          "content": "the correct choices are A, C, D, and E.",
+          "selected_answer": "ACDE",
+          "replies": []
+        },
+        {
+          "content": "isn't BCDE ?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ACDE is correct.",
+          "selected_answer": "ACDE",
+          "replies": []
+        },
+        {
+          "content": "A, C, D, E is very correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A, C, D, E:\n\nhttps://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/configuration-management/concept/cnfig-mgmt-and-cmdb.html",
+          "selected_answer": "ACDE",
+          "replies": []
+        },
+        {
+          "content": "A, C, D, E is the correct answers",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "30",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/86132-exam-csa-topic-1-question-30-discussion/",
+      "most_voted": "ACDE",
+      "error": null
+    },
+    {
+      "question": "What is a formatter? Select one of the following.<br/>",
+      "answers": [
+        "A. A formatter allows you to configure applications on your instance",
+        "B. A formatter is a form element used to display information that is not a field in the record",
+        "C. A formatter allows you to populate fields automatically",
+        "D. A formatter is a set of conditions applied to a table to help find and work with data"
+      ],
+      "comments": [
+        {
+          "content": "b is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Updated link that explains the basics of a Formatter.\nhttps://docs.servicenow.com/bundle/vancouver-platform-administration/page/administer/form-administration/concept/c_Formatters.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct, it includes Activity Stream and Work Notes.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct\nhttps://docs.servicenow.com/bundle/rome-platform-administration/page/administer/form-administration/concept/c_Formatters.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "31",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73555-exam-csa-topic-1-question-31-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When searching using the App Navigator search field, what can be returned? (Choose four.)<br/>",
+      "answers": [
+        "A. Names of Applications and Modules",
+        "B. Names of Modules",
+        "C. Names of Applications",
+        "D. Favorites",
+        "E. History Records",
+        "F. Titles of Dashboard Gauges"
+      ],
+      "comments": [
+        {
+          "content": "A., B., & C. literally say the same thing...lol",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "abcd are correct",
+          "selected_answer": "ABCD",
+          "replies": []
+        },
+        {
+          "content": "ABCD correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ABCD is correct",
+          "selected_answer": "ABCD",
+          "replies": []
+        },
+        {
+          "content": "A,B,C,D is correct",
+          "selected_answer": "ABCD",
+          "replies": []
+        },
+        {
+          "content": "To be more precise, to search in Favorites you have to open the Favorites menu although from Utah, it's not necessary anymore.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "CORRECT",
+          "selected_answer": "ABCD",
+          "replies": []
+        },
+        {
+          "content": "ABCD are correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A, B, C, and D are the correct answers",
+          "selected_answer": "ABCD",
+          "replies": []
+        },
+        {
+          "content": "A, B, C, D is the correct answers",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "32",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73648-exam-csa-topic-1-question-32-discussion/",
+      "most_voted": "ABCD",
+      "error": null
+    },
+    {
+      "question": "Which technique is used to get information from a series of referenced fields from different tables?<br/>",
+      "answers": [
+        "A. Table-Walking",
+        "B. Sys_ID Pulling",
+        "C. Dot-Walking",
+        "D. Record-Hopping"
+      ],
+      "comments": [
+        {
+          "content": "dot-walking, C is correct, by definition of this activity :)",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c is correct.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "d is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-platform-user-interface/page/use/navigation/reference/dot-walking-examples.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Dot-Walking:\nhttps://docs.servicenow.com/bundle/utah-platform-user-interface/page/use/navigation/reference/dot-walking-examples.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "dot-walking, C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "33",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73649-exam-csa-topic-1-question-33-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is a schema map?<br/>",
+      "answers": [
+        "A. A schema map enables administrators to define records from specific tables as trouble sources for Configuration Items",
+        "B. A schema map graphically organizes the visual task boards for the CMDB",
+        "C. A schema map graphically displays the Configuration Items that support a business service",
+        "D. A schema map displays the details of tables and their relationships in a visual manner, allowing administrators to view and easily access different parts of the database schema"
+      ],
+      "comments": [
+        {
+          "content": "D is the correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The schema map displays the details of tables and their relationships in a visual manner, allowing administrators to view and easily access different parts of the database schema.\nhttps://docs.servicenow.com/bundle/washingtondc-platform-administration/page/administer/table-administration/concept/c_SchemaMapForTables.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Yes, D is the correct answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct\nhttps://docs.servicenow.com/bundle/rome-platform-administration/page/administer/table-administration/concept/c_SchemaMapForTables.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "34",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73556-exam-csa-topic-1-question-34-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which one of the following statements best describes the purpose of an Update Set?<br/>",
+      "answers": [
+        "A. An Update Set allows administrators to group a series of changes into a named set and then move this set as a unit to other systems",
+        "B. By default, an Update Set includes customizations, Business Rules, and homepages",
+        "C. An Update Set is a group of customizations that is moved from Production to Development",
+        "D. By default, the changes included in an Update Set are visible only in the instance to which they are applied"
+      ],
+      "comments": [
+        {
+          "content": "A is the correct answer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct\nhttps://docs.servicenow.com/bundle/rome-application-development/page/build/system-update-sets/concept/system-update-sets.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "35",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73557-exam-csa-topic-1-question-35-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following can be customized through the Basic Configuration UI 16 module? (Choose three.)<br/>",
+      "answers": [
+        "A. Banner Image",
+        "B. Record Number Format",
+        "C. Browser Tab Title",
+        "D. System Date Format",
+        "E. Form Header Size"
+      ],
+      "comments": [
+        {
+          "content": "The Basic Configuration UI 16 module in ServiceNow allows administrators to make simple branding and UI customizations without requiring deep technical knowledge. Based on its typical functionalities, the three customizable options from your list are:\n\nA. Banner Image – ✅ Can be customized via the module to change the system's branding.\nC. Browser Tab Title – ✅ This can be configured to display a custom title in the browser tab.\nE. Form Header Size – ✅ Allows changes to the appearance of form headers.\n\nThe incorrect options:\nB. Record Number Format – ❌ This is controlled by numbering rules, not the Basic Configuration UI 16 module.\nD. System Date Format – ❌ Managed in system properties, not via the Basic Configuration UI 16 module.\n\nFinal answer: A, C, and E.",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "ACD is the correct answer.",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "A, C, D is correct",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "correct answer",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "ACD -\nhttps://docs.servicenow.com/ja-JP/bundle/rome-platform-user-interface/page/administer/navigation-and-ui/task/t_ConfigureLogoColorsSysDfltsUI16.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ACD are correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A, C, and D are the correct answers",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "A, C, D is the correct answers",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "36",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73558-exam-csa-topic-1-question-36-discussion/",
+      "most_voted": "ACD",
+      "error": null
+    },
+    {
+      "question": "What is the function of user impersonation?<br/>",
+      "answers": [
+        "A. Testing and visibility",
+        "B. Activate verbose logging",
+        "C. View custom perspectives",
+        "D. Unlock Application master list"
+      ],
+      "comments": [
+        {
+          "content": "A. is correct but why is C. wrong?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I know A is correct but can someone please explain why view custom perspectives is wrong?",
+          "selected_answer": "",
+          "replies": [
+            "When impersonating a user, the impersonator can:\n -- Access exactly what that impersonated user can access (apps, modules,data)\n-- Test what different users can do\nSo A is the better answer",
+            "C is also correct, but A is a better answer.",
+            "i have the same question"
+          ]
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "37",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73650-exam-csa-topic-1-question-37-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What information does the System Dictionary contain?<br/>",
+      "answers": [
+        "A. The human-readable labels and language settings",
+        "B. The definition for each table and column",
+        "C. The information on how tables relate to each other",
+        "D. The language dictionary used for spell checking"
+      ],
+      "comments": [
+        {
+          "content": "The system dictionary is a table, called Dictionary Entry [sys_dictionary], that contains details for each table and the definition for every column on each table in an instance.\n\nhttps://docs.servicenow.com/bundle/vancouver-platform-administration/page/administer/data-dictionary-tables/concept/c_SystemDictionary.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct!\nInsert -> Saves the item as a new record and returns to the previously viewed page.\nUpdate -> Click Submit or Update to save changes and return to the previously viewed page.\nsource:\nhttps://docs.servicenow.com/bundle/tokyo-platform-user-interface/page/use/using-forms/task/t_EditingInForms.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the accurate answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is your answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Both Insert and update will close the form. Insert and Stay or Save options will stay on the form",
+          "selected_answer": "B",
+          "replies": [
+            "Not related to this question, though."
+          ]
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct\nhttps://docs.servicenow.com/bundle/rome-platform-administration/page/administer/data-dictionary-tables/concept/c_SystemDictionary.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "38",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73583-exam-csa-topic-1-question-38-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When working on a form, what is the difference between Insert and Update operations?<br/>",
+      "answers": [
+        "A. Insert creates a new record and Update saves changes, both remain on the form",
+        "B. Insert creates a new record and Update saves changes, both exit the form",
+        "C. Insert saves changes and exits the form, Update saves changes and remains on the form",
+        "D. Insert saves changes and remains on the form, Update saves changes and exits the form"
+      ],
+      "comments": [
+        {
+          "content": "From the actual ServiceNow fundamentals course transcript:\n\n\"\"Some records—for example, surveys and catalog items—allow you to copy records through Insert and Insert and Stay. Check for these options on the form context menu if you want to create a copy of the current record. Insert copies the record and redisplays the list. Insert and Stay copies the record and keeps it open so that you can work on the new copy immediately.\"\n\nKristen: Tell me about it! If I want to make a copy of the record and close the form, I make my changes, and then just select Insert. I'm good to go. So simple! \"\n\nThe suggested answer is WRONG and should be changed, unless they are deliberately trying to get people to fail the test.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is B, Insert, Insert and Stay, update, save",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct .if the choice is insert and stay ,D is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "b is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is B, I have gone to my dev instance, performed both save and update operations on a form. Insert creates a new record and Update saves changes, both exit the form",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct answer. \nWhat is a difference between insert and save if D should be the right  answer?",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "D is right answer",
+          "selected_answer": "",
+          "replies": [
+            "No sir, the correct is B, if you want to create and stay you need to use insert and stay, insert close the form"
+          ]
+        },
+        {
+          "content": "Correct answer is B as Insert and Stay allows for you to stay on the form, if you select Insert it will exit the form.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The answer is B for sure. If answer is D then What is the use of insert and stay ?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct for sure...",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B. it would be D if the question included \"Insert & Stay\" instead of \"Insert\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D. Insert saves changes and remains on the form, Update saves changes and exits the form",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Insert adds the record and closes the form.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "39",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/61779-exam-csa-topic-1-question-39-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "How is the Event Log different from the Event Registry?<br/>",
+      "answers": [
+        "A. Event Log contains generated Events, the Event Registry is a table of Event definitions",
+        "B. Event Log is formatted in the Log style, the Event Registry displays different fields",
+        "C. Event Log lists Events that were triggered by integrations, the Event Registry lists the Events that were triggered during the day (24-hour period)",
+        "D. Event Log is the same as the Event Registry"
+      ],
+      "comments": [
+        {
+          "content": "A is partially correct. Event Registry is a feature that allows ServiceNow to capture events from external systems, such as servers, applications, and network devices. The Event Registry provides a way to collect and analyze events from multiple sources in a single location, allowing organizations to identify patterns and trends in their IT infrastructure. The Event Registry can be configured to trigger notifications, alerts, and other actions based on specific events, enabling organizations to proactively manage their IT environment.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/sandiego-platform-administration/page/administer/platform-events/event-logs-2.html\nhttps://docs.servicenow.com/bundle/sandiego-platform-administration/page/administer/platform-events/concept/c_EventRegistry.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "40",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/77546-exam-csa-topic-1-question-40-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What is a Dictionary Override?<br/>",
+      "answers": [
+        "A. A Dictionary Override is an incoming customer update in an Update Set which applies to the same objects as a newer local customer update",
+        "B. A Dictionary Override is the addition, modification, or removal of anything that could have an effect on IT services",
+        "C. A Dictionary Override is a task within a flow that requests an action before the flow can continue",
+        "D. A Dictionary Override sets field properties in extended tables"
+      ],
+      "comments": [
+        {
+          "content": "dictionary overrides can be used to set field properties in extended tables in ServiceNow. An extended table is a custom database table that is created by extending an existing base table in the platform. When you create an extended table, you can specify which fields from the base table you want to include in the new table, as well as any additional fields that are specific to the extended table.\n\nYou can use dictionary overrides to modify the properties of fields in an extended table in much the same way as you would for fields in a base table. For example, you might use a dictionary override to change the label or description of a field, or to specify a default value or a custom picker for that field.\n\nIt is important to note that dictionary overrides apply to the specific field that they are defined for, and do not affect other fields in the same table or in related tables. So if you want to modify the properties of multiple fields in an extended table, you will need to create separate dictionary overrides for each field.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "A Dictionary Override is a feature of the ServiceNow platform, which is used for IT service management. It allows customers to update or modify the metadata (dictionary) of a specific table in a ServiceNow instance, even if that table has been customized by the instance owner. This allows for greater flexibility in customization and ensures that customer updates can be easily managed and tracked.\n\nIn simple terms, a Dictionary Override occurs when a customer updates the metadata of a table in a ServiceNow instance that has already been customized by the instance owner. The customer update is stored separately from the instance owner's customization, and can be easily identified and managed.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Dictionary overrides provide the ability to define a field on an extended table differently from the field on the parent table. For example, for a field on the Task [task] table, a dictionary override can change the default value on the Incident [incident] table without affecting the default value on Task [task] or on Change [change]",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D.-\nhttps://docs.servicenow.com/bundle/tokyo-platform-administration/page/administer/data-dictionary-tables/concept/c_DictionaryOverrides.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "41",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73666-exam-csa-topic-1-question-41-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which group of permissions is used to control Application and Module access?<br/>",
+      "answers": [
+        "A. Access Control Rules",
+        "B. UI Policies",
+        "C. Roles",
+        "D. Assignment Rules"
+      ],
+      "comments": [
+        {
+          "content": "C.   Roles are used to control application and module access in most systems that use role-based access control (RBAC) as a security model. Roles are assigned to users or groups and define the permissions and access levels that they have within the system. By defining roles with specific permissions, access to applications and modules can be restricted to only those users who need it, while preventing unauthorized access. Access Control Rules, UI Policies, and Assignment Rules are used for other purposes within the system, such as enforcing data security or automating tasks.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is the answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://developer.servicenow.com/dev.do#!/learn/learning-plans/utah/servicenow_application_developer/app_store_learnv2_securingapps_utah_roles",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct\nhttps://docs.servicenow.com/bundle/rome-platform-administration/page/administer/roles/concept/c_Roles.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct. In ServiceNow, roles are used to limit and control access to features in applications and modules",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "42",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73560-exam-csa-topic-1-question-42-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is a Record Producer?<br/>",
+      "answers": [
+        "A. A Record Producer is a type of Catalog Item that is used for Requests, not Services",
+        "B. A Record Producer creates user records",
+        "C. A Record Producer is a type of Catalog Item that provides easy ordering by bundling requests",
+        "D. A Record Producer is a type of a Catalog Item that allows users to create task-based records from the Service Catalog"
+      ],
+      "comments": [
+        {
+          "content": "correct answer is D.  A Record Producer is a type of Catalog Item that allows users to create task-based records from the Service Catalog.\n\nIn the context of IT service management and ServiceNow platform, a Record Producer is a type of Catalog Item that enables users to create new records of a specified table and task-based records from the Service Catalog interface. It is a form-based interface that presents users with fields and options to fill in, which then generates a new record in the designated table with the entered information.\n\nRecord Producers are often used to facilitate user self-service and automate the creation of records for various types of requests, such as incidents, change requests, or service requests. They can also be used to bundle multiple requests into a single, easy-to-use interface, making it simpler for users to order multiple services or items at once.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D may be the correct answer for the exam but for people wanting to know the actual use.   A record producer can be used to insert a record directly from the service catalog into ANY table, task-based or otherwise.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct\nhttps://docs.servicenow.com/bundle/rome-servicenow-platform/page/product/service-catalog-management/concept/c_RecordProducer.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "43",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73584-exam-csa-topic-1-question-43-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Create Incident, Password Reset, and Report outage: what do these services in the Service Catalog have in common?<br/>",
+      "answers": [
+        "A. They direct the user to a record producer",
+        "B. They direct the user to a catalog property",
+        "C. They direct the user to a catalog UI policy",
+        "D. They direct the user to a catalog client script"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is A.  They direct the user to a record producer.\n\nThe three services in the Service Catalog - Incident, Password Reset, and Report Outage - have in common that they all direct the user to a record producer. A record producer is a form that allows users to create a new record, such as an incident or a password reset request, in the ServiceNow platform. When a user requests any of these services, they are directed to a record producer where they can fill out the required information and submit the request.\n\nWhile the specific details of each record producer may vary depending on the service being requested, the commonality between them is that they all serve as the starting point for creating a new record in the ServiceNow platform.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "44",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73667-exam-csa-topic-1-question-44-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What is the Import Set Table?<br/>",
+      "answers": [
+        "A. A table where data will be placed, post-transformation",
+        "B. A table that determines relationships",
+        "C. A staging area for imported records",
+        "D. A repository for Update Set information"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is C.   Import Set Table is a staging area for imported records in ServiceNow. It is used to import data from various sources into ServiceNow tables. Import Set Tables provide a temporary holding area for records imported from a data source such as a CSV file, an Excel file, or a database table. Once the records are imported into the Import Set Table, they can be transformed and then moved to the appropriate ServiceNow table. The Import Set Table is typically used in conjunction with Transform Maps, which define how the imported data is transformed and mapped to ServiceNow tables",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C IS CORRECT",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct\nhttps://docs.servicenow.com/bundle/rome-platform-administration/page/administer/import-sets/concept/c_ImportSetsKeyConcepts.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "45",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73585-exam-csa-topic-1-question-45-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is a characteristic of importing data into ServiceNow?<br/>",
+      "answers": [
+        "A. An existing Transform Map can be used one time on the same import set",
+        "B. Coalesce fields are used only after running Transform",
+        "C. Any user can manage and set up import sets",
+        "D. An existing Transform Map can be used multiple times on the same import set"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is D.   An existing Transform Map can be used multiple times on the same import set is a characteristic of importing data into ServiceNow. Transform Maps are used to map data from an import set to fields in a ServiceNow table. Once a Transform Map is created, it can be used multiple times on the same import set or on different import sets that have the same data structure. This makes it easier to import data into ServiceNow, especially if you need to import the same type of data on a regular basis.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D seems to be correct from the list of available options",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "46",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73668-exam-csa-topic-1-question-46-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What module in the Service Catalog application does an Administrator access to begin creating a new item?<br/>",
+      "answers": [
+        "A. Maintain Categories",
+        "B. Maintain Items",
+        "C. Content Items",
+        "D. Items"
+      ],
+      "comments": [
+        {
+          "content": "Admin can define individual catalog items using Service Catalog > Catalog Definition > Maintain Item application. You can create, edit, and copy catalog items.\n\nMaintain items is an application module that list few types of request items like catalog item, record producer, standard change templates, software catalog, hardware catalog etc. All of these are extended from the base sc_cat_item table and used for request fulfillment from your service catalog. They do create new records ie request or RITM from catalog items or a task based record from a record producer or a change from standard template.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is: B. Maintain Items\nWhy not the others:\nA. Maintain Categories: Used to manage and organize catalog categories, not individual items.\nC. Content Items: Used for informational items, not for creating standard requestable catalog items.\nD. Items: Not a standalone module — \"Maintain Items\" is the correct full module name.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "- Service Catalog > Catalog Definitions > Maintain Items B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B IS RIGHT",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The module that an Administrator would access to begin creating a new item in the Service Catalog application would be \"B. Maintain Items\".",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B -  Service Catalog > Catalog Definitions > Maintain Items",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "47",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73796-exam-csa-topic-1-question-47-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following allows a user to edit field values in a list without opening the form?<br/>",
+      "answers": [
+        "A. Data Editor",
+        "B. Edit Menu",
+        "C. List Editor",
+        "D. Form Designer"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct, Just double click on any field to edit.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C.-\nhttps://docs.servicenow.com/bundle/tokyo-platform-administration/page/administer/list-administration/reference/r_AdministeringTheListEditor.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "48",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73669-exam-csa-topic-1-question-48-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which three Variable Types can be added to a Service Catalog Item?<br/>",
+      "answers": [
+        "A. True/False, Multiple Choice, and Ordered",
+        "B. True/False, Checkbox, and Number List",
+        "C. Number List, Single Line Text, and Reference",
+        "D. Multiple Choice, Select Box, and Checkbox"
+      ],
+      "comments": [
+        {
+          "content": "The answer to this question may vary depending on the specific Service Catalog software being used. However, based on common practices, the three variable types that can be added to a Service Catalog Item are typically:\n\nD. Multiple Choice, Select Box, and Checkbox\n\nThese variable types allow users to select options from a predefined list and can be used for a variety of purposes, such as selecting a specific model or version of a product, choosing a department or location, or selecting a priority level. Other variable types that may also be supported by some Service Catalog software include text fields, date/time pickers, and attachments.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D seems to be the correct answer\nhttps://docs.servicenow.com/bundle/tokyo-application-development/page/administer/flow-designer/reference/supported-service-catalog-types.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "49",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73670-exam-csa-topic-1-question-49-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "How are Workflows moved between instances?<br/>",
+      "answers": [
+        "A. Workflows are moved using Update Sets",
+        "B. Workflows are moved using Transform Maps",
+        "C. Workflows are moved using Application Sets",
+        "D. Workflows cannot be moved between instances"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A. Workflows are moved using Update Sets.\n\nUpdate Sets are used to move customizations and configurations from one ServiceNow instance to another. Workflows, being a type of customization, can be moved between instances using Update Sets. When you create an Update Set, you can add workflows to it, along with any related components such as tables, fields, business rules, and UI pages. Once you have created an Update Set, you can then export it from the source instance and import it into the target instance. This allows you to move workflows and other customizations between instances as needed.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The system tracks workflows in update sets differently than other records because workflow information is stored across multiple tables.\n\nChanges made to a workflow version are not added to the update set until the workflow is published, at which point the entire workflow is added into the update set. Update sets store workflows as a single Workflow [wf_workflow] record and only retain the latest version with the update type of Workflow.\n\nhttps://docs.servicenow.com/bundle/tokyo-servicenow-platform/page/administer/workflow-administration/concept/c_WorkflowMovementWithUpdateSets.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A might be correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "50",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73672-exam-csa-topic-1-question-50-discussion/",
+      "most_voted": "A",
+      "error": null
+    }
+  ]
+}

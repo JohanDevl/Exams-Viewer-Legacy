@@ -1,0 +1,2302 @@
+{
+  "chunk_id": 4,
+  "start_question": 201,
+  "end_question": 250,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "On the Reports page, what sections allow you to see which reports are visible to different audiences? (Choose four.)",
+      "answers": [
+        "A. Group",
+        "B. Department",
+        "C. My reports",
+        "D. Team",
+        "E. Global",
+        "F. All"
+      ],
+      "comments": [
+        {
+          "content": "ACEF are correct",
+          "selected_answer": "",
+          "replies": [
+            "no man you gotta stop commenting you provide so many wrong questions , i mean seriously F is legit the worse choice The Correct answer is A,B,C,E ...",
+            "PappyFox is actually right...if you go to Reports -> View/Run and look in the top left, it's My Reports, Group, Global, and All",
+            "Can you pls give me your account details... I need to study bro...\nMy Reddit: Conscious_Can_2005\n\nOr Can you pls drop any comment in every question bro.... Please bro..."
+          ]
+        },
+        {
+          "content": "Group, My Reports, All and Global",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The real answer is on Report Visibility Controls\n\nA, C, E, F",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ACEF is correct. Page 266 of the ServiceNow Administration Fundamentals - Tokyo Edition.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "201",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106912-exam-csa-topic-1-question-201-discussion/",
+      "most_voted": "ACEF",
+      "error": null
+    },
+    {
+      "question": "On a filter condition, there is an element, which is based on the table, the user access rights, and columns on the table. What is this element called?",
+      "answers": [
+        "A. Label",
+        "B. Column",
+        "C. Data Element",
+        "D. Field",
+        "E. Attribute"
+      ],
+      "comments": [
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D. is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "202",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106913-exam-csa-topic-1-question-202-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "You have been asked to create a way for users to order a new iPhone, but only if they get two levels of approval. The approvers and users should be automatically notified at each approval level. What feature would you use to manage the approvals and notifications?",
+      "answers": [
+        "A. Approval Chains",
+        "B. Flows",
+        "C. Approver Delegates",
+        "D. Parent-Child Approvers",
+        "E. Approval Criteria"
+      ],
+      "comments": [
+        {
+          "content": "B. Flows",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct:\nResolution\nCreating the Knowledge simple approval workflow\n\n1. In the Application Navigator filter text, type workflow to find the Workflow application menu.\n\n2. Select the Workflow Editor module. The Workflow Editor always opens in an adjacent browser tab.\n\n3. Click the New button.\nhttps://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0538552",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B. is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "203",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106914-exam-csa-topic-1-question-203-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Groups are stored in what table?",
+      "answers": [
+        "A. User Group [user_groups]",
+        "B. Groups [sys_user_groups]",
+        "C. Group [sn_sys_user_group]",
+        "D. Group [sys_user_group]",
+        "E. User Groups [sn_user_groups]"
+      ],
+      "comments": [
+        {
+          "content": "D. Group [sys_user_group]",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct. Page 75 of the ServiceNow Administration Fundamentals - Tokyo Edition.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D. is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "204",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106915-exam-csa-topic-1-question-204-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When managing tags, you can adjust who is able to see it. What are the visibility options? (Choose three.)",
+      "answers": [
+        "A. Groups and Users",
+        "B. Me",
+        "C. Roles and Permissions",
+        "D. Everyone",
+        "E. Admins"
+      ],
+      "comments": [
+        {
+          "content": "A. Groups and Users\nB. Me\nD. Everyone",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "Yeah the Answer is  A,B,D.",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "ABD are correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I agree that \"Groups and Users\", \"Me\", and \"Everyone\" are correct.",
+          "selected_answer": "ABD",
+          "replies": []
+        }
+      ],
+      "question_number": "205",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100677-exam-csa-topic-1-question-205-discussion/",
+      "most_voted": "ABD",
+      "error": null
+    },
+    {
+      "question": "What module enables an administrator to define destinations for imported data on any ServiceNow table?",
+      "answers": [
+        "A. Field Transform",
+        "B. Schema Map",
+        "C. Transform Map",
+        "D. Import Map"
+      ],
+      "comments": [
+        {
+          "content": "C. Transform Map\nThe Transform Maps module enables an administrator to define destinations for imported data on any tables.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C. Transform Map",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct\nhttps://docs.servicenow.com/bundle/utah-employee-service-management/page/product/human-resources/reference/transform-maps-navex.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "206",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105467-exam-csa-topic-1-question-206-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "On the Form header, which icon do you use to access form templates?",
+      "answers": [
+        "A. Stamp",
+        "B. Pages",
+        "C. More Options (...)",
+        "D. Paperclip"
+      ],
+      "comments": [
+        {
+          "content": "C. More Options (...)",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Check out page 33 in the Bonus section 5.2, of the ServiceNow Administration Fundamentals - Tokyo. It states, \"Click the More options icon (...) from the form header, then Toggle Template Bar to work with templates.\"",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C - https://www.youtube.com/watch?v=C6ujM7xaVMQ",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer is C\n\nhttps://docs.servicenow.com/bundle/tokyo-platform-user-interface/page/use/using-forms/concept/c_UI16FormHeader.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "STAMP is correct ignore these , wrong answers....",
+          "selected_answer": "A",
+          "replies": [
+            "C, user the More Options button then \"Toggle Templates Bar\", have you ever seriously used SNOW before or just trolling?",
+            "YOU WRONG. CAN'T EVEN FIND A STAMP ICON"
+          ]
+        },
+        {
+          "content": "C. is correct",
+          "selected_answer": "",
+          "replies": [
+            "omg again you provide the wrong answer its A guys ...",
+            "C is correct (...) not even a stamp icon on the forms"
+          ]
+        }
+      ],
+      "question_number": "207",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106916-exam-csa-topic-1-question-207-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When using the Data Pill Picker, use which keys to dot-walk to fields in other tables?",
+      "answers": [
+        "A. Plus, Minus",
+        "B. Ctrl <, Ctrl >",
+        "C. Arrows",
+        "D. Ctrl C, Ctrl V",
+        "E. Shift F4, Shift F5"
+      ],
+      "comments": [
+        {
+          "content": "C. Arrows",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct. Page 235 of the ServiceNow Administration Fundamentals - Tokyo Edition.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C. is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "208",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106917-exam-csa-topic-1-question-208-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In what order are Access Controls evaluated?",
+      "answers": [
+        "A. Field-level - most specific to most general; then Table-level - most specific to most general",
+        "B. Field-level - most general to most specific; then Row-level - most specific to most general",
+        "C. Table-level - most specific to most general; then Field-level - most specific to most general",
+        "D. Table-level - most specific to most general, then Row-level - most specific to most general"
+      ],
+      "comments": [
+        {
+          "content": "Answer is C. First table lvl after field lvl",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C. Table-level - most specific to most general; then Field-level - most specific to most general",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "It is C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct. Access controls are always evaluated table and field, and always most specific to most general (",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "1.Match the table and field name: x_58872_needit_needit.short_description\n2. Match the parent table and field name: task.short_description\n3. Match any table with the field name: *.short_description\n4. Match the table and any field (wildcard): x_58872_needit_needit.*\n5. Match the parent table and any field (wildcard): task.*\n6. Match any table (wildcard) and any field (wildcard): *.*",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct. Page 429 of the ServiceNow Administration Fundamentals - Tokyo Edition.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the CSA prep course\n\n61. In what order are access controls evaluated?\n\nFirst at the Table-level (Most specific to most general), then at the Field-level (most specific to most general)",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is the right answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "209",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/88530-exam-csa-topic-1-question-209-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What instance resource allows you to access guided tours, information about actions, and instructions on how to use inputs and outputs in your flow?",
+      "answers": [
+        "A. Docs",
+        "B. Community",
+        "C. Help Panel (question mark icon)",
+        "D. Wiki"
+      ],
+      "comments": [
+        {
+          "content": "C. Help Panel (question mark icon)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C. Help Panel (question mark icon)",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C. Section \"Flow Components: Data\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C. is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "210",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106919-exam-csa-topic-1-question-210-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "The Report Designer contains different sections for configuring your report. Which section is used to specify grouping and calculations to be run against the data?",
+      "answers": [
+        "A. Style",
+        "B. Group by",
+        "C. Configure",
+        "D. Format",
+        "E. Data"
+      ],
+      "comments": [
+        {
+          "content": "C.\nhttps://developer.servicenow.com/dev.do#!/learn/courses/washingtondc/app_store_learnv2_reportanalytics_washingtondc_reporting_and_analytics/app_store_learnv2_reportanalytics_washingtondc_data_visualization/app_store_learnv2_reportanalytics_washingtondc_viewrun_reports",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Based on SN ebook pg 267",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer is C. https://developer.servicenow.com/dev.do#!/learn/courses/tokyo/app_store_learnv2_reportanalytics_tokyo_reporting_and_analytics/app_store_learnv2_reportanalytics_tokyo_data_visualization/app_store_learnv2_reportanalytics_tokyo_configuring_reports",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is C. Configure.\nhttps://docs.servicenow.com/bundle/tokyo-now-intelligence/page/use/reporting/reference/aggregation-reporting.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "There are only 4 sections and they are DATA, TYPE, CONFIGURE, and STYLE. And Group by do not include calculations Aggregation does. Both Group by and Aggregation are both under the Configure section therefore making C. Configure the answer.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The answer is the Configure section. The data section does not provide any of what the question is asking. Group by is not a section its a subsection under Configure.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is B, I checked it on my instance",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think B. Group by should be the correct answer...",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think B. Grouop by should be the correct answer...",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "211",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/101980-exam-csa-topic-1-question-211-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What icon do you use to change the icon and color on a Favorite?",
+      "answers": [
+        "A. Clock",
+        "B. Pencil",
+        "C. Triangle",
+        "D. Star"
+      ],
+      "comments": [
+        {
+          "content": "Star selects the favorite and pencil edits the favorite",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Is this not by using the star Icon and clicking on \"more\". There I saw the color and icon options.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "212",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106920-exam-csa-topic-1-question-212-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "You have heard about a new application released by ServiceNow. You want to try it out, to see if it might be useful for your company's ServiceNow implementation. What would be the best way to get hands-on experience with the new application?",
+      "answers": [
+        "A. Search the wiki for the sales demo request form",
+        "B. Check the latest release notes at docs servicenow.com",
+        "C. Activate the application plug in, on your personal dev instance",
+        "D. Activate the application plug in, on your company's production instance."
+      ],
+      "comments": [
+        {
+          "content": "C - you want hands on experience",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I think it A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is B:\nCheck the latest release notes at docs servicenow.com",
+          "selected_answer": "",
+          "replies": [
+            "I think that \"get hands-on experence\" are the main key words in this question, so answer \"C\" should be ok :)"
+          ]
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "213",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106921-exam-csa-topic-1-question-213-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When looking at a long list of records, you want to quickly filter, to show only those which have Category of Hardware. How might you do that?",
+      "answers": [
+        "A. On the Category column header, right click and select Show > Hardware",
+        "B. Right click on magnifier, type Hardware and click enter",
+        "C. On the list, locate and right click on the value Hardware, select Show Matching",
+        "D. On Breadcrumb, click > icon, type Hardware and click enter",
+        "E. Click Funnel icon, type Hardware and click enter"
+      ],
+      "comments": [
+        {
+          "content": "Show matching",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "214",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106922-exam-csa-topic-1-question-214-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When looking at a long list of records, you want to quickly filter, to show only those which have Short Description containing email. How might you do that?",
+      "answers": [
+        "A. Click List Magnifier to expand column search, on Short Description, type email, click enter",
+        "B. On Search box, select text, type email, click enter",
+        "C. Click List Magnifier to expand column search, on Short Description, type *email, click enter",
+        "D. Click List Magnifier to expand column search, on Short Description, type %email, click enter"
+      ],
+      "comments": [
+        {
+          "content": "%email - returns records with short description ending with email\n*email - returns records with short description that contains word email",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A, C, and D are all correct. It just depends on whether you are looking for email as a standalone word or combined with another word. But all (A, C, D) are correct. The question indicates it wants you to pull any records where the word email is contained. In that case (again technically) D is the most correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "It's C. With the short description you can't do \"show matching\" as in the previous question, you need to search for records that have the word \"e-mail\" in the short description. and this is done by searching \"*e-mail\" (wildcard e-mail) in the Short Description column.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "215",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106923-exam-csa-topic-1-question-215-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When importing spreadsheet data into ServiceNow, what is the first step in the process?",
+      "answers": [
+        "A. Run Data Scrubber",
+        "B. Set Coalesce",
+        "C. Select Import Set",
+        "D. Load Data",
+        "E. Define Data Source"
+      ],
+      "comments": [
+        {
+          "content": "Load data: Navigate to System Import Sets -> Load",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "1. Load data: Navigate to System Import Sets -> Load",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I am with E option, this is the write one, the first step in the process of importing data is Define data source, if you go to Navigation bar and type import data set, you see the module is data source this define where the data come \" fetch the data from excel to this staging source.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The Anwser is Not C because you can also create import Set instead of Select one so there is no way either of those two anwsers were correct.\nIt is also not D since another question(Q.322) with the excat question text doesn't have the option'Load Data', and I am pretty sure you dont load data from the beginning the data is loaded after you hit submit. So the only anwser seems right would be E \"Define Data Source\"",
+          "selected_answer": "E",
+          "replies": [
+            "no no no no no no",
+            "Explain"
+          ]
+        },
+        {
+          "content": "Gonna have to opt for Load Data. If I already have a spreadsheet where the data is defined, what do I do next? I type Load Data in the app navigator. What next? I create an import set. What next? I choose the source of my data. Clearly the answer is D. If I wanted to start before I knew what the data was then I would select E. However, since the question states that I already have that in the form of a spreadsheet then the answer is D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer is D. \n\n\"Import Sets\" Is under \n\"System Import Sets > Advanced > Import Sets\" \nWhich if you create a new instance is \"Empty\" & has no way to Load Data. Import Sets only shows you the imported data sources.\n\nUnder All menu - The \"Integration - Imports\" drop down is called \"System Import Sets\" Load Data is the Module that begins an import to ServiceNow. \n\nAfter filling out the form & clicking submit it states \"Next Steps....\" & provides the following links. \n\nImport Sets - Go to the import Sets for this data load.\nLoaded Data.\nCreate Transformation Map. \nImport Logs.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Right Ans IS option E",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Bit naughty this one and I'd imagine these options wouldnt be the same. If you browse, you have to select \"Select Import Set\" before you select \"Load Data\" but you could also type Load Data and you could select that without selecting \"Select Import Set\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I would go with C here. The Module you use to load data is indeed called \"Load Data\" module, but once you open it, the first thing it asks you to do is select (or create a new ) Import Set table, then you need to choose a data source, and only after you do these 2 things you can click \"Submit\" which Loads the data....",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "You have to create or select an Import Set prior to selecting the Data Source.  Once the Import set is defined you update or add the data source.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "216",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106924-exam-csa-topic-1-question-216-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Tables may be set up with Many to Many relationships. What is a classic example of a scenario where the tables would have many to many relationships?",
+      "answers": [
+        "A. Vendors can sell multiple products; and products can be sold by multiple vendors.",
+        "B. A Task can trigger many Workflows; and a Workflow can trigger many Tasks.",
+        "C. Requests can contain many Items; and Items can be any item from the catalog.",
+        "D. A Configuration Item can belong to multiple Classes, and Classes can contain multiple Configuration Items."
+      ],
+      "comments": [
+        {
+          "content": "option A is the example used in the Data schema overview lesson under Additional SN fundamentals content for Sys Admins & Developers.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Can't be B as this would 1) cause a loop but also 2) it would be the workflow generating the task that triggers another (sub)flow, not the task itself. Workflow-to-task is one-to-many.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A should be the correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A should be the correct answer. Workflows and tasks are not two-way (i.e. a task can trigger a workflow, but this workflow will not trigger the same task - otherwise you have a loop...)",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "217",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/94629-exam-csa-topic-1-question-217-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What section on a task record would you use to see the most recent update made to a record?",
+      "answers": [
+        "A. Audit Log",
+        "B. Timeline",
+        "C. Activity",
+        "D. Journal"
+      ],
+      "comments": [
+        {
+          "content": "C - this is where you see the full list of activities",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "218",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106925-exam-csa-topic-1-question-218-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "The Employee On-boarding team has asked for a way for managers to order computers, monitors, business cards, and cell phones for new employees. How would you proceed to meet this requirement?",
+      "answers": [
+        "A. Create Requested Item",
+        "B. Create Record Producer",
+        "C. Create On-boarding Bot",
+        "D. Create Order Guide"
+      ],
+      "comments": [
+        {
+          "content": "D - create order guide",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D. is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "219",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106927-exam-csa-topic-1-question-219-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "On the CI Dependency View, what enables you to trace from an infrastructure item, like a Server, to the Services that are dependent on that Server?",
+      "answers": [
+        "A. Automapping Utility",
+        "B. Relationships",
+        "C. Service Tracer",
+        "D. Transform Map"
+      ],
+      "comments": [
+        {
+          "content": "B - you can see the dependencies",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "220",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106928-exam-csa-topic-1-question-220-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "From a related list, what would a user click to personalize the layout of the columns?",
+      "answers": [
+        "A. Gear",
+        "B. Context Menu",
+        "C. Pencil",
+        "D. Magnifier"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A. Gear",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "221",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107468-exam-csa-topic-1-question-221-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What is the language used for scripting in ServiceNow?",
+      "answers": [
+        "A. C++",
+        "B. JavaScript",
+        "C. PHP",
+        "D. Python"
+      ],
+      "comments": [
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B. JavaScript",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B IS CORRECT",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "222",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107469-exam-csa-topic-1-question-222-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What are examples of UI Actions, relating to Lists? (Choose four.)",
+      "answers": [
+        "A. List Links",
+        "B. List Choices",
+        "C. List Buttons",
+        "D. List Override",
+        "E. List Context Menu",
+        "F. List Control"
+      ],
+      "comments": [
+        {
+          "content": "List links - List Choice - List button - List Style - List Context menus",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "A. List Links\nB. List Choices\nC. List Buttons\nE. List Context Menu",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "ABCE correct options",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A. List Links\nB. List Choices\nC. List Buttons\nE. List Context Menu",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "ABCE is correct links buttons context menu",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ABCE is correct, you can find it SNAF book page 435: \nhttps://evantage.gilmoreglobal.com/reader/books/SN-SNAF-T010-PG-E/pageid/435",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "ABCE are the right answers, check page 436 of the ebook to confirm",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "I am changing my answer :-)\n\"A,B,C,D,E\" are all correct.  \"F\" is wrong. The list itself is not a UI Action.",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "\"F\" is wrong.  The list itself is not a UI Action.  \"B\" is sort of correct, but not, since a UI Action is a single choice, not plural \"choices\".",
+          "selected_answer": "ACDE",
+          "replies": []
+        },
+        {
+          "content": "Confusing question as it uses plurals which are not part of the UI action > New record.",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "ABCDE\n\nList bottom button Puts a button at the bottom of a list.\nList context menu Puts an item in a list field context menu (right-click a cell in a list).\nList choice Puts an item in the action choice list at the bottom of a list.\nList link Puts a link in the Related Links section at the bottom of a list.\nOverrides Specifies a UI action that this UI action overrides.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "List bottom button\tPuts a button at the bottom of a list.\nList context menu\t       Puts an item in a list field context menu (right-click a cell in a list).\nList choice\t               Puts an item in the action choice list at the bottom of a list.\nList link\t                        Puts a link in the Related Links section at the bottom of a list.\nOverrides\t               Specifies a UI action that this UI action overrides.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ABCE\n\nUI action controls\nYou can create a UI action to provide any of these controls:\n\n    A button on a form.\n    A context menu item on a form that appears when you open the form context menu or right-click the form header.\n    A related link in a form.\n    A button in the banner on top of a list.\n    A button at the bottom of a list.\n    A context menu item on a list that appears when you open the list context menu or right-click the list header.\n    A menu item for the action choice list at the bottom of a list.\n    A related link at the bottom of a list.\nhttps://docs.servicenow.com/en-US/bundle/tokyo-platform-administration/page/administer/list-administration/concept/c_UIActions.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://nowlearning.jp/servicenow/643/",
+          "selected_answer": "ACDF",
+          "replies": []
+        }
+      ],
+      "question_number": "223",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/88564-exam-csa-topic-1-question-223-discussion/",
+      "most_voted": "ABCE",
+      "error": null
+    },
+    {
+      "question": "A Service Catalog project will involve building 80 catalog items. For each of the catalog items, the following fields will be mandatory on the forms:<br/>•\tRequested for<br/>•\tRequested by<br/>•\tApproving manager<br/>•\tDelivery instructions<br/><br/>All of the other variables will be specific to the individual catalog item. What features would you use when designing the catalog item form?",
+      "answers": [
+        "A. Create a Variable Set Template, then apply to all of the catalog items.",
+        "B. Create one Variable Set for the four variables, then add that variable set to each of the 80 catalog items.",
+        "C. Create a Record Producer that contains the four fields; then add to the record producer related list on the Catalog Items.",
+        "D. Create a Flow Designer Action, with Variable Set Data Pill, then apply flow to all of the 80 catalog items.",
+        "E. Create an Order Guide, which includes all variables; then copy and hide variables as needed."
+      ],
+      "comments": [
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Variable set is correct.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct based on the definition of variable set",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "224",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/119074-exam-csa-topic-1-question-224-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "A task worker asks how they can monitor any updates occurring to records assigned to him, like responses from customers. What do you suggest?",
+      "answers": [
+        "A. On My Work list, select the Activity Stream icon to show a frame with live updates",
+        "B. Click on the eyeglass icon to expand the Monitor frame",
+        "C. Open an Agent workspace tab for each record he wants to monitor",
+        "D. Select Service Desk > My Work Dashboard"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "225",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106930-exam-csa-topic-1-question-225-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What access does a user need to be able to import articles to a knowledge base?",
+      "answers": [
+        "A. sn_knowledge_import",
+        "B. sn_knowledge_contribute",
+        "C. Can contribute",
+        "D. Can import"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/community/training-and-certifications/that-access-does-a-user-need-to-be-able-to-import-articles-to-a/td-p/3134613",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C. What ‘’access” not “role”",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct:\nhttps://www.servicenow.com/docs/bundle/xanadu-servicenow-platform/page/product/knowledge-management/task/import-word-platform.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "In ServiceNow, the sn_knowledge_import role is specifically used to manage and facilitate the importing of knowledge articles into the Knowledge Base.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "226",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106931-exam-csa-topic-1-question-226-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When importing data from a spreadsheet, which step defines where the incoming data columns will be written in the receiving table?",
+      "answers": [
+        "A. Schedule Transform",
+        "B. Field Matching",
+        "C. Select Data Source",
+        "D. Create Transform Map",
+        "E. Load Data"
+      ],
+      "comments": [
+        {
+          "content": "Answer is B. \nField Matching is the step that defines where the incoming data columns will be written in the receiving table when importing data from a spreadsheet. During the field matching step, you map the columns in the source file to the fields in the target table. This allows you to specify which columns in the source file correspond to which fields in the target table, ensuring that the data is imported correctly.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Filed Mapping is what you do in Create Transform Map\n\nThe B answer says Filed Matching not Filed Mapping...",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct.  Field match was never considered a step.  However Create Transform Map, is considered a step in the process.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Questions is on which \"step\", so i would go with: D.Create Transform Map. At transform map you can then do field matching but the \"step\" is D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Can I say NONE of the above? In reality you can create a transform map record by just specifying the source and target tables and clicking submit. You need to do the firld mapping before you transform. But it's Field MAPPING not Field Matching and it's done in the Transform Map (so it has to be there) through Auto Field Map Matching or Mapping Assist links. Very confusing question...",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D - Create Transform Map is the correct answer.  \nB - Field Matching: For Event Management, when creating Event Rule to bind non-host CI using CI field matching, if there are multiple CI records having same name.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer should be Field Mapping. But we dont have that option. \nSo its D because Transform Map is a set of field maps.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Wouldn't it be B if it was spelled correctly to Field Mapping? Note that not only the questions could be spelled incorrectly, I recognize that many answers are spelled incorrectly with or without purpose.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D. is correct \nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/tokyo/new_to_servicenow/app_store_learnv2_importingdata_tokyo_create_a_transform_map",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct\nhttps://docs.servicenow.com/bundle/utah-integrate-applications/page/administer/integrationhub/tasks/map-source-data-target.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "227",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/101580-exam-csa-topic-1-question-227-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "To apply a UI Policy to all views, which field should be set to true in its definition record?",
+      "answers": [
+        "A. Global",
+        "B. Reverse if false",
+        "C. On load",
+        "D. Inherit"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "To apply a UI Policy to all views, set the Global setting to true.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Per my PDI, \"if the 'Global' checkbox is selected, the UI Policy applies to all form views; otherwise the UI Policy is view-specific\".",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A. If UI policy applies to extended table then answer is D. So here answer is A.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is A.\nGlobal [Advanced view]\tOption for specifying whether the UI policy applies to all form views. If this check box is cleared, the UI policy is view-specific.\nBy default, the Global UI policy applies to all form views. However, a UI policy can be specific to a view. For example, you can define a UI policy for only the itil view of a form. Use the View field to accomplish this.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A : Global\nhttps://docs.servicenow.com/bundle/sandiego-platform-administration/page/administer/form-administration/task/t_CreateAUIPolicy.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "yes global makes the most sense",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Global",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "228",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/88565-exam-csa-topic-1-question-228-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What are the steps for importing data using an import set?",
+      "answers": [
+        "A. Select source file; Run automap; Transform data; Clean up target table",
+        "B. Identity source; Import transform map; Run transformer, Verify import",
+        "C. Setup LDAP; Test map; Create update set; Run import; Apply update set",
+        "D. Load the data; Create transform map; Transform data; Clean up import table"
+      ],
+      "comments": [
+        {
+          "content": "D - contains the major steps.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D. https://docs.servicenow.com/bundle/tokyo-platform-administration/page/administer/import-sets/concept/c_ImportDataUsingImportSets.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "229",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106932-exam-csa-topic-1-question-229-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which type of scripts run in the browser?",
+      "answers": [
+        "A. Script Include Scripts",
+        "B. Access Control Scripts",
+        "C. Business Rule Scripts",
+        "D. UI Policies and Client Scripts"
+      ],
+      "comments": [
+        {
+          "content": "D - both UI Policies and Client Scripts run on the Client side.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D. UI Policies and Client Scripts",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is D",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "230",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107471-exam-csa-topic-1-question-230-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which modules can you use to create a new table? (Choose two.)",
+      "answers": [
+        "A. Dictionary",
+        "B. Schema Map",
+        "C. Tables",
+        "D. Tables & Columns"
+      ],
+      "comments": [
+        {
+          "content": "CD is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I just hopped in my instance and tested.\n\nTables\n\nTables & Columns\n\nDictionary \n\nAre all valid ways to find the button to create a new table (Utah)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It cannot be A because you cannot create a table in Dictionary.",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CD is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C. Tables\nD. Tables & Columns",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CD is the answer",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "AC table creation",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "231",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/93099-exam-csa-topic-1-question-231-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "Which one of the following describes the primary operations performed against tables in the ServiceNow platform?",
+      "answers": [
+        "A. Create, Read, Upload, Delete",
+        "B. Capture, Rate, Write, Develop",
+        "C. Create, Rate, Update, Delete",
+        "D. Create, Read, Write, Delete"
+      ],
+      "comments": [
+        {
+          "content": "Please read page 367 from the ServiceNow Administration Fundamentals - Tokyo booklet.\nIt states Create, Delete, Read, Write. \n\nThere is no Upload. \n\nThere is an update, as stated in answer \"C\" but \"C\" also contains \"Rate\" which is also incorrect. \n\nTrick question!",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Create, Read, Write, Delete\nTo make it easier to remember they acronym CRUD was introduced, where U stands for Update.\n\nBut such choice is not available in AC rules, you have WRITE only.\n\nCRUD is for ease of remembering the basic operations, but it NOT the real option available.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is D. In ServiceNow a CRUD is named as a CRWD, Create, Read, Write and Delete, be careful and take your time to understand the question",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the right answer.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is D\n\nChoice A has \"Upload\" this is incorrect\nChoice C has \"Rate\" this is incorrect",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The answer is D. Please read each choice in the question carefully. CRUD / CRWD are used interchangeably. \nCreate / Read / Update or Write / Delete\nThe screen shots proof is here\n\nhttps://www.servicenow.com/community/developer-forum/crud-or-crwd/m-p/2583304",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "\"CRUD\", but the W for Write can replace the U for Update.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-service-management/page/product/configurable-workforce-optimization-itsm/reference/components-installed-worforce-optimization-itsm.html",
+          "selected_answer": "C",
+          "replies": [
+            "It is A. Sorry. Create, Read, Update, Delete"
+          ]
+        },
+        {
+          "content": "Create, Read, Update, Delete is CRUD",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "READ NOT RATE SO IT SHOULD BE A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "C is the right answer, these operations are called CRUD",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the right answer, these operations are called CRUD",
+          "selected_answer": "C",
+          "replies": [
+            "Well apologies it is not C because it should be Create, Read, Update and Delete"
+          ]
+        },
+        {
+          "content": "remember CRUD  so not D!",
+          "selected_answer": "",
+          "replies": [
+            "in ServiceNow, its CRWD. Do not confuse everyone please",
+            "it is CRUD not CRWD"
+          ]
+        }
+      ],
+      "question_number": "232",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102052-exam-csa-topic-1-question-232-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "How is a user defined in ServiceNow?",
+      "answers": [
+        "A. A user is a record stored in the Profile [sys_user_profile] table",
+        "B. A user is a record stored in the User [sys_user] table",
+        "C. A user is a record stored in the User Preference [sys_user_preference] table",
+        "D. A user is a field in the LDAP integration"
+      ],
+      "comments": [
+        {
+          "content": "B is the answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "B",
+          "replies": [
+            "did you already take the exam?"
+          ]
+        }
+      ],
+      "question_number": "233",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107472-exam-csa-topic-1-question-233-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which ServiceNow utility gives a Service Desk agent the ability to trace from a Service having an issue, to see which CIs supporting that service have active issues?",
+      "answers": [
+        "A. CI Dependency View",
+        "B. Event Management Homepage",
+        "C. Service Dashboard",
+        "D. CI Health Dashboard"
+      ],
+      "comments": [
+        {
+          "content": "According to the ServiceNow Administration Fundamentals - Tokyo, page 427, it states, Dependency Views indicate if a CI has any active, pending issues.\"\n\nI'd select A on the Exam",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A per SN Fundamentals book p.361-362",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/docs/bundle/washingtondc-servicenow-platform/page/product/configuration-management/concept/cmdb-health-dashboards.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "A - dependency view\n\nThe CI Health Dashboard is used to look at things accuracy/completeness of CI information.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Dependency views shows the related services down to the affected cis",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "This is tough.  I leaning toward A because the question is relates to what a Service Desk user would use; not an Administrator.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "According to the ServiceNow Administration Fundamentals - \"it states, Dependency Views indicate if a CI has any active, pending issues.\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-servicenow-platform/page/product/configuration-management/task/t_ViewCIHealth.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The health dashboard provides a single view of the quality of data at the CMDB, CI class and CI levels using completeness, correctness and compliance scores",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "mentioned in e-book",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The answer is D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "It's D, according to SNOW docs:\nhttps://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/configuration-management/task/t_ViewCIHealth.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From ChatGPT - To trace from a service having an issue to see which CIs supporting that service have active issues, the CI Health Dashboard would be more suitable. It allows Service Desk agents to view the health status of CIs supporting a particular service and identify any active issues or incidents associated with those CIs. By analyzing the CI Health Dashboard, agents can gain insights into the affected CIs and their current status, enabling them to trace the impact of issues on the supporting CIs of a service.\n\nWhile the CI Dependency View provides a visual representation of CI relationships, it may not directly provide real-time information about active issues or incidents associated with specific CIs. It focuses more on understanding the connectivity and dependencies between CIs.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer. \nCI Health Dashboard in ServiceNow provides IT teams with a powerful tool for managing and maintaining the health of their organization's IT infrastructure, helping to ensure that critical systems and services remain available and performing at peak efficiency.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "234",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106933-exam-csa-topic-1-question-234-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which feature enables business process owners to organize Flow Designer content into unified and digitized cross-enterprise processes via a digitized task board interface?",
+      "answers": [
+        "A. Flow Designer",
+        "B. Workflow Editor",
+        "C. Process Workflow Designer",
+        "D. Process Automation Designer"
+      ],
+      "comments": [
+        {
+          "content": "D is the answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D. Process Automation Designer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct. Page 237 of the ServiceNow Administration Fundamentals - Tokyo Edition.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct\nhttps://docs.servicenow.com/bundle/utah-build-workflows/page/administer/process-automation-designer/concept/process-automation-designer.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "235",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105466-exam-csa-topic-1-question-235-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "An IT user calls the service desk because they need to work on task records. All they can see is Self Service on their homepage when they login to the ServiceNow instance. What issue could explain this? (Choose two.)",
+      "answers": [
+        "A. Their user account does not have itil role",
+        "B. Their user account was not approved by their manager",
+        "C. Their user account is not logged in properly",
+        "D. Their user account failed LDAP authentication",
+        "E. Their user account does not belong to any groups, which contain the itil role"
+      ],
+      "comments": [
+        {
+          "content": "AE is correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "CE in my opinion.  ITIL role should be given to the group; not the user account.  If they are not logged on properly, is more of a likely scenario or they are still Impersonating someone and forgot.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A. Their user account does not have itil role\nE. Their user account does not belong to any groups, which contain the itil role",
+          "selected_answer": "AE",
+          "replies": []
+        },
+        {
+          "content": "AE are correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "236",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106934-exam-csa-topic-1-question-236-discussion/",
+      "most_voted": "AE",
+      "error": null
+    },
+    {
+      "question": "On a related list, which buttons are commonly used for managing the records on the list? (Choose three.)",
+      "answers": [
+        "A. Add",
+        "B. Edit",
+        "C. Publish",
+        "D. Manage",
+        "E. New"
+      ],
+      "comments": [
+        {
+          "content": "ABE correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D. is not correct. In Utah, there are no UI Actions named \"manage\", but there are \"Add\" UI Actions",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "A. Add\nB. Edit\nE. New",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "ABE correct answer",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is ABE",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "Should Be ABE",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "Can only see Add,Edit and New",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "What I have found so far mentioned about Edit, Collection, Save, New and Submit.\nhttps://docs.servicenow.com/bundle/tokyo-platform-user-interface/page/use/using-forms/task/t_SelectRelatedRecords.html",
+          "selected_answer": "BE",
+          "replies": []
+        },
+        {
+          "content": "ABE should be correct",
+          "selected_answer": "ABE",
+          "replies": []
+        }
+      ],
+      "question_number": "237",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/93555-exam-csa-topic-1-question-237-discussion/",
+      "most_voted": "ABE",
+      "error": null
+    },
+    {
+      "question": "A customer requests the following data quality measures be added:<br/>•\tIncident numbers should be read only, on all lists and forms, for all users.<br/>•\tShort Description field should be mandatory, on all records, across all applications, on Insert.<br/><br/>Which type of policy would you use to meet this requirement?",
+      "answers": [
+        "A. Data Quality Policy",
+        "B. Dictionary Design Policy",
+        "C. Data Policy",
+        "D. Field Criteria Policy"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C. Data Policy",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "shouldn't this be D - field criteria policy?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "238",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107473-exam-csa-topic-1-question-238-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "On what part of the ServiceNow instance, would you find the option to access applications, like Incident Management?",
+      "answers": [
+        "A. Application Navigator",
+        "B. Service Desk Homepage",
+        "C. Self Service Module",
+        "D. Favorites"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A. Application Navigator",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "It's A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer should be A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The Self-Service is an application and this is why it's in the Application Navigator.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A. Self-Service is not a Module. It is an application.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "239",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/97479-exam-csa-topic-1-question-239-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What catalog tool would you use to create a catalog item or record producer?",
+      "answers": [
+        "A. Catalog Builder",
+        "B. Workflow Designer",
+        "C. Catalog Designer",
+        "D. Catalog Formatter"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A. Catalog Builder",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "240",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107475-exam-csa-topic-1-question-240-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "On a form, which type of field has this icon which can be clicked, to see a preview of the associated record?<br/><br/><img src=\"https://img.examtopics.com/csa/image1.png\"/>",
+      "answers": [
+        "A. Lookup",
+        "B. Preview",
+        "C. Reference",
+        "D. Snapshot",
+        "E. Quickview",
+        "F. Drilldown"
+      ],
+      "comments": [
+        {
+          "content": "The icon is preview but the question is \"what type of field > Reference field is the answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C - Reference field. It's a trick question, the button is preview but there is no Preview Field Type in ServiceNow. So the only logical answer is Reference.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C. Reference",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C\n\nhttps://docs.servicenow.com/en-US/bundle/utah-platform-administration/page/administer/field-administration/concept/c_ReferenceIcon.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I can confirm that B is the answer.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B \"Preview this Record\" is the correct answer.  Tested on Utah",
+          "selected_answer": "B",
+          "replies": [
+            "Sorry read it wrong.  Its \"C\""
+          ]
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer is definitely C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The answer is C. You can select the reference icon to preview the referenced record (on the target table). \nhttps://docs.servicenow.com/en-US/bundle/tokyo-platform-administration/page/administer/field-administration/concept/c_ReferenceIcon.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer is B.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer is B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "241",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100947-exam-csa-topic-1-question-241-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "While on an Incident record, how would you add a Tag for \"Special Handling\" to the record?",
+      "answers": [
+        "A. Click on the Context menu, select Add Tag, type Special Handling, press enter",
+        "B. Click on the More options (...) icon, click Add Tag, type Special Handling, press enter",
+        "C. On the Tag field, select Special Handling from the choice list",
+        "D. On the Special Handling field, check the box"
+      ],
+      "comments": [
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B. Click on the More options (...) icon, click Add Tag, type Special Handling, press enter",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Just tested it in my instance - B is correct.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the right answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think option A will more fit here.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "242",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102211-exam-csa-topic-1-question-242-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What feature allows you to limit who is able to contribute or read knowledge within a knowledge base?",
+      "answers": [
+        "A. Roles",
+        "B. Groups",
+        "C. User Criteria",
+        "D. Categories"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct\nhttps://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/knowledge-management/concept/diagnose-knowledge-user-criteria.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "243",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105357-exam-csa-topic-1-question-243-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When moving a homepage or dashboard between instances, what must you remember?",
+      "answers": [
+        "A. Manually add them to the update set",
+        "B. They cannot be moved via update set",
+        "C. They are automatically added to the update set",
+        "D. Create a separate update set for them"
+      ],
+      "comments": [
+        {
+          "content": "A is correct. B is not correct- they are not *automatically* captured in an update set like other development items but still can be moved via update set if they are manually added.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "B- don’t be fooled they ain’t part of a update set",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A. Manually add them to the update set",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "244",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107476-exam-csa-topic-1-question-244-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What is the platform name for the Group table?",
+      "answers": [
+        "A. sys_groups",
+        "B. group",
+        "C. sys_user_group",
+        "D. sys_group"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C. sys_user_group",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "245",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107477-exam-csa-topic-1-question-245-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Many actions are included with flow designer, what are some frequently used core actions? (Choose four.)",
+      "answers": [
+        "A. Look for Update",
+        "B. Create Record",
+        "C. Ask for Approval",
+        "D. Look Up Record",
+        "E. Wait for Condition",
+        "F. Wait for Match"
+      ],
+      "comments": [
+        {
+          "content": "easy, must-know",
+          "selected_answer": "BCDE",
+          "replies": []
+        },
+        {
+          "content": "BCDE correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B. Create Record\nC. Ask for Approval\nD. Look Up Record\nE. Wait for Condition",
+          "selected_answer": "BCDE",
+          "replies": []
+        },
+        {
+          "content": "BCDE is the correct answer",
+          "selected_answer": "BCDE",
+          "replies": []
+        },
+        {
+          "content": "BCDE is correct \nhttps://docs.servicenow.com/bundle/utah-build-workflows/page/administer/flow-designer/concept/flow-actions.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "246",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105359-exam-csa-topic-1-question-246-discussion/",
+      "most_voted": "BCDE",
+      "error": null
+    },
+    {
+      "question": "What role enables someone to authorize a request, with no other permissions on the platform?",
+      "answers": [
+        "A. Approval Group [approval_group]",
+        "B. Authorize [authorize_user]",
+        "C. Reviewer [reviewer_user]",
+        "D. Verification [verify_user]",
+        "E. Approver [approver_user]"
+      ],
+      "comments": [
+        {
+          "content": "E is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "E. Approver [approver_user]",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "E is the correct answer",
+          "selected_answer": "E",
+          "replies": [
+            "Hi bro, can you pls share your Account Details with me? pls help me to study bro..."
+          ]
+        },
+        {
+          "content": "E is correct",
+          "selected_answer": "",
+          "replies": [
+            "Hi bro, can you pls share your Account Details with me? pls help me to study bro..."
+          ]
+        }
+      ],
+      "question_number": "247",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105360-exam-csa-topic-1-question-247-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "On the knowledge base record, which tab would you use to define which users are not able to write articles to the knowledge base?",
+      "answers": [
+        "A. Can Contribute",
+        "B. Cannot Author",
+        "C. Can Read",
+        "D. Can Write",
+        "E. Can Author"
+      ],
+      "comments": [
+        {
+          "content": "The question is confusing, it seems like the correct answer would be \"cannot contribute\" which is not an option. If you *only* select \"can read\" then inherently those users can only read and not contribute. So technically this may be the correct answer \nhttps://docs.servicenow.com/bundle/quebec-servicenow-platform/page/product/knowledge-management/task/t_SelectUserCriteria.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think it's A. I did 2 tests. \nKnowledge > Administration > Knowledge Bases.=> open a record. \n1.Trying to add a role to both 'can read' and 'can contribute'. It worked.  \n   So I think just setting 'can read' does not have full control to remove a write access. \n2.On 'Can contribute', I see we can add filter options like 'OR users does not contain xx'. \n   So this at least a way to let a user/users are NOT able to write. \nSo my conclusion, either 'able to'/'not able to' is controlled in the same tab 'can contribute' for writing access. Just my opinion at the moment.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The answer choices are wrong. The answer is \"cannot contribute\" and it is not listed",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "CAN READ means they can’t contribute",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Can contribute refers to users that CAN actually contribute to the article, so the answer C because can read CANNOT contribute to the attribute, they can only read",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Cannot Contribute would be the perfect answer.\nFor this question, if we add them to Can Read, this will limit their ability to create new articles (I think).\nAnyway, it;s the closest thing to correct answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A - Can Contrbiture (because Cannot Contribute is not in the choices)\n\nIf you define can contribute, it means only the users in the criteria can write, the rest CANNOT.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Ans is  B  The \"Cannot Author\" tab is specifically designed to restrict users from writing or authoring articles in the knowledge base. The \"Can Read\" tab, on the other hand, only allows users to read the articles without making any changes.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Can Read:\tUsers can read knowledge articles in the knowledge base.\nCannot Read:\tUsers can't read knowledge articles in the knowledge base.\nCan Contribute:\tUsers can create, modify, and retire knowledge articles in a knowledge base. Contribute access to a knowledge base also provides read access to all articles in the knowledge base.\nCannot Contribute:\tUsers can't create, modify, retire, or read knowledge articles in the knowledge base.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer is A.  On P.223 in the Vancouver study guide: User Criteria records are accessed from the Can read or Can contribute related lists.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "None of these are correct. As jjjrrrferere says correct answer is \"Cannot Contribute\". This is a duplicate of question 123 so you can ignore this question as 123 has the Cannot Contribute option",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The answer should be \"cannot contribute\" \nhttps://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/knowledge-management/task/t_SelectUserCriteria.html\nRelated list\tDescription\nCan Read\tUsers can read knowledge articles in the knowledge base.\nCannot Read\tUsers can't read knowledge articles in the knowledge base.\nCan Contribute\tUsers can create, modify, and retire knowledge articles in a knowledge base. Contribute access to a knowledge base also provides read access to all articles in the knowledge base.\nCannot Contribute\tUsers can't create, modify, retire, or read knowledge articles in the knowledge base.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Obviously the actual answer would be \"Cannot Contribute\", but that selection is not available as an answer here.\n\nTherefore, with the options available to us here, the MOST correct choice would be to limit the user with \"Can Read\" access.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Cannot contribute",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is the correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct\nhttps://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/knowledge-management/task/t_SelectUserCriteria.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Should be can contribute. \nIf the user is not on the list, then they cannot contribute",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "248",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/88609-exam-csa-topic-1-question-248-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What types of entities can receive task assignments, in ServiceNow? (Choose two.)",
+      "answers": [
+        "A. Users",
+        "B. Departments",
+        "C. Groups",
+        "D. Teams"
+      ],
+      "comments": [
+        {
+          "content": "ans is AC",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A. Users\nC. Groups",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "AC is the correct answer",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "AC is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "249",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105361-exam-csa-topic-1-question-249-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "The Report Designer contains different sections for configuring your report. Which section is used to adjust the look of your report, including colors, titles and legend layout?",
+      "answers": [
+        "A. Layout",
+        "B. Format",
+        "C. Configure",
+        "D. Style"
+      ],
+      "comments": [
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D. Style",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct. Page 267 of the ServiceNow Administration Fundamentals - Tokyo Edition.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct\nhttps://docs.servicenow.com/bundle/utah-now-intelligence/page/use/reporting/task/t_CreateYourOwnReport.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Style is the correct answer. You may change the Chart title and colors.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "This is not right, it should be C",
+          "selected_answer": "",
+          "replies": [
+            "No sir, style apply in this specific case :)"
+          ]
+        }
+      ],
+      "question_number": "250",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/99238-exam-csa-topic-1-question-250-discussion/",
+      "most_voted": "D",
+      "error": null
+    }
+  ]
+}

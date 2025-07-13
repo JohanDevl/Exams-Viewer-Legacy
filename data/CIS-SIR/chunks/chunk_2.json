@@ -1,0 +1,440 @@
+{
+  "chunk_id": 2,
+  "start_question": 101,
+  "end_question": 117,
+  "questions_count": 17,
+  "questions": [
+    {
+      "question": "Once a Phishing Email record is created, which Flow creates a new Security Incident record?",
+      "answers": [
+        "A. Security Incident - Phishing Manual",
+        "B. Security Incident - Automated Phishing Playbook",
+        "C. Child Incident Automated Flow",
+        "D. Transform Phishing Email to Security Incident"
+      ],
+      "comments": [
+        {
+          "content": "\"The Transform Phishing Email to Security Incident flow is a new flow that converts or transforms phishing email records to security incidents.\"",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "\"Transform user-reported phishing emails to security incidents\nThe Transform Phishing Email to Security Incident flow is a new flow that converts or transforms phishing email records to security incidents.\"\n//https://docs.servicenow.com/bundle/vancouver-security-management/page/product/security-incident-response/concept/urp-about.html#urp-transform-flow",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Double checked in the book.\naccording to the eBook page 314 it is stated the following:\nThe Transform flow evaluates the Child incident aggregation email property. It it is set to true, then the flow will determine whether the incident is new or should be set up as a child of an existing incident.\nThis flow utilizes a highly configurable aggregation design to determine child incidents.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "verified in course provided SN instance,",
+          "selected_answer": "D",
+          "replies": [
+            "there is 2 versions, Transform Phishing Email to Security Incident v1 and Transform Phishing Email to Security Incident v1.1 both inactive",
+            "I disagree.\nThe Answer D, \"Transform Phishing Email to Security Incident,\" might be a valid option in some ServiceNow implementations, but it's not a standard flow provided by ServiceNow out of the box.\nI go with B"
+          ]
+        }
+      ],
+      "question_number": "106",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114954-exam-cis-sir-topic-1-question-106-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When an inbound email is processed and identified as a phishing email what table is it stored in for URP v2?",
+      "answers": [
+        "A. Security Incident Alert",
+        "B. Security Incident Phishing Email",
+        "C. Security Incident",
+        "D. Incident"
+      ],
+      "comments": [
+        {
+          "content": "Explanation: ebook p.312, Once the Security Incident Phishing Email record is created, it triggers the Transform flow. Thta flow creates the Security incident record and determines if this is a new phishing attempt or whether it should be aggregated with existing incidents.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "107",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114852-exam-cis-sir-topic-1-question-107-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "In order to use User Reported Phishing v2, what must occur in Flow Designer?",
+      "answers": [
+        "A. Transform Flow must be published",
+        "B. Transform Flow must be activated",
+        "C. Transform Action must be activated",
+        "D. Phishing Email Aggregation Subflow must be activated",
+        "E. Transform Flow must be copied and activated"
+      ],
+      "comments": [
+        {
+          "content": "I don't know if the question was referring to this flow, but currently, there isn't one with that exact name. However, there is a flow called ‘Security Incident - Automated Phishing Playbook - Template V2’, which is inactive and would need to be copied and activated. In any case, the correct option is E.",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "E is correct",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "Explanation: ebook p.314, Transform Flow, \"Flow int he baseline must be copied and activated\"",
+          "selected_answer": "E",
+          "replies": []
+        }
+      ],
+      "question_number": "108",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114856-exam-cis-sir-topic-1-question-108-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "When setting up a Playbook what field in the Flow Action for Creating a Response Task must contain the same value as the Runbook name?",
+      "answers": [
+        "A. Short Description",
+        "B. Action",
+        "C. Runbook",
+        "D. Knowledge article"
+      ],
+      "comments": [
+        {
+          "content": "The field that must contain the same value as the runbook name is Runbook. The answer is C.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Explanation: ebook p.296, set criteria for which Response Task should have a specific KB article attached to them (i.e. -\"short description\" | \"contains\" | \"Run Mun MalwareScan\")",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "109",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114928-exam-cis-sir-topic-1-question-109-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Runbook records utilize a link to what type record for content?",
+      "answers": [
+        "A. Knowledge article",
+        "B. Response Tasks",
+        "C. Managed Document",
+        "D. Instruction Details"
+      ],
+      "comments": [
+        {
+          "content": "Knowledge article",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "runbook links to a Knowledge article",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "110",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114955-exam-cis-sir-topic-1-question-110-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "In a Flow, if the Create Response Task set Incident state V1 action is selected, what field contains the yes_no value that drives a question being asked in the playbook?",
+      "answers": [
+        "A. Question Type",
+        "B. Outcome Type",
+        "C. SI State",
+        "D. Answer Type"
+      ],
+      "comments": [
+        {
+          "content": "In order to support various response types \"outcome_type\" and \"outcome\" fields are introduced in the response task table. To explain briefly, while creating a response task, its \"outcome_type\" field value is set to an appropriate type based on the nature of the task that the analyst will perform.\nExamples: \"yes_no\", \"accept_reject\".",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "checked on the instance",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "111",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118939-exam-cis-sir-topic-1-question-111-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Runbooks are used to create a relationship between what components? (Choose two.)",
+      "answers": [
+        "A. Events",
+        "B. Security Incident Response Task",
+        "C. Playbook Task",
+        "D. Alerts",
+        "E. Workflow Trigger",
+        "F. Knowledge article"
+      ],
+      "comments": [
+        {
+          "content": "BF is correct",
+          "selected_answer": "BF",
+          "replies": []
+        },
+        {
+          "content": "Explanation: ebook p.295, \"Runbooks are used to create an association between published knowledge base articles and Security Incident Response Task\".",
+          "selected_answer": "BF",
+          "replies": []
+        },
+        {
+          "content": "BF ARE CORRECT",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "112",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/111184-exam-cis-sir-topic-1-question-112-discussion/",
+      "most_voted": "BF",
+      "error": null
+    },
+    {
+      "question": "What is included in the real-time data model in the right pane of the Flow Designer UI that may be dragged and dropped into fields in the main flow workspace?",
+      "answers": [
+        "A. Record Objects",
+        "B. Table References",
+        "C. Data Pills",
+        "D. Code Snippets"
+      ],
+      "comments": [
+        {
+          "content": "validated in course provided SN instance.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "113",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114857-exam-cis-sir-topic-1-question-113-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What kind of rules can be used to configure how email phishing incidents are processed? (Choose two.)",
+      "answers": [
+        "A. Risk Rules",
+        "B. Inbound Property Rules",
+        "C. CI Lookup Rules",
+        "D. Ingestion Rules",
+        "E. Condition Rules",
+        "F. Duplication Rules"
+      ],
+      "comments": [
+        {
+          "content": "Explanation: only mention of rules in ebook are\n\t- Ingestion Rules, p.312, \"inbound actions & email ingestion rules indetnifies phishing email to create phishing email records\"\n\t- Duplication Rules, p.64, \"... calls the checkCreatedRecord() function... \", there should be step wihch it checks Duplicate Rules [sn_sec_cmn_duplication_rule] table for duplicates.\n\nsooo i tihnk the answer should be D and F",
+          "selected_answer": "DF",
+          "replies": []
+        }
+      ],
+      "question_number": "114",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114858-exam-cis-sir-topic-1-question-114-discussion/",
+      "most_voted": "DF",
+      "error": null
+    },
+    {
+      "question": "Which role must a user have to customize major security incident reports based on the incremental progress since last summary update?",
+      "answers": [
+        "A. sn_msi.workspace_user",
+        "B. sn_msi.workspace_responder",
+        "C. sn_msim.workspace_responder",
+        "D. sn_msi.workspace_manager"
+      ],
+      "comments": [
+        {
+          "content": "sn_msi.workspace_manager",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "115",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/153340-exam-cis-sir-topic-1-question-115-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Risk Score weighting uses which of the following components? (Choose two.)",
+      "answers": [
+        "A. Business impact of a CI or Security Incident",
+        "B. Severity and Priority of a Security incident",
+        "C. Cost and Risk of an affected service",
+        "D. SLA and Schedule of an impacted service",
+        "E. Impact and Urgency of a Security incident"
+      ],
+      "comments": [
+        {
+          "content": "AB is correct",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "As explained on p. 228",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "Correct answers: A B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "116",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/141471-exam-cis-sir-topic-1-question-116-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "Who is responsible for identifying security incidents?",
+      "answers": [
+        "A. Everyone",
+        "B. Managers",
+        "C. IT personnel",
+        "D. Security analysts"
+      ],
+      "comments": [
+        {
+          "content": "It is the job of everyone to identify and report security incidents. If analysts were the only ones tasked with this security incidents would wreak havoc. It is everyone's job to report security incidents. The answer is A.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Security analysts\n\nSecurity analysts are the ‘boots on the ground’ during the incident. These analysts should be trained to identify actual incidents from among potential false positives,determine the time, location, and details of the incident, and locate and maintain any evidence that may have been left behind by the intruder.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "117",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/153341-exam-cis-sir-topic-1-question-117-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Select all of the following which are key features of the Malware Information Sharing Platform (Choose three.)",
+      "answers": [
+        "A. Dedicated MISP workspace for managing major security incidents",
+        "B. Auto-extract MITRE-ATT&CK™ information from MISP attributes and associate them to SIR security incidents",
+        "C. Attribute enrichment including adding or updating tags, galaxies, or attributes",
+        "D. Send malware to MISP for detonation",
+        "E. Add security incident associated observables as attributes to a MISP event"
+      ],
+      "comments": [
+        {
+          "content": "Key features\n\nSupport manual and automatic observable enrichment. Results include the MISP attribute and event information that is associated with the observables.\nAttribute enrichment in MISP which includes adding or updating tags, galaxies, or comments.\nEvent creation in MISP from SIR: Supports manual and the automatic creation of events in MISP from SIR.\nUpdate a MISP event from SIR which includes adding or updating tags, galaxies, or attributes.\nAdd security incident associated observables as attributes to a MISP event.\nAuto-extract MITRE-ATT&CK™ information from MISP attributes and associate the information to SIR security incidents.\nAutomatically add SIR MITRE-ATT&CK™ information as galaxies to a MISP event.",
+          "selected_answer": "BCE",
+          "replies": []
+        }
+      ],
+      "question_number": "118",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/153342-exam-cis-sir-topic-1-question-118-discussion/",
+      "most_voted": "BCE",
+      "error": null
+    },
+    {
+      "question": "Select all of the following which are the target personas for MITRE ATT&amp;CK 2.0? (Choose three.)",
+      "answers": [
+        "A. SOC Managers and CISO",
+        "B. Security and Threat Intelligence Administrators",
+        "C. Security Analysts",
+        "D. Compliance Managers",
+        "E. Penetration Testers"
+      ],
+      "comments": [
+        {
+          "content": "As described on p. 116",
+          "selected_answer": "ABC",
+          "replies": []
+        }
+      ],
+      "question_number": "119",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/142977-exam-cis-sir-topic-1-question-119-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "How does a user modify Risk Scores to suit their organizational needs?",
+      "answers": [
+        "A. alter values in the Risk Score Configuration module",
+        "B. amend constants in the RiskScoreUtil script include",
+        "C. change the business impact for affected Business Services and Configuration Items",
+        "D. recode logic in the Risk Score Calculator"
+      ],
+      "comments": [
+        {
+          "content": "The Risk Score Configuration module allows administrators to define the factors that are considered when calculating risk scores and adjust the weightings of those factors. This provides flexibility to tailor the risk scoring to your organization’s specific risk tolerances and priorities.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Look at page 227",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "121",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/142978-exam-cis-sir-topic-1-question-121-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What are some of the ways SIR teams can increase their productivity? (Choose three.)",
+      "answers": [
+        "A. Red/Blue automation",
+        "B. Export to spreadsheet pivot tables",
+        "C. Process automation",
+        "D. Training",
+        "E. Form personalization"
+      ],
+      "comments": [
+        {
+          "content": "CDE is correct",
+          "selected_answer": "CDE",
+          "replies": []
+        },
+        {
+          "content": "I think the correct answer is C,D,E",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "123",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/143036-exam-cis-sir-topic-1-question-123-discussion/",
+      "most_voted": "CDE",
+      "error": null
+    },
+    {
+      "question": "What is one of the Security Incident Response Team’s activities?",
+      "answers": [
+        "A. Patch vulnerabilities",
+        "B. Escalate incidents to security incidents",
+        "C. Monitor security alerts",
+        "D. Penetration testing"
+      ],
+      "comments": [
+        {
+          "content": "C is the closed to what what SIRT does",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "124",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/153345-exam-cis-sir-topic-1-question-124-discussion/",
+      "most_voted": "C",
+      "error": null
+    }
+  ]
+}

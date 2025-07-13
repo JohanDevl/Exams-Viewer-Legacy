@@ -1,0 +1,3225 @@
+{
+  "chunk_id": 0,
+  "start_question": 1,
+  "end_question": 50,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "Which of the following statements is true for the Form Designer? a) To add a field to the form layout, drag the field from the Fields tab to the desired destination on the form. b) To create a new field on a form's table, drag the appropriate data type from the Field Types tab to the form and then configure the new field. c) To remove a field from the form layout, hover over the field to enable the Action buttons, and select the Delete (X) button. d) To add a section to the form layout, drag it from the Field Types tab to the desired destination on the form.<br/>",
+      "answers": [
+        "A. a, b, c, and d",
+        "B. b, c, and d",
+        "C. a, b, and d",
+        "D. a, b, and c"
+      ],
+      "comments": [
+        {
+          "content": "A B and C are correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is not true.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Since \"Section\" is under Components and not Fields. You have Annotation and Section under Components.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Please help me.\nIs this questions is enough to clear exam.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "1",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/82736-exam-cad-topic-1-question-1-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following are configured in an Email Notification? a) Who will receive the notification. b) What content will be in the notification. c) When to send the notification. d) How to send the notification.<br/>",
+      "answers": [
+        "A. a, b and c",
+        "B. a, b, and d",
+        "C. b, c and d",
+        "D. a, c and d"
+      ],
+      "comments": [
+        {
+          "content": "A B and C are valid tabs on the email notifications.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "When, Who, what",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I think all a, b, c and d are valid. \"d\" is valid answer as we define how we send the notification: by \"how\" I mean it's content type, to include or not a push notification as well as SMS and to choose to make a it a part of digest.",
+          "selected_answer": "",
+          "replies": [
+            "d isn't applicable because they already told you the notification type in the question i.e. email. Push and SMS are also notification types (i.e. \"how\"). One notification (template) can have multiple types but it's redundant to say \"this email notification is sent via email\" because by definition you can't have an email sent via another method. d would only be applicable if the question stated \"notification\" or \"template\"."
+          ]
+        },
+        {
+          "content": "Answer a",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Who, What, When",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "2",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/82737-exam-cad-topic-1-question-2-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "To see what scripts, reports, and other application artifacts will be in a published application:<br/>",
+      "answers": [
+        "A. Enter the name of the Application in the Global search field",
+        "B. Open the list of Update Sets for the instance",
+        "C. Examine the Application Files Related List in the application to be published",
+        "D. Open the artifact records individually to verify the value in the Application field"
+      ],
+      "comments": [
+        {
+          "content": "this is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is most accurate scenario to check the existing development of a published application. The update sets and global search option can also be used to see what different types of development the specific application contains.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is B because the question states that the application has been published. Answer C is not correct because it states the application 'is to be published' ie. It has not yet been published",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Question correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "\"Application developers can view the complete list of application files from the custom application record.\"",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Copied from the provided link, \"Update sets work in scoped apps just like they do in global scope. But there is a better way to move scoped apps from one instance to another. This capability is called \"publish\" and it allows you to move an application just like you would with a single executable. The publish capability checks for dependencies and locks the application in the instance where it has been moved so that no changes can be made\". for option B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "3",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/66877-exam-cad-topic-1-question-3-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is NOT a debugging strategy for client-side scripts?<br/>",
+      "answers": [
+        "A. g_form.addInfoMessage()",
+        "B. Field Watcher",
+        "C. jslog()",
+        "D. gs.log()"
+      ],
+      "comments": [
+        {
+          "content": "gs is server side",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "gs is server side",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "gs.log",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct answer.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Glide System object is not allowed in client-side",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "You can test this!",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Why gs.log() is not a valid client-side debugging option:",
+          "selected_answer": "",
+          "replies": [
+            "gs.log() and GSLog are two different things. gs refers t0 GlideSystem but the GSLog in your link is a Script Include. These are two completely different objects."
+          ]
+        },
+        {
+          "content": "Answer D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "4",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/71307-exam-cad-topic-1-question-4-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which Application Access configuration field(s) are NOT available if the Can read configuration field is NOT selected?<br/>",
+      "answers": [
+        "A. All access to this table via web services",
+        "B. Can create, Can update, and Can delete",
+        "C. Can read does not affect the availability of other Application Access fields",
+        "D. Allow configuration"
+      ],
+      "comments": [
+        {
+          "content": "Answer is \"B\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer B is the correct.Just tried it on the table setting.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Please navigate to your PDI and, in the Filter Navigator, go to System Definition > Tables. Search for the 'Incident' table and open the record. Then, go to the Application Access tab and uncheck the 'Can Read' field. You will notice that the 'Can Create,' 'Can Update,' and 'Can Delete' fields are now read-only.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct answer.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct. I just tried in studio application",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I just tried in studio application the answer is B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "can create, update, delete becomes read only",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "You can test this!",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I've just tried it and certainly answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B nha cac ban oi",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "b is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "5",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/72024-exam-cad-topic-1-question-5-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following is NOT a trigger type in Flow Designer?<br/>",
+      "answers": [
+        "A. Outbound Email",
+        "B. Application",
+        "C. Record",
+        "D. Schedule"
+      ],
+      "comments": [
+        {
+          "content": "A is the correct answer.\nThese are the triggers for a Flow in ServiceNow:\n\nRecord\n -Created\n-Updated \n-Created or Updated\n\nScheduled\n-Daily\n-Weekly\n-Monthly\n-Run once\n-Repeat\n\nApplication\n-SLA Task\n-Inbound Email \n-Service Catalog",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct answer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Should be A and D. Flow designer trigger types are Application, Record, Date..\nSo in this case we kinda considering D  schedule as Date, which is weird..",
+          "selected_answer": "",
+          "replies": [
+            "Schedule is the wrong answer. Answers must be messed up. Outbound email is a wrong answer too."
+          ]
+        },
+        {
+          "content": "Outbound email is not a trigger type",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Just go and check",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "6",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90874-exam-cad-topic-1-question-6-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When creating new application files in a scoped application, cross scope access is turned on by default in which of the following?<br/>",
+      "answers": [
+        "A. REST messages",
+        "B. Table",
+        "C. Script Include",
+        "D. Workflow"
+      ],
+      "comments": [
+        {
+          "content": "When you create new application files in a scoped application, cross-scope access is automatically enabled by default only for:\n\n🔹 Script Includes",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is \"B\".\nCross-scope privileges can be granted for: Table: Read, write, create, delete records",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Table need explicit permissions",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is:\n\n**A. REST messages**\n\nIn ServiceNow, when creating new application files in a scoped application, **cross-scope access** is turned on by default for **REST messages**. This allows the scoped application to interact with external systems or other applications via REST without requiring additional configuration for cross-scope privileges. \n\nOther components, like **Tables**, **Script Includes**, and **Workflows**, generally require specific permissions or configuration to enable cross-scope access.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The answer is A. Tables are not accessible outside of the scope by default.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "B is correct answer.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Cross-scope privileges can be granted for:\n\nTable: Read, write, create, delete records\nScript Include: Execute API\nScriptable (script objects): Execute API\n\nReference: https://www.servicenow.com/community/developer-blog/securing-an-application-using-cross-scope-access-application/ba-p/2288801#:~:text=Cross%20scope%20access%20allows%20administrators,run%20on%20the%20target%20instance.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Both B & D are correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "B and D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "\"By default, all application scope scripts can read the table's records but cannot perform any other database operations.\"",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "7",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/82740-exam-cad-topic-1-question-7-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "In an Email Notification, which one of the following is NOT true for the Weight field?<br/>",
+      "answers": [
+        "A. Only Notifications with the highest weight for the same record and recipients are sent",
+        "B. A Weight value of zero means that no email should be sent",
+        "C. The Weight value defaults to zero",
+        "D. A Weight value of zero means the Notification is always sent when the Notification's When to send criteria is met"
+      ],
+      "comments": [
+        {
+          "content": "Which is \"NOT\" true.  A, C, D are true.  B is false.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "My wife's boyfriend confirmed it was B. I just accept it",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct answer.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Which is \"NOT\" true. A, C, D are true. B is false.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct for this question",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "D is the right one",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is D\n\n\" The default value 0 causes the system to always send the notification (assuming the conditions are met).\"",
+          "selected_answer": "",
+          "replies": [
+            "ndiichie is right, the D is TRUE, so the correct answer is B"
+          ]
+        },
+        {
+          "content": "B moi dung nha may ba oi",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Per my Developer Fundamental class notes:\nNotifications with Weight value of zero are always sent",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is the right answer. See the \"NOT\" in the question.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B! (Ref Tokyo Documentation)\nNotifications that have the same target table and recipients are considered duplicates if the weights are different. If weights are same, an additional evaluation is done to check if the subject and the body (excluding watermark) are same to qualify as duplicate notification. When there are duplicate notifications, the system only sends the notification with the highest weight. All other notifications are moved from the Outbox to the Skipped mailbox. The default value 0 causes the system to always send the notification (assuming the conditions are met).",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer D",
+          "selected_answer": "D",
+          "replies": [
+            "Answer is B. Your link even states the same, \"Notifications with a Weight value of zero are always sent.\""
+          ]
+        },
+        {
+          "content": "Answer D",
+          "selected_answer": "D",
+          "replies": [
+            "Answer is B. Your link even states the same, \"Notifications with a Weight value of zero are always sent.\""
+          ]
+        },
+        {
+          "content": "Answer B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer is B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "8",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73888-exam-cad-topic-1-question-8-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following objects does a Display Business Rule NOT have access to?<br/>",
+      "answers": [
+        "A. previous",
+        "B. GlideSystem",
+        "C. g_scratchpad",
+        "D. current"
+      ],
+      "comments": [
+        {
+          "content": "Question should be asking about async business rules",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A display BR is Before the form is presented to the user, just after the data is read from the database, so there will be always the current data not the previous data which was stored in the database, however the previous object available, but not sure it holds any value to it.\nAs per the definition of Display BR it should not hold any previous data.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Docs says current and gscratchpad are available for ondisplay br.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct answer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "But the problem is, that g_scratchpad is also not available in Async BR...",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Business Rules often use the current and previous objects in their script logic.\n\nThe current object is automatically instantiated from the GlideRecord class. The current object's properties are all the fields for a record and all the GlideRecord methods. The property values are the values as they exist in the runtime environment.\n\nThe previous object is also automatically instantiated from the GlideRecord class. The previous object's properties are also all fields from a record and the GlideRecord methods. The property values are the values for the record fields when they were loaded from the database and before any changes were made. The previous object is not available for use in async Business Rules.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Yes, I think this should be about async business rules:\nhttps://docs.servicenow.com/bundle/tokyo-application-development/page/script/business-rules/concept/c_BusinessRules.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Previous is only unavailable in Async Business Rules",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "9",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/77307-exam-cad-topic-1-question-9-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following features are available to Global applications? (Choose two.)<br/>",
+      "answers": [
+        "A. Automated Test Framework",
+        "B. Source Control",
+        "C. Delegated Development",
+        "D. Flow Designer"
+      ],
+      "comments": [
+        {
+          "content": "A, B & D.\n\nThe question is outdated as 3 are now supported in Global ( A) Automated Test Framework, B) Source Control and D) Flow Designer). Delegated Development is not supported in Global scope.\n\nhttps://www.servicenow.com/community/developer-forum/which-of-the-following-features-are-available-to-global/m-p/1391919\n\nGlobal apps gained source control integration in the Paris release.\n\nhttps://developer.servicenow.com/blog.do?p=/post/paris-source-control/\n\nThe delegated developer feature only works with true scoped apps, not global.\n\nhttps://www.servicenow.com/community/developer-forum/globally-scoped-apps-and-delegated-developers/m-p/1862075",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is A & D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Like TwelveKay said.\nAnswer is ATF, Source Control and Flow Designer. Just Delegated Development is not supported in Global Scope",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "Only those are the correct answer",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "Source control is available since Paris",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "should be A,B and D.\nSource control is available to Global applications today",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AD is correct answer.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A&B\noptions C (Delegated Development) and D (Flow Designer) are not specifically tied to global applications. While they are valuable features, they are not inherently exclusive to global deployments.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The delegated developer feature only works with true scoped apps",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Delegated Development is  supported only on private scoped app.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "The question is outdated as 3 are now supported in Global (Automated Test Framework, Source Control and Flow Designer).  Delegated Development is not supported in Global scope.\nhttps://www.servicenow.com/community/developer-forum/which-of-the-following-features-are-available-to-global/m-p/1391919\n\nGlobal apps gained source control integration in the Paris release.\nhttps://developer.servicenow.com/blog.do?p=/post/paris-source-control/\n\nThe delegated developer feature only works with true scoped apps, not global.\nhttps://www.servicenow.com/community/developer-forum/globally-scoped-apps-and-delegated-developers/m-p/1862075",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer should be update as it is A, B, D with the recent integration of source control in Paris release.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A, B , D - ATFs and Flow Designer is available to Global not the Delegate Development. Also, after Paris release source control is available to Global apps as well",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Question is outdated, global apps gained source control integration in the Paris release",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A & D is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ATF is available for both Global and Scoped applications.  Same for Flow Designer.",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "10",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64109-exam-cad-topic-1-question-10-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is NOT a UI Action type?<br/>",
+      "answers": [
+        "A. List choice",
+        "B. Form button",
+        "C. List banner button",
+        "D. Form choice"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/sandiego-platform-administration/page/administer/list-administration/concept/c_UIActions.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct answer.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct there is a list choice and there is no form choice",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-platform-administration/page/administer/list-administration/concept/c_UIActions.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "11",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/74912-exam-cad-topic-1-question-11-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following is NOT supported by Flow Designer?<br/>",
+      "answers": [
+        "A. Call a subflow from a flow",
+        "B. Test a flow with rollback",
+        "C. Use Delegated Developer",
+        "D. Run a flow from a MetricBase Trigger"
+      ],
+      "comments": [
+        {
+          "content": "B is correct answer.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "There is no roll back in flow testing",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B - I think they meant \"Rollback action\" which is available for Workflows only. However testing a flow in Flow Designer also does not offer rollback functionality. Record modified during a Test of a Flow remains modified when a Test is completed.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "12",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/82745-exam-cad-topic-1-question-12-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following are true for reports in ServiceNow? (Choose three.)<br/>",
+      "answers": [
+        "A. Any user can see any report shared with them.",
+        "B. Can be a graphical representation of data.",
+        "C. All users can generate reports on any table.",
+        "D. Can be run on demand by authorized users.",
+        "E. Can be scheduled to be run and distributed by email."
+      ],
+      "comments": [
+        {
+          "content": "Valid is BDE\nA is invalid because an user cannot see a shared report if has no access to a report's table(s)\nE is valid: https://docs.servicenow.com/bundle/rome-platform-administration/page/administer/reference-pages/task/schedule-report.html\nGenerate and distribute scheduled reports via email.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BDE is right",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Simple",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "B. Can be a graphical representation of data: Reports in ServiceNow can include various graphical representations, such as charts and graphs, to provide visual insights into the data.\n\nD. Can be run on demand by authorized users: Authorized users can generate reports on-demand to view real-time data or specific information from the ServiceNow instance.\n\nE. Can be scheduled to be run and distributed by email: ServiceNow allows users to schedule reports to run at specific times and automatically distribute the results via email. This feature is useful for regular reporting and sharing information with stakeholders.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BDE is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BDE is correct. A is absolutely wrong",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "B, D and A are the correct answers.",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "BDE is correct answer in Utah",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "User without authorization to see some tables, cannot see the report",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "BDE should be the answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BDE is my answer",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "BDE is correct.",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "BDE is valid in San Diego",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "yes BDE is correct according to docs.servicenow",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "VALID IS BDE",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "13",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64112-exam-cad-topic-1-question-13-discussion/",
+      "most_voted": "BDE",
+      "error": null
+    },
+    {
+      "question": "Modules must have a Link type. Which one of the following is a list of Link types?<br/>",
+      "answers": [
+        "A. List of Records, Separator, Catalog Type, Roles",
+        "B. Assessment, List of Records, Separator, Timeline Page",
+        "C. List of Records, Content Page, Order, URL (from arguments:)",
+        "D. Assessment, List of Records, Content Page, Roles"
+      ],
+      "comments": [
+        {
+          "content": "Order and role unavailable to select.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Order and role unavailable to select.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "•\tList of Records: Displays a list of records from a specified table.\n\t•\tContent Page: Displays a custom content page.\n\t•\tOrder: Refers to displaying an ordered list or a sequential structure.\n\t•\tURL (from arguments:): Directs users to a specific URL or webpage.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "There is no roles and oreder and catalog in link type.so correct option is B.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B.\n\nValid link for docs:\nhttps://docs.servicenow.com/bundle/utah-application-development/page/administer/auto-test-framework/reference/test-steps-app-navigator-category.html#title_r_ModuleLinkTypes",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct, all Link Type options are: ontent Page, Documentation Link, HTML (from Arguments:), List Filter, List of Records, Map Page, New Reocrd, Run a Report, Script (from Arguments:), Search Screen, Seperator, Single Record, Survey, Timeline Page, URL (from Arguments:)",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "14",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/78197-exam-cad-topic-1-question-14-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is true for a table with the `Allow configuration` Application Access option selected?<br/>",
+      "answers": [
+        "A. Only the in scope application's scripts can create Business Rules for the table",
+        "B. Any user with the application's user role can modify the application's scripts",
+        "C. Out of scope applications can create Business Rules for the table",
+        "D. Out of scope applications can add new tables to the scoped application"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A. Incorrect. \"Catalog Type\" is not a standard Link type for modules in ServiceNow.\n\nB. Incorrect. \"Assessment\" and \"Timeline Page\" are not standard Link types for modules in ServiceNow.\n\nC. Correct. This option includes standard Link types for modules in ServiceNow:\n\nList of Records: Displays a list of records from a specified table.\nContent Page: Links to a ServiceNow content page.\nOrder: Represents an ordering of items (a separator that organizes other modules).\nURL (from arguments): Allows you to link to an external URL.\nD. Incorrect. \"Assessment\" is not a standard Link type for modules in ServiceNow.",
+          "selected_answer": "",
+          "replies": [
+            "This is for question 14.  Please remove your answers from questions as it applies to question 14."
+          ]
+        },
+        {
+          "content": "https://developer.servicenow.com/dev.do#!/learn/learning-plans/tokyo/new_to_servicenow/app_store_learnv2_securingapps_tokyo_allow_configuration",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Option C is correct.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "15",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/87480-exam-cad-topic-1-question-15-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When working in the Form Designer, configuring the label of a field in a child table changes the label on which table(s)?<br/>",
+      "answers": [
+        "A. base table",
+        "B. child table",
+        "C. parent table",
+        "D. all tables"
+      ],
+      "comments": [
+        {
+          "content": "When working in the Form Designer in ServiceNow, configuring the label of a field in a child table changes the label on:\nB. child table\nThis means that the label change will only apply to the child table where you made the modification, not affecting the base table, parent table, or all tables.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "c. Parent table\nfrom servicnow support documentation: If a child table, such as pm_project, is saved using the form designer, the parent field labels (sys_documentation) are changed to those of the child. For example, changing and saving the pm_project form causes the short_description field label on task to change from \"Short Description\" to \"Project Name.\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct:\nhttps://www.servicenow.com/community/developer-forum/when-working-in-form-designer-configuring-the-label-of-a-field/m-p/1436339/highlight/true#M93265\n\nSystem would not create a dictionary override automatically.",
+          "selected_answer": "",
+          "replies": [
+            "It creates Label  not dict. override. It is B"
+          ]
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Child table",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I agree that the \"child table\" is correct.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "16",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102949-exam-cad-topic-1-question-16-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is true?<br/>",
+      "answers": [
+        "A. A UI Policy's Actions execute before the UI Policy's Scripts",
+        "B. The execution order for a UI Policy's Scripts and Actions is determined at runtime",
+        "C. A UI Policy's Scripts execute before the UI Policy's Actions",
+        "D. A UI Policy's Actions and Scripts execute at the same time"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is A. I didn't find any definite statements about order in the docs. However in the link, quoted for this question, there are two opposite responses. One, which takes UI Policy Actions first and UI Policy Scripts second, was marked helpful by ServiceNow and Expert(s)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct, verified.\nCreated UI policy on incident form, action set's cmdb_ci field as mandatory and script as not. result, field was not mandatory.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "In ServiceNow, UI policy actions execute before UI policy scripts. Here’s the sequence of execution:\n\t1.\tUI Policy Conditions: The condition is evaluated first to determine whether the UI policy should apply.\n\t2.\tUI Policy Actions: If the condition is met, the UI policy actions (e.g., making fields visible, read-only, or mandatory) are executed first.\n\t3.\tUI Policy Script: After the actions are applied, the script associated with the UI policy runs.\n\nThis order ensures that the predefined actions are applied before any custom logic in the script is executed. If you need to modify the behavior after actions, the script is where you can do that.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The answer is A\n\nActions execute first: When a UI Policy is triggered, the Actions are applied first. This ensures that the form is updated (fields are shown, hidden, made mandatory, etc.) before any custom scripts are run.\n\nScripts execute after Actions: Once the Actions have been applied, the UI Policy Scripts are then executed. This allows the script to work with the form in its updated state.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A. tested in PDI",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "In ServiceNow, when a UI Policy is triggered, its actions (such as setting fields to mandatory, visible, or read-only) are executed before any scripts associated with the UI Policy are run.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The Scripting in ServiceNow Fundamentals course section called Catalog Client Scripts and Catalog UI Policies which is found in the student instance has a KBA #KB86753O9 that states \"UI Policy Actions execute before UI Policy Scripts\".",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct is A:\nGeneral Order:\n-UI Scripts\n-Client Scripts\n-UI Policy Action\n-UI Policy Scripts",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is A. UI Policy action executes before scripts.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "This video goes over Answer A - https://www.google.com/search?client=opera&q=UI+Policy%27s+Actions+execute+before+the+UI+Policy%27s+Scripts&sourceid=opera&ie=UTF-8&oe=UTF-8#fpstate=ive&vld=cid:63e72bd4,vid:TptpAXlLT10,st:0",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The correct is C",
+          "selected_answer": "C",
+          "replies": [
+            "https://developer.servicenow.com/dev.do#!/learn/courses/washingtondc/app_store_learnv2_scripting_washingtondc_scripting_in_servicenow/app_store_learnv2_scripting_washingtondc_client_side_scripting/app_store_learnv2_scripting_washingtondc_client_scripts_vs_ui_policies"
+          ]
+        },
+        {
+          "content": "C\nUI Policy’s Scripts execute before the UI Policy’s Actions (Option C): This statement is accurate. When a UI Policy is triggered, its script runs first. The script evaluates conditions and performs any necessary modifications. If the conditions are met, the associated actions (such as hiding fields or setting field values) are then executed.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Just tested in my PDI.\n\nSample example:\n\n1) on incident form write UI policy when state changes to closed; make short description as mandatory from UI policy action\n\n2) from UI policy script execute if true; use below script\n\ng_form.setMandatory('short_description', false);\n\nAnswer is A.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I think the answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I tested this on the incident form in a Vancouver PDI by modifying the \"Fields set to mandatory for all states\" UI policy.\n\nI changed the \"When to Apply\" condition to when the state was \"In Progress\"\nI enabled \"Run scripts\" and added code in the \"Execute if true\" section\n**I keep getting bad gateway errors when I try to submit with the code**\n\nWhen the form loads, the caller and short descriptions fields are not mandatory. When I select \"In Progress\" for the state, after about 5 seconds the caller and short description fields become mandatory.\n\nThis tells me that the script runs before the actions.\n\nThe answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "In ServiceNow, UI Policies are used to dynamically change the behavior of form elements based on certain conditions. A UI Policy consists of both Scripts and Actions.\n\nScripts: These are JavaScript code snippets that execute when the conditions specified in the UI Policy are met. They are typically used for more complex logic and calculations.\n\nActions: These are predefined operations that can be applied to form elements when the conditions are met. Examples include showing or hiding a field, making a field mandatory, or setting a default value.\n\nThe correct order of execution is that the Scripts execute before the Actions. The JavaScript code in the Scripts section is evaluated first, and based on the results, the corresponding Actions are then executed.\n\nSo, option C is the correct statement.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A\n\nhttps://www.servicenow.com/community/developer-forum/which-executes-first-ui-policy-action-or-ui-policy-script/m-p/2666819/highlight/true#M1034196",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "17",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64113-exam-cad-topic-1-question-17-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Here is the Business Rule script template:<br/><img class=\"in-exam-image\" src=\"/assets/media/exam-media/03995/0000900001.png\"/><br/>This type of JavaScript function is known as:<br/>",
+      "answers": [
+        "A. Constructor",
+        "B. Scoped",
+        "C. Anonymous",
+        "D. Self-invoking"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is D: Self-invoking. Learn JavaScript!",
+          "selected_answer": "",
+          "replies": [
+            "True and.. easy man!"
+          ]
+        },
+        {
+          "content": "Correct Answer is \"D\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C and D are correct because \nthe function is called directly = self-invoking\nit doesn't have name = anonymous",
+          "selected_answer": "C",
+          "replies": [
+            "it has name, it's called executeRule"
+          ]
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D\nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/utah/new_to_servicenow/app_store_learnv2_scripting_utah_business_rule_scripts",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Notice the template syntax. The function syntax is known in JavaScript as a self-invoking function or an Immediately Invoked Function Expression (IIFE). The function is immediately invoked after it is defined. ServiceNow manages the function and when it is invoked; developers do not explicitly call Business Rule scripts.\nReference Link: https://developer.servicenow.com/dev.do#!/learn/learning-plans/utah/new_to_servicenow/app_store_learnv2_scripting_utah_business_rule_scripts",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It is self invoking",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "in javascript ut is called immediate invoked function /self invoking function",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Notice the template syntax. The function syntax is known in JavaScript as a self-invoking function or an Immediately Invoked Function Expression (IIFE).",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "\"The template's process function, known as a self-invoking or immediately invoked function expression, is automatically invoked when a resource is accessed.\"\nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/rome/servicenow_application_developer/app_store_learnv2_rest_rome_resource_script",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "in javascript it's called self-invoking",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "self Invoking",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is D - self-invoking. Its NOT a constructor.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is the correct one",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D, that´s an IIFE which stands for inmediately invoked Function Expression",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "18",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64114-exam-cad-topic-1-question-18-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which method call returns true only if the currently logged in user has the catalog_admin role and in no other case?<br/>",
+      "answers": [
+        "A. g_user.hasRole('catalog_admin')",
+        "B. g_user.hasRoleExactly('catalog_admin')",
+        "C. g_user.hasRoleOnly('catalog_admin')",
+        "D. g_user.hasRoleFromList('catalog_admin')"
+      ],
+      "comments": [
+        {
+          "content": "Answer is incorrect , It should be B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B. There is no g_user.hasRoleOnly function",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "g_user.hasRole('client_script_admin');\nThe example script checks to see if the currently logged in user has the capability to create and edit Client Scripts (client_script_admin role). Note that the script returns true not only when the currently logged in user has the role assigned but also if the currently logged in user has the admin role. The admin user has all roles implicitly assigned. To test whether the currently logged in user has the role explicitly assigned, use the hasRoleExactly() method:\n\ng_user.hasRoleExactly('client_script_admin');",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Take a look of this\n\nhttps://servicenow.read.inkling.com/a/b/969eb76959534a84af3d0c2c58ba13ff/p/7b1eee5b6af844d08eeea8ccbecb08d5",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "it's B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B (https://developer.servicenow.com/dev.do#!/learn/courses/washingtondc/app_store_learnv2_scripting_washingtondc_scripting_in_servicenow/app_store_learnv2_scripting_washingtondc_client_side_scripting/app_store_learnv2_scripting_washingtondc_the_glideuser_g_user_class)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is Correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The g_user.hasRoleExactly() method in ServiceNow is used to check if the currently logged-in user has a specified role and no other roles. In this case, it checks if the user has the 'catalog_admin' role and no other roles.\n\nSo, the correct method call to return true only if the currently logged-in user has the 'catalog_admin' role and in no other case is g_user.hasRoleExactly('catalog_admin')",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct one",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B, there is no hasRoleOnly methond in g_user",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B, g_user.hasRoleExactly()\n\nPlease find this g_user.hasRoleOnly() client side script that you speak of in the below ServiceNow documentation. I can wait.  :D\n\nSource: https://developer.servicenow.com/dev.do#!/reference/api/utah/client/c_GlideUserAPI",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer is B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Has role exactly.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B IS CORRECT",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Can you guys update the correct answer? So far I've seen the \"correct answer\" be incorrect a little too many times and I'm not even a quarter of the way through these questions....the correct answer is B!!!",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "let it b, let it b...",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "19",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/61951-exam-cad-topic-1-question-19-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "There is a basic strategy when creating a Utils Script Include. Identify the step that does not belong.<br/>",
+      "answers": [
+        "A. Identify the table",
+        "B. Script the function(s)",
+        "C. Create a class",
+        "D. Create a prototype object from the new class"
+      ],
+      "comments": [
+        {
+          "content": "A and D - You don't define the table for Script Include and also you don't create an instance of an object of the class. An object is created on a script invoking the class -level.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct; \nApplication Development Fundamentals - San Diego book page 343",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct\nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/tokyo/new_to_servicenow/app_store_learnv2_scripting_tokyo_utilities_script_include",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "On a Script Include you don't need to Identify the table.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The correct is A\nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/tokyo/new_to_servicenow/app_store_learnv2_scripting_tokyo_utilities_script_include",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "20",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102859-exam-cad-topic-1-question-20-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which roles grant access to source control repository operations such as importing applications from source control, or linking an application to source control?<br/>(Choose two.)<br/>",
+      "answers": [
+        "A. source_control",
+        "B. source_control_admin",
+        "C. admin",
+        "D. git_admin"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-application-development/page/build/applications/task/t_LinkAnApplicationToSourceControl.html\nBased on tokyo release, only the admin can do it. For previous releases, source_control role is needed.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Still A and C as of Utah\nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/utah/new_to_servicenow/app_store_learnv2_devenvironment_utah_linking_an_application_to_source_control",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "A and C are correct:\nA.) https://docs.servicenow.com/bundle/tokyo-application-development/page/build/applications/task/t_ImportAppFromSourceControl.html\nC.) https://docs.servicenow.com/bundle/tokyo-application-development/page/build/applications/task/t_LinkAnApplicationToSourceControl.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A and C. \"Users with the admin or source_control role can use Studio to link a ServiceNow application to a repository.\"\n\nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/rome/new_to_servicenow/app_store_learnv2_devenvironment_rome_linking_an_application_to_source_control",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "21",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90725-exam-cad-topic-1-question-21-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "When configuring the content of an Email Notification, which syntax should be used to reference the properties of an event triggering the Notification?<br/>",
+      "answers": [
+        "A. ${event.<property name>}",
+        "B. ${current.<property name>}",
+        "C. ${<property name>.getDisplayValue()}",
+        "D. ${gs.<property name>}"
+      ],
+      "comments": [
+        {
+          "content": "${event.<property name>} should be answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer :A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct ans a",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answers are messed up. Should be either event params or field value.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A:${event.<property name>} is the correct answer, refer:\nhttps://www.servicenow.com/community/itsm-forum/email-notification/m-p/695221",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "C is right",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "When you pass an event, you pass a record and two parameters, this does not ask if you want to access the parameters, which would need the ${event.parm1} syntax,  but it asks to access the proparties of the event, which would be the record being passed with it.  which can be accessed by using the field name directly. so ${property_name} would work, and so should ${property_name.getDisplayValue} to get its display value instead of actual value.  the trigger for an event is gs.eventQueue(<EVENT NAME>, <RECORD OBJECT>, PARM1, PARM2)  you can access a field within the record object by simply using ${field_Name}",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer: A.\n\nhttps://www.servicenow.com/community/it-service-management-forum/email-notification/m-p/695221",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Option A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "${event.<property name>}",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer: A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "22",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/61952-exam-cad-topic-1-question-22-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is true for a Script Include with a Protection Policy value of Protected?<br/>",
+      "answers": [
+        "A. Any user with the protected_edit role can see and edit the Script Include",
+        "B. The Protection policy option can only be enabled by a user with the admin role",
+        "C. The Protection Policy is applied only if the glide.app.apply_protection system property value is true",
+        "D. The Protection Policy is applied only if the application is downloaded from the ServiceNow App Store"
+      ],
+      "comments": [
+        {
+          "content": "Valid answer is D:\nhttps://docs.servicenow.com/bundle/rome-application-development/page/build/applications/concept/c_ScriptProtectionPolicy.html\nAnswer by Chuck Tomasi: https://community.servicenow.com/community?id=community_question&sys_id=530ff629db58dbc01dcaf3231f9619d7\nThis field is mainly intended for our TPP (technical partner program) - those people who create apps and publish them to the store.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer :D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "its true",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Active link - https://developer.servicenow.com/dev.do#!/learn/learning-plans/vancouver/new_to_servicenow/app_store_learnv2_scripting_vancouver_script_includes\n\n\"Protection policy: If set to Read-only, instances on which the application is installed from the ServiceNow Store can read but not edit the Script Include. If set to Protected, the Script Include is encrypted on instances on which the application is installed from the ServiceNow Store. Protection policies are never applied to the instance on which an application is developed.\"",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Pag 379 form fundamentales scripting Book \nCorrect answer is D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D IS THE ANSWER",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Valid is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "answer is D! Did a robot create the test? The official answer makes no sense at all.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is right",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer : D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer Is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "CORRECT ANSWER IS  D",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "23",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64115-exam-cad-topic-1-question-23-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is true for GlideUser (g_user) methods?<br/>",
+      "answers": [
+        "A. Can be used in Client Scripts and UI Policies only",
+        "B. Can be used in Business Rules only",
+        "C. Can be used in Client Scripts, UI Policies, and UI Actions",
+        "D. Can be used in Business Rules, and Scripts Includes"
+      ],
+      "comments": [
+        {
+          "content": "https://developer.servicenow.com/dev.do#!/reference/api/vancouver/client/c_GlideUserAPI\nC",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "UI actions is a server side artifact but it can also run on client. hence g_user can be used on any client side scripts",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "- is typically used in client scripts and UI policies but is also found in UI actions that run on the client.\n- cannot be used in business rules or UI actions that run on the server.\n\nSource: https://developer.servicenow.com/dev.do#!/reference/api/utah/client/c_GlideUserAPI",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "g_user can be used on Client Side Scripts:\n1. Client Script\n2. UI Policy Script\n3. UI Action (if client checkbox is true)",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is C, although GlideUser is not COMMONLY used in UI Actions, you can make a UI Action run client side. Running a UI action client side is also how you integrate GlideModal and other client operations with a UI Action.\n\nTricky question, but the answer is C.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Search in the doc UTAH version: \"is typically used in client scripts and UI policies but is also found in UI actions that run on the client.\" \nSo, the correct answer is C.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The link being shared says that the GlideUser API cannot be used in UI actions that run on the server. This question doesn't specify if the UI Action runs on the client or on the server. For that reason, I believe the correct answer is A. The GlideUser is typically used in client scripts and UI policies. Unless it is specified where the UI Action is running I will not assume is on the client side. A very tricky question indeed.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "\"CAN\" is a key word interpretation that needs to be understood for this question. \n\"Can be used in Client Scripts, UI Policies, and UI Actions\"  as is mentioned below. Read these details carefully.  https://developer.servicenow.com/dev.do#!/reference/api/tokyo/client/c_GlideUserAPI",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "C is correct - Can be used in Client Scripts, UI Policies, and UI Actions. \nhttps://developer.servicenow.com/dev.do#!/reference/api/tokyo/client/c_GlideUserAPI",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "answer is client scripts and ui policies only, Please correct the answer in website",
+          "selected_answer": "",
+          "replies": [
+            "you can run the ui action in client side"
+          ]
+        },
+        {
+          "content": "GlideUser\nThe GlideUser API provides access to information about the current user and current user roles. Using the GlideUser API avoids the need to use the slower GlideRecord queries to get user information.\nThe GlideUser methods and properties are accessed through a global object (g_user) that is only available in client scripts. GlideUser\ncontains name and role information about the current user.\nis typically used in client scripts and UI policies but is also found in UI actions that run on the client.\ncannot be used in business rules or UI actions that run on the server.\n\n(Refer:https://developer.servicenow.com/dev.do#!/reference/api/tokyo/client/c_GlideUserAPI)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "UI action works as both client and server side\nSo Answer C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A\nhttps://servicenowguru.com/scripting/user-object-cheat-sheet/#:~:text=The%20g_user%20object%20can%20be,accessible%20to%20client%2Dside%20JavaScript.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "24",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92618-exam-cad-topic-1-question-24-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When configuring a module, what does the Override application menu roles configuration option do?<br/>",
+      "answers": [
+        "A. Users with the module role but without access to the application menu access the module",
+        "B. Self-Service users can access the module even though they do not have roles",
+        "C. Admin is given access to the module even if Access Controls would ordinarily prevent access",
+        "D. Users with access to the application menu can see the module even if they don't have the module role"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is A. \nThe reference link, provided for the question, confirms that: Override application menu roles : Allows users to access this module even if they do not have permission to view the containing application menu. Users must still meet the role requirements for this module.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer :A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Use the Override application menu roles option to give module-level access to a role that is not authorized to see the application.\nFor example, assume the Special Occasions application menu requires the admin role and the Occasions module for the Special Occasions application requires the x_snc_employee_spe.occasions_user role.\nThe application-level requirement supersedes the module-level requirement which means that users with the x_snc_employee_spe.occasions_user role cannot see either the application or the module.\nIf the Override application menu roles option is selected, users with the x_snc_employee_spe.occasions_user role can see both the application and the module even though the user is not authorized by role to see the application menu.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is right answer",
+          "selected_answer": "",
+          "replies": [
+            "Is this questions is enough to pass the exam????"
+          ]
+        },
+        {
+          "content": "Answer A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer A is correct:\nCheckbox tooltip:\n\"Show this module when the user has the specified roles.  Otherwise the user must have the roles specified by both the application menu and the module.\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Option A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer: A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "25",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64116-exam-cad-topic-1-question-25-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which platform feature can be used to determine the relationships between field in an Import Set table to field in an existing ServiceNow table?<br/>",
+      "answers": [
+        "A. Business Service Management Map",
+        "B. Data Sources",
+        "C. Transform Map",
+        "D. CI Relationship Builder"
+      ],
+      "comments": [
+        {
+          "content": "C, Transform MAP",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Transform map is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C. Transform Map - correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "26",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107786-exam-cad-topic-1-question-26-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When configuring a REST Message, the Endpoint is:<br/>",
+      "answers": [
+        "A. The commands to the REST script to stop execution",
+        "B. The URI of the data to be accessed, queried, or modified",
+        "C. Information about the format of the returned data",
+        "D. The response from the provider indicating there is no data to send back"
+      ],
+      "comments": [
+        {
+          "content": "B is correct base on Lab 9.2 number 5 (page 455 of SN CAD ebook)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The endpoint is the URL of the data to be retrieved, updated, or deleted.\nhttps://docs.servicenow.com/bundle/utah-api-reference/page/integrate/outbound-rest/reference/r_RESTMessageElements.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "27",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107928-exam-cad-topic-1-question-27-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When evaluating Access Controls, ServiceNow searches and evaluates:<br/>",
+      "answers": [
+        "A. Only for matches on the current table",
+        "B. Only for matches on the current field",
+        "C. From the most specific match to the most generic match",
+        "D. From the most generic match to the most specific match"
+      ],
+      "comments": [
+        {
+          "content": "Correct is C.\nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/paris/new_to_servicenow/app_store_learnv2_securingapps_paris_access_controls_evaluation_order",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer :C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "When deciding whether to grant or deny access, the ACL is searched from the most specific to the most generic match. For example, when determining whether to grant access to the NeedIt table Short description field, the search order is:",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Whenever a session requests data, the system searches for access control rules that match the requested object and operation. If there is a matching access control rule, then the system evaluates if the user has the permissions required to access the object and operation. If an access control rule specifies more than one permission, then the user must meet all permissions to gain access to the object and operation. Failing any one permission check prevents the user from accessing the matching object and operation.\nIf a user does not meet the permissions of the first matching rule, the system evaluates the permissions of the next matching access control rule as specified by the access control processing order. If the user fails to meet the permissions of any matching access control rule, the system denies access to the requested object and operation.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer: C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://developer.servicenow.com/dev.do#!/learn/learning-plans/tokyo/new_to_servicenow/app_store_learnv2_securingapps_tokyo_access_controls_evaluation_order",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "It's C:\nWhen deciding whether to grant or deny access, the ACL is searched from the most specific to the most generic match.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct is C.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Option C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "28",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64117-exam-cad-topic-1-question-28-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In a Business Rule, which one of the following returns true if the currently logged in user has the admin role?<br/>",
+      "answers": [
+        "A. g_form.hasRoleExactly('admin')",
+        "B. gs.hasRole('admin')",
+        "C. g_form.hasRole('admin')",
+        "D. gs.hasRoleExactly('admin')"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is B. gs.hasRole\nBusiness Rule is server-side, so it uses GlideSystem API. gs.hasRoleExactly doesn't exist",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct ans :B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Only gs is for server side, g_form is for client side",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "hasRoleExactly only exists in the Glide User (g_user) class",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Only gs is for server side, g_form is for client side.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "gs.hasRole is corect. g_form.hasRole and g_form.hasRoleExactly not exist",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "server side is gs",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "server side api",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is B",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "29",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64118-exam-cad-topic-1-question-29-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "From the list below, identify one reason an application might NOT be a good fit with ServiceNow.<br/>The application:<br/>",
+      "answers": [
+        "A. Needs workflow to manage processes",
+        "B. Requires ג€as-isג€ use of low-level programming libraries",
+        "C. Requires reporting capabilities",
+        "D. Uses forms extensively to interact with data"
+      ],
+      "comments": [
+        {
+          "content": "ServiceNow doesn’t support libraries with low-level programming, they support their own API with low-code functionalities.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "b is correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "30",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108176-exam-cad-topic-1-question-30-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Identify the incorrect statement about Delegated Development in ServiceNow.<br/>",
+      "answers": [
+        "A. Administrators can grant non-admin users the ability to develop global applications.",
+        "B. Administrators can specify which application file types the developer can access.",
+        "C. Administrators can grant the developer access to script fields.",
+        "D. Administrators can grant the developer access to security records."
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is: A. Administrators can grant non-admin users the ability to develop global applications.\nDelegated Development is for the scoped applications only",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer :A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Scoped apps only",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Its for scoped apps only",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "It is only for scoped applications",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct\nScope and delegated development module 1.2 of servicenow application developer fundamentals on demand\n\nApplication - specific permissions: specify which file types the developer can access\n\nInstance - specific user roles: grants the developer access to security records and script fields.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Delegated Development = Scoped Apps",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "This is for scoped apps only. See the docs... \"A\" is not correct. B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Reference is :\nhttps://docs.servicenow.com/bundle/tokyo-application-development/page/build/applications/concept/c_DelegatedDevelopment.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ADF EBOOK, PN = 48",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A system administrator can assign a non-administrator user or group as a developer or deployment resource for a specific application.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct. Delegated is only for Scoped apps not for Global. A says admin can grant for Globral apps.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "delegated development is for scoped apps only",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Delegated Development is for the scoped applications only",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "B is the right answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Administrators can grant non-admin users the ability to develop global applications.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "31",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64119-exam-cad-topic-1-question-31-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "One of the uses of the ServiceNow REST API Explorer is:<br/>",
+      "answers": [
+        "A. Practice using REST to interact with public data providers",
+        "B. Find resources on the web for learning about REST",
+        "C. Convert SOAP Message functions to REST methods",
+        "D. Create sample code for sending REST requests to ServiceNow"
+      ],
+      "comments": [
+        {
+          "content": "Create sample code for sending REST requests to ServiceNow is correct.  https://developer.servicenow.com/dev.do#!/learn/courses/washingtondc/app_store_learnv2_rest_washingtondc_rest_integrations/app_store_learnv2_rest_washingtondc_inbound_rest_integrations/app_store_learnv2_rest_washingtondc_introduction_to_the_rest_api_explorer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct  - SN CAD ebook pg 394",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "32",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/121051-exam-cad-topic-1-question-32-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is true regarding Application Scope?<br/>",
+      "answers": [
+        "A. All applications are automatically part of the Global scope",
+        "B. Applications downloaded from 3 party ServiceNow application developers cannot have naming conflicts rd",
+        "C. Any developer can edit any application",
+        "D. Developers can choose the prefix for a scope's namespace"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is B.\nhttps://docs.servicenow.com/bundle/rome-application-development/page/build/applications/concept/c_ApplicationScope.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "you can't change the prefix. So B.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B and D are correct.\nB: import App from Store or Source control must not be conflict with existing ones\nD: for client-instance, it can be any. But for personal instance, it needs some prefix number before the app name",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct ans is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "It's B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct Applications downloaded from 3 party ServiceNow application developers cannot have naming conflicts rd",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B.\nApplications downloaded from 3 party ServiceNow application developers cannot have naming conflicts rd",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/rome-application-development/page/build/applications/concept/c_ApplicationScope.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "33",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64120-exam-cad-topic-1-question-33-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is the baseline behavior of a table in a privately-scoped application?<br/>",
+      "answers": [
+        "A. The table and its data are not accessible using web services",
+        "B. Any Business Rule can read, write, delete, and update from the table",
+        "C. Only artifacts in the table's application can read from the table",
+        "D. All application scopes can read from the table"
+      ],
+      "comments": [
+        {
+          "content": "Correct is indeed D:\nhttps://docs.servicenow.com/bundle/rome-application-development/page/build/applications/concept/c_DefaultDesignAccessPermissions.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Like many said before, reading is possible, editing is not",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "By default (as of the Xanadu release), new tables in privately-scoped applications are configured with the following baseline design-time access:\n\nAccessible from: All application scopes\nCan read: Enabled\nCan create, update, delete: Disabled\nAllow configuration: Disabled\n\nThis means:\n\nRead access is allowed from all scopes (i.e., cross-scope reads are enabled by default).\nOther actions (create, update, delete) are blocked unless explicitly granted.\n\nWeb services access is also enabled by default.\n\nTherefore, option D is the best representation of baseline behavior.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "the answer is c :\nIn a privately-scoped application in ServiceNow, the table and its data are restricted to the application's scope by default.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "By default, new application tables prevent other application scopes from creating configuration records on application data tables. But reading the Data from the Table wont be a Problem, because for a table \"Can Read=true\" by default.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "In a privately-scoped application in ServiceNow, the default behavior is that the table and its data are accessible only to artifacts (scripts, business rules, etc.) within the same application scope. This ensures data security and encapsulation.\nhttps://docs.servicenow.com/bundle/rome-application-development/page/build/applications/concept/c_DefaultDesignAccessPermissions.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Table is accessible by default.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The answer is C.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "are the comments for different question?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-application-development/page/build/applications/concept/c_DefaultDesignAccessPermissions.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Yes, the correct Answer is D",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "34",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64121-exam-cad-topic-1-question-34-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is NOT a purpose of application scoping?<br/>",
+      "answers": [
+        "A. Provide a relationship between application artifacts",
+        "B. Provide a way of tracking the user who developed an application",
+        "C. Provide a namespace (prefix and scope name) to prevent cross application name collisions",
+        "D. Provide controls for how scripts from another scope can alter tables in a scoped application"
+      ],
+      "comments": [
+        {
+          "content": "Option B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer :A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is also my answer. Why is there several incorrect answers",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Option B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is Correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The purpose of application scoping is not to track the user who developed an application. However, application scoping does provide a way to manage access to applications based on roles and groups, which can be used to control who has access to create, modify, and delete application artifacts",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Option B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Option B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://developer.servicenow.com/dev.do#!/learn/learning-plans/rome/new_to_servicenow/app_store_learnv2_buildneedit_rome_application_scope: \nScope protects an application, its files, and its data from conflicts with other applications.\nScope determines which parts of an application are available for use by other applications in ServiceNow.\nScope allows developers to configure which parts of their application can be acted on by other applications.\nScope prevents work done in the main ServiceNow browser window (not in Studio) from becoming part of an application's files.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Option B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The answer is B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is A. Provide a relationship between application artifacts\nIMHO :)",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "35",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64122-exam-cad-topic-1-question-35-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "It is best practice to define the business requirements and the process(es) an application will manage as part of the application development plan. What are some of the considerations to document as part of the business process?<br/>",
+      "answers": [
+        "A. Business problem, data input/output, users/stakeholders, and process steps",
+        "B. Business problem, data input/output, project schedule, and process steps",
+        "C. Business problem, data input/output, users/stakeholders, and database capacity",
+        "D. Business problem, users/stakeholders, available licenses, and database capacity"
+      ],
+      "comments": [
+        {
+          "content": "Explanation:\n\nBusiness problem - If you are not solving a business problem, you do not need an application.\n\nStakeholders - Requestor and Fulfiller, Application Administrator , Management.\nUsers - Personas largely equate to Roles in ServiceNow.\n\nInputs - can take many forms such as Users, spreadsheets, and web services.\nOutputs: can also take many forms such as dashboards, reports, and email.\n\nProcess Steps - There are many strategies for defining a process, such as SIPOC(Six Sigma), ASME Standard for Process Charts, and others. Choose a strategy that works well for you. \n\nhttps://docs.servicenow.com/bundle/vancouver-governance-risk-compliance/page/product/grc-risk/concept/business-process-overview.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Yes A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I agree that \"Business problem, data input/output, users/stakeholders, and process steps\" are correct.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "36",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/110068-exam-cad-topic-1-question-36-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following statements does NOT apply when extending an existing table?<br/>",
+      "answers": [
+        "A. The parent table's Access Controls are evaluated when determining access to the new table's records and fields",
+        "B. The new table inherits the functionality built into the parent table",
+        "C. The new table inherits all of the fields from the parent table",
+        "D. You must script and configure all required behaviors"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is D. You must script and configure all required behaviors\nProvided link has this statement: Extending an existing ServiceNow table means the new table inherits the parent table's columns as well as its business logic.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I need my money back. So many questions are absolutely wrong. Absolute garbage!!",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Do you must script and configure all required behavior when table extending an existing table ? NO ! so answer D does not apply... stop doubt \n\nThe correct answer D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "does NOT apply!",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "We have a flexibility to choose which fields from the parent table to include in the extended table. Its not always ''ALL'",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I agree \"You must script and configure all required behaviors\" is the correct answer.",
+          "selected_answer": "D",
+          "replies": [
+            "Hello,\nPlease let me know. Is this questions is enough to clear the CAD exam????"
+          ]
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct is D. No doubt.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ANSWER: D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is D",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "37",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64123-exam-cad-topic-1-question-37-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following CANNOT be debugged using the Field Watcher?<br/>",
+      "answers": [
+        "A. Business Rules",
+        "B. Script Includes",
+        "C. Client Scripts",
+        "D. Access Controls"
+      ],
+      "comments": [
+        {
+          "content": "B. its about what interacts with fields, and no client vs server",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct ... looked up how field watcher works here (https://docs.servicenow.com/bundle/washingtondc-api-reference/page/script/debugging/concept/c_FieldWatcher.html#d1173192e71) and the only field not referenced is the Script Includes.  So ... B it is.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Just opened the field watcher in a Vancouver PDI and these are the options:\n\nACL\nBusiness rule\nClient Script\nData lookup\nData policy\nUI Policy\nUI action\nWorkflow activity\nReference qualifier",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Access control can not be debugged by feed watcher",
+          "selected_answer": "D",
+          "replies": [
+            "Why do you think so?"
+          ]
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Option B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-application-development/page/script/debugging/concept/c_FieldWatcher.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "38",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90728-exam-cad-topic-1-question-38-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which objects can be used in Inbound Action scripts?<br/>",
+      "answers": [
+        "A. current and previous",
+        "B. current and email",
+        "C. current and event",
+        "D. current and producer"
+      ],
+      "comments": [
+        {
+          "content": "Should be B. There is no access to event in inbound action",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Technically both B and C are correct:\n\n(function runAction(/*GlideRecord*/ current, /*GlideRecord*/ event, /*EmailWrapper*/ email, /*ScopedEmailLogger*/ logger) {\n\n// Implement email action here\n\n})(current, event, email, logger);",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Both B and C are correct:\n\n(function runAction(/*GlideRecord*/ current, /*GlideRecord*/ event, /*EmailWrapper*/ email, /*ScopedEmailLogger*/ logger) {\n\n// Implement email action here\n\n})(current, event, email, logger);",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I agree that B and C are correct.\nAs Jyoti18 pointed out, the available objects are:\ncurrent, event, email, logger, classifier)\n\nThis the function that populates in my Vancouver PDI:\n(function runAction(/*GlideRecord*/ current, /*GlideRecord*/ event, /*EmailWrapper*/ email, /*ScopedEmailLogger*/ logger, /*EmailClassifier*/ classifier) {\n\n\t// Implement email action here\n\n})(current, event, email, logger, classifier);",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "event is deprecated",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "You cannot use current and email in Inbound Action scripts. The current and email objects are only available in the context of an inbound email action. The current and previous objects are the only objects available in Inbound Action scripts for the following reasons:\n\n(1) The current and previous objects allow you to access the current and previous records in the context of an inbound email action.\n\n(2) The current and previous objects are the only objects that contain information about the email message that triggered the inbound email action.\n\n(3) The current and previous objects are the only objects that contain information about the records that are associated with the email message that triggered the inbound email action.\n\n(4) The current and previous objects are the only objects that contain information about the user who sent the email message that triggered the inbound email action.\n\n(5) The current and previous objects are the only objects that contain information about the inbound email action that was triggered by the email message.\n\nTherefore, the current and previous objects are the only objects used in Inbound Action scripts for this reason.The correct answer is A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "event is deprecated in inbound email action",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B and C are correct:  https://docs.servicenow.com/bundle/tokyo-servicenow-platform/page/administer/notification/task/t_CreatingAnInboundEmailAction.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Definitely B - current and email\n\"event\" really has no purpose as inbound email actions are always triggered by \"email.read\".",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Utah PDI: When checking System Policy > Email > Inbound Actions and creating new Inbound action\n\nThe function runAction() Has parameters current,event,email\n\nHowever event is striked and marked as deprecated, thats why B is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B.\nEvent is a parameter of the function, that gives access one of the parameters of the originating event. For example, event.parm1 accesses the first parameter of the event or event.parm2 for the second parameter.\nInbound actions are not generated by an event.\nhttps://docs.servicenow.com/bundle/tokyo-servicenow-platform/page/administer/notification/task/t_CreatingAnInboundEmailAction.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B and C both are correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Current, email",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer B is correct",
+          "selected_answer": "",
+          "replies": [
+            "Have you finished CAD? Is this dump still valid?",
+            "have you? I'm thinking about today :D",
+            "what was your experience? was it valid?",
+            "fghnjm"
+          ]
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct answer is B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "39",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64417-exam-cad-topic-1-question-39-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is part of the client-side scripting API?<br/>",
+      "answers": [
+        "A. workflow.scratchpad",
+        "B. GlideUser object (g_user)",
+        "C. current and previous objects",
+        "D. GlideSystem object (gs)"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is B. GlideUser object (g_user)\nhttps://developer.servicenow.com/dev.do#!/reference/api/rome/client",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Open a client script record, you will see.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "C is not correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "C is not correct, as previous is not available in some types of BRs and not available in all other client scripts (UI Action etc.)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B \nGLIDEUSER IS CLIENT SIDE",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "40",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64125-exam-cad-topic-1-question-40-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Application developers configure ServiceNow using industry standard JavaScript to`¦<br/>",
+      "answers": [
+        "A. Enable the right-click to edit the context menus on applications in the navigator",
+        "B. Extend and add functionality",
+        "C. Customize the organization's company logo and banner text",
+        "D. Configure the outgoing email display name"
+      ],
+      "comments": [
+        {
+          "content": "Base on SN CAD ebook pg 10",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "41",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118523-exam-cad-topic-1-question-41-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "How many applications menus can an application have?<br/>",
+      "answers": [
+        "A. 3, one for an application's user modules, one for an application's administrator modules, and one for the ServiceNow administrator's modules",
+        "B. As many as the application design requires",
+        "C. 2, one for an application's user modules and one for an application's administrator modules",
+        "D. 1, which is used for all application modules"
+      ],
+      "comments": [
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B for certain",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Of course b, I mean look at the global application. It has by default 119 application menus",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "final answer guys?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B.\nD answer is a best practice, but technically you can create as many applications menus as needed.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer",
+          "selected_answer": "",
+          "replies": [
+            "No B is correct"
+          ]
+        },
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is D. \n1, which is used for all application modules",
+          "selected_answer": "",
+          "replies": [
+            "I just created 2 and it works, so I think as many as needed"
+          ]
+        }
+      ],
+      "question_number": "42",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/77514-exam-cad-topic-1-question-42-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The source control operation used to store local changes on an instance for later application is called a(n) &lt;blank&gt;.<br/>",
+      "answers": [
+        "A. Branch",
+        "B. Tag",
+        "C. Stash",
+        "D. Update set"
+      ],
+      "comments": [
+        {
+          "content": "C is correct. git stash - temporarily shelves (or stashes) changes you've made to your working copy so you can work on something else, and the come back and re-apply them later on",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Stash is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Stash is correct SN CAD  ebook pg102",
+          "selected_answer": "C",
+          "replies": [
+            "Correction: Ebook pg 94"
+          ]
+        },
+        {
+          "content": "https://developer.servicenow.com/dev.do#!/learn/learning-plans/utah/new_to_servicenow/app_store_learnv2_devenvironment_utah_stashing_changes",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Update Set is the source control operation used to store local changes on an instance for later application.\nBrance is actually used to isolating new feautures, bugs, or experiment. To work on your independent changes without directly affecting the actual codebase",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "I am leaning more towards stashing.\n\"Stashing in source control saves local changes for an application to apply later. The local changes do not need to be committed to the remote repository. Stashing a change removes the change from the current application and saves the change for a developer to later apply or delete.\"  https://developer.servicenow.com/dev.do#!/learn/learning-plans/utah/new_to_servicenow/app_store_learnv2_devenvironment_utah_stashing_changes#:~:text=To%20stash%20something%20is%20to%20store%20that%20something,for%20a%20developer%20to%20later%20apply%20or%20delete.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "i think the answer shoud be A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "i think the answer shoud be A",
+          "selected_answer": "",
+          "replies": [
+            "is this questions is enough to clear the CAD exam????"
+          ]
+        }
+      ],
+      "question_number": "43",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107699-exam-cad-topic-1-question-43-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What syntax is used in a Record Producer script to access values from Record Producer form fields?<br/>",
+      "answers": [
+        "A. producer.field_name",
+        "B. producer.variablename",
+        "C. current.variable_name",
+        "D. current.field_name"
+      ],
+      "comments": [
+        {
+          "content": "B is correct - Use producer.*VARIABLE_NAME* to reference values entered by the end user.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Use current.*FIELD_NAME* to reference fields on the record being created.\nUse producer.*VARIABLE_NAME* to reference values entered by the end user",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "producer.variable_name - javascript code",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "From the docs that everyone else linked: \n\nDefine a script that uses any variable or server-side objects and functions to assign values.\nUse current.*FIELD_NAME* to reference fields on the record being created.\nUse producer.*VARIABLE_NAME* to reference values entered by the end user.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Right answer is B.\n/** Use `producer.var1` to access variables*/",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/service-catalog-management/concept/c_PopulatingRecordData.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer\nhttps://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/service-catalog-management/concept/c_PopulatingRecordData.html#:~:text=Use%20producer.*VARIABLE_NAME*%20to%20reference%20values%20entered%20by%20the%20end%20user.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Both A and B are literally the same depending on the input field name.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct per SDF book",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "it should be B according to the SN community as well.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct \n\nhttps://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/service-catalog-management/concept/c_PopulatingRecordData.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct \n\ncheck the SN docs\nhttps://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/service-catalog-management/concept/c_PopulatingRecordData.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct\nUse current.*FIELD_NAME* to reference fields on the record being created.\nUse producer.*VARIABLE_NAME* to reference values entered by the end\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-servicenow-platform/page/product/service-catalog-management/concept/c_PopulatingRecordData.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "44",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/111990-exam-cad-topic-1-question-44-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following methods prints a message on a blue background to the top of the current form by default?<br/>",
+      "answers": [
+        "A. g_form.addInfoMsg()",
+        "B. g_form.addInfoMessage()",
+        "C. g_form.showFieldMessage()",
+        "D. g_form.showFieldMsg()"
+      ],
+      "comments": [
+        {
+          "content": "Answer should be B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer should be B.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "it's B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://developer.servicenow.com/dev.do#!/reference/api/tokyo/client/c_GlideFormAPI#r_GlideFormAddInfoMessage_String",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer is AddinfoMessage",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "showFieldMessage is used for displaying messages under a specific field, this is another question in the CAD exam",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "From: https://docs.servicenow.com/bundle/paris-application-development/page/script/general-scripting/reference/r_ScriptingAlertInfoAndErrorMsgs.html\n\ng_form.showFieldMsg(\"field_name\", \"Hello World\", \"error\");\tPuts \"Hello World\" in an error message **below the specified field**.\n\ng_form.addInfoMessage() or g_form.addErrorMessage() place a blue box message at the top of the screen.  Pg 126 of the CAD handbook",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "45",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64105-exam-cad-topic-1-question-45-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "A scoped application containing Flow Designer content dedicated to a particular application is called a(n):<br/>",
+      "answers": [
+        "A. Spoke",
+        "B. Bundle",
+        "C. Action",
+        "D. Flow"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/paris-servicenow-platform/page/administer/flow-designer/concept/spokes.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct. A spoke is a scoped application that includes Flow Designer custom actions or subflows. A spoke is a logical grouping of related custom actions, subflows, and supporting application files. Developers can reuse spoke logic in their own applications. Flow Designer includes baseline spokes",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Spoke is correct\nSN CAD ebook pg284",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A: Spoke\n\nhttps://developer.servicenow.com/dev.do#!/learn/courses/sandiego/app_store_learnv2_flowdesigner_sandiego_flow_designer/app_store_learnv2_flowdesigner_sandiego_developing_for_flow_designer/app_store_learnv2_flowdesigner_sandiego_working_with_spokes",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A: Spoke\n\nhttps://developer.servicenow.com/dev.do#!/learn/courses/sandiego/app_store_learnv2_flowdesigner_sandiego_flow_designer/app_store_learnv2_flowdesigner_sandiego_developing_for_flow_designer/app_store_learnv2_flowdesigner_sandiego_working_with_spokes",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A, Spoke",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is Flow",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "46",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/73174-exam-cad-topic-1-question-46-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What is a Module?<br/>",
+      "answers": [
+        "A. The functionality within an application menu such as opening a page in the content frame or a separate tab or window",
+        "B. A group of menus, or pages, providing related information and functionality to end-users",
+        "C. A way of helping users quickly access information and services by filtering the items in the Application Navigator",
+        "D. A web-based way of providing software to end-users"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is B. A group of menus, or pages, providing related information and functionality to end-users\nhttps://docs.servicenow.com/bundle/rome-platform-user-interface/page/use/navigation/concept/c_ApplicationNavigation.html\nAn application is a group of modules, or pages, that provide related information and functionality in an instance",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer A is correct IMHO",
+          "selected_answer": "A",
+          "replies": [
+            "Here is the reference from documentation:\nhttps://docs.servicenow.com/bundle/rome-platform-user-interface/page/administer/navigation-and-ui/task/t_CreateAModule.html"
+          ]
+        },
+        {
+          "content": "A describes a module\nB describes an application \nC describes the navigator",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Modules are the children, or the second tier navigation options to the applications in the application navigator. Modules often link to other pages or records in the platform. You can configure which modules appear in the application navigator using Application Menus module.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A, check the video in NiDoSa comment.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is A.\nSee \"Content Page\" and \"Documentation Link\" types.\nhttps://docs.servicenow.com/bundle/rome-platform-user-interface/page/administer/navigation-and-ui/reference/r_ModuleLinkTypes.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A already taken the exam",
+          "selected_answer": "",
+          "replies": [
+            "Hi Parcerocarl, Hey is this dumps enough to clear CAD.Did you have any other recommendations ? Please Help me on this."
+          ]
+        },
+        {
+          "content": "It is A. The documentation provided by NiDoSa says it perfectly",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "47",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/64126-exam-cad-topic-1-question-47-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which source control operation is available from BOTH Studio and the Git Repository?<br/>",
+      "answers": [
+        "A. Create Branch",
+        "B. Apply Remote Changes",
+        "C. Stash Local Changes",
+        "D. Edit Repository Configurations"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is A - check SNOW documentation",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/rome-application-development/page/build/applications/reference/r_AvailableSourceControlOperations.html#:~:text=The%20source%20control%20integration%20primarily,directly%20from%20the%20GIT%20repository.&text=Imports%20an%20application%20from%20the%20repository%20to%20the%20local%20instance.",
+          "selected_answer": "A",
+          "replies": [
+            "https://docs.servicenow.com/bundle/tokyo-application-development/page/build/applications/reference/r_AvailableSourceControlOperations.html\n\nUpdated link also showing A is right."
+          ]
+        },
+        {
+          "content": "Create branch is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-application-development/page/build/applications/reference/r_AvailableSourceControlOperations.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I agree that \"Create Branch\" is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Create a Branch",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "48",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/68154-exam-cad-topic-1-question-48-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which one of the following is NOT required to link a ServiceNow application to a Git repository?<br/>",
+      "answers": [
+        "A. Password",
+        "B. URL",
+        "C. User name",
+        "D. Application name"
+      ],
+      "comments": [
+        {
+          "content": "D is correct answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct link:\n\nhttps://docs.servicenow.com/bundle/vancouver-application-development/page/build/applications/task/t_LinkAnApplicationToSourceControl.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "49",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130612-exam-cad-topic-1-question-49-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which Report Type(s) can be created by right-clicking on a column header in a table's list?<br/>",
+      "answers": [
+        "A. Bar Chart, Pie Chart, Histogram, and Line",
+        "B. Bar Chart",
+        "C. Bar Chart, Pie Chart, and Histogram",
+        "D. Bar Chart and Pie Chart"
+      ],
+      "comments": [
+        {
+          "content": "Answer: D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D. Bar Chart and Pie Chart is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is right",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Bar Chart , Pie Chart",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Right click on a list of records, we can create Bar Chart , Pie Chart.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I agree that \"Bar Chart and Pie Chart\" is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "it's D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Bar and Pie",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Option D is the correct answer, please",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Option B is the correct answer: Pie Chart and Bar Chart",
+          "selected_answer": "",
+          "replies": [
+            "Option B is not correct. It only mentions Bar Chart."
+          ]
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "default behavior",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Pie Chart and Bar Chart",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "50",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/66604-exam-cad-topic-1-question-50-discussion/",
+      "most_voted": "D",
+      "error": null
+    }
+  ]
+}

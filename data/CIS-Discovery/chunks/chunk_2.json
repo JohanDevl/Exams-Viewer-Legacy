@@ -1,0 +1,132 @@
+{
+  "chunk_id": 2,
+  "start_question": 101,
+  "end_question": 104,
+  "questions_count": 4,
+  "questions": [
+    {
+      "question": "Which of the following best describes what may also be required when increasing the max number of threads for a MID Server?",
+      "answers": [
+        "A. updating the acl rules for the CMDB tables in ServiceNow",
+        "B. increase the amount of disk space on the MID Server host",
+        "C. increasing the memory allocated to the MID Server app.",
+        "D. increase the MID Server max payload size"
+      ],
+      "comments": [
+        {
+          "content": "C is correct.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/mid-server/task/t_SetMIDServerThreadUse.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C as otherwise you may get an out of memory error from the extra processing",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "To increase the number of threads, you might have to increase the amount of memory that Java uses. If you configure insufficient memory, an Out of memory error appears in the MID Server log.   I'm going with C",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "109",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/132307-exam-cis-discovery-topic-1-question-109-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which part of Agent Client Collector must be configured to run osquery commands on a CI?",
+      "answers": [
+        "A. ACC Websocket Endpoint",
+        "B. Credential-less Discovery",
+        "C. Check",
+        "D. Infrastructure Patterns",
+        "E. Policies"
+      ],
+      "comments": [
+        {
+          "content": "kind of still both right.. a policy holds a check, the check itself executes the osquery, so i guess take the highest parent?",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "I selected Policies because the question asks \"on a CI.\"\n\"Check\" defines the queries or osquery commands that are executed.\n\"Policies\" control when and on which CIs those queries are executed.\nWhile the Check defines the specific queries, it is the Policy that triggers and executes them on the corresponding devices. In other words, Check Definitions do not execute on their own, and they must be associated with a Policy to be executed, and therefore I believe the correct answer is Policies.",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "C.\nExample:\nCheck: A check is created to run the osquery command SELECT * FROM processes; to gather a list of running processes on the CI.\nPolicy: A policy is set up to run this check on all Windows servers every 24 hours.\nSummary:\nChecks specify the osquery commands to be run.\nPolicies determine when and on which CIs those checks are executed.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "110",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/148636-exam-cis-discovery-topic-1-question-110-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "Which selections are necessary to trigger a custom pattern? (Choose two.)",
+      "answers": [
+        "A. CI Type",
+        "B. Asset Record",
+        "C. CI Classification",
+        "D. CI Entry Point",
+        "E. CI Class Process Handler"
+      ],
+      "comments": [
+        {
+          "content": "AD\n- CI Classification helps identify the type of CI but does not itself trigger a pattern.",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "112",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155732-exam-cis-discovery-topic-1-question-112-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "What are three ways of extending Discovery?",
+      "answers": [
+        "A. Classifiers, Fingerprinting, Probes & Sensors",
+        "B. Flow Designer, Classifiers, Probes & Sensors",
+        "C. Classifiers, Probes & Sensors, Discovery Patterns",
+        "D. Fingerprinting, Classifiers, Discovery Pattern"
+      ],
+      "comments": [
+        {
+          "content": "C is correct Answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct Answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer*",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer",
+          "selected_answer": "D",
+          "replies": [
+            "I cant delete my own comment '-'"
+          ]
+        }
+      ],
+      "question_number": "113",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/146371-exam-cis-discovery-topic-1-question-113-discussion/",
+      "most_voted": "C",
+      "error": null
+    }
+  ]
+}

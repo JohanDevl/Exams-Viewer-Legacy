@@ -20,10 +20,22 @@ let settings = {
   showQuestionToolbar: false,
   showAdvancedSearch: false,
   sidebarOpen: false,
+  enableLazyLoading: false, // Lazy loading disabled by default
 };
 
 // Available exams mapping (will be populated dynamically)
 let availableExams = {};
+
+// Lazy loading system
+let lazyLoadingConfig = {
+  chunkSize: 50, // Questions per chunk
+  loadedChunks: new Map(), // Map of chunkId -> questions array
+  currentChunk: 0,
+  totalChunks: 0,
+  preloadBuffer: 1, // Number of chunks to preload ahead/behind
+  isChunkedExam: false, // Whether current exam uses chunking
+  examMetadata: null, // Metadata for chunked exams
+};
 
 // Favorites and Notes system
 let favoritesData = {
@@ -2454,10 +2466,18 @@ async function discoverAvailableExams() {
         if (manifest.exams && Array.isArray(manifest.exams)) {
           devLog("Found manifest file with exams:", manifest.exams);
 
+          // Preload popular exams via service worker
+          if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.controller.postMessage({
+              type: 'PRELOAD_EXAMS',
+              exams: manifest.exams.slice(0, 5) // Top 5 most popular
+            });
+          }
+
           // Verify each exam file exists
           const verifyPromises = manifest.exams.map(async (examCode) => {
             try {
-              const response = await fetch(`data/${examCode}.json`, {
+              const response = await fetch(`data/${examCode}/exam.json`, {
                 method: "HEAD",
               });
               if (response.ok) {
@@ -2563,7 +2583,7 @@ async function discoverAvailableExams() {
     const availableCodes = [];
     const checkPromises = allPotentialCodes.map(async (code) => {
       try {
-        const linkResponse = await fetch(`data/${code}_links.json`, {
+        const linkResponse = await fetch(`data/${code}/links.json`, {
           method: "HEAD",
         });
         if (linkResponse.ok) {
@@ -2581,7 +2601,7 @@ async function discoverAvailableExams() {
     // Now check if corresponding .json files exist for discovered codes
     const examCheckPromises = availableCodes.map(async (examCode) => {
       try {
-        const response = await fetch(`data/${examCode}.json`, {
+        const response = await fetch(`data/${examCode}/exam.json`, {
           method: "HEAD",
         });
         if (response.ok) {
@@ -2627,6 +2647,8 @@ function loadSettings() {
       settings.showQuestionToolbar;
     document.getElementById("showAdvancedSearch").checked =
       settings.showAdvancedSearch;
+    document.getElementById("enableLazyLoading").checked =
+      settings.enableLazyLoading;
     isHighlightEnabled = settings.highlightDefault;
     applyTheme(settings.darkMode);
     
@@ -2658,6 +2680,9 @@ function saveSettings() {
   ).checked;
   settings.showAdvancedSearch = document.getElementById(
     "showAdvancedSearch"
+  ).checked;
+  settings.enableLazyLoading = document.getElementById(
+    "enableLazyLoading"
   ).checked;
   localStorage.setItem("examViewerSettings", JSON.stringify(settings));
   isHighlightEnabled = settings.highlightDefault;
@@ -2698,7 +2723,7 @@ async function populateExamDropdown() {
   const sortedExamCodes = Object.keys(availableExams).sort();
   for (const examCode of sortedExamCodes) {
     try {
-      const response = await fetch(`data/${examCode}.json`);
+      const response = await fetch(`data/${examCode}/exam.json`);
       if (response.ok) {
         const data = await response.json();
         const questionCount = data.questions ? data.questions.length : 0;
@@ -2791,19 +2816,19 @@ function setupEventListeners() {
   // Navigation
   document
     .getElementById("prevBtn")
-    .addEventListener("click", () => navigateQuestion(-1));
+    .addEventListener("click", async () => await navigateQuestion(-1));
   document
     .getElementById("nextBtn")
-    .addEventListener("click", () => navigateQuestion(1));
+    .addEventListener("click", async () => await navigateQuestion(1));
   document
     .getElementById("homeBtn")
     .addEventListener("click", () => goToHome());
   document
     .getElementById("randomBtn")
-    .addEventListener("click", () => navigateToRandomQuestion());
+    .addEventListener("click", async () => await navigateToRandomQuestion());
   document
     .getElementById("jumpBtn")
-    .addEventListener("click", () => jumpToQuestion());
+    .addEventListener("click", async () => await jumpToQuestion());
 
   // Answer controls
   document
@@ -2908,6 +2933,13 @@ function setupEventListeners() {
       updateAdvancedSearchVisibility();
     });
 
+  document
+    .getElementById("enableLazyLoading")
+    .addEventListener("change", () => {
+      saveSettings();
+      showSuccess("Lazy loading setting updated. Changes will apply when loading new exams.");
+    });
+
   // Search functionality
   document.getElementById("searchBtn").addEventListener("click", performSearch);
   document.getElementById("clearSearchBtn").addEventListener("click", clearSearch);
@@ -2963,7 +2995,7 @@ async function displayAvailableExams() {
     // Try to get question count
     let questionCount = "Loading...";
     try {
-      const response = await fetch(`data/${code}.json`);
+      const response = await fetch(`data/${code}/exam.json`);
       if (response.ok) {
         const data = await response.json();
         questionCount = `${data.questions?.length || 0} questions`;
@@ -3002,36 +3034,71 @@ async function loadExam(examCode) {
   showLoading(true);
 
   try {
-    const response = await fetch(`data/${examCode}.json`);
-    if (!response.ok) {
-      throw new Error(`Failed to load exam data: ${response.status}`);
+    // Reset lazy loading state
+    lazyLoadingConfig.loadedChunks.clear();
+    lazyLoadingConfig.currentChunk = 0;
+    lazyLoadingConfig.examMetadata = null;
+
+    // Check if this exam has chunked version for lazy loading
+    const isChunked = await checkForChunkedExam(examCode);
+
+    if (isChunked) {
+      // Load first chunk immediately for chunked exams
+      const firstChunk = await loadChunk(examCode, 0);
+      if (firstChunk.length === 0) {
+        throw new Error("Failed to load first chunk of exam data");
+      }
+
+      // Set up exam data
+      currentExam = {
+        exam_name: lazyLoadingConfig.examMetadata.exam_name || examCode,
+        questions: [], // Will be assembled dynamically
+        isChunked: true
+      };
+
+      // Preload nearby chunks
+      await preloadChunks(examCode, 0);
+
+      // Assemble current questions from loaded chunks
+      allQuestions = assembleCurrentQuestions();
+      currentQuestions = [...allQuestions];
+    } else {
+      // Standard loading for smaller exams
+      const response = await fetch(`data/${examCode}/exam.json`);
+      if (!response.ok) {
+        throw new Error(`Failed to load exam data: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (!data.questions || !Array.isArray(data.questions)) {
+        throw new Error("Invalid exam data format");
+      }
+
+      // Store the complete exam data object
+      currentExam = {
+        exam_name: data.exam_name || examCode,
+        questions: data.questions,
+        isChunked: false
+      };
+
+      // Sort questions by question_number numerically with robust comparison
+      allQuestions = data.questions.sort((a, b) => {
+        const numA = parseInt(a.question_number, 10);
+        const numB = parseInt(b.question_number, 10);
+
+        // Handle invalid numbers
+        if (isNaN(numA) && isNaN(numB)) return 0;
+        if (isNaN(numA)) return 1;
+        if (isNaN(numB)) return -1;
+
+        return numA - numB;
+      });
+
+      // Initialize current questions
+      currentQuestions = [...allQuestions];
     }
-
-    const data = await response.json();
-    if (!data.questions || !Array.isArray(data.questions)) {
-      throw new Error("Invalid exam data format");
-    }
-
-    // Store the complete exam data object
-    currentExam = {
-      exam_name: data.exam_name || examCode,
-      questions: data.questions,
-    };
-    // Sort questions by question_number numerically with robust comparison
-    allQuestions = data.questions.sort((a, b) => {
-      const numA = parseInt(a.question_number, 10);
-      const numB = parseInt(b.question_number, 10);
-
-      // Handle invalid numbers
-      if (isNaN(numA) && isNaN(numB)) return 0;
-      if (isNaN(numA)) return 1;
-      if (isNaN(numB)) return -1;
-
-      return numA - numB;
-    });
     
-    // Initialize current questions and reset search state
-    currentQuestions = [...allQuestions];
+    // Reset search state
     filteredQuestions = [];
     isSearchActive = false;
     searchCache = {};
@@ -3136,40 +3203,161 @@ function showSuccess(message) {
   }, 3000);
 }
 
+// Lazy Loading Functions
+async function checkForChunkedExam(examCode) {
+  // Check if lazy loading is enabled in settings
+  if (!settings.enableLazyLoading) {
+    console.log(`⚡ Lazy loading disabled in settings, using standard loading for ${examCode}`);
+    lazyLoadingConfig.isChunkedExam = false;
+    return false;
+  }
+
+  try {
+    const metadataResponse = await fetch(`data/${examCode}/metadata.json`);
+    if (metadataResponse.ok) {
+      const metadata = await metadataResponse.json();
+      if (metadata.chunked && metadata.total_questions > lazyLoadingConfig.chunkSize) {
+        lazyLoadingConfig.isChunkedExam = true;
+        lazyLoadingConfig.examMetadata = metadata;
+        lazyLoadingConfig.totalChunks = metadata.total_chunks || Math.ceil(metadata.total_questions / lazyLoadingConfig.chunkSize);
+        console.log(`🚀 Lazy loading activated for ${examCode}: ${metadata.total_questions} questions in ${lazyLoadingConfig.totalChunks} chunks`);
+        return true;
+      }
+    }
+  } catch (error) {
+    console.log(`No chunked version available for ${examCode}, using standard loading`);
+  }
+  lazyLoadingConfig.isChunkedExam = false;
+  return false;
+}
+
+async function loadChunk(examCode, chunkId) {
+  if (lazyLoadingConfig.loadedChunks.has(chunkId)) {
+    console.log(`📦 Chunk ${chunkId} already loaded from cache`);
+    return lazyLoadingConfig.loadedChunks.get(chunkId);
+  }
+
+  try {
+    console.log(`📥 Loading chunk ${chunkId} for ${examCode}...`);
+    const response = await fetch(`data/${examCode}/chunks/chunk_${chunkId}.json`);
+    if (!response.ok) {
+      throw new Error(`Failed to load chunk ${chunkId}: ${response.status}`);
+    }
+
+    const chunkData = await response.json();
+    const questions = chunkData.questions || [];
+    
+    lazyLoadingConfig.loadedChunks.set(chunkId, questions);
+    console.log(`✅ Chunk ${chunkId} loaded: ${questions.length} questions (${chunkData.start_question}-${chunkData.end_question})`);
+    return questions;
+  } catch (error) {
+    console.error(`❌ Error loading chunk ${chunkId}:`, error);
+    return [];
+  }
+}
+
+async function preloadChunks(examCode, centerChunk) {
+  const promises = [];
+  const start = Math.max(0, centerChunk - lazyLoadingConfig.preloadBuffer);
+  const end = Math.min(lazyLoadingConfig.totalChunks - 1, centerChunk + lazyLoadingConfig.preloadBuffer);
+
+  console.log(`🔄 Preloading chunks ${start}-${end} around chunk ${centerChunk}`);
+
+  for (let chunkId = start; chunkId <= end; chunkId++) {
+    if (!lazyLoadingConfig.loadedChunks.has(chunkId)) {
+      promises.push(loadChunk(examCode, chunkId));
+    }
+  }
+
+  if (promises.length > 0) {
+    await Promise.all(promises);
+    console.log(`✅ Preloaded ${promises.length} chunks`);
+  } else {
+    console.log(`📦 All chunks ${start}-${end} already cached`);
+  }
+}
+
+function getChunkIdForQuestion(questionIndex) {
+  return Math.floor(questionIndex / lazyLoadingConfig.chunkSize);
+}
+
+async function ensureQuestionLoaded(examCode, questionIndex) {
+  if (!lazyLoadingConfig.isChunkedExam) {
+    return true;
+  }
+
+  const requiredChunk = getChunkIdForQuestion(questionIndex);
+  
+  if (!lazyLoadingConfig.loadedChunks.has(requiredChunk)) {
+    console.log(`📥 Loading chunk ${requiredChunk} for question ${questionIndex + 1}...`);
+    
+    try {
+      await loadChunk(examCode, requiredChunk);
+      await preloadChunks(examCode, requiredChunk);
+      
+      // Update assembled questions immediately after loading
+      allQuestions = assembleCurrentQuestions();
+      
+      console.log(`✅ Chunk ${requiredChunk} loaded successfully`);
+    } catch (error) {
+      console.error(`❌ Failed to load chunk ${requiredChunk}:`, error);
+      return false;
+    }
+  }
+
+  return lazyLoadingConfig.loadedChunks.has(requiredChunk);
+}
+
+function assembleCurrentQuestions() {
+  if (!lazyLoadingConfig.isChunkedExam) {
+    return allQuestions;
+  }
+
+  const assembledQuestions = [];
+  let loadedChunks = 0;
+  let placeholderChunks = 0;
+
+  for (let chunkId = 0; chunkId < lazyLoadingConfig.totalChunks; chunkId++) {
+    if (lazyLoadingConfig.loadedChunks.has(chunkId)) {
+      assembledQuestions.push(...lazyLoadingConfig.loadedChunks.get(chunkId));
+      loadedChunks++;
+    } else {
+      // Add lightweight placeholder questions for unloaded chunks
+      const startIndex = chunkId * lazyLoadingConfig.chunkSize;
+      const endIndex = Math.min(startIndex + lazyLoadingConfig.chunkSize, lazyLoadingConfig.examMetadata.total_questions);
+      for (let i = startIndex; i < endIndex; i++) {
+        assembledQuestions.push({
+          question_number: (i + 1).toString(),
+          question: `Question ${i + 1}`,
+          answers: [],
+          isPlaceholder: true,
+          chunkId: chunkId
+        });
+      }
+      placeholderChunks++;
+    }
+  }
+  
+  console.log(`🧩 Assembled ${assembledQuestions.length} questions: ${loadedChunks} chunks loaded, ${placeholderChunks} placeholders`);
+  return assembledQuestions;
+}
+
 // Navigate to question
-function navigateQuestion(direction) {
+async function navigateQuestion(direction) {
   if (!currentQuestions.length) return;
 
   const newIndex = currentQuestionIndex + direction;
   if (newIndex >= 0 && newIndex < currentQuestions.length) {
-    // Add to history before changing
-    addToNavigationHistory(currentQuestionIndex);
-    
-    currentQuestionIndex = newIndex;
-
-    // Reset highlight override when navigating to a new question
-    isHighlightTemporaryOverride = false;
-
-    displayCurrentQuestion();
-    updateProgressSidebar();
+    await navigateToQuestionIndex(newIndex);
   }
 }
 
 // Navigate to random question
-function navigateToRandomQuestion() {
+async function navigateToRandomQuestion() {
   if (!currentQuestions.length) return;
-
-  // Add to history before changing
-  addToNavigationHistory(currentQuestionIndex);
   
   const randomIndex = Math.floor(Math.random() * currentQuestions.length);
-  currentQuestionIndex = randomIndex;
-
-  // Reset highlight override when navigating to a new question
-  isHighlightTemporaryOverride = false;
-
-  displayCurrentQuestion();
-  updateProgressSidebar();
+  await navigateToQuestionIndex(randomIndex);
 }
 
 // Go to home page
@@ -3211,7 +3399,7 @@ function goToHome() {
 }
 
 // Jump to specific question
-function jumpToQuestion() {
+async function jumpToQuestion() {
   const questionNumber = parseInt(
     document.getElementById("questionJump").value
   );
@@ -3222,12 +3410,7 @@ function jumpToQuestion() {
   );
 
   if (questionIndex !== -1) {
-    currentQuestionIndex = questionIndex;
-
-    // Reset highlight override when jumping to a new question
-    isHighlightTemporaryOverride = false;
-
-    displayCurrentQuestion();
+    await navigateToQuestionIndex(questionIndex);
     document.getElementById("questionJump").value = "";
   } else {
     showError(`Question ${questionNumber} not found`);
@@ -3303,6 +3486,18 @@ function displayCurrentQuestion(fromToggleAction = false) {
   if (!currentQuestions.length) return;
 
   const question = currentQuestions[currentQuestionIndex];
+  
+  // Handle placeholder questions for lazy loading
+  if (question?.isPlaceholder) {
+    document.getElementById("questionText").innerHTML = `
+      <div class="loading-placeholder">
+        <div class="spinner"></div>
+        <p>Loading question ${question.question_number}...</p>
+      </div>
+    `;
+    document.getElementById("answersList").innerHTML = "";
+    return;
+  }
 
   // Reset state
   selectedAnswers.clear();
@@ -4111,29 +4306,29 @@ function toggleLegalInfo() {
 window.toggleLegalInfo = toggleLegalInfo;
 
 // Enhanced keyboard shortcuts for navigation
-document.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", async function (e) {
   if (currentQuestions.length === 0 || e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
 
   switch (e.key) {
     case "ArrowLeft":
     case "h": // Vim-style navigation
       e.preventDefault();
-      navigateQuestion(-1);
+      await navigateQuestion(-1);
       break;
     case "ArrowRight":
     case "l": // Vim-style navigation
       e.preventDefault();
-      navigateQuestion(1);
+      await navigateQuestion(1);
       break;
     case "ArrowUp":
     case "k": // Vim-style navigation
       e.preventDefault();
       if (e.ctrlKey || e.metaKey) {
         // Ctrl+Up: Jump to first question
-        navigateToQuestionIndex(0);
+        await navigateToQuestionIndex(0);
       } else {
         // Regular Up: Previous 5 questions
-        navigateQuestion(-5);
+        await navigateQuestion(-5);
       }
       break;
     case "ArrowDown":
@@ -4141,36 +4336,36 @@ document.addEventListener("keydown", function (e) {
       e.preventDefault();
       if (e.ctrlKey || e.metaKey) {
         // Ctrl+Down: Jump to last question
-        navigateToQuestionIndex(currentQuestions.length - 1);
+        await navigateToQuestionIndex(currentQuestions.length - 1);
       } else {
         // Regular Down: Next 5 questions
-        navigateQuestion(5);
+        await navigateQuestion(5);
       }
       break;
     case "Home":
       e.preventDefault();
-      navigateToQuestionIndex(0);
+      await navigateToQuestionIndex(0);
       break;
     case "End":
       e.preventDefault();
-      navigateToQuestionIndex(currentQuestions.length - 1);
+      await navigateToQuestionIndex(currentQuestions.length - 1);
       break;
     case "PageUp":
       e.preventDefault();
-      navigateQuestion(-10);
+      await navigateQuestion(-10);
       break;
     case "PageDown":
       e.preventDefault();
-      navigateQuestion(10);
+      await navigateQuestion(10);
       break;
     case " ": // Space bar
       e.preventDefault();
       if (e.shiftKey) {
         // Shift+Space: Previous question
-        navigateQuestion(-1);
+        await navigateQuestion(-1);
       } else {
         // Space: Next question
-        navigateQuestion(1);
+        await navigateQuestion(1);
       }
       break;
     case "Enter":
@@ -4180,7 +4375,7 @@ document.addEventListener("keydown", function (e) {
         document.getElementById("validateBtn").click();
       } else {
         // Enter: Next question
-        navigateQuestion(1);
+        await navigateQuestion(1);
       }
       break;
     case "r":
@@ -4193,7 +4388,7 @@ document.addEventListener("keydown", function (e) {
         }
       } else {
         // R: Random question
-        navigateToRandomQuestion();
+        await navigateToRandomQuestion();
       }
       break;
     case "v":
@@ -4403,31 +4598,40 @@ function updateProgressSidebar() {
     const isCurrentQuestion = index === currentQuestionIndex;
     const isAnswered = isQuestionAnswered(question.question_number);
     const isFavorite = isQuestionFavorite(question.question_number);
+    const isPlaceholder = question.isPlaceholder;
     
     let statusClass = "";
     let statusIcon = "";
+    let questionPreview = "";
     
-    if (isCurrentQuestion) {
+    if (isPlaceholder) {
+      statusClass = "loading";
+      statusIcon = '<i class="fas fa-spinner fa-spin"></i>';
+      questionPreview = `Chunk ${question.chunkId + 1} - Loading...`;
+    } else if (isCurrentQuestion) {
       statusClass = "current";
       statusIcon = '<i class="fas fa-arrow-right"></i>';
+      questionPreview = truncateText(question.question || "", 60);
     } else if (isAnswered) {
       statusClass = "answered";
       statusIcon = '<i class="fas fa-check"></i>';
+      questionPreview = truncateText(question.question || "", 60);
     } else {
       statusClass = "unanswered";
       statusIcon = '<i class="far fa-circle"></i>';
+      questionPreview = truncateText(question.question || "", 60);
     }
     
-    const favoriteIcon = isFavorite ? '<i class="fas fa-star favorite-icon"></i>' : '';
+    const favoriteIcon = isFavorite && !isPlaceholder ? '<i class="fas fa-star favorite-icon"></i>' : '';
     
     return `
-      <div class="question-item ${statusClass}" data-index="${index}" onclick="navigateToQuestionIndex(${index})">
+      <div class="question-item ${statusClass}" data-index="${index}" onclick="navigateToQuestionAsync(${index})">
         <div class="question-number">
           ${statusIcon}
           <span>Q${question.question_number || index + 1}</span>
           ${favoriteIcon}
         </div>
-        <div class="question-preview">${truncateText(question.question || "", 60)}</div>
+        <div class="question-preview">${questionPreview}</div>
       </div>
     `;
   }).join("");
@@ -4532,13 +4736,13 @@ function truncateText(text, maxLength) {
 }
 
 // Jump to specific question number
-function jumpToQuestionNumber(questionNumber) {
+async function jumpToQuestionNumber(questionNumber) {
   const questionIndex = currentQuestions.findIndex(q => 
     q.question_number && q.question_number.toString() === questionNumber.toString()
   );
   
   if (questionIndex !== -1) {
-    navigateToQuestionIndex(questionIndex);
+    await navigateToQuestionIndex(questionIndex);
   }
 }
 
@@ -4708,7 +4912,7 @@ function closeKeyboardHelp() {
 }
 
 // Enhanced navigateToQuestionIndex with history support
-function navigateToQuestionIndex(newIndex, addToHistory = true) {
+async function navigateToQuestionIndex(newIndex, addToHistory = true) {
   if (!currentQuestions.length) return;
   
   if (newIndex >= 0 && newIndex < currentQuestions.length) {
@@ -4717,14 +4921,45 @@ function navigateToQuestionIndex(newIndex, addToHistory = true) {
       addToNavigationHistory(currentQuestionIndex);
     }
     
+    // Set current index immediately for responsive UI
     currentQuestionIndex = newIndex;
     
     // Reset highlight override when navigating to a new question
     isHighlightTemporaryOverride = false;
     
+    // Check if we need to load a chunk for this question
+    if (lazyLoadingConfig.isChunkedExam && currentQuestions[newIndex]?.isPlaceholder) {
+      const examCode = Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam?.exam_name
+      ) || currentExam?.exam_name;
+      
+      if (examCode) {
+        // Show placeholder immediately while loading
+        displayCurrentQuestion();
+        updateProgressSidebar();
+        
+        // Load chunk in background without blocking UI
+        const success = await ensureQuestionLoaded(examCode, newIndex);
+        if (success) {
+          // Update current questions after successful loading
+          currentQuestions = isSearchActive ? currentQuestions : [...allQuestions];
+          // Refresh display with loaded content
+          displayCurrentQuestion();
+          updateProgressSidebar();
+        }
+        return;
+      }
+    }
+    
+    // Standard navigation for loaded questions
     displayCurrentQuestion();
     updateProgressSidebar();
   }
+}
+
+// Async wrapper for onclick handlers
+async function navigateToQuestionAsync(index) {
+  await navigateToQuestionIndex(index);
 }
 
 // Initialize app when DOM is loaded
@@ -5108,9 +5343,9 @@ function showQuestionNumberSuggestions(query) {
   
   // Add click handlers
   autocompleteDiv.querySelectorAll(".autocomplete-item").forEach(item => {
-    item.addEventListener("click", () => {
+    item.addEventListener("click", async () => {
       const questionNumber = item.dataset.questionNumber;
-      jumpToQuestionNumber(questionNumber);
+      await jumpToQuestionNumber(questionNumber);
       hideAutocompleteSuggestions();
     });
   });
@@ -5401,14 +5636,13 @@ function toggleSearchSection() {
 }
 
 // Jump to specific question number
-function jumpToQuestionNumber(questionNumber) {
+async function jumpToQuestionNumber(questionNumber) {
   const targetIndex = currentQuestions.findIndex(q => 
     q.question_number === questionNumber.toString()
   );
   
   if (targetIndex !== -1) {
-    currentQuestionIndex = targetIndex;
-    displayCurrentQuestion();
+    await navigateToQuestionIndex(targetIndex);
     document.getElementById("searchInput").value = "";
     showSuccess(`Jumped to question #${questionNumber}`);
   } else {
@@ -5420,7 +5654,7 @@ function jumpToQuestionNumber(questionNumber) {
 // Note: navigateToQuestionIndex is now defined earlier in the file with history support
 
 // Override jump to question to work with current question set
-function jumpToQuestion() {
+async function jumpToQuestion() {
   const jumpInput = document.getElementById("questionJump");
   const questionNumber = parseInt(jumpInput.value);
   
@@ -5429,6 +5663,6 @@ function jumpToQuestion() {
     return;
   }
   
-  jumpToQuestionNumber(questionNumber.toString());
+  await jumpToQuestionNumber(questionNumber.toString());
   jumpInput.value = "";
 }

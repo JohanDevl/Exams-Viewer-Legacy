@@ -1,0 +1,2344 @@
+{
+  "chunk_id": 0,
+  "start_question": 1,
+  "end_question": 50,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "Agents and managers cannot create knowledge articles from Community questions.",
+      "answers": [
+        "A. True",
+        "B. False"
+      ],
+      "comments": [
+        {
+          "content": "Look at the question once again, they are talking about knowledge article creation, not case. A is correct. They can't.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "an agent has role sn_customerservice_agent, which allows article creation.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A is correct, agent and managers cannot create knowledge article from community questions, it requires knowledge harvester role, only cases from community questions.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct, agent and managers cannot create knowledge article from community questions, it requires knowledge harvester role, only cases from community questions.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "This is not creating case from community questions, this is creating knowledge article from community questions, it requires knowledge harvester role..\nAnswer is False",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "This is not creating case from community questions, this is creating knowledge article from community questions, it requires knowledge harvester role.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct!  Agents & Managers CAN create cases from Community questions",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct and this is why:\nTwo sets of users can create cases from questions:\n\nCustomer service agents, consumer service agents, and customer service managers.\nUsers with the sn_customerservice.proxy_case_creator role. Community administrators and community moderators inherit this role.\n\nCSM Fundamentals CSM Service Portal (Common Features)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A is correct, They can't, check this link of the documentation:\nhttps://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-communities/reference/communities-roles.html\n\nProxy case creator\n[sn_customerservice.proxy_case_creator]\n-A community user who can create a customer service case from a community discussion.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-communities/reference/communities-roles.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer and this is why..\nIf you create a group for managers n agents if you want to be able to create knowledge from the community and assign these roles to that group \"sn_communities.knowledge_harvester, sn_communities.admin, or sn_communities.moderation_admin\"  cos by default, they won't have these roles. I will say yes they can if they're being assigned the roles mentioned above.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Is the correct answer B?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "abrakadabrek is right",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Given answer is correct. A",
+          "selected_answer": "",
+          "replies": [
+            "I think the correct answer is A.\nThere are special roles that CSM managers don't have out of the box and they are called sn_communities.knowledge_harvester, sn_communities.admin, or sn_communities.moderation_admin\nhttps://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-communities/task/create-knowledge-from-communities.html"
+          ]
+        }
+      ],
+      "question_number": "1",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91460-exam-cis-csm-topic-1-question-1-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Information about a customer’s service contract is found in Knowledge.",
+      "answers": [
+        "A. False",
+        "B. True"
+      ],
+      "comments": [
+        {
+          "content": "In ServiceNow Customer Service Management (CSM), information about a customer’s service contract is typically found in the Contract Management section, not in Knowledge.\n\nHere’s where you can find service contract details in ServiceNow CSM:\n\t1.\tContracts (Customer Service > Contracts) – This module stores service contracts, including their terms, start and end dates, entitlements, and associated customers or accounts.\n\t2.\tEntitlements (Customer Service > Entitlements) – Defines the services and support levels a customer is eligible for under their contract.\n\t3.\tAccounts & Contacts (Customer Service > Accounts/Contacts) – Links contracts to specific customers and their support entitlements.\n\nThe Knowledge Base (KB) is used for storing articles, troubleshooting guides, and FAQs—not contract details.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct Answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "given answer is correct. By Aakreet\ncheck last paragraph of doc\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/create-csm-service-contracts.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "2",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92036-exam-cis-csm-topic-1-question-2-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "From what places in SN can an agent create a case? (Choose three.)",
+      "answers": [
+        "A. Customer Service Application",
+        "B. Contact",
+        "C. Account",
+        "D. Chat"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is ACD. here is a proof.\nAgents can create a case from:\n- The Customer Service Application\n- Any associated entities (Account, Contract, Entitlement, Asset, etc.)\n- A Chat Session\n- An interaction\n\nThis information is available on CSM Fundamentals Course. You can Open Module Case — Basic Principles, Lesson 1 \"Case and Case Types\"",
+          "selected_answer": "",
+          "replies": [
+            "ABCD is actually all the correct answers. Contact falls under associated entities. I just spun up a PDI per ftpuser and there is indeed a Case related list at the bottom with a \"New\" UI action button for it."
+          ]
+        },
+        {
+          "content": "ABC is the correct answer, this seems to be word play. Look at the latest information in CSM essentials, it is mentioned how agent & customer can create the case.\nIf Interaction was mentioned instead of \"Chat\" then all 4 will be correct.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "Section 6.2 from the course materials has a diagram that shows a Case can be created via an interaction, from within the Customer Service application, and by selecting Create Case from any of these data entities (Account, Contact, Consumer)\n\nWhen a live agent is connected via a chat, an interaction is automatically triggered.  The Case is created via the interaction, not via the chat.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "5.1 in EBook",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "Ok, so this is a tricky one: the correct answer is A, B, C. \nD is chat and it is not correct, because - and here is the good part - you can create an INTERACTION from Chat, but not a directly a CASE (similarly to all communicational Channels). I would like to hear your reasoning, if you think this logic is not correct.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "Agent cannot create case using chat.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "directly in the ebook",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "Customer Service Application: Agents can create cases directly from the Customer Service Management (CSM) application.\nContact: Cases can be created for specific customers based on their contact information.\nChat: During live agent chat sessions, cases can be created directly from the interaction.\nC. Account is incorrect because cases are not typically created directly from the \"Account\" record; instead, cases are linked to accounts indirectly through contacts or customer interactions.",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is ABC\n\nExplaination:\nAs per Ebook and CSM Fundamentals all answers seems to be correct but I would go with ABC as the question expects only 3 options to be selected. \n\nAgents can create a case from:\n\nCustomer Service Application\nRelated Entities - Account, Contact , Consumer\nAn interaction\nBusiness Location Service Portal\nEmail\n\nAs per my understanding chat should fall under interaction but there are other channels like call which also fall under Interaction. However \"Customer Service Application\", \"Account\", \"Contact\" are directly mentioned unlike chat or call which is a channel of interaction.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tA. Customer Service Application\n\tC. Account\n\tD. Chat\n\nExplanation: Agents can create a case from\n\t- The Customer Service Application\n\t- Any associated entities (Account, Contract, Entitlement, Asset, etc.)\n\t- A Chat Session\n\t- An interaction\n\nSource: CSM Fundamentals > Module Case > Basic Principles, Lesson 1 Case and Case Types",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "There is no  Customer Service Application. There is  Customer Service *Managment* Application",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "Why are there so many different answers here from Exam Topics? Can someone link the source of truth?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I believe ABC is correct because why would an agent open a Case from a chat?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is BCD.\nThere is \"create Case\" in related list in contact.\nYou guys can find it in your PDI.",
+          "selected_answer": "BCD",
+          "replies": [
+            "What is the source ?"
+          ]
+        },
+        {
+          "content": "Ebook and CSM Fundamentals",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "BCD is the right answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I just read that it is ACD. Page 205 Fundamental",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "3",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90903-exam-cis-csm-topic-1-question-3-discussion/",
+      "most_voted": "ACD",
+      "error": null
+    },
+    {
+      "question": "What are the conditions that matching rules are based on? (Choose two.)",
+      "answers": [
+        "A. Agent resources best suited to work on a case",
+        "B. Specific routing rules",
+        "C. Filters set up in advanced work assignment",
+        "D. Specific case attributes"
+      ],
+      "comments": [
+        {
+          "content": "Everywhere answer is AD",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Matching Rules\nMatching rules are based on two defined sets of conditions, one that identifies specific case attributes and another that identifies the agent resources best suited to handle cases with these attributes. Matching rules are created using the Matching Rule form.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD Is correct\nMatching rules are based on two defined sets of conditions, one that identifies specific case attributes and another that identifies the agent resources best suited to handle cases with these attributes.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AD Is Correct.\nMatching rules are based on two defined sets of conditions, one that identifies specific case attributes and another that identifies the agent resources best suited to handle cases with these attributes. Matching rules are created using the Matching Rule form.\n\nhttps://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/c_CaseRouting.html",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "4",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92059-exam-cis-csm-topic-1-question-4-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "Matching rules enhance assignment capability by ____________________.",
+      "answers": [
+        "A. Matching best agent by availability",
+        "B. Providing dynamic matching of cases to groups or individuals",
+        "C. Determining if account is a customer or partner",
+        "D. Matching best agent by skill"
+      ],
+      "comments": [
+        {
+          "content": "If you open 'Availability Today' and 'Matching Skills' criteria, description suggest 'Availability based on the schedule, overlap timezone and current time..' and 'Availability based on the skill.' and also script mentioned 'This scripted dimension will return list of agents with the availbility data as below '. So answer is A) Matching best agent by availability",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Matching rules in ServiceNow enhance assignment capability by dynamically matching cases (or other records) to appropriate groups or individuals based on predefined conditions and attributes, such as skills, availability, or other criteria.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "there should be 2 right answers: A, D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The default configuration uses the Recommendation for Case Assignment matching rule, which uses three of the four default matching criteria:\nAvailability Today\nMatching Skills\nAssigned Cases",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer: B ( The assignment workbench uses configurable matching criteria, such as skills and availability, to evaluate the agents in a selected group and provide an overall ranking.)\n\nTo create matching criteria, select the type and use the fields related to that type to build the query. After creating matching criteria, you can create a configuration for the assignment workbench by creating a matching rule of the type Selection criteria and selecting the desired matching criteria.\n\nAs part of selecting the matching criteria for the workbench configuration, you can specify the following settings for each individual criterion:\nranking and display usage\nranking method\nranking weight\nthreshold\nactive/inactive",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I initially thought the answer was A as everyone else has posted (or possibly also D), but then I found the following definitions and now I think the answer could be C:\n\nCreate matching rules for case routing - Matching rules are based on two defined sets of conditions, one that identifies specific case attributes and another that identifies the agent resources best suited to handle cases with these attributes.\n\nCreate assignment rules for case routing - Assignment rules automatically assign tasks to users and groups when the conditions in a matching rule are met.\n\nhttps://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/task/configure-case-routing-assignment.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "By Aakreet",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Given answer is correct.\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/case-assignment-matching-rules.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "5",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92060-exam-cis-csm-topic-1-question-5-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Special Handling Notes can apply to which one of the following based on specific attributes?",
+      "answers": [
+        "A. Domain",
+        "B. Contact",
+        "C. Holiday",
+        "D. VIP"
+      ],
+      "comments": [
+        {
+          "content": "contact is the correct answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Directly from the course text.\n\nSpecial Handling Notes are mostly used for Cases because customer service agents handle large volumes of Cases every day, and some Cases may need to be handled in a particular way. However, Special Handling Notes can also apply to other entities, such as, but not limited to:\n\t• Case\n\t• Account\n\t• Contact\n\t• Product Model",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B: Use the Special Handling Notes application to create notes that bring important information about individual records to an agent’s attention.\n\nSpecial Handling Notes can apply to any of the following entities, based on specific attributes:\n\nCase\n\nAccount\n\nContact\n\nProduct Model\n\nAsset",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct. Tested in PDI",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "sorry this one is the good answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Given answer is correct.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "6",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90284-exam-cis-csm-topic-1-question-6-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Predictive Intelligence improves Case management by:",
+      "answers": [
+        "A. Predicting what values should have gone into empty fields in historical records",
+        "B. Reducing the number of records needed to accurately predict a value",
+        "C. Replacing legacy routing rules",
+        "D. Predicting Case values without manual intervention"
+      ],
+      "comments": [
+        {
+          "content": "Answer: D. Predicting Case values without manual intervention\n\nExplanation: From either Agent Workspace or the platform interface, agents can use this feature when creating cases by providing the short description. Based on the information entered in the Short description field, the Predictive Intelligence feature predicts the category, priority, and assignment group, and routes the case to the correct queue. \n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/agent-intelligence-case-mgmt.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "From either Agent Workspace or the platform interface, agents can use this feature when creating cases by providing the short description. Based on the information entered in the Short description field, the Predictive Intelligence feature predicts the category, priority, and assignment group, and routes the case to the correct queue.\n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/agent-intelligence-case-mgmt.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "E-book,",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "E-book,",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "7",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120832-exam-cis-csm-topic-1-question-7-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following is a condition for matching rules?",
+      "answers": [
+        "A. Agent domain",
+        "B. Assignment",
+        "C. Switching",
+        "D. Specific case attributes"
+      ],
+      "comments": [
+        {
+          "content": "D is the Correct Answer.\n\nCSM Implementation book page 117",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "I think the correct answer is D.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D should be the correct one",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "8",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/101909-exam-cis-csm-topic-1-question-8-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What do blue circles in the timeline of a case form represent?",
+      "answers": [
+        "A. Note",
+        "B. State",
+        "C. Activity",
+        "D. Comment"
+      ],
+      "comments": [
+        {
+          "content": "Section 5.1 - Case Overview from the guide book.\nService Level Agreement Timelines",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The timeline uses blue circles to represent case state changes and markers to represent case activities. The information included in the timeline is also shown on the Case form in the Activity history.\n\nhttps://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/r_CustomerServiceCaseTimeline.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct\n\nIt represents the change of state",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "9",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/119472-exam-cis-csm-topic-1-question-9-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Predictive Intelligence improves triage quality by eliminating the guesswork. Predictive Intelligence supports which of the following decisions? (Choose two.)",
+      "answers": [
+        "A. Case Escalation",
+        "B. Case State",
+        "C. Case Categorization",
+        "D. Case Prioritization"
+      ],
+      "comments": [
+        {
+          "content": "E-book, pág 154.\nServiceNow Predictive Intelligence can improve case triage quality by eliminating guesswork from these case management decisions:\n• Case Categorization\n• Case Assignment\n• Case Prioritization",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "ServiceNow Predictive Intelligence can improve case triage quality by eliminating guesswork from these case management decisions: \n• Case Categorization \n• Case Assignment \n• Case Prioritization",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Given answer is correct, By Akrit.\nhttps://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/resource-center/data-sheet/ds-predictive-intelligence.pdf",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "10",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92672-exam-cis-csm-topic-1-question-10-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "Which Business Rules are part of the Customer Service Management baseline configuration? (Choose two.)",
+      "answers": [
+        "A. Apply Role by Customer",
+        "B. Auto Assessment",
+        "C. Change Update to Close",
+        "D. Update Case Entitlement"
+      ],
+      "comments": [
+        {
+          "content": "- Auto assessment business rule.\n- Update case entitlement on Close.\n\nSource: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/r_BRIWCustomerService.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "- Auto assessment business rule.\n- Update case entitlement on Close.\n\nSource: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/r_BRIWCustomerService.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD Is correct.\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/r_BRIWCustomerService.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "given answer is correct.by Akrit\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/reference/r_BRIWCustomerService.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "11",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92748-exam-cis-csm-topic-1-question-11-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "What are the Critical Success Factors that are related to CSM Suite Implementations? (Choose four.)",
+      "answers": [
+        "A. Define the Business Pain Points",
+        "B. Provide consistent service to customers",
+        "C. Have a clear understanding of the use cases",
+        "D. Define the number of hours needed to develop the associated requirements",
+        "E. Implementation is only as good as the underlying process"
+      ],
+      "comments": [
+        {
+          "content": "It should be ABCE",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It should be ABCE",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "ABCE Is correct",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "ABCE Is correct",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "numbers has no relation with CSF",
+          "selected_answer": "ABCE",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is ABCE",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "12",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90549-exam-cis-csm-topic-1-question-12-discussion/",
+      "most_voted": "ABCE",
+      "error": null
+    },
+    {
+      "question": "What should be emphasized when designing solutions? (Choose three.)",
+      "answers": [
+        "A. Minimize customizations",
+        "B. Focus Out-of-the-box functionality",
+        "C. Design for Scalability",
+        "D. Mobile friendly functionality"
+      ],
+      "comments": [
+        {
+          "content": "It should be ABC",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "✅ A. Minimize customizations\nServiceNow Best Practice: Excessive customizations lead to technical debt, upgrade challenges, and higher maintenance costs.\n\n✅ B. Focus Out-of-the-box functionality\nServiceNow Best Practice: Always leverage native platform features before considering configuration or custom development.\n\n✅ C. Design for Scalability\nDesign Principle: Architect solutions to scale across processes, users, and global operations.\n\n❌ D. Mobile friendly functionality\nWhile mobile is important, it is typically a contextual design consideration, not a top-three principle unless mobile-first is a core requirement. It's secondary to maintainability, scalability, and platform alignment.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "ABC is correct.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "It should be ABC",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "When you focus on OOB functionality it reduces customization which means option A & B are the same and for that reason the right answers to this question is ACD OR BCD",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "BCD or ACD is Correct\nThis is because when A and B are the same when you are focused on OOB functionality, it minimizes customization. Mobile functionality cannot be ignored.",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "It should be ABC",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is ABC",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "This is correct.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "It should be ABC",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "13",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90550-exam-cis-csm-topic-1-question-13-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "What role does the Engagement Manager play before the Workshop? (Choose two.)",
+      "answers": [
+        "A. Project Manager",
+        "B. Acts as intermediary",
+        "C. Provides answers to technical problems",
+        "D. Assists with technical requirements"
+      ],
+      "comments": [
+        {
+          "content": "BD is correct",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Acts as intermediary & Assists with technical requirements --Per SN docs.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Acts as intermediary: The Engagement Manager often acts as a bridge between the client and the technical team, ensuring communication and expectations are aligned before the workshop.\nAssists with technical requirements: They help gather and define the technical requirements to prepare for the workshop effectively.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AB is Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AD is correct",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "14",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122676-exam-cis-csm-topic-1-question-14-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "What should be part of the pre-engagement collateral?",
+      "answers": [
+        "A. Frequently Asked Questions (FAQ)",
+        "B. Scoping Guide",
+        "C. Customer Service roles template",
+        "D. Stock Keeping Unit (SKU) and pricing sheet"
+      ],
+      "comments": [
+        {
+          "content": "It should be B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The Scoping Guide is the most critical piece of pre-engagement collateral because it:\nEstablishes alignment on project goals, functional areas, and high-level requirements.\nHelps identify what’s in scope vs. out of scope before deeper engagement begins.\nIs a standard artifact in ServiceNow’s pre-sales and delivery readiness process.\n\n❌ Why the Others Are Less Suitable:\nA. FAQ – Helpful, but not always required or standardized for pre-engagement.\n\nC. Customer Service roles template – Typically used after engagement begins during discovery or design.\n\nD. SKU and pricing sheet – Belongs to sales/procurement, not implementation prep.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Scoping guide is the right answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "It should be B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "15",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90551-exam-cis-csm-topic-1-question-15-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Articles can provide the following: (Choose three.)",
+      "answers": [
+        "A. Document current and known issues",
+        "B. Provide answers and responses to common issues or questions",
+        "C. Information about customer’s service contract",
+        "D. Share product information"
+      ],
+      "comments": [
+        {
+          "content": "ABD I believe is correct",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "ABD I believe is correct",
+          "selected_answer": "ABD",
+          "replies": []
+        }
+      ],
+      "question_number": "16",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120109-exam-cis-csm-topic-1-question-16-discussion/",
+      "most_voted": "ABD",
+      "error": null
+    },
+    {
+      "question": "Contextual Search framework is used for providing Knowledge search results in which of these scenarios?",
+      "answers": [
+        "A. Entering question in portal only",
+        "B. Record Producer only",
+        "C. Both portal question entry and Record Producer",
+        "D. None of the above"
+      ],
+      "comments": [
+        {
+          "content": "C is the correct answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "In the Service Portal, when users enter queries into search fields (such as \"Ask a Question\"), the Contextual Search Framework dynamically suggests relevant Knowledge Base (KB) articles.\n\nWithin Record Producers, as users input information to create records (e.g., incidents or requests), the Contextual Search Framework can suggest relevant KB articles based on the entered data.\n\n📘 Supporting Documentation:\nWhile specific documentation detailing the Contextual Search Framework's application in both scenarios is limited, the general behavior of the framework suggests its utilization in enhancing user interactions across various components, including portal entries and Record Producers.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer: C. Both portal question entry and Record Producer Most Voted\n\nExplanation: \"Contextual search displays related results within a form or record producer based on the text you enter in a field.\" feels like both the portal question entry and the record producer.... \n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-platform-administration/page/administer/contextual-search/concept/c_ContextualSearch.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "my bad C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/tokyo-platform-administration/page/administer/contextual-search/concept/c_ContextualSearch.html\nhttps://docs.servicenow.com/bundle/tokyo-servicenow-platform/page/build/service-portal/concept/search-service-portal.html#d370579e460",
+          "selected_answer": "B",
+          "replies": [
+            "the first link provided gives 2 examples. C is correct"
+          ]
+        },
+        {
+          "content": "Correct is C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "17",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90554-exam-cis-csm-topic-1-question-17-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following are true regarding integrating a ServiceNow Knowledge base with external content? (Choose two.)",
+      "answers": [
+        "A. Imported external articles appear as attachments in ServiceNow",
+        "B. Only applications that allow WebDAV connections can be integrated",
+        "C. The imported article will have the same category it had in the source knowledge base",
+        "D. SharePoint blocks this integration"
+      ],
+      "comments": [
+        {
+          "content": "This should be correct",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "Is asking about integration not OOB funtionality we know that we can create KB- Articles from a doc files but over integrations will be WebDAV",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is A and B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tA. Imported external articles appear as attachments in ServiceNow\n\tB. Only applications that allow WebDAV connections can be integrated\n\nExplanation:\n\t- \"The acquire handler uses a WebDAV client to acquire external content to create articles.\" (b)\n\t- \"a blank knowledge article is created and the external file is added as an attachment to the article.\" (a)\n\t- \"The short description of the article is derived from the file name of the external content source.\"\n\nSource: https://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/knowledge-management/task/run-import-job-external-content-integration.html",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "correct answer is C & D",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "A&B \n\nhttps://www.servicenow.com/community/csm-forum/servicenow-knowledge-base-with-external-content/m-p/376807#M2656",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/knowledge-management/task/run-import-job-external-content-integration.html",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "18",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90888-exam-cis-csm-topic-1-question-18-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "Access to a Knowledge base or Article can be restricted based on a customer’s assets and the product models using which of the following? (Choose two.)",
+      "answers": [
+        "A. Knowledge Product Entitlements",
+        "B. Data Policy",
+        "C. ACL",
+        "D. User Criteria"
+      ],
+      "comments": [
+        {
+          "content": "I believe the correct answer is A, D",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A D ARE CORRECT\nhttps://docs.servicenow.com/en-US/bundle/utah-customer-service-management/page/product/customer-service-management/concept/c_KnowledgeProductEntitlements.html",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the CSM Implementation book (Lab 2.03): KPE restricts access to knowledge bases and articles based on products owned by the customer or consumer. Once verified, user criteria are the second level of security being applied, as both work in conjunction.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "correct answer is A & C",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "Is the correct answer",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "19",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91985-exam-cis-csm-topic-1-question-19-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "What are some benefits that Knowledge Product Entitlement provide? (Choose three.)",
+      "answers": [
+        "A. Reduces call volume",
+        "B. Makes it easier for Agents to manage case volume",
+        "C. Allows access to Knowledge Articles that are related to products owned by a customer",
+        "D. Information about customer’s service contract",
+        "E. Focused product marketing"
+      ],
+      "comments": [
+        {
+          "content": "A. Reduces call volume\nWhen customers can self-serve using knowledge articles relevant to their specific products, they are less likely to open support cases.\n\nProduct entitlements ensure they see only what is applicable to them, improving self-resolution rates.\n\nB. Makes it easier for Agents to manage case volume\nCustomers resolve more issues on their own, reducing inbound volume and allowing agents to focus on more complex or higher-priority cases.\n\nAlso, when agents access knowledge filtered by product entitlements, they retrieve the most relevant guidance faster.\n\nC. Allows access to Knowledge Articles that are related to products owned by a customer\nThis is the core function of Knowledge Product Entitlement — it restricts or grants visibility to knowledge content based on products or assets tied to a user or account.\n\nEnsures customers only see applicable articles, improving accuracy and user experience.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "ABC are the right answers",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "ABC are the right answers",
+          "selected_answer": "ABC",
+          "replies": []
+        }
+      ],
+      "question_number": "20",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120104-exam-cis-csm-topic-1-question-20-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "What are the characteristics of Knowledge Categories?",
+      "answers": [
+        "A. Shareable across KBs: Yes ; Multi-Level: No",
+        "B. Shareable across KBs: No ; Multi-Level: Yes",
+        "C. Shareable across KBs: No ; Multi-Level: No",
+        "D. Shareable across KBs: Yes ; Multi-Level: Yes"
+      ],
+      "comments": [
+        {
+          "content": "| **Shareable across Knowledge Bases** | ❌ **No** – Categories are specific to a single Knowledge Base.                   |\n\n| **Supports Multi-Level Hierarchies** | ✅ **Yes** – Categories can be nested into multiple levels to create a hierarchy. |\n\n📚 Source:\nServiceNow Docs – Organize Knowledge Articles Using Categories\n\n“You can create a multi-level category hierarchy for each knowledge base. Categories are not shared across knowledge bases.”\nhttps://docs.servicenow.com/bundle/washington-servicenow-platform/page/product/knowledge-management/task/t_CreateKnowledgeCategory.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "New ServiceNow version",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "21",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122819-exam-cis-csm-topic-1-question-21-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Users with the sn_customerservice.proxy_contact role can do which of the following? (Choose two.)",
+      "answers": [
+        "A. Manage cases on behalf of customer service agents",
+        "B. Create cases on behalf of customers",
+        "C. Manage requests on behalf of customer service agents",
+        "D. Create requests on behalf of customers",
+        "E. Manage major incident communication on behalf of a customer service manager"
+      ],
+      "comments": [
+        {
+          "content": "BD is right\n\nhttps://docs.servicenow.com/en-US/bundle/utah-customer-service-management/page/product/customer-service-management/concept/employee-create-case-for-customer.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Employees with the proxy contact role can do the following:\nCreate cases on behalf of customers by email, phone, chat, Virtual Agent, and from the Customer Service Portal.\nCreate requests on behalf of customers from the Customer Service Portal.\n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/employee-create-case-for-customer.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Answer: \n\tB. Create cases on behalf of customers\n\tD. Create requests on behalf of customers\n\nExplanation: \"The proxy contact role enables employees to create cases for customer accounts and contacts. Employees can also be proxy case contacts on behalf of customers.\" which includes\n\t- Create cases on behalf of customers by email, phone, chat, Virtual Agent, and from the Customer Service Portal. (b.)\n\t- Create requests on behalf of customers from the Customer Service Portal. (d.)\n\nSource: https://docs.servicenow.com/en-US/bundle/utah-customer-service-management/page/product/customer-service-management/concept/employee-create-case-for-customer.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD is Correct..\nEmployees with the proxy contact role can do the following:\nCreate cases on behalf of customers by email, phone, chat, Virtual Agent, and from the Customer Service Portal.\nCreate requests on behalf of customers from the Customer Service Portal.",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "22",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114901-exam-cis-csm-topic-1-question-22-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "What is the purpose of a Catalog Item variable?",
+      "answers": [
+        "A. Grants the customer the opportunity to ask a question",
+        "B. Opens a wizard to help a customer fill in a case form",
+        "C. Guides a customer by providing hints on case forms",
+        "D. Allows the customer or consumer to qualify their answer"
+      ],
+      "comments": [
+        {
+          "content": "Answer: D. Allows the customer or consumer to qualify their answer\n\nExplanation: D is the only one that makes sense... \"Service Catalog provides several types of variables, which are also referred to as questions.\" \n\nsource: https://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/service-catalog-management/concept/c_ServiceCatalogVariables.html ... but customer only answers the question not ask the question....",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "I think A. should be the right answer, based on the following\n\n\"Service Catalog provides several types of variables, which are also referred to as questions.\"\n\nsource: https://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/service-catalog-management/concept/c_ServiceCatalogVariables.html",
+          "selected_answer": "A",
+          "replies": [
+            "hmmm.. sorry i am wrong, in this case, D. is the correct answer, since customers don't create questions (a)......"
+          ]
+        }
+      ],
+      "question_number": "23",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116941-exam-cis-csm-topic-1-question-23-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What one of the following is optional when creating a Catalog workflow?",
+      "answers": [
+        "A. Publishing the workflow",
+        "B. Defining workflow activities",
+        "C. Approving the workflow",
+        "D. Managing workflow versions"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Double check the web and with chatgpt. Confirmed the answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A. Publishing the workflow\t✅ Yes\tRequired to make the workflow available for use in catalog items.\n\nB. Defining workflow activities\t✅ Yes\tCore part of the workflow; defines the actual steps the workflow will perform.\n\nC. Approving the workflow\t❌ No\tWorkflows do not require approval before being used. Approvals can be included within the workflow as activities, but the workflow itself doesn't need to go through an approval process to be created or published.\n\nD. Managing workflow versions\t✅ Yes\tWorkflow versioning is automatic when changes are published, but managing versions is essential to maintain control over updates.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "It has to be C.. there is no approval needed to create a workflow. Versions dont really exist, you cant go back in workflows or flows..\na and b are mandatory anyways otherwise you wont have a workflow..\nC is the only option left..",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/community/csm-forum/catalog-workflow/m-p/2987274",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer should be C. We're talking about Workflows not Flow. In the previous Workflow Editor, any change is recorded with a version, so, it's not optional.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/administer/workflow-administration/task/work-on-workflows.html\n\nhttps://docs.servicenow.com/bundle/washingtondc-servicenow-platform/page/product/service-catalog-management/task/t_CreateANewServiceCatalogWorkflow.html",
+          "selected_answer": "D",
+          "replies": [
+            "https://docs.servicenow.com/bundle/washingtondc-build-workflows/page/administer/workflow-administration/task/t_CrtWkflwNewSvcCtlgItm.html"
+          ]
+        },
+        {
+          "content": "I guess, there is no approving process for Workflows to be optional !!!",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct \nWork on workflows\nTo complete a workflow, you add workflow activities, validate the workflow, and publish it.\n\nhttps://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/administer/workflow-administration/concept/managing-workflows.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer is C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is C",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "24",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104168-exam-cis-csm-topic-1-question-24-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What module is used to create Case Record Producers?",
+      "answers": [
+        "A. Case Record Producers",
+        "B. Edit Records",
+        "C. Record Producers",
+        "D. Maintain Records"
+      ],
+      "comments": [
+        {
+          "content": "Record Producers are a type of Service Catalog item used to create records in any table, including the Case [sn_customerservice_case] table in Customer Service Management (CSM).\n\nTo create a Case Record Producer, you go to the Record Producers module and specify:\n- The target table as sn_customerservice_case\n- The fields and variables to capture input from the user\n- Optional scripting to customize behavior",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer: C. Record Producers\n\nExplanation: \"A record producer is a specific type of catalog item that allows end users to create task-based records, such as incident records, from the service catalog.\"\n\nSource: https://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/service-catalog-management/concept/c_RecordProducer.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "25",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/111895-exam-cis-csm-topic-1-question-25-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which one is NOT a dependency for the Customer Service Plugin?",
+      "answers": [
+        "A. Task Activities",
+        "B. Skills Management",
+        "C. Openframe",
+        "D. Communities"
+      ],
+      "comments": [
+        {
+          "content": "- Skills Management\n[com.snc.skills_management]\n\n- Task Activities\n[com.snc.task_activity]\n\n- Openframe\n[com.sn_openframe]\n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/task/t_ActivateCustomerService.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct.\n\nhttps://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/task/t_ActivateCustomerService.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Given is right. D\nhttps://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/task/t_ActivateCustomerService.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "26",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114123-exam-cis-csm-topic-1-question-26-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "ACME corporation wants to use ServiceNow CSM for supporting their customers through Twitter. What CSM entity would you recommend ACME to store the customer’s Twitter profile details?",
+      "answers": [
+        "A. Account",
+        "B. Not supported",
+        "C. Consumer",
+        "D. Social Profile",
+        "E. Personnel File"
+      ],
+      "comments": [
+        {
+          "content": "Social Profile is the correct one, by mistake I have added Consumer in discussion",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Social Profile is correct because the question asks where shall we store the customer´s twitter profile details, meaning, their profile URL, id, etc. And this information is not stored on the consumer table, but the Social Profile table. \n\nhttps://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/social-media-integration.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "This should be consumer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "27",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90539-exam-cis-csm-topic-1-question-27-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which social media channels are NOT available out-of-box?",
+      "answers": [
+        "A. Facebook",
+        "B. Twitter",
+        "C. LinkedIn",
+        "D. All of the above",
+        "E. None of the above"
+      ],
+      "comments": [
+        {
+          "content": "OOB Social media components supported by servicenow are Facebook and Twitter.We can communicate by using these channels if social profile captured on the case form. \n\nHence LinkedIn is NOT available OOTB",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "This should be correct",
+          "selected_answer": "D",
+          "replies": [
+            "how are you highly voted and have 7 upvotes the answer is C linkedin it even saids it on the docs? like jeesus half the answers on here are wrong from people being fools i hope you all fail for spreading misinformation constantly"
+          ]
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "None of these social media channels (Facebook, Twitter, LinkedIn) are available out-of-the-box in ServiceNow. They can be implemented, but they are not set up by default.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "No social media channel is ootb, the fields commented below for Facebook and Twitter do not means the integration is out-of-the-box, it is not.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Customer service managers can create one or more social profiles for a user by recording a user's social profile information on a specific social media channel such as Twitter or Facebook. Managers can create social profiles for accounts, contacts, and consumers from the Social Profiles related list on the entity form. Agents have read-only access to these profiles.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Only Facebook ad Twitter are OOB",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I agrre with Damien .. I feel FB and Twitter",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "LinkedIn",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Tried in PDI. Only Facebook and Twitter are available OOB.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Social Media Integration is provided with CSM by defaut : https://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/social-media-integration.html\n\nContrary to some may think, no documentation provide the explicite channels created (\"such as\" is not a defined list). But going in the Lab Instance during the studies, and looking at the channel table (sn_app_cs_social_social_channel) gives the answer : C\n\nEven better way is to install CSM on the developer instance.",
+          "selected_answer": "C",
+          "replies": [
+            "By the way, the CHANNELS exists, but not the INTEGRATION.\nYou still need to use IntegrationHub spokes to connect with Twitter, Facebook and all other medias."
+          ]
+        },
+        {
+          "content": "E is correct. https://www.servicenow.com/community/csm-forum/csm-social-media/m-p/377149",
+          "selected_answer": "E",
+          "replies": [
+            "Refer to a 2018 post is not really ideal..."
+          ]
+        },
+        {
+          "content": "Answer: C. LinkedIn\n\nExplanation: \"Customer service managers can create one or more social profiles for a user by recording a user's social profile information on a specific social media channel such as Twitter or Facebook.\" LinkedIn is not mentioned\n\nsource: https://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/social-media-integration.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Twitter and Facebook are the only two social media platforms rn",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "28",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90565-exam-cis-csm-topic-1-question-28-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is the equivalent of NOT selecting any group, when configuring multiple active configurations of OpenFrame?",
+      "answers": [
+        "A. Selecting all the groups",
+        "B. Selecting none of the groups",
+        "C. Missing configuration",
+        "D. Misconfigured"
+      ],
+      "comments": [
+        {
+          "content": "sn_openframe_configuration.do - the form itself gives the hint \"User Group: selecting no group is equivalent to selecting all groups\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "B. Selecting none of the groups\n\nIn ServiceNow's OpenFrame configuration, when you configure multiple active configurations, not selecting any group effectively means that the configuration applies to all users, as there are no restrictions based on group membership. This is equivalent to the behavior of selecting all groups.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer: A. Selecting all the groups\n\nExplanation: \"If you do not select any groups, the configuration is available to all users with the openframe user role.\" translates to all the groups\n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/task/t_CreateAnOpenFrameConfiguration.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The user groups selected for this configuration. Access to this configuration is limited to the users that have the openframe user role and that belong to the selected groups.\nNote: If you do not select any groups, the configuration is available to all users with the openframe user role.\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/t_CreateAnOpenFrameConfiguration.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "B. Selecting none of the groups",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "29",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120377-exam-cis-csm-topic-1-question-29-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "How many outbound email accounts are supported in Customer Service Management?",
+      "answers": [
+        "A. One",
+        "B. Unlimited",
+        "C. Two",
+        "D. One per business service"
+      ],
+      "comments": [
+        {
+          "content": "Answer: A. One\n\nExplanation: \"The system administrator can create multiple incoming email addresses that customers can use to communicate with customer service agents. The system administrator can also create one outgoing email address.\"\n\nSource: https://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/c_CustomerServiceEmailCommunication.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct.\n\nCustomer Service Management uses the Email Accounts application to create and maintain email accounts. The system administrator can create multiple incoming email addresses that customers can use to communicate with customer service agents. The system administrator can also create one outgoing email address.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "what Lekat said is correct, A.One is the correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The system administrator can create multiple incoming email addresses that customers can use to communicate with customer service agents. The system administrator can also create one outgoing email address.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I would think one is correct. See in the link: \"The system administrator can create multiple incoming email addresses that customers can use to communicate with customer service agents. The system administrator can also create one outgoing email address.\"\n\nIn sn docs - Configuring the email channel: https://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/c_CustomerServiceEmailCommunication.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Unlimited Outbound email account is supported",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "30",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/87021-exam-cis-csm-topic-1-question-30-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What are features of Customer Service Management? (Choose four.)",
+      "answers": [
+        "A. Timed Audits",
+        "B. Service Entitlements",
+        "C. Demand Management",
+        "D. Service Prospecting",
+        "E. Real-time SLAs",
+        "F. Service Contracts",
+        "G. Skills-based routing"
+      ],
+      "comments": [
+        {
+          "content": "This should be correct",
+          "selected_answer": "BEFG",
+          "replies": []
+        },
+        {
+          "content": "The features of Customer Service Management (CSM) are:\n\nSkills-based routing: This feature allows incoming service requests or incidents to be automatically routed to the most appropriate agent or team based on their skills, capacity, and availability.\nReal-time SLAs: This feature enables service level agreements (SLAs) to be defined and monitored in real-time, allowing service agents to proactively manage and resolve issues before they breach the SLA.\nService Entitlements: This feature enables organizations to define and manage service entitlements, which specify the type and level of support that customers are entitled to based on their contract or subscription.\nService Contracts: This feature enables organizations to define and manage service contracts, which outline the terms and conditions of the service provided to customers.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BEFG is correctomundo.",
+          "selected_answer": "BEFG",
+          "replies": []
+        },
+        {
+          "content": "BEFG is the correct one, please upvote this one so that everyone gets correct answer",
+          "selected_answer": "BEFG",
+          "replies": []
+        },
+        {
+          "content": "its BCEG please refer to docs all these people are wrong lmao its actually insane how these same people are highly voted etc yet constantly wrong, please upvote this so you can save other people from these morons.",
+          "selected_answer": "",
+          "replies": [
+            "Demand Management is a feature of PPM not CSM"
+          ]
+        },
+        {
+          "content": "right Ans",
+          "selected_answer": "BEFG",
+          "replies": []
+        },
+        {
+          "content": "BEFG - for service contract - Navigate to All > Customer Service > Contracts > Service Contracts. Demand can feed input to any process in servicenow , but not an integral part of CSM.",
+          "selected_answer": "BEFG",
+          "replies": []
+        },
+        {
+          "content": "BCEG \nhttps://www.servicenow.com/community/csm-forum/what-are-features-of-customer-service-management-a-skills-based/m-p/384389",
+          "selected_answer": "BCEG",
+          "replies": [
+            "I think you meant BEFG? As the link suggests?"
+          ]
+        },
+        {
+          "content": "BCEG is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct is",
+          "selected_answer": "BEFG",
+          "replies": []
+        }
+      ],
+      "question_number": "31",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90559-exam-cis-csm-topic-1-question-31-discussion/",
+      "most_voted": "BEFG",
+      "error": null
+    },
+    {
+      "question": "What are the Forum User Types? (Choose three.)",
+      "answers": [
+        "A. Admin",
+        "B. Registered",
+        "C. Public",
+        "D. Custom",
+        "E. Moderator"
+      ],
+      "comments": [
+        {
+          "content": "This should be correct",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "Types of forum user\nPublic     Public users can view the community without logging in. By default, public users have content_read access to questions and answers in public forums.\n\nRegistered\tUsers who have signed up to the community and accepted the Terms & Conditions. Once logged in, their access to forum content depends on the permissions set up for each specific forum.\n\nCustom\tSpecific users and user groups that are added as members to the current forum user.\n\nMembership\tA group of members who have joined a specific forum. Once logged in, their access to forums depends on the permissions set up for each specific forum.\n\nhttps://www.servicenow.com/docs/bundle/xanadu-customer-service-management/page/product/customer-communities/task/add-user.html?state=seamless",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "source: https://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-communities/task/add-user.html",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "BCD is Correct\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-communities/task/add-user.html",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "Types of forum users are:\n\t- Public: Public users can view the community without logging in. By default, public users have content_read access to questions and answers in public forums.\n\t- Registered: Users who have signed up to the community and accepted the Terms & Conditions. Once logged in, their access to forum content depends on the permissions set up for each specific forum.\n\t- Custom: Specific users and user groups that are added as members to the current forum user.\n\t- Membership: A group of members who have joined a specific forum. Once logged in, their access to forums depends on the permissions set up for each specific forum.\n\nsource: https://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-communities/task/add-user.html",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "is right ans",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-communities/task/add-user.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "b, c, d is correct - Forum user types are: Registered, Public, Custom, Membership, see link from the docs - Create a forum user: https://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-communities/task/add-user.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "32",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/87079-exam-cis-csm-topic-1-question-32-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "Which of the following are true regarding the Community Portal application? (Choose two.)",
+      "answers": [
+        "A. It is available to any customer with a Community license",
+        "B. It is available by default with the Support and Service portals",
+        "C. It is only available to CSM license holders",
+        "D. Most of the configuration does not require System Administrator role"
+      ],
+      "comments": [
+        {
+          "content": "there is no such thing like Community license. The Customer should have CSM license",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tA. It is available to any customer with a Community license\n\tD. Most of the configuration does not require System Administrator role\n\nExplanation: \n\t- Licensed for the Customer Service Management application & licensed for HR Service Delivery, so c. is wrong, which makes a. a logical choice\n\t- \"The roles required to define requirements and set up forums include sn_communities.admin or sn_communities.forum_admin.\" (d.)\n\nSource: \n\t- https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-communities/task/activate-communities.html (licensing)\n\t- https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-communities/reference/r_setup-communities-admin.html ( roles)",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "it could be A or B depending on the moderation settings of the community.",
+          "selected_answer": "AB",
+          "replies": [
+            "Disregard this answer it was meant for a different question."
+          ]
+        },
+        {
+          "content": "AD is Correct",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD correct",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "- \"C\" is different because it can also be used in HRSD.\n-I think the answer is \"A\" and \"D\".",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "This is correct:\nroles - https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-communities/reference/r_setup-communities-admin.html\n\n-license https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-communities/task/activate-communities.html",
+          "selected_answer": "CD",
+          "replies": []
+        }
+      ],
+      "question_number": "33",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/101575-exam-cis-csm-topic-1-question-33-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "If only one user reports a content for moderation, the content will be hidden.",
+      "answers": [
+        "A. True",
+        "B. False"
+      ],
+      "comments": [
+        {
+          "content": "Answer: B. False\n\nExplanation: Content removal is done via\n\t1. Navigate to All > Community > Content > Contents.\n\t2. Click the content to remove.\n\t3. Click Actions on selected rows > Delete and confirm that you want to delete the item.\nReporting doesn't hid or remove the content\n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-communities/task/moderate-communities.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "its could be A or B depending on the moderation settings of the community.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer: B\nReference: https://docs.servicenow.com/bundle/orlando-customer-service-management/page/product/customer-communities/task/approve-reject-content.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "34",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120638-exam-cis-csm-topic-1-question-34-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The available case types are: (Choose two.)",
+      "answers": [
+        "A. Product Support",
+        "B. Order",
+        "C. Product",
+        "D. Support"
+      ],
+      "comments": [
+        {
+          "content": "This should be the correct",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "First answer is C, other is missing.\nIt is PRODUCT and CUSTOM.\nORDER is a case type from CSM Demo Data or CSM for Orders, which are unrecommanded : they recommand to use Order Management for CSM instead\nSource : eBook, pages 47 to 49",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "BC Is correct.\nProduct\nOrder\nCustomer",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "The case types are: Product, Order, & Custom. Source is CSM fundamentals course organizational structure and case principles \"Case and Case Types\".",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Only these",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "BC is correct",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "35",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90561-exam-cis-csm-topic-1-question-35-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "What is required to enable the Follow the sun field on the Customer Service Case form?",
+      "answers": [
+        "A. Nothing, it is a standard field",
+        "B. The value property on the form must be set to true",
+        "C. The plugin ‘com.snc.csm_time_recording’ needs to be activated",
+        "D. The value property on the form must be set to true and the field added to the case form"
+      ],
+      "comments": [
+        {
+          "content": "This should be correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct\nEnable the Follow the sun check box on the Customer Service case form by setting the value of the property sn_customerservice. FTS_flag_enabled to true.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Enable the Follow the sun check box on the Customer Service case form by setting the value of the property sn_customerservice.FTS_flag_enabled to true. Configure the form layout to add this field to the Case form.\n\n https://docs.servicenow.com/en-US/bundle/utah-customer-service-management/page/product/customer-service-management/reference/r_CustomerServiceCaseForm.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct as of now, just checked the doc here: https://docs.servicenow.com/en-US/bundle/utah-customer-service-management/page/product/customer-service-management/reference/r_CustomerServiceCaseForm.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-customer-service-management/page/product/customer-service-management/reference/r_CustomerServiceCaseForm.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is actually the correct answer as you dont have to add it to the form which is what is mentioned in the labs etc idk why all these guys have commented the wrong answer lmao please upvote so other people can be saved",
+          "selected_answer": "",
+          "replies": [
+            "Doc is pretty clear no? D?"
+          ]
+        },
+        {
+          "content": "is the right ans",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct one\nhttps://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/reference/r_CustomerServiceCaseForm.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "In the fundamentals course, there is a lab where you are required to add this field to the form and enable it. Therefore, the option D is the one that makes most sense.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "36",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90562-exam-cis-csm-topic-1-question-36-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "In the Customer Service Management space, what does the term asset management mean?",
+      "answers": [
+        "A. Financial, contractual and inventory information of assets",
+        "B. A set of business activities and processes used to track assets",
+        "C. Tables in the Asset application",
+        "D. Tracking products or services customers are using"
+      ],
+      "comments": [
+        {
+          "content": "I believe the correct answer is D",
+          "selected_answer": "D",
+          "replies": [
+            "I think option D refers to install base management. In the asset table is stored all the financial information related to an asset"
+          ]
+        },
+        {
+          "content": "financial, contractual, inventory, maintenance of install base items (which are assets) are tacked on the asset record.  (This is a good practice from the eBook)",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is D, Lesson CSM Asset Management.\n\nTo Customer Service Management, asset management has different use cases for tracking products or services customers uses, or the assets the company uses to support customer-facing services.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "An asset is a specific product or instance that is supported for a customer.\n\nhttps://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/task/configure-csm-assets.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "right ans is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct answer is D:\nTo Customer Service Management, asset management has different use cases for tracking products or services customers uses, or the assets the company uses to support customer-facing services.\nNote:https://nowlearning.servicenow.com/lxp?id=learning_course&course_id=0ca1382d472a15d4f6b11244846d4310&group_id=3c88ce7e87ea5d50bfe94088dabb35b3&child_id=a9980abe87ea5d50bfe94088dabb35c1&spa=1",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "37",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91986-exam-cis-csm-topic-1-question-37-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following roles cannot update a consumer’s record?",
+      "answers": [
+        "A. sn_customerservice_agent",
+        "B. sn_customerservice_manager",
+        "C. sn_customerservice.consumer_agent",
+        "D. admin"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "internal Roles\n\t- Business-to-business (B2B)\n\t\t- sn_customerservice_agent\n\t\t- sn_customerservice_manager\n\t- Business-to-consumer (B2C)\n\t\t- sn_customerservice.consumer_agent\n\t\t- sn_customerservice_manage\n\nsource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/reference/r_RolesInstalledWithCustomerService.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "38",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116946-exam-cis-csm-topic-1-question-38-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Major Issue Management uses which one of the following capabilities?",
+      "answers": [
+        "A. Governance Risk and Control",
+        "B. Targeted Communications",
+        "C. Asset management",
+        "D. Record producers"
+      ],
+      "comments": [
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "b is correct\nTargeted Communications - This is a key feature of Major Issue Management. When a major issue arises, effective communication about the problem and its resolution to affected customers is crucial.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "39",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/110173-exam-cis-csm-topic-1-question-39-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What is required to synchronize fields from a parent to a child case(s)?",
+      "answers": [
+        "A. The advanced plugin (com.sns.pa.customer_service_advanced) needs to be activated",
+        "B. Major Issue Management needs to be installed and certain properties enabled",
+        "C. No action required, this is a standard Customer Service Management feature",
+        "D. The role of sn_customerservice.customer_case_manager must be assigned"
+      ],
+      "comments": [
+        {
+          "content": "This should be the correct one",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer: B. Major Issue Management needs to be installed and certain properties enabled\n\nExplanation: \"Configure the major issue management system properties to enable synchronization between major cases and associated child cases.\"\n\nSource: https://docs.servicenow.com/en-US/bundle/utah-customer-service-management/page/product/customer-service-management/task/config-major-case-synchronization.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "most right ans",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Given answer is right.\nhttps://www.servicenow.com/community/csm-forum/what-is-required-to-synchronize-parent-to-child-cases-s-in-csm/m-p/379067",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "b is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-customer-service-management/page/product/customer-service-management/task/config-major-case-synchronization.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "40",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90563-exam-cis-csm-topic-1-question-40-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "HOTSPOT -<br/>Match the definitions for roles relationships.<br/><img src=\"https://img.examtopics.com/cis-csm/image14.png\"/>",
+      "answers": [],
+      "comments": [
+        {
+          "content": "A2,B1,C3,D4",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "41",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128131-exam-cis-csm-topic-1-question-41-discussion/",
+      "most_voted": "",
+      "error": null
+    },
+    {
+      "question": "Which of the following functions can be completed when using the Field Service Management Application on a mobile device offline? (Choose three.)",
+      "answers": [
+        "A. Manage requests",
+        "B. Execute assigned tasks",
+        "C. Close work orders",
+        "D. Manage cases",
+        "E. Manage assets"
+      ],
+      "comments": [
+        {
+          "content": "This should be correct",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "BCE is Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tB. Execute assigned tasks\n\tC. Close work orders\n\tE. Manage assets\n\nExplanation: Field Service instance on mobile device in offline mode can:\n\t- Execute tasks assigned to you at the task location. (b.)\n\t- View knowledge articles\n\t- Track asset usage. (e.)\n\t- Record an incidental expense.\n\t- Create a work order task.\n\t- Pause work order tasks.\n\t- Create a part requirement.\n\t- Complete work orders and work order tasks. (c.)\n\t- Log incidentals.\n\t- Complete questionnaire\n\nSource: https://docs.servicenow.com/bundle/utah-field-service-management/page/product/field-service-management/concept/work-offline-fieldservice-mobile.html",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "BCE is correct",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "explanation:\n\nhttps://docs.servicenow.com/bundle/utah-field-service-management/page/product/field-service-management/concept/work-offline-fieldservice-mobile.html",
+          "selected_answer": "BCE",
+          "replies": []
+        }
+      ],
+      "question_number": "42",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90587-exam-cis-csm-topic-1-question-42-discussion/",
+      "most_voted": "BCE",
+      "error": null
+    },
+    {
+      "question": "Information in the Case Field ‘Contact’ is copied to which Incident Field?",
+      "answers": [
+        "A. Contact",
+        "B. User",
+        "C. Customer",
+        "D. Caller"
+      ],
+      "comments": [
+        {
+          "content": "https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0817494",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "it should be caller",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct.\nContact is mapped to the caller field",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "explanation:\n\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/reference/csm-integration-sm-incident.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Caller",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "43",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90542-exam-cis-csm-topic-1-question-43-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "How many active OpenFrame configurations can you have on an instance?",
+      "answers": [
+        "A. 2",
+        "B. Unlimited",
+        "C. 1",
+        "D. 3"
+      ],
+      "comments": [
+        {
+          "content": "✅ Explanation:\nServiceNow allows you to have multiple active OpenFrame configurations on an instance. This enables different groups or use cases to have their own OpenFrame setup, such as:\n\nDifferent CTI (Computer Telephony Integration) providers for different business units\n\nSpecialized configurations for support tiers, languages, or locations\n\nEach configuration can be:\n\nTargeted to specific user groups\n\nActivated or deactivated independently\n\nCustomized to open different URLs, pass different parameters, or launch different workspaces",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "we can have unlimited open frame configuration but, one active at a time per instance.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "44",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128140-exam-cis-csm-topic-1-question-44-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What are common types of application record data that are imported during a CSM data migration? (Choose two.)",
+      "answers": [
+        "A. Knowledge Article",
+        "B. Accounts",
+        "C. Chat",
+        "D. Case"
+      ],
+      "comments": [
+        {
+          "content": "When migrating from one system to ServiceNow the most critical aspects are the ability to execute the process and provide the same or better level of service to customers.  This is only possible if you migrate Accounts and Knowledge.\n\nMigrating Case data does not enable you to deliver service, just to lookup historical information.  It is not often recommended to migrate historical data because of differences in data structure.  It is often the case that fields from one system do not map to ServiceNow.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "when we talk about migration, the current and closed cases should be migrated (for auditing and reporting purposes). Accounts should be definitely imported. KBAs are supporting the case resolution, but not such important as above 2",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Knowledge Articles (A) are important, they are often considered part of the knowledge management migration rather than strictly application record data for CSM.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "AD is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Although I think the answer is AB, it could also include D, as they may want to migrate open cases or historical cases. See https://www.servicenow.com/community/csm-blog/good-practices-legacy-data-conversion-for-customer-service/ba-p/2291150\n\nhttps://www.servicenow.com/community/csm-blog/good-practices-legacy-data-conversion-for-customer-service/ba-p/2291150",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Accounts: Accounts store information about the customer organizations that the CSM team supports, such as their name, address, contact information, and subscription status. This information is essential for the CSM team to be able to provide effective support.\nKnowledge Articles: Knowledge articles contain information about products, services, and troubleshooting procedures. This information is essential for the CSM team to be able to quickly and accurately answer customer questions.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AB \nHere are some examples of why these two types of data are so important for CSM:\n\nAccounts: Accounts store information about the customer organizations that the CSM team supports, such as their name, address, contact information, and subscription status. This information is essential for the CSM team to be able to provide effective support.\nKnowledge Articles: Knowledge articles contain information about products, services, and troubleshooting procedures. This information is essential for the CSM team to be able to quickly and accurately answer customer questions.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/community/csm-forum/common-types-of-application-record-data-that-are-imported-during/m-p/2670426",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AB is the Correct Answer - see Vancouver Product Docs\nCustomer Data: Includes Account\nProduct Data: Includes Knowledge Articles\nhttps://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/concept/csm-data-management.html",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "BD i believe",
+          "selected_answer": "BD",
+          "replies": [
+            "I think this its AB instead because .. The specific types of data that are imported will depend on the specific needs of the business and the CSM team.\n\nHere are some examples of why these two types of data are so important for CSM:\n\nAccounts: Accounts store information about the customer organizations that the CSM team supports, such as their name, address, contact information, and subscription status. This information is essential for the CSM team to be able to provide effective support.\nKnowledge Articles: Knowledge articles contain information about products, services, and troubleshooting procedures. This information is essential for the CSM team to be able to quickly and accurately answer customer questions.\nImporting these two types of data allows the CSM team to quickly get up and running on the new system and to start providing support to customers."
+          ]
+        },
+        {
+          "content": "@DurkDurgler: Would it be possible for you to share the source please?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It's AB",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "45",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118148-exam-cis-csm-topic-1-question-45-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "Which are the key self-service functions of the Customer Support Portal? (Choose three.)",
+      "answers": [
+        "A. Community",
+        "B. Knowledge Base",
+        "C. Open An Incident",
+        "D. Service Catalog"
+      ],
+      "comments": [
+        {
+          "content": "ABD is correct.",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "ABD is correct.\n\nA customer self-service portal is designed to function as an easy-to-access resource for leads and customers. It generally includes knowledge-base articles, FAQs, chat services, tutorials, community forums, and other relevant options for finding solutions. \n\nThe customer self-service portal is usually hosted on the company’s website and is available 24/7. Customer self-service empowers clients and potential clients with quick resolutions to common first- and second-tier issues.",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "Correct, customer cannot open an incident directly. They can create a case and a customer service agent can pass it to IT as an incident",
+          "selected_answer": "ABD",
+          "replies": []
+        }
+      ],
+      "question_number": "46",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/106698-exam-cis-csm-topic-1-question-46-discussion/",
+      "most_voted": "ABD",
+      "error": null
+    },
+    {
+      "question": "Which of the following are channels? (Choose two.)",
+      "answers": [
+        "A. Contacts",
+        "B. Web",
+        "C. Chat",
+        "D. Article"
+      ],
+      "comments": [
+        {
+          "content": "BC IS CORRECT",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "BC IS CORRECT",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "47",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/123104-exam-cis-csm-topic-1-question-47-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "Out-of-the-box, the consumer support portal (/csp) CANNOT be used for which one of the following actions?",
+      "answers": [
+        "A. Open an incident",
+        "B. Viewing knowledge articles",
+        "C. Live chat",
+        "D. Consumer self-registration"
+      ],
+      "comments": [
+        {
+          "content": "this should be A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "In the fundamentals course there is a lab where you are required to used the consumer's self registration. Therefore, A is the correct answer.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tC. Chat\n\tD. Email\n\nExplanation: Omnichannels for communicating with customers includes \n\t- Chat (c)\n\t- Phone\n\t- Email (d)\n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/omnichannels-communicating-customers.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A is correct.\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/concept/use-consumer-service-portal.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Consumers self register using CSP portal.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "48",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90590-exam-cis-csm-topic-1-question-48-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "The Customer Support Portal default configuration provides the following channels to interact with customers? (Choose two.)",
+      "answers": [
+        "A. Web",
+        "B. Social",
+        "C. Chat",
+        "D. Email"
+      ],
+      "comments": [
+        {
+          "content": "Email - is not a function of the \"Customer Support Portal\"\nUsing the \"Customer Support Portal\" you can:\n- use the catalog item to generate a case\n- chat with the agent",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "Explanation:\nThe Customer Support Portal in ServiceNow (usually accessible via /customer) provides out-of-the-box (OOB) channels that enable customers to interact with support teams. The default configuration includes:\n\nA. Web\nThis is the primary interaction channel.\nCustomers use the portal to:\nSubmit cases\nSearch knowledge articles\nBrowse the service catalog\nTrack their support history\n\nC. Chat\nLive Chat or Virtual Agent is provided OOB.\nThis enables real-time assistance through:\nPredefined scripts and FAQs (via Virtual Agent)\nLive agent handoff (via Connect Support or third-party chat integrations)",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "I think a,c",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "What is the default value in the Channel field when a new case is opened by a customer in the Service Catalog, using the Customer Service Portal?\n\nA. Web Most Voted\nB. Catalog\nC. Portal\nD. Virtual Agent\n\nThe answer is A. Web, so A and C are correct for this question",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/omnichannels-communicating-customers.html\n\nCase raised using Get help in Serice Portal is considered as Web channel. watch the videp in the link 0:47 and 3:31 , there is no e,ail option shown in service portal",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "In the CSP, you can utilize only chat - live or virtual agent or requesting something via catalog (open a case, which will be classified as source web). Email is when you are using your email client (not the portal)",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "Chat = Virtual or live agent --> Interaction\nWeb = Open a Case with channel web",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "Answer C & D \nExplanation: Chat, Email and Phone are correct. Reference : https://docs.servicenow.com/en-US/bundle/sandiego-customer-service-management/page/product/customer-service-management/concept/omnichannels-communicating-customers.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tC. Chat\n\tD. Email\n\nExplanation: Omnichannels for communicating with customers includes \n\t- Chat (c)\n\t- Phone\n\t- Email (d)\n\nSource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/omnichannels-communicating-customers.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CD IS CORRECT",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Omnichannels for communicating with customers:\n\nChat channel\nFrom the Customer Service Portal and Consumer Service Portal, customers can start a chat with a virtual or live agent for help.\n\nEmail channel\nWith an email channel, customers can send emails to create new cases and update current cases. They can also receive email updates from customer service agents as cases progress.\n\nPhone channel\nExternal customers can reach out to customer service agents by phone. The Customer Service Management application uses both Computer Telephony Integration (CTI) and OpenFrame to provide phone support for customers.",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "is the ans",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C and D",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CD\nhttps://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/omnichannels-communicating-customers.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "49",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108650-exam-cis-csm-topic-1-question-49-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "HOTSPOT -<br/>Match the business rule to its function in the Self-Service Portal.<br/><img src=\"https://img.examtopics.com/cis-csm/image19.png\"/>",
+      "answers": [],
+      "comments": [
+        {
+          "content": "A2, B1, C4, D3\n\nhttps://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/r_BRIWCustomerService.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A2,B1,C4,D3",
+          "selected_answer": "",
+          "replies": [
+            "Can you please explain better your answer?. As I am really struggeling to understand this question and those answers.\nThank you."
+          ]
+        }
+      ],
+      "question_number": "50",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128142-exam-cis-csm-topic-1-question-50-discussion/",
+      "most_voted": "",
+      "error": null
+    }
+  ]
+}

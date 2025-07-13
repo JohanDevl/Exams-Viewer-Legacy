@@ -1,0 +1,2004 @@
+{
+  "chunk_id": 2,
+  "start_question": 101,
+  "end_question": 150,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "External customers can view the problem, change, and request records associated with their customer service cases from the Customer and Consumer Service Portals. Which of the following can they approve in relation to cases via the portals?",
+      "answers": [
+        "A. Request Records and Escalations",
+        "B. Change Records and Request Records",
+        "C. Problem Records and Escalations",
+        "D. Problem Records and Incident Records"
+      ],
+      "comments": [
+        {
+          "content": "B is Correct.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is Correct.\n\nhttps://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/enable-customer-request-approval.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \"Enable external customers to approve requests and changes\"\n\nsource: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/enable-customer-request-approval.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "given answer is correct.\nhttps://www.servicenow.com/community/csm-forum/change-request-process-be-used-by-external-accounts-our/m-p/369938",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "101",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90675-exam-cis-csm-topic-1-question-101-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Playbooks for CSM provide step-by-step guidance for resolving specific types of customer service cases. What are the three out-of-the-box playbooks for CSM? (Choose three.)",
+      "answers": [
+        "A. Case playbook for Onboarding",
+        "B. Case playbook for Services",
+        "C. Case playbook for Product Support",
+        "D. Case playbook for Complaints",
+        "E. Case playbook for Billing"
+      ],
+      "comments": [
+        {
+          "content": "A, C, D is Correct.",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "ACD is Correct.\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/customer-service-case-playbooks.html",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "Explain: CSM playbooks are\n\t- Case Playbook for Onboarding\n\t- Case Playbook for Complaints\n\t- Case Playbook for Product Support\n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/customer-service-case-playbooks.html",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "given answer is correct.\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/customer-service-case-playbooks.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "102",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90676-exam-cis-csm-topic-1-question-102-discussion/",
+      "most_voted": "ACD",
+      "error": null
+    },
+    {
+      "question": "Based on which out-of-box attributes can Special handling Notes be applied to cases? (Choose three.)",
+      "answers": [
+        "A. Service Contract",
+        "B. Install Base Item",
+        "C. Product",
+        "D. Account",
+        "E. Contact"
+      ],
+      "comments": [
+        {
+          "content": "Create special handling notes for specific records or for a set of records that meet one or more conditions. You can also configure the Special Handling Notes application to display any special handling notes from related records, such as the account or the product associated with a customer service case.\n\nhttps://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/concept/c_OnScreenAlerts.html",
+          "selected_answer": "CDE",
+          "replies": []
+        },
+        {
+          "content": "CDE is Correct",
+          "selected_answer": "CDE",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \"You can also configure the Special Handling Notes application to display any special handling notes from related records, such as the account or the product associated with a customer service case.\"\n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/c_OnScreenAlerts.html\n\nNote: while SN documetation mentinos Product and Acount, there is no reference to Contact, but verfied in course provided SN instance",
+          "selected_answer": "CDE",
+          "replies": []
+        },
+        {
+          "content": "given answer is correct\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/c_OnScreenAlerts.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "103",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90679-exam-cis-csm-topic-1-question-103-discussion/",
+      "most_voted": "CDE",
+      "error": null
+    },
+    {
+      "question": "As an agent you can report a knowledge gap, if you cannot find relevant articles that could help resolve a case. Which action is required to create the knowledge gap?",
+      "answers": [
+        "A. Document the knowledge gap in the case work notes and escalate the case",
+        "B. Post a question in one of the various Customer Service Management knowledge bases",
+        "C. Use Related Links on the case form to report a knowledge gap",
+        "D. Use the Create Knowledge button on the case form to report a knowledge gap"
+      ],
+      "comments": [
+        {
+          "content": "C is correct.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct.\n\nProcedure\n\nOpen a customer service case.\n(Optional) Search for existing knowledge articles or create a knowledge article to help resolve a case.\nClick the More UI Actions icon (agent workspace more UI actions icon) and then click Report Knowledge Gap.\nIn the platform interface, click the Report Knowledge Gap related link on the Case form and provide information in the resulting pop-up window.\nThe system opens a new knowledge feedback task in a sub-tab. The short description from the case is copied to the Description field on the task.\n(Optional) Edit the knowledge feedback task description.\nClick Save.\nThe task is added to the Knowledge Gaps related list on the Case form.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "given answer is correct\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/administer/workspace/task/csm-workspace-report-knowledge-gap.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "104",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90680-exam-cis-csm-topic-1-question-104-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What feature does the Product Model and Catalog Items Relationship plugin enable?",
+      "answers": [
+        "A. Agents are automatically proposed catalog items related to the chosen product on the case form",
+        "B. Consumers can track what products they have purchased via the catalog",
+        "C. It provides a contextual service catalog based on the customer’s subscribed services",
+        "D. Customer service managers can track the financial cost of customer’s subscribed services and the related requests"
+      ],
+      "comments": [
+        {
+          "content": "https://vceguide.com/what-feature-does-the-product-model-and-catalog-items-relationship-plugin-enable/",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Is this A Or C?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is Correct.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is Correct.\n\nBenefits\n\nAs a service provider, provide a contextual service catalog based on the subscribed services.\nAs a customer, request additional items related to subscribed services.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/create-csm-product-model-items.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A is correct.\nhttps://docs.servicenow.com/en-US/bundle/utah-customer-service-management/page/product/customer-service-management/task/create-csm-product-model-items.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct.\nGiven in lab.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "105",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90682-exam-cis-csm-topic-1-question-105-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What happens to a case whenever the state of one of the associated IT Service Management records (incident, problem, change) is updated?",
+      "answers": [
+        "A. The case escalates to an assignment group as defined in the default escalation template",
+        "B. The case work notes are updated automatically",
+        "C. The case action status changes to Related Task Updated",
+        "D. The case displays a special handling note highlighting the update"
+      ],
+      "comments": [
+        {
+          "content": "B is correct\nhttps://docs.servicenow.com/en-US/bundle/vancouver-it-service-management/page/product/problem-management/concept/sync-btwn-inci-prob.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer: B\nSynchronizing data between the incident and the case\nWork notes are synchronized from the incident to the case when:\n-The incident state changes. If the incident state changes to On Hold, the hold reason is copied to the case work notes.\n-The incident is resolved or closed. The incident resolution notes and resolution code are copied to the case work notes.\n-Additional comments are added to the incident.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "106",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120946-exam-cis-csm-topic-1-question-106-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Application Scoping from a security perspective brings the following benefits: (Choose two.)",
+      "answers": [
+        "A. Improves instance security by limiting access to other applications on the instance",
+        "B. Scoped applications prevent versioning for complex instances",
+        "C. Scoping hold the records and acts as a container for the desired CSM applications",
+        "D. Scoped applications limits autonomy and control of all aspects of the CSM application"
+      ],
+      "comments": [
+        {
+          "content": "AC is Correct",
+          "selected_answer": "AC",
+          "replies": [
+            "From a security perspective, scoping brings several benefits:\n\n1. The scope \"holds\" the records and acts as a container for the applications.\n2. Scoping improves instance security by limiting accessibility to other applications on the instance.\n3. Scoped applications can be developed independently of IT by applying delegated development and deployment."
+          ]
+        },
+        {
+          "content": "A and C is correct pg 16 on fundamentals ebook",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "107",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120947-exam-cis-csm-topic-1-question-107-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "How can multiple service catalogs be made available on the Customer Service Portal?",
+      "answers": [
+        "A. Include them in the list of service catalogs on the Customer Service Portal record",
+        "B. Add them to the list of service catalogs in the Customer Service Portal header widget options",
+        "C. Only the Customer Service service catalog can be used on the Customer Service Portal",
+        "D. Create user criteria for each of the applicable service catalogs"
+      ],
+      "comments": [
+        {
+          "content": "A is Correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct.\n\nMultiple catalogs can be added to the Customer Service Portal and to the Consumer Service Portal. A catalog can be added by navigating to Service Portal > Portals and add it to its Service Catalogs list.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct pg 286 Fundamentals ebook",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "108",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120948-exam-cis-csm-topic-1-question-108-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Now Create provides a prescriptive methodology, leading practices, and accelerators to help with ServiceNow implementations and upgrades. How many sequential project phases and exit gates are there in the Now Create Methodology?",
+      "answers": [
+        "A. Three",
+        "B. Five",
+        "C. Four",
+        "D. Six"
+      ],
+      "comments": [
+        {
+          "content": "Five is correct.\n\nE-book see 223. https://evantage.gilmoreglobal.com/reader/books/SN-CSMI-T010-PG-E/pageid/222",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is Correct.\nInitiate: Understand the business objectives; establish program\ngovernance; establish the project team; formally kick-off the project \nPlan: Conduct process, platform, and integration workshops; define,\nreview and prioritize the product backlog; release\nplanning; finalize the project timeline; document the test\nstrategy; setup the environment\nExecute: Run agile scrum cycles; define support processes and\nhypercare approach; execute communications and awareness\nroadshows; plan for system and user acceptance testing\nDeliver: System testing and user acceptance testing; go-live\nplanning; operational readiness; training; go-live\nClose: Operational handover; hypercare support; lessons learned;\nmeasure value and champion success; formally close the project",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "109",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/123451-exam-cis-csm-topic-1-question-109-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "From which one of the following can an agent create a CSM Case:",
+      "answers": [
+        "A. Human Resource Application",
+        "B. Incident Management",
+        "C. Chat",
+        "D. Special Handling Note"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Explanation: Anagent can create a CSM case from any of the following source:\n\t- A customer service portal\n\t- A customer service dashboard\n\t- A customer service record producer\n\t- A customer service email\n\t- A customer service chat1\n\nSource: https://docs.servicenow.com/bundle/sandiego-customer-service-management/page/product/customer-service-management/concept/customer-service-case-types.html",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "110",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/123193-exam-cis-csm-topic-1-question-110-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Using the out-of-the-box major issue management process flow, a consumer service agent proposes an existing case in the Open state as a major case candidate. The major case candidate has a consumer defined and is approved by the customer service manager What happens to the major case candidate?",
+      "answers": [
+        "A. The major case candidate becomes a major case",
+        "B. A new major case is created and the major case candidate is added as a child to the major case",
+        "C. The major case candidate requires an approval from the major issue manager",
+        "D. The major case candidate is closed and a new major case is created"
+      ],
+      "comments": [
+        {
+          "content": "https://www.servicenow.com/docs/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/approve-reject-major-case-candidate.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Approves the current major case candidate as a major case.\nUpon approval:\nIf the candidate case was proposed from an existing case, a major case is created and the candidate case becomes a child case of that major case.\nIf the candidate case was created directly, the candidate case becomes the major case.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/concept/major-candidate-child-case-types.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the answer.\nSource: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/concept/major-candidate-child-case-types.html\n\"If the major case candidate was promoted from an existing case, a major case is created and the candidate case becomes a child case of that parent.\"",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \"These cases are added to the Child Cases related list on the major case form.\"\n\nsource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/major-candidate-child-case-types.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.\nIf the major case candidate was promoted from an existing case, a major case is created and the candidate case becomes a child case of that parent.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT\n Approved candidate cases become major cases, which you can use to manage issues to resolution. Child cases are created for customers impacted by an issue and are associated with a major case.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "given answer is correct\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/major-candidate-child-case-types.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "111",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90685-exam-cis-csm-topic-1-question-111-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What types of escalation templates can be created? (Choose two.)",
+      "answers": [
+        "A. Case",
+        "B. Sold Product",
+        "C. Consumer",
+        "D. Account"
+      ],
+      "comments": [
+        {
+          "content": "Case and Account",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "An escalation template determines how an escalation request is processed and includes the type of escalation (case or account); an approval list or workflow (if approval is required), and an escalation watch list.\n\nhttps://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/task/create-escalation-template.html",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD is correct.\nCreate a case or account escalation template\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/create-escalation-template.html",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD is right",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "given answer is correct\nhttps://docs.servicenow.com/bundle/quebec-customer-service-management/page/product/customer-service-management/task/create-escalation-template.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "112",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90686-exam-cis-csm-topic-1-question-112-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "What are the recommended good practices when running implementation workshops? (Choose three.)",
+      "answers": [
+        "A. Give the customers the data they need so they can make an informed decision",
+        "B. Any financial implication of a decision should be handled by the delivery and sales team",
+        "C. Enforce customers to adapt their processes towards the baseline processes",
+        "D. Engage with customers to gain deep understanding of their organization",
+        "E. Guide the customer toward industry best practices"
+      ],
+      "comments": [
+        {
+          "content": "Nobody commented on this one so I figured I'd be the first to confirm the selected answers (A, D, E) are correct.",
+          "selected_answer": "ADE",
+          "replies": []
+        }
+      ],
+      "question_number": "113",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/146404-exam-cis-csm-topic-1-question-113-discussion/",
+      "most_voted": "ADE",
+      "error": null
+    },
+    {
+      "question": "What is the specific type of catalog item called that allows users to create task-based records, such as case records, from the Service Catalog?",
+      "answers": [
+        "A. Request Item",
+        "B. Record Producer",
+        "C. Catalog Processor",
+        "D. Case Template"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-servicenow-platform/page/product/service-catalog-management/concept/c_RecordProducer.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.\n\nRecord Producer\nA record producer is a specific type of catalog item that allows end users to create task-based records, such as incident records, from the service catalog.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Explanation: CSA knowledge, in order for catalog items transform to any other table other than request (can't remember the table name) will require a record producer (think of it as a tranform map :P)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "given answer is correct.\nhttps://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwilzfKK0er7AhXdsVYBHUU7DR8QFnoECA4QAQ&url=https%3A%2F%2Fdocs.servicenow.com%2Fen-US%2Fbundle%2Ftokyo-servicenow-platform%2Fpage%2Fproduct%2Fservice-catalog-management%2Freference%2Fr_ExtendedCatalogItemFunctions.html&usg=AOvVaw1Ufz14Njnq_JNApKfOB4Ly",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "114",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90687-exam-cis-csm-topic-1-question-114-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Out-of-box, which functionality handles state transitioning for case management?",
+      "answers": [
+        "A. Workflows",
+        "B. State Flows",
+        "C. Business Rules",
+        "D. Flows"
+      ],
+      "comments": [
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Explanation: in coures provided instance, system enforces the state transition through com.snc.state_model.StateTransitionValidator when the state model and transtions are enabled on a table.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "115",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/123207-exam-cis-csm-topic-1-question-115-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following are benefits of customer access management? (Choose two.)",
+      "answers": [
+        "A. It defaults the responsibility for access management to the customer service agent.",
+        "B. It increases security by automatically providing access to case information based on account hierarchy",
+        "C. It increases automation by automatically granting access to cases based on access to sold product",
+        "D. It improves the customer experience by enabling related parties to track and collaborate on cases.",
+        "E. It defaults the responsibility for access management to the customer."
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is C, D --> https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/customer-access-mgmt.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C&D\nCustomer access management:\nImproves the customer experience by enabling related parties to track and collaborate on cases\nImproves operational efficiency by enabling customers to track cases for products and services\nIncreases automation by automatically granting access to cases based on access to sold product\n\nhttps://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/customer-access-mgmt.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Improves the customer experience by enabling related parties to track and collaborate on cases\nImproves operational efficiency by enabling customers to track cases for products and services\nIncreases automation by automatically granting access to cases based on access to sold product\n\nhttps://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/concept/customer-access-mgmt.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CD is Correct.\n\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/customer-access-mgmt.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Explanation:\n\t- Improves the customer experience by enabling related parties to track and collaborate on cases (D.)\n\t- Improves operational efficiency by enabling customers to track cases for products and services\n\t- Increases automation by automatically granting access to cases based on access to sold product (C.)\n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/customer-access-mgmt.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C and D",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CD ARE CORRECT",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CD are correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "116",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92816-exam-cis-csm-topic-1-question-116-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "What are the advantages of leading indicators over lagging indicators? (Choose two.)",
+      "answers": [
+        "A. Hard to influence",
+        "B. Prospective",
+        "C. Retrospective",
+        "D. Easy to influence"
+      ],
+      "comments": [
+        {
+          "content": "Correct Answer is B, D --> https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/success/quick-answer/leading-indicators.pdf",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD is Correct.\n\nhttps://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/success/quick-answer/leading-indicators.pdf",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \nLeading indicators are:\n\t- Input oriented: These measure the progress made on the inputs or actions required to achieve a desired goal.\n\t- Easy to influence: The team or person responsible can see the impact of their efforts daily. (D.)\n\t- Hard to measure: Data required for these indicators are often not collected, so they can be hard to measure without a conscious effort to collect data.\n\t- Prospective: These help evaluate the future performance on goals. (B.)\n\nSource: https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/success/quick-answer/leading-indicators.pdf",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/success/quick-answer/leading-indicators.pdf",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "B and D",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "117",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92817-exam-cis-csm-topic-1-question-117-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "Customer Service Management Administrators can delegate Contact Administration activities to specific contacts within accounts by assigning specific roles to one or more users. Which of the following roles, if assigned, would allow the user to create contacts?",
+      "answers": [
+        "A. Customer case manager (sn_customerservice.customer_case_manager)",
+        "B. Customer account manager (sn_customerservice.customer_account_manager)",
+        "C. Customer admin (sn_customerservice.customer_admln)",
+        "D. Customer (sn_customerservice.customer)"
+      ],
+      "comments": [
+        {
+          "content": "C is the answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct, they can delegate by assigning either of roles to the user. Customer Admin, Partner Admin",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/reference/r_RolesInstalledWithCustomerService.html",
+          "selected_answer": "C",
+          "replies": [
+            "Customer administrator\n[sn_customerservice.customer_admin]\n\nAdministrator role for a customer account. This user has access to data within the account."
+          ]
+        },
+        {
+          "content": "C is correct.\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/configure-csm-accounts-contacts.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Create customer contacts\nA contact is a user who is an employee of an account. Use the Customer Service Management application to create contact records.\n\nBefore you begin\n\nRole required: sn_customerservice_manager or admin\n\nSOURCE: https://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/configure-csm-accounts-contacts.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/reference/r_RolesInstalledWithCustomerService.html#r_RolesInstalledWithCustomerService__section_uff_bbj_x2b",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I believe the correct answer should be C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "118",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92045-exam-cis-csm-topic-1-question-118-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is knowledge article versioning?",
+      "answers": [
+        "A. A content tracker for knowledge articles",
+        "B. A knowledge article publishing guide",
+        "C. The ability to manage and track article updates",
+        "D. A knowledge article numbering guide"
+      ],
+      "comments": [
+        {
+          "content": "E-book see 188.\n\nhttps://evantage.gilmoreglobal.com/reader/books/SN-CSMI-T010-PG-E/pageid/187",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "FROM SERVICENOW: \nWhat is knowledge article versioning in Servicenow?\nThe Article Versioning feature allows knowledge contributors to create multiple versions of a knowledge article. They can create a new version of an article from an existing published version. This existing version can be either the latest published version or an older outdated version.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct.\nhttps://docs.servicenow.com/bundle/rome-servicenow-platform/page/product/knowledge-management/concept/article-versioning.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I believe the correct answer should be C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "119",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92047-exam-cis-csm-topic-1-question-119-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Service providers use business models to support their various customers. What type of customer is supported with the Business-to-Consumer (B2C) model?",
+      "answers": [
+        "A. Individuals",
+        "B. Partners",
+        "C. Contacts",
+        "D. Accounts"
+      ],
+      "comments": [
+        {
+          "content": "Business-to-consumer (B2C) model\nWith the business-to-consumer (B2C) model, you can support individual consumers.\n\nhttps://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/concept/customer-service-data-models.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is Correct.\nBusiness-to-consumer (B2C) model\nWith the business-to-consumer (B2C) model, you can support individual consumers.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Business-to-consumer (B2C) model\nWith the business-to-consumer (B2C) model, you can support individual consumers.\n\nSOURCE: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/customer-service-data-models.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "From Servicenow: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/customer-service-data-models.html\nBusiness-to-business (B2B) model\nIn the business-to-business (B2B) model, an account is a supported external customer and a contact is an employee of that account. With the B2B model, you can support accounts and contacts and also set up:\nC and D are correct, but since D (account) is the supported external customer and C (contact) is an employee of D (account), then D is most correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I believe the correct answer should be A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "120",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92046-exam-cis-csm-topic-1-question-120-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When configuring email in Communication Channels, how many outgoing email addresses are supported?",
+      "answers": [
+        "A. One",
+        "B. Two",
+        "C. Three",
+        "D. Unlimited"
+      ],
+      "comments": [
+        {
+          "content": "Customer Service Management uses the Email Accounts application to create and maintain email accounts. The system administrator can create multiple incoming email addresses that customers can use to communicate with customer service agents. The system administrator can also create one outgoing email address.\n\nhttps://www.servicenow.com/docs/bundle/vancouver-customer-service-management/page/product/customer-service-management/concept/c_CustomerServiceEmailCommunication.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer: A. One\n\nExplanation: \"The system administrator can also create one outgoing email address.\"\n\nsource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/c_CustomerServiceEmailCommunication.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct.\n\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/c_CustomerServiceEmailCommunication.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/c_CustomerServiceEmailCommunication.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/community/training-and-certifications/how-many-outgoing-email-addresses-are-supported-in-csm-for/m-p/363279",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "121",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90608-exam-cis-csm-topic-1-question-121-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following roles have permission to create a relationship between a contact and an account? (Choose two.)",
+      "answers": [
+        "A. sn_customerservice_agent",
+        "B. sn_customerservice.customer_admm",
+        "C. sn_customerservice.partner_admin",
+        "D. sn_customerservice_manager",
+        "E. admin"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/t_CreateAContactRelationship.html",
+          "selected_answer": "DE",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/task/t_CreateAContactRelationship.html",
+          "selected_answer": "DE",
+          "replies": []
+        },
+        {
+          "content": "DE is Correct.\n\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/t_CreateAContactRelationship.html",
+          "selected_answer": "DE",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \nRole required: \n\t- sn_customerservice_manager (D.)\n\t- admin (E.)\n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/t_CreateAContactRelationship.html",
+          "selected_answer": "DE",
+          "replies": []
+        },
+        {
+          "content": "DE is right\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/t_CreateAContactRelationship.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "122",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90607-exam-cis-csm-topic-1-question-122-discussion/",
+      "most_voted": "DE",
+      "error": null
+    },
+    {
+      "question": "In CSM Asset Management has a different meaning than in ITSM or Corporate Finance Which of the following defines Asset Management in CSM?",
+      "answers": [
+        "A. The process of developing, operating, maintaining, upgrading, and disposing of assets in me most cost-effective manner",
+        "B. A generic activity or process responsible for tracking and reporting the value and ownership of assets throughout their lifecycle",
+        "C. Asset management has different use cases for tracking specific products or services customers are using",
+        "D. It includes all of the data crucial to support customers as efficiently as possible"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "From the CSM fundamentals course :To Customer Service Management, asset management has different use cases for tracking products or services customers uses, or the assets the company uses to support customer-facing services.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The answer should be C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "123",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92818-exam-cis-csm-topic-1-question-123-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is KCS (Knowledge Centered Services)?",
+      "answers": [
+        "A. A bunch of tables strictly pertaining to CSM case articles that focus on mapping articles to Knowledge management",
+        "B. A documented methodology to provide a set of best practices for creating and maintaining knowledge",
+        "C. A dashboard with specific visualization of the different knowledge bases and categories",
+        "D. An application that helps agents and managers to create cases from Knowledge articles"
+      ],
+      "comments": [
+        {
+          "content": "I believe the correct answer should be B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "\"B\" is correct.\n\nFrom the CSM Fundamentals e-book:\n\nKnowledge-Centered Services (KCS) is a documented methodology providing a set of best practices for creating and maintaining knowledge. It focuses on knowledge as a key asset to the service provider in every customer interaction. The CSM Table Map [csm_table_map] creates a mapping between the case and knowledge article tables. The Create Knowledge feature uses the Case KCS Article table map by default. Administrators can modify this table map or create a new one. (...)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-servicenow-platform/page/product/knowledge-management/concept/knowledge-centred-configuration.html#:~:text=Knowledge%2DCentered%20Service%20(KCS),KCS%20(V6)%20verified%20product.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is B\npg326 fundamentals ebook",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "124",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92048-exam-cis-csm-topic-1-question-124-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When creating or importing assets for CSM, model categories are used to: (Choose three.)",
+      "answers": [
+        "A. Define whether a Configuration Item (CI) is created when an Asset record is created or vice versa",
+        "B. Group assets together",
+        "C. Build a classification structure for product models",
+        "D. Model the configuration options for each product model being sold to customers",
+        "E. Define a link between Asset classes and Configuration Item (CI) classes"
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is A, B, E",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/product-catalog/concept/c_ModelCategories.html",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "ABE is correct",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "ABE is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "125",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92765-exam-cis-csm-topic-1-question-125-discussion/",
+      "most_voted": "ABE",
+      "error": null
+    },
+    {
+      "question": "Viewing a customer’s install base in the CSM Workspaces enables customer service agents to: (Choose two.)",
+      "answers": [
+        "A. Close an upsell of related products and services not yet purchased by a customer",
+        "B. See the detailed configurations of the products and services deployed for a customer to determine the action needed",
+        "C. Trace Information provided in a case to the right product or service to which it relates",
+        "D. Monitor related operational services and configuration items that affect service health"
+      ],
+      "comments": [
+        {
+          "content": "Correct ans is B & C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B and C are correct. A is wrong because upselling is not a primary function of the install base view; it focuses on managing existing customer assets.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "The answer is B&C",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B&C",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Me and Chat-GPT vote for B, C ..\nUpselling is not a customer agent task and monitoring doesnt help either.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B and C",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "My vote goes to B and C. I don't think it is a customer service agent's task to sell anything, or to monitor operational service and CIs. Their main focus is to resolve customers issues as fast as possible.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "According to the ServiceNow CSM Fundamental Course, to enable support organizations to efficiently manage customer cases, both agents and customers need to have a common understanding of the products and services being used. For those same support organizations to efficiently manage customer cases, agents need the ability to:\n\n1. Trace information provided in a case to the right product or service to which it relates.\n\n2. See the detailed configurations of the products and services deployed for a customer to determine the action needed.\n\nhttps://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/task/install-base-aw-csm.html\n\nhttps://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/configure-install-base.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Vancouver docs are clear:\n\"View a customer’s install base in CSM workspaces to quickly identify the support they require as well as the opportunities for adoption and upsell\"\nhttps://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/install-base-aw-csm.html#:~:text=View%20a%20customer's%20install%20base,opportunities%20for%20adoption%20and%20upsell",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AD is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "CD is Actually the correct answer.\n\nTo enable support organizations to efficiently manage customer cases, both agents and customers need to have a common understanding of the products and services being used. For those same support organizations to efficiently manage customer cases, agents need the ability to:\n\n1. Trace information provided in a case to the right product or service to which it relates.\n2. See the detailed configurations of the products and services deployed for a customer to determine the action needed.\n\nCSM Fundamentals",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "A,B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AB is Correct.\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/install-base-aw-csm.html#:~:text=View%20a%20customer's%20install%20base,opportunities%20for%20adoption%20and%20upsell.",
+          "selected_answer": "AB",
+          "replies": [
+            "this is wrong ignore this",
+            "AD is the correct answer\nCSM Fundamental.\nThe service-aware install base enables organizations to: \n\n1. Model complex products and services with components.\n2. Quickly identify products sold and installed.\n3. Track related operational services and configuration items that affect service health.\n4. View products not yet purchased or deployed by customers.",
+            "this is wrong ignore this"
+          ]
+        },
+        {
+          "content": "Correct answer is: A, D\nCSM Fundamentals - Service Aware Install Base",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "126",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118102-exam-cis-csm-topic-1-question-126-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "Benefits of Proactive Customer Service Operations include: (Choose two.)",
+      "answers": [
+        "A. Reduced inbound calls from customers",
+        "B. Reduction in staff turnover",
+        "C. Major cases can be eliminated as there will be no Impact to customers",
+        "D. Reduced Mean Time To Resolve (MTTR)",
+        "E. Guaranteed increase in customer satisfaction"
+      ],
+      "comments": [
+        {
+          "content": "From the CSM fundamental course - ans are validated ----> Reduce Inbound calls and Reduce MTTR",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "From Customer Service Management Implementation (participant guide)\nProactive Customer Service Operations\nBenefits\n•\tReduce inbound calls: Proactively monitor issues and orchestrate case workflows.\n•\tReduce MTTR: Enable operations engineers to identify customers impacted by service disruptions and propose major case.\n•\tImprove customer experience: Empower customer service agents to track service disruptions and notify only affected customer.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "E-book see 109.\n\nhttps://evantage.gilmoreglobal.com/reader/books/SN-CSMI-T010-PG-E/pageid/108",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD is Correct.\n\nhttps://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/resource-center/data-sheet/ds-csm-proactive-customer-service-operations.pdf",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \"You can also associate outage information to a case to keep your customers informed about the impact of the outage and the status of the resolution. It also gives customers visibility into planned service disruptions, enhancing transparency and reducing the number of customer-reported cases.\" \n\nsource: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/concept/proactive-service-operations.html",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD are correct",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "127",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92883-exam-cis-csm-topic-1-question-127-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "What features are included with the Customer Service Portal? (Choose three.)",
+      "answers": [
+        "A. Header with links for different customer activities such as creating a case",
+        "B. Search feature to get information from several repositories",
+        "C. Links to information sources such as the knowledge base, community and customer support",
+        "D. Links to marketing promotions and product coupons",
+        "E. The ability to create new accounts"
+      ],
+      "comments": [
+        {
+          "content": "I believe the correct answer should be A, B, C",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/task/use-the-customer-portal.html",
+          "selected_answer": "ABC",
+          "replies": []
+        }
+      ],
+      "question_number": "128",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92775-exam-cis-csm-topic-1-question-128-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "What does NLU stand for?",
+      "answers": [
+        "A. Natural-Learning Userability",
+        "B. Natural-Language Understanding",
+        "C. Natural-Learning URL",
+        "D. Natural-Language URL"
+      ],
+      "comments": [
+        {
+          "content": "E-book see 17.\n\nhttps://evantage.gilmoreglobal.com/reader/books/SN-CSMI-T010-PG-E/pageid/16",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is Correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \"ServiceNow® Natural Language Understanding (NLU)\"\n\nSource: https://docs.servicenow.com/bundle/vancouver-intelligent-experiences/page/administer/natural-language-understanding/concept/natural-language-understanding.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "129",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/123222-exam-cis-csm-topic-1-question-129-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Out-of-the-box. cases are automatically closed after how many days?",
+      "answers": [
+        "A. 3 days",
+        "B. 5 days",
+        "C. 10 days",
+        "D. Cases are not automatically closed by default"
+      ],
+      "comments": [
+        {
+          "content": "I think its D. Its 10 days with “Auto Close Resolved Cases”-flow activated, but this is not active by default.",
+          "selected_answer": "",
+          "replies": [
+            "If the flow is active, it closes after how many days, 5 or 10, in cases of active flow?"
+          ]
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Explanation: Auto Close Resolved Cases Flow Designer flow closes the case, however, \"This flow is not active by default.\"\n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/auto-close-customer-service-case.html",
+          "selected_answer": "D",
+          "replies": [
+            "If the flow is active, it closes after how many days, 5 or 10, in cases of active flow?"
+          ]
+        },
+        {
+          "content": "D correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "130",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/103217-exam-cis-csm-topic-1-question-130-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When are any changes to the platform considered a customization?",
+      "answers": [
+        "A. When they require an implementation spread across all project phases",
+        "B. If they are NOT applied through the usage of built-in tools on the Now Platform",
+        "C. When they are solely implemented for a custom application",
+        "D. When there are business demands for custom functionality that is not offered out-of-the-box"
+      ],
+      "comments": [
+        {
+          "content": "B is incorrect because built-in tools are used for many customizations  and Option D describes the need for a customization (\"business demands for custom functionality that is not offered out-of-the-box\"), but it doesn't explicitly state that a customization has been implemented. I hate such questions!",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D describes the need of a customization, but does not say that one has been done.. misleading question.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Explanation: kinda messy to explain read the ServiceNow Configuration vs Customization would indication D. the best fit as any changes to functionaliyt that is not offered out of box is considered a \"customization\"\n\nsource: https://www.servicenow.com/community/developer-articles/servicenow-configuration-vs-customization/ta-p/2415251",
+          "selected_answer": "D",
+          "replies": [
+            "Option D describes the need for a customization (\"business demands for custom functionality that is not offered out-of-the-box\"), but it doesn't explicitly state that a customization has been implemented.",
+            "B is incorrect because built-in tools are used for many customizations."
+          ]
+        },
+        {
+          "content": "D correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "I would say B.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I belive D is best Answer",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "131",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90599-exam-cis-csm-topic-1-question-131-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which solution must be implemented to let a breakdown dashboard appear as a pop-up window on the case form?",
+      "answers": [
+        "A. Service Analytics",
+        "B. In-form Analytics",
+        "C. Case Spotlight",
+        "D. CSM Prediction Results"
+      ],
+      "comments": [
+        {
+          "content": "I believe the correct answer should be B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "E-book see 282.\n\nhttps://evantage.gilmoreglobal.com/reader/books/SN-CSMI-T010-PG-E/pageid/281",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/vancouver-now-intelligence/page/use/performance-analytics/concept/in-form-analytics.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "132",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92049-exam-cis-csm-topic-1-question-132-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The case digests feature includes which types of case communication? (Choose two.)",
+      "answers": [
+        "A. Case Lifecycle Reports",
+        "B. Case Action Summaries",
+        "C. Post Case Reviews",
+        "D. Case Post Mortem"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/configure-case-digests.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is B and C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The case digests feature includes two types of case communication:\nCase action summary: while a case is in progress, agents can send periodic case updates that describe actions taken, next steps, and other case-related information.\nPost case review: when the work on a case has been completed, agents can a post case review document that captures details about the issue, such as the root cause, mitigation plan, and preventive actions.\n\nSource: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/configure-case-digests.html",
+          "selected_answer": "BC",
+          "replies": [
+            "E-book see 83.\n\nhttps://evantage.gilmoreglobal.com/reader/books/SN-CSMI-T010-PG-E/pageid/82"
+          ]
+        },
+        {
+          "content": "BC, see Vancouver: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/configure-case-digests.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BC Is Correct.\n\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/configure-case-digests.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \nThe case digests feature includes two types of case communication:\n\t- Case Action Summary: while a case is in progress, agents can send periodic case updates that describe actions taken, next steps, and other case-related information.\n\t- Post case review: when the work on a case has been completed, agents can a post case review document that captures details about the issue, such as the root cause, mitigation plan, and preventive actions.\n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/configure-case-digests.html",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "133",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90598-exam-cis-csm-topic-1-question-133-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "By default what can customers with the customer (sn_customerservice.customer) role see on the customer service portal? (Choose three.)",
+      "answers": [
+        "A. Assets",
+        "B. Publications",
+        "C. Products",
+        "D. Contacts",
+        "E. Contracts"
+      ],
+      "comments": [
+        {
+          "content": "I think it should be A, B and C.\nAssets: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/task/t_ViewAssetAndProductInformation.html\nPublications: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/task/t_TargetCommViewPubOnPortal.html\nProducts: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/task/view-product-info-csp.html",
+          "selected_answer": "",
+          "replies": [
+            "Checked on a PDI and couldn't see Contacts and Contracts so ABC seems right!"
+          ]
+        },
+        {
+          "content": "Confirmed in PDI, Customer Service Portal only has Asset, Publications and products",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct: A, B and C.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "ABC is correct",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "ABC is correct",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "ABC is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ABC IS Correct",
+          "selected_answer": "ABC",
+          "replies": []
+        }
+      ],
+      "question_number": "134",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108843-exam-cis-csm-topic-1-question-134-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "Which feature allows an agent to copy reusable messages to case or task forms to provide quick and consistent messages to users?",
+      "answers": [
+        "A. Quick Messages",
+        "B. Quick Actions",
+        "C. Response Templates",
+        "D. Templates"
+      ],
+      "comments": [
+        {
+          "content": "RESPONSE TEMPLATE IS CORRECT ANS",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "it's C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-servicenow-platform/page/product/human-resources/concept/response-templates-templated-snippets.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is Correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \"Response templates (formerly known as templated snippets) are reusable messages that can be copied to case or task forms to provide quick and consistent messages to users, or to display standard chat response messages to requesters in Agent Chat.\"\n\nsource: https://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/human-resources/concept/response-templates-templated-snippets.html",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "135",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90593-exam-cis-csm-topic-1-question-135-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In the Customer Service Management space what defines the term asset?",
+      "answers": [
+        "A. A physical item",
+        "B. A specific product instance supported for a customer",
+        "C. A product that a company supports",
+        "D. A resource that allows a business service"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/task/configure-csm-assets.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/task/configure-csm-assets.html#:~:text=An%20asset%20is%20a%20specific,is%20supported%20for%20a%20customer.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "136",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/123539-exam-cis-csm-topic-1-question-136-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which capabilities does the integration with Microsoft Outlook add-in offer? (Choose two.)",
+      "answers": [
+        "A. Escalate a case on the add-m panel of Outlook",
+        "B. Register the sender of an email as contact",
+        "C. As the Microsoft Outlook user, register yourself as self-contributor",
+        "D. Create cases using email content in Outlook for the customer contact"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/administer/workspace/task/integrate-outlook-csm.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "E-book CSM see 251.\n\nhttps://evantage.gilmoreglobal.com/reader/books/SN-CSMI-T010-PG-E/pageid/250",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD is Correct.\n\nPage 251 CSM Implementation eBook",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \"This integration enables you to manage workflows such as creating and updating contacts and cases from within Microsoft Outlook.\"\n\nsource: This integration enables you to manage workflows such as creating and updating contacts and cases from within Microsoft Outlook.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD correct",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD - pag 248 from Rome CSM Implementation",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "137",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90588-exam-cis-csm-topic-1-question-137-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "To which entities can Special Handling Notes be applied out of the box?",
+      "answers": [
+        "A. Consumer",
+        "B. Entitlement",
+        "C. Sold Product"
+      ],
+      "comments": [
+        {
+          "content": "sorry, my earlier answer is wrong, these are the entities where special handling notes can be applied : \"* Asset\n* Account\n* Case\n* ﻿﻿﻿Contact\n* ﻿﻿Incident\n* Product Model\n* Work Order Task\"\nHence none of the answer is correct,  somehow If I have to pick one of the answers I would go with Sold Product as there is Product model option is present, not correct though...",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Consumer is the right answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Special handling notes are used to bring important information to an agent’ attention.\n-\tEntitlement change\n-\tVIP Account & Customer\n-\tUrgent Issue \n-\tProduct recall Alert\nSource: E-book",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Tested in PDI you can create for Products as a condition on cases",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "There should be a 4th option. Consumer is not correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Special Handling Notes can apply to any of the following entities, based on specific attributes: Case, Account, Contact, Product Model, Asset",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "138",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/138866-exam-cis-csm-topic-1-question-138-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which service catalogs are available out-of-the-box in the customer portals? (Choose two.)",
+      "answers": [
+        "A. Partner Service",
+        "B. Customer Service",
+        "C. Consumer Service",
+        "D. Product Service"
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is B, C",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-servicenow-platform/page/product/service-catalog-management/concept/catalog-on-portal.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "BC is Correct",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "BC correct",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "I think it's AB. It's a customer portal , not consumer portal",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "139",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92776-exam-cis-csm-topic-1-question-139-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "Partner admin (sn_customerservice.partner_admin) contacts have access to:",
+      "answers": [
+        "A. Their customer account",
+        "B. Their partner accounts",
+        "C. Both",
+        "D. Neither"
+      ],
+      "comments": [
+        {
+          "content": "Partner administrator\n[sn_customerservice.partner_admin]\n\nAdministrator role for a partner account.\nThe partner administrator can do the following:\nAccess the data within the partner account.\nAccess the data created by the contacts in their company in the customer account.\nManage users for the partner account and for customer accounts.\nView all of the cases created by a partner.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct.\n\nhttps://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0639072#:~:text=by%20other%20people.-,sn_customerservice.,belonging%20to%20their%20own%20accounts.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "140",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/123540-exam-cis-csm-topic-1-question-140-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "From a security perspective, scoping brings several benefits: (Choose two.)",
+      "answers": [
+        "A. Improves instance security by limiting accessibility to other applications on the instance",
+        "B. Provides CSM teams the autonomy and control needed to configure and manage the CSM application, but not the CSM Service Portals",
+        "C. IT can manage and control the pace of the CSM teams because dependencies have been put in place",
+        "D. The scope holds the records and acts as a container for the desired Customer Service Management Applications"
+      ],
+      "comments": [
+        {
+          "content": "From a secutiry perspective, scoping brings which benefits ?\n-The scope \"holds\" the records ans acts as a container for the desired Customer Service Management applications\n-Improves instance security by limiting accessibility to other applications on the instance\n-Scoped application can be versioned for a governed change process",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD is correct",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "141",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90584-exam-cis-csm-topic-1-question-141-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "Advanced Work Assignment (AWA) pushes work to qualified agents using work item queues, routing conditions, and assignment criteria that you define. Which step would ensure the work was allocated to the appropriate agent?",
+      "answers": [
+        "A. Set the Agent Experience (What agents see in their Workspace inbox)",
+        "B. Define Assignment Rules (How to assign work items)",
+        "C. Define Work Item Queues (Where to route)",
+        "D. Configure Service Channels (What to route)"
+      ],
+      "comments": [
+        {
+          "content": "B is the correct answer.\n\nAssignment rule:\nCriteria that determines how work items are pushed to the appropriate agent within a qualified assignment group.\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-servicenow-platform/page/administer/advanced-work-assignment/concept/awa-overview.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Assignment rule\nCriteria that determines how work items are pushed to the appropriate agent within a qualified assignment group.\n\nhttps://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/administer/advanced-work-assignment/task/awa-create-assignment-rule.html",
+          "selected_answer": "B",
+          "replies": [
+            "About this task\n\nAfter installing the Advanced Work Assignment plugin and any relevant org-specific plugins, the following list outlines the basic planning and configuration steps that you must determine for AWA:\n\nDetermine what to route – Configure the base service channels to be used.\nDetermine where to route – Define the work item queues and the routing rules, execution order, work item sort order, and strategy.\nDetermine how to assign work items – Define the assignment rules that determine the work items pushed to agents.\nDetermine what the agent sees – Set the inbox card layouts and presence (availability) states that agents use in their Agent Workspace inbox."
+          ]
+        },
+        {
+          "content": "Assignment rule\nCriteria that determines how work items are pushed to the appropriate agent within a qualified assignment group.\n\nhttps://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/administer/advanced-work-assignment/concept/awa-overview.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "C is correct.\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-servicenow-platform/page/administer/advanced-work-assignment/concept/awa-overview.html",
+          "selected_answer": "C",
+          "replies": [
+            "Ignore this answer of mine the correct answer is B.\n\nAssignment rule:\nCriteria that determines how work items are pushed to the appropriate agent within a qualified assignment group."
+          ]
+        },
+        {
+          "content": "Explanation: \nUsers with the awa_admin role determine:\n\t- What to route: Configure the base service channels to be used.\n\t- Where to route: Define the work item queues and the routing rules, execution order, work item sort order, and strategy\n\t- How to assign work items: Define the assignment rules that determine the work items pushed to agents\n\t- What the agent sees: Set the inbox card layouts and presence (availability) states that agents use in their Agent Workspace inbox.\n\nSource: https://docs.servicenow.com/bundle/tokyo-servicenow-platform/page/administer/advanced-work-assignment/concept/awa-overview.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-servicenow-platform/page/administer/advanced-work-assignment/concept/awa-overview.html",
+          "selected_answer": "C",
+          "replies": [
+            "The doc seems to cite \"Assignment Rules\" (Assignment rule;\nCriteria that determines how work items are pushed to the appropriate agent within a qualified assignment group.)"
+          ]
+        }
+      ],
+      "question_number": "142",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90583-exam-cis-csm-topic-1-question-142-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What action can be performed by a Partner Admin (sn_customerservice.partner_admin) and NOT by a Partner (sn_customerservice partner) in the Customer Service Portal?",
+      "answers": [
+        "A. Can view assets belonging to their partner accounts",
+        "B. Can create, view, and edit cases for their partner accounts",
+        "C. Can resolve cases reported by their partner accounts",
+        "D. Can create and update contacts for their partner accounts"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is D",
+          "selected_answer": "D",
+          "replies": [
+            "https://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/concept/c_ManageUsersFromCustomerPortal.html"
+          ]
+        },
+        {
+          "content": "Correct answer is D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/reference/r_RolesInstalledWithCustomerService.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D\nhttps://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/reference/r_RolesInstalledWithCustomerService.html#r_RolesInstalledWithCustomerService__section_p5t_gcr_3mb",
+          "selected_answer": "D",
+          "replies": [
+            "Confirmed on a PDI as well!"
+          ]
+        },
+        {
+          "content": "https://servicenowhelpdesk.com/customer-service-management/",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "143",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90585-exam-cis-csm-topic-1-question-143-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What is a household entity?",
+      "answers": [
+        "A. Group of users that usually share a common address and use services as a group",
+        "B. Group of people that usually share a common address and use services as a group",
+        "C. Group of customers that usually share a common address and use services as a group",
+        "D. Group of consumers that usually share a common address and use services as a group"
+      ],
+      "comments": [
+        {
+          "content": "Correct Ans is D\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/reference/industry-data-model-households.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The household entity represents a group of consumers that usually share a common address and use services as a group.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer: D. Group of consumers that usually share a common address and use services as a group\n\nExplanation: \"A household has an address and consumers have their own addresses. These addresses do not need to be the same in order to add a consumer as a member to a household.\"\n\nSource: https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/reference/industry-data-model-households.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct Ans is D\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/reference/industry-data-model-households.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "144",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90580-exam-cis-csm-topic-1-question-144-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Why does the implementation team need to deliver core functionality to the customer as quickly as possible?",
+      "answers": [
+        "A. To expand the technical reach",
+        "B. To facilitate the requirement gathering during the workshops",
+        "C. To complete any complex customizations early enough",
+        "D. To realize near-term ROI (Return on Investment)"
+      ],
+      "comments": [
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "E-book CSM see page 229.\n\nhttps://evantage.gilmoreglobal.com/reader/books/SN-CSMI-T010-PG-E/pageid/228",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "145",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/123544-exam-cis-csm-topic-1-question-145-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Assignment workbench enables customer service managers to assign tasks to agents via configurable criteria known as Matching Rules. Which out-of-the-box configurable criteria can be used? (Choose three.)",
+      "answers": [
+        "A. Assigned Cases",
+        "B. Agent Affinity",
+        "C. Availability Today",
+        "D. Matching Skills",
+        "E. Agent History"
+      ],
+      "comments": [
+        {
+          "content": "Configuring the assignment workbench\nThe assignment workbench configuration is stored in a matching rule that is based on the Selection criteria matching type. The default configuration uses the Recommendation for Case Assignment matching rule, which includes three of the four default matching criteria:\nAvailability Today\nMatching Skills\nAssigned Cases\n\nSource: https://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/concept/case-assignment-workbench.html",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "ACD is correct.\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-customer-service-management/page/product/customer-service-management/concept/case-assignment-workbench.html",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "Explanation: \nThe default configuration uses the Recommendation for Case Assignment matching rule, which includes three of the four default matching criteria:\n\t- Assigned Cases (A.)\n\t- Matching Skills (C.)\n\t- Availability Today (D.)\n\nSource: https://docs.servicenow.com/bundle/vancouver-customer-service-management/page/product/customer-service-management/concept/case-assignment-workbench.html",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "Correct Ans\nhttps://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/concept/case-assignment-workbench.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "146",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90578-exam-cis-csm-topic-1-question-146-discussion/",
+      "most_voted": "ACD",
+      "error": null
+    },
+    {
+      "question": "Regarding Account Teams, what is the purpose of marking a role as 'unique'?",
+      "answers": [
+        "A. The role then becomes a child responsibility",
+        "B. Ensure there is a dedicated account manager for that account",
+        "C. The role then becomes a parent responsibility",
+        "D. Prevent the same role being used on different customer accounts"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-customer-service-management/page/product/customer-service-management/task/t_CreateAResponsibilityDefinition.html",
+          "selected_answer": "D",
+          "replies": [
+            "Unique\tOption that you can select to disable the duplicate entries for the responsibility definition."
+          ]
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "B \ndedicated role, can be a manager",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "D IS CORRECT",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is D\nhttps://docs.servicenow.com/bundle/tokyo-customer-service-management/page/product/customer-service-management/task/t_CreateAResponsibilityDefinition.html\n\nwhen you create 2 records for the some Account there UNIQUE flag is checked it will display and error \n<Company> already has <Responsibility Definition name> an as unique responsibility, duplicate not allowed for this account",
+          "selected_answer": "",
+          "replies": [
+            "Tried on a PDI as well!",
+            "Above should be B instead of D - my mistake"
+          ]
+        },
+        {
+          "content": "I believe the correct answer should be B",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "147",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92558-exam-cis-csm-topic-1-question-147-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Configuration items (CIs) are entities that capture the individual configurations for each product sold to the customer CIs are stored in the configuration management database (CMDB). Assets are specific product instances that are supported for a customer. Which of the following statements is correct for CIs and assets?",
+      "answers": [
+        "A. The contract and entitlements of an asset dictate whether or not it is stored in the CMDB",
+        "B. The CMDB only tracks CIs, assets cannot be CIs",
+        "C. While the CMDB may track some assets as configuration items (CIs) not ALL assets are CIs",
+        "D. The CMDB tracks all assets as configuration items (CIs)"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/hardware-asset-management/concept/work-with-asset-ci.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "148",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/123547-exam-cis-csm-topic-1-question-148-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following statements is correct when the 'Contact Local Time' field is enabled in a case form?",
+      "answers": [
+        "A. The field is not based of the customers profile time zone",
+        "B. The field is active in the base form",
+        "C. The field is always based on the system time zone",
+        "D. Agents can use the field to identify if it is the right time to contact customer"
+      ],
+      "comments": [
+        {
+          "content": "I believe D is correct.\n\nIn the ebook, it is written:\n\"Time Zone / Contact Local Time\n\nAgent can identify if it is the right time to contact customer. Based on customer's time-zone, their local time will be displayed\".\n\nCSM Fundamentals, Organizational Structure and Case - Basic Principles, Case - Basic Principles, Useful Features",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "I believe the correct answer should be D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/tokyo-customer-service-management/page/product/customer-service-management/reference/r_CustomerServiceCaseForm.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": [
+            "I feel none of the options are correct, plz refer the doc link",
+            "Yes, Too belive but  i was just checked in the instance it is display date and time based on the field contact filed so Option D is correct"
+          ]
+        }
+      ],
+      "question_number": "149",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90574-exam-cis-csm-topic-1-question-149-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following roles can update a consumer's record? (Choose two.)",
+      "answers": [
+        "A. Consumer Support Agent {sn_customerservice.consumer_agent)",
+        "B. Customer Service Manager (sn_customerservice_manager)",
+        "C. Customer Service Agent (sn_customerservice_agent)",
+        "D. Customer (sn_customerservice.customer)"
+      ],
+      "comments": [
+        {
+          "content": "Correct Ans Should be A and B:\nhttps://vceguide.com/which-of-the-following-roles-cannot-update-a-consumers-record/",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AB is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "internal Roles\n- Business-to-business (B2B)\n- sn_customerservice_agent\n- sn_customerservice_manager\n- Business-to-consumer (B2C)\n- sn_customerservice.consumer_agent\n- sn_customerservice_manage\n\nsource: https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/reference/r_RolesInstalledWithCustomerService.html",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AB is correct",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AB is correct",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "A and B",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "150",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90573-exam-cis-csm-topic-1-question-150-discussion/",
+      "most_voted": "AB",
+      "error": null
+    }
+  ]
+}

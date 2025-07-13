@@ -1,0 +1,1779 @@
+{
+  "chunk_id": 0,
+  "start_question": 1,
+  "end_question": 50,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "An HR Admin without the System Admin role can do what? (Choose three.)",
+      "answers": [
+        "A. Grant roles to users or groups",
+        "B. Modify the HR Administration > Properties",
+        "C. Reset user passwords",
+        "D. Create HR Criteria",
+        "E. Configure business rules",
+        "F. Add users to groups"
+      ],
+      "comments": [
+        {
+          "content": "I think the answer should be : BDF",
+          "selected_answer": "BDF",
+          "replies": []
+        },
+        {
+          "content": "BDF should be right.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer should be: BDF",
+          "selected_answer": "BDF",
+          "replies": []
+        },
+        {
+          "content": "BDF - confirmed in my instance",
+          "selected_answer": "BDF",
+          "replies": []
+        },
+        {
+          "content": "Technically, only DF are correct. HR Implementation",
+          "selected_answer": "DF",
+          "replies": []
+        },
+        {
+          "content": "Not C, so BDF --> Platform HR Admins cannot change the password of any user with a scoped HR role (page 13)",
+          "selected_answer": "BDF",
+          "replies": []
+        },
+        {
+          "content": "The answer BDF",
+          "selected_answer": "BDF",
+          "replies": []
+        },
+        {
+          "content": "BDF 100%",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "sorry BDF are correct",
+          "selected_answer": "BDF",
+          "replies": []
+        },
+        {
+          "content": "a d f are correct\nhttps://docs.servicenow.com/en-US/bundle/utah-employee-service-management/page/product/human-resources/concept/c_ManageRoles.html",
+          "selected_answer": "ADF",
+          "replies": []
+        },
+        {
+          "content": "The answer is BDF",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "1",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102059-exam-cis-hr-topic-1-question-1-discussion/",
+      "most_voted": "BDF",
+      "error": null
+    },
+    {
+      "question": "After the HR Admin [sn_hr_core.admin] role has been removed from the Admin role, how may a user with only the Admin role add members to HR groups?",
+      "answers": [
+        "A. The Admin must elevate their role to security_admin to add members to HR groups.",
+        "B. The Admin follows the same process as with any group membership change.",
+        "C. The Admin can no longer add members to HR groups.",
+        "D. The Admin must impersonate an HR Admin to add members to HR groups."
+      ],
+      "comments": [
+        {
+          "content": "From the sn docs: After system configuration, remove the HR Administrator role from IT System Administrator to prevent the IT System Administrator from viewing sensitive HR information. This will ensure that only the HR Administrator [sn_hr_core.admin] has access to the sensitive information.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I also have tried that admin role has the override in spite of any role not being tagged to it, so it is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-employee-service-management/page/product/human-resources/concept/c_ManageRoles.html",
+          "selected_answer": "C",
+          "replies": [
+            "Also page 18 HR Fundamentals ebook"
+          ]
+        },
+        {
+          "content": "It's B, try it on your instance. The admin can always add users to groups.",
+          "selected_answer": "",
+          "replies": [
+            "Sorry, wrong, i didn't logged out from the instance"
+          ]
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "2",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102060-exam-cis-hr-topic-1-question-2-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In the Create Bulk Cases module, which Filter by options are available in the dropdown? (Choose four.)",
+      "answers": [
+        "A. Document Template",
+        "B. Upload File",
+        "C. HR Service Template",
+        "D. User Criteria",
+        "E. HR Template",
+        "F. HR Profiles",
+        "G. HR Criteria"
+      ],
+      "comments": [
+        {
+          "content": "Right Answer is BDFG",
+          "selected_answer": "BDFG",
+          "replies": []
+        },
+        {
+          "content": "BDFG is right",
+          "selected_answer": "BDFG",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "BDFG",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/task/bulk-case-segment.html",
+          "selected_answer": "BDFG",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "BDFG",
+          "replies": []
+        }
+      ],
+      "question_number": "3",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102061-exam-cis-hr-topic-1-question-3-discussion/",
+      "most_voted": "BDFG",
+      "error": null
+    },
+    {
+      "question": "If you have both Admin and HR Admin roles and wanted to configure an Access Control for the Employee Relations Cases table, what must first be done?",
+      "answers": [
+        "A. Add the Delegated Developer role to your User record",
+        "B. From the User dropdown in the banner, elevate your role to security_admin",
+        "C. Manually add the security_admin role to your User record",
+        "D. Nothing would need to be done"
+      ],
+      "comments": [
+        {
+          "content": "Answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "You can’t do ACLs without elevating to security admin and you cannot just add security admin to yourself.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Because duhh :)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "b is corretc",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B. You must elevate tole to security_admin.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B! You can't manually assign security_admin role without having the security_admin role itself and to have it yous should first Elevate role",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer : C\n\nManually add the security_admin role to your User record provided the logged in user  has secruity_admin role because only user with security_admin role can give this role to another admin.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "4",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102062-exam-cis-hr-topic-1-question-4-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What type of information does the HR Profile contain?",
+      "answers": [
+        "A. Personal employee data",
+        "B. Group membership and role information",
+        "C. User login and department information",
+        "D. A user’s password"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/c_HRProfileRecords.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "5",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102063-exam-cis-hr-topic-1-question-5-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "How many User Criteria Records may be applied to a single KB or KB Article?",
+      "answers": [
+        "A. Only two",
+        "B. Only three",
+        "C. Unlimited",
+        "D. Only one"
+      ],
+      "comments": [
+        {
+          "content": "Correct Answer should be : C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Says nothing about a limit, so C --> https://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/knowledge-management/task/t_SelectUserCriteria.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Unlimited",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C tested",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "6",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102064-exam-cis-hr-topic-1-question-6-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In the base ServiceNow instance, how are User Criteria used?",
+      "answers": [
+        "A. To control which users can access the HR Case application",
+        "B. To control what a user sees in the information and suggested reading widgets",
+        "C. To control read and write access to Knowledge bases and articles",
+        "D. To control which users can access the HR Service Portal"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-platform-user-interface/page/build/service-portal/concept/user-criteria.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct is C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "7",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102065-exam-cis-hr-topic-1-question-7-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following are true for an HR application as it relates to the User [sys_user] Table and the HR Profile [sn_hr_core.profile] Table?",
+      "answers": [
+        "A. Both are required.",
+        "B. Only HR Profile table is required in HR.",
+        "C. Neither are required.",
+        "D. Only the User table is required in HR."
+      ],
+      "comments": [
+        {
+          "content": "Correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "8",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102066-exam-cis-hr-topic-1-question-8-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "In the base instance, what determines the conditions a Case must meet before it can be assigned to an agent?",
+      "answers": [
+        "A. Matching Rules",
+        "B. Client Rules",
+        "C. ACLs",
+        "D. Escalation Rules"
+      ],
+      "comments": [
+        {
+          "content": "Advanced Work Assignment (AWA) or Assignment and Matching rules determine the Assignment Group and Assignee. Skills may also be part of the assignment process (page 38)",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "9",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102067-exam-cis-hr-topic-1-question-9-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What role is required, at a minimum, to view confidential HR Profile data?",
+      "answers": [
+        "A. HR Admin [sn_hr_core.admin]",
+        "B. HR Basic [sn_hr_core.basic]",
+        "C. LE Admin [sn_hr_le.admin]",
+        "D. HR Manager [sn_hr_core.manager]"
+      ],
+      "comments": [
+        {
+          "content": "B is correct\n\nsn_hr_core.basic contains the role sn_hr_core.profile_writer\n\nhttps://docs.servicenow.com/bundle/washingtondc-employee-service-management/page/product/human-resources/concept/c_HRProfileSecurity.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "10",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102068-exam-cis-hr-topic-1-question-10-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What types of HR Document templates may be created in ServiceNow? (Choose two.)",
+      "answers": [
+        "A. Document Templates",
+        "B. Word document templates",
+        "C. PDF document templates",
+        "D. Text document templates"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/c_HRDocumentTemplates.html",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "A, C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "11",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102069-exam-cis-hr-topic-1-question-11-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "What are the advantages of removing the HR Admin role from the system Admin role after the HR Implementation tasks have been completed? (Choose two.)",
+      "answers": [
+        "A. This ensures that HR has control over further HR configurations.",
+        "B. The HR Admin role should remain a part of the system Admin role.",
+        "C. This ensures that confidential HR data is only accessible to users with an HR role.",
+        "D. It is not necessary because the system Admin always has access to all HR data."
+      ],
+      "comments": [
+        {
+          "content": "correct",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "12",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102070-exam-cis-hr-topic-1-question-12-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "What does ServiceNow now call the HR application?",
+      "answers": [
+        "A. HRDS - HR Deliver Service",
+        "B. HRSM - HR Service Management",
+        "C. HRMS - HR Management System",
+        "D. HRSD - HR Service Delivery"
+      ],
+      "comments": [
+        {
+          "content": "D is the Correct Answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct: D",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "13",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122561-exam-cis-hr-topic-1-question-13-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What defines an employee's access to the HR Service Portal / Employee Service Center?",
+      "answers": [
+        "A. Group membership",
+        "B. User Criteria",
+        "C. HR Criteria",
+        "D. Client Roles"
+      ],
+      "comments": [
+        {
+          "content": "HR criteria uses the standard platform condition builder to support complex conditions for controlling the Employee Center content that employees see when logged in.\n\nHR criteria:\n- Filters content on the Employee Center\n\nhttps://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/hr-criteria.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/c_ClientRoles.html",
+          "selected_answer": "D",
+          "replies": [
+            "Also page 53 of Fundamentals ebook: Client Roles grant employees access to HR-specific parts of the system for self-service"
+          ]
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "14",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102071-exam-cis-hr-topic-1-question-14-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What kind of records do HR Requests create?",
+      "answers": [
+        "A. HR Incidents",
+        "B. HR Files",
+        "C. HR Problems",
+        "D. HR Cases"
+      ],
+      "comments": [
+        {
+          "content": "Page 21 HR Fundamentals ebook",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "15",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102072-exam-cis-hr-topic-1-question-15-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "In the HR Guided Setup Module, why are some tasks locked in the Task view?",
+      "answers": [
+        "A. They require an elevated role to access.",
+        "B. They are deprecated tasks that should not be completed.",
+        "C. They require other tasks to be completed first.",
+        "D. They require a plugin to be activated first."
+      ],
+      "comments": [
+        {
+          "content": "Correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Page 34 implementation ebook: Some tasks may be locked because they require a plugin to be activated.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Both C and D are correct as per the documentation which states:\nLock icon\nWhen it appears in front of an activity, task, or subtask, you cannot access the item. You may need to activate a plugin or complete a prerequisite task to unlock it.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "16",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102073-exam-cis-hr-topic-1-question-16-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following are examples of HR application scopes? (Choose four.)",
+      "answers": [
+        "A. Human Resources: COE",
+        "B. Human Resources: Core",
+        "C. Human Resources: Knowledge",
+        "D. Human Resources: Integrations",
+        "E. Human Resources: Lifecycle Events",
+        "F. Human Resources: Global",
+        "G. Human Resources: Service Portal"
+      ],
+      "comments": [
+        {
+          "content": "B,D,E,G:\nPlease see documentation: https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0691402\n\n Human Resources Scoped App: Core\n Human Resources Scoped App: Service Portal\n Human Resources Scoped App: Integrations\n Human Resources Scoped App: Data Migration\n Human Resources Scoped App: Lifecycle Events\n Human Resources Scoped App: Employee Document Files\n Human Resources Scoped App: Virtual Agent Conversations",
+          "selected_answer": "BDEG",
+          "replies": []
+        },
+        {
+          "content": "B,D,E,G (for some reason, it allows me to select 3 only, although BDEG is correct)",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "B,D,E,G",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BDE; There are core, employee relations, integrations, lifecycle events, lifecycle enterprise",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "this is not 'Human Ressources : Service Portal' but just 'Employee Center' (scope)",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "Corrent answer\nHuman resource : core\nHuman resource : Integration\nHuman resource : Life Cycle event\nHuman resource : Employee relation\nHuman resource : Life Cycle event enterprise",
+          "selected_answer": "BDE",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "BDEG",
+          "replies": []
+        }
+      ],
+      "question_number": "17",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102074-exam-cis-hr-topic-1-question-17-discussion/",
+      "most_voted": "BDEG",
+      "error": null
+    },
+    {
+      "question": "How can an HR Administrator or Content writer limit which employees will see content on the Employee Service Center?",
+      "answers": [
+        "A. All employees will see the same information",
+        "B. Client roles automatically limit what is visible to employees",
+        "C. Using User Criteria",
+        "D. Using HR Criteria"
+      ],
+      "comments": [
+        {
+          "content": "I think answer should be : D\n\nHR criteria defines the audience for HR content, services, or cases. You can make information available to or create an HR case for specific groups, individuals, or to all employees using HR criteria.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "HR Fundamentals ebook page 110: HR Criteria are sets of filters used to define the audience for HR content or Bulk HR Cases. HR Criteria may be used to determine what an employee sees on the Employee Center Pro.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "user criteria is used for knowledge Article Access VA HR criteria is use for Portal access.\nD is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D\nuser cariteria is used for knowledge Article Access VA HR criteria is use for Portal access.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It should be D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D for sure",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "18",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102075-exam-cis-hr-topic-1-question-18-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "If the Audience field has been configured on a Lifecycle Event Activity, what will the system do if the subject person does not meet the criteria for that Activity?",
+      "answers": [
+        "A. the activity must be manually closed by the HR professional",
+        "B. the Lifecycle Event will be canceled",
+        "C. the activity must be manually closed by the Subject person",
+        "D. the activity will be skipped"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is D.  \"If employee does not meet the criteria, the activity will be skipped\".  Page 106",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer : D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the answer. Implementation ebook, pg. 84",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Page 84 of HR Implementation ebook",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D. From the Implementaion training book: \"Audience records contain sets of filters used to define who may view content. When an Audience is defined on a Lifecycle event activity, but not on activity set, the activity will only be triggered if the employee meets the conditions. In the example shown, the task will only be triggered if the employee is remote. If an employee does not meet the criteria, the activity will be skipped\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "d is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "19",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102076-exam-cis-hr-topic-1-question-19-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "The ServiceNow SIM methodology is based around what generic methodologies?",
+      "answers": [
+        "A. Waterfall and Rapid Application Development (RAD)",
+        "B. Agile and Waterfall",
+        "C. Prince",
+        "D. Scrum and XP"
+      ],
+      "comments": [
+        {
+          "content": "I think right answer should be : B - Agile and waterfall.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Definitely Agile",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B korrect",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B - Agile & Waterfall.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct is B - Agile and Waterfall",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "20",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102077-exam-cis-hr-topic-1-question-20-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "If an HR Services needs to be accessible to employees on the Employee Service Center, what field must be completed on the HR Service?",
+      "answers": [
+        "A. Checklist",
+        "B. Fulfiller Instructions",
+        "C. Lifecycle Event type",
+        "D. Record Producer"
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 140: If you need to make an existing HR service available for employee self-service, you can configure a record producer to make the service available as an HR catalog item in the HR service catalog",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "21",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102078-exam-cis-hr-topic-1-question-21-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "HR Profiles may be created for multiple employees using conditions and criteria in which module?",
+      "answers": [
+        "A. Create Human Resources Profile",
+        "B. Create new Case",
+        "C. Generate HR Profiles",
+        "D. Bulk Cases"
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 75: HR profiles for multiple employees may be created using the Generate HR Profiles module.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "22",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102080-exam-cis-hr-topic-1-question-22-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "User authentication and Instance restriction are examples of what type of security?",
+      "answers": [
+        "A. Physical Security",
+        "B. Roles and Groups",
+        "C. Contextual Security",
+        "D. Platform Access"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 149: Under Platform Access you find User Authentication, Instance Restriction and Scoped Application.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "23",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102081-exam-cis-hr-topic-1-question-23-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "If the HR Service does not have any Case options specified, HR Documents must be manually generated for the HR Case.<br/>In this situation, who is able to generate an HR document for the Case?",
+      "answers": [
+        "A. Any HR professional",
+        "B. Only an HR Admin",
+        "C. Only an HR Manager",
+        "D. Only the assigned to person"
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 116",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "From the Fundamentals training book: \"Only the assigned HR professional can manually generate the associated HR Document on a Case\"",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D korrect",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Looks like D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Definitely D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Is it D?",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "24",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102082-exam-cis-hr-topic-1-question-24-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When does the HR Template populate information on the HR Case form?",
+      "answers": [
+        "A. When the Opened for person is selected",
+        "B. When the Assignment group is selected.",
+        "C. When the HR Case Type is selected.",
+        "D. When the HR service is selected on the HR Case Creation form."
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 105: The HR Template associated with the HR Service is used to complete the defined fields on the Case Form",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "25",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102083-exam-cis-hr-topic-1-question-25-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "The HR Profile table is used to track information for what Employment types? (Choose three.)",
+      "answers": [
+        "A. Other",
+        "B. Potential Employee",
+        "C. Full Time Employee",
+        "D. Temporary Employee",
+        "E. Spouse",
+        "F. Contractor"
+      ],
+      "comments": [
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "CDF",
+          "replies": []
+        }
+      ],
+      "question_number": "26",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102084-exam-cis-hr-topic-1-question-26-discussion/",
+      "most_voted": "CDF",
+      "error": null
+    },
+    {
+      "question": "If the HRSD application is scoped, why can the System Administrator initially access all HR applications after the plugin has been installed?",
+      "answers": [
+        "A. When the HR plugins are installed, the necessary HR roles are added to the Admin role.",
+        "B. The roles were manually granted by a ServiceNow security user.",
+        "C. The Admin will always have access to all HR tables and data.",
+        "D. The roles were manually granted by an HR Admin."
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 30: The associated Admin role for each HR plugin is automatically added to the system Admin role so that they may assist with the initial implementation. After the implementation is complete, these roles may be removed from the Admin role for added security.\n\nAlso page 17 of the HR Fundamentals ebook.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "27",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102085-exam-cis-hr-topic-1-question-27-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Scenario: You have an existing ITSM customer who is now implementing HR Enterprise. In UAT, they discovered that they get an error message about a Read operation from the HR scope to the Global scope being denied. You have verified that each Script Include was written correctly.<br/>What else must be done to allow the Script Includes to work in the HR application?",
+      "answers": [
+        "A. The Status of the associated record on the Application Restricted Caller Access list must be set to Denied.",
+        "B. You must create a custom ACL to allow the script includes to work.",
+        "C. The Status of the associated record on the Application Restricted Caller Access list must be set to Allowed.",
+        "D. You must change Scope for the script includes to work."
+      ],
+      "comments": [
+        {
+          "content": "Correct Answer : C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "It must be C with these options, but this is what the HR Implementation ebook (page 16) says: Customizations that reference a script include can lead to RCA errors when upgrading. To help prevent this issue, you can Add the appropriate RCA record / Reset the script include's caller access to none.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer : C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C 100%",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "c correkt",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C, definitely",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Absolutely C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Definitely C",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "28",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102086-exam-cis-hr-topic-1-question-28-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In the HR Guided Setup Module, the Configuration View displays which of the following for a Category? (Choose three.)",
+      "answers": [
+        "A. Properties",
+        "B. Gauges",
+        "C. Dashboards",
+        "D. Lists",
+        "E. Overviews",
+        "F. Forms"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 34",
+          "selected_answer": "ADF",
+          "replies": []
+        },
+        {
+          "content": "From implementation training book: \"Configuration View: set configurations through the corresponding forms, lists, properties, etc. It also provides access to contextual embedded help, contextual documentation on the ServiceNow product documentation site, and guided tour (if available for an activity).\"",
+          "selected_answer": "ADF",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "ADF",
+          "replies": []
+        }
+      ],
+      "question_number": "29",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102087-exam-cis-hr-topic-1-question-29-discussion/",
+      "most_voted": "ADF",
+      "error": null
+    },
+    {
+      "question": "What method needs to be invoked from MatchingRuleProcessor class?",
+      "answers": [
+        "A. processAndGetCandidates",
+        "B. processAndGetUsers",
+        "C. processAndGelList",
+        "D. processAndGetArray"
+      ],
+      "comments": [
+        {
+          "content": "The correct Answer is A\nReference: https://docs.servicenow.com/csh?topicname=t_InvokeMatchingRuleAPI.html&version=latest",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "30",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102088-exam-cis-hr-topic-1-question-30-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "If an HR Service will only be used internally by HR professionals, what is the minimum configuration needed?",
+      "answers": [
+        "A. HR Service and HR Template.",
+        "B. HR Service, HR Template, and Record Producer.",
+        "C. HR Service.",
+        "D. HR Service, HR Template, Record Producer, and Lifecycle event type."
+      ],
+      "comments": [
+        {
+          "content": "answer is HR Service. HR Fundamentals ebook pg. 140: \"If an HR Service only needs to be available to HR Professionals, only the HR Service configuration is necessary.\"",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "31",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102089-exam-cis-hr-topic-1-question-31-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "The Knowledge bases searched for the Knowledge results section on an HR Case are determined by what?",
+      "answers": [
+        "A. Contextual Search configuration",
+        "B. HR Service configuration",
+        "C. HR Criteria configuration",
+        "D. Knowledge Management configuration"
+      ],
+      "comments": [
+        {
+          "content": "Correct Answer : A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "From the guide:  The Knowledge bases searched for the Knowledge results section on an HR Case are determined by the Contextual Search configuration.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "HR Implementation ebook page 187",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "From the implementation training book: \"The Knowledge bases searched for the Knowledge results section on an HR Case are determined by the Contextual Search configuration\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A 100%",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "32",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102090-exam-cis-hr-topic-1-question-32-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When gathering requirements for HR Services, it is best to begin by defining the Service then working upwards, categorizing in progressively more detail.<br/>What are the basic categories used?",
+      "answers": [
+        "A. HR Service, Topic Detail, COE.",
+        "B. HR Service, Topic Category, Activity Category, Activities, COE.",
+        "C. HR Service, Topic Category, COE.",
+        "D. HR Service, Topic Detail, Topic Category, COE."
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 31",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "33",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102091-exam-cis-hr-topic-1-question-33-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "If a knowledge base and its articles have no user criteria selected, a user without a role can do what?",
+      "answers": [
+        "A. read and contribute articles",
+        "B. read articles, but not contribute",
+        "C. can neither read nor contribute articles",
+        "D. contribute, but not read articles"
+      ],
+      "comments": [
+        {
+          "content": "There seems to be a contradiction in the documentation and the settings:\n\nThis note indicates it's B:\nhttps://docs.servicenow.com/bundle/tokyo-servicenow-platform/page/product/knowledge-management/task/t_SelectUserCriteria.html\n\nBut it depends on a property to deny access which is turned on by default - that seems to indicate it's C:\nhttps://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/knowledge-management/reference/r_KnowledgeProperties.html",
+          "selected_answer": "",
+          "replies": [
+            "based in the description for [glide.knowman.block_access_with_no_user_criteria] \"Enter the value as true to deny *contribute access* to a knowledge base when Can Contribute or Can Read user criteria isn’t set.\"\nThe default value for the property is \"true\"\n\nBased on this description, I believe B is still the correct answer."
+          ]
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "34",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102092-exam-cis-hr-topic-1-question-34-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "How does ServiceNow know which HR Template to use on an HR Case?",
+      "answers": [
+        "A. The HR Template is referenced on the HR Service record.",
+        "B. The HR Template is referenced on the record producer form.",
+        "C. Each COE has a specific HR Template.",
+        "D. The HR Template is selected directly on the Catalog item."
+      ],
+      "comments": [
+        {
+          "content": "I think the right answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Template field is on the HR Service record and the Record Producer, but for HR, the record to update is HR Service so A is correct.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "the answer is A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A it should be",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A\nHR Service Record",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "35",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102093-exam-cis-hr-topic-1-question-35-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What are the key differentiators between an HR Profile record and a User record? (Choose three.)",
+      "answers": [
+        "A. The HR Profile stores the employee's assigned delegates.",
+        "B. The HR Profile includes group membership information.",
+        "C. The HR Profile includes employee organizational information like Colleagues.",
+        "D. The HR Profile stores login credential information.",
+        "E. The HR Profile may include employee marital status.",
+        "F. The HR Profile is intended to store confidential employee data that is pertinent for HR."
+      ],
+      "comments": [
+        {
+          "content": "I think answer should be - CEF",
+          "selected_answer": "CEF",
+          "replies": []
+        },
+        {
+          "content": "CEF - confirmed in my instance.",
+          "selected_answer": "CEF",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/c_HRProfileSecurity.html",
+          "selected_answer": "CEF",
+          "replies": []
+        },
+        {
+          "content": "CEF is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "CEF is korrect",
+          "selected_answer": "CEF",
+          "replies": []
+        },
+        {
+          "content": "Colleagues can be found in Related Lists \nAnswer is CEF",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "36",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102094-exam-cis-hr-topic-1-question-36-discussion/",
+      "most_voted": "CEF",
+      "error": null
+    },
+    {
+      "question": "If a customer has a huge employee population, complex organizational structures, and requires custom integrations and language translations, what level of configuration complexity would their project be considered?",
+      "answers": [
+        "A. Drastic",
+        "B. Low",
+        "C. Major",
+        "D. Nominal"
+      ],
+      "comments": [
+        {
+          "content": "Page 197 implementation ebook",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "From the implementation training book: \nMajor Configuration: Applies to any customer that wants to make significant changes to the base instance. These customers often have a large employee populations, varied business units with varying business needs, and/or is global. These customers may need custom integrations or language translations.\nDrastic Configuration: Applies to any customer who suggests they would need exorbitant changes to the base instance. These customers often have a huge employee population, complex organizational structures",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct. \nPage 35 in HR Implementation eBook (Rome)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Definitely A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Should be A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "37",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102096-exam-cis-hr-topic-1-question-37-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When an employee completes a questionnaire on an Employee Form, on which table does the system store their answers?",
+      "answers": [
+        "A. Form [sys_ui_form]",
+        "B. Metric Result [asmt_metric_result]",
+        "C. Question Answer [question_answer]",
+        "D. HR Case [sn_hr_core_case]"
+      ],
+      "comments": [
+        {
+          "content": "Since Employee Forms use Surveys; https://docs.servicenow.com/bundle/xanadu-employee-service-management/page/product/human-resources/task/configure-hr-employee-form.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "HR Implementation ebook page 185: Because questions on the employee form are built using the survey designer, the answers collected are saved to the Metric Result table",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "38",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102097-exam-cis-hr-topic-1-question-38-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "With the I18N: Knowledge Management Internationalization Plugin v2 enabled, how are translated Knowledge articles associated with each other so that the user is presented with the article in the selected language?",
+      "answers": [
+        "A. Article Versions related list",
+        "B. Knowledge feedback related list",
+        "C. Affected Products related list",
+        "D. Translated Versions related list"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/employee-center/concept/upgrades-to-knowledge-article-translation-behavior-in-connected-content.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "39",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102098-exam-cis-hr-topic-1-question-39-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When creating a PDF Document Template, where does the list of Document Revisions come from?",
+      "answers": [
+        "A. From Managed Documents",
+        "B. From Document Templates",
+        "C. From Knowledge Articles",
+        "D. From System Documents"
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 132",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "40",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102099-exam-cis-hr-topic-1-question-40-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Only users with which role, at a minimum, may view the confidential data on the HR Profiles table?",
+      "answers": [
+        "A. Profile Writer [sn_hr_core.profile_writer]",
+        "B. Profile Reader [sn_hr_core.profile_reader]",
+        "C. HR Case Writer [sn_hr_le.case_writer]",
+        "D. HR Case Reader [sn_hr_le.case_reader]"
+      ],
+      "comments": [
+        {
+          "content": "Correct Answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "HR Fundamentals ebook page 74: Data associated with the HR profile is stored confidentially and is only viewable by HR professionals with the Profile Reader (sn_hr_core.profile_reader) role.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Definitely B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "41",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102100-exam-cis-hr-topic-1-question-41-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What determines if a user can view a Knowledge article?",
+      "answers": [
+        "A. Can/Cannot Read User Criteria",
+        "B. Can/Cannot Contribute User Criteria",
+        "C. HR Criteria",
+        "D. ACL Rules"
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 167: to select User Criteria on the Knowledge article level, the HR Admin will need to add the Can Read and Cannot Read fields to the Knowledge Article form.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "42",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102101-exam-cis-hr-topic-1-question-42-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What do Client Roles define?",
+      "answers": [
+        "A. Groups for the customer's clients.",
+        "B. Roles that come into force if user uses a browser client.",
+        "C. Named roles (eg VP of Operations, SVP Sales) for a customer’s clients.",
+        "D. Access for new hires, employees, alumni, contingent, and contract workers."
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 53",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "d is correct$\nhttps://docs.servicenow.com/en-US/bundle/utah-employee-service-management/page/product/human-resources/concept/c_ClientRoles.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "43",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102102-exam-cis-hr-topic-1-question-43-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When a Guided Setup task is marked as complete, how can it be reopened?",
+      "answers": [
+        "A. Closed tasks cannot be reopened",
+        "B. Click the Mark as Incomplete button",
+        "C. Submit a request in HI",
+        "D. Restart the Guided Setup entirely"
+      ],
+      "comments": [
+        {
+          "content": "b is correct\nhttps://docs.servicenow.com/bundle/rome-platform-administration/page/administer/core-configuration/concept/guided-setup.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "44",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102103-exam-cis-hr-topic-1-question-44-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When creating a PDF Document template, the Document revision field must be completed.<br/>How does the system determine which documents are available to be selected for this field?",
+      "answers": [
+        "A. You must be a member of the Owning Group for the Managed Document",
+        "B. All Documents are visible",
+        "C. Your group memberships and the Document owner field on the Managed Document record",
+        "D. You must have created the Managed Document record"
+      ],
+      "comments": [
+        {
+          "content": "://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/task/PDFTemplate.html\n\nNote: User group and document owner determine what revisions are available to view or select.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/task/PDFTemplate.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "45",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102105-exam-cis-hr-topic-1-question-45-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is used to create a link on an HR Case form that accesses information outside the application?",
+      "answers": [
+        "A. HR Service",
+        "B. Link Generator",
+        "C. Restricted Caller Access",
+        "D. COE Configuration"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 186: The Link Generator is used to create a link on the HR Case form that hyperlinks to an external site.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "46",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102106-exam-cis-hr-topic-1-question-46-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When configuring a PDF Document Template, how does the system map form fields to ServiceNow fields?",
+      "answers": [
+        "A. The Document field type on the PDF Template Mappings record",
+        "B. The Preview value field on the PDF Template Mappings record",
+        "C. The Mapping field on the PDF Template Mappings record",
+        "D. The Document field on the PDF Template Mappings record"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": [
+            "In the PDF Document Template record, you'll find a related list called \"Field Maps\". Here, you can create new records to map each PDF form field to a ServiceNow field. You do this by specifying the PDF form field's name and selecting the corresponding ServiceNow field."
+          ]
+        },
+        {
+          "content": "HR Fundamentals ebook page 134",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "From the fundemantals training book: \nhe HR Leadership team wants to personalize PDF documents by using field mapping to pre-fill information from ServiceNow tables into HR Document Templates.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct one.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct answers",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct\n\nhttps://docs.servicenow.com/bundle/utah-employee-service-management/page/product/human-resources/task/PDFTemplateMapping.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct answer is C ; mapping field - Field that maps information into your document.\nhttps://docs.servicenow.com/en-US/bundle/utah-employee-service-management/page/product/human-resources/task/edit-pdf-mappings.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "47",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102107-exam-cis-hr-topic-1-question-47-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "If the Match All field is checked on a User Criteria record, the user:",
+      "answers": [
+        "A. Must satisfy at least one of the criteria to meet the conditions.",
+        "B. Must satisfy at least of the criteria to meet the conditions.",
+        "C. Must satisfy a majority percentage of the criteria to meet the conditions.",
+        "D. Must satisfy all of the selected criteria to meet the conditions."
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct. HR Fundmentals ebook p.169",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "HR Fundamentals ebook page 169: If the Match All field is checked, the user must satisfy all of the selected criteria to meet the conditions.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D correkt",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Must be D  \"all\" = Match all",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "48",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102241-exam-cis-hr-topic-1-question-48-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "If a new HR Knowledge base is created, how can it be included in the Knowledge results section on the HR Case form?",
+      "answers": [
+        "A. Add it to the HR Template",
+        "B. Add it to the HR Service configuration",
+        "C. All Knowledge bases are searched by default",
+        "D. Add it to the Contextual Search configuration"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer : D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "HR Fundamentals ebook page 187: The Knowledge bases searched for the Knowledge results section on an HR Care are determined by the Contextual Search configuration. This means that if a customer has any new HR knowledge bases, those articles will not be returned in the knowledge results section unless the Contextual Search configuration is updated.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is B.",
+          "selected_answer": "",
+          "replies": [
+            "p.201 : Correct answer is D: Contextual Search configuration"
+          ]
+        }
+      ],
+      "question_number": "49",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102242-exam-cis-hr-topic-1-question-49-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "How is the HR template associated with an HR service?",
+      "answers": [
+        "A. On the HR service record",
+        "B. On the Lifecycle Event Activity Set",
+        "C. On the HR template record",
+        "D. On the HR case"
+      ],
+      "comments": [
+        {
+          "content": "Correct Answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "HR Implementation ebook page 38: the HR Template associated with the HR Service is used to complete the defined fields on the Case form.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A korrect",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct answer is A, checked on ServiceNow HR service record page is where the HR template will be associated with that HR service",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "d is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-employee-service-management/page/product/human-resources/concept/hr-template-configuration.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "A is correct.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "50",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102243-exam-cis-hr-topic-1-question-50-discussion/",
+      "most_voted": "A",
+      "error": null
+    }
+  ]
+}

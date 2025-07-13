@@ -1,0 +1,833 @@
+{
+  "chunk_id": 3,
+  "start_question": 151,
+  "end_question": 180,
+  "questions_count": 30,
+  "questions": [
+    {
+      "question": "Which of these automatic restocking actions are available in baseline? (Choose two.)",
+      "answers": [
+        "A. Create a task assigned to stock room manager to contact procurement manager",
+        "B. Create a task assigned to the stock room manage to create a purchase order",
+        "C. Create a new asset from any returned inventory",
+        "D. Create a transfer order to restock from another stockroom",
+        "E. Create a transfer order to restock from a vendor"
+      ],
+      "comments": [
+        {
+          "content": "Definitely B and D, see docs extract below:\n\nThere are two restocking options:\n\nAn email can be sent to the stockroom manager (user identified in the Manager field on the stockroom record) to place a vendor order. A task is automatically created for the stockroom manager or, if Procurement is active, purchase order and a purchase order line item are created.\nA transfer order can be generated automatically to restock the item from another stockroom.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Marka's text from page 372 HAMF Vancouver",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD\nThe two automatic restocking actions are:\nCreate a task assigned to the stockroom manager to create a purchase order; an email is sent to the stockroom manager notifying them of the task\nCreate a transfer order to restock from another stockroom",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "152",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127038-exam-cis-ham-topic-1-question-152-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "When sourcing a requested item from a supplier using the catalog task form to create a purchase order, the catalog item must be available in:",
+      "answers": [
+        "A. Supplier Catalog",
+        "B. Product Catalog",
+        "C. Inventory Catalog",
+        "D. Vendor Catalog"
+      ],
+      "comments": [
+        {
+          "content": "vendor catalog",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer: D. Vendor Catalog\n\nExplanation: \"The vendor catalog is a list of goods available from different vendors.\"\n\nSource: https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/product-catalog/concept/c_ManageVendorCatalogItems.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D\nTo source a request by purchasing it, select Add Purchase Order. With Vendor catalog Items created, you can select the vendor from whom you wish to purchase. The pull-down displays the vendors and their current price for the items.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Vendor catalog",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "153",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115891-exam-cis-ham-topic-1-question-153-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What information would you find on the Procurement tab of the Hardware Asset dashboard? (Choose two.)",
+      "answers": [
+        "A. Hardware nearing end of warranty",
+        "B. Hardware model normalization status",
+        "C. Hardware expenditure by vendor",
+        "D. Hardware models up for end of life",
+        "E. New hardware assets found by audits",
+        "F. Requests that require sourcing"
+      ],
+      "comments": [
+        {
+          "content": "C and F. Just checked on the nowlearning ham instance.",
+          "selected_answer": "CF",
+          "replies": []
+        },
+        {
+          "content": "C and F. Just checked on the nowlearning ham instance.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "CF  are correct answers. Checked on Now Learning.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Page 319 HAMF Vancouver",
+          "selected_answer": "CF",
+          "replies": []
+        },
+        {
+          "content": "C- Expenditure by vendor\nF- Request that require sourcing",
+          "selected_answer": "CF",
+          "replies": []
+        },
+        {
+          "content": "C- Expenditure by vendor\nF- Request that require sourcing \nPurchase orders pending delivery \nOrders by vendor \nLocation (Choice list)\nYear (Choice list)",
+          "selected_answer": "CF",
+          "replies": []
+        }
+      ],
+      "question_number": "154",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115647-exam-cis-ham-topic-1-question-154-discussion/",
+      "most_voted": "CF",
+      "error": null
+    },
+    {
+      "question": "Since trustworthy data is key to good asset management practices, where would you look to determine the number of days until next Content Service download will occur?",
+      "answers": [
+        "A. Asset > Administration",
+        "B. Asset > Overview",
+        "C. Asset Hardware Model Normalization > Content Service Setup",
+        "D. Asset > Asset Audits > Asset Audits",
+        "E. Asset > Hardware Asset Dashboard"
+      ],
+      "comments": [
+        {
+          "content": "Just checked my instance - only correct answer is E - on the Hardware Asset Dashboard, on the 'Model Management' tab.\n\nThe Content Service Setup is incorrect as you can only see the setup, not when it's due.  The other place you van find it is menu option is 'Asset>Hardware Model Normalization>Overview' which opens the 'Hardware Normalization Dashboard'",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "Page 113 HAMF Vancouver",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "Hardware Asset Dashboard > Model Management tab",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "Hardware Asset Dashboard > Model Management tab",
+          "selected_answer": "E",
+          "replies": []
+        }
+      ],
+      "question_number": "155",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115893-exam-cis-ham-topic-1-question-155-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "Which mobile app can users leverage to view the assets assigned to them and create incidents to report issues with their devices?",
+      "answers": [
+        "A. Now Agent Mobile app",
+        "B. Now Onboarding app",
+        "C. Now Mobile app",
+        "D. Now My Assets app"
+      ],
+      "comments": [
+        {
+          "content": "C is correct as per the NowLearning materials",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Verified via Docs: \"Use the ServiceNow Mobile app to view the assets that are assigned to you, to report any issues with your assets, and to remotely receive new assets. Create incidents to report any issues with your assets to your IT department.\"\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-service-management/page/product/asset-management/concept/now-mobile-asset.html#:~:text=Use%20the%20ServiceNow%20Mobile%20app,Store%20or%20Google%20Play%20Store.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "156",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115894-exam-cis-ham-topic-1-question-156-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When creating a stock rule that replenishes from a vender, what is primary requirement for the warehouse stockroom? (Choose two.)",
+      "answers": [
+        "A. The stockroom manager must have a valid email address",
+        "B. The stockroom must have an assigned manager",
+        "C. The stockroom must have an assignment group",
+        "D. The stockroom manager must have a valid mobile phone",
+        "E. The stockroom manager must have a valid time zone"
+      ],
+      "comments": [
+        {
+          "content": "Verified via DOCS",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "To satisfy the below Stock Manager needs to be assigned to the Stockroom and have the valid email to receive notifications from the instance: \n- Create a task assigned to the stockroom manager to create a purchase order; an email is sent to the stockroom manager notifying them of the task",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "Verified via ServiceNow Docs",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "157",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115902-exam-cis-ham-topic-1-question-157-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "Which tab on the Hardware Asset Dashboard enables tracking asset models with missing purchase details?",
+      "answers": [
+        "A. Asset Heath",
+        "B. Procurement",
+        "C. Model Management",
+        "D. Inventory",
+        "E. End of Lite"
+      ],
+      "comments": [
+        {
+          "content": "Page 318 of Vancouver HAMF",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A\nAsset Health tab\nThis tab gives you an overview of hardware and consumable models that are missing purchase information, undiscovered over a period one month of missing, scheduled for retirement, or reported with most incidents. Use Location and Model Category filters to view asset health reports of particular location and model respectively.\nhttps://docs.servicenow.com/bundle/vancouver-it-asset-management/page/use/dashboards/application-content-packs/hardware-asset-content-pack.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The answer is A. Asset Health Tab\nThis tab gives you an overview of hardware and consumable models that are missing purchase information, undiscovered over a period one month of missing, scheduled for retirement, or reported with most incidents. Use Location and Model Category filters to view asset health reports of particular location and model respectively.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "158",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114995-exam-cis-ham-topic-1-question-158-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "To utilize the contract rate cards features, which plugin is required to be activated?",
+      "answers": [
+        "A. Financial Management",
+        "B. Contract Management",
+        "C. Rate Management",
+        "D. Cost Management"
+      ],
+      "comments": [
+        {
+          "content": "Page 454 HAMF Vancouver",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D\nBefore you begin\nYou must activate the Cost Management plugin to use rate cards.\nhttps://docs.servicenow.com/bundle/utah-it-service-management/page/product/contract-management/task/t_ContractRateCardsAndExpenseLines.html#:~:text=You%20must%20activate%20the%20Cost%20Management%20plugin%20to%20use%20rate%20cards.&text=A%20contract%20rate%20card%20provides,lines%20for%20recurring%20expenses%20automatically.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Verified via Docs: \"You must activate the Cost Management plugin to use rate cards.\"\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-service-management/page/product/contract-management/task/t_ContractRateCardsAndExpenseLines.html#:~:text=You%20must%20activate%20the%20Cost%20Management%20plugin%20to%20use%20rate%20cards.&text=A%20contract%20rate%20card%20provides,lines%20for%20recurring%20expenses%20automatically.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "159",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115897-exam-cis-ham-topic-1-question-159-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "The current value of an asset (original cost less the depreciated amount) is known as:",
+      "answers": [
+        "A. Cost of ownership",
+        "B. Residual value",
+        "C. Current balance",
+        "D. Salvage value"
+      ],
+      "comments": [
+        {
+          "content": "Page 466 of Vancouver text",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "160",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128398-exam-cis-ham-topic-1-question-160-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following are considered original costs as opposed to operational expenses? (Choose three.)",
+      "answers": [
+        "A. Warranty costs",
+        "B. Purchase price or lease cost",
+        "C. Delivery costs",
+        "D. Resource costs for support",
+        "E. Replacement parts",
+        "F. Maintenance agreements"
+      ],
+      "comments": [
+        {
+          "content": "Page 452 HAMF Vancouver textbook",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "ABC\nAs per NowLearning \nOriginal costs are the dollars involved in purchasing an asset and putting it into use, such as:\nPurchase price or lease cost\nTaxes paid at time of purchase or while in stock waiting to be put in use\nDelivery costs\nStorage costs\nInstallation costs\nWarranty costs",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "Correction. After further review the correct answers are ABC",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "\"ServiceNow Asset Management serves as a repository for all the costs associated with\nassets throughout their lifecycle. This can include the initial acquisition cost, lease\ncharges, warranty fees, support and maintenance contract payments, and labor\ncharges.\"\n\nhttps://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/resource-center/data-sheet/ds-hardware-asset-management-orlando.pdf",
+          "selected_answer": "ABF",
+          "replies": []
+        }
+      ],
+      "question_number": "161",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115992-exam-cis-ham-topic-1-question-161-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "After installing the Hardware Asset Management (HAM) plugin, how do you update it when new versions become available?",
+      "answers": [
+        "A. The HI portal team automatically updates as new versions become available",
+        "B. On your instance, filter on application updates, then click Update",
+        "C. On your instance, filter on application updates, then request an update from HI",
+        "D. Run scheduled job, HAM Check for Updates, and request an update",
+        "E. Check the HI portal for updates and request an update"
+      ],
+      "comments": [
+        {
+          "content": "B is correct as per the provided evidence below",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B\nAs per NowLearning: \nHow do you check for and install new updates?\nYou can check for and install updates on your instance under: System Applications > All Available ApplicationsManagement and locating the Hardware Asset application.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is B not C disregard my last.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "162",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116516-exam-cis-ham-topic-1-question-162-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Baseline ITSM Asset Management provides which features? (Choose three.)",
+      "answers": [
+        "A. Mobile My Assets",
+        "B. Hardware Model Normalization",
+        "C. Asset Inventory Audit",
+        "D. Hardware Asset Dashboard",
+        "E. Hardware Manufacturer Lifecycle Dates",
+        "F. Stockrooms",
+        "G. Mobile Asset Receiving"
+      ],
+      "comments": [
+        {
+          "content": "ITSM Asset Management \nAsset&Model records\nStockrooms\nTransfer orders\nPurchase orders\nContracts\nMobile asset receiving for employees\nMobile My Asset",
+          "selected_answer": "AFG",
+          "replies": []
+        },
+        {
+          "content": "Verified via ServiceNow HAM(f) course",
+          "selected_answer": "AFG",
+          "replies": [
+            "Is question number 6 not the same with this?",
+            "Question #6 is the opposite of this question, it's asking for which base plugins are included in ITAM (HAM) while this one is talking about ITSM plugins for asset management, 2 different products (kinda)"
+          ]
+        }
+      ],
+      "question_number": "163",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115901-exam-cis-ham-topic-1-question-163-discussion/",
+      "most_voted": "AFG",
+      "error": null
+    },
+    {
+      "question": "Taxes paid at the time of purchase are what type of cost?",
+      "answers": [
+        "A. Operating Expense",
+        "B. Capital Expense",
+        "C. Operating Cost",
+        "D. Original Cost"
+      ],
+      "comments": [
+        {
+          "content": "HAM Text",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The answer is D Original Cost",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "164",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/134853-exam-cis-ham-topic-1-question-164-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Within the asset audit form, where would you find the list of all assets that are currently assigned to the stockroom or warehouse that is being audited?",
+      "answers": [
+        "A. Labelled assets",
+        "B. Expected assets",
+        "C. Inventoried assets",
+        "D. Scanned assets",
+        "E. Stored assets"
+      ],
+      "comments": [
+        {
+          "content": "Definitely B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer is B",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "165",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/135538-exam-cis-ham-topic-1-question-165-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When a hardware asset is retired what happens to any existing software allocations on that asset?",
+      "answers": [
+        "A. The software allocations remain with the hardware asset and need to be reclaimed manually",
+        "B. The software allocations are handled based upon the configuration of the system property glide.ham.retire_sw()",
+        "C. The software allocations are removed from the asset but not returned to inventory",
+        "D. The software allocations are automatically returned back into inventory"
+      ],
+      "comments": [
+        {
+          "content": "Answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Majority of searches on the internet searches point to A, so I will go with A. Also surprised no one is considering B as the property configuration determines the actual reclamation via option B \"system property glide.ham.retire_sw()\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer is A. I specifically remember this exact sentence from my studying",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "should be D. Manual actions only happens in Pre-Ham. With HAM, this is done automatically by the Asset task.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "If you use the offboard request then only steps are there which ensures removal of allocations and returning to inventory, it doesn't happen automatically.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer is A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "166",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/135251-exam-cis-ham-topic-1-question-166-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which are valid hardware model lifecycle phases? (Choose three.)",
+      "answers": [
+        "A. General Availably",
+        "B. Upgrade",
+        "C. End of Subscription",
+        "D. Pre-release",
+        "E. Beta",
+        "F. End of Life"
+      ],
+      "comments": [
+        {
+          "content": "ADF - As per ServiceNow online course",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Question misleading - only 2 valid options A and F\n\nconfirmed via docs today:  \nhttps://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/hardware-asset-management/reference/hardware-model-fields.html\n(Vancouver is the same as Washington)",
+          "selected_answer": "AF",
+          "replies": []
+        },
+        {
+          "content": "Hardware Model Lifecycles for Vancouver are\nPre-Release\nGeneral Availability\nEnd of Sale\nEnd of Support\nEnd of Extended Support\nEnd of Life",
+          "selected_answer": "ADF",
+          "replies": []
+        },
+        {
+          "content": "This question is incorrect/misleading.  There are only two(2) valid ones on the list.  A and F\n\nValid lifecycle phases are:  \n\nGeneral Availability\nEnd of Sale\nEnd of Support\nEnd of Extended Support\nEnd of Life",
+          "selected_answer": "AF",
+          "replies": [
+            "Pre-release is also a lifecycle phase.\nHardware has been purchased, Plans are in progress for releasing for general availability."
+          ]
+        }
+      ],
+      "question_number": "167",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/138272-exam-cis-ham-topic-1-question-167-discussion/",
+      "most_voted": "AF",
+      "error": null
+    },
+    {
+      "question": "What functionality enables you to automatically create asset records from information provided by your vendor while your assets are still in transit?",
+      "answers": [
+        "A. Advanced Shipment Notification (ASN)",
+        "B. Advanced Vendor Notification (AVN)",
+        "C. Automatic Shipment Notification (ASN)",
+        "D. Automatic Asset Notification (AAN)",
+        "E. Advanced Delivery Notification (ADN)"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/hardware-asset-management/task/advanced-shipment-notification.html\n\nAnswer is A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "168",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/136485-exam-cis-ham-topic-1-question-168-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "During an audit, when is the Scanned Assets related list updated in the asset audit form?",
+      "answers": [
+        "A. When the nightly scheduled job runs",
+        "B. Every 15 minutes",
+        "C. Every hour",
+        "D. Each time scans are submitted from the app",
+        "E. Every time an item is scanned from the app"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/hardware-asset-management/reference/audit-results.html\n\nAnswer is D",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "169",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/136483-exam-cis-ham-topic-1-question-169-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Key features of consumables are: (Choose two.)",
+      "answers": [
+        "A. Can be discovered",
+        "B. Managed in bulk",
+        "C. Retired on consumption",
+        "D. Fixed cost",
+        "E. Low value"
+      ],
+      "comments": [
+        {
+          "content": "B and E Manage in bulk and low value",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B and E",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "172",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157577-exam-cis-ham-topic-1-question-172-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What baseline flow could you use to replace hardware assets nearing their end-of-life?",
+      "answers": [
+        "A. Loaner Asset Refresh",
+        "B. Update Asset Request",
+        "C. Hardware Asset Refresh",
+        "D. Refresh Asset Request"
+      ],
+      "comments": [
+        {
+          "content": "Checked my instance",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "173",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157578-exam-cis-ham-topic-1-question-173-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Fixed assets refer to what type of assets?",
+      "answers": [
+        "A. Current assets",
+        "B. Intangible assets",
+        "C. Short-term assets",
+        "D. Long-term assets"
+      ],
+      "comments": [
+        {
+          "content": "From the course\n\n\"Fixed assets are purchased for long term and are not likely to be converted easily to cash.\"",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "174",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157582-exam-cis-ham-topic-1-question-174-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which single view of the Hardware Asset Workspace provides a consolidated set of quick links to manage model normalization, asset requests, transfer orders, stock orders, refresh requests, and disposal orders?",
+      "answers": [
+        "A. Hardware asset overview",
+        "B. Inventory",
+        "C. Asset estate",
+        "D. Procurement",
+        "E. Asset operations"
+      ],
+      "comments": [
+        {
+          "content": "Should be A. Just checked my instance.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "175",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157178-exam-cis-ham-topic-1-question-175-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When an employee leaves a company and their manager submits an Asset Reclamation Request for them which of their assigned assets are reclaimed by default?",
+      "answers": [
+        "A. All hardware and software assets but not consumable assets",
+        "B. All hardware, software, and consumable assets selected in the reclaim asset service catalog",
+        "C. All hardware software and consumable assets",
+        "D. All hardware and software assets selected in the reclaim asset service catalog"
+      ],
+      "comments": [
+        {
+          "content": "D, I tested in my instance",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "176",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157581-exam-cis-ham-topic-1-question-176-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What does the depreciation effective date field modify on the depreciation tab? (Choose three.)",
+      "answers": [
+        "A. Salvage value",
+        "B. Residual date",
+        "C. Depreciated amount",
+        "D. Residual value",
+        "E. Depreciation quantity"
+      ],
+      "comments": [
+        {
+          "content": "I tested it in my instance and this community post talks about it\n\nhttps://www.servicenow.com/community/sam-forum/please-explain-depreciation-calculation-process-it-is-auto-or/td-p/1307607",
+          "selected_answer": "BCD",
+          "replies": []
+        }
+      ],
+      "question_number": "177",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157580-exam-cis-ham-topic-1-question-177-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "What is the second tier of the capability blueprint?",
+      "answers": [
+        "A. Practical management",
+        "B. Strategic conformance",
+        "C. Trustworthy data",
+        "D. Operational integration",
+        "E. Financial management"
+      ],
+      "comments": [
+        {
+          "content": "It's actually A. Practical Management\n\nJust checked my instance",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Practical Management is the second tier.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "178",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157179-exam-cis-ham-topic-1-question-178-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which view within the Hardware Asset Management Workspace enables Asset Managers to work on features such as RMA request lines asset audits, disposal orders and stock orders?",
+      "answers": [
+        "A. Asset estate",
+        "B. Asset operations",
+        "C. Inventory",
+        "D. Model management"
+      ],
+      "comments": [
+        {
+          "content": "Inventory\n\nJust checked my instance",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "180",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157180-exam-cis-ham-topic-1-question-180-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What information would you find on me Model Management tab of me Hardware Asset dashboard? (Choose two.)",
+      "answers": [
+        "A. Hardware nearing end of lease",
+        "B. Hardware model normalization status",
+        "C. Hardware models up for end of life",
+        "D. Hardware model expenditure by vendor",
+        "E. Hardware model purchase orders pending delivery",
+        "F. New hardware assets found by audits"
+      ],
+      "comments": [
+        {
+          "content": "Checked my instance",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "181",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157579-exam-cis-ham-topic-1-question-181-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "What is required to manage utilization of the Hardware Asset Management Content Service?",
+      "answers": [
+        "A. The service must be opted in to and can be opted out of in the future, if required.",
+        "B. The service must be opted in to, but once enabled it cannot be opted out of.",
+        "C. A script must be defined to identify what information should be shared with the Content Service.",
+        "D. Nothing. The service is atomically enabled and cannot be opted out of.",
+        "E. The service is automatically enabled through the baseline installation but can be opted out of, if required."
+      ],
+      "comments": [
+        {
+          "content": "A\n\nhttps://www.servicenow.com/docs/bundle/yokohama-it-asset-management/page/product/hardware-asset-management/task/opt-in-hardware-normalization.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "182",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157181-exam-cis-ham-topic-1-question-182-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What is the first tier of the capability blueprint?",
+      "answers": [
+        "A. Practical management",
+        "B. Strategic conformance",
+        "C. Trustworthy data",
+        "D. Operational integration",
+        "E. Financial management"
+      ],
+      "comments": [
+        {
+          "content": "C\n\nConfirmed by looking in my course",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "183",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157661-exam-cis-ham-topic-1-question-183-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Populating CMDB tables using import sets can inadvertently result in duplicate configuration items (CIs). To minimize this duplication, you can apply what process to the import sets?",
+      "answers": [
+        "A. Import set prioritization",
+        "B. Manual reconciliation",
+        "C. Identification and reconciliation",
+        "D. Transform map consolidation"
+      ],
+      "comments": [
+        {
+          "content": "C\n\nhttps://www.servicenow.com/docs/bundle/yokohama-servicenow-platform/page/product/configuration-management/concept/exploring-ire.html",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "184",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157104-exam-cis-ham-topic-1-question-184-discussion/",
+      "most_voted": "C",
+      "error": null
+    }
+  ]
+}

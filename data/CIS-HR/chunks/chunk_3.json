@@ -1,0 +1,471 @@
+{
+  "chunk_id": 3,
+  "start_question": 151,
+  "end_question": 169,
+  "questions_count": 19,
+  "questions": [
+    {
+      "question": "When creating a new Lifecycle Event activity set, what happens when the audience field is set as empty?",
+      "answers": [
+        "A. The activity set applies to all employees.",
+        "B. The activity set applies for a specific group of people.",
+        "C. The activity set will not apply to a specific group of people.",
+        "D. The activity set will not apply to any employees."
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 81: If the audience field is empty, the activity set applies to all employees.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "154",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128564-exam-cis-hr-topic-1-question-154-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which base instance application delivers the results of current state metrics?",
+      "answers": [
+        "A. HR Integrations",
+        "B. Employee Center",
+        "C. HR Dashboards and Reports",
+        "D. Performance Analytics"
+      ],
+      "comments": [
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I also think it’s C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "static -> reprots and not PA",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Why D? Reports are perfect for current state data. Performance Analytic to analyse data over time. So shouldn't it be C?",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "155",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/132785-exam-cis-hr-topic-1-question-155-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which application delivers employees an omni-channel learning experience to enable timely access to the correct learning?",
+      "answers": [
+        "A. Document Templates",
+        "B. Manager Hub",
+        "C. Employee Relations",
+        "D. Learning Posts"
+      ],
+      "comments": [
+        {
+          "content": "HRSD Implementation ebook page 106",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D, Learning posts that is part of Journey Accelerator.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "157",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/134797-exam-cis-hr-topic-1-question-157-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "If an HR Service needs to be accessible to employees on the Employee Center, which field must be completed on the HR Service record?",
+      "answers": [
+        "A. Record Producer",
+        "B. Taxonomy Topic",
+        "C. Catalog item",
+        "D. Checklist"
+      ],
+      "comments": [
+        {
+          "content": "Record producer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is A, Record Producer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Record Producer is configured on the HR Service record.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "158",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/133686-exam-cis-hr-topic-1-question-158-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What is the purpose of Journey designer?",
+      "answers": [
+        "A. It tracks the progress of Lifecycle Events and onboarding cases using the dashboards.",
+        "B. It passes information from the lifecycle event case to a child case or task",
+        "C. It manages the dependencies of activities within an activity set.",
+        "D. It combines Lifecycle Event cases and Journey Accelerator action plans."
+      ],
+      "comments": [
+        {
+          "content": "D, correct answer.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "159",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/134798-exam-cis-hr-topic-1-question-159-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which content delivery feature will allow a user to deliver messages to employees and invite them to a meeting where survey results will be shared?",
+      "answers": [
+        "A. Campaigns",
+        "B. Journey Accelerator",
+        "C. Scheduling",
+        "D. Listening Posts"
+      ],
+      "comments": [
+        {
+          "content": "Campaigns for content experience\n\nhttps://docs.servicenow.com/bundle/washingtondc-employee-service-management/page/product/employee-center/concept/ecpro-campaigns.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "161",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/134148-exam-cis-hr-topic-1-question-161-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which learning task template field allows creation of the short description and description in one or more languages?",
+      "answers": [
+        "A. Language Table",
+        "B. Description Template",
+        "C. Additional fields",
+        "D. Global descriptions for translations"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-employee-service-management/page/product/human-resources/concept/translation-of-hr-cases-and-tasks.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct, D",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "162",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/134796-exam-cis-hr-topic-1-question-162-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "With the I18N: Knowledge Management Internationalization Plugin v2 enabled, how are translated Knowledge articles associated with each other so that the user is presented with the article in the selected language?",
+      "answers": [
+        "A. Article Versions related list",
+        "B. Translated Versions related list",
+        "C. Localization list",
+        "D. Dynamic translations list"
+      ],
+      "comments": [
+        {
+          "content": "B is correct. Checked in pdi",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "163",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137201-exam-cis-hr-topic-1-question-163-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which base instance application delivers the results of current state metrics?",
+      "answers": [
+        "A. Employee Center",
+        "B. Performance Analytics",
+        "C. HR Reports",
+        "D. HR Integrations"
+      ],
+      "comments": [
+        {
+          "content": "Agree,  answer should be C.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Report = current data\nPerformance Analytics = data over time",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "STATIC -> report and not PA",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "It should be C. HR Reports are showing current state metrics.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "164",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/132821-exam-cis-hr-topic-1-question-164-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which feature prevents editing or purging of employee documents based on an HR Profile?",
+      "answers": [
+        "A. Retention Policy",
+        "B. Legal Holds",
+        "C. Security Policy",
+        "D. Topic Detail"
+      ],
+      "comments": [
+        {
+          "content": "B is correct\n\nhttps://docs.servicenow.com/bundle/washingtondc-employee-service-management/page/product/human-resources/concept/hr-doc-management-admin.html\n\n\"Place an HR profile or document type on legal hold: Placing an HR profile or document type on legal hold prevents associated employee documents from being purged after the retention period has been reached.\"",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "166",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137202-exam-cis-hr-topic-1-question-166-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "In terms of bulk cases what Status label is given to a User that no longer matches the criteria defined in User Segments?",
+      "answers": [
+        "A. Duplicate",
+        "B. Inactive",
+        "C. Included",
+        "D. Excluded"
+      ],
+      "comments": [
+        {
+          "content": "To remove a user from the user segment group, double-click in the Status column for the user you want to remove and change to Excluded.\nhttps://docs.servicenow.com/bundle/utah-employee-service-management/page/product/human-resources/task/bulk-case-segment-manage.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "168",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/135554-exam-cis-hr-topic-1-question-168-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What happens when a cross-scope attempt is executed?",
+      "answers": [
+        "A. The record is automatically added to the Restricted Caller Access Privileges table",
+        "B. The record is automatically set to caller tracking",
+        "C. The Read record status is set to requested before the system will allow the script to run",
+        "D. The record status is automatically set to allowed"
+      ],
+      "comments": [
+        {
+          "content": "A is correct. The system does not allow execution. This must be manually changed to allowed. The answer is c is irritating and incorrect",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I believe it should be A?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "\"When a cross-scope application attempts to access a resource set to Caller Restriction, the system denies access to the resource and creates a record in the Restricted Caller Access table with a status of Requested.\"\n\nhttps://docs.servicenow.com/bundle/vancouver-application-development/page/build/applications/task/set-RCA-level.html",
+          "selected_answer": "C",
+          "replies": [
+            "so it is A?"
+          ]
+        }
+      ],
+      "question_number": "170",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/132787-exam-cis-hr-topic-1-question-170-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What are the functions of a journey template owner? (Choose three.)",
+      "answers": [
+        "A. Restrict inter-departmental transfer of sensitive case details",
+        "B. Manage the order and flow of the journey stages and tasks",
+        "C. Create task templates for their audience in a simple user-friendly experience",
+        "D. Message new hire to welcome them to the team",
+        "E. Change only the task templates that they own"
+      ],
+      "comments": [
+        {
+          "content": "BCE is correct",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "BCE is correct",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "sorry should BCE",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-release-notes/page/release-notes/hr-service-delivery/hr-jny-designer-v2-rn.html\n\nourney template owners, who are enabled to manage and create journeys templates for assigned audiences, can do the following actions:\nCreate task templates for their audience in a simple, user-friendly experience.\nChange only the task templates that they own.\nManage the order and flow of the journey stages and tasks.\nManage the journey templates from the Employee Center for the intended audience that is defined in the template.",
+          "selected_answer": "BDE",
+          "replies": []
+        }
+      ],
+      "question_number": "172",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/146410-exam-cis-hr-topic-1-question-172-discussion/",
+      "most_voted": "BDE",
+      "error": null
+    },
+    {
+      "question": "What does the template field referenced on the HR Service record do?",
+      "answers": [
+        "A. Populate fields on a Journey task",
+        "B. Populate responses for HR agents",
+        "C. Populate fields on the HR Profile",
+        "D. Populate fields on the HR Case record"
+      ],
+      "comments": [
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "174",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/148088-exam-cis-hr-topic-1-question-174-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which option allows a user to make a copy of a campaign?",
+      "answers": [
+        "A. User Campaign",
+        "B. Copy Campaign",
+        "C. Update Campaign",
+        "D. Clone Campaign"
+      ],
+      "comments": [
+        {
+          "content": "clone campaign allows to cody everything associated with that campaign",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "175",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/153849-exam-cis-hr-topic-1-question-175-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which feature enables agents to have discussions about their work in the Next Experience user interface?",
+      "answers": [
+        "A. Work Notes",
+        "B. Sidebar overview",
+        "C. Connect Chat",
+        "D. Scheduling"
+      ],
+      "comments": [
+        {
+          "content": "Connect Chat is not available on the latest releases. Now is the sidebar discussion section.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "185",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/150565-exam-cis-hr-topic-1-question-185-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which application is used to analyze trends, patterns, and data on the Team Insights page?",
+      "answers": [
+        "A. Manager Hub",
+        "B. HR Integrations",
+        "C. Employee Center",
+        "D. Lifecycle Events"
+      ],
+      "comments": [
+        {
+          "content": "Answer is A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "187",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/148092-exam-cis-hr-topic-1-question-187-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which application is used to send prompts to managers and employees in their flow of work?",
+      "answers": [
+        "A. HR Performance Analytics",
+        "B. Proactive Prompts",
+        "C. Lifecycle Events",
+        "D. HR integrations"
+      ],
+      "comments": [
+        {
+          "content": "Proactive Prompts enable contextual and proactive engagement for managers and employees by bringing actionable insights as prompts into their flow of work.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "194",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/148093-exam-cis-hr-topic-1-question-194-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When using Agent workspace for Case Management, how can the maximum default size of 30MB for an Employee Document be changed?",
+      "answers": [
+        "A. Using the maximum file upload size in megabytes Security policy",
+        "B. Using the file upload size system property",
+        "C. Using the maximum file upload size in megabytes field in the Employee Document Properties",
+        "D. Using the maximum file upload size business rule"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/xanadu-employee-service-management/page/product/human-resources/reference/employee-doc-properties.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "y default, the maximum size of a document allowed is 30 MB. The default can be changed from the Maximum file upload size in megabytes field in Employee Document Properties.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "197",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/148094-exam-cis-hr-topic-1-question-197-discussion/",
+      "most_voted": "C",
+      "error": null
+    }
+  ]
+}

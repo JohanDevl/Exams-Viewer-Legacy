@@ -1,0 +1,563 @@
+{
+  "chunk_id": 4,
+  "start_question": 201,
+  "end_question": 224,
+  "questions_count": 24,
+  "questions": [
+    {
+      "question": "What defines which catalog items, and in what order, are included in an Order Guide?",
+      "answers": [
+        "A. Order guide template",
+        "B. Rules",
+        "C. Variable sets",
+        "D. UI policies"
+      ],
+      "comments": [
+        {
+          "content": "IT Service Management (ITSM) Implementation - Vancouver page-146",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Checked on PDI",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "201",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139695-exam-cis-itsm-topic-1-question-201-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "A customer requires incidents to automatically move to a Closed state from Resolved after 7 days. How is this configured? (Choose two.)",
+      "answers": [
+        "A. Configure the incident lifecycle flow script action",
+        "B. Configure the number of days Resolved incidents automatically close property",
+        "C. Configure the incident lifecycle timeline property",
+        "D. Enable the auto closure of Incidents based on Resolution date property"
+      ],
+      "comments": [
+        {
+          "content": "To configure incidents to automatically move to a Closed state from Resolved after 7 days, you should:\nB. Configure the number of days Resolved incidents automatically close property.\nAdditionally, you would need to:\nD. Enable the auto closure of Incidents based on Resolution date property.\nThese configurations ensure that incidents are automatically closed after the specified period of inactivity.",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "202",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/153003-exam-cis-itsm-topic-1-question-202-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "On the ‘Create New’ change landing page in Service Operations Workspace, what class label is displayed for the Emergency change model?",
+      "answers": [
+        "A. Unauthorized",
+        "B. Default",
+        "C. Break/fix",
+        "D. Out-of-the-box"
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is A. Unauthorized",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Based on the official ServiceNow documentation, the correct answer is C. Break/fix. On the ‘Create New’ change landing page in Service Operations Workspace, the class label displayed for the Emergency change model is Break/fix.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct. IT Service Management (ITSM) Implementation - Vancouver page 392",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "203",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139502-exam-cis-itsm-topic-1-question-203-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of these can be defined using step based fulfillment in Catalog Builder? (Choose two.)",
+      "answers": [
+        "A. Approvals",
+        "B. Subflow triggers",
+        "C. Notifications",
+        "D. Tasks",
+        "E. Payment processing"
+      ],
+      "comments": [
+        {
+          "content": "Step-based fulfillment in Catalog Builder allows you to define the sequence of tasks and approvals that need to be completed when a catalog item is requested. So, you can define approvals and tasks as part of the fulfillment process.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation - Vancouver page 184\n\nBy default, there are three types:\n* Task\n* Custom Approval\n* Manager Approval\n\nI believe the correct answer is A and D.",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "204",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139514-exam-cis-itsm-topic-1-question-204-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "Which Service Portfolio Management phase does a service belong to when it is in operational state?",
+      "answers": [
+        "A. Active",
+        "B. Retired",
+        "C. Catalog",
+        "D. Pipeline"
+      ],
+      "comments": [
+        {
+          "content": "IT Service Management (ITSM) Implementation - Vancouver - page 80.\n\nThere are three phases:\n* Service pipeline: Not yet operational\n* Service catalog: Operational\n* Retired services: No longer operational or available for use",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is C",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "205",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139515-exam-cis-itsm-topic-1-question-205-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is normally done when a Root Cause and a Workaround are identified for a problem to document the quickest known resolution?",
+      "answers": [
+        "A. Publish Workaround",
+        "B. Document a Known error",
+        "C. Document Five Whys",
+        "D. Complete Investigation"
+      ],
+      "comments": [
+        {
+          "content": "See Question 171",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "In 171 question is the same and most voted answer is B, why A is chose like a true answer here ?",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "206",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303529-exam-cis-itsm-topic-1-question-206-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "A Portfolio Manager is primarily concerned with the performance of what hierarchy?",
+      "answers": [
+        "A. Service Portfolio, Service, Service Offering",
+        "B. Portfolio Owner, Service Owner, Catalog Manager",
+        "C. Service Catalog, Catalog item, Requested item",
+        "D. Requested Item, Catalog Task, Task SLA"
+      ],
+      "comments": [
+        {
+          "content": "This one seems tricky, maybe C?",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "207",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305047-exam-cis-itsm-topic-1-question-207-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When modifying a Change Flow, a library is available of re-usable components for your flow. What are these components called?",
+      "answers": [
+        "A. Flow activities",
+        "B. Flow actions",
+        "C. Attributes",
+        "D. Properties"
+      ],
+      "comments": [
+        {
+          "content": "Looks like B to me.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "ITSM Book - \"Through the ITSM Spoke <com.snc.itsm.spoke> plugin, users will find a library of reusable change flow actions that can be added to any flow.\"",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "In the IT Service Management Implementation eBook, Module 7.2, Change Management Components, it is stated: \"Change Management provides a library of \"reusable actions\" and \"flows\" via Workflow Studio for the change models in the base system. I'm unable to find any supporting data that mentions reusable flow activities.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "208",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303540-exam-cis-itsm-topic-1-question-208-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "How is granular read and write access for a specific change model defined?",
+      "answers": [
+        "A. Configuring ACL's on the chge_model table",
+        "B. Configuring ACL's on the Create New landing page",
+        "C. Change properties",
+        "D. Setting Advanced Security to true and applying user criteria"
+      ],
+      "comments": [
+        {
+          "content": "Definitely C in my opinion.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "ITSM book - \"As the number of change models in an organization grows, change managers may wish to limit which models are available to read and write to a given set of users.\nThis can be done at the role level, via role based access control (RBAC) in the Read Roles and Write Roles fields.\nThis can be further refined via user criteria by setting Advanced Security = true. New related lists will then appear:\n- Available For\n- Not Available For\n- Can Write\nACLs at the table level still apply. If a user does not have read / write access at the chg_model table level, then they will still not have any kind of access through Read Roles, Write Roles, Available For, Not Available For, or Can Write.\"",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "209",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303675-exam-cis-itsm-topic-1-question-209-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following can leverage user criteria for controlling access?",
+      "answers": [
+        "A. catalog taxonomy",
+        "B. catalog topics",
+        "C. catalog categories",
+        "D. catalog variables",
+        "E. catalog items"
+      ],
+      "comments": [
+        {
+          "content": "Hmm, seems like A from what I studied.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "210",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305048-exam-cis-itsm-topic-1-question-210-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which level are service commitments associated in the service portfolio taxonomy?",
+      "answers": [
+        "A. Node",
+        "B. Offering",
+        "C. Portfolio",
+        "D. Service"
+      ],
+      "comments": [
+        {
+          "content": "I believe it's A.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "211",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305049-exam-cis-itsm-topic-1-question-211-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "How are the relationships between services and offerings that are built in Service Portfolio Management transferred to the Configuration Management Database (CMDB)?",
+      "answers": [
+        "A. Only parent:child (service:offering) relationships are automatically created in the CMDB",
+        "B. If the service is defined as a business service, the relationships and dependencies will be automatically in the CMDB",
+        "C. All CMDB relationships and dependencies are automatically created upon publishing the service and offerings",
+        "D. Any required CMDB relationships and dependencies must be created manually"
+      ],
+      "comments": [
+        {
+          "content": "This one seems tricky, maybe C?",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "212",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305050-exam-cis-itsm-topic-1-question-212-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is the minimum number of offering(s) a service must have to move to the Catalog phase?",
+      "answers": [
+        "A. 1",
+        "B. 2",
+        "C. 3",
+        "D. 4"
+      ],
+      "comments": [
+        {
+          "content": "Could be D, thoughts?",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "213",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305051-exam-cis-itsm-topic-1-question-213-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Your client indicates they would like a way to designate VIP callers on an incident form. How would you accomplish this?",
+      "answers": [
+        "A. Dictionary entry attribute",
+        "B. Reference decorator",
+        "C. Action script",
+        "D. Field style"
+      ],
+      "comments": [
+        {
+          "content": "Looks like B to me.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "VIP - Field Style. Reference decorator refers to showing a related incident & show related workflow icons on the form.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "214",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303235-exam-cis-itsm-topic-1-question-214-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following defines the approvals that should be applied to a change request?",
+      "answers": [
+        "A. Change approval UI actions",
+        "B. Change approval policy",
+        "C. Change approval script includes",
+        "D. Change approval business rules"
+      ],
+      "comments": [
+        {
+          "content": "Definitely C in my opinion.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "215",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305052-exam-cis-itsm-topic-1-question-215-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What do you use to identify who will have access to particular items in a service catalog?",
+      "answers": [
+        "A. User criteria",
+        "B. Access criteria",
+        "C. User access rules",
+        "D. Availability rules",
+        "E. Security rules"
+      ],
+      "comments": [
+        {
+          "content": "Definitely C in my opinion.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "216",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305053-exam-cis-itsm-topic-1-question-216-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Once a Catalog Item has been requested, what mechanism determines the approvals, and tasks that are triggered in the application?",
+      "answers": [
+        "A. Decision Tables",
+        "B. Actions",
+        "C. Run Books",
+        "D. Flows",
+        "E. Playbooks"
+      ],
+      "comments": [
+        {
+          "content": "Definitely C in my opinion.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "217",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305054-exam-cis-itsm-topic-1-question-217-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is a core difference between an Incident and a Problem?",
+      "answers": [
+        "A. Incidents are focused on one individual having an issue; Problems are when you have many people having the same issue",
+        "B. Incidents can be any priority; Problems are high or critical",
+        "C. Incidents are the same as a Problem",
+        "D. Incidents are focused on the quickest resolution; Problems are focused on root cause analysis"
+      ],
+      "comments": [
+        {
+          "content": "I would go with B. Anyone else?",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "218",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305055-exam-cis-itsm-topic-1-question-218-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Where can a change manager define the fields that must be populated before a change request can move from the state of New to Assess?",
+      "answers": [
+        "A. Choice conditions",
+        "B. Model State Transition Conditions",
+        "C. Dictionary Overrides",
+        "D. State choice lists"
+      ],
+      "comments": [
+        {
+          "content": "Hmm, seems like A from what I studied.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "219",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305056-exam-cis-itsm-topic-1-question-219-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When building multiple catalog items, which components should be evaluated for consolidation and re-use? (Choose two.)",
+      "answers": [
+        "A. Approvals",
+        "B. Flows and Subflows",
+        "C. Sets of variables",
+        "D. Workflow Triggers"
+      ],
+      "comments": [
+        {
+          "content": "Looks like B to me.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "220",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305057-exam-cis-itsm-topic-1-question-220-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Your company sells bicycles. They want to build a service catalog for current and prospective customers, so they can browse for bicycles and accessories, and make purchases.<br/><br/>What interface is suitable for these external users?",
+      "answers": [
+        "A. Service Catalog Mobile App",
+        "B. Portal",
+        "C. Now Catalog App",
+        "D. Google leads spoke",
+        "E. Customer Service Catalog"
+      ],
+      "comments": [
+        {
+          "content": "I believe it's A.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "221",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305058-exam-cis-itsm-topic-1-question-221-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "By default, an Assignment group is automatically set on a change request record because of a business rule. How is the group identified?",
+      "answers": [
+        "A. Change group on CI record, or if empty, the Change group on the Service offering",
+        "B. Support group on CI record, or if empty, the Support group on the Service",
+        "C. Support group on CI record, or the default assignment group for the user",
+        "D. Support group on CI record, or if empty, the Support group on the Service offering"
+      ],
+      "comments": [
+        {
+          "content": "I would go with B. Anyone else?",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "populate assignment group based on CI/SO business rule. implementation bk (xanadu release)",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Service offering",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "222",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/302792-exam-cis-itsm-topic-1-question-222-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What happens when an existing service record is checked out in service Builder for editing?",
+      "answers": [
+        "A. The service portfolio record is placed in a Work in progress state",
+        "B. The service and offerings are temporarily unavailable for consumption",
+        "C. A copy of the service is created and placed in a Draft state",
+        "D. The original service record is placed in a Retired state"
+      ],
+      "comments": [
+        {
+          "content": "Answer is probably D based on the docs.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "223",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305059-exam-cis-itsm-topic-1-question-223-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Users with which role can Communicate a workaround or fix? (Choose two.)",
+      "answers": [
+        "A. itil_admin",
+        "B. problem_task_analyst",
+        "C. problem_manager",
+        "D. problem_admin"
+      ],
+      "comments": [
+        {
+          "content": "C. problem_manager Has permission to manage problem records, including updating status and communicating workarounds/fixes.",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C and D \n\nProblem_task_analyst does not have the permission to communicate workarounds or fixes",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C. problem_manager\nHas permission to manage problem records, including updating status and communicating workarounds/fixes.\n\nOften responsible for the overall lifecycle and communication strategy for a Problem.\n\nD. problem_admin\nHas full admin privileges over Problem Management.\n\nCan do everything a problem_manager can, and more — including configuration and override capabilities.",
+          "selected_answer": "CD",
+          "replies": []
+        }
+      ],
+      "question_number": "224",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/302696-exam-cis-itsm-topic-1-question-224-discussion/",
+      "most_voted": "CD",
+      "error": null
+    }
+  ]
+}

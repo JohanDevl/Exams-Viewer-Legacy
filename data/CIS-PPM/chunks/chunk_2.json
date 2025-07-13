@@ -1,0 +1,1612 @@
+{
+  "chunk_id": 2,
+  "start_question": 101,
+  "end_question": 150,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "As a demand manager, you can view an artifact from a demand. What artifacts are part of a demand?",
+      "answers": [
+        "A. Incidents, Problems, Change.",
+        "B. Decision, Risk, Requirements.",
+        "C. Project, Defect, Requests.",
+        "D. Stories, Vulnerability Tasks, Enhancements."
+      ],
+      "comments": [
+        {
+          "content": "Available artifact types are Project, Extension, Change, Defect, or Scrum and SAFe entities (epic, story, feature, etc.).",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct.\nhttps://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/planning-and-policy/task/t_CrtArtftDmdMnu.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "\"The available artifact types are project, enhancement, change, defect, or scrum and SAFe entities such as epic, story, or feature.\"\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_CrtArtftDmdMnu.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Part of Demand",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "103",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115586-exam-cis-ppm-topic-1-question-103-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "As an it_pps_admin, what can you use to detect corrupt data in a project, such as tasks with invalid parents or cyclic relations in a project?",
+      "answers": [
+        "A. Project Diagnostics.",
+        "B. System Diagnostics.",
+        "C. Edge Encryption Diagnostics.",
+        "D. Analytics Diagnostics."
+      ],
+      "comments": [
+        {
+          "content": "a is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/concept/project-diagnostics-overview.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "104",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109300-exam-cis-ppm-topic-1-question-104-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "In which scenario would using the Copy Project action NOT result in a new project record being created?",
+      "answers": [
+        "A. When copying an existing project",
+        "B. When copying a new project",
+        "C. When copying sub-projects",
+        "D. When copying partial projects"
+      ],
+      "comments": [
+        {
+          "content": "d is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/t_CopyAProject.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "105",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109302-exam-cis-ppm-topic-1-question-105-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When copying a source project to a target project, what fields are copied by default? (Choose three.)",
+      "answers": [
+        "A. Number.",
+        "B. Duration fields.",
+        "C. Short description.",
+        "D. Planned dates.",
+        "E. State."
+      ],
+      "comments": [
+        {
+          "content": "bcd are correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/t_CopyAProject.html",
+          "selected_answer": "BCD",
+          "replies": []
+        }
+      ],
+      "question_number": "106",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109303-exam-cis-ppm-topic-1-question-106-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "The Project management application supports two types of external dependencies. What are they? (Choose two.)",
+      "answers": [
+        "A. Hard Dependency.",
+        "B. Milestone Dependency.",
+        "C. Soft Dependency.",
+        "D. Task Dependency.",
+        "E. Change Dependency."
+      ],
+      "comments": [
+        {
+          "content": "From Docs:  The Project management application supports two types of external dependencies - hard and soft.",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "a c are correct\nhttps://docs.servicenow.com/bundle/sandiego-it-business-management/page/product/project-management/concept/external-dependency-types.html",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "107",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109304-exam-cis-ppm-topic-1-question-107-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "In order to map custom fields from Microsoft Project to ServiceNow when importing a project, you must first:",
+      "answers": [
+        "A. Configure the Project form",
+        "B. Export the project to XML format",
+        "C. Import your project",
+        "D. Create custom fields in your ServiceNow instance"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/ja-JP/bundle/utah-it-business-management/page/product/project-management/task/map-custom-fields-msp-project.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "108",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130044-exam-cis-ppm-topic-1-question-108-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What is the formula for Committed Utilization?",
+      "answers": [
+        "A. Allocated Hours/Capacity",
+        "B. (Allocated Hours + Confirmed Hours)/Capacity",
+        "C. Confirmed Hours/Capacity",
+        "D. Assigned Hours/Capacity"
+      ],
+      "comments": [
+        {
+          "content": "a is correct\nAllocated hours: The number of hours that the resource is already committed. The value considers all resource plans and the hours on the user calendar, such as hours allocated for operational work or meetings across all projects and demands for group/user requested for selected resource plans.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "109",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109305-exam-cis-ppm-topic-1-question-109-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "How many days is the default sprint length if the length cannot be calculated from the sprint?",
+      "answers": [
+        "A. 12",
+        "B. 14",
+        "C. 16",
+        "D. 18"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/sandiego-it-business-management/page/product/agile-development/reference/components-installed-with-agile-2.0.html#properties-installed-with-agile2",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "110",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/117213-exam-cis-ppm-topic-1-question-110-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Risks and issues submitted in which forms will be included in the Program record? (Choose three.)",
+      "answers": [
+        "A. project",
+        "B. idea",
+        "C. demand",
+        "D. program",
+        "E. portfolio"
+      ],
+      "comments": [
+        {
+          "content": "ACD : https://docs.servicenow.com/bundle/xanadu-it-business-management/page/product/program-management/concept/c_ProgramManagement.html",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "A, C, D is correct",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "what is the correct answer?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "ACD",
+          "replies": []
+        }
+      ],
+      "question_number": "112",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115587-exam-cis-ppm-topic-1-question-112-discussion/",
+      "most_voted": "ACD",
+      "error": null
+    },
+    {
+      "question": "The Program Management application provides the following capabilities to the program manager (Choose three.)",
+      "answers": [
+        "A. Create tasks specific to the program.",
+        "B. Track program costs.",
+        "C. Create a program by adding related projects and demands",
+        "D. Create releases for sprints.",
+        "E. Manage ideas specific to the program"
+      ],
+      "comments": [
+        {
+          "content": "another wrong question correct answers are :\n\nABC\nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/program-management/concept/c_ProgramManagement.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/program-management/concept/c_ProgramManagement.html",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "The it_program_manager role is essential to be able to manage programs. The Program Management application provides the following capabilities to the program manager:\nCreate a program by adding related projects and demands.\nCreate tasks specific to the program. These tasks are essential for completion of the program but are outside the scope of projects.\nDefine key milestones, anticipated risks, and issues for the program.\nMonitor the progress and status and of all the projects and demand that are part of the program. Program manager can track the costs, resources, and schedules.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/program-management/concept/c_ProgramManagement.html",
+          "selected_answer": "ABC",
+          "replies": []
+        }
+      ],
+      "question_number": "113",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116391-exam-cis-ppm-topic-1-question-113-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "Which feature provides a central location for portfolio managers to create and track the roadmap for project and demand execution?",
+      "answers": [
+        "A. Program Workbench",
+        "B. Portfolio Workbench",
+        "C. Project Workspace",
+        "D. Demand Workbench"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/itbm-portfolio-planning/concept/portfolio-planning-overview.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Portfolio Workbench deprecated in Paris so going with:  A. Program Workbench",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/concept/c_PortfolioManagement.html#:~:text=The%20Scenario%20Planning%20for%20PPM%20application%20provides,roadmap%20for%20project%20execution%20for%20a%20given",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "You must have the it_portfolio_manager role to manage a portfolio. And the question talks about the portfolio manager",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The portfolio workbench provides a central location to view and monitor the progress of the program, the projects, and demands that are part of the portfolio. You can also perform annual portfolio planning, create budget and forecast plans for the portfolio.\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/concept/c_PortfolioManagement.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/concept/c_PortfolioManagement.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/program-management/concept/c_ProgramWorkbench.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "114",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109319-exam-cis-ppm-topic-1-question-114-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Why is it recommended to keep the value of the property 'com.snc.project.task.max_task_duration' to 2600 or under?",
+      "answers": [
+        "A. Best practices states projects should be no longer than 5 years.",
+        "B. The system is unable to handle more than 2600 tasks.",
+        "C. To avoid application memory issues.",
+        "D. Because projects longer than 2600 days will no longer load."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/reference/r_InstalledWithProjectManagement.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct\n\nDefault value: 2600\nWarning: Increasing the value of the property to more than 2600 will have an impact on memory usage of the platform. A very high value causes out of memory error, for example, if you try to create a project or a project task with 15000 days duration.\nhttps://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/reference/r_InstalledWithProjectManagement.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "115",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/124905-exam-cis-ppm-topic-1-question-115-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which role can create a project status report in the Project Workspace?",
+      "answers": [
+        "A. itil",
+        "B. it_demand_manager",
+        "C. it_project_manager",
+        "D. it_project_user"
+      ],
+      "comments": [
+        {
+          "content": "D is not correct. It_project_users have read access only.  You need write access to create a status report.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/task/t_CreateAProjectStatusReport.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct but D is correct as well. it_project_manager contains it_project_user. \nit_project_user can create a project status report as well.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "116",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/124906-exam-cis-ppm-topic-1-question-116-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When creating a program, which of the following cannot be part of multiple programs? (Choose two.)",
+      "answers": [
+        "A. Tasks",
+        "B. Project",
+        "C. Demand",
+        "D. Portfolio"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/program-management/concept/c_ProgramManagement.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/program-management/concept/c_ProgramManagement.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Should be B and C. \"A project or demand cannot be part of multiple programs\". https://docs.servicenow.com/bundle/utah-it-business-management/page/product/program-management/concept/c_ProgramManagement.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "117",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/117794-exam-cis-ppm-topic-1-question-117-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "Winch role allows you to allocate a resource?",
+      "answers": [
+        "A. resource_user",
+        "B. it_project_user",
+        "C. business_stakertolder",
+        "D. resource_manager"
+      ],
+      "comments": [
+        {
+          "content": "Moderator should correct the initial setting here.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/resource-management/reference/r_AllocatingResources.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct.\n\nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/resource-management/task/t_AllocateWResAllocationsRelList.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/reference/r_AllocatingResources.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Resource Man",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "118",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115588-exam-cis-ppm-topic-1-question-118-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Why would a program manager create a program? (Choose two.)",
+      "answers": [
+        "A. To manage related demands",
+        "B. To define the number of sprints",
+        "C. To manage related protects",
+        "D. To manage portfolios"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/program-management/concept/c_ProgramManagement.html",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "A and C are Correct.\nCreate a program to manage related projects and demands. Define the duration, estimated cost, benefits, and ROI to the organization.",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/program-management/task/t_CreateAProgram.html",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "A AND C ARE CORRECT\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/program-management/task/t_CreateAProgram.html",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "119",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109323-exam-cis-ppm-topic-1-question-119-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "Which role in Protect Portfolio Management contains both the resource_user and it_demand manager roles?",
+      "answers": [
+        "A. it_project_manager",
+        "B. scrum_master",
+        "C. itil",
+        "D. timeline_admin"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is A",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "120",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/124907-exam-cis-ppm-topic-1-question-120-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "In order to allocate an operational resource plan from the Resource Allocation Workbench, which property must be enabled?",
+      "answers": [
+        "A. com.snc.project.move_project.wip",
+        "B. com.snc.resource_management.create_and_manage_operational_resource_plans_from_raw",
+        "C. com.snc.resource_management.percentage_allocation_normal",
+        "D. com.snc.resource_management.calendar_show_soft_allocations"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/resource-management/reference/r_ResourceProperties.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct answer \nhttps://docs.servicenow.com/en-US/bundle/vancouver-it-business-management/page/product/resource-management/reference/r_ResourceProperties.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/reference/r_ResourceProperties.html\n\nCreate and manage operational resource plans from the resource allocation workbench (com.snc.resource_management.create_and_manage_operational_resource_plans_from_raw)\n\nEnables the creation and management of operational resource plans from the Resource Allocation Workbench.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B IS CORRECT\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/reference/r_ResourceProperties.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "121",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109325-exam-cis-ppm-topic-1-question-121-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The basics of Demand Management include (Choose two.)",
+      "answers": [
+        "A. Identify stakeholders",
+        "B. Create assessment categories",
+        "C. Evaluate and quality tasks",
+        "D. Create ideas"
+      ],
+      "comments": [
+        {
+          "content": "AB is correct\nBasics of Demand Management:\n>Set up the application: Plan, create stakeholders and assessment categories, and create bubble charts.\n\n>Assess ideas: Review and analyze submitted ideas before promoting ideas to demands.\n\n>Create and add details to the demands: Create demands and add demand tasks, stakeholders and assessments, and evaluate and qualify demands.\n\n>Use the Demand Management application or the demand workbench to compare and assess demands, and promote demands to projects, enhancements, changes, or defects.\n\nSource: https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/concept/c_DemandManagement.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/concept/c_DemandManagement.html\n\nBasics of Demand Management\nSet up the application: Plan, create stakeholders and assessment categories, and create bubble charts.\nAssess ideas: Review and analyze submitted ideas before promoting ideas to demands.\nCreate and add details to the demands: Create demands and add demand tasks, stakeholders and assessments, and evaluate and qualify demands.\nUse the Demand Management application or the demand workbench to compare and assess demands, and promote demands to projects, enhancements, changes, or defects.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "b AND c ARE CORRECT",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "122",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109326-exam-cis-ppm-topic-1-question-122-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "At which point in the Demand Management lifecycle do assessments get sent to stakeholders?",
+      "answers": [
+        "A. Screening",
+        "B. Creation",
+        "C. Planning",
+        "D. Assessment"
+      ],
+      "comments": [
+        {
+          "content": "A is the correct answer here, moderator should modify the initial answer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/planning-and-policy/reference/r_UsingDemandManagement.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/reference/r_UsingDemandManagement.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT\nhttps://www.servicenow.com/community/spm-forum/need-help-on-demand-assessment-receives-to-stakeholders/m-p/1036808",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "123",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109327-exam-cis-ppm-topic-1-question-123-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When working with demands, which field must be set to “Yes” in order for a user to receive an assessment?",
+      "answers": [
+        "A. Approver",
+        "B. Assessment recipient",
+        "C. Influence",
+        "D. Level of Interest"
+      ],
+      "comments": [
+        {
+          "content": "Bi is correct. Assessment recipient: Indication of whether the user is authorized to receive assessment questionnaires for a demand.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/planning-and-policy/reference/stakeholder-register-form.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct \nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_PopulatingTheStakeholderRegistry.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_PopulatingTheStakeholderRegistry.html\n\nAssessment recipient:\tIndication of whether the user is authorized to receive assessment questionnaires for a demand.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "124",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116568-exam-cis-ppm-topic-1-question-124-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Where is the normalization process used?",
+      "answers": [
+        "A. Demand Approval",
+        "B. Assessment scoring",
+        "C. Risk records",
+        "D. Cost Plan updates"
+      ],
+      "comments": [
+        {
+          "content": "Calculated value that measures the Rating relative to the weights of categories used to assess the record evaluated.\n\nThe normalized value is calculated as follows:\n\nNormalized value = Rating x (Associated category weight / Sum of weights of all categories the source record has category results for in this assessment group)\n\nExample: A source record has four associated category results in assessment group ASG0000907, one for each of these categories:\nImportance Rating (weight = 10)\nProduct Reliability (weight = 9)\nCompany Alignment (weight = 9)\nCompliance Score (weight = 9)\nIf this source record's category result for Product Reliability has a Rating of 7.81, the normalized value calculation is:\n\n7.81 x [9 / (10+9+9+9)] = 1.9",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-servicenow-platform/page/administer/assessments/task/t_ViewACategoryResult.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-servicenow-platform/page/administer/assessments/task/t_ViewACategoryResult.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "125",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116569-exam-cis-ppm-topic-1-question-125-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The selections from the Category and Type fields determine the artifact that can be created from a demand. The artifacts can be (Choose three.)",
+      "answers": [
+        "A. enhancement",
+        "B. defect",
+        "C. change",
+        "D. resource",
+        "E. task"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/planning-and-policy/task/t_CrtArtftDmdMnu.html",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "The available artifact types are project------------ enhancement, change, defect----------- scrum, and SAFe entities such as epic, story, or feature.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_CrtArtftDmdMnu.html",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "A B C ARE CORRECT\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_CrtArtftDmdMnu.html",
+          "selected_answer": "ABC",
+          "replies": []
+        }
+      ],
+      "question_number": "126",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109329-exam-cis-ppm-topic-1-question-126-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "In the default system, when working with demands, what two assessment metrics are supported when taking an assessment survey? (Choose two.)",
+      "answers": [
+        "A. Strategic Alignment",
+        "B. Risk",
+        "C. Size",
+        "D. Cost"
+      ],
+      "comments": [
+        {
+          "content": "From training doc:  The strategic project demand assessment questions are grouped under two categories:\nStrategic Alignment and Risk.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "The default demand assessment contains a series of risk and alignment questions . ( SPM book, point assessment recipients and trigger",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "since only C and D is on the demand form, i will vote for this.\nhttps://docs.servicenow.com/bundle/washingtondc-servicenow-platform/page/administer/assessments/task/t_CreateAnAssessmentCategory.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Any combination works here... \nhttps://docs.servicenow.com/bundle/sandiego-servicenow-platform/page/administer/assessments/task/t_CreateAnAssessmentCategory.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Checked on  default PDI instance",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "In default system for demands we can find size and costs but no risk. Maybe the aswer should be CD",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The correct answers: B C\ncost must be defined with a task, 'strategic' is a category type",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "127",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116571-exam-cis-ppm-topic-1-question-127-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "The colors and quadrant labels used in the central location for viewing and assessing business demands?",
+      "answers": [
+        "A. Workbench Config - Demand",
+        "B. Demand Roadmap",
+        "C. Demand - Config",
+        "D. System Properties"
+      ],
+      "comments": [
+        {
+          "content": "From the training course documentation: Project Administration > Settings > Workbench Config - Demand",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct, checked on default PDI instance",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "128",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/117216-exam-cis-ppm-topic-1-question-128-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Under the Preferences tab on the Demand form, you have the option to (Choose two.)",
+      "answers": [
+        "A. Add a financial benefit",
+        "B. Close a demand on closure of a project",
+        "C. Close a demand on creation of a project",
+        "D. Add a risk score"
+      ],
+      "comments": [
+        {
+          "content": "Moderator should correct the answers, again! B and C are the only valid answers.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "another portion of wrong answers correct answers are :\nB and C\nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/planning-and-policy/reference/demand-form.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "omg, why are so many of these questions posting the wrong answers",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_CreatingDemands.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "BC is correct",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_CreatingDemands.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_CreatingDemands.html",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "129",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114679-exam-cis-ppm-topic-1-question-129-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "When a demand is converted to a project, the following fields retain the start and due date (Choose two.)",
+      "answers": [
+        "A. Approved start date",
+        "B. Actual start date",
+        "C. Approved end date",
+        "D. Actual end date"
+      ],
+      "comments": [
+        {
+          "content": "A&C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_CreatingDemands.html",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "130",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/117217-exam-cis-ppm-topic-1-question-130-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "Which roles can add stakeholders to a Portfolio? (Choose two.)",
+      "answers": [
+        "A. it_project_user",
+        "B. it_demand_manager",
+        "C. it_pps_admin",
+        "D. it_demand_user"
+      ],
+      "comments": [
+        {
+          "content": "it_pps_admin can pretty much do everything in PPM.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "B C are the correct ones.",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "131",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116573-exam-cis-ppm-topic-1-question-131-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "When Agile Development 2.0 and Test Management 2.0 plugins are activated, the project manager can create and edit which of the following phase types depending on execution type? (Choose two.)",
+      "answers": [
+        "A. Test",
+        "B. Agile",
+        "C. List",
+        "D. VTB"
+      ],
+      "comments": [
+        {
+          "content": "Checked on PDI instance",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/t_CreateAProject.html\n\nCreate Agile Phase\tCreates an agile phase for the project. An agile phase includes stories in the Stories related list.\nThis related link appears only when the value for the Execution Type field is set to Agile and the Agile Development 2.0 plugin is installed.\n\nCreate Test Phase\tCreates a test phase for the project. A test phase includes test cases in the Test Cases related list.\nThis related link appears only when the value for the Execution Type field is set to Waterfall or Hybrid and the Test Management plugin is installed.",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "132",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116574-exam-cis-ppm-topic-1-question-132-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "The combination of the user and the assigned portfolio must be unique when adding a user to which registry?",
+      "answers": [
+        "A. UX Page Registry",
+        "B. Event Registry",
+        "C. Application Registry",
+        "D. Stakeholder Registry"
+      ],
+      "comments": [
+        {
+          "content": "When adding a user to the stakeholder registry, the combination of the user and the assigned portfolio must be unique. However, there can be more records for the same user but with different portfolio.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "again and again wrong answer !\nCorrect is D \nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/planning-and-policy/task/t_PopulatingTheStakeholderRegistry.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is the answer. Another incorrect answer displayed.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer\nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_PopulatingTheStakeholderRegistry.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is answer",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_PopulatingTheStakeholderRegistry.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "133",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114685-exam-cis-ppm-topic-1-question-133-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "How can the planned start date on a WIP/Closed task be changed?",
+      "answers": [
+        "A. By setting the property – 'Enable firing of Business Rules on save from Planning Console'",
+        "B. By setting the property – 'Enable alter of planned date with Actual for Manual Project'",
+        "C. By setting the property – 'Enable altering of planned date(s) for task in WIP/Closed'",
+        "D. By setting the property – 'Enable project cost rollup'"
+      ],
+      "comments": [
+        {
+          "content": "C is correct.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "134",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127567-exam-cis-ppm-topic-1-question-134-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Project score is calculated based on the individual scores of the following attributes (Choose two.)",
+      "answers": [
+        "A. Alignment Score",
+        "B. Risk Score",
+        "C. Strategy Score",
+        "D. Value Score"
+      ],
+      "comments": [
+        {
+          "content": "Checked on PDI instance",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/community/spm-forum/project-score/m-p/1012729",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "135",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109153-exam-cis-ppm-topic-1-question-135-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "The Project Management application enables users to create parent-child relationships between tasks and dependencies, such as finish-to-start and finish-to-finish, between tasks. How many relationships can exist between two tasks?",
+      "answers": [
+        "A. One",
+        "B. Two",
+        "C. Three",
+        "D. Four"
+      ],
+      "comments": [
+        {
+          "content": "the correct answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Attention: question is how many relationships can exists between to tasks.\nDoc: \"Note: Only one relationship can exist between two tasks.\"\nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-management/concept/c_ProjectTaskRelationDepend.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "1. Finish to Start\n2. Start to Start\n3. Finish to Finish\n4. Start to Finish",
+          "selected_answer": "D",
+          "replies": [
+            "All of these cannot exist at the same time between two tasks. Only one can happen between any two tasks."
+          ]
+        }
+      ],
+      "question_number": "136",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/124909-exam-cis-ppm-topic-1-question-136-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following defines a parent-child relationship? (Choose two.)",
+      "answers": [
+        "A. Parent-child task relationships do not have any effect on task time constraints",
+        "B. A parent-child relationship is not saved as a record in any table",
+        "C. A parent-child task must finish before another begins",
+        "D. Any number of child tasks can be nested under a parent task with or without any dependencies"
+      ],
+      "comments": [
+        {
+          "content": "Wrong answer again! \nAs stated: https://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-management/concept/c_Parent-ChildTaskRelationships.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "As stated:\nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-management/concept/c_Parent-ChildTaskRelationships.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-management/concept/c_Parent-ChildTaskRelationships.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "b anx d",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "137",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109152-exam-cis-ppm-topic-1-question-137-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "What can a time card admin or a project manager create to define specific activities in a project?",
+      "answers": [
+        "A. Policies",
+        "B. Time Sheets",
+        "C. Subcategories",
+        "D. Time Cards"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/administer/task-table/task/create-project-time-category.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct \nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/administer/task-table/task/create-project-time-category.html\n\n\"A time card admin or a project manager can create subcategories to define specific activities in the projects. The time card users can use these project subcategories to report time for a specific activity in a project.\"",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "\"A time card admin or a project manager can create subcategories to define specific activities in the projects.\"\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/administer/task-table/concept/time-card-management.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct.\nThe time card admin can create and manage--------- time sheet policies-----------, and can also approve or reject by exception and process the time sheets.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/administer/task-table/task/create-project-time-category.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "b is ok\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/administer/task-table/concept/time-card-management.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "138",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109151-exam-cis-ppm-topic-1-question-138-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Who can access a project when it is imported into a teamspace from Microsoft Project into ServiceNow?",
+      "answers": [
+        "A. Only project users",
+        "B. A project cannot be imported into a teamspace",
+        "C. Only users who can access the teamspace",
+        "D. All users"
+      ],
+      "comments": [
+        {
+          "content": "again and again wrong after wrong answer!\n\nAbout this task\n\nBefore importing a Microsoft Project file into the ServiceNow instance, consider the following information.\n\nMicrosoft Project project imported into a teamspace is only available to users who can access the teamspace.\nC is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-management/task/t_ImportMicrosoftProjectFiles.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct.\nBefore importing a Microsoft Project file into the ServiceNow instance, consider the following information.\n\nMicrosoft Project imported into a teamspace is only available to ----------users who can access the teamspace--------------.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/t_ImportMicrosoftProjectFiles.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "139",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109140-exam-cis-ppm-topic-1-question-139-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "The overall health of a program rolls up from the latest status report of each project in the program. The status is indicated by which colors? (Choose three.)",
+      "answers": [
+        "A. Orange",
+        "B. Yellow",
+        "C. Green",
+        "D. Red"
+      ],
+      "comments": [
+        {
+          "content": "Overall health\tOverall health of the program rolled up from the latest status report of each project in the program. The status is indicated using red, green, and yellow colors as the default.\n\nBCD",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/program-management/task/create-program-status-report.html",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "Overall health of the program rolled up from the latest status report of each project in the program. The status is indicated using --------- red, green, and yellow ------------------- colors as the default.",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/program-management/task/create-program-status-report.html",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "correct is B C D \nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/program-management/task/create-program-status-report.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/community/spm-forum/ceridian-itbm-ppm-how-is-overall-status-color-determined/m-p/982240",
+          "selected_answer": "ACD",
+          "replies": []
+        }
+      ],
+      "question_number": "140",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109138-exam-cis-ppm-topic-1-question-140-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "The PPM Strategic Spend Trading-Generate Strategy/Goal Allocation Breakdowns for Projects and Demands scheduled job is installed, when which of the following is activated?",
+      "answers": [
+        "A. Predictive Intelligence for Innovation Management",
+        "B. PPM Standard",
+        "C. Strategic Spend Tracking for PPM",
+        "D. Scenario Planning for PPM"
+      ],
+      "comments": [
+        {
+          "content": "Checked on PDI instance",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/itbm-business-outcomes/concept/ppm-strategic-spend-tracking-overview.html",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "141",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109137-exam-cis-ppm-topic-1-question-141-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Each teamspace has its own (Choose two.)",
+      "answers": [
+        "A. Project table",
+        "B. Resource table",
+        "C. Demand table",
+        "D. Problem table"
+      ],
+      "comments": [
+        {
+          "content": "A and C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A and C are correct/\nIdeas, Demands, Project, Tasks, Settings",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/concept/c_Teamspaces.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A et C are correct",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "142",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109135-exam-cis-ppm-topic-1-question-142-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "During the allocation process, when named resources are allocated to a plan, where is resource cost derived from?",
+      "answers": [
+        "A. Labor rate card for the user",
+        "B. Labor rate card for the fiscal period",
+        "C. Cost specified on the resource allocation",
+        "D. Cost specified on user record"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "143",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109133-exam-cis-ppm-topic-1-question-143-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What is the formula for Forecasted Utilization?",
+      "answers": [
+        "A. Allocated Hours/Capacity",
+        "B. (Allocated Hours + Confirmed Hours)/Capacity",
+        "C. Confirmed Hours/Capacity",
+        "D. Assigned Hours/Capacity"
+      ],
+      "comments": [
+        {
+          "content": "Forecasted Utilization\nPercentage of forecasted resource time utilization. It is calculated as sum of allocated and confirmed hours, divided by the total capacity.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Forecasted Utilization\nPercentage of forecasted resource time utilization. It is calculated as sum of allocated and confirmed hours, divided by the total capacity.\n\nhttps://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/resource-management/concept/c_UsingResourceManagementReports.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Forecasted Utilization: Percentage of forecasted resource time utilization. It is calculated as sum of allocated and confirmed hours, divided by the total capacity.\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/concept/c_UsingResourceManagementReports.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is the correct.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "144",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/117268-exam-cis-ppm-topic-1-question-144-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What are the allocation types available on a resource plan? (Choose three.)",
+      "answers": [
+        "A. Weekly",
+        "B. Yearly",
+        "C. Monthly",
+        "D. Plan Duration",
+        "E. Daily"
+      ],
+      "comments": [
+        {
+          "content": "Wrong initial answer again! Checked in PDI.",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "Checked on PDI",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "Allocation type: The value in this field determines how the planned hours are distributed across resource plan duration among requested resources:\n- Weekly\n- Monthly\n- Plan Duration\n\nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/resource-management/task/t_CreateResourcePlanProjectTask.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ACD are correct",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "a c d are correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/reference/r_AllocatingResources.html",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "a c e are correct",
+          "selected_answer": "ACE",
+          "replies": []
+        }
+      ],
+      "question_number": "145",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109095-exam-cis-ppm-topic-1-question-145-discussion/",
+      "most_voted": "ACD",
+      "error": null
+    },
+    {
+      "question": "Resource plan costs are divided into (Choose three.)",
+      "answers": [
+        "A. Planned Cost",
+        "B. Forecast Cost",
+        "C. Allocated Cost",
+        "D. Expense Cost",
+        "E. Actual Cost"
+      ],
+      "comments": [
+        {
+          "content": "Clearly stated in the ebook,",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "ACE are correct",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "a c e are correct\nhttps://www.servicenow.com/community/spm-articles/resource-plan-cost-calculations/ta-p/2303709",
+          "selected_answer": "ACE",
+          "replies": []
+        }
+      ],
+      "question_number": "146",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109093-exam-cis-ppm-topic-1-question-146-discussion/",
+      "most_voted": "ACE",
+      "error": null
+    },
+    {
+      "question": "On a resource plan, when the attribute for \"Derive assignee list from resource plan\" is set to true, in what state must the plan be to allow a resource to be added to the assignee field?",
+      "answers": [
+        "A. Confirmed",
+        "B. Requested",
+        "C. Allocated",
+        "D. Planning"
+      ],
+      "comments": [
+        {
+          "content": "C - tested all options in my instance",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Derive assignee list from resource plan: Option to constrain the resources in the Assigned to and Additional assignee list fields on the project and project task forms to be derived only from the associated allocated resource plans.\n\nhttps://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/project-management/task/t_CreateAProject.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/t_CreateAProject.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "D is correct answer",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "147",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109092-exam-cis-ppm-topic-1-question-147-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When a user's schedule changes, what action needs to be taken to update their existing data?",
+      "answers": [
+        "A. No action needed",
+        "B. Update project plans",
+        "C. Update calendar manually to reflect the changed capacity",
+        "D. Update capacity via 'Update Resource Capacity'"
+      ],
+      "comments": [
+        {
+          "content": "Use the Update resource capacity related link in the following scenarios:\nIf a user is newly added and you want to update the capacity for the user.\nIf the schedule of an existing user is changed and you want to update the capacity of the user.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/task/update-resource-capacity.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "148",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114708-exam-cis-ppm-topic-1-question-148-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "If a resource plan is not associated manually to a time card, then a resource plan is auto-associated. The auto-association is done based on which of the following in the time card?",
+      "answers": [
+        "A. task",
+        "B. hard allocation",
+        "C. soft allocation",
+        "D. resource type"
+      ],
+      "comments": [
+        {
+          "content": "If a resource plan is not associated manually to a time card, then a resource plan is auto-associated. The auto-association is done based on the selected Task in the time card.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/task/t_AssocATimeCardWithAResourcePlan.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "a is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/task/t_AssocATimeCardWithAResourcePlan.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "149",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109090-exam-cis-ppm-topic-1-question-149-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Actuals on a resource plan are updated by what activity?",
+      "answers": [
+        "A. User submits time card",
+        "B. Project manager enters actuals",
+        "C. Resource plan is approved",
+        "D. Time card is approved"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-business-management/page/product/resource-management/reference/rsrc-plan-form-tabs.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "d is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "150",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109089-exam-cis-ppm-topic-1-question-150-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What must a resource plan contain if a resource plan is associated with a time card?",
+      "answers": [
+        "A. Soft allocation bookings.",
+        "B. Front load allocation spread.",
+        "C. Hard allocation bookings.",
+        "D. Even allocation spread."
+      ],
+      "comments": [
+        {
+          "content": "A resource plan can be associated with a time card only if the resource plan contains hard allocations for the user.\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/task/t_AssocATimeCardWithAResourcePlan.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c is correct\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/task/t_AssocATimeCardWithAResourcePlan.html",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "151",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109088-exam-cis-ppm-topic-1-question-151-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What are the offset types in Benefit Plans?",
+      "answers": [
+        "A. Rate Card",
+        "B. Start Date and End Date",
+        "C. Risk",
+        "D. Cost"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-management/task/create-project-benefit-plan.html\n\nField to indicate when the benefits start realizing. Select any of the following options:\nNone: The default value is None. When you select None, you need to manually enter the benefit plan start and end fiscal periods.\nMilestone: After completion of a milestone.\nStart Date: At the start of the project.\nEnd Date: After the project ends.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B IS CORRECT",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "152",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108998-exam-cis-ppm-topic-1-question-152-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which field, referenced from the cost plan, determines if a cost plan is Capex or Opex?",
+      "answers": [
+        "A. Resource category (resource_category)",
+        "B. Currency type (currency_type)",
+        "C. Cost type (resource_type)",
+        "D. Resource plan (resource_plan)"
+      ],
+      "comments": [
+        {
+          "content": "Create a cost type definition to associate a cost type, operating, or capital, to an account in the General Ledger from the Financial Management application. Create a cost type definition if you are using Project Portfolio Management with Financials.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-management/task/t_CreateAResourceTypeDefinition.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Checked on PDI",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-management/task/t_CreateAResourceTypeDefinition.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "153",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108997-exam-cis-ppm-topic-1-question-153-discussion/",
+      "most_voted": "C",
+      "error": null
+    }
+  ]
+}

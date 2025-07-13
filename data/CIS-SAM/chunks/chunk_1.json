@@ -1,0 +1,1434 @@
+{
+  "chunk_id": 1,
+  "start_question": 51,
+  "end_question": 100,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "If a customer does not like the way reconciliation runs or calculates compliance, it is okay to modify the scripts includes, business rules and other logic to accommodate the business requirement.",
+      "answers": [
+        "A. True",
+        "B. False"
+      ],
+      "comments": [
+        {
+          "content": "I don't think it's an option to \"not like the way reconciliation is run\". If the user believes there are errors, raise a Hi ticket.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "52",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/132735-exam-cis-sam-topic-3-question-52-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "By default, which ServiceNow role can view reconciliation results?",
+      "answers": [
+        "A. sam_reconcile_user",
+        "B. sam_user",
+        "C. sam_viewer",
+        "D. sam_cmdb_user"
+      ],
+      "comments": [
+        {
+          "content": "From the course:\nUsers with the sam_admin role can run on-demand reconciliation; users with sam_user role can only view reconciliation results.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "53",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130295-exam-cis-sam-topic-3-question-53-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The process of determining compliance by comparing software rights owned with normalized software installations discovered is __________________ .",
+      "answers": [
+        "A. Discovery",
+        "B. Allocation",
+        "C. Normalization",
+        "D. Reconciliation"
+      ],
+      "comments": [
+        {
+          "content": "-\tReconciliation: calculates the compliance status of software products with respect to discovered installations and defined software models and entitlements.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Software reconciliation is an automated process that calculates compliance based on how many rights are in use compared to the number of active rights purchased. It keeps license positions accurate and up to date without manual calculations.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "54",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127589-exam-cis-sam-topic-3-question-54-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "The definition for _________________ in the Reconciliation Product result is: “Estimated cost of remediating non-compliance based on the least number of rights needed.”",
+      "answers": [
+        "A. Reconciliation cost",
+        "B. True-up cost",
+        "C. True-down cost",
+        "D. Over-licensed cost"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-service-management/page/product/software-asset-management2/task/t_ViewSWModelResultsSAMF.html\n\nTrue-up cost:\tEstimated cost of remediating non-compliance based on the least number of rights needed (rights needed * average price per right from entitlements). The lowest cost from Purchase Rights remediation options.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "55",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130297-exam-cis-sam-topic-3-question-55-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When reconciliation is run, a list of product results displays the compliance status of software versions and editions with respect to discovery and entitlements.",
+      "answers": [
+        "A. True",
+        "B. False"
+      ],
+      "comments": [
+        {
+          "content": "-\tReconciliation: calculates the compliance status of software products with respect to discovered installations and defined software models and entitlements.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B: Software Model Result shows compliance status based on software version.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/reference/Recon-swmodelresults-classic.html\n\nI think it does show the version but not the compliance of the version? Not sure",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The answer is A. https://docs.servicenow.com/en-US/bundle/vancouver-it-service-management/page/product/software-asset-management2/concept/c_SAMReconciliationSAMF.html",
+          "selected_answer": "",
+          "replies": [
+            "Your link negates your answer. This produces a list of RECONSOLIATION results whilst question mentions a list of PRODUCT results which is not correct.\nShould be B."
+          ]
+        }
+      ],
+      "question_number": "56",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120626-exam-cis-sam-topic-3-question-56-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "In order to write to the reconciliation results, a user would need the following role in ServiceNow: sam_reconcile_user",
+      "answers": [
+        "A. True",
+        "B. False"
+      ],
+      "comments": [
+        {
+          "content": "I don't think that role even exists",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "57",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/134746-exam-cis-sam-topic-3-question-57-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Select the field attribute that indicates whether this product result is from the most recent reconciliation run.",
+      "answers": [
+        "A. Current",
+        "B. Last",
+        "C. Active",
+        "D. Latest"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/reference/Recon-swmodelresults-classic.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "58",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130466-exam-cis-sam-topic-3-question-58-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "In defining a Custom License Metric, in the Reconciliation Order field, the ___________ ‘metric rank priority’ number takes precedence.",
+      "answers": [
+        "A. Lower",
+        "B. Impact",
+        "C. Higher",
+        "D. WBS"
+      ],
+      "comments": [
+        {
+          "content": "A\nhttps://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/reference/Recon-swmodelresults-classic.html\npage 213 of ebook",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-service-management/page/product/software-asset-management2/task/add-custom-license-metric-samf.html\n\nReconciliation order - allocated\tReconciliation metric rank priority for allocated licenses. Lower rank value takes precedence.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "59",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130303-exam-cis-sam-topic-3-question-59-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "The license metric attributes related list contains metric values set in software entitlements, and is used for reconciliation (metric group, license metric, and software model combination).",
+      "answers": [
+        "A. True",
+        "B. False"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/c_SAMLicenseMetrics.html\n\nLicense metrics are set in software entitlements and are used for reconciliation (metric group, license metric, and software model combination).\n\nEach metric group has a set of license metrics that are specific to the publisher.\n\nYou can view the Metric Attributes related list in software models to set the attribute value.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "60",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130305-exam-cis-sam-topic-3-question-60-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "By default, when is a product result generated for a licensable product after reconciliation?",
+      "answers": [
+        "A. Always, even if there are no software models defined for the product",
+        "B. Never",
+        "C. Only when there are software entitlements defined for the product",
+        "D. Whenever there is at least one software model defined for the product",
+        "E. Only when related entitlements have a cost identified"
+      ],
+      "comments": [
+        {
+          "content": "software product result for a licensable product is generated after reconciliation even if there are no software models defined for the product.\nA software model results record is only created when a software model or entitlement exists for the product.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/reference/Recon-swmodelresults-classic.html",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "61",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/117789-exam-cis-sam-topic-3-question-61-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which feature provides detailed, actionable information for software reconciliation?",
+      "answers": [
+        "A. License Workbench",
+        "B. License Position Report",
+        "C. Normalization and Content Service dashboard",
+        "D. Normalization Suggestions",
+        "E. Historical Results"
+      ],
+      "comments": [
+        {
+          "content": "i think it's A, I dont see anything on historical results",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It is the license usage view - A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "It is the License View. A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Historical results (E). https://www.servicenow.com/docs/bundle/xanadu-it-asset-management/page/product/software-asset-management2/reference/Recon-swmodelresults-classic.html",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "It should be B - License position report",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "E\nhttps://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/software-asset-management2/task/t_ViewSWModelResults.html",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "A. License Workbench",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It's A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "License position report - B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "62",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108505-exam-cis-sam-topic-3-question-62-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "What are the four tiers of software reconciliation results? (Choose four.)",
+      "answers": [
+        "A. Software License Metric",
+        "B. Software Product",
+        "C. Software Allocation",
+        "D. Software Entitlement",
+        "E. Software Publisher",
+        "F. Software Model"
+      ],
+      "comments": [
+        {
+          "content": "SOFTWARE METRIC IS RIGHT AND NOT SOFTWARE ALLOCATION",
+          "selected_answer": "ABEF",
+          "replies": []
+        },
+        {
+          "content": "Four tiers of reconciliation results:\n-\tSoftware publisher: results for all products and installations associated to the publisher\n-\tSoftware product: results for all models and installations associated to the product. Generated after reconciliation, even if there are no software models defined for the product. Displays information such as Software Model Results, Unlicensed Installs, Removal candidates etc.\n-\tSoftware model: results for all license metrics related to the software model. Only created when a software model or entitlement exists for the product.\n-\tLicense metric: results for each license metric associated to the software model.",
+          "selected_answer": "ABEF",
+          "replies": []
+        },
+        {
+          "content": "Based on SAM Fundamentals",
+          "selected_answer": "ABE",
+          "replies": []
+        }
+      ],
+      "question_number": "63",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91428-exam-cis-sam-topic-3-question-63-discussion/",
+      "most_voted": "ABEF",
+      "error": null
+    },
+    {
+      "question": "When reconciliation is run, what information does the license metric results display?",
+      "answers": [
+        "A. Results for all models and installations associated to the product",
+        "B. Results for all products and installations associated to the publisher",
+        "C. Results for each license metric associated to the software model",
+        "D. Results for all license metrics related to the software model"
+      ],
+      "comments": [
+        {
+          "content": "From the course:\nLicense metric: Results for each license metric associated to the software model",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "64",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130310-exam-cis-sam-topic-3-question-64-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "To run an on-demand reconciliation, which module would you navigate to?",
+      "answers": [
+        "A. Software Asset > Discovery > Run Reconciliation",
+        "B. Software Asset > Reconciliation > Run Reconciliation",
+        "C. Software Asset > Discovery > License Workbench",
+        "D. Software Asset > Reconciliation > License Workbench",
+        "E. Software Asset > Reconciliation > Run License Position Report",
+        "F. Software Asset > Discovery > Run License Position Report"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/task/t_RunReconciliation.html\n\nWhen running reconciliation manually, allow enough time for the process to complete. For faster results, narrow the scope by selecting specific publishers.\n\nProcedure\n\nNavigate to All > Software Asset > Reconciliation > Run Reconciliation and select the publishers for which compliance should be calculated, or select all publishers.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "65",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130312-exam-cis-sam-topic-3-question-65-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following features are available from the main publisher results screen of the License Workbench? (Choose three.)",
+      "answers": [
+        "A. All Publishers",
+        "B. Publisher Compliance",
+        "C. Pinned Publishers",
+        "D. Publisher License Metrics",
+        "E. Publishers Out of Compliance",
+        "F. Publisher Software Models"
+      ],
+      "comments": [
+        {
+          "content": "a c e is right",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "there are 3 tabs available in License workbench:\nAll Publishers\nPublishers Our of Compliance\nPinned Publishers\nso options => A,C, E is right answer",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/sam-license-workbench.html\n\nAll Publishers\tList of all publishers.\nPublishers Out of Compliance\tList of all publishers where status is not compliant.\nPinned Publishers\tUser-specific saved list of publishers that have been grouped.",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/sandiego-it-asset-management/page/product/software-asset-management2/concept/sam-license-workbench.html",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "A,C, E is right answer",
+          "selected_answer": "ACE",
+          "replies": []
+        }
+      ],
+      "question_number": "66",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91429-exam-cis-sam-topic-3-question-66-discussion/",
+      "most_voted": "ACE",
+      "error": null
+    },
+    {
+      "question": "Which related list is NOT available from the software model on the License Workbench?",
+      "answers": [
+        "A. Unlicensed Subscriptions",
+        "B. Unlicensed Software Products",
+        "C. Removal Candidates",
+        "D. Remediation Options",
+        "E. License Metric Results"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/software-asset-management2/concept/sam-license-workbench.html\n\nSoftware Model Results related lists:\nLicense Metric Results\nRemediation Options: The Rights Needed By tab is not visible for the Resource Value Unit (RVU) IBM license metric. Rights are not used by individual devices, as the Resource Value Unit (RVU) license metric is licensed at the product level.\nNote: For more details on the remediation options, see View software model results.\nLicensed Installs\nUnlicensed Installs (SAP: Unlicensed Users)\nUnlicensed Subscriptions (Subscription-based software)\nUnlicensed Consumptions (Consumption-based software models)\nUnlicensed Options (Oracle only)\nRemoval Candidates\nPurchase Orders (only when the Procurement (com.snc.procurement) plugin is active)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/sam-license-workbench.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "67",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127334-exam-cis-sam-topic-3-question-67-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "License metrics can be defined for which of the following? (Choose four.)",
+      "answers": [
+        "A. Publishers",
+        "B. Users",
+        "C. Cores",
+        "D. Devices",
+        "E. Metric Types",
+        "F. Operating Systems",
+        "G. Processors"
+      ],
+      "comments": [
+        {
+          "content": "B, C, D, G is correct - per 194 of the SN SAM Pro text that comes with the course",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "it fault for users",
+          "selected_answer": "BCDG",
+          "replies": []
+        },
+        {
+          "content": "Six common license metrics:\n-\tPer Core: licenses cores on a physical server or virtual machine (CPU core count)\n-\tPer Device: licenses a device for a number of installations of software\n-\tPer Named Device: licenses a specific device for a number of installations of software\n-\tPer User: licenses a user for a number of installations of software\n-\tPer Named User: licenses a specific user for a number of installations of software\n-\tPer Processor (CPU count): licenses processors on either a physical server or virtual machine",
+          "selected_answer": "BCDG",
+          "replies": []
+        },
+        {
+          "content": "can some put the redeem code for the book ?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B, C, D, G is correct:\n\"Software license metrics are used for reconciliation to determine your compliance position. License metrics can be defined for users, devices, processors, and cores. What license metrics are available is based on the metric group. Metric groups are either common or tied to a specific software publisher.\" per the Software Asset Management (SAM) Professional Fundamentals On Demand (Utah) training - Software License Metrics page",
+          "selected_answer": "BCDG",
+          "replies": []
+        },
+        {
+          "content": "BCDG is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BCDF is right answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "68",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91430-exam-cis-sam-topic-3-question-68-discussion/",
+      "most_voted": "BCDG",
+      "error": null
+    },
+    {
+      "question": "Which license metric would be used for software that is only allowed to be installed on one computer per license right?",
+      "answers": [
+        "A. Per Processor",
+        "B. Per Named Device",
+        "C. Per Named User",
+        "D. Per Core"
+      ],
+      "comments": [
+        {
+          "content": "This should be per Named Device , Option B\nhttps://docs.servicenow.com/en-US/bundle/tokyo-it-asset-management/page/product/software-asset-management2/concept/c_SAMLicenseMetrics.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Six common license metrics:\n-\tPer Core: licenses cores on a physical server or virtual machine (CPU core count)\n-\tPer Device: licenses a device for a number of installations of software\n-\tPer Named Device: licenses a specific device for a number of installations of software\n-\tPer User: licenses a user for a number of installations of software\n-\tPer Named User: licenses a specific user for a number of installations of software\n-\tPer Processor (CPU count): licenses processors on either a physical server or virtual machine",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I agree, this should e B - Per Named Device",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "69",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/95466-exam-cis-sam-topic-3-question-69-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following license metrics require allocations in order to maintain compliance? (Choose two.)",
+      "answers": [
+        "A. Per Core",
+        "B. Per User",
+        "C. Per Named Device",
+        "D. Per Named User",
+        "E. Per Core (with CAL)",
+        "F. Per Application Instance",
+        "G. Named User Plus"
+      ],
+      "comments": [
+        {
+          "content": "C,D\nAllocations needed: number of allocations needed for compliance (only used for Per Named User and Per Named Device license metrics)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "-\tLicense metric: results for each license metric associated to the software model. License metric rights allocations are calculated for:\no\tAllocated in use: software license that is allocated and used to license installations.\no\tNot allocated in use: software license that is used to license installations but not allocated.\no\tAllocated not in use: software license that is allocated but not used to license installations.\no\tNot allocated: number of available rights that have not been allocated (installed or not)\no\tAllocations needed: number of allocations needed for compliance (only used for Per Named User and Per Named Device license metrics)",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C and D is correct",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is C and D",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "70",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109650-exam-cis-sam-topic-3-question-70-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "Which of the following are NOT tabs available on the License Workbench? (Choose three.)",
+      "answers": [
+        "A. Publisher License Metrics",
+        "B. All Publishers",
+        "C. Publishers Out of Compliance",
+        "D. Publisher Software Models",
+        "E. Publisher Compliance",
+        "F. Pinned Publishers"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/software-asset-management2/concept/sam-license-workbench.html\n\nLicense Workbench tabs\nAll Publishers:\tList of all publishers.\nPublishers Out of Compliance:\tList of all publishers where status is not compliant.\nPinned Publishers:\tUser-specific saved list of publishers that have been grouped.",
+          "selected_answer": "ADE",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/sam-license-workbench.html",
+          "selected_answer": "ADE",
+          "replies": []
+        }
+      ],
+      "question_number": "71",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127340-exam-cis-sam-topic-3-question-71-discussion/",
+      "most_voted": "ADE",
+      "error": null
+    },
+    {
+      "question": "You can view IBM, Microsoft, Oracle and VMware license metrics as part of ServiceNow standard baseline configuration features.",
+      "answers": [
+        "A. True",
+        "B. False"
+      ],
+      "comments": [
+        {
+          "content": "Publisher pack: provides publisher specific licensing metrics for reconciliation and optimization to determine license compliance. When activated, results are displayed in a software publisher compliance dashboard. Publisher packs are available for Adobe, Citrix, IBM, Microsoft, Oracle, SAP, VMWare.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Adobe, Citrix, IBM (includes both IBM and Red Hat), Microsoft, Oracle, SAP, and VMware publisher packs are available as add-ons that provide the capability to manage software licensed under the publisher licensing models.\nhttps://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/c_SAMLicenseMetrics.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "72",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130173-exam-cis-sam-topic-3-question-72-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When creating a reportable bar graph view of License Metrics, you can use which of the following options to refine how you view license metric data?",
+      "answers": [
+        "A. ‘Group by’ or ‘Stacked by’",
+        "B. ‘Group by’ and ‘Stacked by’",
+        "C. ‘Stacked by’",
+        "D. ‘Group by’"
+      ],
+      "comments": [
+        {
+          "content": "Nowhere is said that you have to use only \"Group By\" or \"Stacked By\" functionality, you can use both of them in combination also. In my opinion the right answer is B.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the right answer.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Right answer is A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "73",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109651-exam-cis-sam-topic-3-question-73-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "A Software Product can only have a single license metric type associated to it.",
+      "answers": [
+        "A. True",
+        "B. False"
+      ],
+      "comments": [
+        {
+          "content": "Answer : False",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "EXPLANATION: a product like Adobe can have several different metrics (i.e. the whole point of a publisher pack)",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "74",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139504-exam-cis-sam-topic-3-question-74-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "By default, the license metric field is displayed on which record form within ServiceNow?",
+      "answers": [
+        "A. Software Model",
+        "B. Software Allocations",
+        "C. Software Entitlement",
+        "D. Software Product",
+        "E. Software publisher"
+      ],
+      "comments": [
+        {
+          "content": "software entitlement",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Software entitlement",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/software-asset-management2/concept/c_SAMLicenseMetrics.html\n\nLicense metrics are set in software entitlements and used for reconciliation in various metric groups and software model combinations.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "75",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91433-exam-cis-sam-topic-3-question-75-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What product must you procure a separate license for in order to utilize Workflow and Client Software Distribution (CSD) to automatically install software on devices.",
+      "answers": [
+        "A. ITSM",
+        "B. Asset Management",
+        "C. Orchestration",
+        "D. Discovery",
+        "E. Deployment management"
+      ],
+      "comments": [
+        {
+          "content": "Orchestration",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C\nClient software distribution requires the Orchestration - Client Software Distribution plugin (com.snc.orchestration.client_sf_distribution), which is available by request with a subscription to Orchestration.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Full use of CSD requires the Orchestration – Client Software Distribution plugin, which is available by request with a subscription to the ServiceNow’s Orchestration product. Only the revocation/reclamation capability is entitled as part of SAM Pro.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Orchestration",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "76",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91434-exam-cis-sam-topic-3-question-76-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Software license management (SLM) is a key component of the software asset lifecycle. What is its primary objective?",
+      "answers": [
+        "A. To convert regular per user licenses into subscription licenses",
+        "B. To track, control, and reduce software costs, including costs associated with non-compliance findings during a software audit",
+        "C. To reserve a block of licenses for a specific group of users and/or user role(s)",
+        "D. To accurately calculate annual true-up cost and total spend on a product",
+        "E. To automatically install and remove software on devices using Workflow and Client Software Distribution (CSD)"
+      ],
+      "comments": [
+        {
+          "content": "From the SAM Pro Practical Management Overview section: \n\n'Software license management (SLM) is a critical component of the software asset lifecycle. Its primary objective is to track, control, and reduce software costs, including costs associated with non-compliance findings during a software audit.'",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "77",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127350-exam-cis-sam-topic-3-question-77-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The Per Named Device license metric licenses which of the following?",
+      "answers": [
+        "A. A user for a number of installations of software",
+        "B. A device for a number of installations of software",
+        "C. A specific user for a number of installations of software",
+        "D. Cores on a physical server or virtual machine",
+        "E. A specific device for a number of installations of software"
+      ],
+      "comments": [
+        {
+          "content": "Per Named Device: Licenses a specific device for the number of installations of software.\n\nhttps://docs.servicenow.com/bundle/tokyo-it-asset-management/page/product/software-asset-management2/concept/c_SAMLicenseMetrics.html",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "I agree, the answer is E",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "78",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/96135-exam-cis-sam-topic-3-question-78-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "What is the purpose of the Metric Group on the Software Entitlement record?",
+      "answers": [
+        "A. To select the group of license metrics to be used on the entitlement",
+        "B. To select a group to see specific license metrics for a software category",
+        "C. To select a category of specific license entitlement attributes",
+        "D. To select a group to see specific license key attributes"
+      ],
+      "comments": [
+        {
+          "content": "A. To select the group of license metrics to be used on the entitlement\n\nThis is on page 69 of the SN SAM Pro text that comes with the course",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "79",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105926-exam-cis-sam-topic-3-question-79-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "ServiceNow Performance Analytics identifies a trend that use of a certain software package has reduced over time. This is a potential indicator of what?",
+      "answers": [
+        "A. Your company is under-licensed for the product.",
+        "B. Your company needs to renegotiate your contract to get better pricing.",
+        "C. Your company is over-licensed for the product.",
+        "D. Your company needs to retire the unused entitlements."
+      ],
+      "comments": [
+        {
+          "content": "B Your company needs to renegotiate your contract to get better pricing.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "80",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/138545-exam-cis-sam-topic-3-question-80-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "A(n) ______________ is required for a user or device to consume software rights.",
+      "answers": [
+        "A. License",
+        "B. Allocation",
+        "C. Entitlement",
+        "D. Workflow"
+      ],
+      "comments": [
+        {
+          "content": "Software entitlement refers to the rights and permissions granted for using specific software products.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "From SAM on-demand course: Allocations identify a user or device with one or more rights to use a software entitlement.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Licenses define the number of users, devices, or instances that can use the software. Entitlements drive the level of access each of your users have to software.\ne.g. a company purchases a software license for the right to use 50 seats of a software product. The software entitlement specifies the machines and/or users to which those 50 licensed seats are assigned.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Licenses define the number of users, devices, or instances that can use the software. Entitlements drive the level of access each of your users have to software.\ne.g. a company purchases a software license for the right to use 50 seats of a software product. The software entitlement specifies the machines and/or users to which those 50 licensed seats are assigned.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think it's A.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "81",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108515-exam-cis-sam-topic-3-question-81-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following is required to identify users and devices that have the right to use software?",
+      "answers": [
+        "A. Software License",
+        "B. Software Allocation",
+        "C. Software Model",
+        "D. Software Entitlement",
+        "E. Software Installation"
+      ],
+      "comments": [
+        {
+          "content": "From SAM on-demand course: Allocations identify a user or device with one or more rights to use a software entitlement",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "82",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139311-exam-cis-sam-topic-3-question-82-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following allocation types are available on an entitlement record in the ServiceNow baseline configuration? (Choose two.)",
+      "answers": [
+        "A. Device allocations",
+        "B. Country allocations",
+        "C. Company allocations",
+        "D. Department allocations",
+        "E. User allocations"
+      ],
+      "comments": [
+        {
+          "content": "https://www.servicenow.com/docs/bundle/xanadu-it-asset-management/page/product/software-asset-management2/reference/software-entitlement-fields.html",
+          "selected_answer": "AE",
+          "replies": []
+        }
+      ],
+      "question_number": "83",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/153088-exam-cis-sam-topic-3-question-83-discussion/",
+      "most_voted": "AE",
+      "error": null
+    },
+    {
+      "question": "When importing entitlements, a record generates the error, “Publisher Part Number not found”. However, the record is for an expired entitlement that is no longer needed. Which is the best UI action to select?",
+      "answers": [
+        "A. Create Entitlement",
+        "B. Delete",
+        "C. Create Part Number",
+        "D. Reject"
+      ],
+      "comments": [
+        {
+          "content": "Option [C] Create PPN and option [A] Create Entitlement do not make sense as we clearly do NOT want that entitlement. \n\nNow, option [B] Delete is a valid UI Action, while option [D] Reject does not exist as a UI Action. What exists, however, is \"Ignore\". With that said, i'd go for Delete, unless Ignore is introduced as a valid option.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "C Correct Answer per page 77 of SAM Fundamentals.  When a PPN is not found a customer can add a PPN to the library or specify the software model so that the software entitlement can be created.",
+          "selected_answer": "",
+          "replies": [
+            "B should be answer : A customer can add PPN to the library and create entitlement OR Delete record if it is not needed. therefore in this scenario B"
+          ]
+        }
+      ],
+      "question_number": "84",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137601-exam-cis-sam-topic-3-question-84-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following describes Practical Management within the capability blueprint?",
+      "answers": [
+        "A. Improve management controls and drive immediate benefits.",
+        "B. Know what you have so you can manage it.",
+        "C. Improve efficiency and effectiveness through integration with other areas, such as request, procurement, and IT Service Management.",
+        "D. Achieve best in-class."
+      ],
+      "comments": [
+        {
+          "content": "1\nTrustworthy Data: Know what you have so you can manage your assets.\n\n2\nPractical Management: Improvement management controls and drive immediate benefits\n\n3\nOperational Integration: Improve the efficient and effectiveness through integration with other areas, such as request, procurement and IT Service Management.\n\n4\nStrategic Conformance: Achieve best in-class.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the course:\nPractical Management: Improvement management controls and drive immediate benefits",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "85",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130417-exam-cis-sam-topic-3-question-85-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Blacklisted candidates are ______________ .",
+      "answers": [
+        "A. Software installations that are not normalized",
+        "B. Unlicensed and unallocated installations",
+        "C. Software installations not allowed in the network environment",
+        "D. Software installations with low usage"
+      ],
+      "comments": [
+        {
+          "content": "The answer is C - Blacklisted software is the same as Restricted software and it's software not allowed in the environment.  From page 393 in the SN SAM pro text from the course.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C- Blacklisted software is software that isn't allowed to be in the network environment.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "87",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105952-exam-cis-sam-topic-3-question-87-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following is not a core Software Asset Management function?",
+      "answers": [
+        "A. Financial Management",
+        "B. Reclamation",
+        "C. Rights Allocation",
+        "D. Inventory Management"
+      ],
+      "comments": [
+        {
+          "content": "Shouldn't this be A Financial management ?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Do you think the answer is C?\nCore functions of SAM:\nSoftware reconciliation \n- The process of producing a compliance position by comparing the number of software rights acquired against the normalized software inventory\nSoftware reclamation \n- The process of identifying unused software and uninstalling it so that the software rights for the user or device can be repurposed\nSoftware Spend \n- The ServiceNow Software Spend Detection application enables you to track, analyze, and optimize IT software spending from imported financial data.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A - Financial management is not a SAM function. Financial data can be imported for Change projection etc ~ SAM on-demand course",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I agree Financial Management - A.  Per SAM Fundamentals - SAM facilitates the tracking, evolution, and management of software license rights, compliance and optimization.  Which my interpretation is  License rights = Rights allocation, Compliance = Inventory Managment, Optimization = reclamation.  No where does it say financial management.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I actually would like to update my answer to \"D - Inventory Management\": https://www.servicenow.com/products/it-asset-management/what-is-inventory-management.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Looking at the Asset Workspace, there is a lot of inventory and financial management. Allocation happens at/after procurement. Reclamation is not required, but should be happening for products, therefore I vote B, Reclamation. You have to do all else, but reclamation is not required.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "88",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108901-exam-cis-sam-topic-3-question-88-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "In addition to creating a new purchase order for software licenses, additional remediation options are available in Software Model results to: (Choose two.)",
+      "answers": [
+        "A. Remove Unallocated Installs",
+        "B. Remove Duplicate Allocations",
+        "C. Remove Unlicensed Installs",
+        "D. Remove Blacklisted Installs"
+      ],
+      "comments": [
+        {
+          "content": "A & C.\nhttps://docs.servicenow.com/bundle/utah-it-asset-management/page/product/software-asset-management2/concept/c_SAMReconciliation.html\n\nIn addition to creating a purchase order for new software licenses, additional remediation options are available in software model results. Use the results to automatically create and remove allocations, remove unallocated installs, and remove unlicensed installs.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A & C. B&D don't exist as remediation  options.",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "A and C",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "89",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114537-exam-cis-sam-topic-4-question-89-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "What list can include manual creation, remediation options, and reclamation rules?",
+      "answers": [
+        "A. Software Models Results",
+        "B. Blacklisted Installations",
+        "C. Removal Candidates",
+        "D. Software Usage"
+      ],
+      "comments": [
+        {
+          "content": "The question iteself is misleading. The right verbiage would be more like: \" What list can include records that originate from manual creation, remediation options, and reclamation rules?\" And yes, C is correct.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/task/t_AddAReclCandidate.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Should be C",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "90",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/109584-exam-cis-sam-topic-4-question-90-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following remediation options can be performed on an individual user or device basis? (Choose three.)",
+      "answers": [
+        "A. Remove Unallocated Installs",
+        "B. Remove Unlicensed Installs",
+        "C. Create Allocations",
+        "D. Remove Allocations",
+        "E. Purchase Rights"
+      ],
+      "comments": [
+        {
+          "content": "query table \"samp_remediation_option\"  with \"display_name=per user\" or \"display_name=per device\"   group by \"remediation_action\"\nResult: \nRemediation action: Create Allocations (82)\nRemediation action: Purchase Rights (7)\nRemediation action: Remove Allocations (8)\nRemediation action: Remove Unallocated Installs (82)",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "CDE is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "CDE - Remove installs (unallocated  or unlicensed) not available for Oracle DB options ~ docs.servicenow",
+          "selected_answer": "CDE",
+          "replies": [
+            "Edit: ACD"
+          ]
+        },
+        {
+          "content": "Agree looked up 4 Remediation Options - Purchase Rights, Create allocations, remove allocations, remove unlicensed installs - B ,C.D, E",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the course:\nWhen software models are Not Compliant there are 4 remediation options available:\nPurchase Rights\nCreate Allocations\nRemove Allocations\nRemove Unlicensed Installs",
+          "selected_answer": "BCE",
+          "replies": []
+        }
+      ],
+      "question_number": "91",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130421-exam-cis-sam-topic-4-question-91-discussion/",
+      "most_voted": "CDE",
+      "error": null
+    },
+    {
+      "question": "Which of the following reasons could apply when a remediation option has an ‘In Progress’ status? (Choose two.)",
+      "answers": [
+        "A. Workflow(s) or process(es) have been initiated to allocate software rights",
+        "B. Rights are now available and can be consumed during reconciliation",
+        "C. Workflow(s) or process(es) have been initiated to purchase software rights",
+        "D. Workflow(s) or process(es) have been initiated to harvest software rights",
+        "E. Customer instance is pending updates to CDS Server"
+      ],
+      "comments": [
+        {
+          "content": "C, D: https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/resource-center/solution-brief/sb-sam-remediation-options.pdf",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "\"Choose 2\" and yet answer is only 1.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "92",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108517-exam-cis-sam-topic-4-question-92-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which stage of the software asset lifecycle includes all of the following steps?<br/>Discovering software in the environment<br/>Normalizing installed software to standards<br/>Reconciling entitlements to discovered software<br/>Remediating detected variances",
+      "answers": [
+        "A. Sunset",
+        "B. Manage",
+        "C. Support",
+        "D. Source",
+        "E. Plan"
+      ],
+      "comments": [
+        {
+          "content": "The answer is B - Manage - Primary activities in Manage include discovering software in the environment, normalizing installed software to standard, reconciling entitlements to discovered software and remediating detected variances.  From page 15 in the text book included in the SN SAM Pro course.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "From the course:\nThe Manage stage encompasses activities to ensure the organization is compliant and can quickly respond to a software audit. Primary activities in Manage include discovering software in the environment, normalizing installed software to standards, reconciling entitlements to discovered software, and remediating detected variances",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "93",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105953-exam-cis-sam-topic-4-question-93-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which catalog provides a listing of goods offered or available by a third party?",
+      "answers": [
+        "A. Service Catalog",
+        "B. Model Catalog",
+        "C. Item Catalog",
+        "D. Vendor Catalog",
+        "E. Product Catalog"
+      ],
+      "comments": [
+        {
+          "content": "D is correct.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "94",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/138549-exam-cis-sam-topic-4-question-94-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "A software model can have up to how many catalog items?",
+      "answers": [
+        "A. 1",
+        "B. 2",
+        "C. 6",
+        "D. 10",
+        "E. Unlimited"
+      ],
+      "comments": [
+        {
+          "content": "From the course:\n\nKeep the following in mind when working with catalogs:\n\nA software catalog is part of a service catalog.\nA product catalog item can be linked to multiple service catalogs and vendor catalog items or to a single model.\nA model can only have one product catalog item.\nA vendor catalog item can only have a single product catalog item.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "95",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130425-exam-cis-sam-topic-4-question-95-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "HOTSPOT -<br/>Define the three catalogs that support the request and procurement process.<br/><img src=\"https://img.examtopics.com/cis-sam/image4.png\"/>",
+      "answers": [],
+      "comments": [
+        {
+          "content": "From the SAM Pro training (Software Request and Sourcing):\n\nService Catalog: Central listing of goods and services an organization provides - End users order from the Service Catalog.\n\nProduct Catalog: Collection of Models in the environment - models can be easily published to the Product Catalog and are then automatically published to the Service Catalog.\n\nVendor Catalog: Listing of goods available from a vendor - items in the Vendor Catalog link to models in the Product Catalog.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "This one is confusing between Product and Service Catalogs. \n\nProduct Catalog = \"Listing of goods an organization provides.\"  https://docs.servicenow.com/en-US/bundle/vancouver-it-asset-management/page/product/product-catalog/concept/c_ProductCatalog.html\n\nService Catalog = \"Collection of Models in the environment\" https://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/service-catalog-management/concept/c_IntroductionToCatalogItems.html\n\nThis video really explains it: https://www.servicenow.com/community/training-and-certifications/service-catalog-administration-overview/ta-p/2297657\n\nI found this blog/discussion to be helpful about Product and Service Catalog differences and uses: https://www.servicenow.com/community/now-platform-forum/service-catalog-items-vs-product-catalog-items-hardware-software/m-p/1058403\n \nVendor Catalog = \"Listing of goods offered or available by a third party\". This one is pretty clear.",
+          "selected_answer": "",
+          "replies": [
+            "I was so bothered by this one, I pressed on and Question #145 of this exam asks: \"Which catalog provides a collection of models in the environment?\" and the correct answer was \"C.Product Catalog\". \n\nProduct Catalog, as it's a collection of models in the environment.\n\n(it is not service catalog, as that is a listing of goods and services an organization provides.)"
+          ]
+        },
+        {
+          "content": "Product Catalog:The product catalog is a set of information about individual models\nService Catalog: create service catalogs that provide your customers with self-service opportunities",
+          "selected_answer": "",
+          "replies": [
+            "True but this was not very helpful in identifying the answers for Product and Service Catalogs. This one was tricky!"
+          ]
+        }
+      ],
+      "question_number": "96",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/103564-exam-cis-sam-topic-4-question-96-discussion/",
+      "most_voted": "",
+      "error": null
+    },
+    {
+      "question": "If a user requests three items from the software catalog at the same time, how many individual requests are created?",
+      "answers": [
+        "A. None; task records are created",
+        "B. 1",
+        "C. 3",
+        "D. 1 for each publisher",
+        "E. 1 for each product type"
+      ],
+      "comments": [
+        {
+          "content": "From the course:\n\nRequests group all the items requested and associated records together in a single location. The structure of a software request includes:\nThe items that were requested.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer is B 1",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "97",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128266-exam-cis-sam-topic-4-question-97-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following elements are included in Operational Integration of a SAM practice? (Choose three.)",
+      "answers": [
+        "A. Software Retirement",
+        "B. Software License Contracts",
+        "C. Software Sourcing",
+        "D. License Change Projection",
+        "E. Software Entitlements",
+        "F. Software Allocations",
+        "G. Software Model Lifecycle"
+      ],
+      "comments": [
+        {
+          "content": "BCD is the right answer",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "BCD page 289",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "As per the text book on page 267, the answers are:\nB - Software License Contracts\nC - Software Sourcing\nD - Licenses Change Projection",
+          "selected_answer": "BCD",
+          "replies": []
+        }
+      ],
+      "question_number": "98",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105957-exam-cis-sam-topic-4-question-98-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "You have a contract that is getting ready to expire. What options do you have for handling this contract and remaining compliant? (Choose three.)",
+      "answers": [
+        "A. Reject",
+        "B. Extend",
+        "C. Cancel",
+        "D. Activate",
+        "E. Delete",
+        "F. Renew"
+      ],
+      "comments": [
+        {
+          "content": "According to ServiceNow text on page 270, it's B - Extend, C - Cancel and F - Renew",
+          "selected_answer": "BCF",
+          "replies": []
+        },
+        {
+          "content": "B, C,F page 281 study guide",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B,C,F - Extend, Cancel, Renew: https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/contract-management/concept/c_ContractLifeCycle.html",
+          "selected_answer": "BCF",
+          "replies": []
+        }
+      ],
+      "question_number": "99",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105958-exam-cis-sam-topic-4-question-99-discussion/",
+      "most_voted": "BCF",
+      "error": null
+    },
+    {
+      "question": "The baseline sam_admin role contains the additional roles of: sam_user, asset, and procurement_user, and which of the following? (Choose two.)",
+      "answers": [
+        "A. itil",
+        "B. sam_developer",
+        "C. contract_manager",
+        "D. model_manager",
+        "E. entitlement_manager"
+      ],
+      "comments": [
+        {
+          "content": "C, D is an answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C, D is the right answer",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C, D page 34 study guide",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C,D: https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/reference/r_SAMRoles.html\n\nAlthough ServiceNow did not indicate Procurement_User in this list of SAM_ADMIN roles...https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/procurement/reference/r_ProcurementRoles.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It says to choose two - the answer is:\nC - contract_manager\nD - model_manager",
+          "selected_answer": "",
+          "replies": [
+            "Yep, just checked sys_user_role and indeed, C - contract_manager & D - model_manager"
+          ]
+        }
+      ],
+      "question_number": "100",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105959-exam-cis-sam-topic-4-question-100-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is the purpose of an external audit?",
+      "answers": [
+        "A. To ensure your users are not running any blacklisted software",
+        "B. To determine compliance with internally-defined vendor processes",
+        "C. To determine compliance with signed vendor agreements/contracts",
+        "D. To ensure your entitlements do not exceed your allocations",
+        "E. To determine compliance with licensing agreements regarding who, how, and when freeware software is being used"
+      ],
+      "comments": [
+        {
+          "content": "C - correct answer",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "101",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/150606-exam-cis-sam-topic-4-question-101-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Software Asset Lifecycle has __________ components.",
+      "answers": [
+        "A. 8",
+        "B. 6",
+        "C. 7",
+        "D. 5"
+      ],
+      "comments": [
+        {
+          "content": "sys_choice.list   of  table \"sam_sw_product_lifecycle\" for element \"lifecycle_phase\" contains:\npre_release\navailability\nupgrade\nend_of_support\nend_of_extended_support\nend_of_life",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Actually, the SAM on-Demand course speaks of \"eight STAGES\", so the question about \"components\"is misleading. Anyway, the answer is A - 8.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "1. Plan\n2. Request\n3. Approve\n4. Source\n5. Allocate\n6. Manage\n7. Support\n8. Sunset",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "103",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120002-exam-cis-sam-topic-5-question-103-discussion/",
+      "most_voted": "A",
+      "error": null
+    }
+  ]
+}

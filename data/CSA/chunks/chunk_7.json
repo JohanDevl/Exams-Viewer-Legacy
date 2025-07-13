@@ -1,0 +1,498 @@
+{
+  "chunk_id": 7,
+  "start_question": 351,
+  "end_question": 369,
+  "questions_count": 19,
+  "questions": [
+    {
+      "question": "After finishing your work on High Security Settings, what is a possible way to return to normal admin security levels?",
+      "answers": [
+        "A. Select Global Update Set",
+        "B. Log out and back in",
+        "C. End Impersonation",
+        "D. Select Normal role",
+        "E. Use System Administration > Normal Security module"
+      ],
+      "comments": [
+        {
+          "content": "I agree with connal308876.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "In Washington, you can select \"Elevate Role\" again, and deselect the checkbox.  Then click the Update button.",
+          "selected_answer": "",
+          "replies": [
+            "Yes, but at least in my PDI it still shows up as elevated. The arrow doesn't disappear unless I log out or I start.end impersonation of a user. So the correct answer from this list can only be B."
+          ]
+        },
+        {
+          "content": "By default, you do not have elevated privilege roles upon login. You must manually elevate to the privilege of the role. An elevated privilege role lasts only for the duration of your user session. Session timeout or logout removes the role.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B: Login out and back in",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "351",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139398-exam-csa-topic-1-question-351-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which feature can be used to give users the choice to easily populate the most-used fields for a specific table?",
+      "answers": [
+        "A. Tags",
+        "B. Formatter",
+        "C. Template",
+        "D. Reference type fields"
+      ],
+      "comments": [
+        {
+          "content": "C: Template is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "352",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139478-exam-csa-topic-1-question-352-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What protects applications by restricting access to data in another application, in the same instance?",
+      "answers": [
+        "A. Admin Center",
+        "B. Access Control Rules",
+        "C. Assignment Rules",
+        "D. Application Scope"
+      ],
+      "comments": [
+        {
+          "content": "Application scope protects app data.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "353",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155810-exam-csa-topic-1-question-353-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which module in the Service Catalog application is used to create a new catalog item?",
+      "answers": [
+        "A. Configuration Items",
+        "B. Maintain Items",
+        "C. Content Items",
+        "D. Catalog Items"
+      ],
+      "comments": [
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is the right answer",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It is maintain items. You can check in PDI",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B. Maintain Items is correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "354",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139479-exam-csa-topic-1-question-354-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What helps to define the structure of a catalog item form that is displayed to the customer?",
+      "answers": [
+        "A. Variables",
+        "B. Catalog Description",
+        "C. Catalog Definition",
+        "D. Order Guides"
+      ],
+      "comments": [
+        {
+          "content": "A correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "355",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/147008-exam-csa-topic-1-question-355-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which displays the list of activities, or history, on a form?",
+      "answers": [
+        "A. Formatter",
+        "B. Dictionary",
+        "C. Sidebar",
+        "D. History Menu"
+      ],
+      "comments": [
+        {
+          "content": "Formatter is the correct answer.\n\nThe history menu only shows the history of your activities on the platform, not the form.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "a is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Formatter",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "356",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139880-exam-csa-topic-1-question-356-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Where should an administrator navigate to add the \"Save\" button in the form header?",
+      "answers": [
+        "A. Context Menu > Form Design",
+        "B. All > System Properties > UI Action Settings",
+        "C. All > System Properties > UI Properties",
+        "D. Context Menu > Form Layout"
+      ],
+      "comments": [
+        {
+          "content": "C is the correct answer.\n\nYou need to go to System Properties > UI Properties to enable the save, update and insert and stay option (true/false box) from the glide.ui.advance property.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct, tried it in my PDI",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "357",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139566-exam-csa-topic-1-question-357-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What are the options that can be set to determine when a Business Rule executes? (Choose four.)",
+      "answers": [
+        "A. Async",
+        "B. Load",
+        "C. Change",
+        "D. Display",
+        "E. After",
+        "F. Before",
+        "G. Submit",
+        "H. Click"
+      ],
+      "comments": [
+        {
+          "content": "According to the vancouver SNAF e-book, the answer is ADEF",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "i cheked in my vancouver version the correct answers is ADEF",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "answer should be - ADEF",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I checked in my PDI and the correct answer is ADEF",
+          "selected_answer": "ADEF",
+          "replies": []
+        },
+        {
+          "content": "In business rule definition the \"when\" field contains before, after, async and display options (ADEF)",
+          "selected_answer": "ADEF",
+          "replies": []
+        }
+      ],
+      "question_number": "358",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/139481-exam-csa-topic-1-question-358-discussion/",
+      "most_voted": "ADEF",
+      "error": null
+    },
+    {
+      "question": "Which access control rule applies to every field in the incident table?",
+      "answers": [
+        "A. incident<=>*",
+        "B. incident.all",
+        "C. incident.*",
+        "D. incident||*"
+      ],
+      "comments": [
+        {
+          "content": "Wildcard applies to every field on a record, without a table.field rule - extract from the CSA Book.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "360",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155812-exam-csa-topic-1-question-360-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is the purpose of an application scope?",
+      "answers": [
+        "A. Scope determines which parts of an application are available for use by other applications In ServiceNow",
+        "B. Scope prevents applications from changing their own tables and business logic",
+        "C. Scope determines the functionality of core services in the platform",
+        "D. Scope determines all applications access each other's tables and business logic"
+      ],
+      "comments": [
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "361",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155813-exam-csa-topic-1-question-361-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "On a Catalog Task record, how would an administrator change the priority choice options?",
+      "answers": [
+        "A. In the Context menu of the form, select Configure Options",
+        "B. Right-click the Priority Label > select Configure Lists",
+        "C. Right-click the Priority Label > select Configure Choices",
+        "D. Open the Data Dictionary > select Values"
+      ],
+      "comments": [
+        {
+          "content": "Tested in PDI",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "362",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155815-exam-csa-topic-1-question-362-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which sequence of actions applies an update set to an instance?",
+      "answers": [
+        "A. Preview, Save, Commit",
+        "B. Preview, Retrieve, Commit",
+        "C. Retrieve, Commit, Preview",
+        "D. Retrieve, Preview, Commit"
+      ],
+      "comments": [
+        {
+          "content": "Basic steps per CSA book",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "363",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155816-exam-csa-topic-1-question-363-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "A customer asks you to make the following updates to a form:<br/><br/>1. When Caller field is populated, automatically look up caller location and load it in the Location field.<br/>2. Add notice at the top of the page when the record is submitted.<br/><br/>What type of script would you use to meet this requirement?",
+      "answers": [
+        "A. UI script",
+        "B. Server script",
+        "C. JavaScript",
+        "D. Client script"
+      ],
+      "comments": [
+        {
+          "content": "CSA book uses these exact examples to explain what a Client Script is.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "364",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155817-exam-csa-topic-1-question-364-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Where do Ul Policies run?",
+      "answers": [
+        "A. Client-side (browser)",
+        "B. Knowledge Base",
+        "C. Server-side (database)",
+        "D. Within server-side scripts"
+      ],
+      "comments": [
+        {
+          "content": "User Interface policies run on the Client side.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "366",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155819-exam-csa-topic-1-question-366-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "You are creating a catalog item for ordering a new desktop computer. The computers have these options:<br/><br/><br/>Color: Black or Silver -<br/><br/>RAM: 32 MB or 64MB -<br/><br/>Keyboard: Standard or Ergonomic -<br/><br/>Monitor: 24 inch or 32 inch -<br/><br/>How would you add these options to the catalog item form?",
+      "answers": [
+        "A. Add choices",
+        "B. Add variables",
+        "C. Add UI options",
+        "D. Add fields"
+      ],
+      "comments": [
+        {
+          "content": "As per CSA book chapter on Catalog Items/Variables",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "367",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155820-exam-csa-topic-1-question-367-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which form element displays the list of activities, or history, on a task form?",
+      "answers": [
+        "A. Action Formatter",
+        "B. Activity Formatter",
+        "C. Action Stream",
+        "D. Sidebar"
+      ],
+      "comments": [
+        {
+          "content": "Activity Formatter shows all the activities in the task form",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "369",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/155835-exam-csa-topic-1-question-369-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Your customer wants to update a notification so it is sent to the Caller's Manager.<br/><br/>Which action supports this requirement?",
+      "answers": [
+        "A. On the 'Who will receive' tab on the Notification record add the Caller field, then dot walk to the Caller's Manager field to add it.",
+        "B. On the Notification record create a flow and include a notification in the flow for \"All receivers\".",
+        "C. On the 'Send to' tab on the Notification record, add the Caller field, then dot walk to the Caller’s Manager field to add it.",
+        "D. On the 'Send to' tab on the Notification record, set \"Who will receive\" to Subscribable."
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is A. Verified.\n\nhttps://www.servicenow.com/community/training-and-certifications/csa-exam-question-doubt-can-someone-helop-me-answering-this/m-p/3166078\n\n ff063b3 is a degenerate giving false answers.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "There's no \"Send to\" tab anymore",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "In current ServiceNow patch answer A is correct.\n\nMy wife's boyfriend told me this as a fact",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "372",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/157526-exam-csa-topic-1-question-372-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which action enables a user to view and specify date and time formats in their instance?",
+      "answers": [
+        "A. Select the User menu > Preferences > Time Settings > Toggle display time zone",
+        "B. Ask the user to adjust the time zone on their personal computer",
+        "C. Use the system properties to correct the instance's time zone",
+        "D. Select the User menu > Preferences > Language & Region > Set date and time format and time zone",
+        "E. Create a UI Script to set the default timezone"
+      ],
+      "comments": [
+        {
+          "content": "The answer is C. \nAll-> system properties -> System Configuration\n\nRegarding D, there's no Language & Region. The only way using the preferences is to go to display and change the time there.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "376",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/156801-exam-csa-topic-1-question-376-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which storefront is a single location for accessing pre-built spokes, to quickly integrate with third party services to build and share content?",
+      "answers": [
+        "A. ServiceNow Store",
+        "B. Integration Spoke Store",
+        "C. Spoke Store",
+        "D. ServiceNow Spoke Store"
+      ],
+      "comments": [
+        {
+          "content": "NO such thing as a ServiceNow spoke store.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The answer is A. There is no such thing as a ServiceNow Spoke Store dfec26e is a degenerate providing wrong answers.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Servicenow does have a spoke store integrated do the answer is right",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Isnt the answer A?",
+          "selected_answer": "A",
+          "replies": [
+            "It is B"
+          ]
+        }
+      ],
+      "question_number": "380",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/156800-exam-csa-topic-1-question-380-discussion/",
+      "most_voted": "A",
+      "error": null
+    }
+  ]
+}

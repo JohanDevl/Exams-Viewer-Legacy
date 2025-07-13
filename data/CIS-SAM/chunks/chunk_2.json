@@ -1,0 +1,1509 @@
+{
+  "chunk_id": 2,
+  "start_question": 101,
+  "end_question": 150,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "Additional Software Model Lifecycles phases can be added as __________ .",
+      "answers": [
+        "A. Options",
+        "B. Items",
+        "C. Choices",
+        "D. Selections"
+      ],
+      "comments": [
+        {
+          "content": "C - Choices.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I would say C as this field is a Choice List",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "104",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/143010-exam-cis-sam-topic-5-question-104-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Software Model Lifecycles can only be created for an external, publisher defined date.",
+      "answers": [
+        "A. True",
+        "B. False"
+      ],
+      "comments": [
+        {
+          "content": "B - false.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B - False is the correct answer.  SAM Fundamentals Utah - Internal lifecycle is used to track the date the software will no longer be available to request.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "105",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137581-exam-cis-sam-topic-5-question-105-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Once a weekly software content update adds lifecycle data to your instance, can it be deleted from the software model?",
+      "answers": [
+        "A. It can be deleted or deactivated",
+        "B. Yes, it can once accepted",
+        "C. It cannot unless the lifecycle stage is EOL",
+        "D. No, it cannot"
+      ],
+      "comments": [
+        {
+          "content": "If a content update adds lifecycle data, it cannot be deleted from the software model but can be deactivated. Any lifecycle data that is added to a content update will have its source set to ServiceNow",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "106",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137582-exam-cis-sam-topic-5-question-106-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "During contract negotiations, what report could you run to gain visibility to products nearing end-of support?",
+      "answers": [
+        "A. Software Contract Lifecycle Report",
+        "B. Software Model Lifecycle Report",
+        "C. Software Licenses Report",
+        "D. Software Support Report"
+      ],
+      "comments": [
+        {
+          "content": "None of these are correct, the correct answer would be Software Product Lifecycle Report. It can be checked just entering the License Workbench and looking to the Reports tab. I also recommend the following article:  Although it talks about \"Software Lifecycle Report\", we can see that the internal name of the table is \"sam_sw_product_lifecycle_report\", so summarizing, the correct answer would be SOFTWARE PRODUCT LIFECYCLE REPORT\"",
+          "selected_answer": "",
+          "replies": [
+            "Agreed, the closest answer would be B, but still, it's either Software Asset Workspace > License Usage > \"Software product lifecycle report\", which is the report they called \"Software Lifecycle Report\" (check sys_report.list).\n\nOr... Software Asset Workspace > Software Asset Overview > \"End of life products\" reports."
+          ]
+        },
+        {
+          "content": "Software Lifecycle Report\nGet visibility to end-of-life and end-of-support software.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "107",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137584-exam-cis-sam-topic-5-question-107-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Once you are ready to retire software in ServiceNow, what is the critical first step in the retirement process?",
+      "answers": [
+        "A. Manually set Allocations available on the entitlement to Zero (0)",
+        "B. Expire identified active software entitlements",
+        "C. Run the Software Model Lifecycle Report",
+        "D. Revoke all current allocations",
+        "E. Recover the identified software entitlements"
+      ],
+      "comments": [
+        {
+          "content": "B - \"Once you have your EOL planning complete and you are ready to retire the software in ServiceNow, it is critical to expire the identified active software entitlements first, to ensure additional license rights cannot be allocated.\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From SAM Pro (Software Retirement): Once you have your EOL planning complete and you are ready to retire the software in ServiceNow, it is critical to expire the identified active software entitlements first, to ensure additional license rights cannot be allocated.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "108",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118947-exam-cis-sam-topic-5-question-108-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Publisher information such as general availability and end-of-life dates will be provided as part of what feature within ServiceNow?",
+      "answers": [
+        "A. License change projection",
+        "B. Software model lifecycle",
+        "C. Publisher packs",
+        "D. Normalization suggestions",
+        "E. Reconciliation dimensions"
+      ],
+      "comments": [
+        {
+          "content": "I think the C is answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Looks like it is actually Software Product Lifecycle, but that is not an option.\n\nAs part of the Software Asset Management Content Library, content such as publisher general availability and end-of-life dates will be provided for software models that have been assigned a discovery map where software lifecycle content is available.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "109",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127434-exam-cis-sam-topic-5-question-109-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "A user is notified their software install has been flagged for reclamation. The user declines approval.<br/>What is the next step in the workflow?",
+      "answers": [
+        "A. Nothing happens.",
+        "B. The user’s manager must approve or decline the reclamation.",
+        "C. The reclamation candidate is removed from the candidate list.",
+        "D. The software is reclaimed since it was not in use."
+      ],
+      "comments": [
+        {
+          "content": "B is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "110",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137586-exam-cis-sam-topic-5-question-110-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following features enables organizations to easily upgrade a standard version of their software to an enterprise version?",
+      "answers": [
+        "A. Software Entitlement",
+        "B. Software Edition",
+        "C. Software Assurance",
+        "D. Software Allocation"
+      ],
+      "comments": [
+        {
+          "content": "I think \"Software Assurance\"  .. \"if you are covered under Microsoft SA you can also upgrade or step up, a standard version of your software to an enterprise edition\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I believe its C , Software Assurance.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is B Software Edition",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "111",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127128-exam-cis-sam-topic-5-question-111-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What role must be granted in order to create new reports that could be viewed by other people?",
+      "answers": [
+        "A. Report Creator [Report_Creator]",
+        "B. Report Publisher [report_publisher]",
+        "C. ITIL [itil]",
+        "D. Global Report User [report_global]"
+      ],
+      "comments": [
+        {
+          "content": "B is the most correct answer based on this official documentation \n\nhttps://www.servicenow.com/docs/bundle/yokohama-now-intelligence/page/use/reporting/reference/reporting-roles.html\n\nand this message from the community : \n\nhttps://www.servicenow.com/community/developer-forum/how-to-generate-reports-without-quot-report-admin-quot-role/td-p/2589904",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "report_publisher - Can publish reports that they can manage. Publishing a report creates a public link to that report. Users with this role must also have another role that grants permission to create, edit, and share reports.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "D => I have tested and the \"ITIL\" role only has the options to \"export to PDF\" & \"Add to Dashboard\". The \"Global Report User [report_global]\" has one more option is \"Share\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C - ITIL is correct answer, ther report_global can manage the reports shared with \"everyone\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C - the word \"create new\" is the difference here. \n\nhttps://docs.servicenow.com/bundle/washingtondc-now-intelligence/page/use/reporting/concept/c_AdminsteringReports.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-now-intelligence/page/use/reporting/reference/reporting-roles.html\n\nglobal report user [report_global]\tCan manage reports that are shared with everyone (listed in Global).",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "112",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/130428-exam-cis-sam-topic-5-question-112-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Software Asset Management (SAM) Professional reports can be delivered in which formats? (Choose three.)",
+      "answers": [
+        "A. PowerPoint",
+        "B. PDF",
+        "C. CSV",
+        "D. XLS"
+      ],
+      "comments": [
+        {
+          "content": "B,C,D is the right answer",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "PDI shows export options:\nExcel (xls)\nCSV\nJSON\nPDF",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "B. PDF\nC. CSV\nD. XLS",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "114",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118948-exam-cis-sam-topic-5-question-114-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "The goals of Software Asset Management include which of the following? (Choose three.)",
+      "answers": [
+        "A. Optimize spend",
+        "B. Rationalize business applications",
+        "C. Maintain compliance",
+        "D. Identify unauthorized usage",
+        "E. Support software audits"
+      ],
+      "comments": [
+        {
+          "content": "The answer is A, C and E\nOptimize Spend\nMaintain compliance\nSupport software audits\n\nIt's on page 13 of the SAM Pro manual that comes with the course.",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "The goals of SAM are:\nMaintain compliance\nOptimize spend\nSupport software audits",
+          "selected_answer": "ACE",
+          "replies": []
+        }
+      ],
+      "question_number": "115",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108431-exam-cis-sam-topic-6-question-115-discussion/",
+      "most_voted": "ACE",
+      "error": null
+    },
+    {
+      "question": "Which ServiceNow plugin is used by Software Asset Management (SAM) Professional and configured during SAM Professional setup?",
+      "answers": [
+        "A. Vendor Procurement",
+        "B. Asset Cost Management",
+        "C. Normalization Data Services",
+        "D. Asset Management",
+        "E. ITSM Software Asset Management"
+      ],
+      "comments": [
+        {
+          "content": "I don't think that D. \"Asset Management\" makes sense as it's more used for HAM. Also, E. \"ITSM Software Asset Management\" is the basic application that comes with ITSM, and NOT with SAM PRO. Therefore, I'd go for C. \"Normalization Data Services\"",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "D is correct - https://docs.servicenow.com/bundle/washingtondc-it-service-management/page/product/asset-management/concept/c_SoftwareAssetManagement.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think it's C\nhttps://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/setup-sam.html",
+          "selected_answer": "C",
+          "replies": [
+            "It's actually D, I did a typo: ITSM Software Asset Management."
+          ]
+        },
+        {
+          "content": "I would like to change my answer to C Asset Management",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is E ITSM Software Asset Management Plugin",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "116",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127129-exam-cis-sam-topic-6-question-116-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which SAM role must be a trained ServiceNow administrator?",
+      "answers": [
+        "A. sam_admin",
+        "B. sam_developer",
+        "C. discover_admin",
+        "D. entitlement_manager",
+        "E. model_manager"
+      ],
+      "comments": [
+        {
+          "content": "Should be sam_developer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Software Asset Management developer - [sam_developer] -Writes scripts on the platform, comparable to the script-writing privileges granted to a sys_admin. Users with this role must be trained ServiceNow administrators.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Writes scripts on the platform, comparable to the script-writing privileges granted to a sys_admin. Users with this role must be trained ServiceNow administrators.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "117",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108604-exam-cis-sam-topic-6-question-117-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Within Software Asset Management there are many key terms to understand, what is the best definition for Reconciliation?",
+      "answers": [
+        "A. Software license details that define use rights",
+        "B. One or more use rights assigned to a specific device or user",
+        "C. Classification of the acquired software",
+        "D. The process of standardizing discovered software installation data to defined norms",
+        "E. The process of producing a compliance position by comparing the number of software rights acquired against the normalized software inventory"
+      ],
+      "comments": [
+        {
+          "content": "E is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Software reconciliation is an automated process that calculates compliance based on how many rights are in use compared to the number of active rights purchased.",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "This is on page 7 of the SAM manual that comes with the course.",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "E is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "118",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92341-exam-cis-sam-topic-6-question-118-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "By default, which persona is responsible for loading asset management data from integrations and discovery tools into SAM Pro?",
+      "answers": [
+        "A. ServiceNow process owner",
+        "B. SAM manager",
+        "C. SAM administrator",
+        "D. ServiceNow administrator",
+        "E. SAM user"
+      ],
+      "comments": [
+        {
+          "content": "Should be D. ServiceNow administrator",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ServiceNow Administrator: Responsible for loading of asset management data, integrations, and discovery tools.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "119",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108605-exam-cis-sam-topic-6-question-119-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "As part of the discovery process, when records are written to the software installation table a check is performed to determine if the information already exists in the discovery model table, if a record exists, what does the system do?",
+      "answers": [
+        "A. The record is deleted and recreated to ensure the most recent discovery model is recorded.",
+        "B. Nothing, the record exists so it is ignored.",
+        "C. A new record is created for the installation in the discovery model table.",
+        "D. A reference to the discovery model record is identified and associated to the software installation record."
+      ],
+      "comments": [
+        {
+          "content": "It's answer D - referenced on page 112 in the SAM manual that came with the SAM course.\n\n* if it does exist, a reference to the Discovery Model records is identified in the Software installation table.\n* If it does not exist:\n - A new record is created for the installation in the Discovery Model table.\n- The reference number to the new record is then identified in the Software Installation table.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "120",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108436-exam-cis-sam-topic-6-question-120-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following are valid on import errors (vs. after import) when using the automated entitlement import feature? (Choose three.)",
+      "answers": [
+        "A. Purchased rights should be greater than 0",
+        "B. The end date must be greater than the start date",
+        "C. Publisher Part Number and Software Model not found",
+        "D. Duplicate entry",
+        "E. Publisher Part Number already exists"
+      ],
+      "comments": [
+        {
+          "content": "on page 71 of SAM manual that came with SAM course:\nA - Purchased rights should be greater than 0\nC - Publisher Part Number and Software Model not found\nD - Duplicate Entry",
+          "selected_answer": "ACD",
+          "replies": []
+        }
+      ],
+      "question_number": "121",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108438-exam-cis-sam-topic-6-question-121-discussion/",
+      "most_voted": "ACD",
+      "error": null
+    },
+    {
+      "question": "What are the available actions associated with the Normalization Suggestions feature? (Choose two.)",
+      "answers": [
+        "A. Accept – updates the discovery model with suggested values",
+        "B. Reject – ignores the suggestion. The next time the scheduled job is executed, it will not pick the same package or rule that was rejected previously",
+        "C. Save – allows you to save the suggestion to review again later",
+        "D. Ignore – ignores the suggestion. All fields are updated to read only until the next time the job is executed with the same package or rule that was ignored previously.",
+        "E. Create – creates a discovery model with suggested values"
+      ],
+      "comments": [
+        {
+          "content": "Correct Answer : A & B \nhttps://docs.servicenow.com/bundle/sandiego-it-asset-management/page/product/software-asset-management2/task/view-norm-suggestions-sam.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "sys_ui_action for table \"samp_normalization_suggestion\"   offers only \"Reject\" & \"Accept\"",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "a,b is the right answer",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "A&B are correct - https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/software-asset-management2/task/view-norm-suggestions-sam.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I agree with A and B - it is either Accept or Reject.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "122",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/97425-exam-cis-sam-topic-6-question-122-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "What is used to identify and normalize software installed in an environment?",
+      "answers": [
+        "A. Software Discovery Mode",
+        "B. Software Installation Model",
+        "C. Software Model",
+        "D. Software Normalization Model",
+        "E. Software Reconciliation Model"
+      ],
+      "comments": [
+        {
+          "content": "A is correct - https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/software-asset-management2/task/t_EditASoftwareDiscModel.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-asset-management/page/product/software-asset-management2/concept/c_DiscoveryModels.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Should be A , Software Discovery model",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "123",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108908-exam-cis-sam-topic-6-question-123-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When a software title is transferred between vendors, the content library download and update feature will automatically propagate those changes to which of the following? (Choose three.)",
+      "answers": [
+        "A. Software entitlements",
+        "B. Software reconciliations",
+        "C. Software models",
+        "D. Transform maps",
+        "E. Discovery models"
+      ],
+      "comments": [
+        {
+          "content": "I actually think it's A,C,E: https://docs.servicenow.com/bundle/utah-it-asset-management/page/product/software-asset-management2/concept/c_SAMContentService.html\n\nTransform Maps I thought only applied to existing SN tables?: https://docs.servicenow.com/bundle/tokyo-platform-administration/page/script/server-scripting/concept/c_CreatingNewTransformMaps.html",
+          "selected_answer": "ACE",
+          "replies": []
+        }
+      ],
+      "question_number": "124",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108565-exam-cis-sam-topic-6-question-124-discussion/",
+      "most_voted": "ACE",
+      "error": null
+    },
+    {
+      "question": "When creating a transform map to map software installation data into the appropriate SAM table, why would you set the coalesce values for the u_display_name. u_publisher, u_version, u_installed_on, and u_assigned_to fields to be true? (Choose two.)",
+      "answers": [
+        "A. To ensure that you import all these fields into the table",
+        "B. To avoid duplication of data",
+        "C. To ensure completeness of data",
+        "D. To ensure that if all fields match an existing record on import, that a new record is created",
+        "E. To ensure that if all fields do not match an existing record on import, that a new record is created"
+      ],
+      "comments": [
+        {
+          "content": "From page 109 in SAM book that was included in SAM course:\nB. To avoid duplication of data\nE. To ensure that if all fields do not match an existing record on import, that a new record is created",
+          "selected_answer": "BE",
+          "replies": []
+        }
+      ],
+      "question_number": "125",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108465-exam-cis-sam-topic-6-question-125-discussion/",
+      "most_voted": "BE",
+      "error": null
+    },
+    {
+      "question": "What information is required when importing device allocations? (Choose three.)",
+      "answers": [
+        "A. Software model associated with the allocation",
+        "B. Purchase order of the device",
+        "C. User assigned to the device",
+        "D. Entitlement associated with the allocation",
+        "E. Quantity of rights allocated to the device"
+      ],
+      "comments": [
+        {
+          "content": "a, d and e, you dont' need purchasing or user data",
+          "selected_answer": "ADE",
+          "replies": []
+        },
+        {
+          "content": "Validated against the SAM Training materials pg 221 \nDevice Allocations:  1) Are assigned to a single device 2)Identify the quantity of entitlement rights assigned to the device 3) Identify the license key or keys assigned to the device.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "126",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137553-exam-cis-sam-topic-6-question-126-discussion/",
+      "most_voted": "ADE",
+      "error": null
+    },
+    {
+      "question": "Within ServiceNow Discovery, the Scanning phase determines what?",
+      "answers": [
+        "A. What else can you tell me about yourself?",
+        "B. How should I classify you specifically?",
+        "C. Have I seen you before?",
+        "D. Are you there? How will I classify you?"
+      ],
+      "comments": [
+        {
+          "content": "D is the right answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "127",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/143491-exam-cis-sam-topic-6-question-127-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Software models are used to connect purchased software rights with discovered software installations via which mechanism?",
+      "answers": [
+        "A. Transform Map",
+        "B. Software Discovery Model",
+        "C. Software Discovery Map",
+        "D. Reconciliation Map",
+        "E. Software Install Model"
+      ],
+      "comments": [
+        {
+          "content": "I think it's C - Software Discover Map\nI researched and it says that SOFTWARE DISCOVERY MAPS map the Software Discovery Model (installations) to the appropriate Software Model (purchased rights to use).",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Software Discovery Models are different from Software Models. Software Models are created when a specific version or edition of software is purchased and/or available to users. Software Discovery Maps map the Software Discovery Model (installations) to the appropriate Software Model (purchased rights to use).",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I made a typo below - I forgot the \"y\"\nC - Software Discovery Map",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think the answer here is B",
+          "selected_answer": "",
+          "replies": [
+            "\"Create a software model to add product details that are used to connect software rights you purchased with software installations discovered on your system.\"\n\nDocs: https://docs.servicenow.com/bundle/washingtondc-it-asset-management/page/product/software-asset-management2/task/record-terms-software-licenses.html"
+          ]
+        }
+      ],
+      "question_number": "128",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/95017-exam-cis-sam-topic-6-question-128-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "ServiceNow Discovery finds IP-enabled devices and the software that runs on them. It uses a combination of the following methods to explore the devices. (Choose three.)",
+      "answers": [
+        "A. Agents",
+        "B. Signature files",
+        "C. Patterns",
+        "D. Probes",
+        "E. Sensors"
+      ],
+      "comments": [
+        {
+          "content": "Should be CDE i.e pattern,probes,sensors",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "CDE is the right answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I have been doing Discovery from past almost 10 years, from my experience, it is CDE",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Should be CDE",
+          "selected_answer": "CDE",
+          "replies": []
+        },
+        {
+          "content": "Discovery always uses probes and sensors during the first two phases of discovery: scanning and classification. For the last two phases, identification and exploration, Discovery can use probes and sensors or patterns.\n\nSo it would be CDE - Patterns, Probes, and Sensors",
+          "selected_answer": "CDE",
+          "replies": []
+        },
+        {
+          "content": "Sounds like C, D, E - pattern, probes, sensors\nDiscovery always uses probes and sensors during the first two phases of discovery: scanning and classification. For the last two phases, identification and exploration, Discovery can use probes and sensors or patterns. \nhttps://docs.servicenow.com/bundle/vancouver-it-operations-management/page/product/discovery/concept/c_DiscoveryProbesAndSensors.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It should be ADE, there is also the Agent Client Collector that you can install.",
+          "selected_answer": "ADE",
+          "replies": []
+        },
+        {
+          "content": "I think it's A C D \nProbes collect information about the device and send it back to the sensor to be processed. So the sensor processes but does not collect.\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-operations-management/page/product/discovery/concept/c_DiscoveryProbesAndSensors.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "130",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108566-exam-cis-sam-topic-6-question-130-discussion/",
+      "most_voted": "CDE",
+      "error": null
+    },
+    {
+      "question": "What does the acronym “CAL” stand for?",
+      "answers": [
+        "A. Client Access Limit",
+        "B. Computer Access License",
+        "C. Client Access License",
+        "D. Concurrent Access License"
+      ],
+      "comments": [
+        {
+          "content": "The answer here is C - Client Access License\n(This is located on page 204 of the ServiceNow book included with the course.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Client Access License (CAL) - A software license measured by the number of users or devices that can access a product.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "131",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108494-exam-cis-sam-topic-6-question-131-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Within the ‘Run Reconciliation’ process, how can the reconciliation be grouped?",
+      "answers": [
+        "A. Country, Department, Corporation, Location, Account",
+        "B. Country, Department, Company, Region, Cost Center",
+        "C. Country, Business Unit, Corporation, Location, Account",
+        "D. Country, Business Unit, Company, Region, Cost Center"
+      ],
+      "comments": [
+        {
+          "content": "B is the right answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I agree, B is the correct answer.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is the right answer\nhttps://docs.servicenow.com/bundle/utah-it-asset-management/page/product/software-asset-management2/task/run-recon-workspace.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "132",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/103555-exam-cis-sam-topic-6-question-132-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "By default, which ServiceNow role can read, but not create, a custom license script?",
+      "answers": [
+        "A. sam_developer",
+        "B. sam_user",
+        "C. sam_reconcile_user",
+        "D. sam_admin"
+      ],
+      "comments": [
+        {
+          "content": "The answer is D.\nFrom page 206 is sam book with course:\nThe sam_admin role is required to read the custom metric script.  The sam_developer role is required to create or modify a custom metric script.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Agree with Stepherbun answer is D\n\n- to create or modify a custom metric script: sam_developer\n- to read custom metric script: sam_admin\n\nhttps://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/task/add-custom-license-metric.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "133",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108496-exam-cis-sam-topic-6-question-133-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following is set in a software entitlement and used during reconciliation to determine your compliance position?",
+      "answers": [
+        "A. Reconciliation rule",
+        "B. Compliancy rule",
+        "C. Baseline KPI",
+        "D. License metric",
+        "E. License allocation"
+      ],
+      "comments": [
+        {
+          "content": "Software license metrics are used for reconciliation to determine your compliance position. License metrics can be defined for users, devices, processors, and cores. What license metrics are available is based on the metric group. Metric groups are either common or tied to a specific software publisher.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Verified in the Learning Course.\n\"Software license metrics are used for reconciliation to determine your compliance position.\"",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "134",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118103-exam-cis-sam-topic-6-question-134-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Once downgrade rights have been populated in the Downgrade Rights table, can they be deleted?",
+      "answers": [
+        "A. Yes, they can once accepted",
+        "B. They can be deleted or deactivated",
+        "C. They cannot until all associated allocations have been removed",
+        "D. No, they cannot"
+      ],
+      "comments": [
+        {
+          "content": "\"Once downgrade rights are created and saved in the Downgrade Rights tables, [samp_sw_downgrade_model] and [samp_downgrade_model], the downgrade rights can't be deleted. However, you can deactivate the downgrade rights.\" (Reference: https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/downgrade-rights.html)",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Should be D",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "135",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108568-exam-cis-sam-topic-6-question-135-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "By default, which ServiceNow role can run on-demand reconciliation?",
+      "answers": [
+        "A. sam_user",
+        "B. sam_reconcile_user",
+        "C. sam_cmdb_user",
+        "D. sam_admin",
+        "E. sam_manager"
+      ],
+      "comments": [
+        {
+          "content": "Users with the sam_admin role can run on-demand reconciliation; users with sam_user role can only view reconciliation results.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer, only the sam_admin can run on demand reconciliation.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "136",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108509-exam-cis-sam-topic-6-question-136-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "On the License Workbench, which of the following is defined as the “Estimated cost of remediating non-compliance”?",
+      "answers": [
+        "A. Software spend",
+        "B. Reconciliation cost",
+        "C. True-down cost",
+        "D. Over-licensed cost",
+        "E. True-up cost"
+      ],
+      "comments": [
+        {
+          "content": "True-up Cost - Estimated cost of remediating non-compliance",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is E - True up cost.\n\nit's on page 237 in the SAM book that comes with the course",
+          "selected_answer": "E",
+          "replies": []
+        }
+      ],
+      "question_number": "137",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108510-exam-cis-sam-topic-6-question-137-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "Automated license reconciliation keeps license positions accurate and up-to-date without manual calculations. Disregarding on-demand runs for a specific publisher or all publishers, how often does reconciliation run?",
+      "answers": [
+        "A. Bi-weekly",
+        "B. Daily",
+        "C. Every other day",
+        "D. Monthly",
+        "E. Weekly"
+      ],
+      "comments": [
+        {
+          "content": "E is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B:Daily is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D: Weekly. https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/task/t_RunReconciliation.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-asset-management/page/product/software-asset-management2/concept/c_SAMReconciliation.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "138",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108569-exam-cis-sam-topic-6-question-138-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "When reconciliation is run, what information does the software product results display?",
+      "answers": [
+        "A. Results for all products and installations associated to the publisher",
+        "B. Results for each license metric associated to the software model",
+        "C. Results for all models and installations associated to the product",
+        "D. Results for all license metrics related to the software model"
+      ],
+      "comments": [
+        {
+          "content": "Verified in the Learning course in the Reconciliation section. When you flip the \"Software product\" tile it says verbatim: \"Results for all models and installations associated to the product\"",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C. All models and Installations associated to the product is the Software Product tier",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Software Product - Results for all models and installations associated to the product.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Should be B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "139",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108572-exam-cis-sam-topic-6-question-139-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When reconciliation is run, what information does the software publisher results display?",
+      "answers": [
+        "A. Results for all products and installations associated to the publisher",
+        "B. Results for each license metric associated to the software model",
+        "C. Results for all models and installations associated to the product",
+        "D. Results for all license metrics related to the software model"
+      ],
+      "comments": [
+        {
+          "content": "Verified in learning course. Similar to the previous question it is located in the reconciliation section of the course. When you flip the \"Software Publisher\" tile it says: \"Results for all products and installations associated to the publisher\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A. Software publisher = Results for all products and installations associated to the publisher",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Software Publisher - Results for all products and installations associated to the publisher.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "140",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/118104-exam-cis-sam-topic-6-question-140-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What type of record is only created when a software model or entitlement exists for the product?",
+      "answers": [
+        "A. SAM Analytics Results",
+        "B. Software Asset Results",
+        "C. Software Product Results",
+        "D. Software Model Results"
+      ],
+      "comments": [
+        {
+          "content": "A software model results record is only created when a software model or entitlement exists for the product.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "141",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/127550-exam-cis-sam-topic-6-question-141-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "For which of the following reasons could an installation be unlicensed at the Product Result level?",
+      "answers": [
+        "A. The software installation was not completed correctly due to an incorrect workflow set-up.",
+        "B. Software installation records are not associated with a software discovery model.",
+        "C. The software normalization process has not yet run.",
+        "D. The software discovery model is not mapped to the appropriate software model.",
+        "E. The software installation has not been fully reconciled."
+      ],
+      "comments": [
+        {
+          "content": "It is D in my view.\nThe install record and the discovery model are created at the same time. The software model is the trail to the entitlement.\nThe link is the discovery map. Without mapping the reconciliation cannot find any entitlement/license.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "I belive it's D. installation records??",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Sorry, I mean B.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I believe its D, \"Software installation records are not associated with a software discovery model\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "isn't it D?",
+          "selected_answer": "",
+          "replies": [
+            "I believe it's B: https://docs.servicenow.com/en-US/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/c_DiscoveryModels.html"
+          ]
+        }
+      ],
+      "question_number": "142",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108894-exam-cis-sam-topic-6-question-142-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "By default, which ServiceNow role can only view reconciliation results?",
+      "answers": [
+        "A. sam_reconcile_user",
+        "B. sam_user",
+        "C. sam_viewer",
+        "D. sam_cmdb_user",
+        "E. sam_manager"
+      ],
+      "comments": [
+        {
+          "content": "sam_user can view the results and sam_admin can run the reconciliation. So the answer is B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "sam_user can view reconciliation results",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Users with the sam_admin role can run on-demand reconciliation; users with sam_user role can only view reconciliation results.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/c_SAMReconciliation.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "it's B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "143",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108577-exam-cis-sam-topic-6-question-143-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "For products monitored by System Center Configuration Manager (SCCM), what usage data point(s) are imported for reclamation analysis?",
+      "answers": [
+        "A. Number of Times Used",
+        "B. Average Use Time",
+        "C. Last Used and Total Usage Time",
+        "D. Last Used Only"
+      ],
+      "comments": [
+        {
+          "content": "There are two types of data (total usage and last used) that you can extract from SCCM and import into your instance. Last used data will only show the last time the software was used during the previous month.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "144",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108578-exam-cis-sam-topic-6-question-144-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which catalog provides a collection of models in the environment?",
+      "answers": [
+        "A. Service Catalog",
+        "B. Item Catalog",
+        "C. Product Catalog",
+        "D. Vendor Catalog",
+        "E. Model Catalog"
+      ],
+      "comments": [
+        {
+          "content": "the correct answer is C - Product Catalog, as it's a collection of models in the environment.\n\n(it is not service catalog, as that is a listing of goods and services an organization provides.)",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Product Catalog - Collection of Models in the environment - models can be easily published to the Product Catalog and are then automatically published to the Service Catalog.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer : C (Product Catalog)\nhttps://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/product-catalog/concept/c_ProductCatalog.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "This should answer the discussion/debate for Question 96 of this Exam :)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A: Service Catalog is the right answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "145",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/103556-exam-cis-sam-topic-6-question-145-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Software reclamation is integrated with which of the following to automate the process of uninstalling software from devices and reclaiming those software rights?",
+      "answers": [
+        "A. Integrated Risk Management",
+        "B. HR Management",
+        "C. Client Software Distribution",
+        "D. Incident Management"
+      ],
+      "comments": [
+        {
+          "content": "For Software Asset Management, ServiceNow’s Client Software Distribution (CSD) product facilitates software removal without user interaction. Using Microsoft System Center Configuration Manager (SCCM), a scheduled job revokes un-entitled software and reclaims license rights. Utilizing this capability does not require that SCCM install the software to be removed.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct - on page 422 of the sam book that came with the course",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the right answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "146",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/103670-exam-cis-sam-topic-6-question-146-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Reclamation rules can be applied to what types of software? (Choose two.)",
+      "answers": [
+        "A. Subscription software",
+        "B. End-of-life software",
+        "C. Blacklisted software",
+        "D. Installed software",
+        "E. Free-ware software"
+      ],
+      "comments": [
+        {
+          "content": "The answer is A & D - as per page 421 in the SAM book that comes with the Sam course.\nA - Subscription software\nD - installed software",
+          "selected_answer": "AD",
+          "replies": [
+            "Agreed! Additionally, look at the \"Filter Conditions\" section: https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/sw-reclamation-rules.html"
+          ]
+        }
+      ],
+      "question_number": "147",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108579-exam-cis-sam-topic-6-question-147-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "Which of the following are valid Remediation Options on the License Workbench after reconciliation has been run? (Choose five.)",
+      "answers": [
+        "A. Create Entitlements",
+        "B. Remove Metric Attributes",
+        "C. Purchase Rights",
+        "D. Remove Unallocated Installs",
+        "E. Remove Unlicensed Installs",
+        "F. Create Allocations",
+        "G. Remove Allocation"
+      ],
+      "comments": [
+        {
+          "content": "As per SAM book in the SAM course on pages 367-371\nC - purchase rights\nD - remove unallocated installs\nE - remove unlicensed installs\nF - create allocations\nG - remove allocations",
+          "selected_answer": "CDEFG",
+          "replies": []
+        },
+        {
+          "content": "CDEFG is the right answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "it's ACDEF",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "148",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108582-exam-cis-sam-topic-6-question-148-discussion/",
+      "most_voted": "CDEFG",
+      "error": null
+    },
+    {
+      "question": "Which of the following are valid States of Remediation Options on the License Workbench after a reconciliation has been run? (Choose four.)",
+      "answers": [
+        "A. New",
+        "B. Cancelled",
+        "C. Void",
+        "D. Complete",
+        "E. Done",
+        "F. In Progress"
+      ],
+      "comments": [
+        {
+          "content": "Should be ACDF",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "the correct answer is A, C, D & F \nfrom page 366 of the SAM book that came with the SAM course",
+          "selected_answer": "ACDF",
+          "replies": []
+        },
+        {
+          "content": "Needs to be updated: Completed, Failed, Partially Completed, In Progress",
+          "selected_answer": "DF",
+          "replies": []
+        },
+        {
+          "content": "Should be ACDF",
+          "selected_answer": "ACDF",
+          "replies": []
+        }
+      ],
+      "question_number": "149",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108606-exam-cis-sam-topic-6-question-149-discussion/",
+      "most_voted": "ACDF",
+      "error": null
+    },
+    {
+      "question": "What role(s) are required to import financial data for use in software spend detection? (Choose two.)",
+      "answers": [
+        "A. sam_spend_import",
+        "B. sam_spend_manager",
+        "C. sam_user",
+        "D. sam_admin",
+        "E. procurement_user"
+      ],
+      "comments": [
+        {
+          "content": "The answers are A and D\nA - Sam_spend_import\nD - Sam_admin\n\nfrom page 287  in the serviceNow sam book that came with the course.",
+          "selected_answer": "AD",
+          "replies": [
+            "Thanks for this, Stepherbun! You refer to a SAM book a lot, how could I obtain a copy?"
+          ]
+        },
+        {
+          "content": "AD\nhttps://docs.servicenow.com/en-US/bundle/tokyo-it-asset-management/page/product/software-asset-management2/task/import-spend-transactions.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "150",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/95020-exam-cis-sam-topic-6-question-150-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "What type of publisher lifecycle information does the Software Lifecycle report prioritize?",
+      "answers": [
+        "A. Information provided in the demo data",
+        "B. Information entered by the user",
+        "C. Information entered by the publisher",
+        "D. Information provided by the software library",
+        "E. Information provided by the publisher pack"
+      ],
+      "comments": [
+        {
+          "content": "B - information entered by the user\n\n(as per page 436 in the SAM book from the SAM course.)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Since Orlando, the Software Lifecycle report is enhanced to prioritize any publisher life-cycle information entered by the user over life cycle information provided by the software library.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "151",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108689-exam-cis-sam-topic-6-question-151-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Maintenance entitlements can be associated with what types of entitlements (for non-Microsoft publishers)? (Choose three.)",
+      "answers": [
+        "A. Upgrade",
+        "B. Perpetual",
+        "C. Perpetual + Subscription",
+        "D. Perpetual + Maintenance",
+        "E. Subscription"
+      ],
+      "comments": [
+        {
+          "content": "The answer is A, B, D as per page 290 in the SAM book that comes with the SAM course.\nUpgrade, Perpetual, Perpetual + Maintenance",
+          "selected_answer": "ABD",
+          "replies": [
+            "Validated by creating a new \"Common\" Entitlement. I see your 3 indicated answers as pick-values under \"License type\". Thanks!"
+          ]
+        }
+      ],
+      "question_number": "152",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108704-exam-cis-sam-topic-6-question-152-discussion/",
+      "most_voted": "ABD",
+      "error": null
+    },
+    {
+      "question": "How are Microsoft Office 365 reserved licenses handled after true-up?",
+      "answers": [
+        "A. They are automatically converted into regular licenses",
+        "B. They are automatically disabled until additional licenses are purchased",
+        "C. They are automatically deleted and must be re-reserved",
+        "D. They are automatically removed from true-up calculations and billed separately"
+      ],
+      "comments": [
+        {
+          "content": "Manage Microsoft Office 365 reserved licenses to accurately calculate annual true-up cost. \n\nCreate reserve entitlements from existing Microsoft Office 365 subscription entitlements to add licenses to your subscription. The total cost of the reserved entitlement is included in the calculations for true-up cost and total spend on the product.\n\nPay for the new licenses during your true-up process; after true-up, the reserved licenses are automatically converted into regular licenses.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The answer is A - they are automatically converted to regular licenses\nThis is on page 292 in the SAM book from the SAM course.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "153",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108707-exam-cis-sam-topic-6-question-153-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Using end-of-life/end-of-support software exposes your organization to security threats. What report can you run to gain visibility to these products?",
+      "answers": [
+        "A. Software Models with deactivated discovery maps",
+        "B. License Position Report",
+        "C. Software Model Lifecycle Report",
+        "D. Software Product Lifecycle Report",
+        "E. License Workbench Report"
+      ],
+      "comments": [
+        {
+          "content": "It's D.\n- if you go to sys_report.list you'll see it named \"Software Lifecycle Report\"...\n-  but when you navigate to Software Asset Workspace > License Usage > Report, same same report is called \"Software Product Lifecycle Report\".",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Agreed with everyone. Provided 2 links, below on the comments. \n\"View the Software Product Lifecycle report to be informed about the products nearing end-of-life, end-of-support, and end-of-extended support. View the report by navigating to Reports > View/Run. The report is based on the scheduled job, SAM - Generate Data For Software Lifecycle Report.\n\nSoftware Lifecycle Report\nThe Software Lifecycle Report [sam_sw_product_lifecycle_report] table calculates the current and upcoming lifecycle phases from the lifecycle phases mentioned in the Software Product Lifecycle [sam_sw_product_lifecyle] table\"",
+          "selected_answer": "D",
+          "replies": [
+            "Furthermore, the \"correct answer\" that this exam is suggesting at B is wrong as  License Position Report only shows compliancy details: https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/sam-license-position-report.html"
+          ]
+        },
+        {
+          "content": "should be D",
+          "selected_answer": "",
+          "replies": [
+            "Agreed with this. See also: https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/calculated-lifecycles.html"
+          ]
+        },
+        {
+          "content": "I believe this is D",
+          "selected_answer": "",
+          "replies": [
+            "Agreed as well. Searched for \"Software Product Lifecycle Report\" in SN docs: https://docs.servicenow.com/bundle/vancouver-it-asset-management/page/product/software-asset-management2/concept/software-models-and-entitlements.html"
+          ]
+        }
+      ],
+      "question_number": "154",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108896-exam-cis-sam-topic-6-question-154-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Performance Analytics allows users to do which of the following? (Choose three.)",
+      "answers": [
+        "A. Assess publisher compliance over a period of time",
+        "B. View trends of software license allocations",
+        "C. Configure software reclamation",
+        "D. Remediate non-compliance",
+        "E. Track usage of a particular software"
+      ],
+      "comments": [
+        {
+          "content": "Should be ABE",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Question #113 says ABE, but I can't back that up with any documentation.",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "I had a hard time with this one, I definitely feel the answers are:\nA - Assess publisher compliance over a period of time\n\nThe others I am thinking:\nC. Configure software reclamation (You can action this from the Software Asset Workspace>Optimization and savings>Removal Candidate)\nD. Remediate non-compliance\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-it-asset-management/page/use/dashboards/application-content-packs/software-asset-mgmt-content-pack.html\n\nI don't see where there is PA information about trends for allocations or usage of software as it relates to anything outside of reclamation...",
+          "selected_answer": "ACD",
+          "replies": []
+        }
+      ],
+      "question_number": "155",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/108891-exam-cis-sam-topic-6-question-155-discussion/",
+      "most_voted": "ABE",
+      "error": null
+    }
+  ]
+}

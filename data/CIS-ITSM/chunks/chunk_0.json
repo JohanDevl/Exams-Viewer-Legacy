@@ -1,0 +1,3255 @@
+{
+  "chunk_id": 0,
+  "start_question": 1,
+  "end_question": 50,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "Given the class structure shown below, which types of CIs will be included in a report run against the cmdb_ci_computer table?<br/><img src=\"https://img.examtopics.com/cis-itsm/image1.png\"/>",
+      "answers": [
+        "A. Just CIs defined directly in cmdb_ci_computer",
+        "B. CIs defined directly in cmdb_ci_computer and all parent classes",
+        "C. CIs defined directly in cmdb_ci_computer and all child classes"
+      ],
+      "comments": [
+        {
+          "content": "C - it's base plus children",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "1",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91649-exam-cis-itsm-topic-1-question-1-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which field from the configuration item will automatically populate in the Assignment group field of an incident record?",
+      "answers": [
+        "A. Managed by",
+        "B. Support group",
+        "C. Approval group",
+        "D. Change group"
+      ],
+      "comments": [
+        {
+          "content": "Support group is correct. Tested on Tokyo PDI. Opened up a CI and added the available fields (through form design): Approval Group, Change Group, and Support Group. Populated them and then opened an incident, filled in \"Configuration Item\", saved it, and the assignment group was filled with the group from \"Support Group\".",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B - support group.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nAutomatically populate the Assignment group field based on the support group available for the respective configuration item (CI). If the CI does not have a support group, then the field gets automatically populated with the support group available for the service offering.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "2",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91652-exam-cis-itsm-topic-1-question-2-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following are defined for a given change model? (Choose three.)",
+      "answers": [
+        "A. Phase transitions",
+        "B. State model",
+        "C. State transition conditions",
+        "D. Phase model",
+        "E. State transitions"
+      ],
+      "comments": [
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule 7.2 - Change and Release Management\nPage: Multimodal change (Change models)\n\nAnswer - BCE",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "BCE are the correct three.  It's state related",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nAn individual change model will have the following defined:\n- State models\n- State transitions\n- State transition conditions",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "ebook pages 392-394",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is BCE as mentioned above, and verified on pg 398 of the CIS-ITSM ebook. @esllin: which textbook?",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is BCE.\nCheck the ITSM implementation book page (398)",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is BCE.\nCheck the ITSM implementation book page (398)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "textbook P235,236,237",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "BCE",
+          "replies": []
+        }
+      ],
+      "question_number": "3",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91653-exam-cis-itsm-topic-1-question-3-discussion/",
+      "most_voted": "BCE",
+      "error": null
+    },
+    {
+      "question": "When is a change task for Post Implementation Review created for an unauthorized change?",
+      "answers": [
+        "A. When the change request moves to Close",
+        "B. When a change manager accepts the change",
+        "C. When the change request moves to a state of Review",
+        "D. When the change request moves to a state of Assess"
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is C\nWhen an unauthorized, Emergency Change Request record moves to a state of Review, a change task for Post Implementation Review is automatically created. ITSM Implementation book page(454)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand - English\nModule: 7.4 Change Management\nPage: Post Implementation Review (PIR)\n\nAnswer is C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is C.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "When an unauthorized Emergency Change Request record moves to a state of Review, a\nchange task for Post Implementation Review is automatically created.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A - this is a post implementation meaning after it was done.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "When an unauthorized, Emergency Change Request record moves to a state of Review, a change task for Post Implementation Review is automatically created.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "It is C. Tested in Tokyo PDI. Created an unauthorized change, went straight to the \"Review\" state with a Post Implementation Review change task created.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Agreed, answer is C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "answer is C",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "4",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/87922-exam-cis-itsm-topic-1-question-4-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which should be used to explore the entire hierarchy and table definitions of the Configuration Management Database Classes?",
+      "answers": [
+        "A. Reports",
+        "B. CI Class Manager",
+        "C. Application Menus",
+        "D. Dependency View"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer- B\nExplanation :  The CI Class Manager brings all of this together and provides a centralized place to view the CMDB class hierarchy in a tree-view format as well as view or edit class definitions and class settings for identification rules, reconciliation rules, and CMDB Health.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Use the Cl Class Manager to explore the hierarchy and table definitions at each level.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B -Class manager",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is Correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Use the CI Class Manager as a central location to explore the CMDB class hierarchy, CI table definitions, and class CIs. https://docs.servicenow.com",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/configuration-management/reference/ci-class-manager-landing-page.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "ITSM implementation book pg 33",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": [
+            "Sorry, B is correct, CI  Class Manager"
+          ]
+        },
+        {
+          "content": "B is the correct answer .",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Textbook P34javascript:void(0)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "5",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91654-exam-cis-itsm-topic-1-question-5-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following cannot be defined or set through a Catalog UI Policy?",
+      "answers": [
+        "A. Setting a variable to mandatory",
+        "B. Apply a requirement to all form views",
+        "C. Setting a catalog category to visible",
+        "D. Setting a variable to read-only"
+      ],
+      "comments": [
+        {
+          "content": "Correct is B, checked in PDI.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "After playing around with Catalog UI Policies on my developer instance (Latest release -Vancouver), I am able to set categories as visible by creating or editing the Catalog UI Policy Actions in the the policy (Hint: must save form first before option is available). Options are Leave alone, True, and False. I DO NOT see an option anywhere to apply the action to ALL form views, These are the options:\n\nApplies on a Catalog Item view \n\nApplies on Catalog Tasks\n\nApplies on Requested Items\n\nSo correct answer is B. CANNOT",
+          "selected_answer": "B",
+          "replies": [
+            "I would be more than thrilled to see how you managed to set a catalog category to visible. Could you please share an example?"
+          ]
+        },
+        {
+          "content": "They propably meant for B to be the correct answer but based on the poor wording im going for C because I cannot figure out a way at all to show and hide catalog categories using a catalog UI policy but for B you can apply on all catlaog Tasks and Requested Item but im sure it applied to all of their views as well but cant remember.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "According to \"IT Service Management Implementation(Washington)\"  module 4.3  you B is the correct answer; HOWEVER, you cannot set a catalog category to visible through the use of a catalog UI Policy. This a poor choice of answers.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Like UI policies, Catalog UI Policies: • Allow variables to be set to mandatory, visible, or read-only based on defined conditions. These policies work on variables included on catalog item forms and variables displayed through a variables editor on the request, request item, and catalog task forms.- copy and pasted from Ebook pg. 148. There is also a chart for furth explanation that states you can not apply on all form views. Please check out the book and test in your free developer instance.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A Catalog UI Policy in ServiceNow is used to control the behavior of catalog item forms, including making variables mandatory, setting variables to read-only, and applying requirements to form views. However, it does not control the visibility of catalog categories. Catalog categories' visibility is managed through other means, such as user criteria or directly in the catalog category configuration.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Now i am sure it s C. Because UI catalog policy only control variable inside an item. You can not manipulate category with ctalog ui policy. We are not talking about UI policy.  For B, while it still possible to assign a UI plicy to a specific view, with catalog UI policy, it s by default applied to all Views, you can't design a specific view as target... So B it s possible with UI calaog policy",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A Catalog UI Policy in ServiceNow is used to control the behavior of catalog item forms, including making variables mandatory, setting variables to read-only, and applying requirements to form views. However, it does not control the visibility of catalog categories. Catalog categories' visibility is managed through other means, such as user criteria or directly in the catalog category configuration.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "In this section, we have a comparison table between functionality of Catalog UI Policies and UI Policies. Under functionality \"Applies on all form views\", for UI Policies we have \"optional\" and for Catalog UI Plicies \"NA\" (Not Applicable). I could not find any statement on the visibility of category, thus answer B is more probable for me.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B - I don't see a UI config doing ALL views, some views may be custom to someone else",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B\ntable on p148 of eBook :\n\"Applies on all form views - Not Applicable\" for Catalog UI Policies\nStill not convinced about the categories though....",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Catalog UI Policies only apply to catalogs,\nNot to forms",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Both B and C.\nCatalog UI Policies cannot be applied to all form views and to set category visible.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "it's not a UI policy variable, it says ''category'' visible... you can'dot do that",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct - catalog category cannot be manipulated through UI policy\nAccording to ITSM Implementation eBook page 148, option B is possible - hence not correct answer for this question.",
+          "selected_answer": "C",
+          "replies": [
+            "I just checked the eBook Pg 148, It literally states you CANNOT apply to all form views. And you CAN set categories as visible."
+          ]
+        },
+        {
+          "content": "C is correct - catalog category cannot be manipulated through UI policy\nAccording to ITSM Implementation eBook page 148, option B is possible - hence not correct answer for this question.",
+          "selected_answer": "",
+          "replies": [
+            "I just checked the eBook Pg 148, It literally states you CANNOT apply to all form views. And you CAN set categories as visible. B is the correct answer. I'm positive"
+          ]
+        }
+      ],
+      "question_number": "6",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/87486-exam-cis-itsm-topic-1-question-6-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which type of catalog item should be used to create an incident record from the portal?",
+      "answers": [
+        "A. Incident Template",
+        "B. Request Item",
+        "C. Order Guide",
+        "D. Record Producer"
+      ],
+      "comments": [
+        {
+          "content": "correct answer is D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D - record producer seems to be the most widely used answer from catalog questions",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct- A record producer is a specific type of catalog item that allows end users to create task-based records, such as incident records, from the service catalog.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "7",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91655-exam-cis-itsm-topic-1-question-7-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which incident management roles are activated by installing the ITSM Roles plugin (com.snc.itsm.roles)? (Choose two.)",
+      "answers": [
+        "A. sn_incident_read",
+        "B. itsm_incident_read",
+        "C. incident_manager",
+        "D. sn_incident_write",
+        "E. itsm_incident_write"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-service-management/page/product/incident-management/task/req-itsm-roles-inci-mgmt.html",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-service-management/page/product/incident-management/task/req-itsm-roles-inci-mgmt.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "8",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91656-exam-cis-itsm-topic-1-question-8-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "A customer requests that when the Service Desk agent clicks on the information icon for the Caller's name, the quick view frame shows only the following fields:<br/><br/>User name -<br/><br/>Manager name -<br/><br/>Email Address -<br/><br/>Employee ID -<br/>How would you modify the quick view frame?",
+      "answers": [
+        "A. Update the sys_popup view for the user table",
+        "B. Update the sys_quick view for the caller table",
+        "C. Update the sys_popup view for the caller table",
+        "D. Update the sys_quick view for the user table"
+      ],
+      "comments": [
+        {
+          "content": "From the book:\nUse the table name of the table being referenced. In this case, the Caller field is on the incident form, but the field references to the User [sys_user] table. The URL to add the sys_popup view should reference the User table",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "the answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct !!",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A Is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "textbook p87",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "9",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91665-exam-cis-itsm-topic-1-question-9-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Your customer has built a mature knowledge base, with articles targeted to internal audiences -which are technical. Other articles are written for end users, with simple instructions. From the Incident form, the agents would like to be able to identify which articles are visible to the callers What feature would you use, to satisfy this requirement?",
+      "answers": [
+        "A. Internal/External Highlighting",
+        "B. Search as User",
+        "C. Show User Viewable",
+        "D. User Only View"
+      ],
+      "comments": [
+        {
+          "content": "Service desk agents may see articles users should not see. Use Search As to share\nappropriate articles with users.\n\nOptionally, administrators may enable Search as. This feature returns search results as both the current user and a specified user on the current form (i.e. caller). This allows agents to be confident that articles shared with users are appropriate.\n\nServiceNow (n.d). IT Service Management (ITSM) Implementation - Tokyo. ServiceNow.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Is this search as also possible in the agent assist in SOW?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It is B, never heard of answer A in any part of the book",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct (if enabled, can use Search as). Source: Contextual search properties section of the ITSM implementation ebook",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Optionally, administrators may enable Search as. This feature returns search results as both the current user and a specified user on the current form (i.e. caller). This allows agents to be confident that articles shared with users are appropriate.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A - it's a highlighting issue to differentiate",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct, for more explanation look at Honeybadge's post",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "why is A the correct answer?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "it should be search as caller not user",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer : B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is search as user",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "10",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91296-exam-cis-itsm-topic-1-question-10-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Your customer is using the baseline Create Incident Catalog Item and would like to add a few additional input fields. How should you update the catalog item?",
+      "answers": [
+        "A. Edit in Catalog Item Designer",
+        "B. Edit in Item Designer",
+        "C. Edit in Catalog Builder",
+        "D. Edit in Form Designer"
+      ],
+      "comments": [
+        {
+          "content": "C - Catalog Builder allows you to design and customize catalog items",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C - key word is baseline.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct. Pg 134 in the itsm implementation tokyo ebook",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The C is correct\nhttps://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/service-catalog-management/concept/catalog-builder.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I do not have tokyo ebook , I have rome ebook. can I prepare using that?",
+          "selected_answer": "",
+          "replies": [
+            "In now learning you will find new book for tokyo. Go to certification, requirement  and well now utah book will be eligible which i dont know how to get but atleast you can get tokyo one."
+          ]
+        },
+        {
+          "content": "textbook P366",
+          "selected_answer": "C",
+          "replies": [
+            "Which textbook are you talking about?"
+          ]
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "11",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91666-exam-cis-itsm-topic-1-question-11-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Your customer is complaining that Service Desk users keep accidentally assigning Incidents to the Network CAB, instead of Network Support You have confirmed that:<br/>The Network Support group record has the Group types: Incident and Change<br/>The Network CAB group record has the Group type: Change<br/>What could you do on the incident form, for the Assignment Group field, to resolve this issue?",
+      "answers": [
+        "A. Add a UI action to hide the Network CAB group from the list",
+        "B. Add a UI action to provide an error message if the Network CAB group is selected",
+        "C. Add Dictionary Override to specify the Incident group Reference Qualifier",
+        "D. Modify the choice list to include only the appropriate group types"
+      ],
+      "comments": [
+        {
+          "content": "From the book:\nOnce group types are assigned, use Dictionairy Overrides to specify Reference Qualifiers on the Assignment group fields for each task type.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Leverage the group Type field and reference qualifiers to restrict assignment options only to include appropriate groups.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "12",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91667-exam-cis-itsm-topic-1-question-12-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which Agent workspace feature gives agents automatic search results that show possible solutions for records they open?",
+      "answers": [
+        "A. Chat Bot",
+        "B. Related Search Results",
+        "C. Knowledge Bases",
+        "D. Intelligent Agent",
+        "E. Agent Assist"
+      ],
+      "comments": [
+        {
+          "content": "eBook IT Service Management (ITSM) Implementation",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "ITSM Implementation (Tokyo) ebook p319",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "ITSM Implementation Tokyo version P152 was not helpful.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-customer-service-management/page/product/customer-service-management/concept/migration-agent-assist.html",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-platform-user-interface/page/administer/workspace/task/set-up-agent-assist.html",
+          "selected_answer": "",
+          "replies": [
+            "this link doesn't work"
+          ]
+        },
+        {
+          "content": "textbook P152",
+          "selected_answer": "E",
+          "replies": [
+            "how to get the textbook?",
+            "Hi, how to get the textbook?",
+            "https://evantage.gilmoreglobal.com/#/user/registration"
+          ]
+        },
+        {
+          "content": "correct",
+          "selected_answer": "E",
+          "replies": []
+        }
+      ],
+      "question_number": "13",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91668-exam-cis-itsm-topic-1-question-13-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "Which capability provides visibility to data joined between multiple tables?",
+      "answers": [
+        "A. Database Views",
+        "B. Metric Tables",
+        "C. Published Reports",
+        "D. Custom Tables",
+        "E. Breakdown Sources"
+      ],
+      "comments": [
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand \nModule 8: Metrics, Maintenance, and evolution\nPage: Database views\n\nAnswer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Page 201 of CIS-ITSM eBook:\nDatabase views exist in baseline instances to combine information related to SLAs and metrics with requests, requested items, and catalog tasks. These are equivalent to SQL joins.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "textbook p156",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "14",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91676-exam-cis-itsm-topic-1-question-14-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What tools are available to the assignee to help resolve an Incident? (Choose two.)",
+      "answers": [
+        "A. Knowledge Articles",
+        "B. Workarounds",
+        "C. CI Class Manager",
+        "D. Incident Overview Dashboard",
+        "E. Enterprise CMDB Dashboard"
+      ],
+      "comments": [
+        {
+          "content": "correct",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "ebook Utah p. 249",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "textbook p94",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "15",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91781-exam-cis-itsm-topic-1-question-15-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "When using Inbound Email Actions, what happens if an email is received which has no watermark or reference number?",
+      "answers": [
+        "A. New incident created from the message",
+        "B. New interaction is created from the message",
+        "C. Email is rejected and auto-reply sent to sender",
+        "D. New case is created from the message"
+      ],
+      "comments": [
+        {
+          "content": "IT Service Management (ITSM) Implementation on Demand \nModule 5: Incident Management\nPage: Inbound Actions\n\nAnswer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nAn inbound email action checks the email for a watermark that associates it with a task and checks for other conditions:\n- Email reply: sending an email back to the source that triggered the action\n- By default, if an email has no identifiable watermark, an inbound email action creates a new incident from the message.\n- If the email has a watermark of an existing incident, an inbound email action updates the existing incident according to the action's script",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "This is clearly given in CIS-ITSM (Tokyo) eBook page 264.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Why couldnt D be the answer?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Tokyo p112 - New INC",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "textbook p85",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Why incident and not any other table?",
+          "selected_answer": "",
+          "replies": [
+            "because the create incident inbound action has the lowest order"
+          ]
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "16",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91782-exam-cis-itsm-topic-1-question-16-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Under what circumstances, should you use the Communicate workaround Related Link on the Problem record?",
+      "answers": [
+        "A. The workaround is helpful information for the Callers on the Problem's related Incidents (open)",
+        "B. The workaround should be published to a knowledge article, visible from the portal",
+        "C. The workaround is helpful information for the members of the Problem's Assignment Group",
+        "D. The workaround is helpful information for the members of the Problem's Work notes list"
+      ],
+      "comments": [
+        {
+          "content": "D. is the correct answer.\nAs per page 355 of CIS-ITSM (Tokyo) eBook:\n1. By default, the workaround gets copied to the work notes of any active (i.e. Open, In Progress) incidents related to the problem record.\n2. The workaround is also copied to the Additional Comments of any related incident that has Resolution code of Known error.\n\nA is NOT correct answer, because callers are not able to see work notes, they can only see additional comments. As per 2nd point above, workaround is copied to additional comments of 'resolved' incidents not for 'open' incidents (which is specified in option A).",
+          "selected_answer": "D",
+          "replies": [
+            "When you select Communicate Workaround in the problem record, ALL of the the following happens not just updating work notes:\n\n1. The contents of the workaround is added to the Work notes field for any active (not in a state of Resolved, Closed, or Canceled) incidents related to the problem record\n2.  and to the Additional comments field of any related incident with a Resolution code of Known error. \n3. The workaround is also automatically sent to the incident Caller, to anyone added to the incident Watch list, and to the incident Assigned to user.\n\nThis is from the ebook and verified in an instance.",
+            "yes, I checked in the e-book as well, A is meant to confuse you, so D must be correct.",
+            "to be fair, it's not clear that the incidents are open, the question could have explicitly stated  \"... Problem's related open incidents\", seems the question aimed to confuse.",
+            "Please ignore my previous post. This really seems confusing. \nOption A: The caller won't be able to see the work notes unless they are ITIL users\nOption D: Should the work notes be copied from the workaround to the problem's work note list?"
+          ]
+        },
+        {
+          "content": "From Docs:\nClick the Communicate Workaround related link.\nThe problem number and the content of the Workaround field are added to the activity stream on all related incidents. By default, any entries made in an incident activity stream field generate an email notification to the Caller that you mention on the Incident form.\nIf group on-call rotation scheduling is in effect when you communicate a workaround, the system stops the escalations on the associated incidents. Escalation stops because a workaround is available. This action effectively communicates knowledge to the appropriate audience, but does not create a knowledge article.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/docs/bundle/yokohama-it-service-management/page/product/problem-management/task/communicate-workaround.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://www.servicenow.com/docs/bundle/xanadu-it-service-management/page/product/problem-management/task/communicate-workaround.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct. D is meant to confuse you.. THe catch is the Problem's work notes not any related Incident worknotes.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "ITSM Book:\n\nThe Communicate Workaround UI action may be used to copy the problem workaround to related incidents.\n\nBy default, the workaround gets copied to the Work Notes for all incidents related to the problem reord with state New, In Progress or On Hold (in other words, Open incidents)\n\nThe workaround is also copied to the Additional comments of any related incident that has a Resolution code of Known error.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "CIS-ITSM module 6 : Problem Management\n  - Communicate Workaround states\n    \"By default, the workaround get copied to the WORK NOTES for all incidents related to the problem with state NEW, In Progress or On Hold.\"\n   \" The workaround is also copied to the ADDITIONAL COMMENTS of any related incident that has a resolution of Known error\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The problem number and the content of the Workaround field are added to the activity stream on all related incidents. (from the Docs - A seems correct)",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand \nModule 6.3: Problem Lifecycle\nPage: Communicate Work around\n\nAnswer is D\n\nThe workaround is copied to all work notes of incidents where the state is \"New\", \"In Progress\", or \"On Hold\".\n\nThe workaround is also copied to \"Additional Comments\" in Incidents where the state is resolved.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer is A. D is WRONG because the contents of workaround is added to related INCIDENT Work notes field and additional comments fields. D says \"PROBLEM Work notes\" which is wrong.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "When the Communicate workaround Related Link on the Problem record is updated:",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "URL: https://servicenow.read.inkling.com/\nBook \"IT Service Management Fundamentals\"\nSection \"Problem\"\n\n\"The contents of the workaround is added to the Work notes field for any active (not in a state of Resolved, Closed, or Canceled) incidents related to the problem record, and to the Additional comments field of any related incident with a Resolution code of Known error. The workaround is also automatically sent to the incident Caller, to anyone added to the incident Watch list, and to the incident Assigned to user.\"",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D - It's going to the notes list.  Initial gut feel is open related but that's a red herring",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation - Vancouver / page 341",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-service-management/page/product/problem-management/task/communicate-workaround.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "PROBLEM WORKOTES DOESN'T MAKE ANY SENSE , notification to related incident callers make more sense",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "17",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/86932-exam-cis-itsm-topic-1-question-17-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which interface is designed for tier 1 IT agents who solve internal or external customer issues?",
+      "answers": [
+        "A. ITSM Dashboard",
+        "B. IT Service Management Workspace (Agent Workspace)",
+        "C. ITIL Homepage",
+        "D. Incident Overview"
+      ],
+      "comments": [
+        {
+          "content": "B is correct but should be updated to Service Operations Workspace (agent workspace has been deprecated since the Utah release)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "textbook P150",
+          "selected_answer": "B",
+          "replies": [
+            "How to get the textbook? These page numbers are not matching with eBook.",
+            "Me neither."
+          ]
+        },
+        {
+          "content": "B probably",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer : B",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "18",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91783-exam-cis-itsm-topic-1-question-18-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When using Agent assist in the Agent workspace, what are examples of possible solutions can be automatically searched and displayed? (Choose five.)",
+      "answers": [
+        "A. Runbook Actions",
+        "B. Knowledge",
+        "C. SQL Queries",
+        "D. Problems",
+        "E. Changes",
+        "F. Cases",
+        "G. Incidents"
+      ],
+      "comments": [
+        {
+          "content": "Incident , problem ,change, knowledge, case",
+          "selected_answer": "BDEFG",
+          "replies": [
+            "textbook p152"
+          ]
+        },
+        {
+          "content": "BDEFG correct",
+          "selected_answer": "BDEFG",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "BDEFG",
+          "replies": []
+        }
+      ],
+      "question_number": "19",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91784-exam-cis-itsm-topic-1-question-19-discussion/",
+      "most_voted": "BDEFG",
+      "error": null
+    },
+    {
+      "question": "Which module is a useful starting point for a manager to view current state operational information for Incident management?",
+      "answers": [
+        "A. CMDB Health Dashboard",
+        "B. Incident > Overview",
+        "C. Manager Workspace",
+        "D. Critical Incidents Map"
+      ],
+      "comments": [
+        {
+          "content": "For a quick overview of current state operational information for Incident Management, B. Incident > Overview could be a more suitable starting point. It provides a straightforward summary of incident metrics, statuses, and trends, making it easier to get an immediate snapshot of the incident management landscape.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nSection - Addendum: Defining and measuring ITSM outcomes\nPage - Incident Management: Reporting\n\nAnswer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B - p320 of ITSM Implementation (Tokyo)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "textbook p153",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "20",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91785-exam-cis-itsm-topic-1-question-20-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The Problem table is extended from what table?",
+      "answers": [
+        "A. Task",
+        "B. Major Incident",
+        "C. Outage",
+        "D. Problem Task",
+        "E. Incident"
+      ],
+      "comments": [
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule 6: Problem Management\nPage: Problem Management Architecture - Data Structures\n\nAnswer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A - task seems to be the universal starting point in case new people are reading this.  task extends to incident, task extends to problem, etc...",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "CSA 101",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "answer is A, pretty much all ITSM tables, incident, request, blah blah all extend from task",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ITSM Implementation (Tokyo) ebook P335",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "textbook p224",
+          "selected_answer": "A",
+          "replies": [
+            "How to get textbook? your page number is not matching with eBook."
+          ]
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "21",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91786-exam-cis-itsm-topic-1-question-21-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "The Problem Manager wants the Problem Coordinators to be able to Re-analyze a Completed Problem.<br/>Which module could they use to make this change?",
+      "answers": [
+        "A. Problem > Administration » Problem Properties",
+        "B. System UI > UI Action Groups",
+        "C. State Management > State Models",
+        "D. System UI > Form Actions",
+        "E. System UI > UI Actions"
+      ],
+      "comments": [
+        {
+          "content": "Copied from the book:\nDetermine which problem role can re-analyze problem records through the Problem Management properties (Problem > Administration > Problem Properties)",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Problem Management properties are used to control features such as creating problem task on a closed problem and reanalyzing a closed or a canceled problem.\nThese properties are available at Problem > Administration > Problem Properties.\n\nhttps://docs.servicenow.com/en-US/bundle/utah-it-service-management/page/product/problem-management/reference/problem-mgmt-properties.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule 6.4 Problem Lifecycle Configuration\nPage: Additional Considerations\n\nAnswer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Checked the instance. \n\nProblem > Administration. Problem Properties",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Tricky question. If the Problem Manager wants to retain the re-anlayze capability, then the Problem Coordinator would need to be added to the UI Action as well. \nProblem > Administration > Problem Properties only allows one selection (role).",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A -> Confirmed from the instance!",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "choose A",
+          "selected_answer": "C",
+          "replies": [
+            "Bruh. Trolling is outahand on this website. I have to verify every answer now. learning better though so whatevs."
+          ]
+        },
+        {
+          "content": "Validated: Problem -> Problem Properties module\nThere is a field choice option 'Who can Re-analyze a Completed Problem?\nSelectable values are Problem Managers or Problem Coordinators or Problem Administrators.",
+          "selected_answer": "A",
+          "replies": [
+            "Problem -> Administration -> Problem Properties"
+          ]
+        },
+        {
+          "content": "A - eBook Tokyo ITSM Implementation  p.376",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "only a makes sense, the rest doesn't",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "VitalSource ITSM Implementer eBook, p376 clearly states the answer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct answer is A. Confirmed on the instance.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ITSM Implementation (Tokyo) ebook P337",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "textbook p186",
+          "selected_answer": "",
+          "replies": [
+            "Which is correct answer and which Release Book Ur referring ? pls respond",
+            "it's a bot"
+          ]
+        },
+        {
+          "content": "A is right",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer : A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Problem Managers don't have access to system UI module so it would be A",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "22",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91106-exam-cis-itsm-topic-1-question-22-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Your Problem Manager has a structured problem management process, which includes a final review of the solution implemented and of the data regarding incident reduction. When a problem is resolved, after implementing a fix, they want the Post Fix Review task to be automatically created and assigned to the Problem assignee.<br/>What feature would you use to meet this requirement?",
+      "answers": [
+        "A. State Model",
+        "B. Workflow Dashboard",
+        "C. Action Modeler",
+        "D. Task Creator",
+        "E. Flow Designer"
+      ],
+      "comments": [
+        {
+          "content": "Flow Designer",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "given the choices Flow Designer but, workflow editor, business rule could also work",
+          "selected_answer": "E",
+          "replies": [
+            "Also, the flow designer would be used to update the State Model."
+          ]
+        },
+        {
+          "content": "Flow Designer",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "E is right",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "E",
+          "replies": []
+        }
+      ],
+      "question_number": "23",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91787-exam-cis-itsm-topic-1-question-23-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "Your customer needs help defining Category values for the Problem records. What approach should you suggest? (Choose two.)",
+      "answers": [
+        "A. Re-use existing categories from legacy systems",
+        "B. Define categories based on the customer’s CMDB classes",
+        "C. Re-use existing categories from incident management",
+        "D. Define categories based on ITIL problem taxonomy"
+      ],
+      "comments": [
+        {
+          "content": "BC is the right answer \n\nyou can approach categorization in the following ways\n\n1) Re - use existing categories\n2)Define new categories\n3)Drive categorization by CI class",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "eBook Vancouver page 328",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule 6.3: Problem Lifecycle Configuration\nPage: Categorization\n\nAnswer is BC",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "URL: https://servicenow.read.inkling.com/\nBook: \"IT Service Management Implementation\"\nSecrion: \"Problem Managment\" -> \"Categorization\"\n\nYou can approach categorization in the following ways:\n* Re-use Existing Categories: Customers typically use the same categories for incident and problem.\n* Define New Categories: : If problem requires a different set of categories, you can use the out of box categories or define your own. The categories should be simple and standard.\n* Drive Categorization by CI: If you have a robust CMDB, you can drive categorization based on the CI class. This would require additional configuration and scripting.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Drive categorization by CI - if you have robust CMDB and requires additional config and scripting. \nRe-use existing categories \nDefine new categories - can use out of the box or define custom but simple and standard.",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "b and c is correct",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "BC as per CIS-ITSM eBook, correct answer would be B and C",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "As per page 344 of CIS-ITSM eBook:\n(1) Re-use existing categories\n(2) Drive categorization by CI (if customer has a robust CMDB architecture)\n(3) Define new categories\nHence B and C are correct answers",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nRe-use existing categories: Customers typically use the same categories for incident and problem.\n\nDefine new categories: use oob categories or define your own.\n\nDrive categorization by CI: you can drive categorization based on the CI class",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "P. 344",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "ITSM Implementation (Tokyo) ebook p344",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "BC is correct",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "B C is right",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "is A not also correct? Jut asking",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "1. There's no such thing as CMDB classes, so CD",
+          "selected_answer": "",
+          "replies": [
+            "Not \"CMDB Classes\" exactly but classes within the CMDB (eg, CI Classes).",
+            "but \"CI Classes\" wasn't mentioned."
+          ]
+        },
+        {
+          "content": "B,C is right",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "BC - is 100% correct.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "24",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91788-exam-cis-itsm-topic-1-question-24-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "When a user clicks on the Communicate fix UI action on the Problem form, what happens?",
+      "answers": [
+        "A. Fix is written to the Comments field on any Incident associated with the problem, which is On Hold, Awaiting Problem",
+        "B. Fix is written to the Work notes field on any Incident associated with the problem, which is Active",
+        "C. Fix is written to the Comments field on any Incident associated with the problem, which is Active",
+        "D. Fix is written to a draft Knowledge article"
+      ],
+      "comments": [
+        {
+          "content": "checked on PDI, it's adding a work note, not a comment",
+          "selected_answer": "B",
+          "replies": [
+            "\"work note\" makes more sense intuitively, as a comment would be for a different purpose."
+          ]
+        },
+        {
+          "content": "As per ServiceNow Doc - \"The fix information is copied from the Fix notes field on the Problem form to the Additional Comments field on the Incident form. An email notification is sent to the caller and the user who is assigned to the Incident.\"",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "As per ServiceNow Doc - \"The fix information is copied from the Fix notes field on the Problem form to the Additional Comments field on the Incident form. An email notification is sent to the caller and the user who is assigned to the Incident.\"",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "eBook Vancouver",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule: 6.3 Problem Lifecycle Configuration\nPage: Communicate fix\n\nAnswer is B -  Fix is written to the Work notes field on any Incident associated with the problem, which is Active. (State = New, On Hold, or In Progress)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B. Work notes in active incidents. \n\nVerified with ebook and in instance.",
+          "selected_answer": "",
+          "replies": [
+            "Hmm... in a different section of the ebook it says; \n\nThe Communicate Fix UI action may be used to copy the text from the Fix notes field of the problem record to associated incidents. By default, the fix notes get copied to incidents that are New, On Hold, or In Progress. \n\nAnd in the image, it shows the comment going in Work Notes. So, It looks like A is the closets though it's work notes. Given all work notes are comments but not all comments are work notes, I guess the answer is A."
+          ]
+        },
+        {
+          "content": "I tested this on PDI (Washindton DC).\n\nWe have the following script actions:\n1) Script Actions \"Copy Prb workaround to Inc comments\"\nTiggered by event: communicate.workaround\nAction: It copies the Workaround to Additional Comments of all related incident records with State = Resolved & Resolution Code = Known Error.\n\n2) Script Actions \"Copy Prb workaround to Inc work notes\"\nTiggered by event: communicate.workaround\nAction: It copies the Workaround to Work Notes of all related incident records with State = New, In Progress & On Hold (but not Resolved, Closed or Cancelled!).\n\n3) Script Actions \"Copy Prb fix to Inc work notes\"\nTiggered by event: communicate.workaround\nAction: It copies the Fix to Work Notes of all related incident records with State = New, In Progress & On Hold (but not Resolved, Closed or Cancelled!).\n\nHense, B is the closest answer to TRUE, see point no 2 above. It is not 100% true, since incidents with Resolved state are active.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Default behavior gets copied to Incidents worknotes that are New, On Hold or in Progress",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "None of the answer is correct , as Options says Active . and Incident Resolved is active only.  CIS-ITSM Page 354, inprogress, new,onhold - Worknotes and Resolved and closed with resolution code = known error goes to comments.. Same I tested in PDi and it wirk as stated.",
+          "selected_answer": "",
+          "replies": [
+            "An 'Active' incident is any state except 'Closed'.  'Closed' incidents are inactive.",
+            "That's for the \"Communicate Workaroud\" UI Action, the \"Communicate Fix\" is described on the CIS-ITSM Page 356, and it is only added to the Work notes"
+          ]
+        },
+        {
+          "content": "Communicate fix UI Action calls the script action:\nCopy Prb fix to Inc work notes\n(pg 342)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B - p356 ITSM Implementation (Tokyo)",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "As per page 356 of CIS-ITSM eBook, the Communicate Fix UI action copies the fix notes to the activity stream of the associated incidents - here 'activity stream' means the Work Notes of the incidents.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nCommunicate Fix UI action calls the script action: Copy Prb fix to Inc work notes (only for the states New, On Hold or In Progress, which means Active Incidents)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Communicate Fix UI action calls the script action: Copy Prb fix to Inc work notes\nAssociated Incident Activity\n\nFix is copied to the Activity Stream and a notification is sent to the users in the Assigned to and Work notes list fields for all associated incidents where:\nState = New, On Hold, or In Progress\nPG. 356",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "25",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/87853-exam-cis-itsm-topic-1-question-25-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Users with which role can Communicate a workaround or fix? (Choose two.)",
+      "answers": [
+        "A. itil_admin",
+        "B. problem_coordinator",
+        "C. problem_task_analyst",
+        "D. problem_admin"
+      ],
+      "comments": [
+        {
+          "content": "BD is correct.\nITSM Implementation ebook page (337)",
+          "selected_answer": "BD",
+          "replies": [
+            "no doubt"
+          ]
+        },
+        {
+          "content": "BD is correct",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand \nModule: 6.1 Architectural Overview\nPage: Platform Roles\n\nAnswer BD",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "1) Communicate a fix: \nSource: https://docs.servicenow.com/bundle/washingtondc-it-service-management/page/product/problem-management/task/communicate-a-fix.html\nRole required: admin, problem_admin, problem_manager or problem_coordinator\n\n2) Communicate workaround: \nSource: https://docs.servicenow.com/bundle/washingtondc-it-service-management/page/product/problem-management/task/communicate-workaround.html\nRole required: admin, problem_admin, problem_manager or problem_coordinator",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "After you have completed root cause analysis of a problem and have come up with a resolution or fix for that problem, submit change requests to get the problem fixed. Documenting and communicating fix helps user to know the solution to a problem.\n\nBefore you begin\n\nRole required: admin, problem_admin, problem_manager or problem_coordinator",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Communicate workaround for Problem:\nRole required: admin, problem_admin, problem_manager or problem_coordinator\nhttps://docs.servicenow.com/csh?topicname=communicate-workaround.html&version=latest",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "AB - itil_admin can do most functions, and problem_coordinator does a lot of the high end problem functions",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nCommunicate workaround, fix can be done by the admin, problem_admin, problem_manager and problem_coordinator roles",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "As pert Problem Management platform roles matrix",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD are correct - from the documentation: Role required: admin, problem_admin, problem_manager or problem_coordinator",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "BD are correct",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "problem_coordinator  , problem_manager and problem_admin.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "problem_coordinator  , problem_manager and problem_admin.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "B,D is right",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer : BD",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Those UI actions have a problem_coordinator role requirement. The role can be also inherited from problem_manager and problem_admin.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "It's B and D",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "26",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/89292-exam-cis-itsm-topic-1-question-26-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "When a user clicks on the Communicate workaround UI action on the Problem form, what happens?",
+      "answers": [
+        "A. Workaround is written to the Comments field on any open Incident associated with the problem",
+        "B. Workaround is written to the Workaround field on any incident associated with the problem",
+        "C. Workaround is written to a draft Knowledge article",
+        "D. Workaround is written to the Work notes field on any open Incident associated with the problem"
+      ],
+      "comments": [
+        {
+          "content": "To comments it is copied when an incident is resolved, therefore not active, thus A cannot be correct. The only correct is D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer is D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "I tested this on PDI (Washington DC).\n\nWe have the following script actions:\n1) Script Actions \"Copy Prb workaround to Inc comments\"\nTiggered by event: communicate.workaround\nAction: It copies the Workaround to Additional Comments of all related incident records with State = Resolved & Resolution Code = Known Error.\n\n2) Script Actions \"Copy Prb workaround to Inc work notes\"\nTiggered by event: communicate.workaround\nAction: It copies the Workaround to Work Notes of all related incident records with State = New, In Progress & On Hold.\n\n3) Script Actions \"Copy Prb fix to Inc work notes\"\nTiggered by event: communicate.workaround\nAction: It copies the Fix to Work Notes of all related incident records with State = New, In Progress & On Hold.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Workaround is copied to Work notes for all incidents where State= New, In Progress, OR On Hold",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D, for comments, inc must be resolved and resolution code = known error",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "The comments are only added to resolved incidents with a resolution code of Known Issue, therefore A is incorrect.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is the correct answer. Tested in PDI. \nFix workaround post the workaround from problem to WorkNotes in open/in progress incidents and to the additional comments in resolved incidents and does not post anything on closed incidents.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Question is about Open Incidents.\nA) Resolved incidents are NOT open\nTherefore correct answer is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nBy default, the workaround gets copied to the Work notes of any active (not in a state of Resolved, Closed or Canceled) incident related to the problem record.\nThe workaround is also copied to the additional comments of any related incident that has a Resolution code of Known error.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct because it is the default behavior. \nA is NOT correct because this is only applicable for resolved incidents, not for open incidents.",
+          "selected_answer": "D",
+          "replies": [
+            "This is very clearly given in CIS-ITSM (Tokyo) eBook page no. 355.\nWorkaround always gets copied to the Work Notes by default.\nA is only applicable when incident is resolved with known error."
+          ]
+        },
+        {
+          "content": "From the book:\nBy default, the workaround gets copied to the Work notes of any active (not in a state of Resolved, Closed or Canceled) incident related to the problem record. \nThe workaround is also copied to the additional comments of any related incident that has a Resolution code of Known error.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Communicate Workaround calls two scripts:\n1. Copy Prb workaround to work notes. Workaround is copied to Work notes for all incidents where State = New, In Progress, OR On Hold\n2. Copy Pro workaround to Inc comments. Workaround is copied to Additional comments to all Resolved Incidents where Resolution code = Known error.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D only because comments when resolution code of incident is known error utah page 350",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "When a user clicks on the \"Communicate workaround\" UI action on the Problem form, this typically triggers communication about the workaround for the problem to all related incidents.\n\nTherefore, the most likely answer is A",
+          "selected_answer": "A",
+          "replies": [
+            "it is only for resolved incidents which resolution code is 'known error'"
+          ]
+        },
+        {
+          "content": "D is correct. See eBook p355. A is NOT correct - comment is populated only if State=Resolved AND Resolution Code=Known Error.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "ebook Utah p. 350",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "27",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91789-exam-cis-itsm-topic-1-question-27-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "A tester wants to submit a bug report, because they are not able to see the Communicate Fix link under the Related Links on the Problem form.<br/>What do you recommend that they confirm, before submitting the bug report? (Choose two.)",
+      "answers": [
+        "A. Tester is impersonating a user with communications.manager role",
+        "B. Tester is impersonating the assignee, which has the problem_coordinator role",
+        "C. Tester is impersonating a user with problem_coordinator role",
+        "D. The Fix notes field is filled in and saved"
+      ],
+      "comments": [
+        {
+          "content": "C. The tester is impersonating a user with the \"problem_coordinator\" role: The \"Communicate Fix\" link is also visible to users with the \"problem_coordinator\" role. Therefore, the tester should also confirm if they can see the link by impersonating a user with this role.\n\nD. The Fix notes field is filled in and saved: The \"Communicate Fix\" link appears only when the \"Fix notes\" field on the Problem record is filled in and saved. The tester needs to ensure that this field has been populated and saved before checking if the link is visible or not.",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nThe Communicate Fix UI action will not appear until text is saved to the Fix notes field. \nAlso its best to make sure the user you impersonate has the role required.",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "The scenario in B is restrictive - Assignee _could_ be a problem_coordinator, but the more general scenario in C is broader and is also true. C and D are the best answers.",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CD are correct, p 356",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C and D are correct.",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Answer is CD",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C is actually correct just tried it on the lab instance, any user with the probelm_coordinator role is able to see that link.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "28",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91790-exam-cis-itsm-topic-1-question-28-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "Problem and Problem Task records, move automatically from New to Assess states, when which fields are filled? (Choose two.)",
+      "answers": [
+        "A. Short Descriptor",
+        "B. State",
+        "C. Assigned to",
+        "D. Configuration Item"
+      ],
+      "comments": [
+        {
+          "content": "The correct answer is: AC.\nState is not a field which can be filled in, it always contain a value and is not selected by user.\nCI is not used to move Problem to Asses, just try by creating a Problem with Short Description (which is mandatory by default) and CI, Problem will stay in New",
+          "selected_answer": "",
+          "replies": [
+            "It is actually BC (state and assigned to) pg.337"
+          ]
+        },
+        {
+          "content": "The state field doesn't make sense",
+          "selected_answer": "AC",
+          "replies": [
+            "I agree it does not make sense, even after testing it out."
+          ]
+        },
+        {
+          "content": "For state transitions to work you need a State.\nAfter that OOTB:\n- Problem General model requires only assigned to\n- Problem Task General and RCA models require assigned to AND short description\n\nTherefore B and C, as A only applies to Problem Task",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "In the IT Service Management Implementer eBook:\nProblem records and problem task records in the \"New\" state automatically move to assess when the required fields are provided. The default \"State\" and \"Assigned To\" are required. Reference module 6.3, section \"Automatically move to the assess state\".",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management Implementation (Xanadu) ebook Module 6.3; section, Automatically move to the assess state: Problem records and problem task records in the New State automatically move to assess when the required fields are provided. By default, state and assigned to are required.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Question is tricky, but page 337 in the guide confirms it with no mention of the Short Description field.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "The Correct Answer is B and C. Although it does not make sense. However, it is configured in that way that system checks for State and Assigned to values. The configuration is in System UI > Form Sections > Assess Dialog Form view.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "eBook Vancouver page 337",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Why do you select state? State is pre-filled, c'mon. It is A and C.",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "AC CORRECT",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "Just now tried in PDI, as soon as we enter the short description and assigned to and save the form, the problem moves to Assess state automatically.",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand \nModule: 6.3 Problem Lifecycle Configuration\nPage: Automatically move to the Assess State\n\nAnswer is BC",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "By default, State and Assigned to are required.",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "By default, State and assigned to are required! I wonder why did I paid for contributor access so that I spend more time checking every answer? Anybody got an answer to that?",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "BC.\nSource page on read.inkling: Automatically move to the Assess state",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AC is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "eBook pg 337",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "29",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/89296-exam-cis-itsm-topic-1-question-29-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "On a Change Approval Definition record, what does the ‘wait for’ condition define?",
+      "answers": [
+        "A. Whether the change approval is sent to an individual user or a group",
+        "B. The state the change must be in before the approval notifications can be sent",
+        "C. The number or percentage of users from the approval group that must approve the change",
+        "D. The fields that must be populated before the approval can be requested"
+      ],
+      "comments": [
+        {
+          "content": "1. First Response\n2. All Response\n3. Percentage of Users",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nIf there are any Wait for conditions, which means how many users from the group must approve; first response, all responses, or a percentage of users",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is one of the available options for the wait condition, none of the others are.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct, p 434",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C- correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is the correct answer.\nCheck the diagram on the page (434) of the ITSM Implementation Tokyo ebook.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "30",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/89297-exam-cis-itsm-topic-1-question-30-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In what table are Change records stored?",
+      "answers": [
+        "A. Change [change_task]",
+        "B. Change Request [rfc]",
+        "C. Change Request [change_request]",
+        "D. Change [change]",
+        "E. Change [task_change]"
+      ],
+      "comments": [
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand \nModule: 7.2 Change Management\nPage: Change Architecture Data Structure\n\nAnswer is C - Change Request [change_request]",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Change Request[change_request] table stores changes request records",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Change Request [change_request] table stores change request records. \nITSM book page 390",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "31",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91793-exam-cis-itsm-topic-1-question-31-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Risk is configured by default, to calculate Risk = High for a change that is scheduled with only 3 days lead time. Your customer’s change policy requires that changes be requested with 5 days lead time.<br/>How would you satisfy this requirement?",
+      "answers": [
+        "A. Update the Risk Property for Insufficient lead time",
+        "B. Update the Risk Assessment Matrix for Insufficient lead time",
+        "C. Update the Calculate Risk UI Action",
+        "D. Update the Risk Matrix for insufficient lead time",
+        "E. Update the Risk Condition for Insufficient lead time"
+      ],
+      "comments": [
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand \nModule: 7.2 Change Management\nPage: Understanding Risk\n\nAnswer is E\nChange > Administration > Risk Conditions",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Its \"E\" correct.",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "It is E, tested it on PDI",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nRisk is assessed based on the Risk conditions defined in Change > Administration > Risk Conditions",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "CIS-ITSM ebook, pg 413",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "Problem > Change > Administration > Risk Conditions > Insufficient lead time",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "E is correct, p 413",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is E. Verify on instance by navigating to ALL > Change > Administration > Risk Conditions. Open \"Insufficient lead time\" on the list, and update the filter condition to Planned start date - relative - on o before- 5 days",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct answer is E",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "Correct Ans is \"E\" . Update the risk condition \"Insufficient lead time\". We can change the filter conditions inside the risk condition- Planned start date - relative - on o before- 5 days- from now",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is E  - Change ---> Risk Conditions",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer : E",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "E is the answer here",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is E",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "32",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/88795-exam-cis-itsm-topic-1-question-32-discussion/",
+      "most_voted": "E",
+      "error": null
+    },
+    {
+      "question": "How are Releases related to Projects?",
+      "answers": [
+        "A. Project tasks and Release tasks are interchangeable",
+        "B. Projects can be part of one or more releases",
+        "C. Project features are components of a release",
+        "D. Projects need to be completed before releases can be defined",
+        "E. Projects are used to do root cause analysis for releases"
+      ],
+      "comments": [
+        {
+          "content": "B, p 485",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand \nModule: 7.5 Release Management\nPage: A Conduit for more IT work\n\nAnswer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "swer:\n\n\n\n\nebook Utah p. 473",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "you would set up a project to handle one or more releases.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct : B",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "33",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/96134-exam-cis-itsm-topic-1-question-33-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What baseline Change Flows support the baseline Normal Change model?",
+      "answers": [
+        "A. Change - Normal - Assess, Change - Normal - Authorize, Change - Normal - Implement Change - Implementation tasks",
+        "B. Change - Normal - New, Change - Normal - Review, Change - Normal - Close, Change - Implementation tasks",
+        "C. Change - Normal - New, Change - Normal - Assess, Change - Normal - Implement, Change - Implementation tasks",
+        "D. Change - Normal - Assess, Change - Normal - Authorize, Change - Normal - Close, Change - Implementation tasks"
+      ],
+      "comments": [
+        {
+          "content": "From the book:\nChange - Normal - Assess\nChange - Normal - Authorize\nChange - Normal - Implement\n\nAAI :) Assess Authorize Implement",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I see confusion here. This is talking about the Flows in Flow Designer, NOT the change model state.\n\nChange model state for a normal Change is New - Assess - Authorize - Schedule - Implement - Review - Close\n\nBut this is talking about the Flows in flow designer\nChange - Normal - Assess\nChange - Normal - Authorize\nChange - Normal - Implement\n\nHope that helps",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand \nModule 7.4 Change Management\nPage: Change Flows\n\nAnswer is A\n\nChange - Normal - Assess\nChange - Normal - Authorize\nChange - Normal - Implement",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A.Tokyo ebook-p444",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct like others have mentioned. Pg 439 and 440.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct because other options are wrong.\nBut actually it should be New - Assess - Authorize - Schedule - Implement - Review - Close",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is an OK answer, but not really the correct answer.\nThe correct flow is NEW - ASSESS - AUTHORIZE - SCHEDULE - IMPLEMENT - REVIEW - CLOSE",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A, p 444",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Change - Normal - Assess\nChange - Normal - Authorize\nChange - Normal - Implement",
+          "selected_answer": "",
+          "replies": [
+            "Change - Implementation tasks\n\nAnswer- A"
+          ]
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-it-service-management/page/product/change-management/concept/change-flows.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct - A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "As change flow A is right answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the right answer check in flow designer flow tab",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I think it should be C",
+          "selected_answer": "",
+          "replies": [
+            "me too :)"
+          ]
+        }
+      ],
+      "question_number": "34",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91794-exam-cis-itsm-topic-1-question-34-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following Change Task Types are available by default? (Choose three.)",
+      "answers": [
+        "A. Planning",
+        "B. Testing",
+        "C. Review",
+        "D. Deployment",
+        "E. Verification"
+      ],
+      "comments": [
+        {
+          "content": "Planning\nImplementation\nTesting\nReview",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management Implementation eBook. For this question, the default change task types are \"Planning\", \"Testing\", and \"Review\". Note: When studying for the exam, \"Implementation\" is also a default change task type. Reference Module 6.3; \"Change Tasks\".",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "Planning ,implementation ,testing and review",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand \nModule: 7.4 Change Management\nPage: Change Tasks\n\nAnswer is ABC",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "A, B, C > - 452",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "ITSM Implementation (Tokyo) ebook p452",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ABC is the correct answer.",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "A change task is a piece of work related to the change request. For example, there can be tasks to plan the change, implement the change, and test, and review the work.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Plan\nDesign\nBuild\nTest\nReview",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "Planning\nImplementation\nTesting\nReview",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "35",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/90425-exam-cis-itsm-topic-1-question-35-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "What is the Business Rule that triggers automatic group assignment on Incident, Problem or Change requests?",
+      "answers": [
+        "A. Populate Assignment Group based on CI/SO",
+        "B. Auto-populate ITSM Assignment Groups",
+        "C. ITSM Assignment Lookup Rule",
+        "D. Automatic Assignment for ITSM"
+      ],
+      "comments": [
+        {
+          "content": "But in real world while working on projects, we do not memorize names of business rules.\nMost often than not, developers customize business rules as per requirements of customer.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule 6: Problem Management\nPage:  Support Group -> Assignment Group\n\nAnswer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "The business rule Populate Assignment Group based on CI/SO triggers this functionality when an incident, problem or change request is created or updated and when the assignment group in the assigned to field is emty.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A, p 290",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A change task is a piece of work related to the change request. For example, there can be tasks to plan the change, implement the change, and test, and review the work.",
+          "selected_answer": "",
+          "replies": [
+            "Business Rule  is a OOB (populate assignment group based on CI/SO)"
+          ]
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "36",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91795-exam-cis-itsm-topic-1-question-36-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "In the CAB workbench, what are some ways the CAB manager can identify the Change requests to be added to a particular meeting agenda? (Choose two.)",
+      "answers": [
+        "A. Change requests meeting different conditions, like Risk level or Type",
+        "B. Change requests planned within a certain date range",
+        "C. Use any of the options on the Agenda Criteria Tab",
+        "D. Change requests for a certain Change Flow Definition"
+      ],
+      "comments": [
+        {
+          "content": "correct answer is AB. There is no Agenda Criteria tab in CAB meeting form, user can specify changes that can be added in CAB workbench thru the Agenda Management tab.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nLab 7.4: Setup Recurring CAB Meetings\n\nMy Answer is A & B\n\nWhen creating a new CAB Definition, you can configure conditions for either Risk Level, type, and/or Date Range",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "CAB team always looks at risk and impact before deciding if a CR needs to be included in the weekly CAB review or not. They also look at the CR schedule that is planned end date of deployment to decide to take up a CR on weekly meeting agenda or not.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "what page is this in the ebook",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The CAB Manager creates the meetings. This question is about the CAB Meeting form. All criteria options are presented on the Agenda Management tab.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A and B",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AB nha bro",
+          "selected_answer": "",
+          "replies": [
+            "okie broo"
+          ]
+        },
+        {
+          "content": "AB is the correct answer",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-service-management/page/product/change-management/task/define-your-cab.html",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "37",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100829-exam-cis-itsm-topic-1-question-37-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "A change user complains that with the new Preapproved tab, they have to search through many options to find the Reboot Windows Server change. Since they use this change several times per day, it is inconvenient. What should you suggest to make it easier for the change user?",
+      "answers": [
+        "A. Use the Pin feature",
+        "B. Make a Favorite",
+        "C. Use the keyword search",
+        "D. Drag the change tile to the Navigation pane"
+      ],
+      "comments": [
+        {
+          "content": "You can only pin, there is the dedicated icon",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "just checked in PDI, we can pin Change model while creating a new change, but there is no option of create favourite.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule 7.2 Change Management\nPage: Change Landing Page UI\n\nAnswer is A (Use the Pin feature)",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "You can pin the preapproved change. No option to make favorite.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "checked in instance, indeed you can pin the model",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Users have the ability to \"pin\" change request models. p391 Utah",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Change models use pin. Favorite is for navigation modules.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A - p397 ITSM Implementation Tokyo",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "The on-demand course lab discusses pinned models",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Page 397 on ITSM Implementation Tokyo, and Tested on PDI, Favorites is for Modules and Applications.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A under Preapproved users can pin a particular model",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Given in page 397 of CIS-ITSM (Tokyo) eBook.\nNOTE: Favorite is something else - where you save a list in navigation pane, hence B is absolutely wrong answer for this question.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "In the change management landing page, users can see the Pinned, Models, Preapproved, All tabs - under Preapproved users can pin a particular model or category of changes.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "It's B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Pin for the Change landing page",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Per pg 397 in the ebook (Change Landing Page):\n- Users have the ability to \"pin\" change request models.\n- The Pinned tab is unique to the logged in user.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Tokyo ITSM Implementation p.397",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "38",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/85621-exam-cis-itsm-topic-1-question-38-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Roles control which users can perform which actions on a change record. What are actions, which cannot be performed by anyone, even an administrator? (Choose two.)",
+      "answers": [
+        "A. Update Change Type on an existing change record",
+        "B. Delete a Change record",
+        "C. Delete a Standard Change Template",
+        "D. Delete CAB Definition"
+      ],
+      "comments": [
+        {
+          "content": "ITSM Tokyo book p. 391.",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule 7.2 Change Management\nPage: Use Case Diagram (Change)",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule 7.2 Change Management\nPage: Change Management Platform Roles\n\nAnswer is A & C.\n\nThe Admin can delete a change record and delete a CAB Definition.",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "Vancouver p.385",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Vancouver ebook: delete change=admin, itil, itil_admin. Delete cab definition=admin.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ITSM Book confirmed as Viperous and chessiflife said",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "If you have read.inkling access to ITSM Implementation Fundamentals, search for: Use case diagram (Change). \n\nThe note at the top of the page clearly states, \"No role or user has the ability to update the change type or model on an existing record, or the ability to delete a standard change proposal\"",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "AC is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "As per book",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "BD - To maintain integrity you can't just delete the definitions or change records",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "p385 Utah",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "P 392 ITSM TOKYO Book",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "A&C. Page391",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AC. p391 ITSM-Impl-Tokyo",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Confirmed on lab instance",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "Change Type of an existing change can never be updated even with admin rights. It is always read-only field and it references from the change model table.\nStandard change templates cannot be deleted by admin, however you can add new templates.",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nNo role or user has the ability to update the change type or model on an existing record, or the ability to delete a standard change proposal\n\nIn the roles overview it is stated that admin users can delete a CAB definition",
+          "selected_answer": "AC",
+          "replies": [
+            "The roles overview also states that admin and itil_admin users can delete a change record"
+          ]
+        }
+      ],
+      "question_number": "39",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/88798-exam-cis-itsm-topic-1-question-39-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "In the baseline Change - Normal model how can Change Tasks be added? (Choose two.)",
+      "answers": [
+        "A. Automatically via the Change - Implementation subflow",
+        "B. Manually by the user during New, Assess, and Authorized states",
+        "C. Automatically depending on the category selected on the Change Request",
+        "D. Manually by the user during all states, except Closed or Canceled"
+      ],
+      "comments": [
+        {
+          "content": "From the book:\nChange tasks may be created manually or automatically when changes enter the implement phase, and triggers the Change - Implementation subflow.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management Implementation ebook: Change tasks my be created manually or automatically \"when\" changes enter the implement phase,  and triggers the Change - Implementation subflow. (supports answer A)\n\nChange tasks that are change specific should be created manually \"before\" entering the Assess or Authorize states, not \"during\" the Assess or Authorize states, therefore, B cannot be the answer. (supports answer D)",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "IT Service Management (ITSM) Implementation On Demand\nModule 7.4 Change Management  \nPage: Change Tasks\n\nAnswer is AD",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "checked in book just like MarlyB",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A and D",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AB\nD is not correct cause: when Change on \"Closed\" state, user also can create new change task, after the task is submit successfully, the Change state will switch from \"Close\" to \"Review\" .... Tested on PDI",
+          "selected_answer": "AB",
+          "replies": [
+            "User error, retest on PDI\nD is CORRECT b/c \"Closed\" state CAN NOT create new change task.\nB is NOT CORRECT b/c it lack Schdeduled, Implement, Review states (those can also create new Change Task)\n... the Final answer should be AD"
+          ]
+        },
+        {
+          "content": "Tested in PDI myself...  AD is correct",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AB, p 452",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AD is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "40",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/101584-exam-cis-itsm-topic-1-question-40-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "In the baseline Change - Normal model, when the Change request goes to the Review state, what happens to the implementation and testing tasks, if they have not been closed.",
+      "answers": [
+        "A. They are automatically canceled",
+        "B. They are automatically closed",
+        "C. They are automatically assigned to the Change assignee and closed",
+        "D. An error displays, requiring that the Tasks be closed before moving to Review"
+      ],
+      "comments": [
+        {
+          "content": "To find in servicenow.read.inkling.com\nIT Service Management (ITSM) Implementation On Demand\nModule 7.4 Change Management\nPage: Change - Normal: Authorize and Implement\n\nAnswer is A - They are automatically canceled",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "p440 Utah",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nIf any tasks remain in an active state, they are moved to the state of Canceled.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "tested that in the Tokyo demo instance, so A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A, p 448",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "ITSM Implementation (Tokyo) ebook p448",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Click Review after reviewing the details on the change request.\nThe change request is moved to the Review state. All open change tasks are set to Canceled.\n\nAnswer: A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "41",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91796-exam-cis-itsm-topic-1-question-41-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "On the Unauthorized Change Properties module what can you configure? (Choose two.)",
+      "answers": [
+        "A. Enable/Disable creation of Unauthorized changes",
+        "B. Maximum number of unauthorized change records for a CI",
+        "C. Unauthorized Change Dashboard",
+        "D. CI classes to monitor"
+      ],
+      "comments": [
+        {
+          "content": "servicenow.read.inkling.com\nIT Service Management (ITSM) Implementation On Demand\nModule 7.2 Change Management \nPage: Unauthorized Change Request\n\nAnswer is A & D",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "Source: /nav_to.do?uri=unauth_chg_prop.do?sys_id=bdaaf92f231650101488dc1756bf6543\n\nAvailable settings:\n* Checkbox \"Enable event processing\": Create an unauthorized change when the 'ci.change.unplanned' event is queued. Answer A. It should be mentoined that creation of CHG is via event.\n* Slushbucket \"CI class inclusion\": Include these configuration item classes. Answer D.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A&D as mentioned on the eBook.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "A D as for product documentation.\n\nUse the Unauthorized Change Properties page to enable or disable the unauthorized change capability, and to configure the criteria for additional unauthorized change properties.\n\nFrom this properties page, you can control the capabilities, such as:\nEnabling or disabling the creation of unauthorized change requests when receiving the ci.change.unplanned event.\nConfiguring the type of change requests, which are valid, and fall into the unauthorized change category.\nConfiguring a quiet time, whereby, if there is a repeated change to a CI that has been flagged previously, another unauthorized change is not created within that time period.\nConfiguring the interval frequency for detection.\nIncluding a CI class for the change request that must be monitored.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nUse the Unauthorized Change Properties page to control capabilities, such as:\n- Enabling or disabling the creation of unauthorized change requests when receiving the ci.change.unplanned event.\n- Configuring a quiet time, whereby, if there is a repeated change to a CI that has been flagged previously, another unauthorized change is not created within that time period.\n- Configuring the interval frequency for detection.\n- Including CI class(es) for the change request that must be monitored.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD, p 404",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "ITSM Implementation (Tokyo) ebook p404",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AD Correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct ans:A,D",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "Unauthorized chnage properties - AD",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "Enabling or disabling the creation of unauthorized change requests when receiving the ci.change.unplanned event.\nConfiguring the type of change requests, which are valid, and fall into the unauthorized change category.\nConfiguring a quiet time, whereby, if there is a repeated change to a CI that has been flagged previously, another unauthorized change is not created within that time period.\nConfiguring the interval frequency for detection.\nIncluding a CI class for the change request that must be monitored",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "I think it's A and D",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "1. Enable event processing\n2. Notification ignored period\n3. Change Request Query\n4. CI Class inclusion",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "42",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/89438-exam-cis-itsm-topic-1-question-42-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "How do you describe the relationship between a Knowledge article and a Knowledge base category?",
+      "answers": [
+        "A. Articles can only be published to one category",
+        "B. Articles must be published to at least one category",
+        "C. Articles must be approved by the selected category owner",
+        "D. Articles can be published to a category and subcategory"
+      ],
+      "comments": [
+        {
+          "content": "Page 220 Tokyo book\n3. Knowledge Categories [kb_categoryl are associated to articles. An article may be published\nwithin a single category. Categories may be nested through parent-child relationships.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Bad question:\nEven D is kind of correct. “(Optional) Select or add a subcategory.”\nhttps://docs.servicenow.com/bundle/rome-servicenow-platform/page/product/knowledge-management/task/t_SelectACategory.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nKnowledge Categories (kb_category) are associated to articles. An article may be published within a single category.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Utah ebook Pg 220\n\".........An article may be published within a single category.\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A, p 220",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer - A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Has to be A. If you could publish to more than one category, how would you do it since the category field is a single reference field.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct, B is only valid for Knowledge Base",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct - One artical can be linked with one category only",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct, B is only valid for Knowledge Base",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I was able to publish an article without selecting a category. Do you mean i must choose a KNOWLEDGE BASE?",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "43",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/89440-exam-cis-itsm-topic-1-question-43-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What are the different ways a user can provide feedback on a knowledge article? (Choose four.)",
+      "answers": [
+        "A. 10 Star scale",
+        "B. Comment on Article",
+        "C. Helpful?",
+        "D. Flag Article",
+        "E. 5 Star scale",
+        "F. Pin Article"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-servicenow-platform/page/product/knowledge-management/reference/r_KnowledgeFeedback.html",
+          "selected_answer": "BCDE",
+          "replies": []
+        },
+        {
+          "content": "BCDE correct",
+          "selected_answer": "BCDE",
+          "replies": []
+        },
+        {
+          "content": "BCDE Correct",
+          "selected_answer": "BCDE",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/ja-JP/bundle/utah-servicenow-platform/page/product/knowledge-management/task/respond-evaluate-articles-agent.html",
+          "selected_answer": "BCDE",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "BCDE",
+          "replies": []
+        }
+      ],
+      "question_number": "44",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91810-exam-cis-itsm-topic-1-question-44-discussion/",
+      "most_voted": "BCDE",
+      "error": null
+    },
+    {
+      "question": "When using the Knowledge - instant Retire workflow, how does the Valid to date enact a Knowledge article?",
+      "answers": [
+        "A. On Valid to date, article is automatically retired",
+        "B. On Valid to date, retire notification is sent to the Knowledge article author",
+        "C. On Valid to date, retire notification is sent to the Knowledge base owner",
+        "D. On Valid to date, the article is archived"
+      ],
+      "comments": [
+        {
+          "content": "duh....",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A, p 232",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "45",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91812-exam-cis-itsm-topic-1-question-45-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "In the ServiceNow native platform, the service catalog can be accessed via the Self-Service &gt; Service Catalog module. Your customer wants to make modifications to this home page, to add, remove and re-arrange the categories.<br/>Users with what roles can make these edits? (Choose two.)",
+      "answers": [
+        "A. catalog_admin",
+        "B. sc_catalog_admin",
+        "C. catalog_editor",
+        "D. sn_catalog_homepage_write",
+        "E. admin"
+      ],
+      "comments": [
+        {
+          "content": "catalog_editor can't delete\nso A and E",
+          "selected_answer": "AE",
+          "replies": []
+        },
+        {
+          "content": "vancouver page - 121",
+          "selected_answer": "AE",
+          "replies": []
+        },
+        {
+          "content": "Utah Pg 110",
+          "selected_answer": "AE",
+          "replies": []
+        },
+        {
+          "content": "I think this is a poor question, since three options are ok (A,C,E) not only two options",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AE, p 108",
+          "selected_answer": "AE",
+          "replies": []
+        },
+        {
+          "content": "AE is correct. \n ITSM-Tokyo ebook page (110)\nAdministrators and catalog administrators can design a home page in any of the following ways:\n • Customizing the catalog home page.\n • Adding, removing, and arranging categories.\n • Enabling content types. \n  • Using catalog properties to provide additional control over behavior and appearance.\n • Using renderers to define the appearance of categories.\n Administrators can also create and customize a multi-catalog homepage to provide end users with access to multiple catalogs from one homepage.",
+          "selected_answer": "AE",
+          "replies": []
+        },
+        {
+          "content": "A and E refer to page 110",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "catalog_editor and above can modify categories.",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "AC , was checked in table role",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "46",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100440-exam-cis-itsm-topic-1-question-46-discussion/",
+      "most_voted": "AE",
+      "error": null
+    },
+    {
+      "question": "What would you use to create a New Hire Employee request which would allow you to order your workstation and company mobile?",
+      "answers": [
+        "A. Knowledge item",
+        "B. Record Producer",
+        "C. Catalog Item",
+        "D. Order Guide",
+        "E. Content Item"
+      ],
+      "comments": [
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "47",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91813-exam-cis-itsm-topic-1-question-47-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which tool allows process owners to use natural language to automate approvals, tasks, notifications and other record operations with little to no code?",
+      "answers": [
+        "A. Workflow Mapper",
+        "B. Workflow Manager",
+        "C. Flow Designer",
+        "D. Flow Dashboard",
+        "E. Process Designer"
+      ],
+      "comments": [
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "48",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91814-exam-cis-itsm-topic-1-question-48-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What process is responsible for defining and managing the lifecycle of all catalog items, by producing and maintaining the services in the catalog and ensuring that a central, accurate, and consistent source of data is provided?",
+      "answers": [
+        "A. Service portfolio management",
+        "B. Catalog item management",
+        "C. Service mapping",
+        "D. Service catalog management"
+      ],
+      "comments": [
+        {
+          "content": "Service catalog management is responsible for defining and managing the lifecycle of all catalog items",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "vancouver, page 114",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "From the book:\nService catalog management is responsible for defining and managing the lifecycle of all catalog items",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "p.103 in TSM Implementation - Tokyo",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "service catalog management. P333",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "49",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91815-exam-cis-itsm-topic-1-question-49-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Your customer needs different catalogs for:<br/>Human Resources - employee facing - for submitting requests to HR<br/>Customer - external customer facing - for ordering company products and services<br/>When these catalogs are created, in which table would the definition be stored?",
+      "answers": [
+        "A. Business Services Catalog [bs_catalog]",
+        "B. Catalog [sc_catalog]",
+        "C. Service Portfolio Catalog [sc_portfolio]",
+        "D. Service Offering Catalog [sn_offering]"
+      ],
+      "comments": [
+        {
+          "content": "B, p 106",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "50",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/91816-exam-cis-itsm-topic-1-question-50-discussion/",
+      "most_voted": "B",
+      "error": null
+    }
+  ]
+}

@@ -24,7 +24,7 @@ class ProgressTracker:
         print(f"[{datetime.now().strftime('%H:%M:%S')}] {text}")
 
 def get_available_exam_codes():
-    """Get all exam codes from existing JSON files"""
+    """Get all exam codes from existing exam directories"""
     exam_codes = set()
     # Update path to go up one level to find data directory
     data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
@@ -33,10 +33,13 @@ def get_available_exam_codes():
         print(f"❌ Data directory '{data_dir}' not found")
         return exam_codes
     
-    for filename in os.listdir(data_dir):
-        if filename.endswith('.json') and not filename.endswith('_links.json'):
-            exam_code = filename.replace('.json', '')
-            exam_codes.add(exam_code)
+    # Look for exam directories containing exam.json
+    for item in os.listdir(data_dir):
+        item_path = os.path.join(data_dir, item)
+        if os.path.isdir(item_path):
+            exam_json = os.path.join(item_path, 'exam.json')
+            if os.path.exists(exam_json):
+                exam_codes.add(item)
     
     print(f"📋 Found {len(exam_codes)} exams: {sorted(exam_codes)}")
     return sorted(exam_codes)

@@ -566,6 +566,15 @@
                 <span class="toggle-slider"></span>
                 Show advanced search and filters
               </label>
+              <label class="toggle-label">
+                <input type="checkbox" id="enableLazyLoading" />
+                <span class="toggle-slider"></span>
+                Enable lazy loading (experimental)
+              </label>
+              <p class="setting-description">
+                Lazy loading loads questions in chunks for better performance on large exams. 
+                May cause brief delays when navigating to unloaded questions.
+              </p>
             </div>
 
             <div class="setting-group">
@@ -664,5 +673,25 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+      // Register Service Worker for intelligent caching
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('Service Worker registered:', registration);
+            
+            // Listen for cache updates
+            navigator.serviceWorker.addEventListener('message', event => {
+              if (event.data && event.data.type === 'CACHE_UPDATED') {
+                console.log('Cache updated for:', event.data.url);
+                // Could show a subtle notification to user about updated content
+              }
+            });
+          })
+          .catch(error => {
+            console.log('Service Worker registration failed:', error);
+          });
+      }
+    </script>
   </body>
 </html>
