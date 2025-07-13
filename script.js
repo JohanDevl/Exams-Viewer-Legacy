@@ -4670,8 +4670,7 @@ function closeKeyboardHelp() {
   }
 }
 
-// Override the existing navigateToQuestionIndex to add history support
-const originalNavigateToQuestionIndex = navigateToQuestionIndex;
+// Enhanced navigateToQuestionIndex with history support
 function navigateToQuestionIndex(newIndex, addToHistory = true) {
   if (!currentQuestions.length) return;
   
@@ -4682,6 +4681,10 @@ function navigateToQuestionIndex(newIndex, addToHistory = true) {
     }
     
     currentQuestionIndex = newIndex;
+    
+    // Reset highlight override when navigating to a new question
+    isHighlightTemporaryOverride = false;
+    
     displayCurrentQuestion();
     updateProgressSidebar();
   }
@@ -5348,16 +5351,7 @@ function jumpToQuestionNumber(questionNumber) {
 }
 
 // Navigation helper functions work with current filtered results
-function navigateToQuestionIndex(newIndex) {
-  if (!currentQuestions.length) return;
-  
-  if (newIndex >= 0 && newIndex < currentQuestions.length) {
-    currentQuestionIndex = newIndex;
-    // Reset highlight override when navigating to a new question
-    isHighlightTemporaryOverride = false;
-    displayCurrentQuestion();
-  }
-}
+// Note: navigateToQuestionIndex is now defined earlier in the file with history support
 
 // Override jump to question to work with current question set
 function jumpToQuestion() {
