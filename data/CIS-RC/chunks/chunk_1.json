@@ -1,0 +1,1658 @@
+{
+  "chunk_id": 1,
+  "start_question": 51,
+  "end_question": 100,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "Policies can be automatically published after which of the following occurs?",
+      "answers": [
+        "A. Related control objectives are marked active",
+        "B. Policy exception is closed",
+        "C. Policy is approved by all approvers",
+        "D. Policy is approved by one approver"
+      ],
+      "comments": [
+        {
+          "content": "Textbook P126\nAll Approver must approve before policy is published",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "When a policy is approved, it is automatically published.\nhttps://docs.servicenow.com/bundle/vancouver-governance-risk-compliance/page/product/grc-policy-and-compliance/task/t_ApprovePolicy.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "51",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100042-exam-cis-rc-topic-1-question-51-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "To allow other applications to request a policy exception, you must complete the integration registry form. In addition to providing the name of the registry entry, what additional information is needed to complete the form?",
+      "answers": [
+        "A. You must indicate the audience for requesting policy exceptions",
+        "B. You must indicate the intended Service Portal",
+        "C. You must indicate the policy exception target table",
+        "D. You must indicate the allowed policy acknowledgement campaigns"
+      ],
+      "comments": [
+        {
+          "content": "\"Policy exception target table\" is mandatory field.\n\nhttps://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-policy-and-compliance/task/enable-other-apps-to-request-policy-exceptions.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer: C. You must indicate the policy exception target table\nExplanation: Quote: \"Enable other applications to request policy exception from any table such as Problem or Incident and so on. The applications must be added and configured in the Integration Registry.\", u kinda need to which table u tagetting LOL\nSource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-policy-and-compliance/task/enable-other-apps-to-request-policy-exceptions.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-policy-and-compliance/task/enable-other-apps-to-request-policy-exceptions.html",
+          "selected_answer": "C",
+          "replies": [
+            "Confirmed in PDI as well"
+          ]
+        }
+      ],
+      "question_number": "52",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100043-exam-cis-rc-topic-1-question-52-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "The overall goal of Entity Classes is to:",
+      "answers": [
+        "A. To enable reporting and to support advanced risk assessment",
+        "B. Show relationships between Entities and policies and map them directly to Citations",
+        "C. Associate Control Objectives and Risk Statements with Risks and Controls",
+        "D. To provide specific information about an Entity, such as who owns the Entity"
+      ],
+      "comments": [
+        {
+          "content": "Testbook P98\n・One goal of entity classes is to support reporting and allow roll-up of risk responsibility.\n・Entity classes are required when using advanced risk assessments.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Overall goal is D- Entity classes are used to add a conceptual information about the entity and classify the entities. They represent a collection of entities that have the same attributes such as Department, Business Unit, or Business Service. You can gather data about the entities based on the entity class.\n\nA is \"one goal\".",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer: D. To provide specific information about an Entity, such as who owns the Entity\nExplanation: quote: \"Entity classes are used to add a conceptual information about the entity or to tag the entity. They are used to classify the entities and they represent a collection of entities that have the same attributes.\"\nSource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-common-workspace/concept/entity-class-in-risk-ws.html",
+          "selected_answer": "D",
+          "replies": [
+            "i think i am wrong.... \nAnswer: A. To enable reporting and to support advanced risk assessment\nExplanation:\n\t- One goal of entity classes is to support reporting and allow roll-up of risk responsibility.\n\t- Entity classes are required when using advanced risk assessments.\nSource: Integrated Risk Management (IRM) Fundamentals\n\t- Create an entity framework"
+          ]
+        },
+        {
+          "content": "D is correct https://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-common-workspace/concept/entity-class-in-risk-ws.html\n\nntity classes are used to add a conceptual information about the entity and classify the entities.They represent a collection of entities that have the same attributes such as Department, Business Unit, or Business Service. You can gather data about the entities based on the entity class.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "53",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100045-exam-cis-rc-topic-1-question-53-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What is the minimum role required for creating a policy acknowledgement campaign?",
+      "answers": [
+        "A. sn_risk.user",
+        "B. sn_compliance.user",
+        "C. sn_compliance.admin",
+        "D. sn_compliance.manager",
+        "E. sn_control.owner"
+      ],
+      "comments": [
+        {
+          "content": "textbook P129\nPolicy owner or sn_compliance.user above can set up campaign, set schedule, and extend valid to date",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct\nhttps://docs.servicenow.com/bundle/rome-governance-risk-compliance/page/product/grc-policy-and-compliance/task/setup-ack-request.html\n\nBefore you begin\n\nRole required: Compliance User",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer: B. sn_compliance.user\nExplanation: quote: \"sers with Compliance user (sn_compliance.user) role can also create policies.\"\nSource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-policy-and-compliance/task/t_DefineAPolicy.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct-\nA policy campaign is the record used to prepare for a policy acknowledgement request. It defines the audience who must provide an acknowledgement that a particular policy is in compliance. A policy campaign is requested only if the compliance user decides it is needed.\n\nBefore you begin\nRole required: Compliance User\nhttps://docs.servicenow.com/bundle/vancouver-governance-risk-compliance/page/product/grc-policy-and-compliance/concept/ack-policy.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "54",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100046-exam-cis-rc-topic-1-question-54-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following are the classic risk score types that ServiceNow tracks? (Choose three.)",
+      "answers": [
+        "A. Residual",
+        "B. Inherent",
+        "C. Calculated",
+        "D. Operational",
+        "E. Digital"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/ja-JP/bundle/utah-governance-risk-compliance/page/product/grc-risk/task/t_CreateRisk.html",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "Explanation: following risk scoring are mentioned\n\t- Inherent SLE\n\t- Residual SLE\n\t- Inherent ARO\n\t- Residual ARO\n\t- Inherent ALE\n\t- Residual ALE\n\t- Inherent score\t\n\t- Residual score\n\t- Calculated ALE\n\t- Calculated score\nsource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-risk/task/t_CreateRisk.html",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "ABC is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "55",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100047-exam-cis-rc-topic-1-question-55-discussion/",
+      "most_voted": "ABC",
+      "error": null
+    },
+    {
+      "question": "What is the condition that must exist to edit the risk scoring logic of a published risk assessment methodology (RAM)?",
+      "answers": [
+        "A. All assessment instance records are closed",
+        "B. All assessment instance records are deleted or canceled",
+        "C. All assessment instance records are in the Monitor state",
+        "D. All assessment instance records are in the Draft state"
+      ],
+      "comments": [
+        {
+          "content": "Changing the risk logic for active assessments would invalidate existing scores.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "A is Correct Answer. eBook - Page 336 \"Rule - Published RAM with Assessment in the Monitor or closed state cannot be edited\".\nNotes - In Prod - A new RAM should be developed. When the old RAM is retired, the assessment instance will be closed.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "B is correct, when No assessment in active state",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "56",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/93845-exam-cis-rc-topic-1-question-56-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which of the following extends from Document Table? (Choose two.)",
+      "answers": [
+        "A. Citation",
+        "B. Policy",
+        "C. Control Objective",
+        "D. Authority Document"
+      ],
+      "comments": [
+        {
+          "content": "A citation extends content, an authority framework is a document!",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "GRC: Integrated Risk Management (IRM) Implementation - San Diego, P.140\nAuthority Document, Policy, and Risk Framework extend from the Document table.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "AC is correct answer (Control Objective, Citation, Risk Statement) extended from content\nAuthority document, policy risk framework extend from document \nrisk & control extended from item",
+          "selected_answer": "",
+          "replies": [
+            "So if Citation (A) is from content, then how can it be AC? \n\nThe right anser is BD, I checked the Schema map of the sn_grc_document table."
+          ]
+        }
+      ],
+      "question_number": "57",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/93846-exam-cis-rc-topic-1-question-57-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "What is the minimum role required to create a risk assessment methodology (RAM)?",
+      "answers": [
+        "A. sn_compliance.admin",
+        "B. sn_risk.user",
+        "C. sn_risk.manager",
+        "D. sn_risk.admin"
+      ],
+      "comments": [
+        {
+          "content": "Agreed, verified in lab instance. Risk Admin role is needed to create RAM.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer: D. sn_risk.admin\nExplanation: confirmed in PDI, you pretty much needs sn_risk.admin if you want to copy or create\nSource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-risk/task/copy-ram.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct answer\nhttps://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-risk/task/configure-ram.html\n\nBefore you begin\n\nRole required: sn_risk_advanced.ara_admin",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-governance-risk-compliance/page/product/grc-risk/task/configure-ram.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "58",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100050-exam-cis-rc-topic-1-question-58-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which table stores the links from Policy to Control Objective?",
+      "answers": [
+        "A. [sn_compliance_m2m_policy_profile_type]",
+        "B. [sn_compliance_m2m_policy_profile]",
+        "C. [sn_compliance_m2m_policy_statement]",
+        "D. [sn_compliance_m2m_statement_profile_type]"
+      ],
+      "comments": [
+        {
+          "content": "No correct selection \nCORRECT TABLE NAME = [sn_compliance_m2m_policy_policy_statement]",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct\nsn_compliance_m2m_policy_policy_statement",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Incorrect answers: \n\nCorrect table name is Policy to Policy Statement\n[sn_compliance_m2m_policy_policy_statement]\n\nDescription: Many-to-many relationship table that is used to manage relationships between policy and control objectives.\n\nhttps://www.servicenow.com/docs/bundle/yokohama-governance-risk-compliance/page/product/grc-policy-and-compliance/reference/r_InstallWPolAndCompl.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer: none is right, but probably typo in C. sn_compliance_m2m_policy_policy_statement\nExplanation: B don't exist, C. has the wrong name, should be sn_compliance_m2m_policy_policy_statement\n\t- Policy to Entity Type[sn_compliance_m2m_policy_profile_type]\n\t- Policy to Control Objective[sn_compliance_m2m_policy_policy_statement]\n\t- Control Objective to Entity Type[sn_compliance_m2m_statement_profile_type]\ngonna love SN naming conventions....\nSource: PDI, sys_db_object list view with filter: label=Policy to Control Objective",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "59",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100052-exam-cis-rc-topic-1-question-59-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is a risk register?",
+      "answers": [
+        "A. Repository for all unidentified risks",
+        "B. Repository for risk frameworks",
+        "C. Repository for risk statements",
+        "D. Repository for all identified risks",
+        "E. Repository for risk criteria"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-governance-risk-compliance/page/product/grc-risk/reference/r_RiskRegister.html\nThe risk register is the central repository for all potential risks that could occur at any time, anywhere in the organization.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "60",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100053-exam-cis-rc-topic-1-question-60-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which feature would you use to track completion of certain tasks?",
+      "answers": [
+        "A. Related Lists",
+        "B. SLAs",
+        "C. Workflow Editor",
+        "D. Notifications"
+      ],
+      "comments": [
+        {
+          "content": "textbook P68",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Service levels\nService level agreements can track the amount of time that a task has been open, to ensure that tasks are completed within an allotted time.\n\nWorkflow editoris to define flows and not for tracking tasks.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "C. Workflow Editor - the question was use to track completion not to determine how long a task is complete.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Book: GRC: Integrated Risk Management (IRM) Implementation - San Diego P.78\n\nhttps://docs.servicenow.com/bundle/vancouver-platform-administration/page/administer/time/reference/r_SLAs.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "61",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100055-exam-cis-rc-topic-1-question-61-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which GRC application would you use to determine where the organization is the most vulnerable or has the most exposure?",
+      "answers": [
+        "A. Vendor Risk Management",
+        "B. Audit Management",
+        "C. Policy and Compliance Management",
+        "D. Risk Management"
+      ],
+      "comments": [
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct answer",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "62",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115573-exam-cis-rc-topic-1-question-62-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What are the terms for level of risk before and after any actions are taken? (Choose two.)",
+      "answers": [
+        "A. Operational risk",
+        "B. Digital risk",
+        "C. Inherent risk",
+        "D. Calculated risk",
+        "E. Residual risk",
+        "F. Solutioned risk"
+      ],
+      "comments": [
+        {
+          "content": "Inherent Risk = Before \nResidual Risk = After",
+          "selected_answer": "CE",
+          "replies": []
+        },
+        {
+          "content": "Inherent Risk = Before\nResidual Risk = After",
+          "selected_answer": "CE",
+          "replies": []
+        },
+        {
+          "content": "C & E ONLY CORRECT\nInherent Risk = Before\nResidual Risk = After",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "63",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100056-exam-cis-rc-topic-1-question-63-discussion/",
+      "most_voted": "CE",
+      "error": null
+    },
+    {
+      "question": "What types of tasks are specific to the Audit module? (Choose four.)",
+      "answers": [
+        "A. Control Attestation",
+        "B. Interview",
+        "C. Walkthrough",
+        "D. Control Test",
+        "E. Activity",
+        "F. Remediation"
+      ],
+      "comments": [
+        {
+          "content": "In audit engagement, you can create audit task for Interview, walkthrough, control test,  activity.",
+          "selected_answer": "BCDE",
+          "replies": []
+        },
+        {
+          "content": "BCDE is correct Interview, walkthrough, control test, activity",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "64",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100061-exam-cis-rc-topic-1-question-64-discussion/",
+      "most_voted": "BCDE",
+      "error": null
+    },
+    {
+      "question": "What baseline criteria determine when notifications are triggered in relation to audit tasks? (Choose two.)",
+      "answers": [
+        "A. Expiration",
+        "B. At 50% completion",
+        "C. Reassignment",
+        "D. Due date change"
+      ],
+      "comments": [
+        {
+          "content": "Answer:\n\tA. Expiration\n\tC. Reassignment\nExplanation: there are 4 notifications OOB related to Audit Task[sn_audit_task]\n\t- Notify audit task confidential users\n\t- Notify current assingee task expired | A.\n\t- Notify assignee before due date\n\t- Change assigned to of audit task | C.\nSource: PDI, sysevent_email_action list view, with filter: sys_scope.nameLIKEGrc^collection=sn_audit_task",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "A and C is the correct answer - \n\tNotify current assingee task expired\n\tNotify current assingee task expired",
+          "selected_answer": "",
+          "replies": [
+            "Change assigned to of audit task"
+          ]
+        },
+        {
+          "content": "C is correct doubt on another one\n\nhttps://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-audit/concept/c_AuditTasks.html\n\nWhen audit tasks are created or reassigned, a notification is sent to the assigned user. A notification is also sent when the task reaches 75% of its planned duration.",
+          "selected_answer": "",
+          "replies": [
+            "Yup, confirmed this on the SN docs."
+          ]
+        }
+      ],
+      "question_number": "65",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115574-exam-cis-rc-topic-1-question-65-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "What minimum role is needed to bulk initiate risk assessments using the risk assessment scheduler?",
+      "answers": [
+        "A. sn_grc.business_user",
+        "B. sn_risk.user",
+        "C. sn_risk.admin",
+        "D. sn_risk.manager"
+      ],
+      "comments": [
+        {
+          "content": "A risk manager can then identify the entities and the risks within the entities for bulk initiation of risk assessments. The question is asking about who can initiate bulk assessments.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "What minimum role is needed to bulk initiate risk assessments using the risk assessment scheduler?\n\tA. sn_grc.business_user\n\tB. sn_risk.user\n\tC. sn_risk.admin\n\tD. sn_risk.manager\nAnswer: C. sn_risk.admin\nExplanation: quote: \"Create a risk assessment scheduler and assign it to the risk manager. A risk manager can then identify the entities and the risks within the entities for bulk initiation of risk assessments.\"\nSource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-risk/concept/risk-assessment-scheduler.html",
+          "selected_answer": "C",
+          "replies": [
+            "sorry i meant D not C."
+          ]
+        },
+        {
+          "content": "D is correct. \n\n\"Create a risk assessment scheduler and assign it to the risk manager. A risk manager can then identify the entities and the risks within the entities for bulk initiation of risk assessments.\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-governance-risk-compliance/page/product/grc-risk/concept/risk-assessment-scheduler.html",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "66",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100063-exam-cis-rc-topic-1-question-66-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Common controls from UCF import into which table in ServiceNow?",
+      "answers": [
+        "A. sn_compliance_policy",
+        "B. sn_compliance_policy_statement",
+        "C. sn_compliance_policy_exception",
+        "D. sn_complilance_authority_document"
+      ],
+      "comments": [
+        {
+          "content": "Control Objective table",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "UCF Citation [sn_comp_ucf_citation]\t=\tCitation [sn_compliance_citation]\nUCF Control [sn_comp_ucf_control]\t=\tControl objective [sn_compliance_policy_statement]\nUCF Authority Document [sn_comp_ucf_authority_document]\t=\tAuthority document [sn_compliance_authority_document]\nUCF Citation To Control [sn_comp_ucf_m2m_control_citation]\t=\tControl Objective to Citation [sn_compliance_m2m_statement_citation]",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer: B. sn_compliance_policy_statement\nExplanation: UCF import contorls are stored in the UCF Control [sn_comp_ucf_control] and is mapped to the SN GRC Control Object[sn_compliance_policy_statement]\nSource: PDI, sys_transform_map list view, filter: source_table=sn_comp_ucf_control",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Book: GRC: Integrated Risk Management (IRM) Implementation - San Diego P.17",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Control objective",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "67",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100066-exam-cis-rc-topic-1-question-67-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "An Entity can belong to one or multiple of which of the following?",
+      "answers": [
+        "A. Entity Types",
+        "B. Information Objects",
+        "C. Departments",
+        "D. Entity Classes"
+      ],
+      "comments": [
+        {
+          "content": "entity types",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "GRC: Integrated Risk Management (IRM) Fundamentals Course, Lesson 3: Create an Entity Framework. https://nowlearning.servicenow.com/lxp/en/pages/learning-course?id=learning_course&course_id=9fe7eaaf977a91908934b67e6253af36&group_id=bc1qs8x6caxpkns9szm37d8csd6ej4nr67qx3hk732&child_id=bb38aaef977a91908934b67e6253afc9&spa=1\nEntities can belong to more than one entity type.\nAn entity can belong to many entity types, but it can have only one entity class.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Entities can belong to multiple entity types.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "entities can belong to one or more entity types as well",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "68",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92153-exam-cis-rc-topic-1-question-68-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When reviewing the Control Objective Table form with your customer, what are the most common choice lists to be configured? (Choose three.)",
+      "answers": [
+        "A. Reference",
+        "B. Classification",
+        "C. Category",
+        "D. Type",
+        "E. Description"
+      ],
+      "comments": [
+        {
+          "content": "When reviewing the Control Objective Table form with your customer, what are the most common choice lists to be configured? (Choose three.)\n\tA. Reference\n\tB. Classification\n\tC. Category\n\tD. Type\n\tE. Description\nAnswer: \n\tB. Classification\n\tC. Category\n\tD. Type\nExplanation:\n\t- referece | string\n\t- Classification | Reference | Choice Dropdown\n\t- Category | Reference | Choice Dropdown\n\t- Type | Reference | Choice Dropdown\n\t- Description | string\nSource: PDI, sys_object related list under table: Control Object",
+          "selected_answer": "BCD",
+          "replies": []
+        },
+        {
+          "content": "BCD is the correct answer : https://docs.servicenow.com/bundle/utah-governance-risk-compliance/page/product/grc-policy-and-compliance/task/t_CreateAPolicyStatement.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "69",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116549-exam-cis-rc-topic-1-question-69-discussion/",
+      "most_voted": "BCD",
+      "error": null
+    },
+    {
+      "question": "Which ServiceNow roles can manually move a Control record into the Monitor state? (Choose two.)",
+      "answers": [
+        "A. Control owner",
+        "B. System admin",
+        "C. Process owner",
+        "D. Compliance manager"
+      ],
+      "comments": [
+        {
+          "content": "A & C are not defined roles in ServiceNow",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Control Owner and Process Owner are not roles.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD\nMonitor In this state, all compliance managers can move the control from review to monitor.\nhttps://docs.servicenow.com/bundle/utah-governance-risk-compliance/page/product/grc-policy-and-compliance/task/t_CreateAControl.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Textbook p146\ncompliance manager above",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "70",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100067-exam-cis-rc-topic-1-question-70-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "For classic risk assessment, what are the risk components that apply to the Qualitative method? (Choose two.)",
+      "answers": [
+        "A. Single Loss Expectancy (SLE)",
+        "B. Annualized Rate of Occurrence (ARO)",
+        "C. Impact",
+        "D. Likelihood"
+      ],
+      "comments": [
+        {
+          "content": "CD IS CORRECT",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "71",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115580-exam-cis-rc-topic-1-question-71-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "On which records is the entity a required field? (Choose two.)",
+      "answers": [
+        "A. Risk",
+        "B. Control",
+        "C. Policy",
+        "D. Control objective",
+        "E. Risk statement"
+      ],
+      "comments": [
+        {
+          "content": "AB is correct. Confirmed in Lab Instance.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AB, IS CORRECT\nRisk & Control auto generated from entity type mapped to respective risk statement & control objective & while generation system automatically populate entity & entity owner to risk & control",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "72",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115581-exam-cis-rc-topic-1-question-72-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "Entity Types are applied to which types of records? (Choose three.)",
+      "answers": [
+        "A. Risk Statement",
+        "B. Issue",
+        "C. Risk",
+        "D. Control Objective",
+        "E. Policy",
+        "F. Control"
+      ],
+      "comments": [
+        {
+          "content": "Risk Statement, Control Objective & Policy",
+          "selected_answer": "ADE",
+          "replies": []
+        },
+        {
+          "content": "ADE, Risk Statement, Control Objective & Policy",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Risk to entities",
+          "selected_answer": "ADE",
+          "replies": []
+        }
+      ],
+      "question_number": "73",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100069-exam-cis-rc-topic-1-question-73-discussion/",
+      "most_voted": "ADE",
+      "error": null
+    },
+    {
+      "question": "What new related list was added to the risk statement and entity records after migrating to advanced risk assessment?",
+      "answers": [
+        "A. Aggregated risk related list",
+        "B. Risk assessments related list",
+        "C. Risk tolerance related list",
+        "D. Assessment instances related list"
+      ],
+      "comments": [
+        {
+          "content": "What new related list was added to the risk statement and entity records after migrating to advanced risk assessment?\n\tA. Aggregated risk related list\n\tB. Risk assessments related list\n\tC. Risk tolerance related list\n\tD. Assessment instances related list\nAnswer: A. Aggregated risk related list\nExplanation: quote: \"a related list called Aggregated Risk is displayed\", Aggregated Risk related list contains the following values derived from various risk assessments\n\t- Risk assessment methodology\n\t- Residual rating\n\t- Inherent rating\n\t- Control effectiveness\n\t- Residual ALE\n\t- Inherent ALE\n\t- Contributing risk assessments\n\t- Risk rollup status\nSource: https://docs.servicenow.com/bundle/utah-governance-risk-compliance/page/product/grc-risk/concept/risk-rollup-ara-concept.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct. \n\n\"When you migrate to advanced risk assessment, individual risk score values do not roll up to give you the risk score. Instead, the values from advanced risk assessment are considered. For example, for an entity, in the Entity form, the Risk Rollup and Tolerance section is not displayed. The same applies to any risk statement. Instead, a related list called Aggregated Risk is displayed.\" \n\nSource: https://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-risk/concept/risk-rollup-ara-concept.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "74",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116070-exam-cis-rc-topic-1-question-74-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What ensures that every time you create an Entity from a specific table, the Class of the Entity is set according to the rule?",
+      "answers": [
+        "A. Entity class rules",
+        "B. Entity business rules",
+        "C. Entity class assignment",
+        "D. Entity type rules"
+      ],
+      "comments": [
+        {
+          "content": "Entity class rules help to assign classes to the entities at the table level. Any new entity created on the table gets that entity class automatically. Entity classes are used to tag your entities.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is Correct. \"Entity type rules\" does not exist. Also not sure why 2 are selected but A is correct.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct.\n\nhttps://docs.servicenow.com/en-US/bundle/utah-governance-risk-compliance/page/product/grc-common-workspace/concept/entity-class-rules-in-risk-ws.html\nEntity class rules help to assign classes to the entities at the table level. Any new entity created on the table gets that entity class automatically. Entity classes are used to tag your entities.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "75",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115816-exam-cis-rc-topic-1-question-75-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "The consolidated assessment feature can be used on which of the following? (Choose two.)",
+      "answers": [
+        "A. Control tests",
+        "B. Classic risk assessments",
+        "C. Issues",
+        "D. Control attestations"
+      ],
+      "comments": [
+        {
+          "content": "Policy and Compliance Management and Risk Management offer two methods for consolidating attestations and risk assessments into groups that help eliminate the task of providing repetitive responses for similar assessments.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Policy and Compliance Management and Risk Management offer two methods for consolidating attestations and risk assessments into groups that help eliminate the task of providing repetitive responses for similar assessments.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "76",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/116592-exam-cis-rc-topic-1-question-76-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "Which table stores the links from the Entity Type to Risk Statement?",
+      "answers": [
+        "A. [sn_risk_m2m_statement_profile_type]",
+        "B. [sn_risk_m2m_framework_profile_type]",
+        "C. [sn_risk_m2m_risk_definition_profile_type]",
+        "D. [sn_risk_m2m_policy_profile_type]"
+      ],
+      "comments": [
+        {
+          "content": "sn_risk_m2m_risk_definition_profile_type",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer: C. [sn_risk_m2m_risk_definition_profile_type]\nExplanation: SN is great at naming convenstions.... so the risk statement[risk_definition] Entity Type[profile_type]....\nSource: PDI, sys_db_object list view, filter: name=sn_risk_m2m_risk_definition_profile_type",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/sandiego-governance-risk-compliance/page/product/grc-risk/reference/r_InstallWRisk.html#title_r_TableInsWRisk",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "77",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100070-exam-cis-rc-topic-1-question-77-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "For classic risk assessment, indicator failure factor represents the impact of risk indicator failures on what score?",
+      "answers": [
+        "A. Inherent ALE",
+        "B. Calculated ALE",
+        "C. Residual ALE",
+        "D. Inherent SLE"
+      ],
+      "comments": [
+        {
+          "content": "Answer: B. Calculated ALE\nExplanation: Quote: \"Calculated risk factor - This value is calculated from (Indicator failure factor + Control failure factor) / 2.\"\nSource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-risk/task/t_CreateRisk.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Calculated Risk Factor = (Indicator failure factor + Control failure factor) / 2\nCalculated ALE = Residual ALE + ((Inherent ALE - Residual ALE) * (Calculated Risk Factor / 100))\nhttps://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0692108",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "78",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/125831-exam-cis-rc-topic-1-question-78-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Praveen is a Risk Manager. Why would he want to utilize Entity Types and Entities? (Choose three.)",
+      "answers": [
+        "A. To monitor risk exposure",
+        "B. To remediate vulnerabilities",
+        "C. To perform risk assessments",
+        "D. To perform policy exceptions",
+        "E. To perform risk reporting"
+      ],
+      "comments": [
+        {
+          "content": "ACE. \n\nABC is about risk management, D is policy therefore I assume it to be less correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Role is a Risk Manager",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tA. To monitor risk exposure\n\tC. To perform risk assessments\n\tE. To perform risk reporting\nExplanation: risk manager, key word is \"Risk\" so answers should be risk related, A, C and E, B... vulnerabiltiles? seriously? wrong module maybe.....\nSource: trust me bro.",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "Has nothing to do with Policy Exceptions",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "ACE IS CORRECT",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "79",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115582-exam-cis-rc-topic-1-question-79-discussion/",
+      "most_voted": "ACE",
+      "error": null
+    },
+    {
+      "question": "If you create a control manually and later decide to create them automatically, what will be the result?",
+      "answers": [
+        "A. ServiceNow will delete the manually created control",
+        "B. ServiceNow creates a duplicate control and notifies the control owner",
+        "C. ServiceNow creates a duplicate control without notifying the control owner",
+        "D. ServiceNow identifies the control and does not create a duplicate"
+      ],
+      "comments": [
+        {
+          "content": "Agreed and validated in the learning lab instance. \nEnsure a policy is not published. Create manual control for some of the planned entities and create controls automatically through Control Objectives. When you run the \"GRC profile Generation\" scheduled job, duplicate controls are created. No notifications are being generated to the entity or control owner.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Tested in my PDI",
+          "selected_answer": "C",
+          "replies": [
+            "I did it, I've created a control (using \"Inherit from control objective\" check) in the control objective and after that i check the \"Creates controls automatically\" and i've assigned the Entity Type which contains the entity assigned before on the Control manually created. What was the Result? Servicenow doesn't create a duplicate."
+          ]
+        },
+        {
+          "content": "I believe its C, yet not 100% sure. \n\nIt would skip creating a duplicate if the first one was also automatically created, but since its manually made I believe the system just creates another one and I do not believe a notification is sendt.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "80",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115820-exam-cis-rc-topic-1-question-80-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following records does not have a lifecycle?",
+      "answers": [
+        "A. Control Objective",
+        "B. Policy",
+        "C. Policy Exception",
+        "D. Control"
+      ],
+      "comments": [
+        {
+          "content": "Control objective do not have a lifecycle.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Answer: A. Control Objective\nExplanation: Control Objective[sn_compliance_policy_statement] doesn't seem to have a lifecycle attached, while Policy[sn_compliance_policy], Policy Exception[sn_compliance_policy_exception] and control[sn_compliance_control] all have a lilfecycle\nSource: PDI, run <table_name>.do against those tables you can see the lifecycle on all but Control Objective[sn_compliance_policy_statement]",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Control Objective does not have a Life cycle",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct :  Control objective this follow policy life cycle, it has not Active & Inactive status",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "how is it that a policy does not have a lifecycle? this is incorrect",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "81",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92155-exam-cis-rc-topic-1-question-81-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which of the following relationship sets are considered a many-to-many relationship? (Choose three.)",
+      "answers": [
+        "A. Entity Type and Entity Class",
+        "B. Indicator Template and Entity Type",
+        "C. Control and Risk",
+        "D. Control Objective and Entity Type",
+        "E. Entity Type and Entity"
+      ],
+      "comments": [
+        {
+          "content": "No relationship between entity type and entity class. \nIndicator template not related to entity type.",
+          "selected_answer": "CDE",
+          "replies": []
+        },
+        {
+          "content": "Existing m2m tables: \nEntity to Entity Type\nControl Objective to Entity Type\nRisk to Control\n\nEntity Type and Class are not related and does not have direct relationship. \nIndicator template and Entity Type are not related directly.",
+          "selected_answer": "CDE",
+          "replies": []
+        },
+        {
+          "content": "CDE IS CORRECT",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "entities can belong to only one entity class. how is this correct?",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "82",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92156-exam-cis-rc-topic-1-question-82-discussion/",
+      "most_voted": "CDE",
+      "error": null
+    },
+    {
+      "question": "How can you get the SOX content pack?",
+      "answers": [
+        "A. ServiceNow Store",
+        "B. Patch Update",
+        "C. Platform Upgrade",
+        "D. Professional Services"
+      ],
+      "comments": [
+        {
+          "content": "Bull shit answer. \nhttps://store.servicenow.com/sn_appstore_store.do#!/store/application/2e03fe8013705b40e94b721a6144b098/11.0.0?referer=%2Fstore%2Fsearch%3Flistingtype%3Dallintegrations%25253Bancillary_app%25253Bcertified_apps%25253Bcontent%25253Bindustry_solution%25253Boem%25253Butility%25253Btemplate%26q%3DSOX&sl=sh",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A IS CORRECT",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "incorrect, can be found on the servicenow store",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "83",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92157-exam-cis-rc-topic-1-question-83-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Critical parts of a successful GRC implementation are understanding the customers current: (Choose three.)",
+      "answers": [
+        "A. Regulatory requirements",
+        "B. Risk and Compliance personas",
+        "C. GRC processes",
+        "D. Data breaches",
+        "E. Audit failures"
+      ],
+      "comments": [
+        {
+          "content": "ACE IS MOST SUITALBE ANSWER\n: 1 Without knowing regulatory requirements hoe you can proceed\n2. GRC process is must\n3. Audit failure",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ACE is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tA. Regulatory requirements\n\tC. GRC processes\n\tE. Audit failures\nExplanation: Persona is pretty much pre defined and why the hell would you care about data breaches? unless SN is selling them SecOps which ironically includes something called Data Loss Prevention\nSource: trust me bro. i am doing me CTA",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "ACE should be correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Based on previous answers, ACE is correct",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "No, we dont need to understand Data breaches.",
+          "selected_answer": "CDE",
+          "replies": [
+            "It should be then ACE"
+          ]
+        }
+      ],
+      "question_number": "84",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/95778-exam-cis-rc-topic-1-question-84-discussion/",
+      "most_voted": "ACE",
+      "error": null
+    },
+    {
+      "question": "Which of the following are ServiceNow classic risk score types? (Choose three.)",
+      "answers": [
+        "A. Applied",
+        "B. Calculated",
+        "C. Inherent",
+        "D. Generated",
+        "E. Residual"
+      ],
+      "comments": [
+        {
+          "content": "Answer:\n\tB. Calculated\n\tC. Inherent\n\tE. Residual\t\nExplanation: following risk scoring are mentioned\n\t- Inherent SLE\n\t- Residual SLE\n\t- Inherent ARO\n\t- Residual ARO\n\t- Inherent ALE\n\t- Residual ALE\n\t- Inherent score\t\n\t- Residual score\n\t- Calculated ALE\n\t- Calculated score\nsource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-risk/task/t_CreateRisk.html",
+          "selected_answer": "BCE",
+          "replies": []
+        },
+        {
+          "content": "RESIDUAL, INHERENT, CALCULATED",
+          "selected_answer": "BCE",
+          "replies": []
+        }
+      ],
+      "question_number": "85",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104609-exam-cis-rc-topic-1-question-85-discussion/",
+      "most_voted": "BCE",
+      "error": null
+    },
+    {
+      "question": "Santa Clara Facility and Boston Facility are examples of what?",
+      "answers": [
+        "A. Entities",
+        "B. Entity Object",
+        "C. Entity Class",
+        "D. Entity Type"
+      ],
+      "comments": [
+        {
+          "content": "I think the right answer is A. \n\nIf it would have been facilities (plural) I believe the right answer would have been Entity Type, but since its only one, Entity makes more sense.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Its 2 separate location, which is an entity.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is right answer. Entities are people, places, objects etc.\nhttps://docs.servicenow.com/bundle/washingtondc-governance-risk-compliance/page/product/grc-common/concept/what-is-an-entity.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is the right answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "I think it should be A",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Yes, C should be correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "IS IT THE RIGHT ANSWER?",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "87",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104610-exam-cis-rc-topic-1-question-87-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which collection of tables extend the Item (sn_grc_item) table? (Choose two.)",
+      "answers": [
+        "A. Risk",
+        "B. Citation",
+        "C. Policy",
+        "D. Control"
+      ],
+      "comments": [
+        {
+          "content": "Policy is extend from Document",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "this is incorrect, should be risk and control",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer: \n\tA. Risk\n\tD. Control\t\nExplanation: Control/Risk[sn_grc_item] extending to the following tables\n\t- Control[sn_compliance_control] (note the table lable is Control NOT Controls.....)\n\t- Control requirement[sn_compliance_control_rrequiement]\n\t- Risk[sn_risk_risk]\nSource: PDI Control/Risk[sn_grc_item] Schema Map",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "ebook: GRC: Integrated Risk Management (IRM) Implementation - San Diego, Page 140\nPolicy is extended from Document. Risk and Control extend from the Item table.",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "88",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92159-exam-cis-rc-topic-1-question-88-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "Who should be directly involved in GRC implementations? (Choose four.)",
+      "answers": [
+        "A. Board of directors",
+        "B. Chief Executive",
+        "C. ServiceNow platform experts",
+        "D. Business Analyst",
+        "E. Risk and compliance experts",
+        "F. CMDB process owner"
+      ],
+      "comments": [
+        {
+          "content": "textbook p38",
+          "selected_answer": "CDEF",
+          "replies": []
+        },
+        {
+          "content": "CDEF is Correct. I actually found the specific video in the IRM implementation course that says \"establish core implementation team\" The video is in the first module in the section titled \"Identify implementation stakeholders and Team\" go to the 1:51 time stamp and youll see that the core team is is a variation or the exact name that I selected as my answer.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "89",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100073-exam-cis-rc-topic-1-question-89-discussion/",
+      "most_voted": "CDEF",
+      "error": null
+    },
+    {
+      "question": "Which of the following are triggers for automatic creation of an issue? (Choose two.)",
+      "answers": [
+        "A. Attestation result is Not Implemented",
+        "B. Indicator result is Failed or Not Passed",
+        "C. Policy Exception Not approved",
+        "D. Control tests have been assigned but not tested"
+      ],
+      "comments": [
+        {
+          "content": "Check your Business Rules: \nA: Create issue if test ineffective, closed\nB: Create issue when result fails",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AB is the correct answer - \nIssues are created with these conditions:\n•\tIssue\no\tCreated when an indicator fails\n•\tControl Issue\no\tCreated when a control attestation is completed indicating that the control is Not Implemented\n•\tControl Test Issue\no\tCreated when a control test is closed complete with the control effectiveness set to Ineffective",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "indicator failure create issue",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "90",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/100075-exam-cis-rc-topic-1-question-90-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "Risk criteria typically include definitions of different levels of what? (Choose two.)",
+      "answers": [
+        "A. Impact",
+        "B. Likelihood",
+        "C. Criticality",
+        "D. Importance",
+        "E. Priority"
+      ],
+      "comments": [
+        {
+          "content": "Different levels of impact and likelihood are defined by default. \nPriority is an outcome of impact and urgency, not associated to Risk Management.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "Impact & Likelihood",
+          "selected_answer": "AB",
+          "replies": []
+        }
+      ],
+      "question_number": "91",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104616-exam-cis-rc-topic-1-question-91-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "Which is not a type of key compliance indicator?",
+      "answers": [
+        "A. Performance Analytics",
+        "B. Manual",
+        "C. Scripted",
+        "D. Reference",
+        "E. Basic"
+      ],
+      "comments": [
+        {
+          "content": "answer D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Reference is not an control indicator.\nPA Indicator related list is available within a Risk or Control based on enablement of Performance Analytics.\nEither the question is incorrectly framed or choice values.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Reference is not an control indicator. \nPA Indicator related list is available within a Risk or Control based on enablement of Performance Analytics. \nEither the question is incorrectly framed or choice values.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Opened this table on my PDI: sn_grc_indicator\nIn the list view, if i double click on Type I can see : Manual, Basic, PA Indicator, Script",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "\"Performance Analytics\" usually pertains to a specific tool or methodology used for analyzing and visualizing data in ServiceNow, particularly for performance management, but it is not categorized as a type of key compliance indicator.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "PERFORMANCE ANALYTICS",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "92",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104617-exam-cis-rc-topic-1-question-92-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "The Entity Type table has a many-to-many relationship with which tables? (Choose two.)",
+      "answers": [
+        "A. Risk Statement",
+        "B. Policy",
+        "C. Control",
+        "D. Risk"
+      ],
+      "comments": [
+        {
+          "content": "Control and Risk has m2m relationship.",
+          "selected_answer": "AB",
+          "replies": [
+            "I think you meant to select CD",
+            "i don't think so if u go to the sys_db_object table in the PDI, filter by\nLabel contains \"entity type\" AND\nName contains \"m2m\" AND\nApplication contains \"GRC\"\n\nyou will get a list of following m2m relationship tables, note that controls and Risk are not in them\n\t- Control Objective to Entity Type[sn_compliance_m2m_statement_profile_type]\n\t- Content to Entity Type[sn_grc_m2m_content_profile_type]\n\t- Content Reference to Entity Type[sn_grc_m2m_cont_ref_profile_type]\n\t- Document to Entity Type[sn_grc_m2m_document_profile_type]\n\t- Item to entity type[sn_grc_m2m_item_entity_type]\n\t- Entity to Entity Type[sn_grc_m2m_profile_profile_type]\n\t- Entity type to Metric Definition[sn_grc_metric_m2m_definition_profile_type]\n\t- Risk Framework to Entity Type[sn_risk_m2m_framework_profile_type]\n\t- Entity Type to Risk Statement[sn_risk_m2m_risk_definition_profile_type]"
+          ]
+        },
+        {
+          "content": "Entity Type to Risk Statement\n[sn_risk_m2m_risk_definition_profile_type]\n\nPolicy to Entity Type\n[sn_compliance_m2m_policy_profile_type]\n\nCheck for components installed with Risk, Policy and Compliance.",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "Answer: \n\tA. Risk Statement\n\tB. Policy\nExplanation: list of m2m tables related to Entity Type\n\t- Control Objective to Entity Type[sn_compliance_m2m_statement_profile_type]\n\t- Content to Entity Type[sn_grc_m2m_content_profile_type]\n\t- Content Reference to Entity Type[sn_grc_m2m_cont_ref_profile_type]\n\t- Document to Entity Type[sn_grc_m2m_document_profile_type]\n\t- Item to entity type[sn_grc_m2m_item_entity_type]\n\t- Entity to Entity Type[sn_grc_m2m_profile_profile_type]\n\t- Entity type to Metric Definition[sn_grc_metric_m2m_definition_profile_type]\n\t- Risk Framework to Entity Type[sn_risk_m2m_framework_profile_type]\n\t- Entity Type to Risk Statement[sn_risk_m2m_risk_definition_profile_type]\nSource: PDI, sys_db_object list view, with filter: nameLIKEm2m^sys_scope.nameLIKEGRC^labelLIKEentity type",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AC is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AB is the correct ans as Risk statement can be linked with multiple entity type.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Controls and Risks often maintain a many-to-many relationship with the Entity Type table in ServiceNow's GRC framework, whereas the relationship with Risk Statements and Policies might exist but is not usually established as a direct many-to-many connection with Entity Types.",
+          "selected_answer": "CD",
+          "replies": []
+        }
+      ],
+      "question_number": "93",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/95779-exam-cis-rc-topic-1-question-93-discussion/",
+      "most_voted": "AB",
+      "error": null
+    },
+    {
+      "question": "Unified Compliance Framework (UCF) uses a slightly different nomenclature structure than ServiceNow. Common controls from UCF import into which table in ServiceNow?",
+      "answers": [
+        "A. Control Objective [sn_compliance_policy_statement]",
+        "B. Authority Document [sn_compliance_authority_document]",
+        "C. Control [sn_compliance_control]",
+        "D. Citation [sn_compliance_citation]"
+      ],
+      "comments": [
+        {
+          "content": "Answer: A. Control Objective [sn_compliance_policy_statement]\nExplanation: UCF import contorls are stored in the UCF Control [sn_comp_ucf_control] and is mapped to the SN GRC Control Object[sn_compliance_policy_statement]\nSource: PDI, sys_transform_map list view, filter: source_table=sn_comp_ucf_control",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "import to sn_compliance_policy_statement table",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "94",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/95780-exam-cis-rc-topic-1-question-94-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What dependency modeling feature can be used in the Classic UI to build relationships between Entity Classes?",
+      "answers": [
+        "A. GRC Workbench",
+        "B. Dependency Model Builder",
+        "C. Data Model Designer",
+        "D. GRC Tree Map"
+      ],
+      "comments": [
+        {
+          "content": "GRC Workbench\nhttps://docs.servicenow.com/bundle/utah-governance-risk-compliance/page/product/grc-common/task/create-relationships-between-profile-classes.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Never heard about another 3",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "95",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/95781-exam-cis-rc-topic-1-question-95-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "The content table (sn_grcs_content) is a parent table of:",
+      "answers": [
+        "A. sn_grc_profile",
+        "B. sn_risk_framework",
+        "C. sn_risk_definition",
+        "D. sn_risk_risk"
+      ],
+      "comments": [
+        {
+          "content": "Risk Statements [sn_risk_definition]",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Answer: C. sn_risk_definition\nExplanation: Content[sn_grc_content] extending to following tables\n\t- Citation[sn_complance_citation]\n\t- Control object requirement[sn_compliance_policy_statement]\n\t- Risk Statment[sn_risk_definition]\n\t- Control object[sn_compliance_policy_statement]\nSource; PDI, Content[sn_grc_content] Schema Map",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "96",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/95782-exam-cis-rc-topic-1-question-96-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following roles can create a policy? (Choose two.)",
+      "answers": [
+        "A. Audit User",
+        "B. Compliance User",
+        "C. Compliance Manager",
+        "D. Risk User",
+        "E. Compliance Reader"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/tokyo-governance-risk-compliance/page/product/grc-policy-and-compliance/task/t_DefineAPolicy.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tB. Compliance User\n\tC. Compliance Manager\nExplanation: Quote \"Role required: sn_compliance.admin or sn_compliance.manager\"\nSource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-policy-and-compliance/task/t_DefineAPolicy.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Role required: sn_compliance.admin or sn_compliance.manager\nUsers with Compliance user (sn_compliance.user) role can also create policies.\nhttps://docs.servicenow.com/bundle/tokyo-governance-risk-compliance/page/product/grc-policy-and-compliance/task/t_DefineAPolicy.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "this is wrong, should be compliance manager & compliance user",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "97",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92310-exam-cis-rc-topic-1-question-97-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "Which filter navigation syntax displays the default form view of the Risk table in the Content Frame?",
+      "answers": [
+        "A. sn_risk_risk.form",
+        "B. sn_risk_risk.LIST",
+        "C. sn_risk_risk.FORM",
+        "D. sn_risk_risk.list"
+      ],
+      "comments": [
+        {
+          "content": "Answer: A. sn_risk_risk.form\nExplanation: i am sorry to have to say thsi, this question is kinda retarded... the <tablename>.form and <tablename>.do \"syntax\" display a form to create a new record in <tablename>, which is different to the literal meaning of default form view.... for those who are interested, navigation syntax:\n    - <tablename>.list - display a list of All <tablename> records.\n    - <tablename>.LIST - display a list of All <tablename> records in a new browser tab.\n    - <tablename>.do - display a form to create a new record in <tablename>.\n    - <tablename>.form - display a form to create a new record in <tablename>.\n    - <tablename>.FORM - display a form to create a new record in <tablename> in a new browser tab.\n    - <tablename>.config - display all of the application files for <tablename>.\n    - <tablename>.CONFIG - display all of the application files for <tablename> in a new browser tab.\nSource: PDI, navigation menu",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "obviously it should be A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "wrong, .FORM opens it in a new tab/window",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "98",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92311-exam-cis-rc-topic-1-question-98-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What three records need to be set-up when integrating with a provider RSS feed? (Choose three.)",
+      "answers": [
+        "A. Feed sources record",
+        "B. Provider record",
+        "C. Regulatory Feed record",
+        "D. Connection and Credentials record",
+        "E. Regulatory Change Task record"
+      ],
+      "comments": [
+        {
+          "content": "what is this? choose three, gives two answers, fix your tests - how is this worth the money?",
+          "selected_answer": "",
+          "replies": [
+            "90% of answers are wrong. Bad quality."
+          ]
+        },
+        {
+          "content": "the correct answer is ABD - Provider, Connection and Credentials, Feed Sources are inputs and regulatory feed record is the output... Reg change task is auto created if the feed is applicable. ebook pages - 191 and 192.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "right ans - ADE \nE because from Feed setup you select regulatory change\nhttps://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-rcm/task/set-up-rss-feeds.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer:\n\tA. Feed sources record\n\tB. Provider record\n\tD. Connection and Credentials record\nExplanation: in the setup the RSS feed documentation (SN)\n\tstep 4, Create New Connection & Credential under related links\n\tstep 7, setup Feed Source Record and new previder record\nSource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-rcm/task/set-up-rss-feeds.html",
+          "selected_answer": "AB",
+          "replies": []
+        },
+        {
+          "content": "AD is correct.\nhttps://docs.servicenow.com/bundle/tokyo-governance-risk-compliance/page/product/grc-rcm/task/set-up-rss-feeds.html",
+          "selected_answer": "AD",
+          "replies": [
+            "It should be ABD"
+          ]
+        }
+      ],
+      "question_number": "99",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/92312-exam-cis-rc-topic-1-question-99-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "Which of the following are Policy Lifecycle states included in the ServiceNow baseline? (Choose two.)",
+      "answers": [
+        "A. Expired",
+        "B. Review",
+        "C. Acknowledged",
+        "D. Published",
+        "E. Verified"
+      ],
+      "comments": [
+        {
+          "content": "Answer:\n\tB. Review\n\tD. Published\nExplanation: Explanation: Policies go through, Draft > Review > Awaiting approval > Published > Retired, lifecycle\nSource: https://docs.servicenow.com/bundle/xanadu-governance-risk-compliance/page/product/grc-policy-and-compliance/task/t_DefineAPolicy.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Draft > Review > Awaiting Approval > Published > Retired",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "100",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/95785-exam-cis-rc-topic-1-question-100-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "Which of the following extends from Content Table? (Choose two.)",
+      "answers": [
+        "A. Citation",
+        "B. Policy",
+        "C. Control Objective",
+        "D. Authority Document"
+      ],
+      "comments": [
+        {
+          "content": "Answer:\n\tA. Citation\n\tC. Control Objective\nExplanation: Content[sn_grc_content] extending to following tables\n\t- Citation[sn_complance_citation]Question #26\n\t- Control object requirement[sn_compliance_policy_statement]The Citation table is a child table of which parent?\n\t- Risk Statment[sn_risk_definition]\tA. Content\n\t- Control object[sn_compliance_policy_statement]\nSource; PDI, Content[sn_grc_content] Schema Map\tC. Item",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "ebook: GRC: Integrated Risk Management (IRM) Implementation - San Diego, Page 140\nControl Objective and Citation",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "control object and citation",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "wrong - should be citation and control obj",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "101",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/94540-exam-cis-rc-topic-1-question-101-discussion/",
+      "most_voted": "AC",
+      "error": null
+    }
+  ]
+}

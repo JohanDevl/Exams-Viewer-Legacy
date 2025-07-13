@@ -7,6 +7,10 @@ import os
 import hashlib
 import random
 import urllib.robotparser
+import base64
+from urllib.parse import urljoin, urlparse
+from PIL import Image
+import io
 
 # Streamlit removed - not needed for automation scripts
 
@@ -193,11 +197,16 @@ def scrape_page(link):
             "most_voted": None,
             "link": link,
             "question_number": "unknown",
+            "images": {},
             "error": f"Request or parsing failed: {e}"
         }
 
     question_number_match = re.search(r"question-(\d+)", link)
     question_number = question_number_match.group(1) if question_number_match else "unknown"
+    
+    # Extract and process images from the question
+    base_url = "https://www.examtopics.com"
+    images = extract_and_process_images(soup, base_url)
 
     # Extract question
     question = ""
@@ -303,6 +312,7 @@ def scrape_page(link):
     question_object["question_number"] = question_number
     question_object["link"] = link
     question_object["most_voted"] = most_voted
+    question_object["images"] = images
     question_object["error"] = None
 
     return question_object
@@ -513,8 +523,9 @@ def check_for_updates(exam_code, progress, skip_online_check=False):
     Checks if exam files need to be updated by comparing 
     existing links with newly available links
     """
-    questions_path = f"data/{exam_code}.json"
-    links_path = f"data/{exam_code}_links.json"
+    exam_dir = f"data/{exam_code}"
+    questions_path = f"{exam_dir}/exam.json"
+    links_path = f"{exam_dir}/links.json"
     
     # Check if files exist
     questions_exist = os.path.exists(questions_path)
@@ -563,28 +574,264 @@ def check_for_updates(exam_code, progress, skip_online_check=False):
     return False, "Files up to date"
 
 
+# Image compression and processing functions
+def ensure_images_directory():
+    """Create images directory if it doesn't exist"""
+    os.makedirs("data/images", exist_ok=True)
+
+def download_and_compress_image(img_url, max_size=(800, 600), quality=85):
+    """
+    Download and compress an image, return the optimized image data
+    """
+    try:
+        response = respectful_request(img_url)
+        if not response:
+            return None
+            
+        # Load image
+        image = Image.open(io.BytesIO(response.content))
+        
+        # Convert to RGB if necessary (for PNG with transparency)
+        if image.mode in ('RGBA', 'LA', 'P'):
+            background = Image.new('RGB', image.size, (255, 255, 255))
+            if image.mode == 'P':
+                image = image.convert('RGBA')
+            background.paste(image, mask=image.split()[-1] if image.mode == 'RGBA' else None)
+            image = background
+        
+        # Resize if too large
+        if image.size[0] > max_size[0] or image.size[1] > max_size[1]:
+            image.thumbnail(max_size, Image.Resampling.LANCZOS)
+        
+        # Save as WebP for better compression
+        output = io.BytesIO()
+        image.save(output, format='WebP', quality=quality, optimize=True)
+        webp_data = output.getvalue()
+        
+        # Fallback JPEG for compatibility
+        output_jpeg = io.BytesIO()
+        image.save(output_jpeg, format='JPEG', quality=quality, optimize=True)
+        jpeg_data = output_jpeg.getvalue()
+        
+        return {
+            'webp': base64.b64encode(webp_data).decode('utf-8'),
+            'jpeg': base64.b64encode(jpeg_data).decode('utf-8'),
+            'original_url': img_url,
+            'size': image.size
+        }
+        
+    except Exception as e:
+        print(f"Error processing image {img_url}: {e}")
+        return None
+
+def extract_and_process_images(soup, base_url):
+    """
+    Extract images from question content only and process them
+    """
+    images = {}
+    
+    # Only look for images inside the question content area
+    question_div = soup.find("div", class_="question-body")
+    if not question_div:
+        return images
+    
+    img_tags = question_div.find_all('img')
+    
+    for i, img in enumerate(img_tags):
+        src = img.get('src')
+        if not src:
+            continue
+            
+        # Convert relative URLs to absolute
+        if src.startswith('//'):
+            src = 'https:' + src
+        elif src.startswith('/'):
+            src = urljoin(base_url, src)
+        elif not src.startswith('http'):
+            src = urljoin(base_url, src)
+        
+        # Enhanced filtering for question images only
+        if should_skip_image(src):
+            continue
+            
+        print(f"  📸 Processing question image: {src}")
+        
+        # Generate unique ID for this image
+        img_id = f"img_{hashlib.md5(src.encode()).hexdigest()[:8]}"
+        
+        # Process and compress image
+        try:
+            processed_img = download_and_compress_image(src)
+            if processed_img:
+                images[img_id] = processed_img
+                # Replace img tag with reference
+                img['data-img-id'] = img_id
+                img['src'] = f"data:image/webp;base64,{processed_img['webp'][:50]}..." # Placeholder
+                print(f"  ✅ Image compressed: {len(processed_img['webp'])} bytes")
+            else:
+                print(f"  ❌ Failed to process image: {src}")
+        except Exception as e:
+            print(f"  ⚠️ Error processing image {src}: {e}")
+            continue
+        
+        # Add small delay between image downloads
+        time.sleep(0.5)
+    
+    return images
+
+def should_skip_image(src):
+    """
+    Determine if an image should be skipped based on URL patterns
+    """
+    src_lower = src.lower()
+    
+    # Skip tracking pixels and social media
+    tracking_patterns = [
+        'facebook.com/tr',
+        'google-analytics.com',
+        'googletagmanager.com',
+        'doubleclick.net',
+        'googlesyndication.com',
+        'adsystem.com',
+        'linkedin.com/px',
+        'twitter.com/i/adsct',
+        'pinterest.com/ct',
+        'bing.com/tr'
+    ]
+    
+    if any(pattern in src_lower for pattern in tracking_patterns):
+        return True
+    
+    # Skip very small images and UI elements
+    ui_patterns = [
+        'icon', 'logo', 'avatar', 'button', 'arrow', 'star', 
+        'thumb', 'profile', 'social', 'badge', 'sprite'
+    ]
+    
+    # Only skip UI patterns if they're not explicitly question images
+    if any(pattern in src_lower for pattern in ui_patterns):
+        # Allow if it's clearly an exam/question image
+        if not any(exam_pattern in src_lower for exam_pattern in ['examtopics.com', 'question', 'exam', 'image']):
+            return True
+    
+    # Skip images that look like 1x1 tracking pixels
+    if any(size in src_lower for size in ['1x1', '1/1', 'pixel']):
+        return True
+        
+    # Skip base64 data URLs (already processed)
+    if src.startswith('data:'):
+        return True
+    
+    return False
+
+def create_chunks_for_exam_data(exam_code, questions, chunk_size=50):
+    """
+    Create chunks directly from questions data after scraping
+    Returns the number of chunks created, or False if failed/skipped
+    """
+    import math
+    
+    total_questions = len(questions)
+    if total_questions <= chunk_size:
+        return False  # Not enough questions to chunk
+    
+    # Calculate number of chunks
+    total_chunks = math.ceil(total_questions / chunk_size)
+    
+    # Create exam directory structure (should already exist from update_exam_data)
+    exam_dir = f"data/{exam_code}"
+    chunks_dir = f"{exam_dir}/chunks"
+    metadata_file = f"{exam_dir}/metadata.json"
+    
+    os.makedirs(chunks_dir, exist_ok=True)
+    
+    print(f"Auto-creating {total_chunks} chunks for {exam_code} ({total_questions} questions)")
+    
+    # Create chunks
+    created_chunks = []
+    for chunk_id in range(total_chunks):
+        start_idx = chunk_id * chunk_size
+        end_idx = min(start_idx + chunk_size, total_questions)
+        
+        chunk_questions = questions[start_idx:end_idx]
+        
+        chunk_data = {
+            "chunk_id": chunk_id,
+            "start_question": start_idx + 1,
+            "end_question": end_idx,
+            "questions_count": len(chunk_questions),
+            "questions": chunk_questions
+        }
+        
+        chunk_file = f"{chunks_dir}/chunk_{chunk_id}.json"
+        try:
+            save_json(chunk_data, chunk_file)
+            created_chunks.append(chunk_id)
+            print(f"  ✓ Created chunk {chunk_id}: questions {start_idx + 1}-{end_idx}")
+        except Exception as e:
+            print(f"  ✗ Failed to create chunk {chunk_id}: {e}")
+    
+    # Create metadata file
+    exam_name = exam_code  # Could be enhanced to extract from questions data
+    metadata = {
+        "exam_code": exam_code,
+        "exam_name": exam_name,
+        "chunked": True,
+        "chunk_size": chunk_size,
+        "total_chunks": total_chunks,
+        "total_questions": total_questions,
+        "created_chunks": created_chunks,
+        "created_at": time.strftime("%Y-%m-%d")
+    }
+    
+    try:
+        save_json(metadata, metadata_file)
+        print(f"  ✓ Created metadata file: {metadata_file}")
+        return len(created_chunks)
+    except Exception as e:
+        print(f"  ✗ Failed to create metadata file: {e}")
+        return False
+
 def update_exam_data(exam_code, progress, rapid_scraping=False, force_rescan=False, force_update=False):
     """
-    Updates exam data by scraping new questions
+    Updates exam data by scraping new questions with automatic chunking
     """
-    questions_path = f"data/{exam_code}.json"
-    links_path = f"data/{exam_code}_links.json"
+    # Create exam directory structure
+    exam_dir = f"data/{exam_code}"
+    os.makedirs(exam_dir, exist_ok=True)
+    os.makedirs(f"{exam_dir}/chunks", exist_ok=True)
+    
+    questions_path = f"{exam_dir}/exam.json"
+    links_path = f"{exam_dir}/links.json"
     
     try:
         # Get all question links
         links = get_question_links(exam_code, progress, links_path, force_rescan)
         
         if len(links) == 0:
-            return [], "No questions found. Please check the exam code and try again."
+            return [], "No questions found. Please check the exam code and try again.", False
         
         # Scrape questions
         questions_obj = scrape_questions(links, questions_path, progress, rapid_scraping, force_update)
         questions = questions_obj.get("questions", [])
         
         if questions_obj.get("error", "") != "":
-            return (questions, f"Error occurred while scraping questions. Your connection may be slow or the website may have limited your rate. You can still see {len(questions)} questions. Try again later by refreshing the page.")
+            return (questions, f"Error occurred while scraping questions. Your connection may be slow or the website may have limited your rate. You can still see {len(questions)} questions. Try again later by refreshing the page.", False)
         
-        return (questions, "")
+        # Auto-create chunks if exam is large enough
+        chunk_message = ""
+        if len(questions) >= 100:  # Threshold for chunking
+            try:
+                chunk_success = create_chunks_for_exam_data(exam_code, questions, chunk_size=50)
+                if chunk_success:
+                    chunk_message = f"Auto-created {chunk_success} chunks for performance optimization."
+                else:
+                    chunk_message = "Chunking skipped - already exists or failed"
+            except Exception as e:
+                print(f"Warning: Failed to create chunks for {exam_code}: {e}")
+                chunk_message = "Chunking failed"
+        
+        return (questions, chunk_message, True)
         
     except Exception as e:
-        return [], str(e)
+        return [], str(e), False
