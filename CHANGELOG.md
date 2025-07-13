@@ -23,6 +23,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Added graceful fallbacks for corrupted or malformed data
   - Automatic cleanup prevents persistent error states
 
+- **Changelog Display**: Improved markdown rendering with compact nested lists
+  - Recursive parser supporting unlimited nesting levels
+  - Compact CSS styling with progressive spacing for better readability
+  - Enhanced visual hierarchy for multi-level list structures
+
 ## [2.5.0] - 2025-07-13
 
 ### Added
