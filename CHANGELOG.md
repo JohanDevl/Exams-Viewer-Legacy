@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.1] - {PR_MERGE_DATE}
+
+### Fixed
+
+- **Console Errors**: Resolved JavaScript errors that appeared in browser console
+  - Fixed JSON parsing errors in statistics compression/decompression with proper regex escaping
+  - Added fallback parsing and default structure for corrupted localStorage data
+  - Implemented automatic detection and cleanup of corrupted localStorage items
+- **Browser Cache Issues**: Added console guidance for users experiencing autoPip.js MediaSession errors
+  - Provides clear instructions for cache clearing and localStorage reset
+  - Helps resolve stale browser cache references to non-existent files
+
+### Enhanced
+
+- **Data Recovery**: Improved robustness of data loading and error handling
+  - Enhanced statistics data compression with proper special character handling
+  - Added graceful fallbacks for corrupted or malformed data
+  - Automatic cleanup prevents persistent error states
+
 ## [2.5.0] - 2025-07-13
 
 ### Added
@@ -259,7 +278,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
-- **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, and history
+- **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, history, and console error fixes
 - **v2.4.x**: Advanced search and filtering system with smart auto-completion
 - **v2.3.x**: Toolbar visibility toggle and UI declutter option
 - **v2.2.x**: Changelog functionality and improvements
