@@ -15,6 +15,7 @@ No installation required! The interface automatically detects your system theme 
 - **📱 Responsive design** for all devices
 - **🔍 Advanced search and filtering** with auto-completion
 - **⌨️ Enhanced keyboard navigation** with vim-style shortcuts
+- **📊 Enhanced progress indicator** with animated progress bar and real-time statistics
 - **📊 Visual progress sidebar** with question overview
 - **📚 Navigation history** with back/forward buttons
 - **🌙 Dark mode** with automatic detection
@@ -75,15 +76,16 @@ pip install -r requirements.txt
 ### Web Interface
 
 1. **Select an exam** from the dropdown list
-2. **Navigate with keyboard shortcuts**: Use arrow keys, `hjkl` (vim-style), or `Space/Enter` for quick navigation
-3. **Open progress sidebar**: Press `Ctrl+S` or click the hamburger menu to see visual progress
-4. **Use navigation history**: Click Back/Forward buttons to return to previously visited questions
-5. **Access keyboard help**: Press `?` to see all available shortcuts
-6. **Use highlight mode** to preview answers before validation
-7. **Check statistics** in the dedicated panel with detailed analytics
-8. **Export data** to PDF or JSON format
-9. **Manage performance**: Enable lazy loading in settings for large exams
-10. **Clean storage**: Use statistics management tools to optimize space
+2. **Monitor progress**: Watch the animated progress indicator for real-time statistics and completion percentage
+3. **Navigate with keyboard shortcuts**: Use arrow keys, `hjkl` (vim-style), or `Space/Enter` for quick navigation
+4. **Open progress sidebar**: Press `Ctrl+S` or click the hamburger menu to see detailed progress
+5. **Use navigation history**: Click Back/Forward buttons to return to previously visited questions
+6. **Access keyboard help**: Press `?` to see all available shortcuts
+7. **Use highlight mode** to preview answers before validation
+8. **Check statistics** in the dedicated panel with detailed analytics
+9. **Export data** to PDF or JSON format
+10. **Manage performance**: Enable lazy loading in settings for large exams
+11. **Clean storage**: Use statistics management tools to optimize space
 
 ### Manual Updates
 

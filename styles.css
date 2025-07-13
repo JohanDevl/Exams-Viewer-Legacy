@@ -3000,6 +3000,441 @@ body {
   border-radius: 6px 0 0 6px;
 }
 
+/* Enhanced Main Progress Indicator */
+.main-progress-section {
+  margin: 1.5rem 0 2rem 0;
+  padding: 1.25rem;
+  background-color: var(--bg-secondary);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.6s ease, transform 0.4s ease, border-color 0.6s ease, border-width 0.6s ease, box-shadow 0.6s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: slideInFromTop 0.6s ease-out forwards;
+}
+
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-theme="dark"] .main-progress-section {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.main-progress-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.progress-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.progress-percentage {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  animation: percentagePulse 2s ease-in-out infinite;
+}
+
+@keyframes percentagePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.progress-stats {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.progress-stats .stat {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  transition: all 0.3s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+.progress-stats .stat:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.progress-stats .stat span {
+  transition: all 0.3s ease;
+}
+
+.progress-stats .stat.answered {
+  color: var(--success-color);
+  border-color: var(--success-color);
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.progress-stats .stat.favorites {
+  color: var(--warning-color);
+  border-color: var(--warning-color);
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+.progress-stats .stat.remaining {
+  color: var(--text-muted);
+  border-color: var(--text-muted);
+  background-color: rgba(108, 117, 125, 0.1);
+}
+
+.main-progress-bar-container {
+  position: relative;
+  height: 16px;
+  background-color: var(--bg-tertiary);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-progress-bar {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.progress-fill.main {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    var(--success-color) 0%, 
+    var(--success-color) 70%, 
+    var(--accent-color) 85%, 
+    var(--warning-color) 100%);
+  transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 8px 0 0 8px;
+  position: relative;
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+  animation: progressGlow 3s ease-in-out infinite;
+}
+
+@keyframes progressGlow {
+  0%, 100% { 
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 15px rgba(40, 167, 69, 0.5), 
+                0 0 25px rgba(40, 167, 69, 0.2);
+  }
+}
+
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .main-progress-section {
+    margin: 1rem 0 1.5rem 0;
+    padding: 1rem;
+  }
+  
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .progress-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .progress-stats {
+    gap: 0.75rem;
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .progress-stats .stat {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .main-progress-bar-container {
+    height: 14px;
+  }
+  
+  .progress-text {
+    font-size: 1rem;
+  }
+  
+  .progress-percentage {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .progress-stats .stat {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .main-progress-bar-container {
+    height: 12px;
+  }
+}
+
+/* Milestone Effects */
+.progress-fill.main.milestone-25 {
+  background: linear-gradient(90deg, 
+    var(--success-color) 0%, 
+    var(--success-color) 100%);
+}
+
+.progress-fill.main.milestone-50 {
+  background: linear-gradient(90deg, 
+    var(--success-color) 0%, 
+    var(--success-color) 70%, 
+    var(--accent-color) 100%);
+}
+
+.progress-fill.main.milestone-75 {
+  background: linear-gradient(90deg, 
+    var(--success-color) 0%, 
+    var(--success-color) 50%, 
+    var(--accent-color) 80%, 
+    var(--warning-color) 100%);
+}
+
+.progress-fill.main.milestone-100 {
+  background: linear-gradient(90deg, 
+    var(--success-color) 0%, 
+    var(--success-color) 40%, 
+    var(--accent-color) 70%, 
+    var(--warning-color) 85%, 
+    #ffd700 100%);
+  animation: progressGlow 1.5s ease-in-out infinite, completionPulse 1.2s ease-in-out;
+}
+
+@keyframes completionPulse {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(1.05); }
+  100% { transform: scaleY(1); }
+}
+
+.progress-percentage.milestone-reached {
+  color: #ffd700;
+  animation: percentagePulse 1s ease-in-out infinite, milestoneGlow 0.8s ease-in-out;
+}
+
+@keyframes milestoneGlow {
+  0% { 
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  50% { 
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 
+                 0 0 20px rgba(255, 215, 0, 0.4);
+  }
+  100% { 
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.main-progress-section.milestone-25 {
+  border-color: var(--success-color) !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 20px rgba(40, 167, 69, 0.5) !important;
+}
+
+.main-progress-section.milestone-50 {
+  border-color: var(--accent-color) !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 20px rgba(255, 75, 75, 0.5) !important;
+}
+
+.main-progress-section.milestone-75 {
+  border-color: var(--warning-color) !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.5) !important;
+}
+
+.main-progress-section.milestone-completion {
+  border-color: #ffd700 !important;
+  border-width: 4px !important;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6) !important;
+}
+
+@keyframes milestoneGlow25 {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+}
+
+@keyframes milestoneGlow50 {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+}
+
+@keyframes milestoneGlow75 {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+}
+
+@keyframes milestoneCelebration {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-width: 1px;
+  }
+  25% { 
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+    border-width: 3px;
+  }
+  50% { 
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(255, 75, 75, 0.4);
+    border-width: 2px;
+  }
+  75% { 
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
+    border-width: 3px;
+  }
+}
+
+@keyframes milestoneGlowCompletion {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  25% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.01);
+  }
+  75% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+  }
+}
+
+@keyframes completionCelebration {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  25% { 
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
+  }
+  50% { 
+    transform: scale(1.01);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+  }
+  75% { 
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(255, 75, 75, 0.3);
+  }
+}
+
+[data-theme="dark"] .main-progress-section.milestone-completion {
+  border-color: #ffd700 !important;
+  border-width: 4px !important;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8) !important;
+}
+
+@keyframes milestoneGlowCompletionDark {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  25% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.01);
+  }
+  75% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+  }
+}
+
+@keyframes completionCelebrationDark {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  25% { 
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.4);
+  }
+  50% { 
+    transform: scale(1.01);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+  }
+  75% { 
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(255, 107, 107, 0.4);
+  }
+}
+
 /* Progress Legend */
 .progress-legend {
   display: grid;
