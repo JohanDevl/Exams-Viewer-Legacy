@@ -4956,6 +4956,8 @@ function updateMainProgressBar() {
   // Show the progress section if it's hidden and enabled
   if (mainProgressSection.style.display === "none") {
     mainProgressSection.style.display = "block";
+    // Reset milestone states for new exam display
+    resetMilestoneStates();
   }
 
   const progressFill = document.getElementById("mainProgressFill");
@@ -5005,6 +5007,14 @@ function getFavoritesCount() {
   return count;
 }
 
+// Track milestone states to avoid repeated triggers
+let milestoneStates = {
+  milestone25: false,
+  milestone50: false,
+  milestone75: false,
+  milestone100: false
+};
+
 // Add visual effects for progress milestones
 function addProgressMilestoneEffects(percentage) {
   const progressFill = document.getElementById("mainProgressFill");
@@ -5016,31 +5026,60 @@ function addProgressMilestoneEffects(percentage) {
   progressFill.classList.remove("milestone-25", "milestone-50", "milestone-75", "milestone-100");
   progressPercentage.classList.remove("milestone-reached");
 
-  // Add milestone classes based on progress
+  // Add milestone classes based on progress and trigger celebrations
   if (percentage >= 100) {
     progressFill.classList.add("milestone-100");
     progressPercentage.classList.add("milestone-reached");
-    triggerMilestoneAnimation("completion");
+    if (!milestoneStates.milestone100) {
+      milestoneStates.milestone100 = true;
+      triggerMilestoneAnimation("completion");
+      console.log("🎉 100% milestone reached!");
+    }
   } else if (percentage >= 75) {
     progressFill.classList.add("milestone-75");
+    if (!milestoneStates.milestone75) {
+      milestoneStates.milestone75 = true;
+      triggerMilestoneAnimation("75");
+      console.log("🎯 75% milestone reached!");
+    }
   } else if (percentage >= 50) {
     progressFill.classList.add("milestone-50");
+    if (!milestoneStates.milestone50) {
+      milestoneStates.milestone50 = true;
+      triggerMilestoneAnimation("50");
+      console.log("🎯 50% milestone reached!");
+    }
   } else if (percentage >= 25) {
     progressFill.classList.add("milestone-25");
+    if (!milestoneStates.milestone25) {
+      milestoneStates.milestone25 = true;
+      triggerMilestoneAnimation("25");
+      console.log("🎯 25% milestone reached!");
+    }
   }
 }
 
-// Trigger celebration animation for major milestones
+// Trigger celebration effect for major milestones
 function triggerMilestoneAnimation(type) {
   const progressSection = document.getElementById("mainProgressSection");
-  if (!progressSection) return;
+  if (!progressSection) {
+    console.log("❌ Progress section not found for milestone effect");
+    return;
+  }
 
-  // Add celebration class temporarily
-  progressSection.classList.add(`milestone-${type}`);
+  const className = `milestone-${type}`;
+  console.log(`🎊 Adding milestone effect: ${className}`);
+  
+  // Add milestone class for visual effect
+  progressSection.classList.add(className);
+  
+  // Remove the class after a delay for clean reset
+  const effectDuration = type === "completion" ? 3000 : 2000;
   
   setTimeout(() => {
-    progressSection.classList.remove(`milestone-${type}`);
-  }, 2000);
+    console.log(`🎊 Removing milestone effect: ${className}`);
+    progressSection.classList.remove(className);
+  }, effectDuration);
 }
 
 // Enhanced function to hide main progress section when no exam is loaded
@@ -5049,6 +5088,19 @@ function hideMainProgressBar() {
   if (mainProgressSection) {
     mainProgressSection.style.display = "none";
   }
+  
+  // Reset milestone states
+  resetMilestoneStates();
+}
+
+// Reset milestone tracking for new exam
+function resetMilestoneStates() {
+  milestoneStates = {
+    milestone25: false,
+    milestone50: false,
+    milestone75: false,
+    milestone100: false
+  };
 }
 
 // Update main progress bar visibility based on settings

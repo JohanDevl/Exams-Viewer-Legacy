@@ -3008,7 +3008,7 @@ body {
   border-radius: 0.75rem;
   border: 1px solid var(--border-light);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease, transform 0.2s ease;
+  transition: all 0.6s ease, transform 0.4s ease, border-color 0.6s ease, border-width 0.6s ease, box-shadow 0.6s ease;
   opacity: 0;
   transform: translateY(-10px);
   animation: slideInFromTop 0.6s ease-out forwards;
@@ -3246,7 +3246,7 @@ body {
     var(--accent-color) 70%, 
     var(--warning-color) 85%, 
     #ffd700 100%);
-  animation: progressGlow 1.5s ease-in-out infinite, completionPulse 0.8s ease-in-out;
+  animation: progressGlow 1.5s ease-in-out infinite, completionPulse 1.2s ease-in-out;
 }
 
 @keyframes completionPulse {
@@ -3273,8 +3273,103 @@ body {
   }
 }
 
+.main-progress-section.milestone-25 {
+  border-color: var(--success-color) !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 20px rgba(40, 167, 69, 0.5) !important;
+}
+
+.main-progress-section.milestone-50 {
+  border-color: var(--accent-color) !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 20px rgba(255, 75, 75, 0.5) !important;
+}
+
+.main-progress-section.milestone-75 {
+  border-color: var(--warning-color) !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.5) !important;
+}
+
 .main-progress-section.milestone-completion {
-  animation: completionCelebration 2s ease-in-out;
+  border-color: #ffd700 !important;
+  border-width: 4px !important;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6) !important;
+}
+
+@keyframes milestoneGlow25 {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+}
+
+@keyframes milestoneGlow50 {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+}
+
+@keyframes milestoneGlow75 {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+}
+
+@keyframes milestoneCelebration {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-width: 1px;
+  }
+  25% { 
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+    border-width: 3px;
+  }
+  50% { 
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(255, 75, 75, 0.4);
+    border-width: 2px;
+  }
+  75% { 
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
+    border-width: 3px;
+  }
+}
+
+@keyframes milestoneGlowCompletion {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  25% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.01);
+  }
+  75% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+  }
 }
 
 @keyframes completionCelebration {
@@ -3297,7 +3392,28 @@ body {
 }
 
 [data-theme="dark"] .main-progress-section.milestone-completion {
-  animation: completionCelebrationDark 2s ease-in-out;
+  border-color: #ffd700 !important;
+  border-width: 4px !important;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8) !important;
+}
+
+@keyframes milestoneGlowCompletionDark {
+  0%, 100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  25% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.01);
+  }
+  75% { 
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+  }
 }
 
 @keyframes completionCelebrationDark {
