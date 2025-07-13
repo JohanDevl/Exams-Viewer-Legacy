@@ -403,7 +403,7 @@ function decompressData(compressedData) {
     let decompressed = compressedData;
     for (const [compressed, original] of Object.entries(decompressionMap)) {
       decompressed = decompressed.replace(
-        new RegExp(compressed, "g"),
+        new RegExp(compressed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "g"),
         original
       );
     }
@@ -411,8 +411,25 @@ function decompressData(compressedData) {
     return JSON.parse(decompressed);
   } catch (error) {
     devError("Error decompressing data:", error);
-    // Try to parse as regular JSON if decompression fails
-    return JSON.parse(compressedData);
+    // If decompression fails, try to parse as regular JSON
+    try {
+      return JSON.parse(compressedData);
+    } catch (parseError) {
+      devError("Error parsing as regular JSON:", parseError);
+      // Return default statistics structure if all else fails
+      return {
+        sessions: [],
+        currentSession: null,
+        totalStats: {
+          totalQuestions: 0,
+          totalCorrect: 0,
+          totalIncorrect: 0,
+          totalPreview: 0,
+          totalTime: 0,
+          examStats: {},
+        }
+      };
+    }
   }
 }
 
@@ -439,6 +456,26 @@ function saveStatistics() {
 }
 
 // Statistics storage management
+function clearCorruptedData() {
+  try {
+    const items = ['examViewerStatistics', 'examViewerSettings', 'examViewerFavorites'];
+    items.forEach(item => {
+      const data = localStorage.getItem(item);
+      if (data) {
+        try {
+          JSON.parse(data);
+        } catch (e) {
+          devError(`Corrupted ${item} detected, clearing...`);
+          localStorage.removeItem(item);
+          showError(`Corrupted data cleared: ${item}. Please refresh the page.`);
+        }
+      }
+    });
+  } catch (error) {
+    devError("Error clearing corrupted data:", error);
+  }
+}
+
 function loadStatistics() {
   try {
     const savedStats = localStorage.getItem("examViewerStatistics");
@@ -4694,7 +4731,17 @@ function navigateToQuestionIndex(newIndex, addToHistory = true) {
 document.addEventListener("DOMContentLoaded", async function () {
   devLog("DOM loaded, initializing application...");
 
-  // Load saved data
+  // Add console message for users experiencing autoPip.js errors
+  if (isDevelopmentMode()) {
+    console.info("%cIf you see autoPip.js MediaSession errors:", "font-weight: bold; color: #007bff;");
+    console.info("1. Clear browser cache and hard refresh (Ctrl+Shift+R / Cmd+Shift+R)");
+    console.info("2. Or clear localStorage with: localStorage.clear()");
+  }
+
+  // Check for and clear corrupted localStorage data
+  clearCorruptedData();
+
+  // Load saved data with recovery
   loadSettings();
   loadStatistics();
   loadFavorites();
