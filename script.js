@@ -19,6 +19,7 @@ let settings = {
   darkMode: false,
   showQuestionToolbar: false,
   showAdvancedSearch: false,
+  sidebarOpen: false,
 };
 
 // Available exams mapping (will be populated dynamically)
@@ -2290,6 +2291,7 @@ function setupFavoritesEventListeners() {
 
       const wasToggled = toggleQuestionFavorite(examCode, questionNumber);
       updateFavoritesUI();
+      updateProgressSidebar();
 
       if (wasToggled.isFavorite) {
         showSuccess("Question added to favorites");
@@ -2590,6 +2592,9 @@ function loadSettings() {
       settings.showAdvancedSearch;
     isHighlightEnabled = settings.highlightDefault;
     applyTheme(settings.darkMode);
+    
+    // Restore sidebar state
+    sidebarOpen = settings.sidebarOpen;
   } else {
     // If no saved settings, check system preference
     const prefersDark =
@@ -2884,6 +2889,16 @@ function setupEventListeners() {
   // Reset filters
   document.getElementById("resetFiltersBtn").addEventListener("click", resetAllFilters);
   
+  // Enhanced Navigation Event Listeners
+  document.getElementById("historyBackBtn").addEventListener("click", navigateHistoryBack);
+  document.getElementById("historyForwardBtn").addEventListener("click", navigateHistoryForward);
+  document.getElementById("sidebarToggle").addEventListener("click", toggleSidebar);
+  document.getElementById("keyboardHelpBtn").addEventListener("click", showKeyboardHelp);
+  document.getElementById("closeSidebarBtn").addEventListener("click", closeSidebar);
+  
+  // Sidebar overlay click to close
+  document.getElementById("sidebarOverlay").addEventListener("click", closeSidebar);
+
   // Toggle search section - both header and button should work
   document.getElementById("searchHeader").addEventListener("click", toggleSearchSection);
   document.getElementById("toggleSearchBtn").addEventListener("click", (e) => {
@@ -3015,6 +3030,11 @@ async function loadExam(examCode) {
     }
     
     displayCurrentQuestion();
+    
+    // Initialize sidebar and navigation history
+    clearNavigationHistory();
+    updateProgressSidebar();
+    updateHistoryButtons();
 
     // Update question jump field max value immediately and with delay
     updateQuestionJumpMaxValue();
@@ -3085,12 +3105,16 @@ function navigateQuestion(direction) {
 
   const newIndex = currentQuestionIndex + direction;
   if (newIndex >= 0 && newIndex < currentQuestions.length) {
+    // Add to history before changing
+    addToNavigationHistory(currentQuestionIndex);
+    
     currentQuestionIndex = newIndex;
 
     // Reset highlight override when navigating to a new question
     isHighlightTemporaryOverride = false;
 
     displayCurrentQuestion();
+    updateProgressSidebar();
   }
 }
 
@@ -3098,6 +3122,9 @@ function navigateQuestion(direction) {
 function navigateToRandomQuestion() {
   if (!currentQuestions.length) return;
 
+  // Add to history before changing
+  addToNavigationHistory(currentQuestionIndex);
+  
   const randomIndex = Math.floor(Math.random() * currentQuestions.length);
   currentQuestionIndex = randomIndex;
 
@@ -3105,6 +3132,7 @@ function navigateToRandomQuestion() {
   isHighlightTemporaryOverride = false;
 
   displayCurrentQuestion();
+  updateProgressSidebar();
 }
 
 // Go to home page
@@ -3129,6 +3157,10 @@ function goToHome() {
   document.getElementById("questionSection").style.display = "none";
   document.getElementById("exportBtn").style.display = "none";
   document.getElementById("homeBtn").style.display = "none";
+  
+  // Reset enhanced navigation features
+  clearNavigationHistory();
+  closeSidebar();
 
   // Reset question jump field max value
   updateQuestionJumpMaxValue();
@@ -3652,6 +3684,9 @@ function validateAnswers() {
   if (typeof updateFilterCounts === 'function') {
     updateFilterCounts();
   }
+  
+  // Update progress sidebar to reflect answered status
+  updateProgressSidebar();
 }
 
 // Show validation results
@@ -4038,25 +4073,619 @@ function toggleLegalInfo() {
 // Make function globally accessible
 window.toggleLegalInfo = toggleLegalInfo;
 
-// Keyboard shortcuts
+// Enhanced keyboard shortcuts for navigation
 document.addEventListener("keydown", function (e) {
-  if (currentQuestions.length === 0 || e.target.tagName === "INPUT") return;
+  if (currentQuestions.length === 0 || e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
 
   switch (e.key) {
     case "ArrowLeft":
+    case "h": // Vim-style navigation
       e.preventDefault();
       navigateQuestion(-1);
       break;
     case "ArrowRight":
+    case "l": // Vim-style navigation
       e.preventDefault();
       navigateQuestion(1);
       break;
+    case "ArrowUp":
+    case "k": // Vim-style navigation
+      e.preventDefault();
+      if (e.ctrlKey || e.metaKey) {
+        // Ctrl+Up: Jump to first question
+        navigateToQuestionIndex(0);
+      } else {
+        // Regular Up: Previous 5 questions
+        navigateQuestion(-5);
+      }
+      break;
+    case "ArrowDown":
+    case "j": // Vim-style navigation
+      e.preventDefault();
+      if (e.ctrlKey || e.metaKey) {
+        // Ctrl+Down: Jump to last question
+        navigateToQuestionIndex(currentQuestions.length - 1);
+      } else {
+        // Regular Down: Next 5 questions
+        navigateQuestion(5);
+      }
+      break;
+    case "Home":
+      e.preventDefault();
+      navigateToQuestionIndex(0);
+      break;
+    case "End":
+      e.preventDefault();
+      navigateToQuestionIndex(currentQuestions.length - 1);
+      break;
+    case "PageUp":
+      e.preventDefault();
+      navigateQuestion(-10);
+      break;
+    case "PageDown":
+      e.preventDefault();
+      navigateQuestion(10);
+      break;
+    case " ": // Space bar
+      e.preventDefault();
+      if (e.shiftKey) {
+        // Shift+Space: Previous question
+        navigateQuestion(-1);
+      } else {
+        // Space: Next question
+        navigateQuestion(1);
+      }
+      break;
+    case "Enter":
+      e.preventDefault();
+      if (e.shiftKey) {
+        // Shift+Enter: Validate answers
+        document.getElementById("validateBtn").click();
+      } else {
+        // Enter: Next question
+        navigateQuestion(1);
+      }
+      break;
     case "r":
       e.preventDefault();
-      navigateToRandomQuestion();
+      if (e.ctrlKey || e.metaKey) {
+        // Ctrl+R: Reset current question
+        const resetBtn = document.getElementById("resetBtn");
+        if (resetBtn.style.display !== "none") {
+          resetBtn.click();
+        }
+      } else {
+        // R: Random question
+        navigateToRandomQuestion();
+      }
+      break;
+    case "v":
+      e.preventDefault();
+      // V: Validate answers
+      document.getElementById("validateBtn").click();
+      break;
+    case "t":
+      e.preventDefault();
+      // T: Toggle highlight mode
+      document.getElementById("highlightBtn").click();
+      break;
+    case "f":
+      e.preventDefault();
+      // F: Toggle favorite
+      document.getElementById("favoriteBtn").click();
+      break;
+    case "n":
+      e.preventDefault();
+      // N: Toggle note
+      document.getElementById("noteBtn").click();
+      break;
+    case "s":
+      e.preventDefault();
+      if (e.ctrlKey || e.metaKey) {
+        // Ctrl+S: Toggle sidebar
+        toggleSidebar();
+      } else {
+        // S: Focus search input
+        const searchInput = document.getElementById("searchInput");
+        const searchSection = document.getElementById("searchSection");
+        if (searchSection.style.display !== "none") {
+          searchInput.focus();
+        }
+      }
+      break;
+    case "Escape":
+      e.preventDefault();
+      // Escape: Close modals, toggle sidebar, or clear search
+      if (document.querySelector('.modal[style*="block"]')) {
+        // Close any open modal
+        const openModal = document.querySelector('.modal[style*="block"]');
+        openModal.style.display = "none";
+      } else if (isSidebarOpen()) {
+        // Close sidebar if open
+        closeSidebar();
+      } else {
+        // Clear search if active
+        const clearBtn = document.getElementById("clearSearchBtn");
+        if (clearBtn.style.display !== "none") {
+          clearBtn.click();
+        }
+      }
+      break;
+    case "?":
+      e.preventDefault();
+      // ?: Show keyboard shortcuts help
+      showKeyboardHelp();
       break;
   }
+
+  // Number keys for quick navigation
+  if (e.key >= "1" && e.key <= "9" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    e.preventDefault();
+    const questionNumber = parseInt(e.key);
+    if (questionNumber <= currentQuestions.length) {
+      navigateToQuestionIndex(questionNumber - 1);
+    }
+  }
 });
+
+// ===========================================
+// ENHANCED NAVIGATION FEATURES
+// ===========================================
+
+// Navigation history for back/forward functionality
+let navigationHistory = [];
+let historyIndex = -1;
+const MAX_HISTORY = 50;
+
+// Sidebar state
+let sidebarOpen = false;
+
+// Add current question to navigation history
+function addToNavigationHistory(questionIndex) {
+  // Don't add if it's the same as current position
+  if (historyIndex >= 0 && navigationHistory[historyIndex] === questionIndex) {
+    return;
+  }
+  
+  // Remove any history after current position (user went back and then navigated elsewhere)
+  if (historyIndex < navigationHistory.length - 1) {
+    navigationHistory = navigationHistory.slice(0, historyIndex + 1);
+  }
+  
+  // Add new entry
+  navigationHistory.push(questionIndex);
+  
+  // Limit history size
+  if (navigationHistory.length > MAX_HISTORY) {
+    navigationHistory.shift();
+  } else {
+    historyIndex++;
+  }
+  
+  updateHistoryButtons();
+}
+
+// Navigate back in history
+function navigateHistoryBack() {
+  if (historyIndex > 0) {
+    historyIndex--;
+    const targetIndex = navigationHistory[historyIndex];
+    navigateToQuestionIndex(targetIndex, false); // false = don't add to history
+    updateHistoryButtons();
+  }
+}
+
+// Navigate forward in history
+function navigateHistoryForward() {
+  if (historyIndex < navigationHistory.length - 1) {
+    historyIndex++;
+    const targetIndex = navigationHistory[historyIndex];
+    navigateToQuestionIndex(targetIndex, false); // false = don't add to history
+    updateHistoryButtons();
+  }
+}
+
+// Update history button states
+function updateHistoryButtons() {
+  const backBtn = document.getElementById("historyBackBtn");
+  const forwardBtn = document.getElementById("historyForwardBtn");
+  
+  if (backBtn) {
+    backBtn.disabled = historyIndex <= 0;
+    backBtn.title = `Go back (${historyIndex} steps available)`;
+  }
+  
+  if (forwardBtn) {
+    forwardBtn.disabled = historyIndex >= navigationHistory.length - 1;
+    forwardBtn.title = `Go forward (${navigationHistory.length - 1 - historyIndex} steps available)`;
+  }
+}
+
+// Clear navigation history
+function clearNavigationHistory() {
+  navigationHistory = [];
+  historyIndex = -1;
+  updateHistoryButtons();
+}
+
+// Sidebar functions
+function toggleSidebar() {
+  sidebarOpen = !sidebarOpen;
+  const sidebar = document.getElementById("progressSidebar");
+  const overlay = document.getElementById("sidebarOverlay");
+  const toggleBtn = document.getElementById("sidebarToggle");
+  
+  if (sidebar) {
+    sidebar.classList.toggle("open", sidebarOpen);
+    overlay?.classList.toggle("active", sidebarOpen);
+    toggleBtn?.classList.toggle("open", sidebarOpen);
+    
+    // Update toggle button icon
+    const icon = toggleBtn?.querySelector("i");
+    if (icon) {
+      icon.className = sidebarOpen ? "fas fa-times" : "fas fa-bars";
+    }
+    
+    // Save sidebar state
+    settings.sidebarOpen = sidebarOpen;
+    saveSettings();
+    
+    // Update sidebar content if opening
+    if (sidebarOpen) {
+      updateProgressSidebar();
+    }
+  }
+}
+
+function openSidebar() {
+  if (!sidebarOpen) {
+    toggleSidebar();
+  }
+}
+
+function closeSidebar() {
+  if (sidebarOpen) {
+    toggleSidebar();
+  }
+}
+
+function isSidebarOpen() {
+  return sidebarOpen;
+}
+
+// Update progress sidebar with question list
+function updateProgressSidebar() {
+  const sidebar = document.getElementById("progressSidebar");
+  if (!sidebar || !currentQuestions.length) return;
+  
+  const questionList = sidebar.querySelector(".question-list");
+  if (!questionList) return;
+  
+  // Generate question items
+  const items = currentQuestions.map((question, index) => {
+    const isCurrentQuestion = index === currentQuestionIndex;
+    const isAnswered = isQuestionAnswered(question.question_number);
+    const isFavorite = isQuestionFavorite(question.question_number);
+    
+    let statusClass = "";
+    let statusIcon = "";
+    
+    if (isCurrentQuestion) {
+      statusClass = "current";
+      statusIcon = '<i class="fas fa-arrow-right"></i>';
+    } else if (isAnswered) {
+      statusClass = "answered";
+      statusIcon = '<i class="fas fa-check"></i>';
+    } else {
+      statusClass = "unanswered";
+      statusIcon = '<i class="far fa-circle"></i>';
+    }
+    
+    const favoriteIcon = isFavorite ? '<i class="fas fa-star favorite-icon"></i>' : '';
+    
+    return `
+      <div class="question-item ${statusClass}" data-index="${index}" onclick="navigateToQuestionIndex(${index})">
+        <div class="question-number">
+          ${statusIcon}
+          <span>Q${question.question_number || index + 1}</span>
+          ${favoriteIcon}
+        </div>
+        <div class="question-preview">${truncateText(question.question || "", 60)}</div>
+      </div>
+    `;
+  }).join("");
+  
+  questionList.innerHTML = items;
+  
+  // Update progress bar
+  updateProgressBar();
+  
+  // Scroll current question into view
+  setTimeout(() => {
+    const currentItem = questionList.querySelector(".question-item.current");
+    if (currentItem) {
+      currentItem.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, 100);
+}
+
+// Update progress bar
+function updateProgressBar() {
+  const progressBar = document.getElementById("overallProgress");
+  if (!progressBar || !currentQuestions.length) return;
+  
+  const answeredCount = getAnsweredQuestionsCount();
+  const percentage = (answeredCount / currentQuestions.length) * 100;
+  
+  progressBar.style.width = `${percentage}%`;
+  progressBar.setAttribute("aria-valuenow", percentage.toFixed(1));
+  
+  // Update progress text
+  const progressText = document.getElementById("progressText");
+  if (progressText) {
+    progressText.textContent = `${answeredCount}/${currentQuestions.length} (${percentage.toFixed(1)}%)`;
+  }
+}
+
+// Get count of answered questions
+function getAnsweredQuestionsCount() {
+  if (!currentQuestions.length) return 0;
+  
+  let count = 0;
+  currentQuestions.forEach(question => {
+    if (isQuestionAnswered(question.question_number)) {
+      count++;
+    }
+  });
+  
+  return count;
+}
+
+// Check if a question is answered
+function isQuestionAnswered(questionNumber) {
+  if (!questionNumber) return false;
+  
+  const examCode = currentExam ? Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  ) : null;
+  
+  // Check current session
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      q.questionNumber.toString() === questionNumber.toString()
+    );
+    if (found) return true;
+  }
+  
+  // Check previous sessions
+  const found = statistics.sessions.find(session => {
+    const sessionExamCode = session.ec || session.examCode;
+    if (sessionExamCode === examCode) {
+      const sessionQuestions = session.q || session.questions || [];
+      return sessionQuestions.find(q => {
+        const qNum = q.questionNumber || q.qn;
+        return qNum && qNum.toString() === questionNumber.toString();
+      });
+    }
+    return false;
+  });
+  
+  return !!found;
+}
+
+// Check if a question is favorited
+function isQuestionFavorite(questionNumber) {
+  if (!questionNumber || !currentExam) return false;
+  
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  if (!examCode || !favoritesData.favorites[examCode]) return false;
+  
+  const questionData = favoritesData.favorites[examCode][questionNumber.toString()];
+  return questionData && questionData.isFavorite;
+}
+
+// Truncate text for preview
+function truncateText(text, maxLength) {
+  if (!text) return "";
+  const cleanText = text.replace(/<[^>]*>/g, "").trim();
+  return cleanText.length > maxLength ? cleanText.substring(0, maxLength) + "..." : cleanText;
+}
+
+// Jump to specific question number
+function jumpToQuestionNumber(questionNumber) {
+  const questionIndex = currentQuestions.findIndex(q => 
+    q.question_number && q.question_number.toString() === questionNumber.toString()
+  );
+  
+  if (questionIndex !== -1) {
+    navigateToQuestionIndex(questionIndex);
+  }
+}
+
+// Show keyboard shortcuts help modal
+function showKeyboardHelp() {
+  // Create modal if it doesn't exist
+  let modal = document.getElementById("keyboardHelpModal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "keyboardHelpModal";
+    modal.className = "modal";
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h2>
+          <button class="close-btn" onclick="closeKeyboardHelp()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="keyboard-help-content">
+            <div class="help-section">
+              <h3><i class="fas fa-arrows-alt"></i> Navigation</h3>
+              <div class="shortcut-grid">
+                <div class="shortcut-item">
+                  <kbd>←</kbd> <kbd>h</kbd>
+                  <span>Previous question</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>→</kbd> <kbd>l</kbd>
+                  <span>Next question</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>↑</kbd> <kbd>k</kbd>
+                  <span>Previous 5 questions</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>↓</kbd> <kbd>j</kbd>
+                  <span>Next 5 questions</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Ctrl</kbd> + <kbd>↑</kbd>
+                  <span>First question</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Ctrl</kbd> + <kbd>↓</kbd>
+                  <span>Last question</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Home</kbd>
+                  <span>First question</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>End</kbd>
+                  <span>Last question</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Page Up</kbd>
+                  <span>Previous 10 questions</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Page Down</kbd>
+                  <span>Next 10 questions</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>1</kbd>-<kbd>9</kbd>
+                  <span>Jump to question 1-9</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>r</kbd>
+                  <span>Random question</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="help-section">
+              <h3><i class="fas fa-check-circle"></i> Actions</h3>
+              <div class="shortcut-grid">
+                <div class="shortcut-item">
+                  <kbd>Space</kbd>
+                  <span>Next question</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Shift</kbd> + <kbd>Space</kbd>
+                  <span>Previous question</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Enter</kbd>
+                  <span>Next question</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Shift</kbd> + <kbd>Enter</kbd>
+                  <span>Validate answers</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>v</kbd>
+                  <span>Validate answers</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>t</kbd>
+                  <span>Toggle highlight mode</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Ctrl</kbd> + <kbd>r</kbd>
+                  <span>Reset question</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="help-section">
+              <h3><i class="fas fa-star"></i> Favorites & Notes</h3>
+              <div class="shortcut-grid">
+                <div class="shortcut-item">
+                  <kbd>f</kbd>
+                  <span>Toggle favorite</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>n</kbd>
+                  <span>Toggle note</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="help-section">
+              <h3><i class="fas fa-cog"></i> Interface</h3>
+              <div class="shortcut-grid">
+                <div class="shortcut-item">
+                  <kbd>Ctrl</kbd> + <kbd>s</kbd>
+                  <span>Toggle sidebar</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>s</kbd>
+                  <span>Focus search</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>Esc</kbd>
+                  <span>Close modal/sidebar</span>
+                </div>
+                <div class="shortcut-item">
+                  <kbd>?</kbd>
+                  <span>Show this help</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    
+    // Close modal when clicking outside
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeKeyboardHelp();
+      }
+    });
+  }
+  
+  modal.style.display = "flex";
+}
+
+function closeKeyboardHelp() {
+  const modal = document.getElementById("keyboardHelpModal");
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
+
+// Override the existing navigateToQuestionIndex to add history support
+const originalNavigateToQuestionIndex = navigateToQuestionIndex;
+function navigateToQuestionIndex(newIndex, addToHistory = true) {
+  if (!currentQuestions.length) return;
+  
+  if (newIndex >= 0 && newIndex < currentQuestions.length) {
+    // Add to history before changing
+    if (addToHistory && currentQuestionIndex !== newIndex) {
+      addToNavigationHistory(currentQuestionIndex);
+    }
+    
+    currentQuestionIndex = newIndex;
+    displayCurrentQuestion();
+    updateProgressSidebar();
+  }
+}
 
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", async function () {
