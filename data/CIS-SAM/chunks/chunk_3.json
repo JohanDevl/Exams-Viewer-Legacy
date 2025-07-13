@@ -23,6 +23,7 @@
       "question_number": "156",
       "link": "https://www.examtopics.com/discussions/servicenow/view/108745-exam-cis-sam-topic-6-question-156-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -51,6 +52,7 @@
       "question_number": "157",
       "link": "https://www.examtopics.com/discussions/servicenow/view/108754-exam-cis-sam-topic-6-question-157-discussion/",
       "most_voted": "E",
+      "images": {},
       "error": null
     },
     {
@@ -71,6 +73,7 @@
       "question_number": "158",
       "link": "https://www.examtopics.com/discussions/servicenow/view/154313-exam-cis-sam-topic-6-question-158-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -102,6 +105,7 @@
       "question_number": "159",
       "link": "https://www.examtopics.com/discussions/servicenow/view/137555-exam-cis-sam-topic-6-question-159-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -123,6 +127,7 @@
       "question_number": "160",
       "link": "https://www.examtopics.com/discussions/servicenow/view/137556-exam-cis-sam-topic-6-question-160-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -143,6 +148,7 @@
       "question_number": "162",
       "link": "https://www.examtopics.com/discussions/servicenow/view/154316-exam-cis-sam-topic-6-question-162-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -184,6 +190,7 @@
       "question_number": "163",
       "link": "https://www.examtopics.com/discussions/servicenow/view/137557-exam-cis-sam-topic-6-question-163-discussion/",
       "most_voted": "DE",
+      "images": {},
       "error": null
     },
     {
@@ -211,6 +218,7 @@
       "question_number": "164",
       "link": "https://www.examtopics.com/discussions/servicenow/view/137558-exam-cis-sam-topic-6-question-164-discussion/",
       "most_voted": "ADF",
+      "images": {},
       "error": null
     },
     {
@@ -223,6 +231,11 @@
         "E. Remove Metric Attributes"
       ],
       "comments": [
+        {
+          "content": "D also",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "Answer BCD",
           "selected_answer": "BC",
@@ -237,6 +250,7 @@
       "question_number": "165",
       "link": "https://www.examtopics.com/discussions/servicenow/view/137559-exam-cis-sam-topic-6-question-165-discussion/",
       "most_voted": "BC",
+      "images": {},
       "error": null
     },
     {
@@ -258,6 +272,7 @@
       "question_number": "166",
       "link": "https://www.examtopics.com/discussions/servicenow/view/137560-exam-cis-sam-topic-6-question-166-discussion/",
       "most_voted": "ABE",
+      "images": {},
       "error": null
     },
     {
@@ -284,6 +299,7 @@
       "question_number": "167",
       "link": "https://www.examtopics.com/discussions/servicenow/view/137561-exam-cis-sam-topic-6-question-167-discussion/",
       "most_voted": "E",
+      "images": {},
       "error": null
     },
     {
@@ -309,6 +325,7 @@
       "question_number": "168",
       "link": "https://www.examtopics.com/discussions/servicenow/view/137580-exam-cis-sam-topic-6-question-168-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -334,6 +351,7 @@
       "question_number": "169",
       "link": "https://www.examtopics.com/discussions/servicenow/view/151837-exam-cis-sam-topic-6-question-169-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -365,6 +383,7 @@
       "question_number": "170",
       "link": "https://www.examtopics.com/discussions/servicenow/view/147573-exam-cis-sam-topic-6-question-170-discussion/",
       "most_voted": "ADE",
+      "images": {},
       "error": null
     },
     {
@@ -387,6 +406,7 @@
       "question_number": "172",
       "link": "https://www.examtopics.com/discussions/servicenow/view/154336-exam-cis-sam-topic-6-question-172-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -413,6 +433,7 @@
       "question_number": "174",
       "link": "https://www.examtopics.com/discussions/servicenow/view/150594-exam-cis-sam-topic-6-question-174-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -434,6 +455,7 @@
       "question_number": "175",
       "link": "https://www.examtopics.com/discussions/servicenow/view/154338-exam-cis-sam-topic-6-question-175-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -445,6 +467,11 @@
         "D. sam_architect"
       ],
       "comments": [
+        {
+          "content": "A is Correct",
+          "selected_answer": "A",
+          "replies": []
+        },
         {
           "content": "C - as per ServiceNow SAM course, the sam_admin role is required to read the custom metric script. The sam_developer role is required to create or modify a custom metric script",
           "selected_answer": "C",
@@ -464,6 +491,7 @@
       "question_number": "176",
       "link": "https://www.examtopics.com/discussions/servicenow/view/146685-exam-cis-sam-topic-6-question-176-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -484,6 +512,7 @@
       "question_number": "180",
       "link": "https://www.examtopics.com/discussions/servicenow/view/169367-exam-cis-sam-topic-6-question-180-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -495,6 +524,11 @@
         "D. SCCM"
       ],
       "comments": [
+        {
+          "content": "Answer: D. SCCM\nExplanation: \"You can also create software usage records manually from third party integrations or Microsoft SCCM integrations.\" so should really be\n    - third party integrations\n    - Microsoft SCCM integrations\nso thrid party is \"manual\" while SCCM is \"baseline\" ¯\\_(ツ)_/¯\nSource:https://www.servicenow.com/docs/bundle/xanadu-it-asset-management/page/product/software-asset-management2/task/view-sw-usage-workspace.html",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "Answer: A or D\nhttps://www.servicenow.com/docs/bundle/yokohama-it-asset-management/page/product/software-asset-management2/task/view-sw-usage-workspace.html",
           "selected_answer": "D",
@@ -509,6 +543,7 @@
       "question_number": "181",
       "link": "https://www.examtopics.com/discussions/servicenow/view/157488-exam-cis-sam-topic-6-question-181-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -530,6 +565,7 @@
       "question_number": "182",
       "link": "https://www.examtopics.com/discussions/servicenow/view/153106-exam-cis-sam-topic-6-question-182-discussion/",
       "most_voted": "AB",
+      "images": {},
       "error": null
     },
     {
@@ -557,6 +593,7 @@
       "question_number": "183",
       "link": "https://www.examtopics.com/discussions/servicenow/view/148018-exam-cis-sam-topic-6-question-183-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -568,6 +605,16 @@
         "D. Discovery model"
       ],
       "comments": [
+        {
+          "content": "Answer: A. Content Service\nExplanation:The Software Asset Management content service generates downgrade rights. The downgrade rights correspond to a discovery map. A scheduled job, Download software content: Downgrade Rights triggered on a weekly basis, gets the downgrade rights from the Software Asset Management content service and pushes the data to the Downgrade Rights [samp_dmap_downgrade_model] table.\nSource: https://www.servicenow.com/docs/bundle/xanadu-it-asset-management/page/product/software-asset-management2/concept/downgrade-rights.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
         {
           "content": "Should be A\nAs per downgrade rights documentation from ServiceNow - The Software Asset Management content service generates downgrade rights. The downgrade rights correspond to a discovery map. A scheduled job, Download software content: Downgrade Rights triggered on a weekly basis, gets the downgrade rights from the Software Asset Management content service and pushes the data to the Downgrade Rights [samp_dmap_downgrade_model] table.",
           "selected_answer": "A",
@@ -593,7 +640,8 @@
       ],
       "question_number": "184",
       "link": "https://www.examtopics.com/discussions/servicenow/view/148020-exam-cis-sam-topic-6-question-184-discussion/",
-      "most_voted": "C",
+      "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -620,6 +668,7 @@
       "question_number": "186",
       "link": "https://www.examtopics.com/discussions/servicenow/view/148019-exam-cis-sam-topic-6-question-186-discussion/",
       "most_voted": "AE",
+      "images": {},
       "error": null
     },
     {
@@ -641,6 +690,7 @@
       "question_number": "187",
       "link": "https://www.examtopics.com/discussions/servicenow/view/152896-exam-cis-sam-topic-6-question-187-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -677,6 +727,7 @@
       "question_number": "188",
       "link": "https://www.examtopics.com/discussions/servicenow/view/148867-exam-cis-sam-topic-6-question-188-discussion/",
       "most_voted": "CD",
+      "images": {},
       "error": null
     },
     {
@@ -697,6 +748,7 @@
       "question_number": "189",
       "link": "https://www.examtopics.com/discussions/servicenow/view/157489-exam-cis-sam-topic-6-question-189-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -723,6 +775,7 @@
       "question_number": "190",
       "link": "https://www.examtopics.com/discussions/servicenow/view/149729-exam-cis-sam-topic-6-question-190-discussion/",
       "most_voted": "CDE",
+      "images": {},
       "error": null
     },
     {
@@ -747,12 +800,15 @@
         {
           "content": "B is the correct answer.",
           "selected_answer": "B",
-          "replies": []
+          "replies": [
+            "should be A: \nAnswer: A. License usage view\nExplanation: \"Use the license usage view as a single plane to understand the license position of all software products, remediate non-compliance, view reconciliation results, view, or add removal candidates, and view Software Asset Management related reports.\"\nSource: https://www.servicenow.com/docs/bundle/xanadu-it-asset-management/page/product/software-asset-management2/concept/sam-workspace-workbench.html"
+          ]
         }
       ],
       "question_number": "191",
       "link": "https://www.examtopics.com/discussions/servicenow/view/150769-exam-cis-sam-topic-6-question-191-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -781,6 +837,7 @@
       "question_number": "192",
       "link": "https://www.examtopics.com/discussions/servicenow/view/147579-exam-cis-sam-topic-6-question-192-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -806,6 +863,7 @@
       "question_number": "193",
       "link": "https://www.examtopics.com/discussions/servicenow/view/154380-exam-cis-sam-topic-6-question-193-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -826,6 +884,7 @@
       "question_number": "194",
       "link": "https://www.examtopics.com/discussions/servicenow/view/153107-exam-cis-sam-topic-6-question-194-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -864,6 +923,7 @@
       "question_number": "195",
       "link": "https://www.examtopics.com/discussions/servicenow/view/147615-exam-cis-sam-topic-6-question-195-discussion/",
       "most_voted": "AD",
+      "images": {},
       "error": null
     },
     {
@@ -890,6 +950,7 @@
       "question_number": "196",
       "link": "https://www.examtopics.com/discussions/servicenow/view/154381-exam-cis-sam-topic-6-question-196-discussion/",
       "most_voted": "AC",
+      "images": {},
       "error": null
     },
     {
@@ -915,6 +976,7 @@
       "question_number": "197",
       "link": "https://www.examtopics.com/discussions/servicenow/view/147616-exam-cis-sam-topic-6-question-197-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -935,6 +997,7 @@
       "question_number": "199",
       "link": "https://www.examtopics.com/discussions/servicenow/view/153108-exam-cis-sam-topic-6-question-199-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -961,6 +1024,7 @@
       "question_number": "200",
       "link": "https://www.examtopics.com/discussions/servicenow/view/153109-exam-cis-sam-topic-6-question-200-discussion/",
       "most_voted": "E",
+      "images": {},
       "error": null
     },
     {
@@ -988,6 +1052,7 @@
       "question_number": "202",
       "link": "https://www.examtopics.com/discussions/servicenow/view/152899-exam-cis-sam-topic-6-question-202-discussion/",
       "most_voted": "ACF",
+      "images": {},
       "error": null
     },
     {
@@ -1013,6 +1078,7 @@
       "question_number": "204",
       "link": "https://www.examtopics.com/discussions/servicenow/view/152900-exam-cis-sam-topic-6-question-204-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1038,6 +1104,7 @@
       "question_number": "205",
       "link": "https://www.examtopics.com/discussions/servicenow/view/147617-exam-cis-sam-topic-6-question-205-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1064,6 +1131,7 @@
       "question_number": "209",
       "link": "https://www.examtopics.com/discussions/servicenow/view/152901-exam-cis-sam-topic-6-question-209-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     }
   ]

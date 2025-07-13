@@ -27,6 +27,7 @@
       "question_number": "201",
       "link": "https://www.examtopics.com/discussions/servicenow/view/139695-exam-cis-itsm-topic-1-question-201-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -47,6 +48,7 @@
       "question_number": "202",
       "link": "https://www.examtopics.com/discussions/servicenow/view/153003-exam-cis-itsm-topic-1-question-202-discussion/",
       "most_voted": "BD",
+      "images": {},
       "error": null
     },
     {
@@ -77,6 +79,7 @@
       "question_number": "203",
       "link": "https://www.examtopics.com/discussions/servicenow/view/139502-exam-cis-itsm-topic-1-question-203-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -103,6 +106,7 @@
       "question_number": "204",
       "link": "https://www.examtopics.com/discussions/servicenow/view/139514-exam-cis-itsm-topic-1-question-204-discussion/",
       "most_voted": "AD",
+      "images": {},
       "error": null
     },
     {
@@ -128,6 +132,7 @@
       "question_number": "205",
       "link": "https://www.examtopics.com/discussions/servicenow/view/139515-exam-cis-itsm-topic-1-question-205-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -153,6 +158,7 @@
       "question_number": "206",
       "link": "https://www.examtopics.com/discussions/servicenow/view/303529-exam-cis-itsm-topic-1-question-206-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -165,6 +171,16 @@
       ],
       "comments": [
         {
+          "content": "Refer to service portfolio management. 3.1 and 3.3 (roles)",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Think its A, portfolio managers are like more bigger picture than just RITM and catalog items right?",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "This one seems tricky, maybe C?",
           "selected_answer": "D",
           "replies": []
@@ -173,6 +189,7 @@
       "question_number": "207",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305047-exam-cis-itsm-topic-1-question-207-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -203,6 +220,7 @@
       "question_number": "208",
       "link": "https://www.examtopics.com/discussions/servicenow/view/303540-exam-cis-itsm-topic-1-question-208-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -214,6 +232,11 @@
         "D. Setting Advanced Security to true and applying user criteria"
       ],
       "comments": [
+        {
+          "content": "7.2 - Change model records",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "Definitely C in my opinion.",
           "selected_answer": "A",
@@ -228,6 +251,7 @@
       "question_number": "209",
       "link": "https://www.examtopics.com/discussions/servicenow/view/303675-exam-cis-itsm-topic-1-question-209-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -241,6 +265,16 @@
       ],
       "comments": [
         {
+          "content": "4.3- User Criteria - user criteria can be applied to category, catalog and catalog item",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
+          "content": "it's E Catalog items have an Available for and Not Available for related list which are user criteria related lists to control access to the Catalog item itself",
+          "selected_answer": "E",
+          "replies": []
+        },
+        {
           "content": "Hmm, seems like A from what I studied.",
           "selected_answer": "A",
           "replies": []
@@ -249,6 +283,7 @@
       "question_number": "210",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305048-exam-cis-itsm-topic-1-question-210-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -261,6 +296,16 @@
       ],
       "comments": [
         {
+          "content": "service portfolio-3.4 component and relationship topic offering.\nOffering are where you define SLA",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Think itsB when I checked in the PDI the Offerings had a Service Commitment related list",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "I believe it's A.",
           "selected_answer": "A",
           "replies": []
@@ -269,6 +314,7 @@
       "question_number": "211",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305049-exam-cis-itsm-topic-1-question-211-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -289,6 +335,7 @@
       "question_number": "212",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305050-exam-cis-itsm-topic-1-question-212-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -301,6 +348,16 @@
       ],
       "comments": [
         {
+          "content": "mentioned in offering",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "It's A see link below:\n\nhttps://www.servicenow.com/docs/bundle/washingtondc-it-service-management/page/product/service-portfolio-management2/concept/SPM2-service-offerings.html\n\nIt says:\n\"Each service must have at least one defined offering to move to the Catalog phase.\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "Could be D, thoughts?",
           "selected_answer": "D",
           "replies": []
@@ -309,6 +366,7 @@
       "question_number": "213",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305051-exam-cis-itsm-topic-1-question-213-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -320,6 +378,16 @@
         "D. Field style"
       ],
       "comments": [
+        {
+          "content": "configuration incident lifecycle 5.3 <<caller user details << VIP- Field Style. \nIgnore my earlier response",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Tricky statement it says they want to decorate VIP user . that is done by Reference decorator. refer incident module",
+          "selected_answer": "B",
+          "replies": []
+        },
         {
           "content": "Looks like B to me.",
           "selected_answer": "D",
@@ -334,6 +402,7 @@
       "question_number": "214",
       "link": "https://www.examtopics.com/discussions/servicenow/view/303235-exam-cis-itsm-topic-1-question-214-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -346,6 +415,16 @@
       ],
       "comments": [
         {
+          "content": "change management<< change management continued<< change approval policies",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Should be B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
           "content": "Definitely C in my opinion.",
           "selected_answer": "B",
           "replies": []
@@ -354,6 +433,7 @@
       "question_number": "215",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305052-exam-cis-itsm-topic-1-question-215-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -367,6 +447,16 @@
       ],
       "comments": [
         {
+          "content": "service catalog<<configuration 4.3<<user criteria",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Its done with user criteria",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "Definitely C in my opinion.",
           "selected_answer": "C",
           "replies": []
@@ -375,6 +465,7 @@
       "question_number": "216",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305053-exam-cis-itsm-topic-1-question-216-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -388,14 +479,27 @@
       ],
       "comments": [
         {
+          "content": "service catalog<<configuration continued<<processing a service catalog item",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Its D approvals and tasks are defined in Flows or Workflows",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "Definitely C in my opinion.",
           "selected_answer": "C",
-          "replies": []
+          "replies": [
+            "You´re wrong, ITS D, I´m checking your comments and in other questions you´re also wrong"
+          ]
         }
       ],
       "question_number": "217",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305054-exam-cis-itsm-topic-1-question-217-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -408,6 +512,16 @@
       ],
       "comments": [
         {
+          "content": "D is the right ans",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer is D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "I would go with B. Anyone else?",
           "selected_answer": "D",
           "replies": []
@@ -416,6 +530,7 @@
       "question_number": "218",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305055-exam-cis-itsm-topic-1-question-218-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -428,14 +543,27 @@
       ],
       "comments": [
         {
-          "content": "Hmm, seems like A from what I studied.",
+          "content": "change management 7.2 <<state transition and transition condition",
           "selected_answer": "B",
           "replies": []
+        },
+        {
+          "content": "Answer is B",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Hmm, seems like A from what I studied.",
+          "selected_answer": "B",
+          "replies": [
+            "NO, it´s B, Don´t confuse others"
+          ]
         }
       ],
       "question_number": "219",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305056-exam-cis-itsm-topic-1-question-219-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -448,6 +576,16 @@
       ],
       "comments": [
         {
+          "content": "service catalog<<configuration<<catalog item\n\ni dont think there is any such thing as workflow triggers",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "Answer is B and C",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
           "content": "Looks like B to me.",
           "selected_answer": "D",
           "replies": []
@@ -456,6 +594,7 @@
       "question_number": "220",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305057-exam-cis-itsm-topic-1-question-220-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -469,14 +608,27 @@
       ],
       "comments": [
         {
-          "content": "I believe it's A.",
+          "content": "B since no there is no such thing as service catalog mobile app or now catalog app or customer catalog or google lead",
           "selected_answer": "B",
           "replies": []
+        },
+        {
+          "content": "Answer is B portal is more catered to customers",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I believe it's A.",
+          "selected_answer": "B",
+          "replies": [
+            "no dude, ITS B"
+          ]
         }
       ],
       "question_number": "221",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305058-exam-cis-itsm-topic-1-question-221-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -489,9 +641,26 @@
       ],
       "comments": [
         {
+          "content": "change management<<change management 7.2<< change group-assignment group\nIt is D incase of INC or PRB",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "the correct is D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Should be A since its for a change request, D would be for Incidents and Problems",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
           "content": "I would go with B. Anyone else?",
           "selected_answer": "C",
-          "replies": []
+          "replies": [
+            "the correct is D"
+          ]
         },
         {
           "content": "populate assignment group based on CI/SO business rule. implementation bk (xanadu release)",
@@ -507,6 +676,7 @@
       "question_number": "222",
       "link": "https://www.examtopics.com/discussions/servicenow/view/302792-exam-cis-itsm-topic-1-question-222-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -519,14 +689,27 @@
       ],
       "comments": [
         {
+          "content": "service portfolio<< component and relationship 3.4<<service builder",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Its C it works exactly the same as catalog builder.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
           "content": "Answer is probably D based on the docs.",
           "selected_answer": "B",
-          "replies": []
+          "replies": [
+            "IT´S THE C"
+          ]
         }
       ],
       "question_number": "223",
       "link": "https://www.examtopics.com/discussions/servicenow/view/305059-exam-cis-itsm-topic-1-question-223-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -538,6 +721,11 @@
         "D. problem_admin"
       ],
       "comments": [
+        {
+          "content": "Problem (coordinator , manager and admin)",
+          "selected_answer": "CD",
+          "replies": []
+        },
         {
           "content": "C. problem_manager Has permission to manage problem records, including updating status and communicating workarounds/fixes.",
           "selected_answer": "CD",
@@ -557,6 +745,7 @@
       "question_number": "224",
       "link": "https://www.examtopics.com/discussions/servicenow/view/302696-exam-cis-itsm-topic-1-question-224-discussion/",
       "most_voted": "CD",
+      "images": {},
       "error": null
     }
   ]

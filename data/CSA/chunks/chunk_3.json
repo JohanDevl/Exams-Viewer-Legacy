@@ -77,6 +77,7 @@
       "question_number": "151",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82715-exam-csa-topic-1-question-151-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -156,6 +157,7 @@
       "question_number": "152",
       "link": "https://www.examtopics.com/discussions/servicenow/view/83442-exam-csa-topic-1-question-152-discussion/",
       "most_voted": "ADEF",
+      "images": {},
       "error": null
     },
     {
@@ -182,6 +184,7 @@
       "question_number": "153",
       "link": "https://www.examtopics.com/discussions/servicenow/view/89076-exam-csa-topic-1-question-153-discussion/",
       "most_voted": "ACE",
+      "images": {},
       "error": null
     },
     {
@@ -286,6 +289,7 @@
       "question_number": "154",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82299-exam-csa-topic-1-question-154-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -317,6 +321,7 @@
       "question_number": "155",
       "link": "https://www.examtopics.com/discussions/servicenow/view/84235-exam-csa-topic-1-question-155-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -343,6 +348,7 @@
       "question_number": "156",
       "link": "https://www.examtopics.com/discussions/servicenow/view/100236-exam-csa-topic-1-question-156-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -428,6 +434,7 @@
       "question_number": "157",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82852-exam-csa-topic-1-question-157-discussion/",
       "most_voted": "BCD",
+      "images": {},
       "error": null
     },
     {
@@ -498,6 +505,7 @@
       "question_number": "158",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82251-exam-csa-topic-1-question-158-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -548,6 +556,7 @@
       "question_number": "159",
       "link": "https://www.examtopics.com/discussions/servicenow/view/81509-exam-csa-topic-1-question-159-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -560,6 +569,11 @@
         "E. User session has timed out"
       ],
       "comments": [
+        {
+          "content": "In ServiceNow, when a user clicks \"Create New\" on a module, the platform tries to open a form for creating a new record in the associated table. If the user does not have the write role (permission) for that table, the form cannot be rendered, resulting in a blank page.\n\nIn this scenario:\n* The user can see the application and module (they have read access).\n* But they can't create a new record, because they lack write permissions on the Inventory table.",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "D is correct",
           "selected_answer": "",
@@ -624,6 +638,7 @@
       "question_number": "160",
       "link": "https://www.examtopics.com/discussions/servicenow/view/84237-exam-csa-topic-1-question-160-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -649,6 +664,7 @@
       "question_number": "161",
       "link": "https://www.examtopics.com/discussions/servicenow/view/101507-exam-csa-topic-1-question-161-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -661,6 +677,11 @@
         "E. Key Performance Indicators"
       ],
       "comments": [
+        {
+          "content": "Performance Analytics (PA) is the right tool for this scenario because it enables:\n+ Snapshots of historical performance data\n+ Trend analysis over time\n+ Forecasting and projections into the future\n+ Comparison of actual performance against targets (goals/KPIs)\n\nPA goes beyond standard reporting by allowing real-time dashboards, interactive scorecards, and time-series data analysis, which is ideal for management-level performance tracking like sales progress.",
+          "selected_answer": "D",
+          "replies": []
+        },
         {
           "content": "Okay the people choosing B are deadass being boomers about this question.",
           "selected_answer": "D",
@@ -707,6 +728,7 @@
       "question_number": "162",
       "link": "https://www.examtopics.com/discussions/servicenow/view/116748-exam-csa-topic-1-question-162-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -763,6 +785,7 @@
       "question_number": "163",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82253-exam-csa-topic-1-question-163-discussion/",
       "most_voted": "CDE",
+      "images": {},
       "error": null
     },
     {
@@ -794,6 +817,7 @@
       "question_number": "164",
       "link": "https://www.examtopics.com/discussions/servicenow/view/85624-exam-csa-topic-1-question-164-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -827,6 +851,7 @@
       "question_number": "165",
       "link": "https://www.examtopics.com/discussions/servicenow/view/83458-exam-csa-topic-1-question-165-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -853,6 +878,7 @@
       "question_number": "166",
       "link": "https://www.examtopics.com/discussions/servicenow/view/100469-exam-csa-topic-1-question-166-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -908,6 +934,7 @@
       "question_number": "167",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82255-exam-csa-topic-1-question-167-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -962,6 +989,7 @@
       "question_number": "168",
       "link": "https://www.examtopics.com/discussions/servicenow/view/80093-exam-csa-topic-1-question-168-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -992,6 +1020,7 @@
       "question_number": "169",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106895-exam-csa-topic-1-question-169-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1023,6 +1052,7 @@
       "question_number": "170",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106896-exam-csa-topic-1-question-170-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1070,6 +1100,7 @@
       "question_number": "171",
       "link": "https://www.examtopics.com/discussions/servicenow/view/100726-exam-csa-topic-1-question-171-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1095,6 +1126,7 @@
       "question_number": "172",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106897-exam-csa-topic-1-question-172-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1156,6 +1188,7 @@
       "question_number": "173",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82450-exam-csa-topic-1-question-173-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1226,6 +1259,7 @@
       "question_number": "174",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106898-exam-csa-topic-1-question-174-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1261,6 +1295,7 @@
       "question_number": "175",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106900-exam-csa-topic-1-question-175-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1291,6 +1326,7 @@
       "question_number": "176",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106901-exam-csa-topic-1-question-176-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -1353,6 +1389,7 @@
       "question_number": "177",
       "link": "https://www.examtopics.com/discussions/servicenow/view/103309-exam-csa-topic-1-question-177-discussion/",
       "most_voted": "ABDF",
+      "images": {},
       "error": null
     },
     {
@@ -1378,6 +1415,7 @@
       "question_number": "178",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106902-exam-csa-topic-1-question-178-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1417,6 +1455,7 @@
       "question_number": "179",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82850-exam-csa-topic-1-question-179-discussion/",
       "most_voted": "ABDGH",
+      "images": {},
       "error": null
     },
     {
@@ -1442,6 +1481,7 @@
       "question_number": "180",
       "link": "https://www.examtopics.com/discussions/servicenow/view/100673-exam-csa-topic-1-question-180-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1502,6 +1542,7 @@
       "question_number": "181",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82452-exam-csa-topic-1-question-181-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1610,6 +1651,7 @@
       "question_number": "182",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82453-exam-csa-topic-1-question-182-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1670,6 +1712,7 @@
       "question_number": "183",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82724-exam-csa-topic-1-question-183-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1752,6 +1795,7 @@
       "question_number": "184",
       "link": "https://www.examtopics.com/discussions/servicenow/view/80097-exam-csa-topic-1-question-184-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -1782,6 +1826,7 @@
       "question_number": "185",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106903-exam-csa-topic-1-question-185-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1818,6 +1863,7 @@
       "question_number": "186",
       "link": "https://www.examtopics.com/discussions/servicenow/view/100675-exam-csa-topic-1-question-186-discussion/",
       "most_voted": "BCE",
+      "images": {},
       "error": null
     },
     {
@@ -1843,6 +1889,7 @@
       "question_number": "187",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106904-exam-csa-topic-1-question-187-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1876,6 +1923,7 @@
       "question_number": "188",
       "link": "https://www.examtopics.com/discussions/servicenow/view/94625-exam-csa-topic-1-question-188-discussion/",
       "most_voted": "ACF",
+      "images": {},
       "error": null
     },
     {
@@ -1926,6 +1974,7 @@
       "question_number": "189",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82725-exam-csa-topic-1-question-189-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -1956,6 +2005,7 @@
       "question_number": "190",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106905-exam-csa-topic-1-question-190-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1981,6 +2031,7 @@
       "question_number": "191",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106906-exam-csa-topic-1-question-191-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2012,6 +2063,7 @@
       "question_number": "192",
       "link": "https://www.examtopics.com/discussions/servicenow/view/84668-exam-csa-topic-1-question-192-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -2038,6 +2090,7 @@
       "question_number": "193",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106907-exam-csa-topic-1-question-193-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2068,6 +2121,7 @@
       "question_number": "194",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106909-exam-csa-topic-1-question-194-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2104,6 +2158,7 @@
       "question_number": "195",
       "link": "https://www.examtopics.com/discussions/servicenow/view/100470-exam-csa-topic-1-question-195-discussion/",
       "most_voted": "CDE",
+      "images": {},
       "error": null
     },
     {
@@ -2136,6 +2191,7 @@
       "question_number": "196",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82849-exam-csa-topic-1-question-196-discussion/",
       "most_voted": "BEF",
+      "images": {},
       "error": null
     },
     {
@@ -2203,6 +2259,7 @@
       "question_number": "197",
       "link": "https://www.examtopics.com/discussions/servicenow/view/84974-exam-csa-topic-1-question-197-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -2258,6 +2315,7 @@
       "question_number": "198",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82848-exam-csa-topic-1-question-198-discussion/",
       "most_voted": "ADE",
+      "images": {},
       "error": null
     },
     {
@@ -2283,6 +2341,7 @@
       "question_number": "199",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106910-exam-csa-topic-1-question-199-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2314,6 +2373,7 @@
       "question_number": "200",
       "link": "https://www.examtopics.com/discussions/servicenow/view/106911-exam-csa-topic-1-question-200-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     }
   ]

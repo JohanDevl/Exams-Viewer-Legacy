@@ -62,6 +62,7 @@
       "question_number": "1",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82736-exam-cad-topic-1-question-1-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -114,6 +115,7 @@
       "question_number": "2",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82737-exam-cad-topic-1-question-2-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -174,6 +176,7 @@
       "question_number": "3",
       "link": "https://www.examtopics.com/discussions/servicenow/view/66877-exam-cad-topic-1-question-3-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -246,6 +249,7 @@
       "question_number": "4",
       "link": "https://www.examtopics.com/discussions/servicenow/view/71307-exam-cad-topic-1-question-4-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -346,6 +350,7 @@
       "question_number": "5",
       "link": "https://www.examtopics.com/discussions/servicenow/view/72024-exam-cad-topic-1-question-5-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -393,6 +398,7 @@
       "question_number": "6",
       "link": "https://www.examtopics.com/discussions/servicenow/view/90874-exam-cad-topic-1-question-6-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -468,6 +474,7 @@
       "question_number": "7",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82740-exam-cad-topic-1-question-7-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -574,6 +581,7 @@
       "question_number": "8",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73888-exam-cad-topic-1-question-8-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -634,6 +642,7 @@
       "question_number": "9",
       "link": "https://www.examtopics.com/discussions/servicenow/view/77307-exam-cad-topic-1-question-9-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -729,6 +738,7 @@
       "question_number": "10",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64109-exam-cad-topic-1-question-10-discussion/",
       "most_voted": "AD",
+      "images": {},
       "error": null
     },
     {
@@ -764,6 +774,7 @@
       "question_number": "11",
       "link": "https://www.examtopics.com/discussions/servicenow/view/74912-exam-cad-topic-1-question-11-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -799,6 +810,7 @@
       "question_number": "12",
       "link": "https://www.examtopics.com/discussions/servicenow/view/82745-exam-cad-topic-1-question-12-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -890,6 +902,7 @@
       "question_number": "13",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64112-exam-cad-topic-1-question-13-discussion/",
       "most_voted": "BDE",
+      "images": {},
       "error": null
     },
     {
@@ -940,6 +953,7 @@
       "question_number": "14",
       "link": "https://www.examtopics.com/discussions/servicenow/view/78197-exam-cad-topic-1-question-14-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -977,6 +991,7 @@
       "question_number": "15",
       "link": "https://www.examtopics.com/discussions/servicenow/view/87480-exam-cad-topic-1-question-15-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -1024,6 +1039,7 @@
       "question_number": "16",
       "link": "https://www.examtopics.com/discussions/servicenow/view/102949-exam-cad-topic-1-question-16-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1126,10 +1142,11 @@
       "question_number": "17",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64113-exam-cad-topic-1-question-17-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
-      "question": "Here is the Business Rule script template:<br/><img class=\"in-exam-image\" src=\"/assets/media/exam-media/03995/0000900001.png\"/><br/>This type of JavaScript function is known as:<br/>",
+      "question": "Here is the Business Rule script template:<br/><img class=\"in-exam-image\" data-img-id=\"img_5d83d5e3\" src=\"data:image/webp;base64,UklGRl4VAABXRUJQVlA4IFIVAABQXACdASpvAkUAPlEkkEUjoi...\"/><br/>This type of JavaScript function is known as:<br/>",
       "answers": [
         "A. Constructor",
         "B. Scoped",
@@ -1225,6 +1242,17 @@
       "question_number": "18",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64114-exam-cad-topic-1-question-18-discussion/",
       "most_voted": "D",
+      "images": {
+        "img_5d83d5e3": {
+          "webp": "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",
+          "jpeg": "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",
+          "original_url": "https://www.examtopics.com/assets/media/exam-media/03995/0000900001.png",
+          "size": [
+            623,
+            69
+          ]
+        }
+      },
       "error": null
     },
     {
@@ -1325,6 +1353,7 @@
       "question_number": "19",
       "link": "https://www.examtopics.com/discussions/servicenow/view/61951-exam-cad-topic-1-question-19-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1365,6 +1394,7 @@
       "question_number": "20",
       "link": "https://www.examtopics.com/discussions/servicenow/view/102859-exam-cad-topic-1-question-20-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1400,6 +1430,7 @@
       "question_number": "21",
       "link": "https://www.examtopics.com/discussions/servicenow/view/90725-exam-cad-topic-1-question-21-discussion/",
       "most_voted": "AC",
+      "images": {},
       "error": null
     },
     {
@@ -1490,6 +1521,7 @@
       "question_number": "22",
       "link": "https://www.examtopics.com/discussions/servicenow/view/61952-exam-cad-topic-1-question-22-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1575,6 +1607,7 @@
       "question_number": "23",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64115-exam-cad-topic-1-question-23-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1662,6 +1695,7 @@
       "question_number": "24",
       "link": "https://www.examtopics.com/discussions/servicenow/view/92618-exam-cad-topic-1-question-24-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -1724,6 +1758,7 @@
       "question_number": "25",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64116-exam-cad-topic-1-question-25-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1754,6 +1789,7 @@
       "question_number": "26",
       "link": "https://www.examtopics.com/discussions/servicenow/view/107786-exam-cad-topic-1-question-26-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -1779,6 +1815,7 @@
       "question_number": "27",
       "link": "https://www.examtopics.com/discussions/servicenow/view/107928-exam-cad-topic-1-question-27-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1849,6 +1886,7 @@
       "question_number": "28",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64117-exam-cad-topic-1-question-28-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -1914,6 +1952,7 @@
       "question_number": "29",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64118-exam-cad-topic-1-question-29-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1944,6 +1983,7 @@
       "question_number": "30",
       "link": "https://www.examtopics.com/discussions/servicenow/view/108176-exam-cad-topic-1-question-30-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2044,6 +2084,7 @@
       "question_number": "31",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64119-exam-cad-topic-1-question-31-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2069,6 +2110,7 @@
       "question_number": "32",
       "link": "https://www.examtopics.com/discussions/servicenow/view/121051-exam-cad-topic-1-question-32-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -2129,6 +2171,7 @@
       "question_number": "33",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64120-exam-cad-topic-1-question-33-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2204,6 +2247,7 @@
       "question_number": "34",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64121-exam-cad-topic-1-question-34-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -2289,6 +2333,7 @@
       "question_number": "35",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64122-exam-cad-topic-1-question-35-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2324,6 +2369,7 @@
       "question_number": "36",
       "link": "https://www.examtopics.com/discussions/servicenow/view/110068-exam-cad-topic-1-question-36-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2406,6 +2452,7 @@
       "question_number": "37",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64123-exam-cad-topic-1-question-37-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -2458,6 +2505,7 @@
       "question_number": "38",
       "link": "https://www.examtopics.com/discussions/servicenow/view/90728-exam-cad-topic-1-question-38-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2563,6 +2611,7 @@
       "question_number": "39",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64417-exam-cad-topic-1-question-39-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2633,6 +2682,7 @@
       "question_number": "40",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64125-exam-cad-topic-1-question-40-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2658,6 +2708,7 @@
       "question_number": "41",
       "link": "https://www.examtopics.com/discussions/servicenow/view/118523-exam-cad-topic-1-question-41-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2717,6 +2768,7 @@
       "question_number": "42",
       "link": "https://www.examtopics.com/discussions/servicenow/view/77514-exam-cad-topic-1-question-42-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2776,6 +2828,7 @@
       "question_number": "43",
       "link": "https://www.examtopics.com/discussions/servicenow/view/107699-exam-cad-topic-1-question-43-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -2876,6 +2929,7 @@
       "question_number": "44",
       "link": "https://www.examtopics.com/discussions/servicenow/view/111990-exam-cad-topic-1-question-44-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2936,6 +2990,7 @@
       "question_number": "45",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64105-exam-cad-topic-1-question-45-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2991,6 +3046,7 @@
       "question_number": "46",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73174-exam-cad-topic-1-question-46-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -3055,6 +3111,7 @@
       "question_number": "47",
       "link": "https://www.examtopics.com/discussions/servicenow/view/64126-exam-cad-topic-1-question-47-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -3107,6 +3164,7 @@
       "question_number": "48",
       "link": "https://www.examtopics.com/discussions/servicenow/view/68154-exam-cad-topic-1-question-48-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -3132,6 +3190,7 @@
       "question_number": "49",
       "link": "https://www.examtopics.com/discussions/servicenow/view/130612-exam-cad-topic-1-question-49-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -3219,6 +3278,7 @@
       "question_number": "50",
       "link": "https://www.examtopics.com/discussions/servicenow/view/66604-exam-cad-topic-1-question-50-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     }
   ]

@@ -14,6 +14,11 @@
       ],
       "comments": [
         {
+          "content": "D is the correct answer\n\nJust cleared my CSA exam with great confidence thanks to ValidIt-Exams!\nTheir updated CSA study material was accurate and very helpful.\nMost of the questions I practiced came in the actual exam.\nIf you're serious about passing, ValidIt-Exams is the best choice.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
           "content": "D is the correct answer IT EXAMS PRO",
           "selected_answer": "D",
           "replies": []
@@ -92,16 +97,12 @@
           "content": "The overall catalog is made up of a collection of discrete catalog items.\n\nThe basic Service Catalog item types include:\n\nStandard catalog items\nRecord producers: giving alternative ways of adding information such as Incidents via the service catalog.\nOrder guides: to group multiple catalog items in one request.\nContent Items: catalog items which provide information instead of goods or services.\n\nhttps://docs.servicenow.com/bundle/utah-servicenow-platform/page/product/service-catalog-management/concept/c_IntroductionToCatalogItems.html",
           "selected_answer": "",
           "replies": []
-        },
-        {
-          "content": "D is correct.",
-          "selected_answer": "D",
-          "replies": []
         }
       ],
       "question_number": "1",
       "link": "https://www.examtopics.com/discussions/servicenow/view/71003-exam-csa-topic-1-question-1-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -202,6 +203,7 @@
       "question_number": "2",
       "link": "https://www.examtopics.com/discussions/servicenow/view/71305-exam-csa-topic-1-question-2-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -216,6 +218,11 @@
         {
           "content": "The correct answer to this question is definitely C. I broke up with my girlfriend. It is hard. I am already 36 years old. If I don't pass this exam, I won't have a future, so I want to do my best.",
           "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is:\n\nB. A metric is a time measurement used to report the effectiveness of workflows and SLAs\n\nExplanation:\nIn ServiceNow, a metric:\n\nTracks and records the amount of time an item (like an incident, change, or task) spends in a particular state or with a certain value.\n\nIs commonly used to measure SLA (Service Level Agreement) compliance and workflow efficiency.\n\nHelps in analyzing how long it takes for a record to progress through various stages, e.g., how long an incident remains in \"New\" state.\n\nWhy the other options are incorrect:\nA. Incorrect – That's describing a gauge, not a metric.\n\nC. Close but vague – Doesn't emphasize the time-based nature of a metric.\n\nD. Incorrect – The term \"comparative measurement\" is misleading; metrics focus on time-based tracking.",
+          "selected_answer": "B",
           "replies": []
         },
         {
@@ -292,16 +299,12 @@
           "content": "C is correct",
           "selected_answer": "C",
           "replies": []
-        },
-        {
-          "content": "C is correct",
-          "selected_answer": "",
-          "replies": []
         }
       ],
       "question_number": "3",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73566-exam-csa-topic-1-question-3-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -397,6 +400,7 @@
       "question_number": "4",
       "link": "https://www.examtopics.com/discussions/servicenow/view/71306-exam-csa-topic-1-question-4-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -497,6 +501,7 @@
       "question_number": "5",
       "link": "https://www.examtopics.com/discussions/servicenow/view/71020-exam-csa-topic-1-question-5-discussion/",
       "most_voted": "AD",
+      "images": {},
       "error": null
     },
     {
@@ -509,6 +514,11 @@
         "E. Number of views"
       ],
       "comments": [
+        {
+          "content": "The correct answers are:\n\n✅ A. Most recent update\n✅ B. Popularity\n✅ C. Relevancy",
+          "selected_answer": "ABC",
+          "replies": []
+        },
         {
           "content": "ACE\npopularity\nrelevency\nnumber of views",
           "selected_answer": "",
@@ -563,6 +573,7 @@
       "question_number": "6",
       "link": "https://www.examtopics.com/discussions/servicenow/view/72122-exam-csa-topic-1-question-6-discussion/",
       "most_voted": "ACE",
+      "images": {},
       "error": null
     },
     {
@@ -648,6 +659,7 @@
       "question_number": "7",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73096-exam-csa-topic-1-question-7-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -723,6 +735,7 @@
       "question_number": "8",
       "link": "https://www.examtopics.com/discussions/servicenow/view/71308-exam-csa-topic-1-question-8-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -793,6 +806,7 @@
       "question_number": "9",
       "link": "https://www.examtopics.com/discussions/servicenow/view/71309-exam-csa-topic-1-question-9-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -809,7 +823,9 @@
         {
           "content": "badly worded...a *user cant select any!\na user with both admin and security roles can select the three answers they're seeking.",
           "selected_answer": "",
-          "replies": []
+          "replies": [
+            "You are sitting for CSA so fair to assume you are a system admin."
+          ]
         },
         {
           "content": "Correct answer",
@@ -898,6 +914,7 @@
       "question_number": "10",
       "link": "https://www.examtopics.com/discussions/servicenow/view/71310-exam-csa-topic-1-question-10-discussion/",
       "most_voted": "BCD",
+      "images": {},
       "error": null
     },
     {
@@ -988,6 +1005,7 @@
       "question_number": "11",
       "link": "https://www.examtopics.com/discussions/servicenow/view/71311-exam-csa-topic-1-question-11-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1088,6 +1106,7 @@
       "question_number": "12",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73097-exam-csa-topic-1-question-12-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1173,6 +1192,7 @@
       "question_number": "13",
       "link": "https://www.examtopics.com/discussions/servicenow/view/69693-exam-csa-topic-1-question-13-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1273,6 +1293,7 @@
       "question_number": "14",
       "link": "https://www.examtopics.com/discussions/servicenow/view/61778-exam-csa-topic-1-question-14-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1333,6 +1354,7 @@
       "question_number": "15",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73640-exam-csa-topic-1-question-15-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1392,6 +1414,7 @@
       "question_number": "16",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73546-exam-csa-topic-1-question-16-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -1467,6 +1490,7 @@
       "question_number": "17",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73547-exam-csa-topic-1-question-17-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1542,6 +1566,7 @@
       "question_number": "18",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73548-exam-csa-topic-1-question-18-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1647,6 +1672,7 @@
       "question_number": "19",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73642-exam-csa-topic-1-question-19-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1661,7 +1687,9 @@
         {
           "content": "Column Context Menus a.k.a Column Options – found on the header of each field (the 3 dots on the left of field header)\nB – Assigning tags is on “Actions on selected rows” tab and search is the tab with magnifying glass. Both is on the top right corner.\nC- This is actually true but A is more precise. So A is the answer\nD – these actions are on each row/record, on the “i” (info) icon not on Column Context Menu",
           "selected_answer": "A",
-          "replies": []
+          "replies": [
+            "filtering is not on Column Options but when you right-click individual cells."
+          ]
         },
         {
           "content": "DEFINITELY A",
@@ -1712,6 +1740,7 @@
       "question_number": "20",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73641-exam-csa-topic-1-question-20-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1788,6 +1817,7 @@
       "question_number": "21",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73644-exam-csa-topic-1-question-21-discussion/",
       "most_voted": "AB",
+      "images": {},
       "error": null
     },
     {
@@ -1833,6 +1863,7 @@
       "question_number": "22",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73549-exam-csa-topic-1-question-22-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -1890,6 +1921,7 @@
       "question_number": "23",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73550-exam-csa-topic-1-question-23-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -1950,6 +1982,7 @@
       "question_number": "24",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73551-exam-csa-topic-1-question-24-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2052,6 +2085,7 @@
       "question_number": "25",
       "link": "https://www.examtopics.com/discussions/servicenow/view/70194-exam-csa-topic-1-question-25-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2135,6 +2169,7 @@
       "question_number": "26",
       "link": "https://www.examtopics.com/discussions/servicenow/view/66549-exam-csa-topic-1-question-26-discussion/",
       "most_voted": "ACDF",
+      "images": {},
       "error": null
     },
     {
@@ -2205,6 +2240,7 @@
       "question_number": "27",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73552-exam-csa-topic-1-question-27-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2260,6 +2296,7 @@
       "question_number": "28",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73553-exam-csa-topic-1-question-28-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -2362,6 +2399,7 @@
       "question_number": "29",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73554-exam-csa-topic-1-question-29-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2374,6 +2412,11 @@
         "E. The Dependency View"
       ],
       "comments": [
+        {
+          "content": "ACDEが正解です",
+          "selected_answer": "ACDE",
+          "replies": []
+        },
         {
           "content": "correct answer",
           "selected_answer": "ACDE",
@@ -2413,6 +2456,7 @@
       "question_number": "30",
       "link": "https://www.examtopics.com/discussions/servicenow/view/86132-exam-csa-topic-1-question-30-discussion/",
       "most_voted": "ACDE",
+      "images": {},
       "error": null
     },
     {
@@ -2478,6 +2522,7 @@
       "question_number": "31",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73555-exam-csa-topic-1-question-31-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -2550,6 +2595,7 @@
       "question_number": "32",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73648-exam-csa-topic-1-question-32-discussion/",
       "most_voted": "ABCD",
+      "images": {},
       "error": null
     },
     {
@@ -2625,6 +2671,7 @@
       "question_number": "33",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73649-exam-csa-topic-1-question-33-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -2695,6 +2742,7 @@
       "question_number": "34",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73556-exam-csa-topic-1-question-34-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -2755,6 +2803,7 @@
       "question_number": "35",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73557-exam-csa-topic-1-question-35-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2821,6 +2870,7 @@
       "question_number": "36",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73558-exam-csa-topic-1-question-36-discussion/",
       "most_voted": "ACD",
+      "images": {},
       "error": null
     },
     {
@@ -2875,6 +2925,7 @@
       "question_number": "37",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73650-exam-csa-topic-1-question-37-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -2947,6 +2998,7 @@
       "question_number": "38",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73583-exam-csa-topic-1-question-38-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -3049,6 +3101,7 @@
       "question_number": "39",
       "link": "https://www.examtopics.com/discussions/servicenow/view/61779-exam-csa-topic-1-question-39-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -3099,6 +3152,7 @@
       "question_number": "40",
       "link": "https://www.examtopics.com/discussions/servicenow/view/77546-exam-csa-topic-1-question-40-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -3154,6 +3208,7 @@
       "question_number": "41",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73666-exam-csa-topic-1-question-41-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -3214,6 +3269,7 @@
       "question_number": "42",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73560-exam-csa-topic-1-question-42-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -3269,6 +3325,7 @@
       "question_number": "43",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73584-exam-csa-topic-1-question-43-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -3314,6 +3371,7 @@
       "question_number": "44",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73667-exam-csa-topic-1-question-44-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     },
     {
@@ -3364,6 +3422,7 @@
       "question_number": "45",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73585-exam-csa-topic-1-question-45-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -3409,6 +3468,7 @@
       "question_number": "46",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73668-exam-csa-topic-1-question-46-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -3474,6 +3534,7 @@
       "question_number": "47",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73796-exam-csa-topic-1-question-47-discussion/",
       "most_voted": "B",
+      "images": {},
       "error": null
     },
     {
@@ -3519,6 +3580,7 @@
       "question_number": "48",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73669-exam-csa-topic-1-question-48-discussion/",
       "most_voted": "C",
+      "images": {},
       "error": null
     },
     {
@@ -3574,6 +3636,7 @@
       "question_number": "49",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73670-exam-csa-topic-1-question-49-discussion/",
       "most_voted": "D",
+      "images": {},
       "error": null
     },
     {
@@ -3624,6 +3687,7 @@
       "question_number": "50",
       "link": "https://www.examtopics.com/discussions/servicenow/view/73672-exam-csa-topic-1-question-50-discussion/",
       "most_voted": "A",
+      "images": {},
       "error": null
     }
   ]
