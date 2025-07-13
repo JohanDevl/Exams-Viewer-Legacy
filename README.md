@@ -13,25 +13,37 @@ No installation required! The interface automatically detects your system theme 
 ### Web Interface
 
 - **📱 Responsive design** for all devices
-- **🔍 Advanced search and filtering**
+- **🔍 Advanced search and filtering** with auto-completion
 - **⌨️ Enhanced keyboard navigation** with vim-style shortcuts
 - **📊 Visual progress sidebar** with question overview
 - **📚 Navigation history** with back/forward buttons
 - **🌙 Dark mode** with automatic detection
-- **📊 Complete statistics system** with storage optimization
+- **📊 Complete statistics system** with intelligent storage management
 - **🎯 Highlight mode** to preview answers
-- **📄 PDF and JSON export**
-- **📈 Progress tracking** with visual charts
+- **📄 PDF and JSON export** with custom formatting
+- **📈 Progress tracking** with visual charts and analytics
 - **📝 Built-in changelog viewer** with Markdown rendering
+- **⚡ Optional lazy loading** for large exams (experimental)
+- **🧹 Data management tools** for storage optimization
+
+### Performance & Storage
+
+- **🚀 Intelligent caching** with service worker
+- **📦 Chunked loading** for large exams (100+ questions)
+- **🗜️ Automatic image compression** during scraping
+- **💾 Smart storage management** with auto-cleanup
+- **🔧 User-controlled lazy loading** setting
+- **📊 Statistics data optimization** with corruption prevention
 
 ### Automation
 
 - **🤖 Automatic scraping** of ExamTopics questions
-- **🔄 Smart change detection**
+- **🔄 Smart change detection** and incremental updates
 - **📅 Manual triggering** via GitHub Actions
-- **🛡️ Robust error handling**
+- **🛡️ Robust error handling** with recovery mechanisms
 - **📝 Detailed logging** of operations
 - **📋 Automated changelog management** with GitHub Actions
+- **🖼️ Image processing** with WebP/JPEG compression
 
 ## 📊 Supported Exams
 
@@ -70,6 +82,8 @@ pip install -r requirements.txt
 6. **Use highlight mode** to preview answers before validation
 7. **Check statistics** in the dedicated panel with detailed analytics
 8. **Export data** to PDF or JSON format
+9. **Manage performance**: Enable lazy loading in settings for large exams
+10. **Clean storage**: Use statistics management tools to optimize space
 
 ### Manual Updates
 
@@ -87,9 +101,19 @@ python scripts/update_all_exams.py --exam CAD
 Exams-Viewer/
 ├── index.html          # Main web interface
 ├── styles.css          # Styles with dark mode support
-├── script.js           # JavaScript with statistics system
-├── data/               # Exam data (JSON files)
+├── script.js           # JavaScript with statistics and lazy loading
+├── service-worker.js   # Intelligent caching system
+├── data/               # Exam data with folder structure
+│   ├── EXAM_CODE/      # Individual exam folders
+│   │   ├── exam.json   # Main exam questions
+│   │   ├── links.json  # Scraping metadata
+│   │   ├── metadata.json # Chunking information
+│   │   └── chunks/     # Question chunks for large exams
+│   └── manifest.json   # Available exams registry
 ├── scripts/            # Python automation scripts
+│   ├── scraper.py      # Enhanced scraper with image compression
+│   ├── create_chunks.py # Chunk generation utility
+│   └── migrate_data_structure.py # Data migration tool
 ├── docs/               # Detailed documentation
 └── requirements.txt    # Python dependencies
 ```
@@ -102,6 +126,7 @@ Exams-Viewer/
 - **[🛠️ Development Guide](docs/DEVELOPMENT.md)** - Instructions for developers
 - **[📊 Statistics System](docs/STATISTICS.md)** - Statistics system documentation
 - **[⌨️ Navigation Features](docs/NAVIGATION.md)** - Enhanced navigation and keyboard shortcuts
+- **[⚡ Performance Optimizations](docs/PERFORMANCE_OPTIMIZATIONS.md)** - Lazy loading and performance features
 - **[📋 API Documentation](docs/API.md)** - Technical API documentation
 - **[🔧 Scraper Improvements](docs/SCRAPER_IMPROVEMENTS.md)** - Improvement details
 - **[📝 Changelog](CHANGELOG.md)** - Project version history and changes

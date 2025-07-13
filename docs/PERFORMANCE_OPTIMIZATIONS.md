@@ -1,18 +1,21 @@
 # Performance Optimizations Guide
 
-This document describes the performance optimizations implemented in Exams-Viewer to improve loading times and user experience.
+This document describes the comprehensive performance optimizations implemented in Exams-Viewer v2.5.x to improve loading times, user experience, and data integrity.
 
 ## Implemented Optimizations
 
 ### 1. 🚀 Lazy Loading with Virtual Pagination
 
-**Objective:** Drastically reduce initial loading times by loading only necessary questions.
+**Status:** Optional feature (disabled by default in user settings)
+
+**Objective:** Drastically reduce initial loading times by loading only necessary questions for large exams.
 
 #### How it works:
 - **Data chunks:** Large exams (>100 questions) are divided into chunks of 50 questions
-- **On-demand loading:** Only the first chunk is loaded immediately
+- **User-controlled:** Can be enabled/disabled in settings for experimental use
+- **Non-blocking UI:** Navigation provides immediate feedback with progressive loading
 - **Intelligent preloading:** Adjacent chunks are preloaded in the background
-- **Smooth navigation:** System automatically loads required chunks during navigation
+- **Fallback support:** Gracefully falls back to standard loading if chunks unavailable
 
 #### File structure:
 ```
@@ -89,6 +92,59 @@ python scripts/migrate_data_structure.py
 }
 ```
 
+### 4. 🛡️ Data Integrity and Storage Management
+
+**Objective:** Eliminate data corruption issues and optimize localStorage usage.
+
+#### Features:
+- **Corruption Prevention:** Removed problematic compression system causing data corruption
+- **Standard JSON Storage:** Uses reliable JSON.stringify/parse instead of custom compression
+- **Intelligent Storage Management:** Auto-cleanup prevents localStorage overflow
+- **Data Validation:** Enhanced corruption detection with structure validation
+- **User Controls:** Manual statistics management tools in settings
+
+#### Storage optimization:
+```javascript
+// Auto-cleanup at 4.5MB threshold
+if (dataToSave.length > 4500000) {
+  statistics.sessions = statistics.sessions.slice(-50);
+}
+
+// User-controlled cleanup options
+cleanOldStatistics(); // Keep last 20 sessions
+resetAllStatistics(); // Complete reset with confirmation
+```
+
+#### Legacy data handling:
+```javascript
+// Backward compatibility for compressed data
+try {
+  parsed = JSON.parse(savedStats); // Try standard JSON first
+} catch {
+  parsed = decompressData(savedStats); // Fallback to legacy format
+  setTimeout(() => saveStatistics(), 1000); // Migrate to new format
+}
+```
+
+### 5. ⚙️ User Settings and Control
+
+**Objective:** Give users control over performance features and data management.
+
+#### Settings options:
+- **Lazy Loading Toggle:** Enable/disable experimental lazy loading
+- **Statistics Management:** Clean old sessions or reset all data
+- **Data Export/Import:** Backup and restore user data
+- **Storage Information:** View current usage and session counts
+
+#### Settings interface:
+```html
+<label class="toggle-label">
+  <input type="checkbox" id="enableLazyLoading" />
+  <span class="toggle-slider"></span>
+  Enable lazy loading (experimental)
+</label>
+```
+
 ## Performance Benefits
 
 ### Loading Times
@@ -106,8 +162,10 @@ python scripts/migrate_data_structure.py
 - **WebP compression:** Up to 50% reduction vs JPEG
 
 ### User Experience
-- **Initial loading:** Immediate for first chunk
-- **Navigation:** Smooth with loading indicators
+- **Initial loading:** Immediate for first chunk (when lazy loading enabled)
+- **Navigation:** Non-blocking with immediate feedback
+- **Data integrity:** Eliminated corruption issues and "corrupted data" messages
+- **User control:** Optional lazy loading and data management tools
 - **Offline mode:** Partial functionality with cache
 
 ## Configuration and Parameters
@@ -118,6 +176,11 @@ let lazyLoadingConfig = {
   chunkSize: 50,           // Questions per chunk
   preloadBuffer: 1,        // Chunks to preload
   isChunkedExam: false,    // Auto-detection
+};
+
+// User setting (disabled by default)
+let settings = {
+  enableLazyLoading: false, // User must opt-in
 };
 ```
 
@@ -143,8 +206,10 @@ def download_and_compress_image(img_url, max_size=(800, 600), quality=85):
 
 ### Compatibility
 - **Existing exams:** Work without modification
-- **Optional chunks:** System falls back to original file if no chunks found
-- **Progressive enhancement:** Optimizations activate automatically when available
+- **Optional lazy loading:** Disabled by default, user must opt-in
+- **Data migration:** Automatic migration from legacy compressed format
+- **Progressive enhancement:** Optimizations activate only when enabled and available
+- **Corruption recovery:** Enhanced detection and automatic cleanup
 
 ### Migration Process
 1. **Create chunks:** Use `scripts/create_chunks.py`
@@ -207,4 +272,42 @@ pip install -r requirements.txt
 - Test offline mode (disable network)
 - Measure loading times before/after
 
-This implementation ensures a significantly improved user experience while maintaining backward compatibility with existing data.
+## Troubleshooting
+
+### Common Issues
+
+#### "Corrupted data cleared" Messages
+**Fixed in v2.5.1+** - This was caused by the old compression system and has been resolved.
+
+**If you still see this:**
+1. Clear browser cache and localStorage
+2. Refresh the page to download fresh data
+3. The issue should not recur with the new storage system
+
+#### Lazy Loading Performance
+**If lazy loading feels slow:**
+1. Check that you have enabled it in Settings > Interface Settings
+2. Disable it if you prefer immediate full loading
+3. Large chunks may take time on slow connections
+
+#### Storage Space Issues
+**To free up space:**
+1. Go to Settings > Statistics Management
+2. Click "Clean Old Sessions" to keep only recent data
+3. Use "Reset All Statistics" for complete cleanup (with confirmation)
+
+### Best Practices
+
+#### For Users
+1. **Leave lazy loading disabled** unless you frequently use very large exams (200+ questions)
+2. **Clean statistics periodically** if you use the app heavily
+3. **Export favorites** before doing major cleanups
+4. **Use advanced search** to filter large exams instead of loading everything
+
+#### For Developers
+1. **Test with both lazy loading on/off** to ensure compatibility
+2. **Monitor localStorage usage** during development
+3. **Test data migration paths** when making storage changes
+4. **Validate JSON structure** when adding new data fields
+
+This implementation ensures a significantly improved user experience while maintaining backward compatibility and giving users full control over performance features.
