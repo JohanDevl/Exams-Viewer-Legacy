@@ -24,7 +24,7 @@ class ProgressTracker:
         print(f"[{datetime.now().strftime('%H:%M:%S')}] {text}")
 
 def get_available_exam_codes():
-    """Get all exam codes from existing JSON files"""
+    """Get all exam codes from existing exam directories"""
     exam_codes = set()
     # Update path to go up one level to find data directory
     data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
@@ -33,10 +33,13 @@ def get_available_exam_codes():
         print(f"❌ Data directory '{data_dir}' not found")
         return exam_codes
     
-    for filename in os.listdir(data_dir):
-        if filename.endswith('.json') and not filename.endswith('_links.json'):
-            exam_code = filename.replace('.json', '')
-            exam_codes.add(exam_code)
+    # Look for exam directories containing exam.json
+    for item in os.listdir(data_dir):
+        item_path = os.path.join(data_dir, item)
+        if os.path.isdir(item_path):
+            exam_json = os.path.join(item_path, 'exam.json')
+            if os.path.exists(exam_json):
+                exam_codes.add(item)
     
     print(f"📋 Found {len(exam_codes)} exams: {sorted(exam_codes)}")
     return sorted(exam_codes)
@@ -51,20 +54,23 @@ def update_single_exam(exam_code, progress_tracker, force_rescan=False, force_up
     
     try:
         # Use respectful scraping mode (with delays) for better compliance
-        # update_exam_data returns a tuple (questions, error_message)
-        questions, error_message = update_exam_data(exam_code, progress_tracker, rapid_scraping=False, force_rescan=force_rescan, force_update=force_update)
+        # update_exam_data returns a tuple (questions, message, success)
+        questions, message, success = update_exam_data(exam_code, progress_tracker, rapid_scraping=False, force_rescan=force_rescan, force_update=force_update)
         
-        if error_message:
-            print(f"❌ {exam_code}: Update failed - {error_message}")
+        if not success:
+            print(f"❌ {exam_code}: Update failed - {message}")
             return {
                 'exam_code': exam_code,
                 'status': 'failed',
                 'question_count': len(questions) if questions else 0,
-                'error': error_message
+                'error': message
             }
         else:
             question_count = len(questions) if questions else 0
-            print(f"✅ {exam_code}: {question_count} questions updated successfully")
+            success_message = f"{question_count} questions updated successfully"
+            if message:  # Add chunk information if available
+                success_message += f". {message}"
+            print(f"✅ {exam_code}: {success_message}")
             return {
                 'exam_code': exam_code,
                 'status': 'success',

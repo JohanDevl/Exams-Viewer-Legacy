@@ -1,0 +1,1547 @@
+{
+  "chunk_id": 0,
+  "start_question": 1,
+  "end_question": 50,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "Which of the following checks to see if the assessable record exists for the demand and creates an assessable record if none exists?",
+      "answers": [
+        "A. Validate Assessment Metrics for Demand",
+        "B. Auto Business Rule for Assessments",
+        "C. Update Demand State",
+        "D. Create OnDemand Assessment"
+      ],
+      "comments": [
+        {
+          "content": "B. Auto Business Rule for Assessments - Checks if the assessable record exists for the demand and creates an assessable record if none exists.\n\nnow learning Project Portfolio Management (PPM) Implementation: Module 3: Idea and Demand Configuration (Washington)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B. Auto Business Rule for Assessments \nYou can check these 4 business rule SPM implementation module3 DEMAND > Assessments",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "D. Create OnDemand Assessment",
+          "selected_answer": "D",
+          "replies": [
+            "Auto Business Rule for Assessments , correct is B."
+          ]
+        },
+        {
+          "content": "Answer is D \nRead below for definitions\nCreate onDemand Assessment\nCreates assessments for authorized users after a demand has moved from the submitted state to the screening state.\nUpdate Demand State\nUpdates the demand state to Qualified after all assessments are completed. For example, Risk must be between 0 and 10 or Strategic Alignment must be between 0 and 10.\nValidate Assessment Metrics for Demand\nValidates the score values for a demand to be within the maximum and minimum values.\nAuto Business Rule for Assessments\n Checks if the assessable record exists for the demand and creates an assessable record if none exists.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D. is the correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Idea and Demand Configuration (Utah) under the business rule",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer found, now learning Project Portfolio Management (PPM) Implementation 3: Idea and Demand Configuration (Utah) under the business rule heading.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "D is correct\n-\tAssessable Record Check: When a specific event or action occurs, such as the creation of a demand record, ServiceNow checks if an assessable record exists for that demand\n-\tAssessable Record Creation: If no assessable record is found, the \"Assessment Creation on Demand\" feature automatically generates a new assessable record associated with the demand",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B IS CORRECT",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "As per the course, Auto Business Rule for Assesments: Checks if the assessable record exists for the demand and creates an assessable record if none exists.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "1",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105781-exam-cis-ppm-topic-1-question-1-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Projects and which other artifact can be linked to either a program, a portfolio, both, or neither.",
+      "answers": [
+        "A. Demands",
+        "B. Test Cases",
+        "C. Resources",
+        "D. Stories"
+      ],
+      "comments": [
+        {
+          "content": "Correct A.",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "2",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/143679-exam-cis-ppm-topic-1-question-2-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "If Scenario Planning for PPM is installed, a portfolio manager can access the Portfolio Planning Workbench by navigating to which of the following? (Choose two.)",
+      "answers": [
+        "A. Project module",
+        "B. Program Workbench",
+        "C. Portfolio Planning related link",
+        "D. Portfolio Planning Workbench module"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/itbm-portfolio-planning/concept/portfolio-planning-overview.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "If you are using the Portfolio Workbench for portfolio planning and want to switch to a scenario-based planning, note the following points:\nAfter installing Scenario Planning for PPM, remove the Portfolio Workbench module and related link from the Portfolio form. The de-activation of Portfolio Workbench is required to avoid conflicts with two methods of planning and data corruption. \n\nSource; https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/itbm-portfolio-planning/concept/portfolio-planning-overview.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "Use the Portfolio Planning related link or the Portfolio Planning Workbench module to navigate to Portfolio Planning Workbench.",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C and D",
+          "selected_answer": "CD",
+          "replies": []
+        }
+      ],
+      "question_number": "3",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105782-exam-cis-ppm-topic-1-question-3-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "When creating a resource plan within a demand, how are the default dates on a resource plan determined?",
+      "answers": [
+        "A. From demand start date and due date",
+        "B. Resource plan(s) cannot be created from demand",
+        "C. Using demand created date",
+        "D. From portfolio date"
+      ],
+      "comments": [
+        {
+          "content": "a is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/create-manage-resource-plans-demand.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "4",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105783-exam-cis-ppm-topic-1-question-4-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "A customer requires five (5) teamspaces to support different departments. What should you do?",
+      "answers": [
+        "A. Enable the teamspace property.",
+        "B. Contact the Account Representative to activate the teamspaces.",
+        "C. Activate via each teamspace plugin.",
+        "D. Use UI Policies and Business Rules to enable teamspaces."
+      ],
+      "comments": [
+        {
+          "content": "Teamspace activation\nYou must activate a teamspace plugin to use the teamspace feature. Following teamspace plugins are available:\n\nThe teamspaces loaded with these plugins contain the same components, but the components have different prefixes. For example, teamspace 1 includes a project table named Teamspace_1 Project [tsp1_project] and teamspace 5 includes a project table named Teamspace_5 Project [tsp5_project].\n\nSource: https://docs.servicenow.com/bundle/washingtondc-it-business-management/page",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/concept/c_Teamspaces.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "5",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105784-exam-cis-ppm-topic-1-question-5-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When setting-up a program, planned ROI% is calculated based on: (Choose two.)",
+      "answers": [
+        "A. Values in the NPV field.",
+        "B. Values in the Planned cost field.",
+        "C. Values in the Planned return field.",
+        "D. Values in the Budgeted cost field."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/ja-JP/bundle/utah-it-business-management/page/product/program-management/task/t_CreateAProgram.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_CreatingDemands.html",
+          "selected_answer": "BC",
+          "replies": []
+        },
+        {
+          "content": "B and C is correct",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "6",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105785-exam-cis-ppm-topic-1-question-6-discussion/",
+      "most_voted": "BC",
+      "error": null
+    },
+    {
+      "question": "Which plugin provides a layer of artificial intelligence that empowers features and capabilities across applications to provide better work experiences?",
+      "answers": [
+        "A. Strategic Spend Tracking for PPM [sn_ppm_sst]",
+        "B. Scenario Planning for PPM [sn_pw_scenario]",
+        "C. Predictive Intelligence for PPM [com.snc.ppm_ml]",
+        "D. PPM Standard [com.snc.financial_planning_pmo]"
+      ],
+      "comments": [
+        {
+          "content": "ServiceNow® Predictive Intelligence is a platform function that provides a layer of artificial intelligence that empowers features and capabilities across ServiceNow® applications to provide better work experiences.\n\nsource; https://docs.servicenow.com/bundle/tokyo-now-intelligence/page/administer/predictive-intelligence/concept/predictive-intelligence.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/itbm-PI-workbench/concept/itbm-predictive-intelligence-wb.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "7",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105786-exam-cis-ppm-topic-1-question-7-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "To use the Time Sheet dashboard, what plugin must be installed?",
+      "answers": [
+        "A. Common ITSM Service Portal Application Components (com.snc.app_common.service_portal)",
+        "B. Employee Service Center (com.sn_hr_service_portal)",
+        "C. Knowledge Management – Service Portal (com.snc.knowledge_serviceportal)",
+        "D. Performance Analytics – Content Pack – PPM Standard plugin (com.snc.pa.pmo_dashboards)"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/use/dashboards/application-content-packs/project-portfolio-content-pack.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/use/dashboards/application-content-packs/time-sheet-dashboard.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/use/dashboards/application-content-packs/project-portfolio-content-pack.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "8",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105787-exam-cis-ppm-topic-1-question-8-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Where do you define ‘Roles’ requested via resource plans?",
+      "answers": [
+        "A. Resource roles under resource management.",
+        "B. No need to define it differently, they are same are system roles",
+        "C. Under skill management modules",
+        "D. Roles under system security"
+      ],
+      "comments": [
+        {
+          "content": "Resource plans are the key element in resource management.\n\nsource; https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/resource-management/concept/c_ResourcePlans.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/task/create-resource-role.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "9",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105788-exam-cis-ppm-topic-1-question-9-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Plugins may be added to the base platform in one of the following ways: (Choose three.)",
+      "answers": [
+        "A. Activated by an admin (not by default).",
+        "B. Activated by an it_portfolio_manager.",
+        "C. Requested from ServiceNow.",
+        "D. Activated by default in the base ServiceNow system.",
+        "E. Activated by an it_pps_admin."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-platform-administration/page/administer/plugins/concept/c_ServiceNowPlugins.html",
+          "selected_answer": "ACD",
+          "replies": []
+        },
+        {
+          "content": "ACD is correct",
+          "selected_answer": "ACD",
+          "replies": []
+        }
+      ],
+      "question_number": "10",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105789-exam-cis-ppm-topic-1-question-10-discussion/",
+      "most_voted": "ACD",
+      "error": null
+    },
+    {
+      "question": "What does the project status report allow project managers to do? (Choose two.)",
+      "answers": [
+        "A. View the project Gantt chart",
+        "B. View the WBS",
+        "C. Show historical trend of project KPI’s",
+        "D. Print as a PDF attachment"
+      ],
+      "comments": [
+        {
+          "content": "c d are correct",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "C and D but I am not confident",
+          "selected_answer": "CD",
+          "replies": []
+        }
+      ],
+      "question_number": "11",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105790-exam-cis-ppm-topic-1-question-11-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "How does a project manager request a change to a resource plan in the requested state?",
+      "answers": [
+        "A. Use notes on resource plan.",
+        "B. Email resource user.",
+        "C. Request change on resource plan",
+        "D. Email resource manager"
+      ],
+      "comments": [
+        {
+          "content": "Now learning, Project Portfolio Management (PPM) Implementation 6: Resource Management Configuration (Utah) under the heading role overview. Play the card game.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "c is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "12",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105791-exam-cis-ppm-topic-1-question-12-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In which table can you find cost information for a specific fiscal period?",
+      "answers": [
+        "A. cost_plan",
+        "B. expense_line",
+        "C. cost_plan_breakdown",
+        "D. pm_project"
+      ],
+      "comments": [
+        {
+          "content": "A cost plan breakdown captures the estimated cost and actual cost for every fiscal period. Cost plan, project, demand, program, and portfolio are the breakdowns types that are available.\n\nhttps://docs.servicenow.com/bundle/xanadu-it-business-management/page/product/project-management/concept/cost-plan-breakdown.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/task/enable-multicurrency-demand.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "13",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105792-exam-cis-ppm-topic-1-question-13-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is the default schedule for a project?",
+      "answers": [
+        "A. 8-hour workday (from 8 to 12 and 1 to 5).",
+        "B. 8-hour workday (from 9 to 12 and 1 to 6).",
+        "C. 9-hour workday (from 8 to 12 and from 1 to 5).",
+        "D. 8-hour workday (from 9 to 5)."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-platform-administration/page/administer/time/reference/r_DefaultSchedules.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-management/concept/project-management-intro.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct!",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Sorry , A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "14",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105793-exam-cis-ppm-topic-1-question-14-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "The PPM Standard plugin enables an it_project_manager to perform the following activities: (Choose three.)",
+      "answers": [
+        "A. Determine overall project cost requirements",
+        "B. Configure cost type definition",
+        "C. Define target for the portfolio",
+        "D. Establish resource requirements and track costs.",
+        "E. Track actual amount spent compared to an approved budget."
+      ],
+      "comments": [
+        {
+          "content": "PPM Standard automatically activates Financial Management if it is not already active.\n\nThe integration enables project and portfolio managers to perform the following activities:\nDetermine overall cost requirements for all demands and projects in portfolios\nEstablish resource requirements and track costs for demands and projects\nTrack actual amounts spent compared to an approved budget\n\nSource; https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-portfolio-suite-with-financials/concept/c_ProjectPortfolioSuiteWithFinancials.html",
+          "selected_answer": "ADE",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-portfolio-suite-with-financials/concept/c_ProjectPortfolioSuiteWithFinancials.html",
+          "selected_answer": "ADE",
+          "replies": []
+        },
+        {
+          "content": "Is there a description in ServiceNowDocs?",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ADE is correct",
+          "selected_answer": "ADE",
+          "replies": []
+        }
+      ],
+      "question_number": "15",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105794-exam-cis-ppm-topic-1-question-15-discussion/",
+      "most_voted": "ADE",
+      "error": null
+    },
+    {
+      "question": "When a time card is approved, the actual time is stored in which two tables? (Choose two.)",
+      "answers": [
+        "A. Project Time table",
+        "B. Resource Allocation Daily table",
+        "C. Resource Event table",
+        "D. Resource Aggregate tables (Daily, Weekly, and Monthly)"
+      ],
+      "comments": [
+        {
+          "content": "When you approve a time card, the time logged in the time card is saved day-wise in the Time Card Daily [time_card_daily] table. Using daily time logged data, you can generate time card reports by days for any period irrespective of the time sheet period to which the time cards belong. For example, you can create a monthly time card report that includes time cards from the first day to the last day of the month.\n\nSource; https://docs.servicenow.com/bundle/washingtondc-platform-administration/page/administer/task-table/concept/c_TimeCards.html",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-portfolio-suite-with-financials/reference/r_InstalledWithProjectPortfolioSuiteWithFinancials.html#d96599e1318",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "BD is correct",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "16",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105795-exam-cis-ppm-topic-1-question-16-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "Which of the following roles can access the project administration application?",
+      "answers": [
+        "A. it_project_user.",
+        "B. it_pps_admin.",
+        "C. it_project_manager.",
+        "D. timecard_admin."
+      ],
+      "comments": [
+        {
+          "content": "PPS admin\n[it_pps_admin]\n\nCan view and modify the preferences, configurations, and settings for projects, demands, programs, portfolios, resources, time cards, agile development, and timeline visualization.\n\nProject manager\n[it_project_manager]\n\nHas configuration access right to all Project Management application features and functionality.\n\nSource; https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-portfolio-suite-with-financials/reference/roles-installed-with-PPS-finance.html    ( B-C )",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B and C are corrects",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "17",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105796-exam-cis-ppm-topic-1-question-17-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The Project Portfolio Management application supports domain separation at this level:",
+      "answers": [
+        "A. Level 3 – Tenant self-managed configuration",
+        "B. Level 1 – Tenant data management",
+        "C. Level 2 – Tenant process management",
+        "D. Data only"
+      ],
+      "comments": [
+        {
+          "content": "Correct answer is B or D.\nI can't tell from the documentation.\nhttps://docs.servicenow.com/ja-JP/bundle/utah-it-business-management/page/product/project-portfolio-suite-with-financials/concept/domain-separation-project-portfolio-financials.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "I going to disagree with D. Project Portfolio Management is BASIC as per https://docs.servicenow.com/bundle/sandiego-it-business-management/page/product/service-portfolio-management2/concept/domain-separation-SPM2.html\nBasic is defined by \nhttps://docs.servicenow.com/en-US/bundle/utah-platform-security/page/administer/company-and-domain-separation/reference/bp-domain-levels.html under the header \"Customer data management\" \nTenant and customer are used interchangeably in this document https://docs.servicenow.com/bundle/sandiego-it-business-management/page/product/service-portfolio-management2/concept/domain-separation-SPM2.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "18",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105797-exam-cis-ppm-topic-1-question-18-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "The hourly rate is derived from the resource rate on the resource plan, if this option is selected.",
+      "answers": [
+        "A. Rate override",
+        "B. Labor rate card",
+        "C. Rate model",
+        "D. Planned cost"
+      ],
+      "comments": [
+        {
+          "content": "It is here :\"If a rate model is associated to the project or demand, the hourly rate is derived from the rate model. Whenever the hourly rates in the associated rate model change, you must recalculate the resource costs of the resource plan to reflect the new rates.\"\nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/resource-management/concept/c_ResourcePlans.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is A",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "・Rate override\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/concept/c_ResourcePlans.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "if Rate override enabled",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "If the Rate override option in a resource plan is selected, the hourly rate for calculating the corresponding resource plan cost is derived from the rate specified in the Resource rate field.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "c is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/concept/c_ResourcePlans.html",
+          "selected_answer": "C",
+          "replies": [
+            "In this link itself, below is listed\n\n\"If the Rate override option in a resource plan is selected, the hourly rate for calculating the corresponding resource plan cost is derived from the rate specified in the Resource rate field.\"\n\nTherefore, answer should be A i.e. Rate Override"
+          ]
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "19",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105798-exam-cis-ppm-topic-1-question-19-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which role can configure the parameters of the demand workbench that is provided with the base system?",
+      "answers": [
+        "A. All roles.",
+        "B. it_project_manager",
+        "C. it_pps_admin.",
+        "D. business_stakeholder."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_CreatingBubbleCharts.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "20",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105799-exam-cis-ppm-topic-1-question-20-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Depending on the execution type selected for a particular project, one of these dashboards will also be available:",
+      "answers": [
+        "A. Timecard Dashboard",
+        "B. User Manager Dashboard",
+        "C. Project Summary – Waterfall Dashboard",
+        "D. PMO Dashboard"
+      ],
+      "comments": [
+        {
+          "content": "[Execution type]\nExecution methodology for this planning item. Select from Waterfall, Agile, or Hybrid.\nThis field is available only if the planning item is of the type Project.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/alignment-planner-workspace/reference/project-form.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "21",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105800-exam-cis-ppm-topic-1-question-21-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In order to submit an idea, what application would a user access?",
+      "answers": [
+        "A. Demand",
+        "B. Project",
+        "C. Idea Portal",
+        "D. Change"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/innovation-management/concept/idea-portal.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "22",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105801-exam-cis-ppm-topic-1-question-22-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which ‘Member Preference’ automatically finds the most available resource(s) from the group and allocates to a plan using the allocation action?",
+      "answers": [
+        "A. All members.",
+        "B. Specific member.",
+        "C. Any member and specific member.",
+        "D. Any member."
+      ],
+      "comments": [
+        {
+          "content": "Case 2: Most available resource requested first\nFor example, the requested allocation for a group with three resources when the Members preference value is set to Any member is as follows:\n\nSource; https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/resource-management/reference/r_AllocatingResources.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/resource-management/reference/r_AllocatingResources.html \ncase 2 Most available resource requested",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "23",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105802-exam-cis-ppm-topic-1-question-23-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "An it_pps_admin user is able to update: (Choose two.)",
+      "answers": [
+        "A. Budget Periods.",
+        "B. Client Scripts.",
+        "C. Business Rules.",
+        "D. Portfolio Targets."
+      ],
+      "comments": [
+        {
+          "content": "Read notes for \nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/repromote-budget-plan.html\nand\nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/itbm-portfolio-planning/task/select-fiscal-period-set-target.html",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "AD is correct",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "24",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105803-exam-cis-ppm-topic-1-question-24-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "What role can configure an idea module, map idea categories to the idea module, and add navigation for the Idea Portal?",
+      "answers": [
+        "A. Idea admin [idea_admin]",
+        "B. Project manager [it_project_manager]",
+        "C. Idea manager [idea_manager]",
+        "D. Demand manager [it_demand_manager]"
+      ],
+      "comments": [
+        {
+          "content": "Review heading Innovation management roles\nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-portfolio-suite-with-financials/reference/r_InstalledWithProjectPortfolioSuiteWithFinancials.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "25",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105804-exam-cis-ppm-topic-1-question-25-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which roles can view reports on resource utilization and availability? (Choose two.)",
+      "answers": [
+        "A. it_project_portfolio_user",
+        "B. pps_resource",
+        "C. resource_manager",
+        "D. resource_user"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/concept/c_ResourceManagement.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/resource-management/concept/c_ResourceManagement.html",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CD is correct",
+          "selected_answer": "CD",
+          "replies": []
+        }
+      ],
+      "question_number": "26",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105805-exam-cis-ppm-topic-1-question-26-discussion/",
+      "most_voted": "CD",
+      "error": null
+    },
+    {
+      "question": "What role can create or modify a rate model?",
+      "answers": [
+        "A. it_pps_admin.",
+        "B. time_card_admin.",
+        "C. push_admin.",
+        "D. release_admin."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-portfolio-suite-with-financials/task/create-rate-model.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "27",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105806-exam-cis-ppm-topic-1-question-27-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "To set up a group for selection in a resource plan, the group record needs to include which role?",
+      "answers": [
+        "A. resource_manager",
+        "B. itil",
+        "C. it_project_user",
+        "D. pps_resource"
+      ],
+      "comments": [
+        {
+          "content": "Review Resource management roles\nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-portfolio-suite-with-financials/reference/r_InstalledWithProjectPortfolioSuiteWithFinancials.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "28",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105807-exam-cis-ppm-topic-1-question-28-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When can a user choose from multiple rate types for their work, while logging a time card?",
+      "answers": [
+        "A. Only if the capability is enabled in the Project Preferences",
+        "B. Only if this capability is enabled in the Project Record",
+        "C. Only one (1) rate type can apply",
+        "D. Only if the capability is enabled in the Time Sheet Policies"
+      ],
+      "comments": [
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "29",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105808-exam-cis-ppm-topic-1-question-29-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What is the difference between confirm and allocate actions?",
+      "answers": [
+        "A. They function the same way.",
+        "B. Confirm action creates hard allocation and allocate action creates soft allocation.",
+        "C. Confirm action creates soft allocation and allocate action creates hard allocation.",
+        "D. Allocate action is always followed by confirm action."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/resource-management/task/review-capacity-for-resources.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "30",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105809-exam-cis-ppm-topic-1-question-30-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "If a user creates a new demand from the demand workbench, what state will the system save the record in?",
+      "answers": [
+        "A. approved",
+        "B. open",
+        "C. draft",
+        "D. qualified"
+      ],
+      "comments": [
+        {
+          "content": "D is correct, i verfied",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/concept/c_DemandWorkbenchListView.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct, however only able to be performed by demand_manager",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "31",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105811-exam-cis-ppm-topic-1-question-31-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "In order for a business unit to have its own Idea Portal to retrieve data, what must be configured first?",
+      "answers": [
+        "A. A business unit cannot have its own its own Idea Portal",
+        "B. Idea Portal URL",
+        "C. Idea categories",
+        "D. Idea module"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/innovation-management/concept/idea-portal-administration.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "32",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105812-exam-cis-ppm-topic-1-question-32-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "What needs to be configured if a customer wants to change the attributes copied when using copy project or copy partial project?",
+      "answers": [
+        "A. The copy project client script.",
+        "B. com.snc.project.copy.",
+        "C. com.snc.project.copy.additional_attributes.",
+        "D. The copy project UI action"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/reference/r_InstalledWithProjectManagement.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "33",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105813-exam-cis-ppm-topic-1-question-33-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When entering time worked into a time sheet, which feature is recommended to group different types of work (e.g., standard hours and overtime)?",
+      "answers": [
+        "A. Rate type",
+        "B. Bill rate",
+        "C. Category",
+        "D. Rate model"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/cost-management/concept/RateType.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "34",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105814-exam-cis-ppm-topic-1-question-34-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What system role is needed to manage programs?",
+      "answers": [
+        "A. it_project_manager",
+        "B. it_portfolio_manager_admin",
+        "C. it_program_manager",
+        "D. it_program_manager_admin"
+      ],
+      "comments": [
+        {
+          "content": "C is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/program-management/concept/c_ProgramManagement.html",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "it_program_manager",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "it_program_manager",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "35",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105815-exam-cis-ppm-topic-1-question-35-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Who can submit Ideas?",
+      "answers": [
+        "A. Any user.",
+        "B. Any IT user.",
+        "C. Any demand user.",
+        "D. Any ITIL user."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/reference/r_DemandManagementProcessFlow.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "36",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105816-exam-cis-ppm-topic-1-question-36-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Where can a user export project data in either a MPP, XML or CSV format?",
+      "answers": [
+        "A. Demand Form",
+        "B. Related lists",
+        "C. Project Workbench",
+        "D. Planning Console"
+      ],
+      "comments": [
+        {
+          "content": "d is correct\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/t_ExportAProjectWithTheProjectForm.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Export the project data using the Export module, Project form, or Planning Console. Save the export file to a folder on your system in the Microsoft Project (MPP), XML, or CSV format.\n\nSource; https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/project-management/task/t_ExportAProjectWithTheProjectForm.html",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "37",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105817-exam-cis-ppm-topic-1-question-37-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which of the following are true regarding how the My Project Space (Project Workspace) handles dynamic content? (Choose two.)",
+      "answers": [
+        "A. If the project state is On Hold, actual start date and actual end date are displayed.",
+        "B. If the project state is Pending or Open, planned start date and planned end date are displayed.",
+        "C. If the project state is Draft, actual start date and actual end date are displayed.",
+        "D. If the project state is Work in Progress, actual start date and planned end date are displayed."
+      ],
+      "comments": [
+        {
+          "content": "Row 1 displays project name, state, project manager name, and important project dates. The displayed project dates are based on the current state of the project:\nIf the project state is Pending or Open, planned start date and planned end date are displayed.\nIf the project state is Work in Progress, actual start date and planned end date are displayed.\nIf the project state is Closed, actual start date and actual end date are displayed.",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "B,D is correct",
+          "selected_answer": "BD",
+          "replies": []
+        },
+        {
+          "content": "Best I could find.\nhttps://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/configure-project-card-parameters.html",
+          "selected_answer": "BD",
+          "replies": []
+        }
+      ],
+      "question_number": "38",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115715-exam-cis-ppm-topic-1-question-38-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "Which of the following states appear in the process flow indicator at the top of the Demand form by default? (Choose three.)",
+      "answers": [
+        "A. Draft",
+        "B. Approved",
+        "C. Updated",
+        "D. Screening",
+        "E. Deferred"
+      ],
+      "comments": [
+        {
+          "content": "These states appear in the process flow indicator at the top of the Demand form. The process flow indicator:\nHighlights the current state of the demand.\nChecks off the states that a demand has passed through.\nLeaves blank the states that have been skipped.\nIn this example, the demand is in the Approved state. It passed through the Draft, Submitted, and Qualified states but skipped the Screening state.\n\nSource; https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/planning-and-policy/reference/r_UsingDemandManagement.html",
+          "selected_answer": "ABD",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/reference/r_UsingDemandManagement.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ABD is correct",
+          "selected_answer": "ABD",
+          "replies": []
+        }
+      ],
+      "question_number": "39",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105818-exam-cis-ppm-topic-1-question-39-discussion/",
+      "most_voted": "ABD",
+      "error": null
+    },
+    {
+      "question": "Where are CAPEX and OPEX targets set for each fiscal year?",
+      "answers": [
+        "A. Demand Workbench",
+        "B. Cost Plans",
+        "C. Portfolio Target",
+        "D. Program Workbench"
+      ],
+      "comments": [
+        {
+          "content": "C is correct, checked in instance",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/t_CreateAPortfolio.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "40",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105819-exam-cis-ppm-topic-1-question-40-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which plugin activates the ideas module to gather and evaluate ideas efficiently, and quickly identify ideas for implementation?",
+      "answers": [
+        "A. Resource Management",
+        "B. Test Management 2.0",
+        "C. Ideation with PPM",
+        "D. Agile Development 2.0"
+      ],
+      "comments": [
+        {
+          "content": "Enables you to manage your demands, resources, portfolios and projects, and gives full visibility from idea to execution. Agile management and test management help you to improve productivity and service delivery. Enables you to manage ideas with full visibility from idea submission to execution. Collaborate with the idea submitter and other stakeholders to Identify ideas with the greatest potential and convert them into different work entities for execution.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct answer: C\nPPM Implementation On-Demand (nowlearning) clearly states that 'Ideation with PPM' plugin installs the Idea application.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The correct answer is ideation with ppm(c).\n\nIdeation with PPM\nEnables you to manage your demands, resources, portfolios and projects, and gives full visibility from idea to execution. Enables you to manage ideas with full visibility from idea submission to execution.\n\ncom.snc.ppm_innovation_management",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Actually the correct answer is Innovation Management: https://docs.servicenow.com/bundle/utah-it-business-management/page/product/innovation-management/concept/innovation-management.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct\nWhen the \"Resource Management\" plugin is activated in ServiceNow, it provides additional capabilities for resource planning, allocation, and management. As part of this plugin, the \"Ideas\" module is available to facilitate the submission, evaluation, and selection of ideas for implementation.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/pt-BR/bundle/sandiego-it-business-management/page/product/project-portfolio-suite-with-financials/reference/r_InstalledWithProjectPortfolioSuiteWithFinancials.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C IS CORRECT",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "I think C is correct!!!",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "41",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105027-exam-cis-ppm-topic-1-question-41-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "In what way would you restrict the assigned to field on a project task to only allow users with resource allocations to be assigned?",
+      "answers": [
+        "A. Create an Access Control List (ACL) rule.",
+        "B. On the project record under the preferences tab select the “Derive assignee list from resource plan” preference.",
+        "C. The system automatically does this and can only be disabled by an admin.",
+        "D. Create a reference qualifier on the ‘assigned to’ field."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/t_CreateAProject.html\nReview heading Derive assignee list from resource plan",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "42",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105820-exam-cis-ppm-topic-1-question-42-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "At a minimum, which role is required to view the summary of a project in the Details tab of Project Workspace?",
+      "answers": [
+        "A. it_project_manager",
+        "B. itil",
+        "C. it_project_user",
+        "D. it_portfolio_manager"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/define-project-in-project-workspace.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "43",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105821-exam-cis-ppm-topic-1-question-43-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is the demand workbench used for? (Choose two.)",
+      "answers": [
+        "A. Displaying submitted demands to stakeholders.",
+        "B. Comparing demands with portfolios.",
+        "C. Comparing and prioritizing demands against other demands.",
+        "D. Approving demands."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-it-business-management/page/product/planning-and-policy/concept/c_DemandWorkbench.html",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-it-business-management/page/product/planning-and-policy/concept/c_DemandWorkbench.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "AC is correct",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "44",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105822-exam-cis-ppm-topic-1-question-44-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "What applications are shared across teamspaces?",
+      "answers": [
+        "A. Project Financials, Agile, Test.",
+        "B. Resource, Project Financials, Agile",
+        "C. Resource, Agile, Test",
+        "D. Agile, Test only."
+      ],
+      "comments": [
+        {
+          "content": "Answer: C",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Now learning Project Portfolio Management (PPM) Implementation 5: Teamspace Configuration (Utah) Review teamspace heading.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "C is correct",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "45",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105823-exam-cis-ppm-topic-1-question-45-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "A project expense line is a cost associated with a specific source. Examples of specific sources could include: (Choose three.)",
+      "answers": [
+        "A. User.",
+        "B. Configuration Item (CI).",
+        "C. Project.",
+        "D. Demand.",
+        "E. Fixed Asset."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/project-management/task/t_CreateAExpenseLine.html",
+          "selected_answer": "ABE",
+          "replies": []
+        },
+        {
+          "content": "ABE is correct",
+          "selected_answer": "ABE",
+          "replies": []
+        }
+      ],
+      "question_number": "46",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105824-exam-cis-ppm-topic-1-question-46-discussion/",
+      "most_voted": "ABE",
+      "error": null
+    },
+    {
+      "question": "Which roles can modify agile properties? (Choose two.)",
+      "answers": [
+        "A. it_pps_admin.",
+        "B. product_owner.",
+        "C. admin.",
+        "D. scrum_master."
+      ],
+      "comments": [
+        {
+          "content": "AC is correct",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "47",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105825-exam-cis-ppm-topic-1-question-47-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "In the base system, what is the default number of cards that can be displayed in the project workspace?",
+      "answers": [
+        "A. 200",
+        "B. 10",
+        "C. 1500",
+        "D. 1"
+      ],
+      "comments": [
+        {
+          "content": "The best I could find\nhttps://docs.servicenow.com/bundle/utah-it-business-management/page/product/project-management/concept/project-workspace-classic.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "A is correct",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "48",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105826-exam-cis-ppm-topic-1-question-48-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Demand managers can enhance a demand request by adding the following: (Choose three.)",
+      "answers": [
+        "A. Requirements",
+        "B. Change Requests",
+        "C. Problems",
+        "D. Decisions",
+        "E. Stakeholders"
+      ],
+      "comments": [
+        {
+          "content": "Same question as No.158. However, 158 answers are requirements, tasks, and stakeholders. Not Decisions. I don't know which is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Who can enhance/manage demands?\nDemand managers can enhance a demand request by adding stakeholders, requirements, risks, decisions, and resource plans.\nhttps://quizlet.com/ca/504824511/servicenow-cis-ppm-project-portfolio-management-orlando-flash-cards/",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "ADE is correct",
+          "selected_answer": "ADE",
+          "replies": []
+        }
+      ],
+      "question_number": "49",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105827-exam-cis-ppm-topic-1-question-49-discussion/",
+      "most_voted": "ADE",
+      "error": null
+    },
+    {
+      "question": "This should be updated by an it_pps_admin, so that the stakeholder list will automatically populate when a user creates a demand or project.",
+      "answers": [
+        "A. Project form.",
+        "B. Stakeholder registry.",
+        "C. Demand form.",
+        "D. Application registry."
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-it-business-management/page/product/planning-and-policy/task/t_PopulatingTheStakeholderRegistry.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "50",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/105828-exam-cis-ppm-topic-1-question-50-discussion/",
+      "most_voted": "B",
+      "error": null
+    }
+  ]
+}

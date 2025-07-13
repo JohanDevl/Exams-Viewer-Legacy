@@ -1,0 +1,15 @@
+{
+  "exam_code": "CIS-PPM",
+  "exam_name": "CIS-PPM",
+  "chunked": true,
+  "chunk_size": 50,
+  "total_chunks": 4,
+  "total_questions": 166,
+  "created_chunks": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "created_at": "2025-07-13"
+}

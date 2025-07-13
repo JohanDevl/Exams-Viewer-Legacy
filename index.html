@@ -566,6 +566,15 @@
                 <span class="toggle-slider"></span>
                 Show advanced search and filters
               </label>
+              <label class="toggle-label">
+                <input type="checkbox" id="enableLazyLoading" />
+                <span class="toggle-slider"></span>
+                Enable lazy loading (experimental)
+              </label>
+              <p class="setting-description">
+                Lazy loading loads questions in chunks for better performance on large exams. 
+                May cause brief delays when navigating to unloaded questions.
+              </p>
             </div>
 
             <div class="setting-group">
@@ -600,6 +609,28 @@
                 Export, import, or reset your favorites, custom categories, and
                 question categorizations. Reset will permanently delete all
                 favorites data.
+              </p>
+            </div>
+
+            <div class="setting-group">
+              <h3><i class="fas fa-chart-bar"></i> Statistics Management</h3>
+              <div class="favorites-actions">
+                <button
+                  id="cleanOldStatisticsBtn"
+                  class="settings-action-btn export-btn"
+                >
+                  <i class="fas fa-broom"></i> Clean Old Sessions
+                </button>
+                <button
+                  id="resetStatisticsBtn"
+                  class="settings-action-btn reset-btn"
+                >
+                  <i class="fas fa-trash-alt"></i> Reset All Statistics
+                </button>
+              </div>
+              <p class="setting-description">
+                Clean old session data to free storage space, or completely reset all statistics.
+                Cleaning keeps the last 20 sessions only.
               </p>
             </div>
           </div>
@@ -664,5 +695,25 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+      // Register Service Worker for intelligent caching
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('Service Worker registered:', registration);
+            
+            // Listen for cache updates
+            navigator.serviceWorker.addEventListener('message', event => {
+              if (event.data && event.data.type === 'CACHE_UPDATED') {
+                console.log('Cache updated for:', event.data.url);
+                // Could show a subtle notification to user about updated content
+              }
+            });
+          })
+          .catch(error => {
+            console.log('Service Worker registration failed:', error);
+          });
+      }
+    </script>
   </body>
 </html>

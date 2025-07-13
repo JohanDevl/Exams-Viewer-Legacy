@@ -53,10 +53,21 @@ python scripts/scraper.py
 ### Data Structure
 ```
 data/
-├── {EXAM_CODE}.json          # Main exam questions data
-├── {EXAM_CODE}_links.json    # Scraping metadata and links
-└── manifest.json             # Available exams registry
+├── {EXAM_CODE}/                     # Folder per exam (new structure)
+│   ├── questions.json               # Main exam questions data
+│   ├── links.json                   # Scraping metadata and links  
+│   ├── chunk_1.json                 # Questions 1-50 (lazy loading)
+│   ├── chunk_2.json                 # Questions 51-100 (lazy loading)
+│   └── chunk_N.json                 # Additional chunks as needed
+├── {EXAM_CODE}.json                 # Legacy format (backward compatibility)
+├── {EXAM_CODE}_links.json           # Legacy format (backward compatibility)
+└── manifest.json                    # Available exams registry
 ```
+
+### Service Worker Architecture
+- **Cache Strategy**: Cache-first with background updates for optimal performance
+- **Intelligent Updates**: Background synchronization when new data is available
+- **File Management**: Automatic registration in production environment
 
 ## Critical Business Rules
 
@@ -78,11 +89,14 @@ data/
 - **Export Functionality**: PDF and JSON export of questions and user data
 - **Settings Management**: Persistent settings for UI preferences, sidebar state, and display options
 - **Advanced Search & Filters**: Comprehensive search system with text search, auto-completion, and status filters
+- **Performance Optimizations**: Lazy loading for large datasets, intelligent caching with service worker, automatic image compression
 
 ### Backend Features
 - **Smart Scraping**: Incremental updates, change detection, robust error handling
 - **Progress Tracking**: Callback-based progress reporting during batch operations
 - **Data Validation**: JSON schema validation and corruption recovery
+- **Image Processing**: Automatic WebP compression with fallback formats, intelligent image filtering
+- **Data Organization**: Folder-per-exam structure with chunked data for performance
 
 ## Code Conventions
 
@@ -245,6 +259,83 @@ The enhanced navigation system provides comprehensive keyboard shortcuts, visual
 - **Event handling**: Ensure keyboard shortcuts don't interfere with input fields
 - **Responsive design**: Test sidebar functionality on both desktop and mobile viewports
 
+## Performance Optimizations
+
+### Lazy Loading System
+- **Architecture**: Chunk-based loading with 50 questions per chunk for optimal performance
+- **Implementation**: Questions automatically split into chunks after scraping (>= 100 questions)
+- **User Control**: Optional feature, disabled by default (controlled by `enableLazyLoading` setting)
+- **Navigation Integration**: Seamless async navigation functions support chunk loading
+- **Progress Indicators**: Loading states and progress tracking during chunk operations
+
+### Key Components
+- **`loadQuestionChunk(chunkNumber)`**: Loads specific question chunks on demand
+- **`createChunksForExamData(examCode, questions, chunkSize=50)`**: Splits large datasets into chunks
+- **`processEmbeddedImages(htmlContent, imagesData)`**: Handles base64 image display in questions
+- **Backward Compatibility**: Automatic fallback to legacy format if chunks unavailable
+
+### Critical Implementation Details
+- **Chunk Loading**: Async loading with proper error handling and user feedback
+- **Image Processing**: Base64 embedded images with responsive styling and accessibility
+- **Memory Management**: Efficient chunk caching and cleanup to prevent memory leaks
+- **Navigation Sync**: All navigation functions updated to handle async chunk loading properly
+
+### Service Worker Caching
+- **Strategy**: Cache-first approach with intelligent background updates
+- **File Types**: JSON data files, static assets, and application resources
+- **Update Detection**: Background synchronization when new data becomes available
+- **Performance**: Significant improvement in load times for repeat visits
+
+### Image Compression
+- **Format**: Automatic WebP compression with JPEG fallback for compatibility
+- **Quality**: 85% compression ratio for optimal size vs quality balance
+- **Sizing**: Maximum dimensions of 800x600px to reduce bandwidth usage
+- **Integration**: Embedded directly in JSON as base64 data for simplified deployment
+- **Filtering**: Intelligent detection to process only question-related images, skip tracking pixels
+
+### Developer Guidelines
+- **Lazy Loading**: Always check if feature is enabled before implementing chunk-based logic
+- **Image Display**: Use `processEmbeddedImages()` for all question content rendering
+- **Chunk Creation**: Automatically triggered after scraping operations for exams >= 100 questions
+- **Error Handling**: Graceful fallback to legacy format if chunk loading fails
+- **Performance Testing**: Monitor chunk loading times and user experience impact
+
+## GitHub Actions Automation
+
+### Workflow Architecture
+The project uses comprehensive GitHub Actions workflows for automated development and release management:
+
+#### Core Workflows
+- **`update-changelog.yml`**: Automatically updates changelog dates when PRs are merged to main
+- **`release-changelog.yml`**: Manages release preparation and changelog versioning
+- **`sync-develop.yml`**: Automatically synchronizes develop branch after changelog updates
+- **`manual-sync-develop.yml`**: Advanced manual synchronization with multiple strategies
+
+#### Automatic Develop Branch Synchronization
+- **Trigger**: Automatically runs after changelog workflows complete successfully
+- **Strategy**: Fast-forward merge from main to develop when no conflicts detected
+- **Conflict Handling**: Intelligent detection and reporting of merge conflicts
+- **Fallback Options**: Manual intervention tools available for complex scenarios
+
+#### Advanced Sync Features
+- **Multiple Strategies**: Merge (recommended), rebase, or reset synchronization methods
+- **Dry Run Capability**: Preview changes before applying them
+- **PR Creation**: Option to create synchronization PRs instead of direct merges
+- **Detailed Reporting**: Comprehensive summaries of sync operations and conflicts
+
+#### Development Workflow Integration
+1. **Feature Development**: Work on feature branches from develop
+2. **PR Merge**: Merge feature PRs to develop, then create release PR to main
+3. **Automatic Processing**: Changelog dates updated automatically on main merge
+4. **Branch Sync**: Develop branch automatically synchronized with latest main changes
+5. **Continuous Development**: Development continues on updated develop branch without manual intervention
+
+### Critical Workflow Requirements
+- **Date Placeholders**: Always use `{PR_MERGE_DATE}` in changelog entries - never replace manually
+- **Branch Protection**: Workflows require proper permissions (contents: write, pull-requests: read/write)
+- **Conflict Resolution**: Manual intervention required when automatic sync detects conflicts
+- **Monitoring**: Review workflow summaries and logs for successful completion
+
 ## Documentation and Changelog Management
 
 ### Changelog Structure (`CHANGELOG.md`)
@@ -283,5 +374,7 @@ The enhanced navigation system provides comprehensive keyboard shortcuts, visual
 - Main interface: `/index.html`, `/script.js`, `/styles.css`
 - Python scripts: `/scripts/scraper.py`, `/scripts/update_all_exams.py`
 - Documentation: `/docs/` (comprehensive guides for features and development)
-- Data files: `/data/{EXAM_CODE}.json` and `/data/{EXAM_CODE}_links.json`
-- Dependencies: `/requirements.txt` (requests==2.32.3, beautifulsoup4==4.13.4)
+- Data files: `/data/{EXAM_CODE}/` (new structure) and `/data/{EXAM_CODE}.json` (legacy)
+- Dependencies: `/requirements.txt` (requests==2.32.3, beautifulsoup4==4.13.4, Pillow==10.4.0)
+- Workflows: `/.github/workflows/` (automation for changelog and branch synchronization)
+- Service Worker: `/sw.js` (caching and performance optimization)

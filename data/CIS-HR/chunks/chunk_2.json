@@ -1,0 +1,1511 @@
+{
+  "chunk_id": 2,
+  "start_question": 101,
+  "end_question": 150,
+  "questions_count": 50,
+  "questions": [
+    {
+      "question": "Using the base HRSD configuration with no integrations, when the subject person electronically signs an HR document or PDF document, the signature is saved as what?",
+      "answers": [
+        "A. a digital signature",
+        "B. a picture of the signature that is added to the document",
+        "C. a digital key",
+        "D. a digital certificate"
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 117: E-signatures are not the same as digital signatures. E-signatures are an image, or picture, of your signature placed on a document to represent an acknowledgement or approval.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct: B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "101",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122260-exam-cis-hr-topic-1-question-101-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What role needs to be removed from the Admin role at go live to prevent the System Admin from being able to see HR Profile information?",
+      "answers": [
+        "A. HR Manager [sn_hr_core.manager]",
+        "B. HR Agent [sn_hr_core.agent]",
+        "C. Core Admin [sn_core.admin]",
+        "D. HR Admin [sn_hr_core.admin]"
+      ],
+      "comments": [
+        {
+          "content": "HR Fund > Access to Confidential Information is Restricted\n\nSome HR profile information, such as Department, is synchronized between the User [sys_user] and HR Profile [hr_profile] tables. Updating information in one record automatically applies the updates to the other. After the HR application is configured and ready to go live, the HR Admin role may be removed from the System Administrator. When the HR Admin role is removed from the Admin role, the System administrator can still view the HR Profile record from the user record, but they will only see the information that is also visible on the User table. The confidential fields, like Beneficiaries, are visible only to HR professionals.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct: D\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-employee-service-management/page/product/human-resources/task/t_HRRemoveAdminRole.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "102",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122355-exam-cis-hr-topic-1-question-102-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "If you select Data Type Numeric Scale on the Assessment Metric (Survey Question) form there is a Scale definition field made visible.<br/>What does it mean to select High for the Scale definition?",
+      "answers": [
+        "A. It means a high score is bad",
+        "B. It means a high score is good",
+        "C. There is no option for Scale definition",
+        "D. There is no option for High"
+      ],
+      "comments": [
+        {
+          "content": "B is correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is B\nhttps://docs.servicenow.com/bundle/rome-servicenow-platform/page/administer/survey-administration/reference/r_SurveyQuestionDataTypes.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "It is B. \nhttps://docs.servicenow.com/en-US/bundle/utah-servicenow-platform/page/administer/survey-administration/reference/r_SurveyQuestionDataTypes.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is D",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "103",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104120-exam-cis-hr-topic-1-question-103-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "In which Application Scope is the Lifecycle Events table contained?",
+      "answers": [
+        "A. Human Resources: Core",
+        "B. Human Resources: Lifecycle Events",
+        "C. Human Resources: Integrations",
+        "D. Human Resources: Service Portal"
+      ],
+      "comments": [
+        {
+          "content": "Correct: B\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-employee-service-management/page/product/human-resources/task/activate-enterprise-onboarding-and-transitions-scoped.html#:~:text=Human%20Resources%20Scoped%20App%3A%20Lifecycle%20Events%20enables%20you%20to%20easily,they%20are%20not%20already%20active.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "104",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122357-exam-cis-hr-topic-1-question-104-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What settings define and track cross-scope access to applications?",
+      "answers": [
+        "A. Access Controls",
+        "B. Restricted Caller Access",
+        "C. Access Restrictions",
+        "D. Business Rules"
+      ],
+      "comments": [
+        {
+          "content": "Correct: B\n\nhttps://docs.servicenow.com/pt-BR/bundle/sandiego-application-development/page/build/applications/task/set-RCA-level.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "105",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104328-exam-cis-hr-topic-1-question-105-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What determines which Knowledge bases, Knowledge articles, and Service Catalog Items an employee can view?",
+      "answers": [
+        "A. Filters",
+        "B. User Groups",
+        "C. HR Criteria",
+        "D. User Criteria"
+      ],
+      "comments": [
+        {
+          "content": "Correct: D\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-servicenow-platform/page/product/knowledge-management/concept/user-access-knowledge.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "106",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122358-exam-cis-hr-topic-1-question-106-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "The Template field referenced on the HR Service record is used to do what?",
+      "answers": [
+        "A. Populate fields on the HR Case record",
+        "B. Filter who can access the HR Service",
+        "C. Create pre-configured responses HR professionals can use",
+        "D. Make the HR Service accessible on the Employee Service Center"
+      ],
+      "comments": [
+        {
+          "content": "Correct: A\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-employee-service-management/page/product/human-resources/task/configure-hr-service.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "107",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122360-exam-cis-hr-topic-1-question-107-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "When is the Record producer field needed on the HR Service record?",
+      "answers": [
+        "A. When the HR professional will be creating Cases on behalf of the employee",
+        "B. When you want the employee to request the HR Service from the Employee Service Center",
+        "C. It is always a required field",
+        "D. There is no Record producer held on the HR Service record"
+      ],
+      "comments": [
+        {
+          "content": "Correct: B\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-employee-service-management/page/product/human-resources/task/configure-hr-record-producer.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "108",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122363-exam-cis-hr-topic-1-question-108-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What are the major HR Service Catalog components? (Choose four.)",
+      "answers": [
+        "A. HR Template",
+        "B. Assignment Group",
+        "C. HR Catalog Item",
+        "D. Matching Rule",
+        "E. Record Producer",
+        "F. HR Service",
+        "G. HR Profile"
+      ],
+      "comments": [
+        {
+          "content": "https://docs.servicenow.com/bundle/washingtondc-employee-service-management/page/product/human-resources/concept/hr-catalog-item-configuration.html",
+          "selected_answer": "ACEF",
+          "replies": []
+        },
+        {
+          "content": "Correct: ACEF",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "109",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122365-exam-cis-hr-topic-1-question-109-discussion/",
+      "most_voted": "ACEF",
+      "error": null
+    },
+    {
+      "question": "How can HR Tasks be marked as optional?",
+      "answers": [
+        "A. Set Optional to True on the HR Task Template",
+        "B. Set Optional to True on the Activity Set",
+        "C. Tasks cannot be optional",
+        "D. Set Optional to True on the HR Case form"
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 112: HR Templates populate fields on an HR Case or Task automatically. HR tasks may be flagged as optional.",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct: A\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-employee-service-management/page/product/human-resources/task/configure-hr-task-template.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "110",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122366-exam-cis-hr-topic-1-question-110-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What provides a graphical representation of other tables related to a specific table, either through class extension or reference?",
+      "answers": [
+        "A. System Structure",
+        "B. Table Map",
+        "C. System Map",
+        "D. Schema Map"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 30:\nYou may use the Schema Map to see a graphical representation of how tables are related to a specific table.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct: D\n\nhttps://docs.servicenow.com/en-US/bundle/vancouver-platform-administration/page/administer/table-administration/concept/c_SchemaMapForTables.html#:~:text=The%20schema%20map%20displays%20the,parts%20of%20the%20database%20schema.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "111",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122367-exam-cis-hr-topic-1-question-111-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Scenario: An existing ITSM customer is now implementing HR Enterprise. As part of the implementation, the Scoped Application Restricted Caller Access [com.glide.scope.access.restricted_caller] plugin was automatically activated.<br/>By default, what is the Caller Access field set to?",
+      "answers": [
+        "A. Caller Denial",
+        "B. Caller Tracking",
+        "C. Caller Restriction",
+        "D. Caller Allowed"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 37: By default, the Caller Access field for all HR tables is set to Caller Restriction.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct: C\n\nhttps://docs.servicenow.com/pt-BR/bundle/sandiego-application-development/page/build/applications/concept/restricted-caller-access-privilege.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "112",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122368-exam-cis-hr-topic-1-question-112-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following is the key factor in determining the implementation timeline?",
+      "answers": [
+        "A. Configuration complexity",
+        "B. Types of integrations",
+        "C. Customer location",
+        "D. Customer business type"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 197",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "From the implementation training book:\n\"Configuration complexity is the key factor when developing an implementation timeline\"",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A is correct answer",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A , HRSD Implementation ebook, Page 35",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "A seems logical",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer is A",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "113",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104122-exam-cis-hr-topic-1-question-113-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Beginning with the Orlando release, which module allows HR Administrators to define which groups may access the various COEs or HR Services without needing to edit or create new ACL records?",
+      "answers": [
+        "A. COE Properties",
+        "B. COE ACL Configuration",
+        "C. Access Policies",
+        "D. COE Policy groups"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 151: The COE Security Configuration module allows admins to restrict access to all cases on a COE or to specific HR Services without creating ACL records.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct: B\n\nhttps://www.servicenow.com/community/hrsd-forum/coe-acl-configuration/m-p/1320245#:~:text=Use%20COE%20Access%20Control%20List,cases%20under%20a%20specific%20COE.&text=To%20restrict%20who%20can%20read,still%20be%20able%20to%20read.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "114",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122370-exam-cis-hr-topic-1-question-114-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "A customer using Lifecycle Events Enterprise has documented a large offboarding Lifecycle Event that includes many steps. Many of the steps, including approvals, must be completed in a specific order.<br/>Which of these is the best method to use to ensure the activities are triggered in the appropriate order?",
+      "answers": [
+        "A. Create a new lifecycle event for each of the dependent items",
+        "B. Create separate trigger conditions for each of the dependent activities",
+        "C. Create activity containers for the dependent items",
+        "D. Create separate activity sets for each of the dependent activities"
+      ],
+      "comments": [
+        {
+          "content": "Configure a lifecycle event activity that is a container for a group of activities. This activity type enables you to manage the dependencies of activities within an activity set. You can use activity containers to order activities, in parallel or sequence, as well as configure multiple activity containers within an activity set.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct: C\n\nhttps://docs.servicenow.com/pt-BR/bundle/vancouver-employee-service-management/page/product/human-resources/task/configure-hr-lifecycle-event-activity.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "116",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122402-exam-cis-hr-topic-1-question-116-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What kinds of records can be created using HR Service Activities? (Choose two.)",
+      "answers": [
+        "A. Workflows",
+        "B. Approvals",
+        "C. HR Templates",
+        "D. Tasks"
+      ],
+      "comments": [
+        {
+          "content": "Correct: BD",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "117",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122404-exam-cis-hr-topic-1-question-117-discussion/",
+      "most_voted": "BD",
+      "error": null
+    },
+    {
+      "question": "Which HR Integrations module is used to document the URL, basic integration properties, and inbound and outbound username and password information for a third-party application?",
+      "answers": [
+        "A. HR Integration Service",
+        "B. HR Schema Mapping",
+        "C. Sources",
+        "D. HR Webservices"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 172",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct\n\nhttps://docs.servicenow.com/bundle/tokyo-employee-service-management/page/product/human-resources/task/configure-source-credentials-for-hr-management-system.html\n\nhttps://docs.servicenow.com/bundle/tokyo-employee-service-management/page/product/human-resources/concept/integrate-with-other-background-check-services.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "118",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/120585-exam-cis-hr-topic-1-question-118-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "How can a PDF document on an active HR case be generated? (Choose two.)",
+      "answers": [
+        "A. Autogenerated by system configuration",
+        "B. By the Subject Person’s manager",
+        "C. By the employee",
+        "D. By the Assigned to person"
+      ],
+      "comments": [
+        {
+          "content": "HR Professional is case Assigned to. So only D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct answers: A, D\nHR Fundamentals - Vancouver, p. 120 - Documents can be generated Automatically by the system or by an HR professional.",
+          "selected_answer": "AD",
+          "replies": []
+        },
+        {
+          "content": "Correct: AD\n\nhttps://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/generate-pdf-doctemp.html\n\nhttps://docs.servicenow.com/pt-BR/bundle/vancouver-employee-service-management/page/product/human-resources/task/task-mapped-participants.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is A and D.",
+          "selected_answer": "AD",
+          "replies": []
+        }
+      ],
+      "question_number": "119",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/117197-exam-cis-hr-topic-1-question-119-discussion/",
+      "most_voted": "AD",
+      "error": null
+    },
+    {
+      "question": "After configuration on a Lifecycle Event is complete, what additional configuration is needed to initiate the LE process for an employee?",
+      "answers": [
+        "A. None. The LE will automatically trigger based on its configuration",
+        "B. An Event is needed to initiate the LE process",
+        "C. A Scheduled Job is needed to initiate the LE process",
+        "D. An HR Service is needed to initiate the LE process"
+      ],
+      "comments": [
+        {
+          "content": "Page 90 of HR Implementation - Tokyo:\nRemember, an HR Service is needed to initiate the Lifecycle Event.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "page 79 of Tokyo implementation guide \"4. Create HR Service which will initiate the Lifecycle event\"\nD is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is D: HR Service is needed...",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D \"An HR Service is needed to initiate the LE process\" seem to be correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer should be \"HR Service\"",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "120",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102814-exam-cis-hr-topic-1-question-120-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "In Employee Document Management, which of the following statements is true for legal holds?",
+      "answers": [
+        "A. Legal Holds are permanent and cannot be removed",
+        "B. Legal Holds may be placed on a group of HR profiles",
+        "C. Legal Holds may be placed on either a Document Type or an individual employee’s HR Profile",
+        "D. Legal Holds may be manually placed on individual employee documents"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 138: Legal Holds may be placed on an entire Document Type or on an employee's HR Profile to prevent documents from being edited or purged",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct: C\n\nhttps://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/exploring-employee-document-management.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "121",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122409-exam-cis-hr-topic-1-question-121-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Each HR service created in _______ has a corresponding transform map job.",
+      "answers": [
+        "A. HR Transform Maps",
+        "B. HR Integration Service",
+        "C. HR Service Mapping",
+        "D. HR Schema Mapping"
+      ],
+      "comments": [
+        {
+          "content": "It is B.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B, https://docs.servicenow.com/bundle/utah-employee-service-management/page/product/human-resources/concept/configure-inbound-integration-for-hr-management-system.html",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B: HR Integration Service seems correct.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "122",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/107612-exam-cis-hr-topic-1-question-122-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "If the Workflow editor is utilized for a Lifecycle Event, how does the system know when a task or approval should be triggered?",
+      "answers": [
+        "A. Activities are manually triggered",
+        "B. The activity set trigger condition determines when it is triggered",
+        "C. Activities are automatically triggered on specific dates",
+        "D. The Activity trigger condition determines when it is triggered"
+      ],
+      "comments": [
+        {
+          "content": "Why is \"Activity Trigger Condition\" correct?\nActivity Trigger Condition is a specific configuration within a workflow that defines the conditions under which individual activities, such as tasks and approvals, should be triggered. For example, a task might be triggered when a lifecycle event reaches a certain state or when specific conditions related to the employee or the case are met.\n\nThe trigger condition evaluates whether the required criteria are met to activate an activity in the workflow, such as when an HR case reaches a specific state, a date arrives, or certain fields are set. This mechanism ensures that tasks and approvals happen automatically at the correct time in the lifecycle process.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Page 81 on HR Implementation - Tokyo book:\n- Trigger conditions: defines when the activity set should be initiated.\nWhen the Activity set is triggered, all Activities within it are triggered as well.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "HR Implementation ebook page 82: The Activity Set Trigger Conditions field tells the system when an Activity Set should begin and Business Rules control the behavior.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer B. HRSD Implemntation ebook page 82.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B coorect",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B iscorrect",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer should be B",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "123",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102815-exam-cis-hr-topic-1-question-123-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What Primary Security aspects are focused on for the HR application? (Choose three.)",
+      "answers": [
+        "A. Password Security",
+        "B. ACL Security",
+        "C. Contextual Security",
+        "D. Physical Security",
+        "E. Roles and Groups",
+        "F. Platform Access"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 149",
+          "selected_answer": "CEF",
+          "replies": []
+        },
+        {
+          "content": "Correct: CEF",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "124",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122411-exam-cis-hr-topic-1-question-124-discussion/",
+      "most_voted": "CEF",
+      "error": null
+    },
+    {
+      "question": "A customer using Lifecycle Events Enterprise has configured their onboarding process. Now, management has tasked the HR Admin with creating a way to back out onboarding work in case the new employee decides not to join the company.<br/>Which of these is the best method to use to reverse work already performed as part of this Lifecycle Event?",
+      "answers": [
+        "A. Check the “allow blackout” box on each of the activities",
+        "B. Configure a new Lifecycle Event with the necessary activities",
+        "C. Configure the rescind activity set with the necessary activities",
+        "D. Check the “allow blackout” box on each of the activity sets"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 89: Cancel and revert work done in a lifecycle event case with the rescind process.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct: C\n\nhttps://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/task/configure-rescind-for-a-lifecycle-event.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "125",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122414-exam-cis-hr-topic-1-question-125-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "If the Applies to all services box is not checked on the COE ACL Configuration record, what additional configurations must be made to the record?",
+      "answers": [
+        "A. No additional configurations are needed",
+        "B. More than one group must be added to the Groups list",
+        "C. At least one HR Service must be selected for the Services list",
+        "D. An Applies when condition must be created for each Service"
+      ],
+      "comments": [
+        {
+          "content": "HR implementation ebook page 151: If the \"Applies to all services\" box is not checked, at least one HR Service must be selected for the Services list.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C is correct. HR Implementation - Rome page 159",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "should be B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "126",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/115018-exam-cis-hr-topic-1-question-126-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "If an HR Document must be manually generated for an HR Case, who is able to generate the document from the Case record?",
+      "answers": [
+        "A. Only an HR Admin can generate Documents from a Case",
+        "B. Any HR professional can generate the Document, even if they are not assigned to the Case",
+        "C. Only the assigned to person can manually generate Documents from a Case",
+        "D. Only the Manager of the assignment group can generate the Document"
+      ],
+      "comments": [
+        {
+          "content": "Its C, assigned to person can manually generate the document",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Assigned to person can manually generate the Document.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Assigned To person",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "C corrct",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "The answer is C : Assigned Person",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "I think it is C.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "127",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104330-exam-cis-hr-topic-1-question-127-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What role is required at a minimum, to access the Lifecycle Events Cases View Dashboard?",
+      "answers": [
+        "A. HR Basic [sn_hr_core basic]",
+        "B. HR Case Reader [sn_hr_le.case_reader]",
+        "C. LE Admin [sn_hr_le.admin]",
+        "D. HR Admin [sn_hr_core.admin]"
+      ],
+      "comments": [
+        {
+          "content": "This dashboard is restricted to the following roles: sn_hr_le.activity_reader, sn_hr_le.case_reader",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "MINIMUM role is asked",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct, check roles in your instance after downloading HR Lifecycle Event",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B correct as it is asking minimum role req",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/utah-employee-service-management/page/product/human-resources/reference/components-installed-with-enterprise-onboarding-and-transitions.html\nThis suggests that answer is C: LE Admin",
+          "selected_answer": "",
+          "replies": [
+            "Check your PDI,  Access this Dashboard, then select \"Share\".  You will see message that indicates sn_hr_le.case_reader is a role that can access.   ANSWER is B"
+          ]
+        },
+        {
+          "content": "Answer is C - LE Admin",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct Answer should be \"LE Admin\"",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "128",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/102817-exam-cis-hr-topic-1-question-128-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Using the Lifecycle Event Enterprise application, tasks may only be assigned to... (Choose the most appropriate answer.)",
+      "answers": [
+        "A. Only users with a Client Role",
+        "B. Only users with an HR role",
+        "C. HR Case Workers. Employees, users in other groups",
+        "D. Only users with the Manager role"
+      ],
+      "comments": [
+        {
+          "content": "Correct: C",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "129",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122426-exam-cis-hr-topic-1-question-129-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What identifies data from HRSD to push to a third-party HR application?",
+      "answers": [
+        "A. HR Inbound Schema Mapping",
+        "B. HR Outbound Schema Mapping",
+        "C. HR Webservices",
+        "D. HR Service Mapping"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 176: with an outbound integration, data is pushed from the HR tables or HR service in HRSD to the third-party HR management system. The HR outbound schema mappings map the data from the source tables to the fields in the target system.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Correct: B\n\nhttps://docs.servicenow.com/bundle/tokyo-employee-service-management/page/product/human-resources/task/hr-outbound-schema-mapping-for-hr-management-system.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "130",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122425-exam-cis-hr-topic-1-question-130-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "When configuring the Onboarding Lifecycle Event, the HR Admin did not select an Audience for the 'Select a Desk' task. If a remote employee is being onboarded. how does the system handle this task?",
+      "answers": [
+        "A. The Lifecycle Event rescind process will be triggered",
+        "B. The activity will be skipped",
+        "C. The Lifecycle Event will be canceled",
+        "D. The activity will be triggered and must be manually closed"
+      ],
+      "comments": [
+        {
+          "content": "It triggers",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct: D. \nThe activity set will trigger.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "If no audience record is selected, then the activity for the activity to trigger in the case.\nThe audience criteria for an activity set applies first. When the audience criteria is met, the activity set executes. The audience at the activity level is then checked and executed.\n\nYou cannot set an audience for activity sets that have a trigger type of Rescind.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "if there isn't an audience record, the activity is triggered",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Correct: D\n\nhttps://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/task/configure-hr-lifecycle-event-activity.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "131",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122428-exam-cis-hr-topic-1-question-131-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When configuring a record on the COE ACL Configuration module how can you apply the conditions to all HR services for the COE?",
+      "answers": [
+        "A. Add a filter condition for each HR service",
+        "B. Select the Applies to all services box",
+        "C. Write a new ACL record for each HR service",
+        "D. Select each HR service using the Services list"
+      ],
+      "comments": [
+        {
+          "content": "B is the correct answer - p. 151 from HR Implementation - Tokyo eBook",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "HR Implementation ebook page 151",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B - see page 151 of Implementation guide (Tokyo) - 2nd Note",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct answer",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "132",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104144-exam-cis-hr-topic-1-question-132-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "If you have both Admin [admin] and HR Admin [sn_hr_core.admin] roles and want to configure an Access Control Rule for the HR Payroll table, which of the following must first be done?",
+      "answers": [
+        "A. Manually add the Delegated Developer role to your User record",
+        "B. Manually add the security_admin role to your User record",
+        "C. From the User dropdown in the banner, elevate your role to delegated_developer",
+        "D. From the User dropdown in the banner, elevate your role to security_admin"
+      ],
+      "comments": [
+        {
+          "content": "It’s rather D, because if you do not have security_admin you cannot just add it. You would need to elevate to security_admin first.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "It depends.. \nThe security_admin role is not automatically granted to Admins.. \nSo if the ACL needs to be created and this Admin does not have the role, the first thing that needs to be done is B.\nElse, if he already has the role, Elevating to Security Admin role is the correct answer (D)",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "It's D",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer is D!",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D should be correct.",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D* not B",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "133",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104146-exam-cis-hr-topic-1-question-133-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "The customer has a group of developers who will be tasked with making subprod updates to the HR Integrations application. Customer policy states these developers cannot be granted the System Administrator [admin] role. Which of these is the best solution for granting the appropriate access needed to complete development work m the HR application?",
+      "answers": [
+        "A. Grant them delegated developer role to the global application scope",
+        "B. Advise the customer this work must be completed in Production",
+        "C. Grant them delegated developer role only to the HR Integrations application scope",
+        "D. Submit an exception request to allow them to have the Admin role"
+      ],
+      "comments": [
+        {
+          "content": "Correct: C",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "134",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122429-exam-cis-hr-topic-1-question-134-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "When an employee contacts HR, they speak in terms of lifecycle events. From an HR perspective, that event gets translated into several HR services that need to be performed. Of the following items, which would be considered a lifecycle event?",
+      "answers": [
+        "A. Direct Deposit Setup",
+        "B. Having a baby",
+        "C. PTO Inquiry",
+        "D. Tuition Reimbursement"
+      ],
+      "comments": [
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B is correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B correct",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "Answer is B: Parental Leave = lifecycle event",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is B",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "135",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104147-exam-cis-hr-topic-1-question-135-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "All ServiceNow web traffic uses which data protocol to ensure data is always TLS encrypted in transit.",
+      "answers": [
+        "A. REST protocol",
+        "B. HTTP",
+        "C. SOAP protocol",
+        "D. HTTPS"
+      ],
+      "comments": [
+        {
+          "content": "Correct: D\n\nhttps://blogs.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/resource-center/white-paper/wp-data-encryption-with-servicenow.pdf",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "136",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122430-exam-cis-hr-topic-1-question-136-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Scenario: Alex is a member of the HR Tier 1 group which grants him the HR Basic [sn_hr_core.basic] role. He is going to be out of the office for a few days and wants to use granular delegation to allow his friend Amy to complete his tasks. Amy is not yet a member of any HR groups, but hopes to transfer into HR one day. Will granular delegation work for this purpose?",
+      "answers": [
+        "A. Yes. Granular delegation will automatically grant the necessary roles",
+        "B. Yes. Granular delegation will automatically add Amy to the HR Tier 1 group where she will inherit the role.",
+        "C. Partially. Granular delegation will allow Amy access to the HR Tasks, but not to the HR Case itself.",
+        "D. No. Granular delegation does not change a delegate's access to records."
+      ],
+      "comments": [
+        {
+          "content": "100% D\n\nServicenow Docs:\n\nImportant: Granular delegation does not change a delegate's access to records. To access records, a delegate must already have the necessary roles. For example, to delegate task records, a delegate must have a role such as itil to access the Task table and its extensions.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Ebook claims that delegation does not change roles assignment, so D.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is quoted from the e-book.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Answer is D.  Page 152 of Implementation ebook (Tokyo) -  \"granular delegation does not change a delegate's access to records\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer is D.  Page 160 of eBook (Rome)...  \"granular delegation does not change a delegate's access to records\"",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "B is correct. \n\n\"Granular delegation allows employees to delegate their tasks to other employees for specific date and time ranges based on delegation rules.\n\nGranular delegation provides the ability to delegate specific records by table and condition. It also allows admins to delegate approvals and/or task assignments for task tables they administer.\"\n\nSource: https://docs.servicenow.com/en-US/bundle/utah-employee-service-management/page/product/employee-service-management/granular-delegation/concept/granular-delegation.html",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Correct answer is D",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "137",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/104148-exam-cis-hr-topic-1-question-137-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which Lifecycle Event activity type enables you to manage the dependencies or order of activities within an activity set?",
+      "answers": [
+        "A. Approval",
+        "B. Notification",
+        "C. Activity container",
+        "D. Employee task"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 87: activity containers allow you to manage the dependencies of activities within an activity set. You can use activity containers to establish the order in which activities should occur.",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "Correct: C\n\nhttps://docs.servicenow.com/bundle/utah-employee-service-management/page/product/human-resources/task/configure-hr-lifecycle-event-activity.html\n\nhttps://docs.servicenow.com/bundle/utah-employee-service-management/page/product/human-resources/task/configure-lifecycle-event-activity-container.html",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "138",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/122431-exam-cis-hr-topic-1-question-138-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "If all Can Edit Journey permissions are selected on the Journey configuration, which of the following users are allowed to make changes to the existing Journey? (Choose two.)",
+      "answers": [
+        "A. The journey owner",
+        "B. The employee",
+        "C. The mentor",
+        "D. The admin"
+      ],
+      "comments": [
+        {
+          "content": "A. The journey owner\nC. The mentor\n\nIn Journey Configuration form there are 2  tabs, one is \"Journey owner Persmission\" and one is \"Mentor Permission\".",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "Based on book it is: A & C",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "HR Implementation ebook page 95",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "from the implementation training book:\n\"Additional Journey editing can be allowed during Journey configuration. This allows custom tasks to be added to a journey by the Journey owner and designated mentor.\"",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "AC is correct",
+          "selected_answer": "AC",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/en-US/bundle/utah-employee-service-management/page/product/human-resources/reference/jny-dsgnr-user-permission-ref.html\n\nCan edit journey: Allows a user to modify a journey. Managers can enable mentors to modify an employee's journey.\n\nCorrect: AC",
+          "selected_answer": "AC",
+          "replies": []
+        }
+      ],
+      "question_number": "139",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/114911-exam-cis-hr-topic-1-question-139-discussion/",
+      "most_voted": "AC",
+      "error": null
+    },
+    {
+      "question": "Lifecycle Events includes an activity set that can be used to cancel and revert work done in a lifecycle event case. What is this process called?",
+      "answers": [
+        "A. Reverse",
+        "B. Cancel",
+        "C. Repeal",
+        "D. Rescind"
+      ],
+      "comments": [
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Rescind",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "\"Cancel and revert work done in a lifecycle event case with the rescind process.\"",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "It should be \"D\"",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "Answer should be :D",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "140",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/126634-exam-cis-hr-topic-1-question-140-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "When configuring a Lifecycle Event, which of the following is used to define the relationships between fields in various tables?",
+      "answers": [
+        "A. Trigger conditions",
+        "B. LE Properties",
+        "C. Activity Field Mapping",
+        "D. HR Templates"
+      ],
+      "comments": [
+        {
+          "content": "C. Activity Field Mapping\n\n\"Activity Field Mappings are used to define the relationships between fields in various tables.\"",
+          "selected_answer": "C",
+          "replies": []
+        },
+        {
+          "content": "HR Implementation ebook page 85: Activity Field Mappings are used to define the relationships between fields in various tables.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "141",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128557-exam-cis-hr-topic-1-question-141-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which of the following features allows employees to delegate their tasks to other employees for specific date and time ranges based on delegation rules?",
+      "answers": [
+        "A. Role Delegation",
+        "B. Admin Delegation",
+        "C. Granular Delegation",
+        "D. Task Delegation"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 152: Granular delegation allows employees to delegate their tasks to other employees for specific date and time ranges based on delegation rules.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "142",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128558-exam-cis-hr-topic-1-question-142-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "What is the purpose of Journey designer?",
+      "answers": [
+        "A. It tracks the progress of Lifecycle Events and onboarding cases using the dashboards.",
+        "B. It creates templates for plan and to-do tasks that managers, employees, and mentors can access.",
+        "C. It manages the dependencies of activities within an activity set.",
+        "D. It combines Lifecycle Event cases and Journey Accelerator action plans."
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 94: Journey designer combines Lifecycle Event cases and Journey Accelerator action plans",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "143",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128559-exam-cis-hr-topic-1-question-143-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which HRSD application automates and streamlines employee onboarding and other activities across departments?",
+      "answers": [
+        "A. Lifecycle Events",
+        "B. Employee Center",
+        "C. HR Performance Analytics",
+        "D. HR Integrations"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation e book page 84",
+          "selected_answer": "A",
+          "replies": []
+        }
+      ],
+      "question_number": "145",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137187-exam-cis-hr-topic-1-question-145-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "What are the functions of a journey template owner? (Choose three.)",
+      "answers": [
+        "A. Manage the order and flow of the journey stages and tasks",
+        "B. Create task templates for their audience in a simple, user-friendly experience",
+        "C. Add owners and approvers to journey configurations",
+        "D. Change only the task templates that they own",
+        "E. Maintain oversight of journey templates and approval flows"
+      ],
+      "comments": [
+        {
+          "content": "Change only the task templates that they own. is for the Co-Owners only",
+          "selected_answer": "ABC",
+          "replies": []
+        },
+        {
+          "content": "According to docs:\nJourney owner\nMaintain plan configurations and initiate the approval workflow for plan configuration.\nUpdate and publish changes to plan configurations.\nCreate and change task templates for your audience.\nAdd or update stages in a journey.\n\nhttps://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/jny-process-owners-maint.html\n\nI don’t know how to answer it correctly :).",
+          "selected_answer": "",
+          "replies": []
+        },
+        {
+          "content": "Journey template owners, who are enabled to manage and create journeys templates for assigned audiences, can do the following actions:\nCreate task templates for their audience in a simple, user-friendly experience.\nChange only the task templates that they own.\nManage the order and flow of the journey stages and tasks.\n\nSo it's ABD",
+          "selected_answer": "ABD",
+          "replies": []
+        }
+      ],
+      "question_number": "146",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/132472-exam-cis-hr-topic-1-question-146-discussion/",
+      "most_voted": "ABD",
+      "error": null
+    },
+    {
+      "question": "What variable type is included to configure the HTML document template?",
+      "answers": [
+        "A. Customized Variable",
+        "B. Label Variable",
+        "C. Multi Row Variable",
+        "D. Masked Variable"
+      ],
+      "comments": [
+        {
+          "content": "As Gil1211 mentioned, It is A, Masked, Multi-Row and Label are unsupported.\n\nhttps://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/variables-html.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "https://docs.servicenow.com/bundle/vancouver-employee-service-management/page/product/human-resources/concept/variables-html.html",
+          "selected_answer": "A",
+          "replies": []
+        },
+        {
+          "content": "Any idea ?",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "147",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128925-exam-cis-hr-topic-1-question-147-discussion/",
+      "most_voted": "A",
+      "error": null
+    },
+    {
+      "question": "Which plugin when paired with HRSD, delivers storage space, filing system, and functionality to purge and retrieve documents?",
+      "answers": [
+        "A. Employee Journey Management",
+        "B. Employee Document Management",
+        "C. Employee Document Enterprise",
+        "D. Document Keeper"
+      ],
+      "comments": [
+        {
+          "content": "Manage large numbers of documents more efficiently with the ServiceNow ™ Employee Document Management product. Employee Document Management provides storage space, a filing system, the ability to easily retrieve documents, defining who can view sensitive documents, and when to purge documents.",
+          "selected_answer": "B",
+          "replies": []
+        },
+        {
+          "content": "B. Employee Document Management\n\n\nhttps://docs.servicenow.com/bundle/utah-employee-service-management/page/product/human-resources/concept/hr-employee-doc-management.html",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "148",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/137188-exam-cis-hr-topic-1-question-148-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "What is the minimum role required to view confidential data associated with the HR Profile?",
+      "answers": [
+        "A. HR Administrator [sn_hr_core.admin]",
+        "B. Employee Service Center Admin [sn_hr_sp.admin]",
+        "C. HR basic [sn_hr_core.basic]",
+        "D. HR profile viewer [sn_hr_core.profile_reader]"
+      ],
+      "comments": [
+        {
+          "content": "D is correct",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "D. HR profile viewer [sn_hr_core.profile_reader]\nThe [sn_hr_core.basic] role contains [sn_hr_core.profile_writer], which contains the [sn_hr_core.profile_reader] role, so B cannot be correct.",
+          "selected_answer": "D",
+          "replies": []
+        },
+        {
+          "content": "HR Fundamentals ebook page 74: The confidential fields, like Beneficiaries, are visible only to HR professionals. So all HR professionals, so the reader role (which is part of the basic role) should be enough.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "149",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128560-exam-cis-hr-topic-1-question-149-discussion/",
+      "most_voted": "D",
+      "error": null
+    },
+    {
+      "question": "Which ServiceNow feature is used to create pulse surveys?",
+      "answers": [
+        "A. Employee Forums",
+        "B. Learning Posts",
+        "C. Listening Posts",
+        "D. Employee Forms"
+      ],
+      "comments": [
+        {
+          "content": "HR Fundamentals ebook page 232: Listening Posts enable you to quickly capture in-the-moment feedback from micro experiences from employees. Admins can create and trigger short Pulse Surveys across various stages of an employee journey.",
+          "selected_answer": "C",
+          "replies": []
+        }
+      ],
+      "question_number": "150",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128561-exam-cis-hr-topic-1-question-150-discussion/",
+      "most_voted": "C",
+      "error": null
+    },
+    {
+      "question": "Which plugin is recommended when upgrading from the global version of HR to the scoped version?",
+      "answers": [
+        "A. Human Resources Scoped App: Employee Relations [com.sn_hr_employee_relations]",
+        "B. Human Resources Scoped App: Data Migration [com.sn_hr_migration]",
+        "C. Human Resources Scoped App: Lifecycle Events [com.sn_hr_lifecycle_events]",
+        "D. Human Resources Scoped App: Integrations [com.sn_hr_integrations]"
+      ],
+      "comments": [
+        {
+          "content": "HR Implementation ebook page 200: The HR Data and Role migration plugin is recommended when upgrading from the global version of HR to the scoped version.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "152",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/128562-exam-cis-hr-topic-1-question-152-discussion/",
+      "most_voted": "B",
+      "error": null
+    },
+    {
+      "question": "Which portal allows employees to submit ethical violation complaints?",
+      "answers": [
+        "A. Lifecycle Events",
+        "B. HR Performance Analytics",
+        "C. Employee Center",
+        "D. HR Integrations"
+      ],
+      "comments": [
+        {
+          "content": "From Vancouver it is Anonymous Reporting (ARC).\nThis question is outdated.",
+          "selected_answer": "",
+          "replies": []
+        }
+      ],
+      "question_number": "153",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/133685-exam-cis-hr-topic-1-question-153-discussion/",
+      "most_voted": "C",
+      "error": null
+    }
+  ]
+}

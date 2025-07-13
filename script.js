@@ -20,10 +20,22 @@ let settings = {
   showQuestionToolbar: false,
   showAdvancedSearch: false,
   sidebarOpen: false,
+  enableLazyLoading: false, // Lazy loading disabled by default
 };
 
 // Available exams mapping (will be populated dynamically)
 let availableExams = {};
+
+// Lazy loading system
+let lazyLoadingConfig = {
+  chunkSize: 50, // Questions per chunk
+  loadedChunks: new Map(), // Map of chunkId -> questions array
+  currentChunk: 0,
+  totalChunks: 0,
+  preloadBuffer: 1, // Number of chunks to preload ahead/behind
+  isChunkedExam: false, // Whether current exam uses chunking
+  examMetadata: null, // Metadata for chunked exams
+};
 
 // Favorites and Notes system
 let favoritesData = {
@@ -435,44 +447,91 @@ function decompressData(compressedData) {
 
 function saveStatistics() {
   try {
-    const compressedData = compressData(statistics);
-    localStorage.setItem("examViewerStatistics", compressedData);
+    // Use simple JSON stringify to avoid compression corruption issues
+    const dataToSave = JSON.stringify(statistics);
+    
+    // Check if data would exceed localStorage limits (roughly 5MB)
+    if (dataToSave.length > 4500000) { // 4.5MB threshold
+      console.warn("Statistics data is getting large, consider cleaning old sessions");
+      
+      // Keep only last 50 sessions to prevent storage overflow
+      if (statistics.sessions.length > 50) {
+        statistics.sessions = statistics.sessions.slice(-50);
+        console.log("Trimmed statistics to last 50 sessions");
+      }
+    }
+    
+    localStorage.setItem("examViewerStatistics", dataToSave);
 
-    // Log compression ratio in development
+    // Log size in development
     if (isDevelopmentMode()) {
-      const originalSize = JSON.stringify(statistics).length;
-      const compressedSize = compressedData.length;
-      const ratio = (
-        ((originalSize - compressedSize) / originalSize) *
-        100
-      ).toFixed(1);
-      devLog(
-        `Statistics saved - Original: ${originalSize} bytes, Compressed: ${compressedSize} bytes, Saved: ${ratio}%`
-      );
+      const sizeKB = (dataToSave.length / 1024).toFixed(1);
+      devLog(`Statistics saved - Size: ${sizeKB} KB, Sessions: ${statistics.sessions.length}`);
     }
   } catch (error) {
     devError("Error saving statistics:", error);
+    
+    // If save fails due to quota, try to clear old data
+    if (error.name === 'QuotaExceededError') {
+      console.warn("localStorage quota exceeded, clearing old statistics");
+      statistics.sessions = statistics.sessions.slice(-20); // Keep only last 20 sessions
+      try {
+        localStorage.setItem("examViewerStatistics", JSON.stringify(statistics));
+        showError("Storage limit reached. Cleared old statistics to free space.");
+      } catch (secondError) {
+        devError("Failed to save even after cleanup:", secondError);
+      }
+    }
   }
 }
 
 // Statistics storage management
 function clearCorruptedData() {
   try {
-    const items = ['examViewerStatistics', 'examViewerSettings', 'examViewerFavorites'];
+    const items = [
+      { key: 'examViewerStatistics', name: 'Statistics' },
+      { key: 'examViewerSettings', name: 'Settings' },
+      { key: 'examViewerFavorites', name: 'Favorites' }
+    ];
+    
     items.forEach(item => {
-      const data = localStorage.getItem(item);
+      const data = localStorage.getItem(item.key);
       if (data) {
         try {
-          JSON.parse(data);
+          const parsed = JSON.parse(data);
+          
+          // Additional validation for statistics
+          if (item.key === 'examViewerStatistics') {
+            if (parsed && typeof parsed === 'object') {
+              // Check if it has expected structure
+              if (!parsed.hasOwnProperty('sessions') && !parsed.hasOwnProperty('currentSession')) {
+                throw new Error('Invalid statistics structure');
+              }
+            }
+          }
+          
+          // Additional validation for settings
+          if (item.key === 'examViewerSettings') {
+            if (parsed && typeof parsed !== 'object') {
+              throw new Error('Invalid settings structure');
+            }
+          }
+          
         } catch (e) {
-          devError(`Corrupted ${item} detected, clearing...`);
-          localStorage.removeItem(item);
-          showError(`Corrupted data cleared: ${item}. Please refresh the page.`);
+          console.warn(`${item.name} data validation failed:`, e.message);
+          localStorage.removeItem(item.key);
+          
+          // Only show error for statistics, settings/favorites can be recreated silently
+          if (item.key === 'examViewerStatistics') {
+            showError(`${item.name} data was corrupted and has been reset.`);
+          } else {
+            console.log(`${item.name} reset to defaults due to corruption`);
+          }
         }
       }
     });
   } catch (error) {
-    devError("Error clearing corrupted data:", error);
+    devError("Error checking data integrity:", error);
   }
 }
 
@@ -480,13 +539,21 @@ function loadStatistics() {
   try {
     const savedStats = localStorage.getItem("examViewerStatistics");
     if (savedStats) {
-      // Try to decompress first, fall back to regular JSON parsing
+      // Try regular JSON parse first, then fall back to decompression for legacy data
       let parsed;
       try {
-        parsed = decompressData(savedStats);
-      } catch (error) {
-        devLog("Decompression failed, trying regular JSON parse:", error);
         parsed = JSON.parse(savedStats);
+      } catch (error) {
+        devLog("JSON parse failed, trying decompression for legacy data:", error);
+        try {
+          parsed = decompressData(savedStats);
+          devLog("Successfully loaded legacy compressed data");
+          // Save in new format immediately
+          setTimeout(() => saveStatistics(), 1000);
+        } catch (decompressionError) {
+          devError("Both JSON parse and decompression failed:", decompressionError);
+          throw decompressionError;
+        }
       }
 
       statistics = {
@@ -670,6 +737,13 @@ function loadStatistics() {
 
       // Clean any corrupted statistics data
       cleanCorruptedStatistics();
+
+      // Clean up old sessions if needed (keep last 100 sessions max)
+      if (statistics.sessions.length > 100) {
+        const oldCount = statistics.sessions.length;
+        statistics.sessions = statistics.sessions.slice(-100);
+        console.log(`Cleaned up old statistics: kept last 100 sessions (removed ${oldCount - 100})`);
+      }
 
       // Save the migrated statistics
       saveStatistics();
@@ -1794,6 +1868,90 @@ function resetFavoritesData() {
   }
 }
 
+// Clean old statistics to free up storage space
+function cleanOldStatistics() {
+  const currentCount = statistics.sessions.length;
+  
+  if (currentCount <= 20) {
+    showSuccess("No old sessions to clean. You have " + currentCount + " sessions.");
+    return;
+  }
+  
+  const toRemove = currentCount - 20;
+  const confirmMessage = 
+    `Clean old statistics data?\n\n` +
+    `Current sessions: ${currentCount}\n` +
+    `Sessions to remove: ${toRemove}\n` +
+    `Sessions to keep: 20 (most recent)\n\n` +
+    `This will free up storage space and improve performance.`;
+    
+  if (!confirm(confirmMessage)) {
+    return;
+  }
+  
+  try {
+    statistics.sessions = statistics.sessions.slice(-20);
+    recalculateTotalStats();
+    saveStatistics();
+    
+    showSuccess(`Cleaned ${toRemove} old sessions. Kept the last 20 sessions.`);
+    console.log(`Statistics cleaned: removed ${toRemove} old sessions`);
+  } catch (error) {
+    showError("Failed to clean statistics: " + error.message);
+    devError("Clean statistics error:", error);
+  }
+}
+
+// Reset all statistics data
+function resetAllStatistics() {
+  const currentCount = statistics.sessions.length;
+  const currentSessionActive = statistics.currentSession ? "Yes" : "No";
+  
+  const confirmMessage = 
+    `⚠️ WARNING: This will permanently delete ALL statistics data!\n\n` +
+    `Current data:\n` +
+    `• ${currentCount} exam sessions\n` +
+    `• Active session: ${currentSessionActive}\n` +
+    `• All exam performance data\n` +
+    `• All progress history\n\n` +
+    `This action cannot be undone. Are you sure you want to continue?`;
+    
+  if (!confirm(confirmMessage)) {
+    return;
+  }
+  
+  try {
+    // Reset to default statistics
+    statistics = {
+      sessions: [],
+      currentSession: null,
+      totalStats: {
+        totalQuestions: 0,
+        totalCorrect: 0,
+        totalIncorrect: 0,
+        totalPreview: 0,
+        totalTime: 0,
+        examStats: {},
+      },
+    };
+    
+    // Clear from localStorage
+    localStorage.removeItem("examViewerStatistics");
+    
+    showSuccess("All statistics have been reset successfully.");
+    console.log("All statistics data has been reset");
+    
+    // Refresh statistics display if visible
+    const statsModal = document.getElementById("statisticsModal");
+    if (statsModal && statsModal.style.display === "flex") {
+      displayStatistics();
+    }
+  } catch (error) {
+    showError("Failed to reset statistics: " + error.message);
+    devError("Reset statistics error:", error);
+  }
+}
+
 function loadFavorites() {
   try {
     const savedFavorites = localStorage.getItem("examViewerFavorites");
@@ -2454,10 +2612,18 @@ async function discoverAvailableExams() {
         if (manifest.exams && Array.isArray(manifest.exams)) {
           devLog("Found manifest file with exams:", manifest.exams);
 
+          // Preload popular exams via service worker
+          if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.controller.postMessage({
+              type: 'PRELOAD_EXAMS',
+              exams: manifest.exams.slice(0, 5) // Top 5 most popular
+            });
+          }
+
           // Verify each exam file exists
           const verifyPromises = manifest.exams.map(async (examCode) => {
             try {
-              const response = await fetch(`data/${examCode}.json`, {
+              const response = await fetch(`data/${examCode}/exam.json`, {
                 method: "HEAD",
               });
               if (response.ok) {
@@ -2563,7 +2729,7 @@ async function discoverAvailableExams() {
     const availableCodes = [];
     const checkPromises = allPotentialCodes.map(async (code) => {
       try {
-        const linkResponse = await fetch(`data/${code}_links.json`, {
+        const linkResponse = await fetch(`data/${code}/links.json`, {
           method: "HEAD",
         });
         if (linkResponse.ok) {
@@ -2581,7 +2747,7 @@ async function discoverAvailableExams() {
     // Now check if corresponding .json files exist for discovered codes
     const examCheckPromises = availableCodes.map(async (examCode) => {
       try {
-        const response = await fetch(`data/${examCode}.json`, {
+        const response = await fetch(`data/${examCode}/exam.json`, {
           method: "HEAD",
         });
         if (response.ok) {
@@ -2627,6 +2793,8 @@ function loadSettings() {
       settings.showQuestionToolbar;
     document.getElementById("showAdvancedSearch").checked =
       settings.showAdvancedSearch;
+    document.getElementById("enableLazyLoading").checked =
+      settings.enableLazyLoading;
     isHighlightEnabled = settings.highlightDefault;
     applyTheme(settings.darkMode);
     
@@ -2658,6 +2826,9 @@ function saveSettings() {
   ).checked;
   settings.showAdvancedSearch = document.getElementById(
     "showAdvancedSearch"
+  ).checked;
+  settings.enableLazyLoading = document.getElementById(
+    "enableLazyLoading"
   ).checked;
   localStorage.setItem("examViewerSettings", JSON.stringify(settings));
   isHighlightEnabled = settings.highlightDefault;
@@ -2698,7 +2869,7 @@ async function populateExamDropdown() {
   const sortedExamCodes = Object.keys(availableExams).sort();
   for (const examCode of sortedExamCodes) {
     try {
-      const response = await fetch(`data/${examCode}.json`);
+      const response = await fetch(`data/${examCode}/exam.json`);
       if (response.ok) {
         const data = await response.json();
         const questionCount = data.questions ? data.questions.length : 0;
@@ -2791,19 +2962,19 @@ function setupEventListeners() {
   // Navigation
   document
     .getElementById("prevBtn")
-    .addEventListener("click", () => navigateQuestion(-1));
+    .addEventListener("click", async () => await navigateQuestion(-1));
   document
     .getElementById("nextBtn")
-    .addEventListener("click", () => navigateQuestion(1));
+    .addEventListener("click", async () => await navigateQuestion(1));
   document
     .getElementById("homeBtn")
     .addEventListener("click", () => goToHome());
   document
     .getElementById("randomBtn")
-    .addEventListener("click", () => navigateToRandomQuestion());
+    .addEventListener("click", async () => await navigateToRandomQuestion());
   document
     .getElementById("jumpBtn")
-    .addEventListener("click", () => jumpToQuestion());
+    .addEventListener("click", async () => await jumpToQuestion());
 
   // Answer controls
   document
@@ -2883,6 +3054,15 @@ function setupEventListeners() {
     .getElementById("resetFavoritesBtn")
     .addEventListener("click", resetFavoritesData);
 
+  // Statistics management
+  document
+    .getElementById("cleanOldStatisticsBtn")
+    .addEventListener("click", cleanOldStatistics);
+  
+  document
+    .getElementById("resetStatisticsBtn")
+    .addEventListener("click", resetAllStatistics);
+
   // Changelog
   document
     .getElementById("changelogBtn")
@@ -2906,6 +3086,13 @@ function setupEventListeners() {
     .addEventListener("change", () => {
       saveSettings();
       updateAdvancedSearchVisibility();
+    });
+
+  document
+    .getElementById("enableLazyLoading")
+    .addEventListener("change", () => {
+      saveSettings();
+      showSuccess("Lazy loading setting updated. Changes will apply when loading new exams.");
     });
 
   // Search functionality
@@ -2963,7 +3150,7 @@ async function displayAvailableExams() {
     // Try to get question count
     let questionCount = "Loading...";
     try {
-      const response = await fetch(`data/${code}.json`);
+      const response = await fetch(`data/${code}/exam.json`);
       if (response.ok) {
         const data = await response.json();
         questionCount = `${data.questions?.length || 0} questions`;
@@ -3002,36 +3189,71 @@ async function loadExam(examCode) {
   showLoading(true);
 
   try {
-    const response = await fetch(`data/${examCode}.json`);
-    if (!response.ok) {
-      throw new Error(`Failed to load exam data: ${response.status}`);
+    // Reset lazy loading state
+    lazyLoadingConfig.loadedChunks.clear();
+    lazyLoadingConfig.currentChunk = 0;
+    lazyLoadingConfig.examMetadata = null;
+
+    // Check if this exam has chunked version for lazy loading
+    const isChunked = await checkForChunkedExam(examCode);
+
+    if (isChunked) {
+      // Load first chunk immediately for chunked exams
+      const firstChunk = await loadChunk(examCode, 0);
+      if (firstChunk.length === 0) {
+        throw new Error("Failed to load first chunk of exam data");
+      }
+
+      // Set up exam data
+      currentExam = {
+        exam_name: lazyLoadingConfig.examMetadata.exam_name || examCode,
+        questions: [], // Will be assembled dynamically
+        isChunked: true
+      };
+
+      // Preload nearby chunks
+      await preloadChunks(examCode, 0);
+
+      // Assemble current questions from loaded chunks
+      allQuestions = assembleCurrentQuestions();
+      currentQuestions = [...allQuestions];
+    } else {
+      // Standard loading for smaller exams
+      const response = await fetch(`data/${examCode}/exam.json`);
+      if (!response.ok) {
+        throw new Error(`Failed to load exam data: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (!data.questions || !Array.isArray(data.questions)) {
+        throw new Error("Invalid exam data format");
+      }
+
+      // Store the complete exam data object
+      currentExam = {
+        exam_name: data.exam_name || examCode,
+        questions: data.questions,
+        isChunked: false
+      };
+
+      // Sort questions by question_number numerically with robust comparison
+      allQuestions = data.questions.sort((a, b) => {
+        const numA = parseInt(a.question_number, 10);
+        const numB = parseInt(b.question_number, 10);
+
+        // Handle invalid numbers
+        if (isNaN(numA) && isNaN(numB)) return 0;
+        if (isNaN(numA)) return 1;
+        if (isNaN(numB)) return -1;
+
+        return numA - numB;
+      });
+
+      // Initialize current questions
+      currentQuestions = [...allQuestions];
     }
-
-    const data = await response.json();
-    if (!data.questions || !Array.isArray(data.questions)) {
-      throw new Error("Invalid exam data format");
-    }
-
-    // Store the complete exam data object
-    currentExam = {
-      exam_name: data.exam_name || examCode,
-      questions: data.questions,
-    };
-    // Sort questions by question_number numerically with robust comparison
-    allQuestions = data.questions.sort((a, b) => {
-      const numA = parseInt(a.question_number, 10);
-      const numB = parseInt(b.question_number, 10);
-
-      // Handle invalid numbers
-      if (isNaN(numA) && isNaN(numB)) return 0;
-      if (isNaN(numA)) return 1;
-      if (isNaN(numB)) return -1;
-
-      return numA - numB;
-    });
     
-    // Initialize current questions and reset search state
-    currentQuestions = [...allQuestions];
+    // Reset search state
     filteredQuestions = [];
     isSearchActive = false;
     searchCache = {};
@@ -3136,40 +3358,219 @@ function showSuccess(message) {
   }, 3000);
 }
 
+// Process embedded images in HTML content
+function processEmbeddedImages(htmlContent, imagesData) {
+  if (!htmlContent || !imagesData || Object.keys(imagesData).length === 0) {
+    return htmlContent;
+  }
+
+  let processedContent = htmlContent;
+
+  // Replace image references with base64 data
+  Object.keys(imagesData).forEach(imageId => {
+    const imageInfo = imagesData[imageId];
+    
+    // Use WebP format for better compression, fallback to JPEG
+    const imageDataUrl = `data:image/webp;base64,${imageInfo.webp}`;
+    
+    // Pattern to find img tags with this data-img-id
+    const imgPattern = new RegExp(`<img[^>]*data-img-id="${imageId}"[^>]*>`, 'gi');
+    
+    processedContent = processedContent.replace(imgPattern, (match) => {
+      let updatedTag = match;
+      
+      // Replace the src attribute (it might be truncated base64)
+      updatedTag = updatedTag.replace(/src="[^"]*"/gi, `src="${imageDataUrl}"`);
+      
+      // Add width and height attributes if available and not already present
+      if (imageInfo.size && imageInfo.size.length === 2) {
+        const [width, height] = imageInfo.size;
+        if (!updatedTag.includes('width=')) {
+          updatedTag = updatedTag.replace('<img', `<img width="${width}"`);
+        }
+        if (!updatedTag.includes('height=')) {
+          updatedTag = updatedTag.replace('<img', `<img height="${height}"`);
+        }
+      }
+      
+      // Add alt text for accessibility if not present
+      if (!updatedTag.includes('alt=')) {
+        updatedTag = updatedTag.replace('<img', `<img alt="Question image"`);
+      }
+      
+      // Add style for responsive images
+      if (!updatedTag.includes('style=')) {
+        updatedTag = updatedTag.replace('<img', `<img style="max-width: 100%; height: auto;"`);
+      }
+      
+      return updatedTag;
+    });
+    
+    // Also handle cases where the original URL might still be referenced
+    if (imageInfo.original_url) {
+      const urlPattern = new RegExp(`src="${imageInfo.original_url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`, 'gi');
+      processedContent = processedContent.replace(urlPattern, `src="${imageDataUrl}"`);
+    }
+  });
+
+  return processedContent;
+}
+
+// Lazy Loading Functions
+async function checkForChunkedExam(examCode) {
+  // Check if lazy loading is enabled in settings
+  if (!settings.enableLazyLoading) {
+    console.log(`⚡ Lazy loading disabled in settings, using standard loading for ${examCode}`);
+    lazyLoadingConfig.isChunkedExam = false;
+    return false;
+  }
+
+  try {
+    const metadataResponse = await fetch(`data/${examCode}/metadata.json`);
+    if (metadataResponse.ok) {
+      const metadata = await metadataResponse.json();
+      if (metadata.chunked && metadata.total_questions > lazyLoadingConfig.chunkSize) {
+        lazyLoadingConfig.isChunkedExam = true;
+        lazyLoadingConfig.examMetadata = metadata;
+        lazyLoadingConfig.totalChunks = metadata.total_chunks || Math.ceil(metadata.total_questions / lazyLoadingConfig.chunkSize);
+        console.log(`🚀 Lazy loading activated for ${examCode}: ${metadata.total_questions} questions in ${lazyLoadingConfig.totalChunks} chunks`);
+        return true;
+      }
+    }
+  } catch (error) {
+    console.log(`No chunked version available for ${examCode}, using standard loading`);
+  }
+  lazyLoadingConfig.isChunkedExam = false;
+  return false;
+}
+
+async function loadChunk(examCode, chunkId) {
+  if (lazyLoadingConfig.loadedChunks.has(chunkId)) {
+    console.log(`📦 Chunk ${chunkId} already loaded from cache`);
+    return lazyLoadingConfig.loadedChunks.get(chunkId);
+  }
+
+  try {
+    console.log(`📥 Loading chunk ${chunkId} for ${examCode}...`);
+    const response = await fetch(`data/${examCode}/chunks/chunk_${chunkId}.json`);
+    if (!response.ok) {
+      throw new Error(`Failed to load chunk ${chunkId}: ${response.status}`);
+    }
+
+    const chunkData = await response.json();
+    const questions = chunkData.questions || [];
+    
+    lazyLoadingConfig.loadedChunks.set(chunkId, questions);
+    console.log(`✅ Chunk ${chunkId} loaded: ${questions.length} questions (${chunkData.start_question}-${chunkData.end_question})`);
+    return questions;
+  } catch (error) {
+    console.error(`❌ Error loading chunk ${chunkId}:`, error);
+    return [];
+  }
+}
+
+async function preloadChunks(examCode, centerChunk) {
+  const promises = [];
+  const start = Math.max(0, centerChunk - lazyLoadingConfig.preloadBuffer);
+  const end = Math.min(lazyLoadingConfig.totalChunks - 1, centerChunk + lazyLoadingConfig.preloadBuffer);
+
+  console.log(`🔄 Preloading chunks ${start}-${end} around chunk ${centerChunk}`);
+
+  for (let chunkId = start; chunkId <= end; chunkId++) {
+    if (!lazyLoadingConfig.loadedChunks.has(chunkId)) {
+      promises.push(loadChunk(examCode, chunkId));
+    }
+  }
+
+  if (promises.length > 0) {
+    await Promise.all(promises);
+    console.log(`✅ Preloaded ${promises.length} chunks`);
+  } else {
+    console.log(`📦 All chunks ${start}-${end} already cached`);
+  }
+}
+
+function getChunkIdForQuestion(questionIndex) {
+  return Math.floor(questionIndex / lazyLoadingConfig.chunkSize);
+}
+
+async function ensureQuestionLoaded(examCode, questionIndex) {
+  if (!lazyLoadingConfig.isChunkedExam) {
+    return true;
+  }
+
+  const requiredChunk = getChunkIdForQuestion(questionIndex);
+  
+  if (!lazyLoadingConfig.loadedChunks.has(requiredChunk)) {
+    console.log(`📥 Loading chunk ${requiredChunk} for question ${questionIndex + 1}...`);
+    
+    try {
+      await loadChunk(examCode, requiredChunk);
+      await preloadChunks(examCode, requiredChunk);
+      
+      // Update assembled questions immediately after loading
+      allQuestions = assembleCurrentQuestions();
+      
+      console.log(`✅ Chunk ${requiredChunk} loaded successfully`);
+    } catch (error) {
+      console.error(`❌ Failed to load chunk ${requiredChunk}:`, error);
+      return false;
+    }
+  }
+
+  return lazyLoadingConfig.loadedChunks.has(requiredChunk);
+}
+
+function assembleCurrentQuestions() {
+  if (!lazyLoadingConfig.isChunkedExam) {
+    return allQuestions;
+  }
+
+  const assembledQuestions = [];
+  let loadedChunks = 0;
+  let placeholderChunks = 0;
+
+  for (let chunkId = 0; chunkId < lazyLoadingConfig.totalChunks; chunkId++) {
+    if (lazyLoadingConfig.loadedChunks.has(chunkId)) {
+      assembledQuestions.push(...lazyLoadingConfig.loadedChunks.get(chunkId));
+      loadedChunks++;
+    } else {
+      // Add lightweight placeholder questions for unloaded chunks
+      const startIndex = chunkId * lazyLoadingConfig.chunkSize;
+      const endIndex = Math.min(startIndex + lazyLoadingConfig.chunkSize, lazyLoadingConfig.examMetadata.total_questions);
+      for (let i = startIndex; i < endIndex; i++) {
+        assembledQuestions.push({
+          question_number: (i + 1).toString(),
+          question: `Question ${i + 1}`,
+          answers: [],
+          isPlaceholder: true,
+          chunkId: chunkId
+        });
+      }
+      placeholderChunks++;
+    }
+  }
+  
+  console.log(`🧩 Assembled ${assembledQuestions.length} questions: ${loadedChunks} chunks loaded, ${placeholderChunks} placeholders`);
+  return assembledQuestions;
+}
+
 // Navigate to question
-function navigateQuestion(direction) {
+async function navigateQuestion(direction) {
   if (!currentQuestions.length) return;
 
   const newIndex = currentQuestionIndex + direction;
   if (newIndex >= 0 && newIndex < currentQuestions.length) {
-    // Add to history before changing
-    addToNavigationHistory(currentQuestionIndex);
-    
-    currentQuestionIndex = newIndex;
-
-    // Reset highlight override when navigating to a new question
-    isHighlightTemporaryOverride = false;
-
-    displayCurrentQuestion();
-    updateProgressSidebar();
+    await navigateToQuestionIndex(newIndex);
   }
 }
 
 // Navigate to random question
-function navigateToRandomQuestion() {
+async function navigateToRandomQuestion() {
   if (!currentQuestions.length) return;
-
-  // Add to history before changing
-  addToNavigationHistory(currentQuestionIndex);
   
   const randomIndex = Math.floor(Math.random() * currentQuestions.length);
-  currentQuestionIndex = randomIndex;
-
-  // Reset highlight override when navigating to a new question
-  isHighlightTemporaryOverride = false;
-
-  displayCurrentQuestion();
-  updateProgressSidebar();
+  await navigateToQuestionIndex(randomIndex);
 }
 
 // Go to home page
@@ -3211,7 +3612,7 @@ function goToHome() {
 }
 
 // Jump to specific question
-function jumpToQuestion() {
+async function jumpToQuestion() {
   const questionNumber = parseInt(
     document.getElementById("questionJump").value
   );
@@ -3222,12 +3623,7 @@ function jumpToQuestion() {
   );
 
   if (questionIndex !== -1) {
-    currentQuestionIndex = questionIndex;
-
-    // Reset highlight override when jumping to a new question
-    isHighlightTemporaryOverride = false;
-
-    displayCurrentQuestion();
+    await navigateToQuestionIndex(questionIndex);
     document.getElementById("questionJump").value = "";
   } else {
     showError(`Question ${questionNumber} not found`);
@@ -3303,6 +3699,18 @@ function displayCurrentQuestion(fromToggleAction = false) {
   if (!currentQuestions.length) return;
 
   const question = currentQuestions[currentQuestionIndex];
+  
+  // Handle placeholder questions for lazy loading
+  if (question?.isPlaceholder) {
+    document.getElementById("questionText").innerHTML = `
+      <div class="loading-placeholder">
+        <div class="spinner"></div>
+        <p>Loading question ${question.question_number}...</p>
+      </div>
+    `;
+    document.getElementById("answersList").innerHTML = "";
+    return;
+  }
 
   // Reset state
   selectedAnswers.clear();
@@ -3354,15 +3762,29 @@ function displayCurrentQuestion(fromToggleAction = false) {
   }`;
   document.getElementById("examTopicsLink").href = question.link || "#";
 
-  // Fix image paths to point to ExamTopics.com
+  // Process question text and handle embedded images
   let questionText = question.question || "";
+  
+  // Replace embedded image references with base64 data
+  if (question.images && Object.keys(question.images).length > 0) {
+    questionText = processEmbeddedImages(questionText, question.images);
+  }
+  
+  // Fix any remaining image paths to point to ExamTopics.com (fallback)
   const originalText = questionText;
   questionText = questionText.replace(
     /src="\/assets\/media\/exam-media\//g,
     'src="https://www.examtopics.com/assets/media/exam-media/'
   );
 
-  // Debug log to confirm the fix is working
+  // Debug log to confirm image processing
+  if (question.images && Object.keys(question.images).length > 0) {
+    devLog(
+      "🖼️ Processed embedded images:",
+      Object.keys(question.images).length,
+      "images found"
+    );
+  }
   if (originalText !== questionText) {
     devLog(
       "🔧 Image path fixed:",
@@ -3429,7 +3851,12 @@ function displayAnswers(question) {
     const answerLetter = answer.charAt(0);
     let answerText = answer.substring(3);
 
-    // Fix image paths in answers too (just in case)
+    // Process embedded images in answers
+    if (question.images && Object.keys(question.images).length > 0) {
+      answerText = processEmbeddedImages(answerText, question.images);
+    }
+
+    // Fix image paths in answers too (fallback)
     answerText = answerText.replace(
       /src="\/assets\/media\/exam-media\//g,
       'src="https://www.examtopics.com/assets/media/exam-media/'
@@ -3914,11 +4341,16 @@ function convertUrlsToLinks(text) {
 }
 
 // Convert text to HTML with line breaks and links
-function formatCommentText(text) {
+function formatCommentText(text, imagesData = null) {
   if (!text) return "";
 
   // Convert line breaks to <br> tags
   let formattedText = text.replace(/\n/g, "<br>");
+
+  // Process embedded images if available
+  if (imagesData && Object.keys(imagesData).length > 0) {
+    formattedText = processEmbeddedImages(formattedText, imagesData);
+  }
 
   // Convert URLs to clickable links
   formattedText = convertUrlsToLinks(formattedText);
@@ -3946,7 +4378,8 @@ function displayDiscussion(question) {
                 <span>Selected: ${comment.selected_answer || "N/A"}</span>
             </div>
             <div class="comment-text">${formatCommentText(
-              comment.content || comment.comment || ""
+              comment.content || comment.comment || "",
+              question.images
             )}</div>
         `;
     discussionList.appendChild(commentElement);
@@ -4000,8 +4433,15 @@ function exportToPDF() {
   currentQuestions.forEach((question, index) => {
     const questionNumber = question.question_number || index + 1;
 
-    // Fix image paths for PDF export too
+    // Process embedded images and fix paths for PDF export
     let questionText = question.question || "";
+    
+    // Process embedded images first
+    if (question.images && Object.keys(question.images).length > 0) {
+      questionText = processEmbeddedImages(questionText, question.images);
+    }
+    
+    // Fix any remaining image paths for PDF export
     questionText = questionText.replace(
       /src="\/assets\/media\/exam-media\//g,
       'src="https://www.examtopics.com/assets/media/exam-media/'
@@ -4022,6 +4462,11 @@ function exportToPDF() {
     answers.forEach((answer) => {
       const answerLetter = answer.charAt(0);
       let answerText = answer.substring(3);
+
+      // Process embedded images in answers
+      if (question.images && Object.keys(question.images).length > 0) {
+        answerText = processEmbeddedImages(answerText, question.images);
+      }
 
       // Fix image paths in answers for PDF export too
       answerText = answerText.replace(
@@ -4062,7 +4507,8 @@ function exportToPDF() {
                            comment.selected_answer || "N/A"
                          }</div>
                          <div>${formatCommentText(
-                           comment.content || comment.comment || ""
+                           comment.content || comment.comment || "",
+                           question.images
                          )}</div>
                      </div>
                  `);
@@ -4111,29 +4557,29 @@ function toggleLegalInfo() {
 window.toggleLegalInfo = toggleLegalInfo;
 
 // Enhanced keyboard shortcuts for navigation
-document.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", async function (e) {
   if (currentQuestions.length === 0 || e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
 
   switch (e.key) {
     case "ArrowLeft":
     case "h": // Vim-style navigation
       e.preventDefault();
-      navigateQuestion(-1);
+      await navigateQuestion(-1);
       break;
     case "ArrowRight":
     case "l": // Vim-style navigation
       e.preventDefault();
-      navigateQuestion(1);
+      await navigateQuestion(1);
       break;
     case "ArrowUp":
     case "k": // Vim-style navigation
       e.preventDefault();
       if (e.ctrlKey || e.metaKey) {
         // Ctrl+Up: Jump to first question
-        navigateToQuestionIndex(0);
+        await navigateToQuestionIndex(0);
       } else {
         // Regular Up: Previous 5 questions
-        navigateQuestion(-5);
+        await navigateQuestion(-5);
       }
       break;
     case "ArrowDown":
@@ -4141,36 +4587,36 @@ document.addEventListener("keydown", function (e) {
       e.preventDefault();
       if (e.ctrlKey || e.metaKey) {
         // Ctrl+Down: Jump to last question
-        navigateToQuestionIndex(currentQuestions.length - 1);
+        await navigateToQuestionIndex(currentQuestions.length - 1);
       } else {
         // Regular Down: Next 5 questions
-        navigateQuestion(5);
+        await navigateQuestion(5);
       }
       break;
     case "Home":
       e.preventDefault();
-      navigateToQuestionIndex(0);
+      await navigateToQuestionIndex(0);
       break;
     case "End":
       e.preventDefault();
-      navigateToQuestionIndex(currentQuestions.length - 1);
+      await navigateToQuestionIndex(currentQuestions.length - 1);
       break;
     case "PageUp":
       e.preventDefault();
-      navigateQuestion(-10);
+      await navigateQuestion(-10);
       break;
     case "PageDown":
       e.preventDefault();
-      navigateQuestion(10);
+      await navigateQuestion(10);
       break;
     case " ": // Space bar
       e.preventDefault();
       if (e.shiftKey) {
         // Shift+Space: Previous question
-        navigateQuestion(-1);
+        await navigateQuestion(-1);
       } else {
         // Space: Next question
-        navigateQuestion(1);
+        await navigateQuestion(1);
       }
       break;
     case "Enter":
@@ -4180,7 +4626,7 @@ document.addEventListener("keydown", function (e) {
         document.getElementById("validateBtn").click();
       } else {
         // Enter: Next question
-        navigateQuestion(1);
+        await navigateQuestion(1);
       }
       break;
     case "r":
@@ -4193,7 +4639,7 @@ document.addEventListener("keydown", function (e) {
         }
       } else {
         // R: Random question
-        navigateToRandomQuestion();
+        await navigateToRandomQuestion();
       }
       break;
     case "v":
@@ -4403,31 +4849,40 @@ function updateProgressSidebar() {
     const isCurrentQuestion = index === currentQuestionIndex;
     const isAnswered = isQuestionAnswered(question.question_number);
     const isFavorite = isQuestionFavorite(question.question_number);
+    const isPlaceholder = question.isPlaceholder;
     
     let statusClass = "";
     let statusIcon = "";
+    let questionPreview = "";
     
-    if (isCurrentQuestion) {
+    if (isPlaceholder) {
+      statusClass = "loading";
+      statusIcon = '<i class="fas fa-spinner fa-spin"></i>';
+      questionPreview = `Chunk ${question.chunkId + 1} - Loading...`;
+    } else if (isCurrentQuestion) {
       statusClass = "current";
       statusIcon = '<i class="fas fa-arrow-right"></i>';
+      questionPreview = truncateText(question.question || "", 60);
     } else if (isAnswered) {
       statusClass = "answered";
       statusIcon = '<i class="fas fa-check"></i>';
+      questionPreview = truncateText(question.question || "", 60);
     } else {
       statusClass = "unanswered";
       statusIcon = '<i class="far fa-circle"></i>';
+      questionPreview = truncateText(question.question || "", 60);
     }
     
-    const favoriteIcon = isFavorite ? '<i class="fas fa-star favorite-icon"></i>' : '';
+    const favoriteIcon = isFavorite && !isPlaceholder ? '<i class="fas fa-star favorite-icon"></i>' : '';
     
     return `
-      <div class="question-item ${statusClass}" data-index="${index}" onclick="navigateToQuestionIndex(${index})">
+      <div class="question-item ${statusClass}" data-index="${index}" onclick="navigateToQuestionAsync(${index})">
         <div class="question-number">
           ${statusIcon}
           <span>Q${question.question_number || index + 1}</span>
           ${favoriteIcon}
         </div>
-        <div class="question-preview">${truncateText(question.question || "", 60)}</div>
+        <div class="question-preview">${questionPreview}</div>
       </div>
     `;
   }).join("");
@@ -4532,13 +4987,13 @@ function truncateText(text, maxLength) {
 }
 
 // Jump to specific question number
-function jumpToQuestionNumber(questionNumber) {
+async function jumpToQuestionNumber(questionNumber) {
   const questionIndex = currentQuestions.findIndex(q => 
     q.question_number && q.question_number.toString() === questionNumber.toString()
   );
   
   if (questionIndex !== -1) {
-    navigateToQuestionIndex(questionIndex);
+    await navigateToQuestionIndex(questionIndex);
   }
 }
 
@@ -4708,7 +5163,7 @@ function closeKeyboardHelp() {
 }
 
 // Enhanced navigateToQuestionIndex with history support
-function navigateToQuestionIndex(newIndex, addToHistory = true) {
+async function navigateToQuestionIndex(newIndex, addToHistory = true) {
   if (!currentQuestions.length) return;
   
   if (newIndex >= 0 && newIndex < currentQuestions.length) {
@@ -4717,14 +5172,45 @@ function navigateToQuestionIndex(newIndex, addToHistory = true) {
       addToNavigationHistory(currentQuestionIndex);
     }
     
+    // Set current index immediately for responsive UI
     currentQuestionIndex = newIndex;
     
     // Reset highlight override when navigating to a new question
     isHighlightTemporaryOverride = false;
     
+    // Check if we need to load a chunk for this question
+    if (lazyLoadingConfig.isChunkedExam && currentQuestions[newIndex]?.isPlaceholder) {
+      const examCode = Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam?.exam_name
+      ) || currentExam?.exam_name;
+      
+      if (examCode) {
+        // Show placeholder immediately while loading
+        displayCurrentQuestion();
+        updateProgressSidebar();
+        
+        // Load chunk in background without blocking UI
+        const success = await ensureQuestionLoaded(examCode, newIndex);
+        if (success) {
+          // Update current questions after successful loading
+          currentQuestions = isSearchActive ? currentQuestions : [...allQuestions];
+          // Refresh display with loaded content
+          displayCurrentQuestion();
+          updateProgressSidebar();
+        }
+        return;
+      }
+    }
+    
+    // Standard navigation for loaded questions
     displayCurrentQuestion();
     updateProgressSidebar();
   }
+}
+
+// Async wrapper for onclick handlers
+async function navigateToQuestionAsync(index) {
+  await navigateToQuestionIndex(index);
 }
 
 // Initialize app when DOM is loaded
@@ -5108,9 +5594,9 @@ function showQuestionNumberSuggestions(query) {
   
   // Add click handlers
   autocompleteDiv.querySelectorAll(".autocomplete-item").forEach(item => {
-    item.addEventListener("click", () => {
+    item.addEventListener("click", async () => {
       const questionNumber = item.dataset.questionNumber;
-      jumpToQuestionNumber(questionNumber);
+      await jumpToQuestionNumber(questionNumber);
       hideAutocompleteSuggestions();
     });
   });
@@ -5401,14 +5887,13 @@ function toggleSearchSection() {
 }
 
 // Jump to specific question number
-function jumpToQuestionNumber(questionNumber) {
+async function jumpToQuestionNumber(questionNumber) {
   const targetIndex = currentQuestions.findIndex(q => 
     q.question_number === questionNumber.toString()
   );
   
   if (targetIndex !== -1) {
-    currentQuestionIndex = targetIndex;
-    displayCurrentQuestion();
+    await navigateToQuestionIndex(targetIndex);
     document.getElementById("searchInput").value = "";
     showSuccess(`Jumped to question #${questionNumber}`);
   } else {
@@ -5420,7 +5905,7 @@ function jumpToQuestionNumber(questionNumber) {
 // Note: navigateToQuestionIndex is now defined earlier in the file with history support
 
 // Override jump to question to work with current question set
-function jumpToQuestion() {
+async function jumpToQuestion() {
   const jumpInput = document.getElementById("questionJump");
   const questionNumber = parseInt(jumpInput.value);
   
@@ -5429,6 +5914,6 @@ function jumpToQuestion() {
     return;
   }
   
-  jumpToQuestionNumber(questionNumber.toString());
+  await jumpToQuestionNumber(questionNumber.toString());
   jumpInput.value = "";
 }

@@ -1,0 +1,205 @@
+name: Manual Sync Develop
+
+on:
+  workflow_dispatch:
+    inputs:
+      strategy:
+        description: "Sync strategy"
+        required: true
+        type: choice
+        options:
+          - "merge"
+          - "rebase" 
+          - "reset"
+        default: "merge"
+      create_pr:
+        description: "Create PR instead of direct merge"
+        required: false
+        type: boolean
+        default: false
+      dry_run:
+        description: "Dry run - show what would be done without making changes"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  sync-develop:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Setup branches and analyze
+        id: analyze
+        run: |
+          # Fetch all branches
+          git fetch --all
+          
+          # Ensure we have both branches
+          git checkout main
+          git checkout develop || git checkout -b develop origin/develop
+          
+          # Get commit differences
+          BEHIND_COUNT=$(git rev-list --count develop..origin/main)
+          AHEAD_COUNT=$(git rev-list --count origin/main..develop)
+          
+          # Get commit messages
+          echo "=== Commits in main not in develop ==="
+          git log --oneline develop..origin/main
+          echo ""
+          echo "=== Commits in develop not in main ==="
+          git log --oneline origin/main..develop
+          
+          echo "behind_count=$BEHIND_COUNT" >> $GITHUB_OUTPUT
+          echo "ahead_count=$AHEAD_COUNT" >> $GITHUB_OUTPUT
+          
+          # Check for conflicts
+          git checkout develop
+          if git merge-tree $(git merge-base develop origin/main) develop origin/main | grep -q "<<<<<<< "; then
+            echo "conflicts=true" >> $GITHUB_OUTPUT
+            echo "⚠️ Merge conflicts detected!"
+          else
+            echo "conflicts=false" >> $GITHUB_OUTPUT
+            echo "✅ No merge conflicts detected"
+          fi
+
+      - name: Dry run analysis
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: |
+          echo "## 🧪 Dry Run Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Branch Status:" >> $GITHUB_STEP_SUMMARY
+          echo "- **Develop behind main**: ${{ steps.analyze.outputs.behind_count }} commits" >> $GITHUB_STEP_SUMMARY
+          echo "- **Develop ahead of main**: ${{ steps.analyze.outputs.ahead_count }} commits" >> $GITHUB_STEP_SUMMARY
+          echo "- **Conflicts detected**: ${{ steps.analyze.outputs.conflicts }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Selected strategy**: ${{ github.event.inputs.strategy }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Create PR**: ${{ github.event.inputs.create_pr }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.analyze.outputs.behind_count }}" -eq 0 ]; then
+            echo "✅ **Result**: No sync needed - develop is up to date" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.analyze.outputs.conflicts }}" = "true" ]; then
+            echo "⚠️ **Result**: Manual intervention required due to conflicts" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "🚀 **Result**: Sync can proceed with ${{ github.event.inputs.strategy }} strategy" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Create sync PR
+        if: ${{ github.event.inputs.create_pr == 'true' && github.event.inputs.dry_run == 'false' }}
+        run: |
+          # Create a new branch for the sync
+          BRANCH_NAME="sync/develop-with-main-$(date +%Y%m%d-%H%M%S)"
+          git checkout develop
+          git checkout -b $BRANCH_NAME
+          
+          # Perform the sync based on strategy
+          case "${{ github.event.inputs.strategy }}" in
+            "merge")
+              git merge origin/main --no-ff -m "sync: merge main into develop
+
+              - Strategy: merge
+              - Behind main by: ${{ steps.analyze.outputs.behind_count }} commits
+              - Automated sync via GitHub Actions"
+              ;;
+            "rebase")
+              git rebase origin/main
+              ;;
+            "reset")
+              git reset --hard origin/main
+              ;;
+          esac
+          
+          # Push the sync branch
+          git push origin $BRANCH_NAME
+          
+          # Create PR
+          gh pr create \
+            --title "sync: Update develop branch with latest main changes" \
+            --body "## Automated Develop Sync
+
+          This PR synchronizes the \`develop\` branch with the latest changes from \`main\`.
+
+          ### Sync Details:
+          - **Strategy**: ${{ github.event.inputs.strategy }}
+          - **Commits behind**: ${{ steps.analyze.outputs.behind_count }}
+          - **Commits ahead**: ${{ steps.analyze.outputs.ahead_count }}
+          - **Conflicts**: ${{ steps.analyze.outputs.conflicts }}
+
+          ### Changes Included:
+          - Latest changelog updates
+          - Release preparations
+          - Bug fixes and improvements from main
+
+          This ensures \`develop\` stays current with production releases.
+
+          🤖 Generated by GitHub Actions" \
+            --head $BRANCH_NAME \
+            --base develop
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Direct sync
+        if: ${{ github.event.inputs.create_pr == 'false' && github.event.inputs.dry_run == 'false' }}
+        run: |
+          git checkout develop
+          
+          # Check if sync is needed
+          if [ "${{ steps.analyze.outputs.behind_count }}" -eq 0 ]; then
+            echo "No sync needed - develop is already up to date"
+            exit 0
+          fi
+          
+          # Check for conflicts
+          if [ "${{ steps.analyze.outputs.conflicts }}" = "true" ]; then
+            echo "❌ Cannot perform automatic sync due to conflicts"
+            echo "Please resolve conflicts manually or use the PR option"
+            exit 1
+          fi
+          
+          # Perform sync based on strategy
+          case "${{ github.event.inputs.strategy }}" in
+            "merge")
+              git merge origin/main --no-ff -m "sync: merge main into develop
+
+              - Strategy: merge (direct)
+              - Behind main by: ${{ steps.analyze.outputs.behind_count }} commits  
+              - Automated sync via GitHub Actions"
+              ;;
+            "rebase")
+              git rebase origin/main
+              ;;
+            "reset")
+              git reset --hard origin/main
+              ;;
+          esac
+          
+          # Push updated develop
+          git push origin develop
+
+      - name: Create success summary
+        if: ${{ github.event.inputs.dry_run == 'false' }}
+        run: |
+          echo "## ✅ Develop Sync Completed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Successfully synchronized \`develop\` branch with \`main\`." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sync Details:" >> $GITHUB_STEP_SUMMARY
+          echo "- **Strategy**: ${{ github.event.inputs.strategy }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Method**: ${{ github.event.inputs.create_pr == 'true' && 'Pull Request' || 'Direct merge' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commits synchronized**: ${{ steps.analyze.outputs.behind_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The \`develop\` branch is now ready for continued development! 🚀" >> $GITHUB_STEP_SUMMARY

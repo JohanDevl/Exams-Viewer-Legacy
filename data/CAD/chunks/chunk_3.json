@@ -1,0 +1,211 @@
+{
+  "chunk_id": 3,
+  "start_question": 151,
+  "end_question": 158,
+  "questions_count": 8,
+  "questions": [
+    {
+      "question": "In a privately-scoped application, which methods are used for logging messages in server-side scripts? (Choose two.)",
+      "answers": [
+        "A. gs.logError()",
+        "B. gs.log()",
+        "C. gs.debug()",
+        "D. gs.info()",
+        "E. gs.error()"
+      ],
+      "comments": [
+        {
+          "content": "CDE are all available in scoped applications. gs.log() is global scope only. gs.logError() does not exist",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CDE are correct. see https://www.servicenow.com/community/itsm-forum/server-side-script/m-p/2776438",
+          "selected_answer": "CD",
+          "replies": []
+        },
+        {
+          "content": "CDE all are correct answers. \n\nGlideSystem debugging methods: gs.info(), gs.error(), gs.warn(), gs.debug() and gs.log()\nAlso the below sends debuding information to the top of the form\n1. gs.addInfoMessage()\n2. gs.addErrorMessage()\n\nFYI: gs.log() is only used in global scope and cannot be used for a privately scoped application.",
+          "selected_answer": "CD",
+          "replies": []
+        }
+      ],
+      "question_number": "159",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/302937-exam-cad-topic-1-question-159-discussion/",
+      "most_voted": "CD",
+      "images": {},
+      "error": null
+    },
+    {
+      "question": "When creating an application through the Guided Application Creator, what are the options for creating a table? (Choose three.)",
+      "answers": [
+        "A. Run import jobs",
+        "B. Use API calls",
+        "C. Create a table from a template",
+        "D. Create a table from scratch",
+        "E. Link to external tables",
+        "F. Extend a table",
+        "G. Upload a spreadsheet"
+      ],
+      "comments": [
+        {
+          "content": "Correct Answers are DFG. Create a table from a template is not an option.",
+          "selected_answer": "DFG",
+          "replies": []
+        },
+        {
+          "content": "Correct Answers are DFG",
+          "selected_answer": "DFG",
+          "replies": []
+        }
+      ],
+      "question_number": "160",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303600-exam-cad-topic-1-question-160-discussion/",
+      "most_voted": "DFG",
+      "images": {},
+      "error": null
+    },
+    {
+      "question": "Which one of the following database operations can be controlled with Application Access? (Choose two.)",
+      "answers": [
+        "A. Query",
+        "B. Update",
+        "C. Create",
+        "D. Delete"
+      ],
+      "comments": [
+        {
+          "content": "BCD are correct:\nhttps://developer.servicenow.com/dev.do#!/learn/learning-plans/xanadu/new_to_servicenow/app_store_learnv2_securingapps_xanadu_application_access",
+          "selected_answer": "BC",
+          "replies": []
+        }
+      ],
+      "question_number": "161",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/303601-exam-cad-topic-1-question-161-discussion/",
+      "most_voted": "BC",
+      "images": {},
+      "error": null
+    },
+    {
+      "question": "Which method can be used to install an application on a ServiceNow instance? (Choose three.)",
+      "answers": [
+        "A. Install from the Google Play Store.",
+        "B. Download from Stack Overflow.",
+        "C. Download and install a third-party application from the ServiceNow Store.",
+        "D. Use the \"Install\" button on the application record.",
+        "E. Install an application from the Application Repository.",
+        "F. Import an application from an XML file."
+      ],
+      "comments": [
+        {
+          "content": "CEF is correct.",
+          "selected_answer": "CEF",
+          "replies": []
+        }
+      ],
+      "question_number": "166",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305866-exam-cad-topic-1-question-166-discussion/",
+      "most_voted": "CEF",
+      "images": {},
+      "error": null
+    },
+    {
+      "question": "Which are valid caller access field options? (Choose three.)",
+      "answers": [
+        "A. Caller Tracking",
+        "B. Accessible from",
+        "C. None",
+        "D. Allow Configuration",
+        "E. Caller Restriction",
+        "F. Caller Permission"
+      ],
+      "comments": [
+        {
+          "content": "ACE are the Caller Access options available for an app",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "Check in the Caller Access, within Application Access when creating a table in Studio.",
+          "selected_answer": "ACE",
+          "replies": []
+        },
+        {
+          "content": "this is the correct answer",
+          "selected_answer": "ACE",
+          "replies": []
+        }
+      ],
+      "question_number": "168",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/302768-exam-cad-topic-1-question-168-discussion/",
+      "most_voted": "ACE",
+      "images": {},
+      "error": null
+    },
+    {
+      "question": "Which items are valid UI Action types in ServiceNow? (Choose three.)",
+      "answers": [
+        "A. List banner button",
+        "B. Form button",
+        "C. Record navigation button",
+        "D. List choice",
+        "E. Form choice",
+        "F. Workflow action"
+      ],
+      "comments": [
+        {
+          "content": "A. Appears in the banner of a list view\nB. Appears at the top or bottom of a record form.\nD. Appears as an option in the list conext menu.",
+          "selected_answer": "ABD",
+          "replies": []
+        }
+      ],
+      "question_number": "169",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305867-exam-cad-topic-1-question-169-discussion/",
+      "most_voted": "ABD",
+      "images": {},
+      "error": null
+    },
+    {
+      "question": "What occurs when an existing table is extended in ServiceNow?",
+      "answers": [
+        "A. The parent table's Access Controls are ignored when determining access to the new table's records and fields.",
+        "B. The new table does not inherit any of the fields from the parent table.",
+        "C. You must script and configure all required behaviors.",
+        "D. The new table inherits the functionality built into the parent table."
+      ],
+      "comments": [
+        {
+          "content": "The new (child) table inherits all fields, business rules, UI policies, client scripts, and other behaviors from the parent table.",
+          "selected_answer": "D",
+          "replies": []
+        }
+      ],
+      "question_number": "170",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305868-exam-cad-topic-1-question-170-discussion/",
+      "most_voted": "D",
+      "images": {},
+      "error": null
+    },
+    {
+      "question": "An application called My App has a table, MyAppTable, with this Application Access configuration:<br/><br/>Accessible from: All application scopes<br/><br/>Can read: Selected -<br/><br/>Can delete: Not selected -<br/><br/>Allow configuration: Selected -<br/><br/>Which of the following is true based on this configuration?",
+      "answers": [
+        "A. An application developer working in another privately scoped application can write a Business Rule for the MyAppTable table which successfully deletes all records from the MyAppTable table",
+        "B. An application developer working in the My App scope can write a Business Rule for the MyAppTable table which successfully deletes all records from the MyAppTable table",
+        "C. Any Application developer can write a Business Rule which successfully deletes all records from the MyAppTable",
+        "D. No Business Rule can be written which successfully deletes all records from the MyAppTable table"
+      ],
+      "comments": [
+        {
+          "content": "Developers within the same application scope (My App) have full control, including delete operations.\nThey can write Business Rules to delete records because deleting within the same scope is allowed.",
+          "selected_answer": "B",
+          "replies": []
+        }
+      ],
+      "question_number": "171",
+      "link": "https://www.examtopics.com/discussions/servicenow/view/305869-exam-cad-topic-1-question-171-discussion/",
+      "most_voted": "B",
+      "images": {},
+      "error": null
+    }
+  ]
+}
