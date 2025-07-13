@@ -69,12 +69,15 @@ data/
 ## Key Features
 
 ### Frontend Features
-- **Question Navigation**: Previous/Next with keyboard shortcuts, random question selection
+- **Enhanced Navigation System**: Comprehensive keyboard shortcuts (vim-style + standard), visual progress sidebar, navigation history with back/forward buttons
+- **Question Navigation**: Previous/Next with keyboard shortcuts, random question selection, direct question jumping (1-9 keys)
+- **Visual Progress Tracking**: Interactive sidebar with question list, status indicators, progress bar, and click-to-navigate functionality
 - **Answer Validation**: Compare user selections with correct answers, highlight mode for previewing
 - **Favorites & Notes**: Category-based organization with custom categories and text notes
 - **Statistics System**: Session tracking, progress metrics, performance analytics with local storage
 - **Export Functionality**: PDF and JSON export of questions and user data
-- **Settings Management**: Persistent settings for UI preferences and display options
+- **Settings Management**: Persistent settings for UI preferences, sidebar state, and display options
+- **Advanced Search & Filters**: Comprehensive search system with text search, auto-completion, and status filters
 
 ### Backend Features
 - **Smart Scraping**: Incremental updates, change detection, robust error handling
@@ -147,6 +150,133 @@ def scrape_page(link):
 - Educational use only - all exam content belongs to respective owners
 - Implement proper input sanitization and data validation
 - No sensitive data should ever be committed to repository
+
+## Advanced Search & Filters System
+
+### Architecture
+- **State Management**: Global variables `allQuestions`, `filteredQuestions`, `isSearchActive`, `searchCache`
+- **Search Logic**: Text-based search across questions, answers, and comments with multi-word support
+- **Filter System**: Status-based filters (answered, unanswered, favorites) with dynamic counting
+- **Auto-completion**: Real-time question number suggestions with visual highlighting
+- **Integration**: Seamless integration with existing navigation and statistics systems
+
+### Key Components
+- **Search Interface**: Collapsible section with full header clickability (collapsed by default)
+- **Text Search**: `searchQuestions()` function with caching for performance optimization
+- **Status Detection**: Smart detection of answered questions across current and previous sessions
+- **Filter Application**: `applyFilters()` combines search results with status filters
+- **Settings Integration**: Optional display via `showAdvancedSearch` setting (false by default)
+
+### Critical Implementation Details
+- **Question Detection**: Uses `statistics.currentSession.questions` and `statistics.sessions` to track answered questions
+- **Search State**: Maintains separate arrays for original (`allQuestions`) and filtered (`currentQuestions`) states
+- **Cache Management**: Search results cached by query string for performance
+- **Mobile Responsive**: Adaptive UI for mobile devices with touch-friendly interactions
+- **State Cleanup**: Automatic reset of search state when disabling the feature
+
+### Developer Notes
+- Always call `updateFilterCounts()` after answer validation or favorite changes
+- Search section visibility controlled by `updateAdvancedSearchVisibility()`
+- Navigation functions work with current filtered results, not original question set
+- Auto-completion shows max 5 suggestions to avoid UI clutter
+
+## Enhanced Navigation System
+
+### Architecture Overview
+The enhanced navigation system provides comprehensive keyboard shortcuts, visual progress tracking, and navigation history functionality. It integrates seamlessly with existing features while maintaining performance and accessibility.
+
+### Key Components
+
+#### Keyboard Navigation System
+- **Comprehensive shortcuts**: Supports vim-style (`hjkl`), arrow keys, and special keys (`Space`, `Enter`, `Home`, `End`)
+- **Action shortcuts**: Direct access to validation (`v`), favorites (`f`), notes (`n`), and interface controls
+- **Navigation modes**: Basic movement, quick jumps (5/10 questions), and direct access (number keys 1-9)
+- **Context awareness**: Shortcuts disabled in input fields, proper focus management
+
+#### Progress Sidebar
+- **Visual overview**: Interactive question list with status indicators and progress bar
+- **Status tracking**: Current question (orange), answered (green), unanswered (gray), favorites (star)
+- **Direct navigation**: Click any question to navigate immediately
+- **Responsive design**: Full-screen on mobile, overlay on desktop
+- **Auto-scroll**: Current question automatically scrolled into view
+
+#### Navigation History
+- **Browser-like functionality**: Back/forward buttons with intelligent history tracking
+- **Smart deduplication**: Prevents consecutive identical entries
+- **Performance optimized**: Limited to 50 entries with automatic cleanup
+- **Universal integration**: Works with all navigation methods (clicks, keyboard, search)
+
+### Critical Implementation Details
+
+#### Function Architecture
+- **`navigateToQuestionIndex(index, addToHistory=true)`**: Central navigation function with history support
+- **`updateProgressSidebar()`**: Updates sidebar with current question states and progress
+- **`addToNavigationHistory(index)`**: Manages history stack with intelligent deduplication
+- **`toggleSidebar()`**: Controls sidebar visibility with state persistence
+
+#### State Management
+- **Navigation history**: `navigationHistory[]` array with `historyIndex` pointer
+- **Sidebar state**: `sidebarOpen` boolean with settings persistence
+- **Progress tracking**: Real-time updates via `isQuestionAnswered()` and `isQuestionFavorite()`
+
+#### Integration Points
+- **Answer validation**: Updates progress indicators automatically via `validateAnswers()`
+- **Favorites system**: Syncs with sidebar display via `toggleQuestionFavorite()`
+- **Search system**: Works with filtered question sets, maintains navigation context
+- **Settings system**: Persists sidebar state and navigation preferences
+
+### Performance Considerations
+- **Efficient DOM updates**: Batch operations and selective rendering
+- **Memory management**: Limited history size and proper cleanup
+- **Event delegation**: Optimized event handling for question list clicks
+- **Responsive updates**: Debounced scroll events and smooth animations
+
+### Critical Business Rules
+1. **Navigation history**: Always add to history before changing position (except when navigating through history)
+2. **Sidebar updates**: Must be called after any question state change (answered, favorited)
+3. **State persistence**: Sidebar open/close state must be saved to settings
+4. **Mobile responsiveness**: Full-screen sidebar on mobile, overlay on desktop
+5. **Accessibility**: All keyboard shortcuts must work without mouse interaction
+
+### Developer Guidelines
+- **Navigation functions**: Always use `navigateToQuestionIndex()` for programmatic navigation
+- **Sidebar updates**: Call `updateProgressSidebar()` after state changes affecting question status
+- **History management**: Never manipulate `navigationHistory` directly, use provided functions
+- **Event handling**: Ensure keyboard shortcuts don't interfere with input fields
+- **Responsive design**: Test sidebar functionality on both desktop and mobile viewports
+
+## Documentation and Changelog Management
+
+### Changelog Structure (`CHANGELOG.md`)
+- **Format**: Follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) standard
+- **Sections**: Added, Enhanced, Changed, Fixed, Security, etc.
+- **Versioning**: Semantic versioning (MAJOR.MINOR.PATCH)
+- **Date Placeholder**: Use `{PR_MERGE_DATE}` for automated date replacement by GitHub Actions
+- **Version History Summary**: Always update the summary section at the end when adding new versions
+
+### Critical Changelog Requirements
+1. **Date Placeholder**: NEVER replace `{PR_MERGE_DATE}` manually - it's handled by automated workflows
+2. **Version History Summary**: Always add new version entries in the summary section (e.g., `v2.4.x: Advanced search and filtering system`)
+3. **User-Focused**: Describe impact and benefits, not implementation details
+4. **Consistent Format**: Group changes by type, use bullet points, maintain proper hierarchy
+5. **Workflow Integration**: The changelog is automatically processed by `.github/workflows/update-changelog.yml`
+
+### Example Changelog Entry
+```markdown
+## [2.4.0] - {PR_MERGE_DATE}
+
+### Added
+- **Feature Name**: Brief description
+  - Sub-feature 1
+  - Sub-feature 2
+
+### Enhanced
+- **Component**: Improvement description
+
+## Version History Summary
+- **v2.4.x**: Brief version summary
+- **v2.3.x**: Previous version...
+```
 
 ## File Locations
 

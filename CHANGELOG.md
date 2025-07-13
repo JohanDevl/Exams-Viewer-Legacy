@@ -4,6 +4,94 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - {PR_MERGE_DATE}
+
+### Added
+
+- **Enhanced Keyboard Navigation System**: Comprehensive shortcuts for all navigation actions
+  - Vim-style navigation (`hjkl`) alongside standard arrow keys
+  - Quick movement: Previous/Next 5 questions (`↑↓`), 10 questions (`Page Up/Down`)
+  - Direct navigation: Number keys 1-9 for instant question jumping
+  - Home/End keys for first/last question navigation
+  - Modifier combinations: `Ctrl+↑/↓` for beginning/end navigation
+- **Visual Progress Sidebar**: Interactive question overview with real-time status tracking
+  - Comprehensive progress bar with completion percentage
+  - Clickable question list with status indicators (current, answered, unanswered, favorites)
+  - Question previews showing first 60 characters for easy identification
+  - Auto-scroll functionality to keep current question visible
+  - Responsive design: full-screen on mobile, overlay on desktop
+- **Navigation History System**: Browser-like back/forward functionality
+  - Intelligent history tracking with smart duplicate prevention
+  - Back/Forward buttons with step counters and tooltips
+  - Limited to 50 entries for optimal performance
+  - Universal integration with all navigation methods
+- **Action Shortcuts**: Direct keyboard access to core functions
+  - `v` for answer validation, `t` for highlight toggle
+  - `f` for favorites, `n` for notes, `r` for random question
+  - `s` for search focus, `Ctrl+S` for sidebar toggle
+  - `Esc` for universal close/cancel, `?` for keyboard help
+- **Keyboard Shortcuts Help Modal**: Interactive reference guide
+  - Organized shortcuts by category (Navigation, Actions, Interface)
+  - Visual keyboard key representations
+  - Responsive design with mobile optimization
+
+### Enhanced
+
+- **Navigation Flow**: Seamless integration between different navigation methods
+  - Space/Enter for next question, Shift+Space for previous
+  - Shift+Enter for quick answer validation
+  - Context-aware shortcuts that respect input field focus
+- **User Experience**: Intuitive interface improvements
+  - Smooth animations and transitions (300ms duration)
+  - Visual feedback for all interactive elements
+  - Accessible design with proper focus management
+- **Performance**: Optimized for smooth operation
+  - Efficient DOM updates with batch operations
+  - Memory management with automatic cleanup
+  - Event delegation for optimal performance
+- **State Persistence**: Intelligent settings management
+  - Sidebar open/close state saved across sessions
+  - Navigation preferences maintained
+  - Integration with existing settings system
+
+### Technical
+
+- **Architecture**: Modular and maintainable code structure
+  - Centralized navigation function with history support
+  - Event-driven updates for real-time synchronization
+  - Clean separation of concerns between components
+- **Integration**: Seamless compatibility with existing features
+  - Works with search/filter system maintaining context
+  - Syncs with favorites and statistics systems
+  - Maintains compatibility with all existing functionality
+
+## [2.4.0] - {PR_MERGE_DATE}
+
+### Added
+
+- **Advanced Search & Filters System**: Comprehensive search functionality for questions
+  - Text search across questions, answers, and comments with multi-word support
+  - Question number search with real-time auto-completion suggestions
+  - Status filters: Answered, Unanswered, and Favorite questions
+  - Smart caching system for improved search performance
+  - Combined search and filter operations support
+- **Search Interface**: Collapsible search section with intuitive UX
+  - Collapsed by default with full header clickable area
+  - Smooth animations and visual feedback
+  - Real-time result counters and status indicators
+- **Settings Integration**: Optional advanced search display
+  - New setting to show/hide advanced search (disabled by default)
+  - Automatic state cleanup when disabling search functionality
+  - Persistent user preference storage
+
+### Enhanced
+
+- **Question Navigation**: Improved navigation compatibility with filtered results
+- **Filter Counts**: Dynamic counters showing answered/unanswered/favorite question counts
+- **User Experience**: Mobile-responsive design with touch-friendly interactions
+- **Performance**: Efficient question detection across current and previous sessions
+- **Interface**: Clean and professional search interface with proper state management
+
 ## [2.3.0] - 2025-07-09
 
 ### Added
@@ -171,6 +259,8 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, and history
+- **v2.4.x**: Advanced search and filtering system with smart auto-completion
 - **v2.3.x**: Toolbar visibility toggle and UI declutter option
 - **v2.2.x**: Changelog functionality and improvements
 - **v2.1.x**: Favorites and study management features
