@@ -3358,6 +3358,64 @@ function showSuccess(message) {
   }, 3000);
 }
 
+// Process embedded images in HTML content
+function processEmbeddedImages(htmlContent, imagesData) {
+  if (!htmlContent || !imagesData || Object.keys(imagesData).length === 0) {
+    return htmlContent;
+  }
+
+  let processedContent = htmlContent;
+
+  // Replace image references with base64 data
+  Object.keys(imagesData).forEach(imageId => {
+    const imageInfo = imagesData[imageId];
+    
+    // Use WebP format for better compression, fallback to JPEG
+    const imageDataUrl = `data:image/webp;base64,${imageInfo.webp}`;
+    
+    // Pattern to find img tags with this data-img-id
+    const imgPattern = new RegExp(`<img[^>]*data-img-id="${imageId}"[^>]*>`, 'gi');
+    
+    processedContent = processedContent.replace(imgPattern, (match) => {
+      let updatedTag = match;
+      
+      // Replace the src attribute (it might be truncated base64)
+      updatedTag = updatedTag.replace(/src="[^"]*"/gi, `src="${imageDataUrl}"`);
+      
+      // Add width and height attributes if available and not already present
+      if (imageInfo.size && imageInfo.size.length === 2) {
+        const [width, height] = imageInfo.size;
+        if (!updatedTag.includes('width=')) {
+          updatedTag = updatedTag.replace('<img', `<img width="${width}"`);
+        }
+        if (!updatedTag.includes('height=')) {
+          updatedTag = updatedTag.replace('<img', `<img height="${height}"`);
+        }
+      }
+      
+      // Add alt text for accessibility if not present
+      if (!updatedTag.includes('alt=')) {
+        updatedTag = updatedTag.replace('<img', `<img alt="Question image"`);
+      }
+      
+      // Add style for responsive images
+      if (!updatedTag.includes('style=')) {
+        updatedTag = updatedTag.replace('<img', `<img style="max-width: 100%; height: auto;"`);
+      }
+      
+      return updatedTag;
+    });
+    
+    // Also handle cases where the original URL might still be referenced
+    if (imageInfo.original_url) {
+      const urlPattern = new RegExp(`src="${imageInfo.original_url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`, 'gi');
+      processedContent = processedContent.replace(urlPattern, `src="${imageDataUrl}"`);
+    }
+  });
+
+  return processedContent;
+}
+
 // Lazy Loading Functions
 async function checkForChunkedExam(examCode) {
   // Check if lazy loading is enabled in settings
@@ -3704,15 +3762,29 @@ function displayCurrentQuestion(fromToggleAction = false) {
   }`;
   document.getElementById("examTopicsLink").href = question.link || "#";
 
-  // Fix image paths to point to ExamTopics.com
+  // Process question text and handle embedded images
   let questionText = question.question || "";
+  
+  // Replace embedded image references with base64 data
+  if (question.images && Object.keys(question.images).length > 0) {
+    questionText = processEmbeddedImages(questionText, question.images);
+  }
+  
+  // Fix any remaining image paths to point to ExamTopics.com (fallback)
   const originalText = questionText;
   questionText = questionText.replace(
     /src="\/assets\/media\/exam-media\//g,
     'src="https://www.examtopics.com/assets/media/exam-media/'
   );
 
-  // Debug log to confirm the fix is working
+  // Debug log to confirm image processing
+  if (question.images && Object.keys(question.images).length > 0) {
+    devLog(
+      "🖼️ Processed embedded images:",
+      Object.keys(question.images).length,
+      "images found"
+    );
+  }
   if (originalText !== questionText) {
     devLog(
       "🔧 Image path fixed:",
@@ -3779,7 +3851,12 @@ function displayAnswers(question) {
     const answerLetter = answer.charAt(0);
     let answerText = answer.substring(3);
 
-    // Fix image paths in answers too (just in case)
+    // Process embedded images in answers
+    if (question.images && Object.keys(question.images).length > 0) {
+      answerText = processEmbeddedImages(answerText, question.images);
+    }
+
+    // Fix image paths in answers too (fallback)
     answerText = answerText.replace(
       /src="\/assets\/media\/exam-media\//g,
       'src="https://www.examtopics.com/assets/media/exam-media/'
@@ -4264,11 +4341,16 @@ function convertUrlsToLinks(text) {
 }
 
 // Convert text to HTML with line breaks and links
-function formatCommentText(text) {
+function formatCommentText(text, imagesData = null) {
   if (!text) return "";
 
   // Convert line breaks to <br> tags
   let formattedText = text.replace(/\n/g, "<br>");
+
+  // Process embedded images if available
+  if (imagesData && Object.keys(imagesData).length > 0) {
+    formattedText = processEmbeddedImages(formattedText, imagesData);
+  }
 
   // Convert URLs to clickable links
   formattedText = convertUrlsToLinks(formattedText);
@@ -4296,7 +4378,8 @@ function displayDiscussion(question) {
                 <span>Selected: ${comment.selected_answer || "N/A"}</span>
             </div>
             <div class="comment-text">${formatCommentText(
-              comment.content || comment.comment || ""
+              comment.content || comment.comment || "",
+              question.images
             )}</div>
         `;
     discussionList.appendChild(commentElement);
@@ -4350,8 +4433,15 @@ function exportToPDF() {
   currentQuestions.forEach((question, index) => {
     const questionNumber = question.question_number || index + 1;
 
-    // Fix image paths for PDF export too
+    // Process embedded images and fix paths for PDF export
     let questionText = question.question || "";
+    
+    // Process embedded images first
+    if (question.images && Object.keys(question.images).length > 0) {
+      questionText = processEmbeddedImages(questionText, question.images);
+    }
+    
+    // Fix any remaining image paths for PDF export
     questionText = questionText.replace(
       /src="\/assets\/media\/exam-media\//g,
       'src="https://www.examtopics.com/assets/media/exam-media/'
@@ -4372,6 +4462,11 @@ function exportToPDF() {
     answers.forEach((answer) => {
       const answerLetter = answer.charAt(0);
       let answerText = answer.substring(3);
+
+      // Process embedded images in answers
+      if (question.images && Object.keys(question.images).length > 0) {
+        answerText = processEmbeddedImages(answerText, question.images);
+      }
 
       // Fix image paths in answers for PDF export too
       answerText = answerText.replace(
@@ -4412,7 +4507,8 @@ function exportToPDF() {
                            comment.selected_answer || "N/A"
                          }</div>
                          <div>${formatCommentText(
-                           comment.content || comment.comment || ""
+                           comment.content || comment.comment || "",
+                           question.images
                          )}</div>
                      </div>
                  `);
