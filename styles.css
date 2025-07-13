@@ -2276,6 +2276,26 @@ body {
   color: var(--text-primary);
 }
 
+/* Compact nested lists - supports unlimited nesting */
+.markdown-content ul ul {
+  margin: 0.25rem 0 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.markdown-content ul ul li {
+  margin: 0.125rem 0;
+}
+
+/* Even more compact for deeply nested lists */
+.markdown-content ul ul ul {
+  margin: 0.2rem 0 0.3rem 0;
+  padding-left: 1.25rem;
+}
+
+.markdown-content ul ul ul li {
+  margin: 0.1rem 0;
+}
+
 .markdown-content strong {
   font-weight: 600;
   color: var(--text-primary);

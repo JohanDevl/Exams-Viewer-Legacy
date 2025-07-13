@@ -4927,42 +4927,61 @@ function renderMarkdown(markdown) {
   // Convert horizontal rules
   html = html.replace(/^---$/gm, "<hr>");
 
-  // Convert unordered lists (handle multi-line properly)
-  const lines = html.split("\n");
-  let inList = false;
-  let listItems = [];
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const isListItem = /^- (.*)$/.test(line);
-
-    if (isListItem) {
-      if (!inList) {
-        inList = true;
-        listItems = [];
+  // Convert unordered lists with support for unlimited nested lists
+  function processNestedLists(lines, startIndex = 0, expectedIndent = 0) {
+    const result = [];
+    let i = startIndex;
+    
+    while (i < lines.length) {
+      const line = lines[i];
+      const listMatch = line.match(/^(\s*)- (.*)$/);
+      
+      if (!listMatch) {
+        if (expectedIndent === 0) {
+          result.push(line);
+        } else {
+          break; // Exit nested processing
+        }
+        i++;
+        continue;
       }
-      listItems.push(line.replace(/^- (.*)$/, "<li>$1</li>"));
-    } else {
-      if (inList) {
-        // End of list, replace the accumulated items
-        const listHtml = `<ul>${listItems.join("")}</ul>`;
-        const startIndex = i - listItems.length;
-        lines.splice(startIndex, listItems.length, listHtml);
-        i = startIndex; // Adjust index
-        inList = false;
-        listItems = [];
+      
+      const [, indent, content] = listMatch;
+      const currentIndent = indent.length;
+      
+      if (currentIndent < expectedIndent) {
+        break; // This item belongs to a parent level
+      } else if (currentIndent > expectedIndent) {
+        // This should not happen in well-formed markdown, skip
+        i++;
+        continue;
       }
+      
+      // Look ahead for nested items
+      const nestedResult = processNestedLists(lines, i + 1, currentIndent + 2);
+      const nestedItems = nestedResult.items;
+      
+      if (nestedItems.length > 0) {
+        result.push(`<li>${content}<ul>${nestedItems.join('')}</ul></li>`);
+      } else {
+        result.push(`<li>${content}</li>`);
+      }
+      
+      i = nestedResult.nextIndex;
     }
+    
+    return { items: result, nextIndex: i };
   }
-
-  // Handle list at end of content
-  if (inList && listItems.length > 0) {
-    const listHtml = `<ul>${listItems.join("")}</ul>`;
-    const startIndex = lines.length - listItems.length;
-    lines.splice(startIndex, listItems.length, listHtml);
-  }
-
-  html = lines.join("\n");
+  
+  const lines = html.split("\n");
+  const processed = processNestedLists(lines);
+  
+  html = processed.items.join("\n");
+  
+  // Wrap consecutive <li> items in <ul> tags
+  html = html.replace(/(<li>.*?<\/li>(?:\n<li>.*?<\/li>)*)/g, (match) => {
+    return `<ul>${match.replace(/\n/g, '')}</ul>`;
+  });
 
   // Convert line breaks to paragraphs
   html = html
