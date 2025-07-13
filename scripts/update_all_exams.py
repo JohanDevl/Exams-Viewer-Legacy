@@ -54,20 +54,23 @@ def update_single_exam(exam_code, progress_tracker, force_rescan=False, force_up
     
     try:
         # Use respectful scraping mode (with delays) for better compliance
-        # update_exam_data returns a tuple (questions, error_message)
-        questions, error_message = update_exam_data(exam_code, progress_tracker, rapid_scraping=False, force_rescan=force_rescan, force_update=force_update)
+        # update_exam_data returns a tuple (questions, message, success)
+        questions, message, success = update_exam_data(exam_code, progress_tracker, rapid_scraping=False, force_rescan=force_rescan, force_update=force_update)
         
-        if error_message:
-            print(f"❌ {exam_code}: Update failed - {error_message}")
+        if not success:
+            print(f"❌ {exam_code}: Update failed - {message}")
             return {
                 'exam_code': exam_code,
                 'status': 'failed',
                 'question_count': len(questions) if questions else 0,
-                'error': error_message
+                'error': message
             }
         else:
             question_count = len(questions) if questions else 0
-            print(f"✅ {exam_code}: {question_count} questions updated successfully")
+            success_message = f"{question_count} questions updated successfully"
+            if message:  # Add chunk information if available
+                success_message += f". {message}"
+            print(f"✅ {exam_code}: {success_message}")
             return {
                 'exam_code': exam_code,
                 'status': 'success',

@@ -626,10 +626,16 @@ def download_and_compress_image(img_url, max_size=(800, 600), quality=85):
 
 def extract_and_process_images(soup, base_url):
     """
-    Extract images from question content and process them
+    Extract images from question content only and process them
     """
     images = {}
-    img_tags = soup.find_all('img')
+    
+    # Only look for images inside the question content area
+    question_div = soup.find("div", class_="question-body")
+    if not question_div:
+        return images
+    
+    img_tags = question_div.find_all('img')
     
     for i, img in enumerate(img_tags):
         src = img.get('src')
@@ -644,25 +650,79 @@ def extract_and_process_images(soup, base_url):
         elif not src.startswith('http'):
             src = urljoin(base_url, src)
         
-        # Skip very small images (likely icons)
-        if any(term in src.lower() for term in ['icon', 'logo', 'avatar']) and 'question' not in src.lower():
+        # Enhanced filtering for question images only
+        if should_skip_image(src):
             continue
             
+        print(f"  📸 Processing question image: {src}")
+        
         # Generate unique ID for this image
         img_id = f"img_{hashlib.md5(src.encode()).hexdigest()[:8]}"
         
         # Process and compress image
-        processed_img = download_and_compress_image(src)
-        if processed_img:
-            images[img_id] = processed_img
-            # Replace img tag with reference
-            img['data-img-id'] = img_id
-            img['src'] = f"data:image/webp;base64,{processed_img['webp'][:50]}..." # Placeholder
+        try:
+            processed_img = download_and_compress_image(src)
+            if processed_img:
+                images[img_id] = processed_img
+                # Replace img tag with reference
+                img['data-img-id'] = img_id
+                img['src'] = f"data:image/webp;base64,{processed_img['webp'][:50]}..." # Placeholder
+                print(f"  ✅ Image compressed: {len(processed_img['webp'])} bytes")
+            else:
+                print(f"  ❌ Failed to process image: {src}")
+        except Exception as e:
+            print(f"  ⚠️ Error processing image {src}: {e}")
+            continue
         
         # Add small delay between image downloads
         time.sleep(0.5)
     
     return images
+
+def should_skip_image(src):
+    """
+    Determine if an image should be skipped based on URL patterns
+    """
+    src_lower = src.lower()
+    
+    # Skip tracking pixels and social media
+    tracking_patterns = [
+        'facebook.com/tr',
+        'google-analytics.com',
+        'googletagmanager.com',
+        'doubleclick.net',
+        'googlesyndication.com',
+        'adsystem.com',
+        'linkedin.com/px',
+        'twitter.com/i/adsct',
+        'pinterest.com/ct',
+        'bing.com/tr'
+    ]
+    
+    if any(pattern in src_lower for pattern in tracking_patterns):
+        return True
+    
+    # Skip very small images and UI elements
+    ui_patterns = [
+        'icon', 'logo', 'avatar', 'button', 'arrow', 'star', 
+        'thumb', 'profile', 'social', 'badge', 'sprite'
+    ]
+    
+    # Only skip UI patterns if they're not explicitly question images
+    if any(pattern in src_lower for pattern in ui_patterns):
+        # Allow if it's clearly an exam/question image
+        if not any(exam_pattern in src_lower for exam_pattern in ['examtopics.com', 'question', 'exam', 'image']):
+            return True
+    
+    # Skip images that look like 1x1 tracking pixels
+    if any(size in src_lower for size in ['1x1', '1/1', 'pixel']):
+        return True
+        
+    # Skip base64 data URLs (already processed)
+    if src.startswith('data:'):
+        return True
+    
+    return False
 
 def create_chunks_for_exam_data(exam_code, questions, chunk_size=50):
     """
@@ -749,14 +809,14 @@ def update_exam_data(exam_code, progress, rapid_scraping=False, force_rescan=Fal
         links = get_question_links(exam_code, progress, links_path, force_rescan)
         
         if len(links) == 0:
-            return [], "No questions found. Please check the exam code and try again."
+            return [], "No questions found. Please check the exam code and try again.", False
         
         # Scrape questions
         questions_obj = scrape_questions(links, questions_path, progress, rapid_scraping, force_update)
         questions = questions_obj.get("questions", [])
         
         if questions_obj.get("error", "") != "":
-            return (questions, f"Error occurred while scraping questions. Your connection may be slow or the website may have limited your rate. You can still see {len(questions)} questions. Try again later by refreshing the page.")
+            return (questions, f"Error occurred while scraping questions. Your connection may be slow or the website may have limited your rate. You can still see {len(questions)} questions. Try again later by refreshing the page.", False)
         
         # Auto-create chunks if exam is large enough
         chunk_message = ""
@@ -764,14 +824,14 @@ def update_exam_data(exam_code, progress, rapid_scraping=False, force_rescan=Fal
             try:
                 chunk_success = create_chunks_for_exam_data(exam_code, questions, chunk_size=50)
                 if chunk_success:
-                    chunk_message = f" Auto-created {chunk_success} chunks for performance optimization."
+                    chunk_message = f"Auto-created {chunk_success} chunks for performance optimization."
                 else:
-                    chunk_message = " (Chunking skipped - already exists or failed)"
+                    chunk_message = "Chunking skipped - already exists or failed"
             except Exception as e:
                 print(f"Warning: Failed to create chunks for {exam_code}: {e}")
-                chunk_message = " (Chunking failed)"
+                chunk_message = "Chunking failed"
         
-        return (questions, chunk_message)
+        return (questions, chunk_message, True)
         
     except Exception as e:
-        return [], str(e)
+        return [], str(e), False
