@@ -5760,7 +5760,33 @@ function checkIfExamCompleted(examCode, resumePosition) {
 function getPreviousAnswers(questionNumber) {
   if (!questionNumber) return null;
   
-  // Use the getMostRecentAnswer function to get the most recent attempt across all sessions
+  // Check current session first - prioritize current session for fresh starts
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    if (found && found.att && found.att.length > 0) {
+      const lastAttempt = found.att[found.att.length - 1];
+      return {
+        selectedAnswers: lastAttempt.a || [],
+        isCorrect: lastAttempt.c,
+        wasValidated: true
+      };
+    }
+  }
+  
+  // If current session is very new (< 30 seconds old), don't show previous session answers
+  // This ensures "Start Fresh" truly starts fresh
+  if (statistics.currentSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) { // Less than 30 seconds old
+      return null; // Don't show previous answers for fresh sessions
+    }
+  }
+  
+  // For older sessions, fall back to previous answers
   const recentAnswer = getMostRecentAnswer(questionNumber);
   
   if (!recentAnswer) return null;
@@ -5768,7 +5794,7 @@ function getPreviousAnswers(questionNumber) {
   return {
     selectedAnswers: recentAnswer.selectedAnswers || [],
     isCorrect: recentAnswer.isCorrect,
-    wasValidated: true // If we have an attempt, it means it was validated
+    wasValidated: true
   };
 }
 
@@ -5930,10 +5956,18 @@ async function handleResumePosition(examCode) {
         clearResumePosition(examCode);
       }
     } else {
-      // User chose to start fresh
+      // User chose to start fresh - restart completely
       currentQuestionIndex = 0;
       clearResumePosition(examCode);
-      devLog(`Started fresh for ${examCode}, cleared resume position`);
+      
+      // Start a fresh session to avoid showing previous answers
+      endCurrentSession();
+      startExamSession(examCode, currentExam.exam_name);
+      
+      // Clear question status cache to ensure fresh state
+      clearQuestionStatusCache();
+      
+      devLog(`Started fresh for ${examCode}, cleared resume position and started new session`);
     }
   } catch (error) {
     devError(`Error handling resume position for ${examCode}:`, error);
@@ -6183,7 +6217,16 @@ function isQuestionAnswered(questionNumber) {
     if (found && found.att && found.att.length > 0) return true;
   }
   
-  // Also check previous sessions for this exam
+  // If current session is very new (< 30 seconds old), don't show previous session progress
+  // This ensures "Start Fresh" truly starts fresh in UI
+  if (statistics.currentSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) { // Less than 30 seconds old
+      return false; // Don't show previous progress for fresh sessions
+    }
+  }
+  
+  // Also check previous sessions for this exam (for older sessions)
   if (currentExam && statistics.sessions) {
     const examCode = Object.keys(availableExams).find(code => 
       availableExams[code] === currentExam.exam_name
@@ -6247,7 +6290,28 @@ function isQuestionVisited(questionNumber) {
 function isQuestionAnsweredCorrectly(questionNumber) {
   if (!questionNumber) return false;
   
-  // Get the most recent answer from any session for this exam
+  // Check current session first
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    if (found && found.att && found.att.length > 0) {
+      const lastAttempt = found.att[found.att.length - 1];
+      return lastAttempt.c === true;
+    }
+  }
+  
+  // If current session is very new, don't show previous session results
+  if (statistics.currentSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) {
+      return false;
+    }
+  }
+  
+  // For older sessions, get the most recent answer from any session for this exam
   const recentAnswer = getMostRecentAnswer(questionNumber);
   return recentAnswer && recentAnswer.isCorrect === true;
 }
@@ -6256,7 +6320,28 @@ function isQuestionAnsweredCorrectly(questionNumber) {
 function isQuestionAnsweredIncorrectly(questionNumber) {
   if (!questionNumber) return false;
   
-  // Get the most recent answer from any session for this exam
+  // Check current session first
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    if (found && found.att && found.att.length > 0) {
+      const lastAttempt = found.att[found.att.length - 1];
+      return lastAttempt.c === false;
+    }
+  }
+  
+  // If current session is very new, don't show previous session results
+  if (statistics.currentSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) {
+      return false;
+    }
+  }
+  
+  // For older sessions, get the most recent answer from any session for this exam
   const recentAnswer = getMostRecentAnswer(questionNumber);
   return recentAnswer && recentAnswer.isCorrect === false;
 }
