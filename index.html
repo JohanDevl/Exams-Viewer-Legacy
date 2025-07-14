@@ -78,7 +78,8 @@
             <button
               id="homeBtn"
               class="home-btn"
-              title="Return to Home"
+              data-tooltip="Return to Home (H)"
+              data-tooltip-position="top"
               style="display: none"
             >
               <i class="fas fa-home"></i>
@@ -90,36 +91,40 @@
             <button
               id="darkModeBtn"
               class="dark-mode-btn"
-              title="Toggle Dark Mode"
+              data-tooltip="Toggle Dark Mode"
+              data-tooltip-position="top"
             >
               <i class="fas fa-moon"></i>
             </button>
             <button
               id="statisticsBtn"
               class="statistics-btn"
-              title="View Statistics"
+              data-tooltip="View Statistics"
+              data-tooltip-position="top"
             >
               <i class="fas fa-chart-bar"></i>
             </button>
-            <button id="settingsBtn" class="settings-btn" title="Open Settings">
+            <button id="settingsBtn" class="settings-btn" data-tooltip="Open Settings" data-tooltip-position="top">
               <i class="fas fa-cog"></i>
             </button>
             <button
               id="revisionModeBtn"
               class="revision-mode-btn"
-              title="Enter Revision Mode"
+              data-tooltip="Enter Revision Mode&#10;Review your favorites"
+              data-tooltip-position="top"
             >
               <i class="fas fa-book"></i>
             </button>
             <button
               id="changelogBtn"
               class="changelog-btn"
-              title="View Changelog"
+              data-tooltip="View Changelog&#10;See latest updates"
+              data-tooltip-position="top"
             >
               <i class="fas fa-history"></i>
             </button>
           </div>
-          <button id="exportBtn" class="export-btn" style="display: none">
+          <button id="exportBtn" class="export-btn" data-tooltip="Export Questions to PDF&#10;Download current exam as PDF" data-tooltip-position="top" style="display: none">
             <i class="fas fa-file-pdf"></i> Export Questions to PDF
           </button>
         </div>
@@ -137,13 +142,13 @@
           style="display: none"
         >
           <div class="nav-controls">
-            <button id="prevBtn" class="nav-btn">
+            <button id="prevBtn" class="nav-btn" data-tooltip="Previous Question (← or H)" data-tooltip-position="top">
               <i class="fas fa-chevron-left"></i> Previous
             </button>
             <div class="question-info">
               <span id="questionCounter">Question 1 of 0</span>
             </div>
-            <button id="nextBtn" class="nav-btn">
+            <button id="nextBtn" class="nav-btn" data-tooltip="Next Question (→ or L)" data-tooltip-position="top">
               Next <i class="fas fa-chevron-right"></i>
             </button>
           </div>
@@ -151,25 +156,25 @@
           <!-- Enhanced Navigation Controls -->
           <div class="nav-controls-enhanced">
             <div class="nav-history">
-              <button id="historyBackBtn" class="nav-btn history" title="Go back" disabled>
+              <button id="historyBackBtn" class="nav-btn history" data-tooltip="Go Back in History&#10;Returns to previous question" data-tooltip-position="top" disabled>
                 <i class="fas fa-undo"></i> Back
               </button>
-              <button id="historyForwardBtn" class="nav-btn history" title="Go forward" disabled>
+              <button id="historyForwardBtn" class="nav-btn history" data-tooltip="Go Forward in History&#10;Returns to next question" data-tooltip-position="top" disabled>
                 <i class="fas fa-redo"></i> Forward
               </button>
             </div>
             <div class="nav-quick-actions">
-              <button id="sidebarToggle" class="nav-btn secondary" title="Toggle progress sidebar">
+              <button id="sidebarToggle" class="nav-btn secondary" data-tooltip="Toggle Progress Sidebar&#10;View all questions at once" data-tooltip-position="top">
                 <i class="fas fa-bars"></i>
               </button>
-              <button id="keyboardHelpBtn" class="nav-btn secondary" title="Keyboard shortcuts (?)">
+              <button id="keyboardHelpBtn" class="nav-btn secondary" data-tooltip="Keyboard Shortcuts (?)&#10;View all available shortcuts" data-tooltip-position="top">
                 <i class="fas fa-keyboard"></i>
               </button>
             </div>
           </div>
           
           <div class="nav-controls-secondary">
-            <button id="randomBtn" class="nav-btn secondary">
+            <button id="randomBtn" class="nav-btn secondary" data-tooltip="Random Question (R)&#10;Jump to a random question" data-tooltip-position="top">
               <i class="fas fa-random"></i> Random
             </button>
             <div class="question-jump">
@@ -181,7 +186,7 @@
                 max="1"
                 inputmode="numeric"
               />
-              <button id="jumpBtn" class="nav-btn secondary">Go</button>
+              <button id="jumpBtn" class="nav-btn secondary" data-tooltip="Go to Question&#10;Navigate to specific question number" data-tooltip-position="top">Go</button>
             </div>
           </div>
         </div>
@@ -221,7 +226,7 @@
         <div id="progressSidebar" class="progress-sidebar">
           <div class="sidebar-header">
             <h3><i class="fas fa-list"></i> Question Progress</h3>
-            <button id="closeSidebarBtn" class="close-sidebar-btn" title="Close sidebar">
+            <button id="closeSidebarBtn" class="close-sidebar-btn" data-tooltip="Close Sidebar (Esc)" data-tooltip-position="left">
               <i class="fas fa-times"></i>
             </button>
           </div>
@@ -350,7 +355,8 @@
               <button
                 id="favoriteBtn"
                 class="favorite-btn"
-                title="Toggle Favorite"
+                data-tooltip="Toggle Favorite (F)&#10;Add to your favorites"
+                data-tooltip-position="top"
               >
                 <i class="far fa-star"></i>
               </button>
@@ -360,11 +366,12 @@
               <button
                 id="addCategoryBtn"
                 class="add-category-btn"
-                title="Add Custom Category"
+                data-tooltip="Add Custom Category&#10;Create new category for organization"
+                data-tooltip-position="top"
               >
                 <i class="fas fa-plus"></i>
               </button>
-              <button id="noteBtn" class="note-btn" title="Add Note">
+              <button id="noteBtn" class="note-btn" data-tooltip="Add Note (N)&#10;Write a personal note" data-tooltip-position="bottom">
                 <i class="far fa-sticky-note"></i>
               </button>
             </div>
@@ -419,13 +426,13 @@
 
             <div id="answersList" class="answers-list"></div>
             <div class="answer-controls">
-              <button id="validateBtn" class="validate-btn">
+              <button id="validateBtn" class="validate-btn" data-tooltip="Validate Answers (V)&#10;Check your answers" data-tooltip-position="top">
                 <i class="fas fa-check"></i> Validate Answers
               </button>
-              <button id="resetBtn" class="reset-btn" style="display: none">
+              <button id="resetBtn" class="reset-btn" data-tooltip="Reset Answers&#10;Clear all selections" data-tooltip-position="top" style="display: none">
                 <i class="fas fa-redo"></i> Reset
               </button>
-              <button id="highlightBtn" class="highlight-btn">
+              <button id="highlightBtn" class="highlight-btn" data-tooltip="Toggle Highlight (Space)&#10;Preview correct answers" data-tooltip-position="top">
                 <i class="fas fa-lightbulb"></i> Toggle Highlight
               </button>
             </div>
@@ -441,7 +448,7 @@
 
           <!-- Discussion Section -->
           <div class="discussion-section">
-            <button id="discussionToggle" class="discussion-toggle">
+            <button id="discussionToggle" class="discussion-toggle" data-tooltip="Toggle Discussion (D)&#10;View community discussion" data-tooltip-position="top">
               <i class="fas fa-comments"></i> Show Discussion
             </button>
             <div
@@ -614,6 +621,15 @@
               <p class="setting-description">
                 Display an animated progress bar with statistics in the header area. 
                 Shows answered questions, favorites count, and overall progress percentage.
+              </p>
+              <label class="toggle-label" style="margin-top: 1rem;">
+                <input type="checkbox" id="showTooltips" />
+                <span class="toggle-slider"></span>
+                Show informative tooltips with keyboard shortcuts
+              </label>
+              <p class="setting-description">
+                Display helpful tooltips on buttons and interactive elements. 
+                Includes keyboard shortcuts and contextual information for better user guidance.
               </p>
             </div>
 

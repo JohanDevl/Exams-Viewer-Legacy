@@ -89,6 +89,7 @@ data/
 - **Export Functionality**: PDF and JSON export of questions and user data
 - **Settings Management**: Persistent settings for UI preferences, sidebar state, and display options
 - **Advanced Search & Filters**: Comprehensive search system with text search, auto-completion, and status filters
+- **Informative Tooltips**: CSS-only tooltip system with keyboard shortcuts, disabled by default with settings toggle, mobile-optimized touch support
 - **Performance Optimizations**: Lazy loading for large datasets, intelligent caching with service worker, automatic image compression
 
 ### Backend Features

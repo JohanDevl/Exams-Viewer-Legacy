@@ -4,6 +4,45 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] - {PR_MERGE_DATE}
+
+### Added
+
+- **Informative Tooltips System**: Comprehensive tooltip guidance for better user experience
+  - CSS-only tooltip implementation using pseudo-elements for optimal performance
+  - Keyboard shortcuts displayed on relevant buttons and interface elements
+  - Four positioning options (top, bottom, left, right) with intelligent placement
+  - Disabled by default with toggle option in settings modal for user control
+  - Mobile-optimized touch support with automatic 3-second display duration
+  - Responsive design adapting to different screen sizes and orientations
+  - Dark mode compatibility with theme-aware styling
+  - Accessibility compliance with screen reader support and high contrast mode
+  - Reduced motion support for users with motion sensitivity preferences
+
+- **Enhanced User Guidance**: Contextual information for all major interface elements
+  - Navigation buttons with keyboard shortcuts (←/→, H/L for vim users)
+  - Action buttons showing corresponding keys (V for validate, F for favorite, N for notes)
+  - Interface controls with helpful descriptions and shortcut combinations
+  - Progressive disclosure of advanced features through informative tooltips
+  - Consistent tooltip styling across all components with proper spacing and readability
+
+### Enhanced
+
+- **Settings Management**: Extended preferences system
+  - New tooltip visibility control in Display Preferences section
+  - Persistent setting storage with localStorage integration
+  - Immediate application of tooltip visibility changes
+  - Clear descriptions of tooltip functionality and keyboard shortcuts
+
+### Fixed
+
+- **Tooltip Display Issues**: Resolved visibility and positioning problems
+  - Proper background sizing with max-content width calculation
+  - High z-index (99999) ensuring tooltips appear above all interface elements
+  - Corrected line break display using HTML entities (&#10;) instead of \n
+  - Improved positioning for header buttons with top-aligned tooltips
+  - Enhanced mobile touch handling with focus-based activation
+
 ## [2.6.0] - 2025-07-14
 
 ### Added
@@ -409,6 +448,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- **v2.7.x**: Informative tooltips system with keyboard shortcuts and enhanced user guidance
 - **v2.6.x**: Enhanced visual status indicators with color-coded badges and question organization system
 - **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, history, animated progress indicator, embedded image display fixes, and performance optimizations
 - **v2.4.x**: Advanced search and filtering system with smart auto-completion
