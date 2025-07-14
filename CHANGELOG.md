@@ -4,6 +4,52 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.0] - {PR_MERGE_DATE}
+
+### Added
+
+- **Resume Study Position System**: Intelligent position tracking across browser sessions
+  - Automatic position saving during question navigation with persistent localStorage storage
+  - Resume dialog with Continue/Start Fresh options when returning to previously studied exams
+  - Visual progress context showing saved position information to help users decide
+  - Cross-session progress tracking maintains statistical data while allowing fresh question experience
+  - Optional auto-save position feature for seamless continuous study sessions (disabled by default)
+  - Position validation with boundary checking and graceful error handling
+  - Settings integration with Study Management section for user control
+  - Performance optimized with efficient storage and non-blocking updates
+  - Privacy-focused design with local-only data storage, never transmitted externally
+
+- **Enhanced Progress Tracking**: Cross-session visual progress indicators
+  - Progress sidebar shows question status across multiple sessions
+  - Highlight/preview mode questions now properly count as answered in progress tracking
+  - Immediate progress indicator updates when highlight mode is activated via settings
+  - Consistent visual feedback for study progress regardless of session boundaries
+  - Statistical data preservation while maintaining fresh question appearance
+
+### Enhanced
+
+- **Settings Management**: Extended Study Management section
+  - New "Resume Study Position" toggle for enabling/disabling position tracking
+  - Optional "Auto-Save Position" setting for automatic position saving during navigation
+  - Position management utilities for viewing and clearing saved positions
+  - User-friendly descriptions explaining feature benefits and privacy approach
+  - Default disabled state requiring explicit user opt-in for conservative approach
+
+- **User Experience**: Seamless study session continuation
+  - Graceful handling of invalid or corrupted position data
+  - Clear visual distinction between resumed and fresh study sessions
+  - Contextual resume dialog providing relevant position information
+  - Smooth integration with existing navigation and statistics systems
+  - Backward compatibility ensuring normal operation when feature is disabled
+
+### Technical
+
+- **Data Structure**: Optimized localStorage management
+  - Minimal storage footprint with efficient position data structure
+  - Automatic cleanup of outdated or invalid position entries
+  - Memory-efficient position tracking with proper cleanup procedures
+  - Background position updates without UI impact or navigation interruption
+
 ## [2.8.0] - 2025-07-14
 
 ### Added
@@ -496,6 +542,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- **v2.9.x**: Resume study position system with intelligent session tracking and cross-session progress indicators
 - **v2.8.x**: Enhanced mobile navigation system with swipe gestures, touch-optimized UI, and mobile bottom navigation bar
 - **v2.7.x**: Informative tooltips system with keyboard shortcuts and enhanced user guidance
 - **v2.6.x**: Enhanced visual status indicators with color-coded badges and question organization system

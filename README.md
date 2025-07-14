@@ -28,6 +28,7 @@ No installation required! The interface automatically detects your system theme 
 - **📝 Built-in changelog viewer** with Markdown rendering
 - **⚡ Optional lazy loading** for large exams (experimental)
 - **🧹 Data management tools** for storage optimization
+- **🔄 Resume study position** across browser sessions with auto-save capability
 
 ### Performance & Storage
 
@@ -90,6 +91,7 @@ pip install -r requirements.txt
 11. **Export data** to PDF or JSON format
 12. **Manage performance**: Enable lazy loading in settings for large exams
 13. **Clean storage**: Use statistics management tools to optimize space
+14. **Resume study sessions**: Enable position tracking in settings to continue where you left off
 
 ### Manual Updates
 
