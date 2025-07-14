@@ -5521,6 +5521,7 @@ function showExportModal() {
   if (modal) {
     modal.style.display = 'flex';
     populateExportCategories();
+    updateFilterAvailability(); // Initialize filter availability
     updateExportPreview();
     setupExportModalEventListeners();
   }
@@ -5557,11 +5558,151 @@ function populateExportCategories() {
   });
 }
 
+function updateFilterAvailability() {
+  if (!currentQuestions || currentQuestions.length === 0) return;
+  
+  // Get the exam code using the same logic as the filtering functions
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  if (!examCode) return;
+  
+  const examFavorites = favoritesData.favorites[examCode] || {};
+  
+  // Count different types of content
+  let favoritesCount = 0;
+  let notesCount = 0;
+  let answeredCount = 0;
+  const categoriesSet = new Set();
+  
+  currentQuestions.forEach(question => {
+    const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+    const questionData = examFavorites[questionNumber.toString()];
+    
+    // Count favorites
+    if (questionData && questionData.isFavorite) {
+      favoritesCount++;
+    }
+    
+    // Count notes
+    if (questionData && questionData.note && questionData.note.trim() !== '') {
+      notesCount++;
+    }
+    
+    // Count answered questions
+    if (isQuestionAnswered(questionNumber)) {
+      answeredCount++;
+    }
+    
+    // Collect categories
+    if (questionData && questionData.category) {
+      categoriesSet.add(questionData.category);
+    }
+  });
+  
+  // Update UI based on counts
+  const favoritesOption = document.querySelector('input[name="contentFilter"][value="favorites"]');
+  const notesOption = document.querySelector('input[name="contentFilter"][value="notes"]');
+  const answeredOption = document.querySelector('input[name="contentFilter"][value="answered"]');
+  const categoryOption = document.querySelector('input[name="contentFilter"][value="category"]');
+  
+  if (favoritesOption) {
+    const favoritesLabel = favoritesOption.closest('label');
+    const favoritesIcon = favoritesLabel.querySelector('i');
+    const favoritesText = favoritesLabel.lastChild;
+    
+    if (favoritesCount === 0) {
+      favoritesOption.disabled = true;
+      favoritesLabel.style.opacity = '0.5';
+      favoritesLabel.style.cursor = 'not-allowed';
+      favoritesText.textContent = ' Favorites Only (0 available)';
+      
+      // If currently selected, switch to "all"
+      if (favoritesOption.checked) {
+        document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
+      }
+    } else {
+      favoritesOption.disabled = false;
+      favoritesLabel.style.opacity = '1';
+      favoritesLabel.style.cursor = 'pointer';
+      favoritesText.textContent = ` Favorites Only (${favoritesCount} available)`;
+    }
+  }
+  
+  if (notesOption) {
+    const notesLabel = notesOption.closest('label');
+    const notesText = notesLabel.lastChild;
+    
+    if (notesCount === 0) {
+      notesOption.disabled = true;
+      notesLabel.style.opacity = '0.5';
+      notesLabel.style.cursor = 'not-allowed';
+      notesText.textContent = ' Questions with Notes (0 available)';
+      
+      if (notesOption.checked) {
+        document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
+      }
+    } else {
+      notesOption.disabled = false;
+      notesLabel.style.opacity = '1';
+      notesLabel.style.cursor = 'pointer';
+      notesText.textContent = ` Questions with Notes (${notesCount} available)`;
+    }
+  }
+  
+  if (answeredOption) {
+    const answeredLabel = answeredOption.closest('label');
+    const answeredText = answeredLabel.lastChild;
+    
+    if (answeredCount === 0) {
+      answeredOption.disabled = true;
+      answeredLabel.style.opacity = '0.5';
+      answeredLabel.style.cursor = 'not-allowed';
+      answeredText.textContent = ' Answered Questions (0 available)';
+      
+      if (answeredOption.checked) {
+        document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
+      }
+    } else {
+      answeredOption.disabled = false;
+      answeredLabel.style.opacity = '1';
+      answeredLabel.style.cursor = 'pointer';
+      answeredText.textContent = ` Answered Questions (${answeredCount} available)`;
+    }
+  }
+  
+  if (categoryOption) {
+    const categoryLabel = categoryOption.closest('label');
+    const categoryText = categoryLabel.lastChild;
+    const categoriesCount = categoriesSet.size;
+    
+    if (categoriesCount === 0) {
+      categoryOption.disabled = true;
+      categoryLabel.style.opacity = '0.5';
+      categoryLabel.style.cursor = 'not-allowed';
+      categoryText.textContent = ' By Category (0 available)';
+      
+      if (categoryOption.checked) {
+        document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
+      }
+    } else {
+      categoryOption.disabled = false;
+      categoryLabel.style.opacity = '1';
+      categoryLabel.style.cursor = 'pointer';
+      categoryText.textContent = ` By Category (${categoriesCount} available)`;
+    }
+  }
+}
+
 function updateExportPreview() {
   const formatRadio = document.querySelector('input[name="exportFormat"]:checked');
   const filterRadio = document.querySelector('input[name="contentFilter"]:checked');
   
   if (!formatRadio || !filterRadio) return;
+  
+  // Update filter availability based on content
+  updateFilterAvailability();
   
   const format = formatRadio.value;
   const filter = filterRadio.value;

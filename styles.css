@@ -2358,6 +2358,18 @@ body {
   background-color: var(--bg-tertiary);
 }
 
+.radio-option:has(input:disabled),
+.checkbox-option:has(input:disabled) {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}
+
+.radio-option:has(input:disabled):hover,
+.checkbox-option:has(input:disabled):hover {
+  border-color: var(--border-light) !important;
+  background-color: var(--bg-primary) !important;
+}
+
 .radio-option input[type="radio"],
 .checkbox-option input[type="checkbox"] {
   display: none;
