@@ -2922,7 +2922,7 @@ function saveSettings() {
         // Update progress indicators immediately
         clearQuestionStatusCache();
         updateProgressSidebar();
-        updateMainProgressIndicator();
+        updateMainProgressBar();
         
         // Update search filter counts if advanced search is available
         if (typeof updateFilterCounts === 'function') {
@@ -2934,11 +2934,33 @@ function saveSettings() {
     // Update the highlight button appearance
     updateHighlightButton();
     
-    // Apply or remove highlight on current question immediately
-    applyHighlightToCurrentAnswers();
+    // Update instructions and validate button state
+    updateInstructions();
     
-    // Refresh the current question display
-    displayCurrentQuestion();
+    // Simply force update the highlight display on current answers
+    const question = currentQuestions[currentQuestionIndex];
+    const mostVoted = question.most_voted || "";
+    const correctAnswers = new Set(mostVoted.split(""));
+    
+    // Get all answer elements and apply/remove highlight
+    const answersList = document.getElementById("answersList");
+    if (answersList) {
+      const answerElements = answersList.querySelectorAll(".answer-option");
+      answerElements.forEach((answerElement) => {
+        const answerLetterElement = answerElement.querySelector(".answer-letter");
+        if (answerLetterElement) {
+          const answerLetter = answerLetterElement.textContent.replace(".", "");
+          const isCorrect = correctAnswers.has(answerLetter);
+          const isSelected = answerElement.classList.contains("selected");
+          
+          if (isHighlightEnabled && isCorrect && !isSelected) {
+            answerElement.classList.add("correct-not-selected");
+          } else {
+            answerElement.classList.remove("correct-not-selected");
+          }
+        }
+      });
+    }
   }
   
   applyTheme(settings.darkMode);
@@ -2948,35 +2970,6 @@ function saveSettings() {
   
   // Update tooltip visibility
   updateTooltipVisibility();
-}
-
-// Apply or remove highlight on current question answers
-function applyHighlightToCurrentAnswers() {
-  if (!currentQuestions.length) return;
-  
-  const question = currentQuestions[currentQuestionIndex];
-  const mostVoted = question.most_voted || "";
-  const correctAnswers = new Set(mostVoted.split(""));
-  
-  // Get all answer elements
-  const answersList = document.getElementById("answersList");
-  if (!answersList) return;
-  
-  const answerElements = answersList.querySelectorAll(".answer-option");
-  
-  answerElements.forEach((answerElement) => {
-    const answerLetter = answerElement.querySelector(".answer-letter").textContent.replace(".", "");
-    
-    if (isHighlightEnabled && correctAnswers.has(answerLetter)) {
-      // Add highlight class if not already selected
-      if (!answerElement.classList.contains("selected")) {
-        answerElement.classList.add("correct-not-selected");
-      }
-    } else {
-      // Remove highlight class
-      answerElement.classList.remove("correct-not-selected");
-    }
-  });
 }
 
 // Apply dark/light theme
@@ -4790,7 +4783,7 @@ function toggleHighlight() {
     // Clear question status cache and update progress indicators immediately
     clearQuestionStatusCache();
     updateProgressSidebar();
-    updateMainProgressIndicator();
+    updateMainProgressBar();
     
     // Update search filter counts if advanced search is available
     if (typeof updateFilterCounts === 'function') {
@@ -4804,9 +4797,6 @@ function toggleHighlight() {
   updateHighlightButton();
 
   if (currentQuestions.length > 0) {
-    // Apply or remove highlight on current question immediately
-    applyHighlightToCurrentAnswers();
-    
     // Pass a flag to indicate this is from a toggle action to avoid double counting
     displayCurrentQuestion(true);
   }
@@ -4825,9 +4815,9 @@ function updateHighlightButton() {
   } else {
     highlightBtn.classList.remove("active");
     highlightBtn.innerHTML =
-      '<i class="fas fa-lightbulb"></i> Enable Highlight';
-    highlightBtn.style.backgroundColor = "var(--warning-color)";
-    highlightBtn.style.color = "#212529";
+      '<i class="fas fa-lightbulb"></i> Toggle Highlight';
+    highlightBtn.style.backgroundColor = "";
+    highlightBtn.style.color = "";
   }
 }
 
