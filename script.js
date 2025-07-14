@@ -3168,6 +3168,17 @@ function setupEventListeners() {
 
   // Mobile tooltip touch handling
   setupMobileTooltips();
+  
+  // Enhanced mobile navigation features
+  setupTouchGestures();
+  setupTouchFeedback();
+  setupSidebarSwipeToClose();
+  
+  // Handle window resize for mobile navigation
+  window.addEventListener('resize', () => {
+    createMobileBottomNavigation();
+    manageSwipeIndicators();
+  });
 }
 
 // Setup mobile tooltip handling for touch devices
@@ -3205,6 +3216,250 @@ function setupMobileTooltips() {
     const tooltipElement = e.target.closest('[data-tooltip]');
     if (tooltipElement && settings.showTooltips) {
       tooltipElement.blur();
+    }
+  });
+}
+
+// Enhanced Mobile Navigation with Swipe Gestures
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+let isSwiping = false;
+let touchStartTime = 0;
+
+// Setup touch gesture navigation
+function setupTouchGestures() {
+  const questionSection = document.getElementById('questionSection');
+  if (!questionSection) return;
+
+  // Touch start handler
+  questionSection.addEventListener('touchstart', handleTouchStart, { passive: false });
+  
+  // Touch move handler
+  questionSection.addEventListener('touchmove', handleTouchMove, { passive: false });
+  
+  // Touch end handler
+  questionSection.addEventListener('touchend', handleTouchEnd, { passive: false });
+  
+  // Manage swipe indicators
+  manageSwipeIndicators();
+}
+
+// Handle touch start
+function handleTouchStart(e) {
+  // Only handle single touch
+  if (e.touches.length !== 1) return;
+  
+  const touch = e.touches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+  touchStartTime = Date.now();
+  isSwiping = false;
+  
+  // Don't interfere with scrolling or form inputs
+  // Allow swipe on question content but not on navigation buttons or forms
+  if (e.target.closest('input, textarea, select, .modal, .sidebar, .nav-btn, .mobile-nav-bottom')) {
+    return;
+  }
+}
+
+// Handle touch move
+function handleTouchMove(e) {
+  if (e.touches.length !== 1) return;
+  
+  const touch = e.touches[0];
+  const deltaX = touch.clientX - touchStartX;
+  const deltaY = touch.clientY - touchStartY;
+  
+  // Check if this is a horizontal swipe
+  if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 30) {
+    isSwiping = true;
+    
+    // Show swipe indicator
+    const direction = deltaX > 0 ? 'right' : 'left';
+    showSwipeIndicator(direction);
+    
+    // Prevent default to stop scrolling during swipe
+    e.preventDefault();
+  }
+}
+
+// Handle touch end
+async function handleTouchEnd(e) {
+  if (!isSwiping) return;
+  
+  const touch = e.changedTouches[0];
+  touchEndX = touch.clientX;
+  touchEndY = touch.clientY;
+  
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+  const deltaTime = Date.now() - touchStartTime;
+  
+  // Hide swipe indicators
+  hideSwipeIndicators();
+  
+  // Check if swipe meets criteria
+  if (Math.abs(deltaX) > 50 && Math.abs(deltaY) < 100 && deltaTime < 300) {
+    // Add haptic feedback
+    addHapticFeedback();
+    
+    if (deltaX > 0) {
+      // Swipe right - previous question
+      await navigateQuestion(-1);
+    } else {
+      // Swipe left - next question
+      await navigateQuestion(1);
+    }
+  }
+  
+  isSwiping = false;
+}
+
+// Manage swipe indicators based on screen size
+function manageSwipeIndicators() {
+  const leftIndicator = document.getElementById('swipeIndicatorLeft');
+  const rightIndicator = document.getElementById('swipeIndicatorRight');
+  
+  if (window.innerWidth <= 480) {
+    // Mobile: Create indicators if they don't exist
+    if (!leftIndicator || !rightIndicator) {
+      createSwipeIndicators();
+    }
+  } else {
+    // Desktop: Remove indicators if they exist
+    if (leftIndicator) leftIndicator.remove();
+    if (rightIndicator) rightIndicator.remove();
+  }
+}
+
+// Create swipe indicators
+function createSwipeIndicators() {
+  // Only create on mobile
+  if (window.innerWidth > 480) return;
+  
+  // Check if indicators already exist
+  if (document.getElementById('swipeIndicatorLeft') && document.getElementById('swipeIndicatorRight')) {
+    return;
+  }
+  
+  // Create left indicator
+  const leftIndicator = document.createElement('div');
+  leftIndicator.className = 'swipe-indicator left';
+  leftIndicator.innerHTML = '← Previous';
+  leftIndicator.id = 'swipeIndicatorLeft';
+  document.body.appendChild(leftIndicator);
+  
+  // Create right indicator
+  const rightIndicator = document.createElement('div');
+  rightIndicator.className = 'swipe-indicator right';
+  rightIndicator.innerHTML = 'Next →';
+  rightIndicator.id = 'swipeIndicatorRight';
+  document.body.appendChild(rightIndicator);
+}
+
+// Show swipe indicator
+function showSwipeIndicator(direction) {
+  const indicator = document.getElementById(direction === 'left' ? 'swipeIndicatorRight' : 'swipeIndicatorLeft');
+  if (indicator) {
+    indicator.classList.add('show');
+  }
+}
+
+// Hide swipe indicators
+function hideSwipeIndicators() {
+  const leftIndicator = document.getElementById('swipeIndicatorLeft');
+  const rightIndicator = document.getElementById('swipeIndicatorRight');
+  
+  if (leftIndicator) leftIndicator.classList.remove('show');
+  if (rightIndicator) rightIndicator.classList.remove('show');
+}
+
+// Add haptic feedback
+function addHapticFeedback() {
+  if ('vibrate' in navigator) {
+    navigator.vibrate(50); // Short vibration
+  }
+}
+
+// Enhanced touch feedback for buttons
+function setupTouchFeedback() {
+  // Add touch feedback class to interactive elements
+  const interactiveElements = document.querySelectorAll('.nav-btn, .answer-option, .exam-load-btn, .favorites-actions button, .export-actions button');
+  
+  interactiveElements.forEach(element => {
+    element.classList.add('touch-feedback');
+    
+    // Add touch feedback for mobile
+    element.addEventListener('touchstart', () => {
+      addHapticFeedback();
+    });
+  });
+}
+
+// Create mobile bottom navigation
+function createMobileBottomNavigation() {
+  const existingNav = document.getElementById('mobileBottomNav');
+  
+  // Check if we're on mobile AND in an exam (not on homepage)
+  if (window.innerWidth <= 480 && currentQuestions.length > 0) {
+    // Create mobile nav if it doesn't exist
+    if (!existingNav) {
+      const mobileNav = document.createElement('div');
+      mobileNav.id = 'mobileBottomNav';
+      mobileNav.className = 'mobile-nav-bottom';
+      
+      mobileNav.innerHTML = `
+        <button class="nav-btn touch-feedback" onclick="navigateQuestion(-1)" data-tooltip="Previous Question">
+          <i class="fas fa-chevron-left"></i>
+          <span>Prev</span>
+        </button>
+        <button class="nav-btn touch-feedback" onclick="navigateToRandomQuestion()" data-tooltip="Random Question">
+          <i class="fas fa-random"></i>
+          <span>Random</span>
+        </button>
+        <button class="nav-btn touch-feedback" onclick="toggleSidebar()" data-tooltip="Progress Sidebar">
+          <i class="fas fa-bars"></i>
+          <span>Progress</span>
+        </button>
+        <button class="nav-btn touch-feedback" onclick="navigateQuestion(1)" data-tooltip="Next Question">
+          <i class="fas fa-chevron-right"></i>
+          <span>Next</span>
+        </button>
+      `;
+      
+      document.body.appendChild(mobileNav);
+    }
+  } else {
+    // Remove mobile nav if we're on desktop OR on homepage
+    if (existingNav) {
+      existingNav.remove();
+    }
+  }
+}
+
+// Enhanced sidebar swipe-to-close
+function setupSidebarSwipeToClose() {
+  const sidebar = document.getElementById('sidebar');
+  if (!sidebar) return;
+  
+  let sidebarTouchStartX = 0;
+  let sidebarTouchStartY = 0;
+  
+  sidebar.addEventListener('touchstart', (e) => {
+    sidebarTouchStartX = e.touches[0].clientX;
+    sidebarTouchStartY = e.touches[0].clientY;
+  });
+  
+  sidebar.addEventListener('touchmove', (e) => {
+    const deltaX = e.touches[0].clientX - sidebarTouchStartX;
+    const deltaY = e.touches[0].clientY - sidebarTouchStartY;
+    
+    // If swiping left and it's a horizontal swipe
+    if (deltaX < -50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      e.preventDefault();
+      closeSidebar();
     }
   });
 }
@@ -3663,6 +3918,9 @@ function goToHome() {
   selectedAnswers.clear();
   isValidated = false;
   isHighlightEnabled = false;
+  
+  // Remove mobile navigation when returning to home
+  createMobileBottomNavigation();
   isHighlightTemporaryOverride = false; // Reset override flag
   questionStartTime = null;
 
@@ -3780,6 +4038,12 @@ function displayCurrentQuestion(fromToggleAction = false) {
   if (!currentQuestions.length) return;
 
   const question = currentQuestions[currentQuestionIndex];
+  
+  // Create mobile bottom navigation if needed
+  createMobileBottomNavigation();
+  
+  // Manage swipe indicators for current question
+  manageSwipeIndicators();
   
   // Handle placeholder questions for lazy loading
   if (question?.isPlaceholder) {
