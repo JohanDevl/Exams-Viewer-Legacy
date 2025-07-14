@@ -1,6 +1,6 @@
 // Service Worker for Intelligent Caching with Background Updates
 const CACHE_NAME = 'exams-viewer-v1';
-const CACHE_EXPIRY = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const CACHE_EXPIRY = 6 * 60 * 60 * 1000; // 6 hours in milliseconds (reduced for better freshness)
 
 // Files to cache immediately
 const STATIC_CACHE_FILES = [
@@ -167,27 +167,38 @@ async function updateCache(cache, request, response) {
 
 // Background update scheduler
 function scheduleBackgroundUpdate(request, cache) {
-  // Use a simple timeout to avoid blocking
-  setTimeout(async () => {
+  // Use scheduler API if available for better performance, otherwise fallback to setTimeout
+  const scheduleBackgroundUpdate = async () => {
     try {
       console.log('Background updating:', request.url);
       const networkResponse = await fetch(request);
       if (networkResponse.ok) {
         await updateCache(cache, request, networkResponse);
         
-        // Notify clients of update
-        const clients = await self.clients.matchAll();
-        clients.forEach(client => {
-          client.postMessage({
-            type: 'CACHE_UPDATED',
-            url: request.url
+        // Throttle notifications to avoid overwhelming main thread
+        const lastNotification = self.lastNotificationTime || 0;
+        const now = Date.now();
+        if (now - lastNotification > 1000) { // Max 1 notification per second
+          self.lastNotificationTime = now;
+          const clients = await self.clients.matchAll();
+          clients.forEach(client => {
+            client.postMessage({
+              type: 'CACHE_UPDATED',
+              url: request.url
+            });
           });
-        });
+        }
       }
     } catch (error) {
       console.log('Background update failed for:', request.url, error);
     }
-  }, 1000);
+  };
+
+  if ('scheduler' in self && 'postTask' in self.scheduler) {
+    self.scheduler.postTask(scheduleBackgroundUpdate, { priority: 'background' });
+  } else {
+    setTimeout(scheduleBackgroundUpdate, 1000);
+  }
 }
 
 // Cache timestamp management
