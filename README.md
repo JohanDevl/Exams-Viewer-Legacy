@@ -23,7 +23,8 @@ No installation required! The interface automatically detects your system theme 
 - **🌙 Dark mode** with automatic detection
 - **📊 Complete statistics system** with intelligent storage management
 - **🎯 Highlight mode** to preview answers
-- **📄 PDF and JSON export** with custom formatting
+- **📄 Enhanced export system** with TXT, CSV, JSON, and PDF formats
+- **⚙️ Flexible export options** with content filtering and selective inclusion
 - **📈 Progress tracking** with visual charts and analytics
 - **📝 Built-in changelog viewer** with Markdown rendering
 - **⚡ Optional lazy loading** for large exams (experimental)
@@ -88,10 +89,12 @@ pip install -r requirements.txt
 8. **Access keyboard help**: Press `?` to see all available shortcuts
 9. **Use highlight mode** to preview answers before validation
 10. **Check statistics** in the dedicated panel with detailed analytics
-11. **Export data** to PDF or JSON format
-12. **Manage performance**: Enable lazy loading in settings for large exams
-13. **Clean storage**: Use statistics management tools to optimize space
-14. **Resume study sessions**: Enable position tracking in settings to continue where you left off
+11. **Export data** with comprehensive format options (TXT, CSV, enhanced JSON, PDF)
+12. **Filter exports** by favorites, notes, answered questions, or categories
+13. **Customize content** with selective inclusion of questions, answers, discussions, images, and user notes
+14. **Manage performance**: Enable lazy loading in settings for large exams
+15. **Clean storage**: Use statistics management tools to optimize space
+16. **Resume study sessions**: Enable position tracking in settings to continue where you left off
 
 ### Manual Updates
 
