@@ -74,6 +74,7 @@ class ExamSession {
     this.st = Date.now(); // Start time as timestamp - shortened
     this.et = null; // End time - shortened
     this.q = []; // Array of question attempts - shortened
+    this.vq = []; // Array of visited question numbers - shortened
     this.tq = 0; // Total questions - shortened
     this.ca = 0; // Correct answers - shortened
     this.ia = 0; // Incorrect answers - shortened
@@ -104,6 +105,9 @@ class ExamSession {
   }
   get questions() {
     return this.q;
+  }
+  get visitedQuestions() {
+    return this.vq;
   }
   get totalQuestions() {
     return this.tq;
@@ -3735,6 +3739,11 @@ function displayCurrentQuestion(fromToggleAction = false) {
     return;
   }
 
+  // Track question visit for status indicators
+  if (question.question_number) {
+    trackQuestionVisit(question.question_number);
+  }
+
   // Reset state
   selectedAnswers.clear();
   isValidated = false;
@@ -4864,45 +4873,128 @@ function updateProgressSidebar() {
   const questionList = sidebar.querySelector(".question-list");
   if (!questionList) return;
   
-  // Generate question items
+  // Generate question items with enhanced status indicators
   const items = currentQuestions.map((question, index) => {
     const isCurrentQuestion = index === currentQuestionIndex;
-    const isAnswered = isQuestionAnswered(question.question_number);
-    const isFavorite = isQuestionFavorite(question.question_number);
     const isPlaceholder = question.isPlaceholder;
     
     let statusClass = "";
     let statusIcon = "";
     let questionPreview = "";
+    let statusBadges = "";
     
     if (isPlaceholder) {
       statusClass = "loading";
       statusIcon = '<i class="fas fa-spinner fa-spin"></i>';
       questionPreview = `Chunk ${question.chunkId + 1} - Loading...`;
-    } else if (isCurrentQuestion) {
-      statusClass = "current";
-      statusIcon = '<i class="fas fa-arrow-right"></i>';
-      questionPreview = truncateText(question.question || "", 60);
-    } else if (isAnswered) {
-      statusClass = "answered";
-      statusIcon = '<i class="fas fa-check"></i>';
-      questionPreview = truncateText(question.question || "", 60);
     } else {
-      statusClass = "unanswered";
-      statusIcon = '<i class="far fa-circle"></i>';
+      const questionStatus = getQuestionStatus(question.question_number);
       questionPreview = truncateText(question.question || "", 60);
+      
+      // Determine main status class and icon based on current question and status
+      if (isCurrentQuestion) {
+        statusClass = "current";
+        statusIcon = '<i class="fas fa-arrow-right"></i>';
+      } else {
+        statusClass = questionStatus.primaryStatus;
+        
+        // Set icon based on primary status
+        switch (questionStatus.primaryStatus) {
+          case 'correct':
+            statusIcon = '<i class="fas fa-check-circle"></i>';
+            break;
+          case 'incorrect':
+            statusIcon = '<i class="fas fa-times-circle"></i>';
+            break;
+          case 'viewed':
+            statusIcon = '<i class="fas fa-eye"></i>';
+            break;
+          case 'new':
+          default:
+            statusIcon = '<i class="far fa-circle"></i>';
+            break;
+        }
+      }
+      
+      // Generate status badges
+      const badges = [];
+      
+      // Primary status badge
+      let primaryBadgeText = "";
+      let primaryBadgeIcon = "";
+      let primaryBadgeClass = questionStatus.primaryStatus;
+      
+      switch (questionStatus.primaryStatus) {
+        case 'correct':
+          primaryBadgeText = "Correct";
+          primaryBadgeIcon = '<i class="fas fa-check"></i>';
+          break;
+        case 'incorrect':
+          primaryBadgeText = "Wrong";
+          primaryBadgeIcon = '<i class="fas fa-times"></i>';
+          break;
+        case 'viewed':
+          primaryBadgeText = "Viewed";
+          primaryBadgeIcon = '<i class="fas fa-eye"></i>';
+          break;
+        case 'new':
+          primaryBadgeText = "New";
+          primaryBadgeIcon = '<i class="fas fa-circle"></i>';
+          break;
+      }
+      
+      badges.push(`
+        <span class="status-badge ${primaryBadgeClass}" aria-label="${primaryBadgeText} question">
+          ${primaryBadgeIcon}
+          ${primaryBadgeText}
+        </span>
+      `);
+      
+      // Secondary badges for additional properties
+      if (questionStatus.isFavorite) {
+        badges.push(`
+          <span class="status-badge favorite" aria-label="Favorited question">
+            <i class="fas fa-star"></i>
+          </span>
+        `);
+      }
+      
+      if (questionStatus.hasNotes) {
+        badges.push(`
+          <span class="status-badge with-notes" aria-label="Question has notes">
+            <i class="fas fa-sticky-note"></i>
+          </span>
+        `);
+      }
+      
+      if (questionStatus.isCategorized) {
+        badges.push(`
+          <span class="status-badge categorized" aria-label="Question is categorized">
+            <i class="fas fa-tag"></i>
+          </span>
+        `);
+      }
+      
+      statusBadges = `
+        <div class="question-status-indicators">
+          <div class="primary-status">
+            ${badges[0]}
+          </div>
+          <div class="secondary-badges">
+            ${badges.slice(1).join('')}
+          </div>
+        </div>
+      `;
     }
     
-    const favoriteIcon = isFavorite && !isPlaceholder ? '<i class="fas fa-star favorite-icon"></i>' : '';
-    
     return `
-      <div class="question-item ${statusClass}" data-index="${index}" onclick="navigateToQuestionAsync(${index})">
+      <div class="question-item question-item-enhanced ${statusClass}" data-index="${index}" onclick="navigateToQuestionAsync(${index})">
         <div class="question-number">
           ${statusIcon}
           <span>Q${question.question_number || index + 1}</span>
-          ${favoriteIcon}
         </div>
         <div class="question-preview">${questionPreview}</div>
+        ${statusBadges}
       </div>
     `;
   }).join("");
@@ -5204,6 +5296,118 @@ function isQuestionFavorite(questionNumber) {
   
   const questionData = favoritesData.favorites[examCode][questionNumber.toString()];
   return questionData && questionData.isFavorite;
+}
+
+// Check if a question has been visited
+function isQuestionVisited(questionNumber) {
+  if (!questionNumber || !statistics.currentSession) return false;
+  
+  // Check if question exists in current session's visited questions (using getter for compatibility)
+  if (statistics.currentSession.visitedQuestions) {
+    return statistics.currentSession.visitedQuestions.includes(questionNumber.toString());
+  }
+  
+  // Fallback: check if it has any recorded interaction (answered or viewed)
+  if (statistics.currentSession.questions) {
+    return statistics.currentSession.questions.some(q => 
+      q.questionNumber.toString() === questionNumber.toString()
+    );
+  }
+  
+  return false;
+}
+
+// Check if a question was answered correctly
+function isQuestionAnsweredCorrectly(questionNumber) {
+  if (!questionNumber || !statistics.currentSession?.questions) return false;
+  
+  const questionAttempt = statistics.currentSession.questions.find(q => 
+    q.questionNumber.toString() === questionNumber.toString()
+  );
+  
+  return questionAttempt && questionAttempt.isCorrect === true;
+}
+
+// Check if a question was answered incorrectly
+function isQuestionAnsweredIncorrectly(questionNumber) {
+  if (!questionNumber || !statistics.currentSession?.questions) return false;
+  
+  const questionAttempt = statistics.currentSession.questions.find(q => 
+    q.questionNumber.toString() === questionNumber.toString()
+  );
+  
+  return questionAttempt && questionAttempt.isCorrect === false;
+}
+
+// Check if a question has notes
+function hasQuestionNotes(questionNumber) {
+  if (!questionNumber || !currentExam) return false;
+  
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  if (!examCode || !favoritesData.favorites[examCode]) return false;
+  
+  const questionData = favoritesData.favorites[examCode][questionNumber.toString()];
+  return questionData && questionData.note && questionData.note.trim().length > 0;
+}
+
+// Check if a question is categorized (has a custom category)
+function isQuestionCategorized(questionNumber) {
+  if (!questionNumber || !currentExam) return false;
+  
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  if (!examCode || !favoritesData.favorites[examCode]) return false;
+  
+  const questionData = favoritesData.favorites[examCode][questionNumber.toString()];
+  return questionData && questionData.category && questionData.category.trim().length > 0;
+}
+
+// Get comprehensive question status
+function getQuestionStatus(questionNumber) {
+  const status = {
+    isNew: !isQuestionVisited(questionNumber) && !isQuestionAnswered(questionNumber),
+    isViewed: isQuestionVisited(questionNumber) && !isQuestionAnswered(questionNumber),
+    isAnsweredCorrectly: isQuestionAnsweredCorrectly(questionNumber),
+    isAnsweredIncorrectly: isQuestionAnsweredIncorrectly(questionNumber),
+    isFavorite: isQuestionFavorite(questionNumber),
+    hasNotes: hasQuestionNotes(questionNumber),
+    isCategorized: isQuestionCategorized(questionNumber),
+    isAnswered: isQuestionAnswered(questionNumber)
+  };
+  
+  // Determine primary status
+  if (status.isAnsweredCorrectly) {
+    status.primaryStatus = 'correct';
+  } else if (status.isAnsweredIncorrectly) {
+    status.primaryStatus = 'incorrect';
+  } else if (status.isViewed) {
+    status.primaryStatus = 'viewed';
+  } else {
+    status.primaryStatus = 'new';
+  }
+  
+  return status;
+}
+
+// Track question visit
+function trackQuestionVisit(questionNumber) {
+  if (!questionNumber || !statistics.currentSession) return;
+  
+  // Initialize visitedQuestions array if it doesn't exist (for backward compatibility)
+  if (!statistics.currentSession.vq) {
+    statistics.currentSession.vq = [];
+  }
+  
+  const questionNumberStr = questionNumber.toString();
+  if (!statistics.currentSession.vq.includes(questionNumberStr)) {
+    statistics.currentSession.vq.push(questionNumberStr);
+    saveStatistics(); // Save to localStorage
+  }
 }
 
 // Truncate text for preview
