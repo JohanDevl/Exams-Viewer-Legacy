@@ -3107,7 +3107,15 @@ function setupEventListeners() {
     .addEventListener("click", toggleDiscussion);
 
   // Export
-  document.getElementById("exportBtn").addEventListener("click", exportToPDF);
+  document.getElementById("exportBtn").addEventListener("click", showExportModal);
+  
+  // Close modal when clicking outside
+  document.addEventListener("click", (e) => {
+    const exportModal = document.getElementById("exportOptionsModal");
+    if (e.target === exportModal) {
+      hideExportModal();
+    }
+  });
 
   // Favorites and revision mode
   document
@@ -5022,6 +5030,1188 @@ function exportToPDF() {
   showSuccess('Print dialog opened. Choose "Save as PDF" to export.');
 }
 
+// Helper function to get exam code and generate filename
+function getExamCodeAndFilename(format, suffix = '') {
+  // Get the exam code using the same logic as the filtering functions
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  ) || 'exam';
+  
+  // Generate timestamp
+  const now = new Date();
+  const timestamp = now.toISOString().replace(/[:.]/g, '-').split('T')[0] + '_' + 
+    now.toTimeString().split(' ')[0].replace(/:/g, '-');
+  
+  // Generate filename
+  const filename = `${examCode}-${suffix || 'export'}-${timestamp}.${format}`;
+  
+  return { examCode, filename };
+}
+
+// Enhanced Export Functions
+function exportToTXT(questions, options = {}) {
+  if (!questions || questions.length === 0) {
+    showError("No questions to export");
+    return;
+  }
+
+  const {
+    includeQuestions = true,
+    includeAnswers = true,
+    includeDiscussions = true,
+    includeImages = false,
+    includeUserNotes = true,
+    includeMetadata = true
+  } = options;
+
+  let content = "";
+  
+  // Add metadata
+  if (includeMetadata) {
+    content += `${currentExam.exam_name}\n`;
+    content += `${'='.repeat(currentExam.exam_name.length)}\n\n`;
+    content += `Total Questions: ${questions.length}\n`;
+    content += `Generated on: ${new Date().toLocaleDateString()}\n`;
+    content += `Export Format: Plain Text\n\n`;
+    content += `${'='.repeat(50)}\n\n`;
+  }
+
+  questions.forEach((question, index) => {
+    const questionNumber = question.question_number || index + 1;
+    
+    // Question header
+    content += `Question ${questionNumber}\n`;
+    content += `${'-'.repeat(20)}\n\n`;
+    
+    // Question text
+    if (includeQuestions) {
+      let questionText = question.question || "";
+      // Remove HTML tags for plain text
+      questionText = questionText.replace(/<[^>]*>/g, '');
+      // Clean up multiple spaces and newlines
+      questionText = questionText.replace(/\s+/g, ' ').trim();
+      content += `${questionText}\n\n`;
+    }
+    
+    // Answers
+    if (includeAnswers && question.answers) {
+      content += "Answers:\n";
+      const correctAnswers = new Set((question.most_voted || "").split(""));
+      
+      question.answers.forEach((answer) => {
+        const answerLetter = answer.charAt(0);
+        let answerText = answer.substring(3);
+        answerText = answerText.replace(/<[^>]*>/g, '');
+        answerText = answerText.replace(/\s+/g, ' ').trim();
+        
+        const isCorrect = correctAnswers.has(answerLetter);
+        const showCorrect = includeCorrectAnswers && isCorrect;
+        content += `${answerLetter}. ${answerText} ${showCorrect ? '✓' : ''}\n`;
+      });
+      
+      // Most Voted Answer(s)
+      if (includeCorrectAnswers && mostVoted) {
+        content += `\nMost Voted Answer(s): ${mostVoted}\n`;
+      }
+      content += "\n";
+    }
+    
+    // User notes
+    if (includeUserNotes && currentExam) {
+      // Get the exam code using the same logic as the filtering functions
+      const examCode = Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam.exam_name
+      );
+      
+      if (examCode && favoritesData.favorites[examCode]) {
+        const questionData = favoritesData.favorites[examCode][questionNumber];
+        if (questionData && questionData.note) {
+          content += `Personal Note: ${questionData.note}\n`;
+          if (questionData.category) {
+            content += `Category: ${questionData.category}\n`;
+          }
+          content += "\n";
+        }
+      }
+    }
+    
+    // Discussion
+    if (includeDiscussions && question.comments && question.comments.length > 0) {
+      content += "Discussion:\n";
+      question.comments.forEach((comment, commentIndex) => {
+        if (commentIndex < 5) { // Limit to first 5 comments
+          let commentText = comment.content || comment.comment || "";
+          // Remove HTML tags but preserve URLs
+          commentText = commentText.replace(/<[^>]*>/g, '');
+          commentText = commentText.replace(/\s+/g, ' ').trim();
+          const selectedAnswer = comment.selected_answer || "N/A";
+          content += `- Selected: ${selectedAnswer}\n  ${commentText}\n`;
+        }
+      });
+      content += "\n";
+    }
+    
+    content += `${'-'.repeat(50)}\n\n`;
+  });
+
+  // Create and download file
+  const { filename } = getExamCodeAndFilename('txt', 'questions');
+  const blob = new Blob([content], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  
+  showSuccess(`Text file exported successfully! (${questions.length} questions)`);
+}
+
+function exportToCSV(questions, options = {}) {
+  if (!questions || questions.length === 0) {
+    showError("No questions to export");
+    return;
+  }
+
+  const {
+    includeQuestions = true,
+    includeAnswers = true,
+    includeDiscussions = true,
+    includeUserNotes = true,
+    includeMetadata = true
+  } = options;
+
+  let csvContent = "";
+  
+  // CSV Header
+  const headers = ["Question Number"];
+  if (includeQuestions) headers.push("Question Text");
+  if (includeAnswers) {
+    headers.push("Answers");
+    if (includeCorrectAnswers) headers.push("Correct Answer");
+  }
+  if (includeUserNotes) headers.push("User Note", "Category", "Is Favorite");
+  if (includeDiscussions) headers.push("Discussion Count", "Top Comment");
+  if (includeMetadata) headers.push("Export Date", "Exam Code");
+  
+  csvContent += headers.map(h => `"${h}"`).join(",") + "\n";
+  
+  questions.forEach((question, index) => {
+    const questionNumber = question.question_number || index + 1;
+    const row = [];
+    
+    // Question number
+    row.push(`"${questionNumber}"`);
+    
+    // Question text
+    if (includeQuestions) {
+      let questionText = question.question || "";
+      questionText = questionText.replace(/<[^>]*>/g, '');
+      questionText = questionText.replace(/"/g, '""'); // Escape quotes
+      questionText = questionText.replace(/\s+/g, ' ').trim();
+      row.push(`"${questionText}"`);
+    }
+    
+    // Answers
+    if (includeAnswers) {
+      const answers = question.answers || [];
+      const answersText = answers.map(a => {
+        let text = a.replace(/<[^>]*>/g, '');
+        text = text.replace(/"/g, '""');
+        return text.replace(/\s+/g, ' ').trim();
+      }).join("; ");
+      row.push(`"${answersText}"`);
+      if (includeCorrectAnswers) {
+        row.push(`"${question.most_voted || ""}"`);
+      }
+    }
+    
+    // User notes
+    if (includeUserNotes) {
+      let userNote = "";
+      let category = "";
+      let isFavorite = "No";
+      
+      if (currentExam) {
+        // Get the exam code using the same logic as the filtering functions
+        const examCode = Object.keys(availableExams).find(code => 
+          availableExams[code] === currentExam.exam_name
+        );
+        
+        if (examCode && favoritesData.favorites[examCode]) {
+          const questionData = favoritesData.favorites[examCode][questionNumber];
+          if (questionData) {
+            userNote = (questionData.note || "").replace(/"/g, '""');
+            category = questionData.category || "";
+            isFavorite = questionData.isFavorite ? "Yes" : "No";
+          }
+        }
+      }
+      
+      row.push(`"${userNote}"`);
+      row.push(`"${category}"`);
+      row.push(`"${isFavorite}"`);
+    }
+    
+    // Discussion
+    if (includeDiscussions) {
+      const comments = question.comments || [];
+      row.push(`"${comments.length}"`);
+      
+      if (comments.length > 0) {
+        let topComment = comments[0].content || comments[0].comment || "";
+        topComment = topComment.replace(/<[^>]*>/g, '');
+        topComment = topComment.replace(/"/g, '""');
+        topComment = topComment.replace(/\s+/g, ' ').trim();
+        const selectedAnswer = comments[0].selected_answer || "N/A";
+        row.push(`"Selected: ${selectedAnswer} - ${topComment}"`);
+      } else {
+        row.push('""');
+      }
+    }
+    
+    // Metadata
+    if (includeMetadata) {
+      row.push(`"${new Date().toISOString().split('T')[0]}"`);
+      row.push(`"${currentExam.exam_code}"`);
+    }
+    
+    csvContent += row.join(",") + "\n";
+  });
+
+  // Create and download file
+  const { filename } = getExamCodeAndFilename('csv', 'questions');
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  
+  showSuccess(`CSV file exported successfully! (${questions.length} questions)`);
+}
+
+function exportToEnhancedJSON(questions, options = {}) {
+  if (!questions || questions.length === 0) {
+    showError("No questions to export");
+    return;
+  }
+
+  const {
+    includeQuestions = true,
+    includeAnswers = true,
+    includeCorrectAnswers = true,
+    includeDiscussions = true,
+    includeImages = true,
+    includeUserNotes = true,
+    includeMetadata = true
+  } = options;
+
+  // Get the exam code for metadata
+  const { examCode } = getExamCodeAndFilename('json');
+  
+  const exportData = {
+    metadata: {
+      version: "2.0",
+      exportDate: new Date().toISOString(),
+      examCode: examCode,
+      examName: currentExam.exam_name,
+      totalQuestions: questions.length,
+      exportOptions: options,
+      generatedBy: "Exams-Viewer Enhanced Export"
+    },
+    questions: []
+  };
+
+  questions.forEach((question, index) => {
+    const questionNumber = question.question_number || index + 1;
+    const exportQuestion = {
+      questionNumber,
+      originalIndex: index
+    };
+
+    // Question content
+    if (includeQuestions) {
+      exportQuestion.question = question.question;
+    }
+
+    // Answers
+    if (includeAnswers) {
+      exportQuestion.answers = question.answers;
+      exportQuestion.correctAnswer = question.most_voted;
+    }
+
+    // Images
+    if (includeImages && question.images) {
+      exportQuestion.images = question.images;
+    }
+
+    // User data
+    if (includeUserNotes && currentExam) {
+      // Get the exam code using the same logic as the filtering functions
+      const examCode = Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam.exam_name
+      );
+      
+      if (examCode && favoritesData.favorites[examCode]) {
+        const questionData = favoritesData.favorites[examCode][questionNumber];
+        if (questionData) {
+          exportQuestion.userData = {
+            isFavorite: questionData.isFavorite || false,
+            category: questionData.category || null,
+            note: questionData.note || null,
+            timestamp: questionData.timestamp || null
+          };
+        }
+      }
+    }
+
+    // Discussion
+    if (includeDiscussions && question.comments) {
+      exportQuestion.discussion = {
+        totalComments: question.comments.length,
+        comments: question.comments.map(comment => ({
+          content: comment.content || comment.comment || "",
+          selectedAnswer: comment.selected_answer || null,
+          replies: comment.replies || []
+        }))
+      };
+    }
+
+    exportData.questions.push(exportQuestion);
+  });
+
+  // Add user statistics if available
+  if (includeMetadata && statistics) {
+    exportData.statistics = {
+      totalSessions: statistics.sessions.length,
+      totalQuestions: statistics.totalStats.totalQuestions,
+      totalCorrect: statistics.totalStats.totalCorrect,
+      totalIncorrect: statistics.totalStats.totalIncorrect,
+      averageAccuracy: statistics.totalStats.totalQuestions > 0 ? 
+        ((statistics.totalStats.totalCorrect / statistics.totalStats.totalQuestions) * 100).toFixed(1) : 0
+    };
+  }
+
+  // Create and download file
+  const { filename } = getExamCodeAndFilename('json', 'enhanced-export');
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  
+  showSuccess(`Enhanced JSON exported successfully! (${questions.length} questions)`);
+}
+
+// Question Filtering Functions for Export
+function getFilteredQuestionsForExport(filterType, categories = []) {
+  if (!currentQuestions || currentQuestions.length === 0) {
+    return [];
+  }
+
+  // Use the same exam code logic as isQuestionFavorite
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  if (!examCode) {
+    console.warn('No exam code found for current exam');
+    return filterType === 'all' ? currentQuestions : [];
+  }
+  
+  const examFavorites = favoritesData.favorites[examCode] || {};
+  
+  // Debug logging
+  console.log('Filter type:', filterType);
+  console.log('Exam code found:', examCode);
+  console.log('Current exam name:', currentExam.exam_name);
+  console.log('Available favorites:', examFavorites);
+  console.log('Total questions:', currentQuestions.length);
+  
+  switch (filterType) {
+    case 'all':
+      return currentQuestions;
+      
+    case 'favorites':
+      const filteredFavorites = currentQuestions.filter(question => {
+        const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+        // Use string key like isQuestionFavorite does
+        const questionData = examFavorites[questionNumber.toString()];
+        const isFav = questionData && questionData.isFavorite;
+        
+        // Debug specific questions
+        if (questionNumber <= 3) {
+          console.log(`Question ${questionNumber}:`, {
+            questionData,
+            isFavorite: isFav,
+            hasData: !!questionData,
+            keyUsed: questionNumber.toString()
+          });
+        }
+        
+        return isFav;
+      });
+      
+      console.log('Filtered favorites count:', filteredFavorites.length);
+      return filteredFavorites;
+      
+    case 'answered':
+      return currentQuestions.filter(question => {
+        const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+        return isQuestionAnswered(questionNumber);
+      });
+      
+    case 'notes':
+      return currentQuestions.filter(question => {
+        const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+        const questionData = examFavorites[questionNumber.toString()];
+        return questionData && questionData.note && questionData.note.trim() !== '';
+      });
+      
+    case 'category':
+      if (!categories || categories.length === 0) {
+        return [];
+      }
+      return currentQuestions.filter(question => {
+        const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+        const questionData = examFavorites[questionNumber.toString()];
+        return questionData && questionData.category && categories.includes(questionData.category);
+      });
+      
+    default:
+      return currentQuestions;
+  }
+}
+
+function getAvailableCategories() {
+  // Use the same exam code logic as isQuestionFavorite
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  if (!examCode) {
+    console.warn('No exam code found for categories');
+    return [];
+  }
+  
+  const examFavorites = favoritesData.favorites[examCode] || {};
+  const categories = new Set();
+  
+  console.log('Getting categories for exam:', examCode);
+  console.log('Favorites data:', examFavorites);
+  
+  // Add default categories that are in use
+  Object.values(examFavorites).forEach(questionData => {
+    if (questionData.category) {
+      categories.add(questionData.category);
+      console.log('Found category:', questionData.category);
+    }
+  });
+  
+  const result = Array.from(categories).sort();
+  console.log('Available categories:', result);
+  return result;
+}
+
+function estimateExportSize(questions, format, options) {
+  if (!questions || questions.length === 0) return 0;
+  
+  const baseSize = questions.length * 200; // Base size per question
+  let multiplier = 1;
+  
+  switch (format) {
+    case 'pdf':
+      multiplier = 10; // PDF is larger
+      break;
+    case 'json':
+      multiplier = 3; // JSON with formatting
+      break;
+    case 'txt':
+      multiplier = 1; // Plain text is smallest
+      break;
+    case 'csv':
+      multiplier = 0.5; // CSV is compact
+      break;
+  }
+  
+  // Adjust based on options
+  let optionsMultiplier = 1;
+  if (options.includeImages) optionsMultiplier += 2;
+  if (options.includeDiscussions) optionsMultiplier += 1;
+  if (options.includeUserNotes) optionsMultiplier += 0.5;
+  
+  return Math.round(baseSize * multiplier * optionsMultiplier);
+}
+
+function formatFileSize(bytes) {
+  if (bytes === 0) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}
+
+// Enhanced Export Modal Functions
+function showExportModal() {
+  const modal = document.getElementById('exportOptionsModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    populateExportCategories();
+    updateFilterAvailability(); // Initialize filter availability
+    updateExportPreview();
+    setupExportModalEventListeners();
+  }
+}
+
+function hideExportModal() {
+  const modal = document.getElementById('exportOptionsModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function populateExportCategories() {
+  const categoryList = document.getElementById('exportCategoryList');
+  if (!categoryList) return;
+  
+  categoryList.innerHTML = '';
+  const categories = getAvailableCategories();
+  
+  if (categories.length === 0) {
+    categoryList.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">No categories available</p>';
+    return;
+  }
+  
+  categories.forEach(category => {
+    const label = document.createElement('label');
+    label.className = 'checkbox-option';
+    label.innerHTML = `
+      <input type="checkbox" name="exportCategory" value="${category}">
+      <span class="checkbox-custom"></span>
+      <i class="fas fa-tag"></i> ${category}
+    `;
+    categoryList.appendChild(label);
+  });
+}
+
+function updateFilterAvailability() {
+  if (!currentQuestions || currentQuestions.length === 0) return;
+  
+  // Get the exam code using the same logic as the filtering functions
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  if (!examCode) return;
+  
+  const examFavorites = favoritesData.favorites[examCode] || {};
+  
+  // Count different types of content
+  let favoritesCount = 0;
+  let notesCount = 0;
+  let answeredCount = 0;
+  const categoriesSet = new Set();
+  
+  currentQuestions.forEach(question => {
+    const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+    const questionData = examFavorites[questionNumber.toString()];
+    
+    // Count favorites
+    if (questionData && questionData.isFavorite) {
+      favoritesCount++;
+    }
+    
+    // Count notes
+    if (questionData && questionData.note && questionData.note.trim() !== '') {
+      notesCount++;
+    }
+    
+    // Count answered questions
+    if (isQuestionAnswered(questionNumber)) {
+      answeredCount++;
+    }
+    
+    // Collect categories
+    if (questionData && questionData.category) {
+      categoriesSet.add(questionData.category);
+    }
+  });
+  
+  // Update UI based on counts
+  const allOption = document.querySelector('input[name="contentFilter"][value="all"]');
+  const favoritesOption = document.querySelector('input[name="contentFilter"][value="favorites"]');
+  const notesOption = document.querySelector('input[name="contentFilter"][value="notes"]');
+  const answeredOption = document.querySelector('input[name="contentFilter"][value="answered"]');
+  const categoryOption = document.querySelector('input[name="contentFilter"][value="category"]');
+  
+  // Add filter count for "All Questions" showing total questions
+  if (allOption) {
+    const allLabel = allOption.closest('label');
+    const optionMain = allLabel.querySelector('.option-main');
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
+    
+    const totalQuestions = currentQuestions ? currentQuestions.length : 0;
+    countSpan.textContent = `(${totalQuestions} available)`;
+  }
+  
+  if (favoritesOption) {
+    const favoritesLabel = favoritesOption.closest('label');
+    const optionMain = favoritesLabel.querySelector('.option-main');
+    
+    // Find or create count span
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
+    
+    if (favoritesCount === 0) {
+      favoritesOption.disabled = true;
+      favoritesLabel.style.opacity = '0.5';
+      favoritesLabel.style.cursor = 'not-allowed';
+      countSpan.textContent = '(0 available)';
+      
+      // If currently selected, switch to "all"
+      if (favoritesOption.checked) {
+        document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
+      }
+    } else {
+      favoritesOption.disabled = false;
+      favoritesLabel.style.opacity = '1';
+      favoritesLabel.style.cursor = 'pointer';
+      countSpan.textContent = `(${favoritesCount} available)`;
+    }
+  }
+  
+  if (notesOption) {
+    const notesLabel = notesOption.closest('label');
+    const optionMain = notesLabel.querySelector('.option-main');
+    
+    // Find or create count span
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
+    
+    if (notesCount === 0) {
+      notesOption.disabled = true;
+      notesLabel.style.opacity = '0.5';
+      notesLabel.style.cursor = 'not-allowed';
+      countSpan.textContent = '(0 available)';
+      
+      if (notesOption.checked) {
+        document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
+      }
+    } else {
+      notesOption.disabled = false;
+      notesLabel.style.opacity = '1';
+      notesLabel.style.cursor = 'pointer';
+      countSpan.textContent = `(${notesCount} available)`;
+    }
+  }
+  
+  if (answeredOption) {
+    const answeredLabel = answeredOption.closest('label');
+    const optionMain = answeredLabel.querySelector('.option-main');
+    
+    // Find or create count span
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
+    
+    if (answeredCount === 0) {
+      answeredOption.disabled = true;
+      answeredLabel.style.opacity = '0.5';
+      answeredLabel.style.cursor = 'not-allowed';
+      countSpan.textContent = '(0 available)';
+      
+      if (answeredOption.checked) {
+        document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
+      }
+    } else {
+      answeredOption.disabled = false;
+      answeredLabel.style.opacity = '1';
+      answeredLabel.style.cursor = 'pointer';
+      countSpan.textContent = `(${answeredCount} available)`;
+    }
+  }
+  
+  if (categoryOption) {
+    const categoryLabel = categoryOption.closest('label');
+    const optionMain = categoryLabel.querySelector('.option-main');
+    const categoriesCount = categoriesSet.size;
+    
+    // Find or create count span
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
+    
+    if (categoriesCount === 0) {
+      categoryOption.disabled = true;
+      categoryLabel.style.opacity = '0.5';
+      categoryLabel.style.cursor = 'not-allowed';
+      countSpan.textContent = '(0 available)';
+      
+      if (categoryOption.checked) {
+        document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
+      }
+    } else {
+      categoryOption.disabled = false;
+      categoryLabel.style.opacity = '1';
+      categoryLabel.style.cursor = 'pointer';
+      countSpan.textContent = `(${categoriesCount} available)`;
+    }
+  }
+}
+
+function updateExportPreview() {
+  const formatRadio = document.querySelector('input[name="exportFormat"]:checked');
+  const filterRadio = document.querySelector('input[name="contentFilter"]:checked');
+  
+  if (!formatRadio || !filterRadio) return;
+  
+  // Update filter availability based on content
+  updateFilterAvailability();
+  
+  const format = formatRadio.value;
+  const filter = filterRadio.value;
+  
+  // Get selected categories if filter is 'category'
+  let selectedCategories = [];
+  if (filter === 'category') {
+    selectedCategories = Array.from(document.querySelectorAll('input[name="exportCategory"]:checked'))
+      .map(cb => cb.value);
+  }
+  
+  // Get filtered questions
+  const filteredQuestions = getFilteredQuestionsForExport(filter, selectedCategories);
+  
+  // Get content options
+  const getCheckboxValue = (id) => {
+    const element = document.getElementById(id);
+    return element ? element.checked : true;
+  };
+  
+  const options = {
+    includeQuestions: getCheckboxValue('includeQuestions'),
+    includeAnswers: getCheckboxValue('includeAnswers'),
+    includeCorrectAnswers: getCheckboxValue('includeCorrectAnswers'),
+    includeDiscussions: getCheckboxValue('includeDiscussions'),
+    includeImages: getCheckboxValue('includeImages'),
+    includeUserNotes: getCheckboxValue('includeUserNotes'),
+    includeMetadata: getCheckboxValue('includeMetadata')
+  };
+  
+  // Update preview text
+  const previewText = document.getElementById('exportPreviewText');
+  const questionCount = document.getElementById('exportQuestionCount');
+  const estimatedSize = document.getElementById('exportEstimatedSize');
+  
+  if (previewText) {
+    let filterText = '';
+    switch (filter) {
+      case 'all': filterText = 'all questions'; break;
+      case 'favorites': filterText = 'favorite questions'; break;
+      case 'answered': filterText = 'answered questions'; break;
+      case 'notes': filterText = 'questions with notes'; break;
+      case 'category': filterText = `questions in ${selectedCategories.length} categories`; break;
+    }
+    
+    previewText.textContent = `Export ${filterText} as ${format.toUpperCase()}`;
+  }
+  
+  if (questionCount) {
+    questionCount.textContent = `${filteredQuestions.length} questions`;
+  }
+  
+  if (estimatedSize) {
+    const sizeBytes = estimateExportSize(filteredQuestions, format, options);
+    estimatedSize.textContent = `~${formatFileSize(sizeBytes)}`;
+  }
+}
+
+function setupExportModalEventListeners() {
+  // Remove any existing listeners to prevent duplicates
+  const modal = document.getElementById('exportOptionsModal');
+  const newModal = modal.cloneNode(true);
+  modal.parentNode.replaceChild(newModal, modal);
+  
+  // Format selection
+  document.querySelectorAll('input[name="exportFormat"]').forEach(radio => {
+    radio.addEventListener('change', updateExportPreview);
+  });
+  
+  // Filter selection
+  document.querySelectorAll('input[name="contentFilter"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const categorySection = document.getElementById('categorySelection');
+      if (radio.value === 'category') {
+        categorySection.style.display = 'block';
+      } else {
+        categorySection.style.display = 'none';
+      }
+      updateExportPreview();
+    });
+  });
+  
+  // Content options - Add specific IDs for better targeting
+  const contentOptionIds = ['includeQuestions', 'includeAnswers', 'includeCorrectAnswers', 'includeDiscussions', 'includeImages', 'includeUserNotes', 'includeMetadata'];
+  contentOptionIds.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.addEventListener('change', () => {
+        console.log(`${id} changed to:`, element.checked);
+        updateExportPreview();
+      });
+    }
+  });
+  
+  // Modal buttons
+  document.getElementById('closeExportModal').addEventListener('click', hideExportModal);
+  document.getElementById('cancelExportBtn').addEventListener('click', hideExportModal);
+  document.getElementById('startExportBtn').addEventListener('click', performExport);
+  
+  // Category selection (delegated event listener)
+  const categoryList = document.getElementById('exportCategoryList');
+  if (categoryList) {
+    categoryList.addEventListener('change', (e) => {
+      if (e.target.name === 'exportCategory') {
+        updateExportPreview();
+      }
+    });
+  }
+}
+
+function performExport() {
+  const formatRadio = document.querySelector('input[name="exportFormat"]:checked');
+  const filterRadio = document.querySelector('input[name="contentFilter"]:checked');
+  
+  if (!formatRadio || !filterRadio) {
+    showError('Please select export format and content filter');
+    return;
+  }
+  
+  const format = formatRadio.value;
+  const filter = filterRadio.value;
+  
+  // Get selected categories if filter is 'category'
+  let selectedCategories = [];
+  if (filter === 'category') {
+    selectedCategories = Array.from(document.querySelectorAll('input[name="exportCategory"]:checked'))
+      .map(cb => cb.value);
+      
+    if (selectedCategories.length === 0) {
+      showError('Please select at least one category');
+      return;
+    }
+  }
+  
+  // Get filtered questions
+  const questionsToExport = getFilteredQuestionsForExport(filter, selectedCategories);
+  
+  if (questionsToExport.length === 0) {
+    showError('No questions match the selected criteria');
+    return;
+  }
+  
+  // Get content options
+  const getCheckboxValue = (id) => {
+    const element = document.getElementById(id);
+    return element ? element.checked : true;
+  };
+  
+  const options = {
+    includeQuestions: getCheckboxValue('includeQuestions'),
+    includeAnswers: getCheckboxValue('includeAnswers'),
+    includeCorrectAnswers: getCheckboxValue('includeCorrectAnswers'),
+    includeDiscussions: getCheckboxValue('includeDiscussions'),
+    includeImages: getCheckboxValue('includeImages'),
+    includeUserNotes: getCheckboxValue('includeUserNotes'),
+    includeMetadata: getCheckboxValue('includeMetadata')
+  };
+  
+  // Debug: Log options to console (can be removed in production)
+  console.log('Export options:', options);
+  console.log('Questions to export:', questionsToExport.length);
+  if (questionsToExport.length > 0) {
+    console.log('First question comments:', questionsToExport[0].comments);
+  }
+  
+  // Perform export based on format
+  try {
+    switch (format) {
+      case 'pdf':
+        exportToPDFWithOptions(questionsToExport, options);
+        break;
+      case 'json':
+        exportToEnhancedJSON(questionsToExport, options);
+        break;
+      case 'txt':
+        exportToTXT(questionsToExport, options);
+        break;
+      case 'csv':
+        exportToCSV(questionsToExport, options);
+        break;
+      default:
+        showError('Invalid export format');
+        return;
+    }
+    
+    // Close modal on successful export
+    hideExportModal();
+    
+  } catch (error) {
+    showError(`Export failed: ${error.message}`);
+  }
+}
+
+function exportToPDFWithOptions(questions, options) {
+  if (!questions || questions.length === 0) {
+    showError("No questions loaded to export");
+    return;
+  }
+
+  const {
+    includeQuestions = true,
+    includeAnswers = true,
+    includeCorrectAnswers = true,
+    includeDiscussions = true,
+    includeImages = true,
+    includeUserNotes = true,
+    includeMetadata = true
+  } = options;
+
+  // Create a printable version
+  const printWindow = window.open("", "_blank");
+  const printDocument = printWindow.document;
+
+  printDocument.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${currentExam.exam_name} - Questions Export</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+                .question { margin-bottom: 30px; page-break-inside: avoid; }
+                .question-header { font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+                .question-text { margin-bottom: 15px; }
+                .question-text img { max-width: 100%; height: auto; margin: 10px 0; border: 1px solid #ddd; }
+                .answers { margin-left: 20px; }
+                .answer { margin-bottom: 5px; }
+                .answer img { max-width: 100%; height: auto; margin: 5px 0; }
+                .correct-answer { background-color: #d4edda; padding: 2px 5px; border-radius: 3px; }
+                .discussion { margin-top: 15px; padding: 10px; background-color: #f8f9fa; border-radius: 5px; }
+                .comment { margin-bottom: 10px; padding: 8px; background-color: white; border-radius: 3px; }
+                .comment-header { font-weight: bold; font-size: 12px; color: #666; }
+                .comment a { color: #007bff; text-decoration: none; word-break: break-all; }
+                .comment a:hover { text-decoration: underline; }
+                .user-note { margin-top: 10px; padding: 8px; background-color: #fff3cd; border-radius: 3px; border-left: 4px solid #ffc107; }
+                .user-note-header { font-weight: bold; font-size: 12px; color: #856404; }
+                @media print {
+                    body { margin: 0; }
+                    .question { page-break-inside: avoid; }
+                }
+            </style>
+        </head>
+        <body>
+    `);
+
+  // Add metadata header
+  if (includeMetadata) {
+    printDocument.write(`
+      <h1>Exam Questions - ${currentExam.exam_name}</h1>
+      <p>Total Questions: ${questions.length}</p>
+      <p>Generated on: ${new Date().toLocaleDateString()}</p>
+      <p>Export Options: ${Object.entries(options).filter(([k, v]) => v).map(([k]) => k.replace('include', '')).join(', ')}</p>
+      <hr>
+    `);
+  }
+
+  questions.forEach((question, index) => {
+    const questionNumber = question.question_number || index + 1;
+
+    printDocument.write(`<div class="question">`);
+    
+    // Question header
+    printDocument.write(`<div class="question-header">Question ${questionNumber}</div>`);
+    
+    // Question text
+    if (includeQuestions) {
+      let questionText = question.question || "";
+      
+      // Process embedded images first
+      if (includeImages && question.images && Object.keys(question.images).length > 0) {
+        questionText = processEmbeddedImages(questionText, question.images);
+      }
+      
+      // Fix any remaining image paths for PDF export
+      if (includeImages) {
+        questionText = questionText.replace(
+          /src="\/assets\/media\/exam-media\//g,
+          'src="https://www.examtopics.com/assets/media/exam-media/'
+        );
+      } else {
+        // Remove images if not included
+        questionText = questionText.replace(/<img[^>]*>/g, '[Image not included]');
+      }
+
+      printDocument.write(`<div class="question-text">${questionText}</div>`);
+    }
+    
+    // Answers
+    if (includeAnswers && question.answers) {
+      const answers = question.answers || [];
+      const mostVoted = question.most_voted || "";
+      const correctAnswers = new Set(mostVoted.split(""));
+
+      printDocument.write(`<div class="answers">`);
+      
+      answers.forEach((answer) => {
+        const answerLetter = answer.charAt(0);
+        let answerText = answer.substring(3);
+
+        // Process embedded images in answers
+        if (includeImages && question.images && Object.keys(question.images).length > 0) {
+          answerText = processEmbeddedImages(answerText, question.images);
+        }
+
+        // Fix image paths in answers for PDF export
+        if (includeImages) {
+          answerText = answerText.replace(
+            /src="\/assets\/media\/exam-media\//g,
+            'src="https://www.examtopics.com/assets/media/exam-media/'
+          );
+        } else {
+          // Remove images if not included
+          answerText = answerText.replace(/<img[^>]*>/g, '[Image not included]');
+        }
+
+        const isCorrect = correctAnswers.has(answerLetter);
+        const fullAnswer = answerLetter + ". " + answerText;
+        const showCorrect = includeCorrectAnswers && isCorrect;
+
+        printDocument.write(`
+          <div class="answer ${showCorrect ? "correct-answer" : ""}">
+              ${fullAnswer} ${showCorrect ? "✓" : ""}
+          </div>
+        `);
+      });
+      
+      printDocument.write(`</div>`);
+      
+      // Most Voted Answer(s)
+      if (includeCorrectAnswers && mostVoted) {
+        printDocument.write(`
+          <div style="margin-top: 10px; font-weight: bold; color: #28a745;">
+              Most Voted Answer(s): ${mostVoted}
+          </div>
+        `);
+      }
+    }
+
+    // User notes
+    if (includeUserNotes && currentExam) {
+      // Get the exam code using the same logic as the filtering functions
+      const examCode = Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam.exam_name
+      );
+      
+      if (examCode && favoritesData.favorites[examCode]) {
+        const questionData = favoritesData.favorites[examCode][questionNumber];
+        if (questionData && (questionData.note || questionData.isFavorite)) {
+          printDocument.write(`<div class="user-note">`);
+          printDocument.write(`<div class="user-note-header">Personal Notes:</div>`);
+          
+          if (questionData.isFavorite) {
+            printDocument.write(`<div>⭐ Favorited</div>`);
+          }
+          
+          if (questionData.category) {
+            printDocument.write(`<div>Category: ${questionData.category}</div>`);
+          }
+          
+          if (questionData.note) {
+            printDocument.write(`<div>Note: ${questionData.note}</div>`);
+          }
+          
+          printDocument.write(`</div>`);
+        }
+      }
+    }
+
+    // Discussion
+    if (includeDiscussions && question.comments && question.comments.length > 0) {
+      const comments = question.comments || [];
+      
+      printDocument.write(`<div class="discussion">`);
+      printDocument.write(`<div class="comment-header">Discussion (${comments.length} comments):</div>`);
+      
+      comments.forEach((comment, commentIndex) => {
+        if (commentIndex < 10) { // Limit to first 10 comments for PDF
+          const commentText = formatCommentText(
+            comment.content || comment.comment || "",
+            question.images
+          );
+          const selectedAnswer = comment.selected_answer || "N/A";
+          
+          printDocument.write(`
+            <div class="comment">
+              <div class="comment-header">Selected: ${selectedAnswer}</div>
+              <div>${commentText}</div>
+            </div>
+          `);
+        }
+      });
+      
+      if (comments.length > 10) {
+        printDocument.write(`<div class="comment-header">... and ${comments.length - 10} more comments</div>`);
+      }
+      
+      printDocument.write(`</div>`);
+    }
+
+    printDocument.write(`</div>`);
+  });
+
+  printDocument.write(`
+        </body>
+        </html>
+    `);
+
+  printDocument.close();
+
+  // Add a small delay to ensure content is loaded before printing
+  setTimeout(() => {
+    printWindow.print();
+  }, 1000);
+
+  showSuccess('Enhanced PDF export opened. Choose "Save as PDF" to export.');
+}
+
 // Toggle legal information display
 function toggleLegalInfo() {
   devLog("toggleLegalInfo called"); // Debug log
@@ -5166,7 +6356,10 @@ document.addEventListener("keydown", async function (e) {
     case "Escape":
       e.preventDefault();
       // Escape: Close modals, toggle sidebar, or clear search
-      if (document.querySelector('.modal[style*="block"]')) {
+      if (document.getElementById('exportOptionsModal').style.display === 'flex') {
+        // Close export modal
+        hideExportModal();
+      } else if (document.querySelector('.modal[style*="block"]')) {
         // Close any open modal
         const openModal = document.querySelector('.modal[style*="block"]');
         openModal.style.display = "none";

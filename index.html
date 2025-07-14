@@ -124,8 +124,8 @@
               <i class="fas fa-history"></i>
             </button>
           </div>
-          <button id="exportBtn" class="export-btn" data-tooltip="Export Questions to PDF&#10;Download current exam as PDF" data-tooltip-position="top" style="display: none">
-            <i class="fas fa-file-pdf"></i> Export Questions to PDF
+          <button id="exportBtn" class="export-btn" data-tooltip="Export Questions&#10;Choose format and options" data-tooltip-position="top" style="display: none">
+            <i class="fas fa-download"></i> Export Questions
           </button>
         </div>
 
@@ -752,6 +752,172 @@
               <h3>Custom Categories</h3>
               <div id="customCategoriesList"></div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enhanced Export Options Modal -->
+      <div id="exportOptionsModal" class="modal" style="display: none">
+        <div class="modal-content export-modal-content">
+          <div class="modal-header">
+            <h2><i class="fas fa-download"></i> Export Options</h2>
+            <button id="closeExportModal" class="close-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="export-options-content">
+              <!-- Export Format Selection -->
+              <div class="export-section">
+                <h3><i class="fas fa-file"></i> Export Format</h3>
+                <div class="export-format-options">
+                  <label class="radio-option">
+                    <input type="radio" name="exportFormat" value="pdf" checked>
+                    <span class="radio-custom"></span>
+                    <i class="fas fa-file-pdf"></i> PDF Document
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="exportFormat" value="json">
+                    <span class="radio-custom"></span>
+                    <i class="fas fa-file-code"></i> JSON Data
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="exportFormat" value="txt">
+                    <span class="radio-custom"></span>
+                    <i class="fas fa-file-alt"></i> Plain Text
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="exportFormat" value="csv">
+                    <span class="radio-custom"></span>
+                    <i class="fas fa-file-csv"></i> CSV Spreadsheet
+                  </label>
+                </div>
+              </div>
+
+              <!-- Content Filter Selection -->
+              <div class="export-section">
+                <h3><i class="fas fa-filter"></i> Content Filter</h3>
+                <div class="export-filter-options">
+                  <label class="radio-option">
+                    <input type="radio" name="contentFilter" value="all" checked>
+                    <span class="radio-custom"></span>
+                    <div class="option-main">
+                      <div class="main-text">
+                        <i class="fas fa-list"></i> All Questions
+                      </div>
+                    </div>
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="contentFilter" value="favorites">
+                    <span class="radio-custom"></span>
+                    <div class="option-main">
+                      <div class="main-text">
+                        <i class="fas fa-star"></i> Favorites Only
+                      </div>
+                    </div>
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="contentFilter" value="answered">
+                    <span class="radio-custom"></span>
+                    <div class="option-main">
+                      <div class="main-text">
+                        <i class="fas fa-check-circle"></i> Answered Questions
+                      </div>
+                    </div>
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="contentFilter" value="notes">
+                    <span class="radio-custom"></span>
+                    <div class="option-main">
+                      <div class="main-text">
+                        <i class="fas fa-sticky-note"></i> Questions with Notes
+                      </div>
+                    </div>
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="contentFilter" value="category">
+                    <span class="radio-custom"></span>
+                    <div class="option-main">
+                      <div class="main-text">
+                        <i class="fas fa-tag"></i> By Category
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Category Selection (shown when "By Category" is selected) -->
+              <div class="export-section" id="categorySelection" style="display: none">
+                <h3><i class="fas fa-tags"></i> Select Categories</h3>
+                <div class="category-checkboxes" id="exportCategoryList">
+                  <!-- Categories will be populated dynamically -->
+                </div>
+              </div>
+
+              <!-- Content Options -->
+              <div class="export-section">
+                <h3><i class="fas fa-cogs"></i> Content Options</h3>
+                <div class="export-content-options">
+                  <label class="checkbox-option">
+                    <input type="checkbox" id="includeQuestions" checked>
+                    <span class="checkbox-custom"></span>
+                    <i class="fas fa-question-circle"></i> Include Questions
+                  </label>
+                  <label class="checkbox-option">
+                    <input type="checkbox" id="includeAnswers" checked>
+                    <span class="checkbox-custom"></span>
+                    <i class="fas fa-check"></i> Include Answers
+                  </label>
+                  <label class="checkbox-option">
+                    <input type="checkbox" id="includeCorrectAnswers" checked>
+                    <span class="checkbox-custom"></span>
+                    <i class="fas fa-check-circle"></i> Include Correct Answers
+                  </label>
+                  <label class="checkbox-option">
+                    <input type="checkbox" id="includeDiscussions" checked>
+                    <span class="checkbox-custom"></span>
+                    <i class="fas fa-comments"></i> Include Discussions
+                  </label>
+                  <label class="checkbox-option">
+                    <input type="checkbox" id="includeImages" checked>
+                    <span class="checkbox-custom"></span>
+                    <i class="fas fa-image"></i> Include Images
+                  </label>
+                  <label class="checkbox-option">
+                    <input type="checkbox" id="includeUserNotes" checked>
+                    <span class="checkbox-custom"></span>
+                    <i class="fas fa-user-edit"></i> Include User Notes
+                  </label>
+                  <label class="checkbox-option">
+                    <input type="checkbox" id="includeMetadata" checked>
+                    <span class="checkbox-custom"></span>
+                    <i class="fas fa-info-circle"></i> Include Metadata
+                  </label>
+                </div>
+              </div>
+
+              <!-- Export Preview -->
+              <div class="export-section">
+                <div class="export-preview">
+                  <div class="preview-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="exportPreviewText">All questions will be exported as PDF</span>
+                  </div>
+                  <div class="preview-stats">
+                    <span id="exportQuestionCount">0 questions</span>
+                    <span id="exportEstimatedSize">~0 KB</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="cancelExportBtn" class="btn-secondary">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+            <button id="startExportBtn" class="btn-primary">
+              <i class="fas fa-download"></i> Export
+            </button>
           </div>
         </div>
       </div>

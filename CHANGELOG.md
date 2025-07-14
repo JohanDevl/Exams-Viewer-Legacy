@@ -4,6 +4,53 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.10.0] - {PR_MERGE_DATE}
+
+### Added
+
+- **Enhanced Export System**: Comprehensive modal interface with flexible export options
+  - Multiple export formats: TXT, CSV, enhanced JSON, and PDF with consistent formatting
+  - Content filtering options: all questions, favorites only, questions with notes, answered questions, and by category
+  - Selective content inclusion: questions, answers, correct answers, discussions, images, user notes, and metadata
+  - Export preview functionality with question count and file size estimation
+  - Real-time availability counting for filter options (automatically disables filters with 0 content)
+  - Clickable links in discussions preserved for PDF exports
+  - Proper file naming with exam codes and timestamps (e.g., "CAD-questions-2024-01-15_14-30-25.txt")
+
+- **Export Content Options**: Granular control over exported content
+  - Include/exclude questions, answers, correct answers independently
+  - Toggle discussions, images, and metadata inclusion
+  - User notes export with personal annotations, categories, and favorite status
+  - Smart content filtering that respects user's saved data across sessions
+
+### Enhanced
+
+- **Export UI/UX**: Intuitive modal design with consistent layout
+  - Organized sections for format selection, content filtering, and content options
+  - Filter availability counts displayed on separate lines for better readability
+  - Disabled states for unavailable filter options with visual feedback
+  - Export preview showing filtered question count and estimated file size
+
+### Fixed
+
+- **Export File Naming**: Proper exam code resolution and timestamp generation
+  - Resolves "undefined" filenames by using consistent exam code lookup logic
+  - Generates unique timestamps with date and time for file identification
+  - Maintains backward compatibility with existing export functions
+
+- **User Notes Export**: Correct data retrieval across all export formats
+  - Uses proper exam code resolution logic matching the filtering system
+  - Ensures user notes, categories, and favorites appear in exports when enabled
+  - Consistent behavior across TXT, CSV, JSON, and PDF export formats
+
+### Technical
+
+- **Export Architecture**: Modular and maintainable export system
+  - Created `getExamCodeAndFilename()` helper for consistent file naming across formats
+  - Integrated `formatCommentText()` in PDF exports for proper link handling
+  - Unified exam code resolution logic across all export and filter functions
+  - Comprehensive error handling and user feedback for export operations
+
 ## [2.9.0] - 2025-07-14
 
 ### Added
@@ -542,6 +589,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- **v2.10.x**: Enhanced export system with flexible options, modal interface, and comprehensive format support
 - **v2.9.x**: Resume study position system with intelligent session tracking and cross-session progress indicators
 - **v2.8.x**: Enhanced mobile navigation system with swipe gestures, touch-optimized UI, and mobile bottom navigation bar
 - **v2.7.x**: Informative tooltips system with keyboard shortcuts and enhanced user guidance
