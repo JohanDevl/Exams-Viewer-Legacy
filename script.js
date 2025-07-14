@@ -3856,14 +3856,12 @@ async function checkForChunkedExam(examCode) {
     if (metadataResponse.ok) {
       const metadata = await metadataResponse.json();
       if (metadata.chunked && metadata.total_questions > lazyLoadingConfig.chunkSize) {
-        // Auto-enable lazy loading for large exams (>100 questions) regardless of user setting
-        const shouldAutoEnable = metadata.total_questions >= 100;
-        if (settings.enableLazyLoading || shouldAutoEnable) {
+        // Respect user preference - only use lazy loading if explicitly enabled
+        if (settings.enableLazyLoading) {
           lazyLoadingConfig.isChunkedExam = true;
           lazyLoadingConfig.examMetadata = metadata;
           lazyLoadingConfig.totalChunks = metadata.total_chunks || Math.ceil(metadata.total_questions / lazyLoadingConfig.chunkSize);
-          const enableReason = settings.enableLazyLoading ? 'user setting' : 'auto-enabled for performance';
-          console.log(`🚀 Lazy loading activated for ${examCode}: ${metadata.total_questions} questions in ${lazyLoadingConfig.totalChunks} chunks (${enableReason})`);
+          console.log(`🚀 Lazy loading activated for ${examCode}: ${metadata.total_questions} questions in ${lazyLoadingConfig.totalChunks} chunks (user setting)`);
           return true;
         } else {
           console.log(`⚡ Chunked version available for ${examCode} but lazy loading disabled in settings`);
