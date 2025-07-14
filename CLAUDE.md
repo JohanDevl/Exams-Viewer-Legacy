@@ -378,3 +378,76 @@ The project uses comprehensive GitHub Actions workflows for automated developmen
 - Dependencies: `/requirements.txt` (requests==2.32.3, beautifulsoup4==4.13.4, Pillow==10.4.0)
 - Workflows: `/.github/workflows/` (automation for changelog and branch synchronization)
 - Service Worker: `/sw.js` (caching and performance optimization)
+
+## GitHub Templates Usage
+
+### CRITICAL REQUIREMENT
+**ALWAYS use the appropriate GitHub templates when creating issues or pull requests. This ensures consistency, proper categorization, and adherence to project standards.**
+
+### Available Templates
+
+#### Issue Templates (`.github/ISSUE_TEMPLATE/`)
+- **`bug_report.md`**: For reporting bugs and issues
+- **`feature_request.md`**: For requesting new features or enhancements
+- **`new_exam_request.md`**: For requesting support for new exams
+- **`scraping_issue.md`**: For reporting scraping-related problems
+
+#### Pull Request Templates (`.github/PULL_REQUEST_TEMPLATE/`)
+- **`new_feature.md`**: For new feature implementations
+- **`bug_fix.md`**: For bug fixes and issue resolutions
+- **`scraper_improvement.md`**: For scraper enhancements and optimizations
+- **`pull_request_template.md`**: Default template for general changes
+
+### Template Usage Guidelines
+
+#### When Creating Issues
+1. **Always select the most appropriate template** from the available options
+2. **Fill out all required sections** completely and accurately
+3. **Include relevant details**: error messages, browser versions, steps to reproduce
+4. **Add appropriate labels** after creation for better categorization
+5. **Reference related issues or PRs** when applicable
+
+#### When Creating Pull Requests
+1. **Use the correct template** based on the type of changes:
+   - New features → `new_feature.md`
+   - Bug fixes → `bug_fix.md`
+   - Scraper changes → `scraper_improvement.md`
+   - Other changes → `pull_request_template.md`
+2. **Complete all template sections** thoroughly
+3. **Include testing information** and verification steps
+4. **Link to related issues** using GitHub's closing keywords
+5. **Ensure all automated checks pass** before requesting review
+
+#### Template Compliance
+- **Required**: All PRs and issues MUST use templates
+- **Quality**: Incomplete or template-bypassing submissions may be rejected
+- **Consistency**: Templates ensure uniform information across all contributions
+- **Automation**: Proper template usage enables automated workflows and tracking
+
+### Example Template Usage
+
+#### For Issues
+```markdown
+When reporting a bug, always use the bug_report.md template:
+- Clear reproduction steps
+- Expected vs actual behavior
+- Environment details (browser, OS, etc.)
+- Screenshots when applicable
+```
+
+#### For Pull Requests
+```markdown
+When implementing new features, use new_feature.md template:
+- Feature description and rationale
+- Implementation details
+- Testing approach and results
+- Breaking changes documentation
+- Related issue references
+```
+
+### Template Enforcement
+Templates are enforced through:
+- **GitHub interface**: Automatically suggests appropriate templates
+- **Review process**: PRs without proper templates may be rejected
+- **Automation**: Workflows may check for template compliance
+- **Quality assurance**: Ensures all necessary information is provided

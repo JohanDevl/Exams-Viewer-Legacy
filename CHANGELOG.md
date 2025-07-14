@@ -4,6 +4,73 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - {PR_MERGE_DATE}
+
+### Added
+
+- **Enhanced Visual Status Indicators**: Comprehensive color-coded badge system for question states
+  - Six distinct status types: New (gray), Viewed (orange), Correct (green), Incorrect (red), With Notes (purple), Categorized (cyan)
+  - Primary status badges showing question completion states with icons and text labels
+  - Secondary badges for favorites (star), notes (sticky note), and categories (tag)
+  - Real-time status updates when validating answers, adding favorites, or creating notes
+  - Intelligent status detection with automatic question visit tracking
+  - Performance-optimized caching system with LRU management (200-item limit)
+  - Full accessibility support with ARIA labels and screen reader compatibility
+  - Complete dark mode integration with adaptive color schemes
+
+- **Question Organization System**: Advanced tools for study session management
+  - Automatic visit tracking when navigating to questions
+  - Distinction between correct/incorrect/preview answer attempts
+  - Integration with existing favorites and notes systems
+  - Category-based organization with visual indicators
+
+- **Responsive Badge System**: Mobile-optimized visual indicators
+  - Adaptive badge sizing for different screen sizes (768px, 480px breakpoints)
+  - Intelligent layout switching from horizontal to vertical stacking on mobile
+  - Touch-friendly interactions with proper spacing and sizing
+  - Consistent visual hierarchy across all device types
+
+### Enhanced
+
+- **Progress Sidebar**: Enriched question overview with visual status display
+  - Enhanced question items showing comprehensive status information
+  - Clear visual hierarchy with primary and secondary status indicators
+  - Improved navigation with click-to-go functionality for all question states
+  - Better mobile responsiveness with adaptive badge layouts
+
+- **Performance Optimizations**: Intelligent caching and memory management
+  - Question status cache with automatic invalidation when data changes
+  - Memory-efficient status calculations for large question sets
+  - Optimized DOM updates and render cycles for smooth animations
+  - Background cache cleanup to prevent memory leaks
+
+- **User Interface**: Improved visual feedback and accessibility
+  - Hover effects and transitions for better interaction feedback
+  - Focus management for keyboard navigation compatibility
+  - Color-blind friendly design with icons complementing color coding
+  - Proper contrast ratios maintained across all themes
+
+### Fixed
+
+- **Question Toolbar Access**: Resolved issue with category dropdown not appearing
+  - Clarified that question toolbar must be enabled in Settings > Display Preferences
+  - Updated documentation to explain toolbar activation requirement
+  - Improved user guidance for accessing favorites, categories, and notes features
+
+### Technical
+
+- **Session Statistics Enhancement**: Extended session data structure
+  - Added `visitedQuestions` array to track question navigation
+  - Backward compatibility with existing session data
+  - Compressed property names for storage efficiency
+  - Proper getter methods for data access
+
+- **Cache Management**: Intelligent status caching system
+  - LRU cache implementation with automatic size management
+  - Cache invalidation triggers for data consistency
+  - Memory leak prevention with bounded cache size
+  - Performance monitoring and optimization
+
 ## [2.5.3] - 2025-07-13
 
 ### Added
@@ -342,6 +409,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- **v2.6.x**: Enhanced visual status indicators with color-coded badges and question organization system
 - **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, history, animated progress indicator, embedded image display fixes, and performance optimizations
 - **v2.4.x**: Advanced search and filtering system with smart auto-completion
 - **v2.3.x**: Toolbar visibility toggle and UI declutter option
