@@ -3642,6 +3642,9 @@ async function loadExam(examCode) {
     );
     devLog("Total questions loaded:", currentQuestions.length);
 
+    // Clear question status cache for fresh start
+    clearQuestionStatusCache();
+
     // Start exam session for statistics
     startExamSession(examCode, currentExam.exam_name);
 
@@ -5703,23 +5706,68 @@ function getResumeIndicatorText(examCode) {
   return `Resume at Q${position.questionNumber} (${timeAgo})`;
 }
 
-// Get previous answers for a question from current session
-function getPreviousAnswers(questionNumber) {
-  if (!statistics.currentSession || !questionNumber) return null;
-  
-  const questionAttempt = statistics.currentSession.questions?.find(
-    q => q.qn === questionNumber || q.questionNumber === questionNumber
-  );
-  
-  if (!questionAttempt || !questionAttempt.att || questionAttempt.att.length === 0) {
-    return null;
+// Check if exam appears to be completed
+function checkIfExamCompleted(examCode, resumePosition) {
+  // If position is at the last question or beyond, consider it completed
+  if (resumePosition.questionIndex >= resumePosition.totalQuestions - 1) {
+    return true;
   }
   
-  // Get the most recent attempt
-  const lastAttempt = questionAttempt.att[questionAttempt.att.length - 1];
+  // Check if we have answered most questions in any session for this exam
+  const totalQuestions = currentQuestions.length || resumePosition.totalQuestions;
+  if (totalQuestions === 0) return false;
+  
+  // Count answered questions across all sessions for this exam
+  let answeredCount = 0;
+  const examName = currentExam?.exam_name || examCode;
+  
+  // Check all sessions (current and previous) for this exam
+  if (statistics.sessions) {
+    statistics.sessions.forEach(session => {
+      if ((session.ec === examCode || session.examCode === examCode || 
+           session.en === examName || session.examName === examName) && 
+          session.questions) {
+        session.questions.forEach(q => {
+          // Only count questions that were actually answered (have attempts)
+          if (q.att && q.att.length > 0) {
+            answeredCount++;
+          }
+        });
+      }
+    });
+  }
+  
+  // Also check current session
+  if (statistics.currentSession && 
+      (statistics.currentSession.ec === examCode || statistics.currentSession.examCode === examCode ||
+       statistics.currentSession.en === examName || statistics.currentSession.examName === examName) &&
+      statistics.currentSession.questions) {
+    statistics.currentSession.questions.forEach(q => {
+      if (q.att && q.att.length > 0) {
+        answeredCount++;
+      }
+    });
+  }
+  
+  // Consider exam completed if 95% or more questions are answered
+  const completionPercentage = (answeredCount / totalQuestions) * 100;
+  devLog(`Exam completion check for ${examCode}: ${answeredCount}/${totalQuestions} (${completionPercentage.toFixed(1)}%)`);
+  
+  return completionPercentage >= 95;
+}
+
+// Get previous answers for a question from current or previous sessions
+function getPreviousAnswers(questionNumber) {
+  if (!questionNumber) return null;
+  
+  // Use the getMostRecentAnswer function to get the most recent attempt across all sessions
+  const recentAnswer = getMostRecentAnswer(questionNumber);
+  
+  if (!recentAnswer) return null;
+  
   return {
-    selectedAnswers: lastAttempt.a || [],
-    isCorrect: lastAttempt.c,
+    selectedAnswers: recentAnswer.selectedAnswers || [],
+    isCorrect: recentAnswer.isCorrect,
     wasValidated: true // If we have an attempt, it means it was validated
   };
 }
@@ -5844,6 +5892,14 @@ async function handleResumePosition(examCode) {
   try {
     const resumePosition = getResumePosition(examCode);
     if (!resumePosition) return;
+    
+    // Check if exam is completed (at last question or 100% answered)
+    const isExamCompleted = checkIfExamCompleted(examCode, resumePosition);
+    if (isExamCompleted) {
+      devLog(`Exam ${examCode} appears to be completed, clearing resume position`);
+      clearResumePosition(examCode);
+      return;
+    }
     
     // Validate resume position
     if (!isResumePositionValid(examCode, resumePosition)) {
@@ -6118,12 +6174,37 @@ function getAnsweredQuestionsCount() {
 function isQuestionAnswered(questionNumber) {
   if (!questionNumber) return false;
   
-  // Only check current session - each exam load should start fresh
+  // Check current session first
   if (statistics.currentSession && statistics.currentSession.questions) {
     const found = statistics.currentSession.questions.find(q => 
-      q.questionNumber.toString() === questionNumber.toString()
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
     );
-    if (found) return true;
+    if (found && found.att && found.att.length > 0) return true;
+  }
+  
+  // Also check previous sessions for this exam
+  if (currentExam && statistics.sessions) {
+    const examCode = Object.keys(availableExams).find(code => 
+      availableExams[code] === currentExam.exam_name
+    ) || currentExam.exam_name;
+    
+    const examName = currentExam.exam_name;
+    
+    for (const session of statistics.sessions) {
+      // Check if this session is for the current exam
+      if ((session.ec === examCode || session.examCode === examCode || 
+           session.en === examName || session.examName === examName) && 
+          session.questions) {
+        
+        const found = session.questions.find(q => 
+          (q.qn && q.qn.toString() === questionNumber.toString()) ||
+          (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+        );
+        
+        if (found && found.att && found.att.length > 0) return true;
+      }
+    }
   }
   
   return false;
@@ -6164,24 +6245,79 @@ function isQuestionVisited(questionNumber) {
 
 // Check if a question was answered correctly
 function isQuestionAnsweredCorrectly(questionNumber) {
-  if (!questionNumber || !statistics.currentSession?.questions) return false;
+  if (!questionNumber) return false;
   
-  const questionAttempt = statistics.currentSession.questions.find(q => 
-    q.questionNumber.toString() === questionNumber.toString()
-  );
-  
-  return questionAttempt && questionAttempt.isCorrect === true;
+  // Get the most recent answer from any session for this exam
+  const recentAnswer = getMostRecentAnswer(questionNumber);
+  return recentAnswer && recentAnswer.isCorrect === true;
 }
 
 // Check if a question was answered incorrectly
 function isQuestionAnsweredIncorrectly(questionNumber) {
-  if (!questionNumber || !statistics.currentSession?.questions) return false;
+  if (!questionNumber) return false;
   
-  const questionAttempt = statistics.currentSession.questions.find(q => 
-    q.questionNumber.toString() === questionNumber.toString()
-  );
+  // Get the most recent answer from any session for this exam
+  const recentAnswer = getMostRecentAnswer(questionNumber);
+  return recentAnswer && recentAnswer.isCorrect === false;
+}
+
+// Get the most recent answer for a question across all sessions for this exam
+function getMostRecentAnswer(questionNumber) {
+  if (!questionNumber || !currentExam) return null;
   
-  return questionAttempt && questionAttempt.isCorrect === false;
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  ) || currentExam.exam_name;
+  
+  const examName = currentExam.exam_name;
+  let mostRecentAttempt = null;
+  let mostRecentTimestamp = 0;
+  
+  // Check current session first
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    if (found && found.att && found.att.length > 0) {
+      const lastAttempt = found.att[found.att.length - 1];
+      mostRecentAttempt = {
+        isCorrect: lastAttempt.c,
+        selectedAnswers: lastAttempt.a || [],
+        timestamp: statistics.currentSession.st || Date.now()
+      };
+      mostRecentTimestamp = statistics.currentSession.st || Date.now();
+    }
+  }
+  
+  // Check previous sessions
+  if (statistics.sessions) {
+    for (const session of statistics.sessions) {
+      if ((session.ec === examCode || session.examCode === examCode || 
+           session.en === examName || session.examName === examName) && 
+          session.questions && 
+          (session.st || session.startTime || 0) > mostRecentTimestamp) {
+        
+        const found = session.questions.find(q => 
+          (q.qn && q.qn.toString() === questionNumber.toString()) ||
+          (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+        );
+        
+        if (found && found.att && found.att.length > 0) {
+          const lastAttempt = found.att[found.att.length - 1];
+          mostRecentAttempt = {
+            isCorrect: lastAttempt.c,
+            selectedAnswers: lastAttempt.a || [],
+            timestamp: session.st || session.startTime || 0
+          };
+          mostRecentTimestamp = session.st || session.startTime || 0;
+        }
+      }
+    }
+  }
+  
+  return mostRecentAttempt;
 }
 
 // Check if a question has notes
