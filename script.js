@@ -2649,26 +2649,11 @@ async function discoverAvailableExams() {
             });
           }
 
-          // Verify each exam file exists
-          const verifyPromises = manifest.exams.map(async (examCode) => {
-            try {
-              const response = await fetch(`data/${examCode}/exam.json`, {
-                method: "HEAD",
-              });
-              if (response.ok) {
-                discoveredExams[examCode] = examCode;
-                devLog(`Confirmed exam file exists for: ${examCode}`);
-              } else {
-                devLog(
-                  `Exam file not found for: ${examCode} (status: ${response.status})`
-                );
-              }
-            } catch (error) {
-              devLog(`Failed to verify exam file for: ${examCode}`, error);
-            }
+          // Trust manifest data - no need to verify each exam file exists
+          // This eliminates redundant HEAD requests for better performance
+          manifest.exams.forEach(examCode => {
+            discoveredExams[examCode] = examCode;
           });
-
-          await Promise.all(verifyPromises);
 
           if (Object.keys(discoveredExams).length > 0) {
             availableExams = discoveredExams;
@@ -3863,23 +3848,24 @@ function processEmbeddedImages(htmlContent, imagesData) {
 
 // Lazy Loading Functions
 async function checkForChunkedExam(examCode) {
-  // Check if lazy loading is enabled in settings
-  if (!settings.enableLazyLoading) {
-    console.log(`⚡ Lazy loading disabled in settings, using standard loading for ${examCode}`);
-    lazyLoadingConfig.isChunkedExam = false;
-    return false;
-  }
+  // Always check for chunked version first for optimal performance
+  // If chunks exist, prefer lazy loading regardless of settings for large exams
 
   try {
     const metadataResponse = await fetch(`data/${examCode}/metadata.json`);
     if (metadataResponse.ok) {
       const metadata = await metadataResponse.json();
       if (metadata.chunked && metadata.total_questions > lazyLoadingConfig.chunkSize) {
-        lazyLoadingConfig.isChunkedExam = true;
-        lazyLoadingConfig.examMetadata = metadata;
-        lazyLoadingConfig.totalChunks = metadata.total_chunks || Math.ceil(metadata.total_questions / lazyLoadingConfig.chunkSize);
-        console.log(`🚀 Lazy loading activated for ${examCode}: ${metadata.total_questions} questions in ${lazyLoadingConfig.totalChunks} chunks`);
-        return true;
+        // Respect user preference - only use lazy loading if explicitly enabled
+        if (settings.enableLazyLoading) {
+          lazyLoadingConfig.isChunkedExam = true;
+          lazyLoadingConfig.examMetadata = metadata;
+          lazyLoadingConfig.totalChunks = metadata.total_chunks || Math.ceil(metadata.total_questions / lazyLoadingConfig.chunkSize);
+          console.log(`🚀 Lazy loading activated for ${examCode}: ${metadata.total_questions} questions in ${lazyLoadingConfig.totalChunks} chunks (user setting)`);
+          return true;
+        } else {
+          console.log(`⚡ Chunked version available for ${examCode} but lazy loading disabled in settings`);
+        }
       }
     }
   } catch (error) {
@@ -3928,8 +3914,16 @@ async function preloadChunks(examCode, centerChunk) {
   }
 
   if (promises.length > 0) {
-    await Promise.all(promises);
-    console.log(`✅ Preloaded ${promises.length} chunks`);
+    // Use Promise.allSettled for better error handling and performance
+    const results = await Promise.allSettled(promises);
+    const successful = results.filter(r => r.status === 'fulfilled').length;
+    const failed = results.filter(r => r.status === 'rejected').length;
+    
+    if (failed > 0) {
+      console.warn(`⚠️ Preloaded ${successful}/${promises.length} chunks (${failed} failed)`);
+    } else {
+      console.log(`✅ Preloaded ${successful} chunks`);
+    }
   } else {
     console.log(`📦 All chunks ${start}-${end} already cached`);
   }
@@ -4034,13 +4028,22 @@ function goToHome() {
   // End current session if exists
   endCurrentSession();
 
-  // Reset exam state
+  // Reset exam state and cleanup memory
   currentExam = null;
   currentQuestions = [];
   currentQuestionIndex = 0;
   selectedAnswers.clear();
   isValidated = false;
   isHighlightEnabled = false;
+  
+  // Cleanup chunk cache and search cache for memory optimization
+  lazyLoadingConfig.loadedChunks.clear();
+  lazyLoadingConfig.currentChunk = 0;
+  lazyLoadingConfig.examMetadata = null;
+  searchCache = {};
+  
+  // Progressive localStorage cleanup to prevent memory issues
+  performProgressiveCleanup();
   
   // Remove mobile navigation when returning to home
   createMobileBottomNavigation();
@@ -4170,13 +4173,26 @@ function displayCurrentQuestion(fromToggleAction = false) {
   
   // Handle placeholder questions for lazy loading
   if (question?.isPlaceholder) {
-    document.getElementById("questionText").innerHTML = `
-      <div class="loading-placeholder">
-        <div class="spinner"></div>
-        <p>Loading question ${question.question_number}...</p>
-      </div>
-    `;
-    document.getElementById("answersList").innerHTML = "";
+    const questionText = document.getElementById("questionText");
+    const answersList = document.getElementById("answersList");
+    
+    // Clear existing content efficiently
+    while (questionText.firstChild) questionText.removeChild(questionText.firstChild);
+    while (answersList.firstChild) answersList.removeChild(answersList.firstChild);
+    
+    // Create loading placeholder with DOM methods
+    const placeholder = document.createElement("div");
+    placeholder.className = "loading-placeholder";
+    
+    const spinner = document.createElement("div");
+    spinner.className = "spinner";
+    placeholder.appendChild(spinner);
+    
+    const loadingText = document.createElement("p");
+    loadingText.textContent = `Loading question ${question.question_number}...`;
+    placeholder.appendChild(loadingText);
+    
+    questionText.appendChild(placeholder);
     return;
   }
 
@@ -4325,7 +4341,10 @@ function displayAnswers(question) {
   const correctAnswers = new Set(mostVoted.split(""));
 
   const answersList = document.getElementById("answersList");
-  answersList.innerHTML = "";
+  // Use more efficient DOM manipulation instead of innerHTML
+  while (answersList.firstChild) {
+    answersList.removeChild(answersList.firstChild);
+  }
 
   answers.forEach((answer) => {
     const answerLetter = answer.charAt(0);
@@ -8821,4 +8840,69 @@ async function jumpToQuestion() {
   
   await jumpToQuestionNumber(questionNumber.toString());
   jumpInput.value = "";
+}
+
+// Progressive localStorage cleanup to prevent memory issues
+function performProgressiveCleanup() {
+  try {
+    // Calculate current localStorage usage
+    let totalSize = 0;
+    for (let key in localStorage) {
+      if (localStorage.hasOwnProperty(key)) {
+        totalSize += localStorage[key].length;
+      }
+    }
+    
+    const sizeMB = (totalSize / (1024 * 1024)).toFixed(2);
+    console.log(`📊 localStorage usage: ${sizeMB} MB`);
+    
+    // If usage exceeds 3MB, perform aggressive cleanup
+    if (totalSize > 3 * 1024 * 1024) {
+      console.warn("localStorage usage high, performing cleanup...");
+      
+      // Clean old statistics sessions
+      try {
+        const statsData = localStorage.getItem("examViewerStatistics");
+        if (statsData) {
+          const stats = JSON.parse(statsData);
+          if (stats.sessions && stats.sessions.length > 30) {
+            stats.sessions = stats.sessions.slice(-30);
+            localStorage.setItem("examViewerStatistics", JSON.stringify(stats));
+            console.log("Cleaned old statistics sessions");
+          }
+        }
+      } catch (error) {
+        console.error("Error cleaning statistics:", error);
+      }
+      
+      // Clean old resume positions
+      try {
+        const positionsData = localStorage.getItem("examViewerResumePositions");
+        if (positionsData) {
+          const positions = JSON.parse(positionsData);
+          const oneWeekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+          
+          // Remove positions older than 1 week
+          Object.keys(positions).forEach(examCode => {
+            if (positions[examCode].timestamp < oneWeekAgo) {
+              delete positions[examCode];
+            }
+          });
+          
+          localStorage.setItem("examViewerResumePositions", JSON.stringify(positions));
+          console.log("Cleaned old resume positions");
+        }
+      } catch (error) {
+        console.error("Error cleaning resume positions:", error);
+      }
+    }
+    
+    // Add performance monitoring for cache operations
+    if (typeof performance !== 'undefined' && performance.mark) {
+      performance.mark('cleanup-complete');
+    }
+    
+  } catch (error) {
+    console.error("Error during progressive cleanup:", error);
+  }
 }
