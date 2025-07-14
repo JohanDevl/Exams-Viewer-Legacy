@@ -4703,6 +4703,17 @@ function toggleHighlight() {
     questionAttempt.addHighlightButtonClick();
     updateSessionStats();
     saveStatistics();
+    
+    // Clear question status cache and update progress indicators immediately
+    clearQuestionStatusCache();
+    updateProgressSidebar();
+    updateMainProgressIndicator();
+    
+    // Update search filter counts if advanced search is available
+    if (typeof updateFilterCounts === 'function') {
+      updateFilterCounts();
+    }
+    
     devLog("Highlight activated on question:", questionNumber);
   }
 
