@@ -3977,7 +3977,6 @@ body {
 /* Base tooltip styles - only active when enabled */
 .tooltips-enabled [data-tooltip] {
   position: relative !important;
-  cursor: help;
 }
 
 /* Tooltip content */
