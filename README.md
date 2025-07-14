@@ -17,6 +17,8 @@ No installation required! The interface automatically detects your system theme 
 - **⌨️ Enhanced keyboard navigation** with vim-style shortcuts
 - **📊 Enhanced progress indicator** with animated progress bar and real-time statistics
 - **📊 Visual progress sidebar** with question overview
+- **🎨 Enhanced visual status indicators** with color-coded badges for question states
+- **🏷️ Question organization** with favorites, categories, and personal notes
 - **📚 Navigation history** with back/forward buttons
 - **🌙 Dark mode** with automatic detection
 - **📊 Complete statistics system** with intelligent storage management
@@ -78,14 +80,16 @@ pip install -r requirements.txt
 1. **Select an exam** from the dropdown list
 2. **Monitor progress**: Watch the animated progress indicator for real-time statistics and completion percentage
 3. **Navigate with keyboard shortcuts**: Use arrow keys, `hjkl` (vim-style), or `Space/Enter` for quick navigation
-4. **Open progress sidebar**: Press `Ctrl+S` or click the hamburger menu to see detailed progress
-5. **Use navigation history**: Click Back/Forward buttons to return to previously visited questions
-6. **Access keyboard help**: Press `?` to see all available shortcuts
-7. **Use highlight mode** to preview answers before validation
-8. **Check statistics** in the dedicated panel with detailed analytics
-9. **Export data** to PDF or JSON format
-10. **Manage performance**: Enable lazy loading in settings for large exams
-11. **Clean storage**: Use statistics management tools to optimize space
+4. **Open progress sidebar**: Press `Ctrl+S` or click the hamburger menu to see detailed progress with visual status badges
+5. **Track question status**: Automatic visual indicators show question states (new, viewed, correct, incorrect)
+6. **Organize questions**: Enable question toolbar in settings to access favorites (⭐), categories (🏷️), and notes (📝)
+7. **Use navigation history**: Click Back/Forward buttons to return to previously visited questions
+8. **Access keyboard help**: Press `?` to see all available shortcuts
+9. **Use highlight mode** to preview answers before validation
+10. **Check statistics** in the dedicated panel with detailed analytics
+11. **Export data** to PDF or JSON format
+12. **Manage performance**: Enable lazy loading in settings for large exams
+13. **Clean storage**: Use statistics management tools to optimize space
 
 ### Manual Updates
 
@@ -128,6 +132,7 @@ Exams-Viewer/
 - **[🛠️ Development Guide](docs/DEVELOPMENT.md)** - Instructions for developers
 - **[📊 Statistics System](docs/STATISTICS.md)** - Statistics system documentation
 - **[⌨️ Navigation Features](docs/NAVIGATION.md)** - Enhanced navigation and keyboard shortcuts
+- **[🎨 Visual Status Indicators](docs/VISUAL_STATUS_INDICATORS.md)** - Color-coded badges and status system
 - **[⚡ Performance Optimizations](docs/PERFORMANCE_OPTIMIZATIONS.md)** - Lazy loading and performance features
 - **[📋 API Documentation](docs/API.md)** - Technical API documentation
 - **[🔧 Scraper Improvements](docs/SCRAPER_IMPROVEMENTS.md)** - Improvement details

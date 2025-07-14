@@ -2433,6 +2433,146 @@ body {
   background-color: var(--text-muted);
 }
 
+/* Status badges for questions */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin-left: 0.25rem;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-badge i {
+  font-size: 0.6rem;
+}
+
+/* Status badge variants */
+.status-badge.new {
+  background-color: rgba(108, 117, 125, 0.15);
+  color: var(--text-muted);
+  border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+.status-badge.viewed {
+  background-color: rgba(255, 193, 7, 0.15);
+  color: var(--warning-color);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.status-badge.correct {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: var(--success-color);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.status-badge.incorrect {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: var(--error-color);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.status-badge.with-notes {
+  background-color: rgba(102, 16, 242, 0.15);
+  color: #6610f2;
+  border: 1px solid rgba(102, 16, 242, 0.3);
+}
+
+.status-badge.categorized {
+  background-color: rgba(23, 162, 184, 0.15);
+  color: #17a2b8;
+  border: 1px solid rgba(23, 162, 184, 0.3);
+}
+
+/* Dark mode adjustments for status badges */
+[data-theme="dark"] .status-badge.new {
+  background-color: rgba(160, 160, 160, 0.2);
+  color: var(--text-muted);
+  border: 1px solid rgba(160, 160, 160, 0.4);
+}
+
+[data-theme="dark"] .status-badge.viewed {
+  background-color: rgba(255, 152, 0, 0.2);
+  color: #ff9800;
+  border: 1px solid rgba(255, 152, 0, 0.4);
+}
+
+[data-theme="dark"] .status-badge.correct {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.4);
+}
+
+[data-theme="dark"] .status-badge.incorrect {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.4);
+}
+
+[data-theme="dark"] .status-badge.with-notes {
+  background-color: rgba(156, 39, 176, 0.2);
+  color: #9c27b0;
+  border: 1px solid rgba(156, 39, 176, 0.4);
+}
+
+[data-theme="dark"] .status-badge.categorized {
+  background-color: rgba(0, 188, 212, 0.2);
+  color: #00bcd4;
+  border: 1px solid rgba(0, 188, 212, 0.4);
+}
+
+/* Enhanced question item status indicators */
+.question-item-enhanced {
+  position: relative;
+}
+
+.question-item-enhanced .question-status-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  align-items: center;
+}
+
+.question-item-enhanced .primary-status {
+  font-weight: 600;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.question-item-enhanced .secondary-badges {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+/* Hover effects for status badges */
+.status-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .status-badge:hover {
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Accessibility improvements */
+.status-badge[aria-label] {
+  cursor: help;
+}
+
+.status-badge:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
 .loading-spinner {
   text-align: center;
   padding: 2rem;
@@ -3743,6 +3883,52 @@ body {
 
 [data-theme="dark"] .shortcut-item kbd {
   box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile responsiveness for status badges */
+@media (max-width: 768px) {
+  .status-badge {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.3rem;
+    margin-left: 0.2rem;
+  }
+  
+  .status-badge i {
+    font-size: 0.55rem;
+  }
+  
+  .question-status-indicators {
+    gap: 0.2rem;
+    margin-top: 0.2rem;
+  }
+  
+  .secondary-badges {
+    gap: 0.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .status-badge {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.25rem;
+  }
+  
+  .question-status-indicators {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+  
+  .primary-status,
+  .secondary-badges {
+    width: 100%;
+  }
+  
+  .secondary-badges {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.15rem;
+  }
 }
 
 /* Mobile responsiveness for changelog */
