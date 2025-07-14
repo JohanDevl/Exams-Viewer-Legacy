@@ -3199,6 +3199,14 @@ function setupMobileTooltips() {
       document.querySelectorAll('[data-tooltip]:focus').forEach(el => el.blur());
     }
   });
+  
+  // Hide tooltips when clicking on tooltip elements
+  document.addEventListener('click', (e) => {
+    const tooltipElement = e.target.closest('[data-tooltip]');
+    if (tooltipElement && settings.showTooltips) {
+      tooltipElement.blur();
+    }
+  });
 }
 
 // Display available exams
