@@ -2886,7 +2886,58 @@ function saveSettings() {
     "autoSavePosition"
   ).checked;
   localStorage.setItem("examViewerSettings", JSON.stringify(settings));
+  
+  // Handle highlight default setting change
+  const wasHighlightEnabled = isHighlightEnabled;
   isHighlightEnabled = settings.highlightDefault;
+  
+  // If highlight setting changed and we have a current question, update the display
+  if (wasHighlightEnabled !== isHighlightEnabled && currentQuestions.length > 0) {
+    // Reset temporary override since user changed the default setting
+    isHighlightTemporaryOverride = false;
+    
+    // If highlight is now enabled and this is the first action on the question, track it
+    if (isHighlightEnabled && statistics.currentSession) {
+      const question = currentQuestions[currentQuestionIndex];
+      const questionNumber = question.question_number;
+      
+      // Find existing question attempt or create new one
+      let questionAttempt = statistics.currentSession.questions.find(
+        (q) => q.questionNumber === questionNumber
+      );
+      
+      if (!questionAttempt) {
+        const mostVoted = question.most_voted || "";
+        const correctAnswers = Array.from(new Set(mostVoted.split("")));
+        questionAttempt = new QuestionAttempt(questionNumber, correctAnswers);
+        statistics.currentSession.questions.push(questionAttempt);
+      }
+      
+      // Track this as a highlight action if no previous attempts exist
+      if (!questionAttempt.attempts || questionAttempt.attempts.length === 0) {
+        questionAttempt.addHighlightButtonClick();
+        updateSessionStats();
+        saveStatistics();
+        
+        // Update progress indicators immediately
+        clearQuestionStatusCache();
+        updateProgressSidebar();
+        updateMainProgressIndicator();
+        
+        // Update search filter counts if advanced search is available
+        if (typeof updateFilterCounts === 'function') {
+          updateFilterCounts();
+        }
+      }
+    }
+    
+    // Update the highlight button appearance
+    updateHighlightButton();
+    
+    // Refresh the current question display
+    displayCurrentQuestion();
+  }
+  
   applyTheme(settings.darkMode);
   
   // Update main progress bar visibility
