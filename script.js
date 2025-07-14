@@ -23,8 +23,8 @@ let settings = {
   enableLazyLoading: false, // Lazy loading disabled by default
   showMainProgressBar: true, // Main progress bar enabled by default
   showTooltips: false, // Tooltips disabled by default
-  enableResumePosition: true, // Resume position enabled by default
-  autoSavePosition: true, // Auto-save position enabled by default
+  enableResumePosition: false, // Resume position disabled by default
+  autoSavePosition: false, // Auto-save position disabled by default
 };
 
 // Available exams mapping (will be populated dynamically)
