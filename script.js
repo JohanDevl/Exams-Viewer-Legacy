@@ -2937,30 +2937,9 @@ function saveSettings() {
     // Update instructions and validate button state
     updateInstructions();
     
-    // Simply force update the highlight display on current answers
-    const question = currentQuestions[currentQuestionIndex];
-    const mostVoted = question.most_voted || "";
-    const correctAnswers = new Set(mostVoted.split(""));
-    
-    // Get all answer elements and apply/remove highlight
-    const answersList = document.getElementById("answersList");
-    if (answersList) {
-      const answerElements = answersList.querySelectorAll(".answer-option");
-      answerElements.forEach((answerElement) => {
-        const answerLetterElement = answerElement.querySelector(".answer-letter");
-        if (answerLetterElement) {
-          const answerLetter = answerLetterElement.textContent.replace(".", "");
-          const isCorrect = correctAnswers.has(answerLetter);
-          const isSelected = answerElement.classList.contains("selected");
-          
-          if (isHighlightEnabled && isCorrect && !isSelected) {
-            answerElement.classList.add("correct-not-selected");
-          } else {
-            answerElement.classList.remove("correct-not-selected");
-          }
-        }
-      });
-    }
+    // Re-display the current question to apply highlight changes properly
+    // This ensures that restorePreviousAnswers() works correctly with the new highlight state
+    displayCurrentQuestion();
   }
   
   applyTheme(settings.darkMode);
@@ -4357,6 +4336,7 @@ function displayAnswers(question) {
 
     const answerElement = document.createElement("div");
     answerElement.className = "answer-option";
+    answerElement.dataset.answer = answerLetter; // Add data-answer attribute for restoration
     answerElement.innerHTML = `<span class="answer-letter">${answerLetter}.</span> ${answerText}`;
 
     answerElement.addEventListener("click", () => {
@@ -5854,15 +5834,22 @@ function checkIfExamCompleted(examCode, resumePosition) {
 function getPreviousAnswers(questionNumber) {
   if (!questionNumber) return null;
   
+  devLog("🔍 getPreviousAnswers called for question:", questionNumber);
+  
   // Check current session first - prioritize current session for fresh starts
   if (statistics.currentSession && statistics.currentSession.questions) {
+    devLog("📊 Current session has", statistics.currentSession.questions.length, "questions");
+    
     const found = statistics.currentSession.questions.find(q => 
       (q.qn && q.qn.toString() === questionNumber.toString()) ||
       (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
     );
     
+    devLog("🔍 Found in current session:", found);
+    
     if (found && found.att && found.att.length > 0) {
       const lastAttempt = found.att[found.att.length - 1];
+      devLog("📝 Last attempt:", lastAttempt);
       return {
         selectedAnswers: lastAttempt.a || [],
         isCorrect: lastAttempt.c,
@@ -5873,9 +5860,11 @@ function getPreviousAnswers(questionNumber) {
   
   // If current session is very new (< 30 seconds old), don't show previous session answers
   // This ensures "Start Fresh" truly starts fresh
-  if (statistics.currentSession) {
+  // BUT only if this is not a resume session (resume sessions should always show previous answers)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
     const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
     if (sessionAge < 30000) { // Less than 30 seconds old
+      devLog("🚫 Session is fresh (<30s) and not a resume session, not showing previous answers");
       return null; // Don't show previous answers for fresh sessions
     }
   }
@@ -5894,35 +5883,27 @@ function getPreviousAnswers(questionNumber) {
 
 // Restore previous answers when resuming or navigating to a previously answered question
 function restorePreviousAnswers(questionNumber) {
+  devLog("🔄 restorePreviousAnswers called for question:", questionNumber);
+  
   const previousAnswers = getPreviousAnswers(questionNumber);
   if (!previousAnswers) {
+    devLog("❌ No previous answers found for question:", questionNumber);
     return false; // No previous answers found
   }
   
-  // Restore selected answers
+  devLog("✅ Found previous answers:", previousAnswers);
+  
+  // Don't restore the visual state - let the question appear fresh
+  // But keep the statistical data for progress tracking
   selectedAnswers.clear();
-  if (Array.isArray(previousAnswers.selectedAnswers)) {
-    previousAnswers.selectedAnswers.forEach(answer => {
-      selectedAnswers.add(answer);
-    });
-  }
+  isValidated = false;
   
-  // Mark as validated if we have a previous attempt
-  isValidated = previousAnswers.wasValidated;
+  devLog("🔄 Question has previous answers but keeping fresh UI state");
+  devLog("🔄 Progress indicators will show it as answered based on statistics");
   
-  // Update UI to show the restored answers and validation state
-  updateAnswerSelectionUI();
-  
-  // If the question was previously validated, also show the validation results
-  if (isValidated) {
-    applyValidationVisuals(questionNumber);
-  }
-  
-  devLog(`Restored previous answers for question ${questionNumber}:`, {
-    selectedAnswers: Array.from(selectedAnswers),
-    isValidated: isValidated,
-    isCorrect: previousAnswers.isCorrect
-  });
+  // Return true to indicate that previous data exists (for progress tracking)
+  // but the UI remains fresh for new interaction
+  devLog(`Question ${questionNumber} has previous answers but UI kept fresh for new interaction`);
   
   return true; // Successfully restored
 }
@@ -6031,6 +6012,12 @@ async function handleResumePosition(examCode) {
     // Show resume dialog
     const shouldResume = await showResumeDialog(examCode, resumePosition);
     if (shouldResume) {
+      // Mark this session as a resume session to enable previous answers loading
+      if (statistics.currentSession) {
+        statistics.currentSession.isResumeSession = true;
+        devLog("✅ Marked session as resume session");
+      }
+      
       // Double-check bounds before setting
       if (resumePosition.questionIndex >= 0 && resumePosition.questionIndex < currentQuestions.length) {
         currentQuestionIndex = resumePosition.questionIndex;
@@ -6317,7 +6304,8 @@ function isQuestionAnswered(questionNumber) {
   
   // If current session is very new (< 30 seconds old), don't show previous session progress
   // This ensures "Start Fresh" truly starts fresh in UI
-  if (statistics.currentSession) {
+  // BUT only if this is not a resume session (resume sessions should always show previous progress)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
     const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
     if (sessionAge < 30000) { // Less than 30 seconds old
       return false; // Don't show previous progress for fresh sessions
@@ -6374,7 +6362,8 @@ function isQuestionAnsweredInPreview(questionNumber) {
   }
   
   // If current session is very new, don't show previous session results
-  if (statistics.currentSession) {
+  // BUT only if this is not a resume session (resume sessions should always show previous results)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
     const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
     if (sessionAge < 30000) {
       return false;
@@ -6463,7 +6452,8 @@ function isQuestionAnsweredCorrectly(questionNumber) {
   }
   
   // If current session is very new, don't show previous session results
-  if (statistics.currentSession) {
+  // BUT only if this is not a resume session (resume sessions should always show previous results)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
     const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
     if (sessionAge < 30000) {
       return false;
@@ -6493,7 +6483,8 @@ function isQuestionAnsweredIncorrectly(questionNumber) {
   }
   
   // If current session is very new, don't show previous session results
-  if (statistics.currentSession) {
+  // BUT only if this is not a resume session (resume sessions should always show previous results)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
     const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
     if (sessionAge < 30000) {
       return false;
@@ -6509,11 +6500,15 @@ function isQuestionAnsweredIncorrectly(questionNumber) {
 function getMostRecentAnswer(questionNumber) {
   if (!questionNumber || !currentExam) return null;
   
+  devLog("🔍 getMostRecentAnswer called for question:", questionNumber);
+  
   const examCode = Object.keys(availableExams).find(code => 
     availableExams[code] === currentExam.exam_name
   ) || currentExam.exam_name;
   
   const examName = currentExam.exam_name;
+  devLog("📚 Looking for answers in exam:", examName, "Code:", examCode);
+  
   let mostRecentAttempt = null;
   let mostRecentTimestamp = 0;
   
@@ -6537,10 +6532,16 @@ function getMostRecentAnswer(questionNumber) {
   
   // Check previous sessions
   if (statistics.sessions) {
+    devLog("📊 Checking", statistics.sessions.length, "previous sessions");
+    
     for (const session of statistics.sessions) {
-      if ((session.ec === examCode || session.examCode === examCode || 
-           session.en === examName || session.examName === examName) && 
-          session.questions && 
+      const sessionExamCode = session.ec || session.examCode;
+      const sessionExamName = session.en || session.examName;
+      const sessionMatches = (sessionExamCode === examCode || sessionExamName === examName);
+      
+      devLog("🔍 Session:", sessionExamCode, sessionExamName, "Matches:", sessionMatches, "Questions:", session.questions?.length || 0);
+      
+      if (sessionMatches && session.questions && 
           (session.st || session.startTime || 0) > mostRecentTimestamp) {
         
         const found = session.questions.find(q => 
@@ -6548,8 +6549,11 @@ function getMostRecentAnswer(questionNumber) {
           (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
         );
         
+        devLog("🔍 Found question in session:", found);
+        
         if (found && found.att && found.att.length > 0) {
           const lastAttempt = found.att[found.att.length - 1];
+          devLog("✅ Found previous answer:", lastAttempt);
           mostRecentAttempt = {
             isCorrect: lastAttempt.c,
             selectedAnswers: lastAttempt.a || [],
@@ -6559,8 +6563,11 @@ function getMostRecentAnswer(questionNumber) {
         }
       }
     }
+  } else {
+    devLog("❌ No previous sessions found");
   }
   
+  devLog("📝 Final result:", mostRecentAttempt);
   return mostRecentAttempt;
 }
 
