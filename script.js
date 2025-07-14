@@ -2934,6 +2934,9 @@ function saveSettings() {
     // Update the highlight button appearance
     updateHighlightButton();
     
+    // Apply or remove highlight on current question immediately
+    applyHighlightToCurrentAnswers();
+    
     // Refresh the current question display
     displayCurrentQuestion();
   }
@@ -2945,6 +2948,35 @@ function saveSettings() {
   
   // Update tooltip visibility
   updateTooltipVisibility();
+}
+
+// Apply or remove highlight on current question answers
+function applyHighlightToCurrentAnswers() {
+  if (!currentQuestions.length) return;
+  
+  const question = currentQuestions[currentQuestionIndex];
+  const mostVoted = question.most_voted || "";
+  const correctAnswers = new Set(mostVoted.split(""));
+  
+  // Get all answer elements
+  const answersList = document.getElementById("answersList");
+  if (!answersList) return;
+  
+  const answerElements = answersList.querySelectorAll(".answer-option");
+  
+  answerElements.forEach((answerElement) => {
+    const answerLetter = answerElement.querySelector(".answer-letter").textContent.replace(".", "");
+    
+    if (isHighlightEnabled && correctAnswers.has(answerLetter)) {
+      // Add highlight class if not already selected
+      if (!answerElement.classList.contains("selected")) {
+        answerElement.classList.add("correct-not-selected");
+      }
+    } else {
+      // Remove highlight class
+      answerElement.classList.remove("correct-not-selected");
+    }
+  });
 }
 
 // Apply dark/light theme
@@ -4772,6 +4804,9 @@ function toggleHighlight() {
   updateHighlightButton();
 
   if (currentQuestions.length > 0) {
+    // Apply or remove highlight on current question immediately
+    applyHighlightToCurrentAnswers();
+    
     // Pass a flag to indicate this is from a toggle action to avoid double counting
     displayCurrentQuestion(true);
   }
