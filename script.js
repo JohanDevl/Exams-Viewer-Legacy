@@ -5109,7 +5109,7 @@ function exportToTXT(questions, options = {}) {
       content += "Discussion:\n";
       question.comments.forEach((comment, commentIndex) => {
         if (commentIndex < 5) { // Limit to first 5 comments
-          let commentText = comment.comment || "";
+          let commentText = comment.content || comment.comment || "";
           commentText = commentText.replace(/<[^>]*>/g, '');
           commentText = commentText.replace(/\s+/g, ' ').trim();
           content += `- ${commentText}\n`;
@@ -5215,7 +5215,7 @@ function exportToCSV(questions, options = {}) {
       row.push(`"${comments.length}"`);
       
       if (comments.length > 0) {
-        let topComment = comments[0].comment || "";
+        let topComment = comments[0].content || comments[0].comment || "";
         topComment = topComment.replace(/<[^>]*>/g, '');
         topComment = topComment.replace(/"/g, '""');
         topComment = topComment.replace(/\s+/g, ' ').trim();
@@ -5317,7 +5317,7 @@ function exportToEnhancedJSON(questions, options = {}) {
       exportQuestion.discussion = {
         totalComments: question.comments.length,
         comments: question.comments.map(comment => ({
-          comment: comment.comment,
+          comment: comment.content || comment.comment || "",
           upvotes: comment.upvotes || 0,
           downvotes: comment.downvotes || 0
         }))
@@ -5517,12 +5517,12 @@ function updateExportPreview() {
   
   // Get content options
   const options = {
-    includeQuestions: document.getElementById('includeQuestions').checked,
-    includeAnswers: document.getElementById('includeAnswers').checked,
-    includeDiscussions: document.getElementById('includeDiscussions').checked,
-    includeImages: document.getElementById('includeImages').checked,
-    includeUserNotes: document.getElementById('includeUserNotes').checked,
-    includeMetadata: document.getElementById('includeMetadata').checked
+    includeQuestions: document.getElementById('includeQuestions')?.checked || true,
+    includeAnswers: document.getElementById('includeAnswers')?.checked || true,
+    includeDiscussions: document.getElementById('includeDiscussions')?.checked || true,
+    includeImages: document.getElementById('includeImages')?.checked || true,
+    includeUserNotes: document.getElementById('includeUserNotes')?.checked || true,
+    includeMetadata: document.getElementById('includeMetadata')?.checked || true
   };
   
   // Update preview text
@@ -5554,6 +5554,11 @@ function updateExportPreview() {
 }
 
 function setupExportModalEventListeners() {
+  // Remove any existing listeners to prevent duplicates
+  const modal = document.getElementById('exportOptionsModal');
+  const newModal = modal.cloneNode(true);
+  modal.parentNode.replaceChild(newModal, modal);
+  
   // Format selection
   document.querySelectorAll('input[name="exportFormat"]').forEach(radio => {
     radio.addEventListener('change', updateExportPreview);
@@ -5572,13 +5577,6 @@ function setupExportModalEventListeners() {
     });
   });
   
-  // Category selection
-  document.addEventListener('change', (e) => {
-    if (e.target.name === 'exportCategory') {
-      updateExportPreview();
-    }
-  });
-  
   // Content options
   document.querySelectorAll('#exportOptionsModal input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', updateExportPreview);
@@ -5588,6 +5586,13 @@ function setupExportModalEventListeners() {
   document.getElementById('closeExportModal').addEventListener('click', hideExportModal);
   document.getElementById('cancelExportBtn').addEventListener('click', hideExportModal);
   document.getElementById('startExportBtn').addEventListener('click', performExport);
+  
+  // Category selection (delegated event listener)
+  document.getElementById('exportCategoryList').addEventListener('change', (e) => {
+    if (e.target.name === 'exportCategory') {
+      updateExportPreview();
+    }
+  });
 }
 
 function performExport() {
@@ -5624,13 +5629,20 @@ function performExport() {
   
   // Get content options
   const options = {
-    includeQuestions: document.getElementById('includeQuestions').checked,
-    includeAnswers: document.getElementById('includeAnswers').checked,
-    includeDiscussions: document.getElementById('includeDiscussions').checked,
-    includeImages: document.getElementById('includeImages').checked,
-    includeUserNotes: document.getElementById('includeUserNotes').checked,
-    includeMetadata: document.getElementById('includeMetadata').checked
+    includeQuestions: document.getElementById('includeQuestions')?.checked || true,
+    includeAnswers: document.getElementById('includeAnswers')?.checked || true,
+    includeDiscussions: document.getElementById('includeDiscussions')?.checked || true,
+    includeImages: document.getElementById('includeImages')?.checked || true,
+    includeUserNotes: document.getElementById('includeUserNotes')?.checked || true,
+    includeMetadata: document.getElementById('includeMetadata')?.checked || true
   };
+  
+  // Debug: Log options to console
+  console.log('Export options:', options);
+  console.log('Questions to export:', questionsToExport.length);
+  if (questionsToExport.length > 0) {
+    console.log('First question comments:', questionsToExport[0].comments);
+  }
   
   // Perform export based on format
   try {
@@ -5661,15 +5673,206 @@ function performExport() {
 }
 
 function exportToPDFWithOptions(questions, options) {
-  // Temporarily override current questions for PDF export
-  const originalQuestions = currentQuestions;
-  currentQuestions = questions;
-  
-  try {
-    exportToPDF(); // Use existing PDF export function
-  } finally {
-    currentQuestions = originalQuestions;
+  if (!questions || questions.length === 0) {
+    showError("No questions loaded to export");
+    return;
   }
+
+  const {
+    includeQuestions = true,
+    includeAnswers = true,
+    includeDiscussions = true,
+    includeImages = true,
+    includeUserNotes = true,
+    includeMetadata = true
+  } = options;
+
+  // Create a printable version
+  const printWindow = window.open("", "_blank");
+  const printDocument = printWindow.document;
+
+  printDocument.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${currentExam.exam_name} - Questions Export</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+                .question { margin-bottom: 30px; page-break-inside: avoid; }
+                .question-header { font-weight: bold; font-size: 18px; margin-bottom: 10px; }
+                .question-text { margin-bottom: 15px; }
+                .question-text img { max-width: 100%; height: auto; margin: 10px 0; border: 1px solid #ddd; }
+                .answers { margin-left: 20px; }
+                .answer { margin-bottom: 5px; }
+                .answer img { max-width: 100%; height: auto; margin: 5px 0; }
+                .correct-answer { background-color: #d4edda; padding: 2px 5px; border-radius: 3px; }
+                .discussion { margin-top: 15px; padding: 10px; background-color: #f8f9fa; border-radius: 5px; }
+                .comment { margin-bottom: 10px; padding: 8px; background-color: white; border-radius: 3px; }
+                .comment-header { font-weight: bold; font-size: 12px; color: #666; }
+                .comment a { color: #007bff; text-decoration: none; word-break: break-all; }
+                .comment a:hover { text-decoration: underline; }
+                .user-note { margin-top: 10px; padding: 8px; background-color: #fff3cd; border-radius: 3px; border-left: 4px solid #ffc107; }
+                .user-note-header { font-weight: bold; font-size: 12px; color: #856404; }
+                @media print {
+                    body { margin: 0; }
+                    .question { page-break-inside: avoid; }
+                }
+            </style>
+        </head>
+        <body>
+    `);
+
+  // Add metadata header
+  if (includeMetadata) {
+    printDocument.write(`
+      <h1>Exam Questions - ${currentExam.exam_name}</h1>
+      <p>Total Questions: ${questions.length}</p>
+      <p>Generated on: ${new Date().toLocaleDateString()}</p>
+      <p>Export Options: ${Object.entries(options).filter(([k, v]) => v).map(([k]) => k.replace('include', '')).join(', ')}</p>
+      <hr>
+    `);
+  }
+
+  questions.forEach((question, index) => {
+    const questionNumber = question.question_number || index + 1;
+
+    printDocument.write(`<div class="question">`);
+    
+    // Question header
+    printDocument.write(`<div class="question-header">Question ${questionNumber}</div>`);
+    
+    // Question text
+    if (includeQuestions) {
+      let questionText = question.question || "";
+      
+      // Process embedded images first
+      if (includeImages && question.images && Object.keys(question.images).length > 0) {
+        questionText = processEmbeddedImages(questionText, question.images);
+      }
+      
+      // Fix any remaining image paths for PDF export
+      if (includeImages) {
+        questionText = questionText.replace(
+          /src="\/assets\/media\/exam-media\//g,
+          'src="https://www.examtopics.com/assets/media/exam-media/'
+        );
+      } else {
+        // Remove images if not included
+        questionText = questionText.replace(/<img[^>]*>/g, '[Image not included]');
+      }
+
+      printDocument.write(`<div class="question-text">${questionText}</div>`);
+    }
+    
+    // Answers
+    if (includeAnswers && question.answers) {
+      const answers = question.answers || [];
+      const mostVoted = question.most_voted || "";
+      const correctAnswers = new Set(mostVoted.split(""));
+
+      printDocument.write(`<div class="answers">`);
+      
+      answers.forEach((answer) => {
+        const answerLetter = answer.charAt(0);
+        let answerText = answer.substring(3);
+
+        // Process embedded images in answers
+        if (includeImages && question.images && Object.keys(question.images).length > 0) {
+          answerText = processEmbeddedImages(answerText, question.images);
+        }
+
+        // Fix image paths in answers for PDF export
+        if (includeImages) {
+          answerText = answerText.replace(
+            /src="\/assets\/media\/exam-media\//g,
+            'src="https://www.examtopics.com/assets/media/exam-media/'
+          );
+        } else {
+          // Remove images if not included
+          answerText = answerText.replace(/<img[^>]*>/g, '[Image not included]');
+        }
+
+        const isCorrect = correctAnswers.has(answerLetter);
+        const fullAnswer = answerLetter + ". " + answerText;
+
+        printDocument.write(`
+          <div class="answer ${isCorrect ? "correct-answer" : ""}">
+              ${fullAnswer} ${isCorrect ? "✓" : ""}
+          </div>
+        `);
+      });
+      
+      printDocument.write(`</div>`);
+    }
+
+    // User notes
+    if (includeUserNotes && currentExam && favoritesData.favorites[currentExam.exam_code]) {
+      const questionData = favoritesData.favorites[currentExam.exam_code][questionNumber];
+      if (questionData && (questionData.note || questionData.isFavorite)) {
+        printDocument.write(`<div class="user-note">`);
+        printDocument.write(`<div class="user-note-header">Personal Notes:</div>`);
+        
+        if (questionData.isFavorite) {
+          printDocument.write(`<div>⭐ Favorited</div>`);
+        }
+        
+        if (questionData.category) {
+          printDocument.write(`<div>Category: ${questionData.category}</div>`);
+        }
+        
+        if (questionData.note) {
+          printDocument.write(`<div>Note: ${questionData.note}</div>`);
+        }
+        
+        printDocument.write(`</div>`);
+      }
+    }
+
+    // Discussion
+    if (includeDiscussions && question.comments && question.comments.length > 0) {
+      const comments = question.comments || [];
+      
+      printDocument.write(`<div class="discussion">`);
+      printDocument.write(`<div class="comment-header">Discussion (${comments.length} comments):</div>`);
+      
+      comments.forEach((comment, commentIndex) => {
+        if (commentIndex < 10) { // Limit to first 10 comments for PDF
+          const commentText = comment.content || comment.comment || "";
+          const upvotes = comment.upvotes || 0;
+          const downvotes = comment.downvotes || 0;
+          
+          printDocument.write(`
+            <div class="comment">
+              <div class="comment-header">Comment ${commentIndex + 1} (↑${upvotes} ↓${downvotes})</div>
+              <div>${commentText}</div>
+            </div>
+          `);
+        }
+      });
+      
+      if (comments.length > 10) {
+        printDocument.write(`<div class="comment-header">... and ${comments.length - 10} more comments</div>`);
+      }
+      
+      printDocument.write(`</div>`);
+    }
+
+    printDocument.write(`</div>`);
+  });
+
+  printDocument.write(`
+        </body>
+        </html>
+    `);
+
+  printDocument.close();
+
+  // Add a small delay to ensure content is loaded before printing
+  setTimeout(() => {
+    printWindow.print();
+  }, 1000);
+
+  showSuccess('Enhanced PDF export opened. Choose "Save as PDF" to export.');
 }
 
 // Toggle legal information display
