@@ -5089,6 +5089,11 @@ function exportToTXT(questions, options = {}) {
         const isCorrect = correctAnswers.has(answerLetter);
         content += `${answerLetter}. ${answerText} ${isCorrect ? '✓' : ''}\n`;
       });
+      
+      // Most Voted Answer(s)
+      if (mostVoted) {
+        content += `\nMost Voted Answer(s): ${mostVoted}\n`;
+      }
       content += "\n";
     }
     
@@ -5112,7 +5117,8 @@ function exportToTXT(questions, options = {}) {
           let commentText = comment.content || comment.comment || "";
           commentText = commentText.replace(/<[^>]*>/g, '');
           commentText = commentText.replace(/\s+/g, ' ').trim();
-          content += `- ${commentText}\n`;
+          const selectedAnswer = comment.selected_answer || "N/A";
+          content += `- Selected: ${selectedAnswer}\n  ${commentText}\n`;
         }
       });
       content += "\n";
@@ -5219,7 +5225,8 @@ function exportToCSV(questions, options = {}) {
         topComment = topComment.replace(/<[^>]*>/g, '');
         topComment = topComment.replace(/"/g, '""');
         topComment = topComment.replace(/\s+/g, ' ').trim();
-        row.push(`"${topComment}"`);
+        const selectedAnswer = comments[0].selected_answer || "N/A";
+        row.push(`"Selected: ${selectedAnswer} - ${topComment}"`);
       } else {
         row.push('""');
       }
@@ -5317,9 +5324,9 @@ function exportToEnhancedJSON(questions, options = {}) {
       exportQuestion.discussion = {
         totalComments: question.comments.length,
         comments: question.comments.map(comment => ({
-          comment: comment.content || comment.comment || "",
-          upvotes: comment.upvotes || 0,
-          downvotes: comment.downvotes || 0
+          content: comment.content || comment.comment || "",
+          selectedAnswer: comment.selected_answer || null,
+          replies: comment.replies || []
         }))
       };
     }
@@ -5637,12 +5644,12 @@ function performExport() {
     includeMetadata: document.getElementById('includeMetadata')?.checked || true
   };
   
-  // Debug: Log options to console
-  console.log('Export options:', options);
-  console.log('Questions to export:', questionsToExport.length);
-  if (questionsToExport.length > 0) {
-    console.log('First question comments:', questionsToExport[0].comments);
-  }
+  // Debug: Log options to console (can be removed in production)
+  // console.log('Export options:', options);
+  // console.log('Questions to export:', questionsToExport.length);
+  // if (questionsToExport.length > 0) {
+  //   console.log('First question comments:', questionsToExport[0].comments);
+  // }
   
   // Perform export based on format
   try {
@@ -5803,6 +5810,15 @@ function exportToPDFWithOptions(questions, options) {
       });
       
       printDocument.write(`</div>`);
+      
+      // Most Voted Answer(s)
+      if (mostVoted) {
+        printDocument.write(`
+          <div style="margin-top: 10px; font-weight: bold; color: #28a745;">
+              Most Voted Answer(s): ${mostVoted}
+          </div>
+        `);
+      }
     }
 
     // User notes
@@ -5838,12 +5854,11 @@ function exportToPDFWithOptions(questions, options) {
       comments.forEach((comment, commentIndex) => {
         if (commentIndex < 10) { // Limit to first 10 comments for PDF
           const commentText = comment.content || comment.comment || "";
-          const upvotes = comment.upvotes || 0;
-          const downvotes = comment.downvotes || 0;
+          const selectedAnswer = comment.selected_answer || "N/A";
           
           printDocument.write(`
             <div class="comment">
-              <div class="comment-header">Comment ${commentIndex + 1} (↑${upvotes} ↓${downvotes})</div>
+              <div class="comment-header">Selected: ${selectedAnswer}</div>
               <div>${commentText}</div>
             </div>
           `);
