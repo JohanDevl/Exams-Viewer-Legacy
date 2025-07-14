@@ -255,6 +255,10 @@
                 <span>Answered</span>
               </div>
               <div class="legend-item">
+                <i class="fas fa-lightbulb preview-icon"></i>
+                <span>Preview</span>
+              </div>
+              <div class="legend-item">
                 <i class="far fa-circle unanswered-icon"></i>
                 <span>Unanswered</span>
               </div>
@@ -630,6 +634,37 @@
               <p class="setting-description">
                 Display helpful tooltips on buttons and interactive elements. 
                 Includes keyboard shortcuts and contextual information for better user guidance.
+              </p>
+            </div>
+
+            <div class="setting-group">
+              <h3><i class="fas fa-play"></i> Resume Position</h3>
+              <label class="toggle-label">
+                <input type="checkbox" id="enableResumePosition" />
+                <span class="toggle-slider"></span>
+                Enable resume position across sessions
+              </label>
+              <p class="setting-description">
+                Automatically save your current position in each exam and show a resume dialog when returning to continue where you left off.
+              </p>
+              <label class="toggle-label" style="margin-top: 1rem;">
+                <input type="checkbox" id="autoSavePosition" />
+                <span class="toggle-slider"></span>
+                Auto-save position on question navigation
+              </label>
+              <p class="setting-description">
+                Automatically save your position as you navigate through questions. When disabled, position is only saved when you leave the exam.
+              </p>
+              <div class="favorites-actions" style="margin-top: 1rem;">
+                <button
+                  id="resetResumePositionsBtn"
+                  class="settings-action-btn reset-btn"
+                >
+                  <i class="fas fa-trash-alt"></i> Clear All Resume Positions
+                </button>
+              </div>
+              <p class="setting-description">
+                Clear all saved resume positions for all exams. This will remove all position bookmarks.
               </p>
             </div>
 

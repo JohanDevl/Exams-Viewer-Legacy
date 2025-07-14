@@ -23,6 +23,8 @@ let settings = {
   enableLazyLoading: false, // Lazy loading disabled by default
   showMainProgressBar: true, // Main progress bar enabled by default
   showTooltips: false, // Tooltips disabled by default
+  enableResumePosition: false, // Resume position disabled by default
+  autoSavePosition: false, // Auto-save position disabled by default
 };
 
 // Available exams mapping (will be populated dynamically)
@@ -64,6 +66,11 @@ let statistics = {
     totalTime: 0,
     examStats: {}, // Per-exam statistics
   },
+};
+
+// Resume position system
+let resumePositions = {
+  // examCode: { questionIndex: number, timestamp: number, questionNumber: number, totalQuestions: number, lastSessionId: string }
 };
 
 // Session data structure
@@ -497,7 +504,8 @@ function clearCorruptedData() {
     const items = [
       { key: 'examViewerStatistics', name: 'Statistics' },
       { key: 'examViewerSettings', name: 'Settings' },
-      { key: 'examViewerFavorites', name: 'Favorites' }
+      { key: 'examViewerFavorites', name: 'Favorites' },
+      { key: 'examViewerResumePositions', name: 'Resume Positions' }
     ];
     
     items.forEach(item => {
@@ -520,6 +528,21 @@ function clearCorruptedData() {
           if (item.key === 'examViewerSettings') {
             if (parsed && typeof parsed !== 'object') {
               throw new Error('Invalid settings structure');
+            }
+          }
+          
+          // Additional validation for resume positions
+          if (item.key === 'examViewerResumePositions') {
+            if (parsed && typeof parsed === 'object') {
+              // Check if all values have required structure
+              for (const [examCode, position] of Object.entries(parsed)) {
+                if (!position || typeof position !== 'object' ||
+                    typeof position.questionIndex !== 'number' ||
+                    typeof position.questionNumber !== 'number' ||
+                    typeof position.timestamp !== 'number') {
+                  throw new Error('Invalid resume position structure');
+                }
+              }
             }
           }
           
@@ -2805,6 +2828,10 @@ function loadSettings() {
       settings.showMainProgressBar;
     document.getElementById("showTooltips").checked =
       settings.showTooltips;
+    document.getElementById("enableResumePosition").checked =
+      settings.enableResumePosition;
+    document.getElementById("autoSavePosition").checked =
+      settings.autoSavePosition;
     isHighlightEnabled = settings.highlightDefault;
     applyTheme(settings.darkMode);
     
@@ -2852,8 +2879,69 @@ function saveSettings() {
   settings.showTooltips = document.getElementById(
     "showTooltips"
   ).checked;
+  settings.enableResumePosition = document.getElementById(
+    "enableResumePosition"
+  ).checked;
+  settings.autoSavePosition = document.getElementById(
+    "autoSavePosition"
+  ).checked;
   localStorage.setItem("examViewerSettings", JSON.stringify(settings));
+  
+  // Handle highlight default setting change
+  const wasHighlightEnabled = isHighlightEnabled;
   isHighlightEnabled = settings.highlightDefault;
+  
+  // If highlight setting changed and we have a current question, update the display
+  if (wasHighlightEnabled !== isHighlightEnabled && currentQuestions.length > 0) {
+    // Reset temporary override since user changed the default setting
+    isHighlightTemporaryOverride = false;
+    
+    // If highlight is now enabled and this is the first action on the question, track it
+    if (isHighlightEnabled && statistics.currentSession) {
+      const question = currentQuestions[currentQuestionIndex];
+      const questionNumber = question.question_number;
+      
+      // Find existing question attempt or create new one
+      let questionAttempt = statistics.currentSession.questions.find(
+        (q) => q.questionNumber === questionNumber
+      );
+      
+      if (!questionAttempt) {
+        const mostVoted = question.most_voted || "";
+        const correctAnswers = Array.from(new Set(mostVoted.split("")));
+        questionAttempt = new QuestionAttempt(questionNumber, correctAnswers);
+        statistics.currentSession.questions.push(questionAttempt);
+      }
+      
+      // Track this as a highlight action if no previous attempts exist
+      if (!questionAttempt.attempts || questionAttempt.attempts.length === 0) {
+        questionAttempt.addHighlightButtonClick();
+        updateSessionStats();
+        saveStatistics();
+        
+        // Update progress indicators immediately
+        clearQuestionStatusCache();
+        updateProgressSidebar();
+        updateMainProgressBar();
+        
+        // Update search filter counts if advanced search is available
+        if (typeof updateFilterCounts === 'function') {
+          updateFilterCounts();
+        }
+      }
+    }
+    
+    // Update the highlight button appearance
+    updateHighlightButton();
+    
+    // Update instructions and validate button state
+    updateInstructions();
+    
+    // Re-display the current question to apply highlight changes properly
+    // This ensures that restorePreviousAnswers() works correctly with the new highlight state
+    displayCurrentQuestion();
+  }
+  
   applyTheme(settings.darkMode);
   
   // Update main progress bar visibility
@@ -3090,6 +3178,11 @@ function setupEventListeners() {
   document
     .getElementById("resetStatisticsBtn")
     .addEventListener("click", resetAllStatistics);
+
+  // Resume positions management
+  document
+    .getElementById("resetResumePositionsBtn")
+    .addEventListener("click", resetAllResumePositions);
 
   // Changelog
   document
@@ -3494,9 +3587,14 @@ async function displayAvailableExams() {
       questionCount = "Click to load";
     }
 
+    // Check for resume position
+    const resumeIndicator = getResumeIndicatorText(code);
+    const resumeHTML = resumeIndicator ? `<div class="resume-indicator">${resumeIndicator}</div>` : '';
+    
     examCard.innerHTML = `
             <div class="exam-code">${code}</div>
             <div class="exam-count">${questionCount}</div>
+            ${resumeHTML}
         `;
 
     examCard.addEventListener("click", () => {
@@ -3599,6 +3697,9 @@ async function loadExam(examCode) {
     );
     devLog("Total questions loaded:", currentQuestions.length);
 
+    // Clear question status cache for fresh start
+    clearQuestionStatusCache();
+
     // Start exam session for statistics
     startExamSession(examCode, currentExam.exam_name);
 
@@ -3620,6 +3721,9 @@ async function loadExam(examCode) {
     if (settings.showAdvancedSearch) {
       initializeSearchInterface();
     }
+    
+    // Check for resume position after questions are loaded
+    await handleResumePosition(examCode);
     
     displayCurrentQuestion();
     
@@ -3908,6 +4012,17 @@ async function navigateToRandomQuestion() {
 
 // Go to home page
 function goToHome() {
+  // Save current position before leaving exam (if auto-save is disabled)
+  if (currentExam && currentQuestions.length > 0 && settings.enableResumePosition && !settings.autoSavePosition) {
+    const examCode = Object.keys(availableExams).find(code => 
+      availableExams[code] === currentExam?.exam_name
+    ) || currentExam?.exam_name;
+    
+    if (examCode && currentQuestionIndex < currentQuestions.length) {
+      saveResumePosition(examCode, currentQuestionIndex);
+    }
+  }
+
   // End current session if exists
   endCurrentSession();
 
@@ -4062,7 +4177,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
     trackQuestionVisit(question.question_number);
   }
 
-  // Reset state
+  // Reset state first
   selectedAnswers.clear();
   isValidated = false;
   questionStartTime = new Date(); // Start timing the question
@@ -4149,9 +4264,19 @@ function displayCurrentQuestion(fromToggleAction = false) {
   // Display answers
   displayAnswers(question);
 
-  // Reset controls
-  document.getElementById("validateBtn").style.display = "inline-flex";
-  document.getElementById("resetBtn").style.display = "none";
+  // Try to restore previous answers for this question (after DOM elements are created)
+  if (question.question_number) {
+    const restored = restorePreviousAnswers(question.question_number);
+    if (restored) {
+      devLog(`Restored previous answers for question ${question.question_number}`);
+    }
+  }
+
+  // Reset controls (will be updated by restorePreviousAnswers if needed)
+  if (!isValidated) {
+    document.getElementById("validateBtn").style.display = "inline-flex";
+    document.getElementById("resetBtn").style.display = "none";
+  }
 
   // Update question statistics
   updateQuestionStatistics();
@@ -4211,6 +4336,7 @@ function displayAnswers(question) {
 
     const answerElement = document.createElement("div");
     answerElement.className = "answer-option";
+    answerElement.dataset.answer = answerLetter; // Add data-answer attribute for restoration
     answerElement.innerHTML = `<span class="answer-letter">${answerLetter}.</span> ${answerText}`;
 
     answerElement.addEventListener("click", () => {
@@ -4633,6 +4759,17 @@ function toggleHighlight() {
     questionAttempt.addHighlightButtonClick();
     updateSessionStats();
     saveStatistics();
+    
+    // Clear question status cache and update progress indicators immediately
+    clearQuestionStatusCache();
+    updateProgressSidebar();
+    updateMainProgressBar();
+    
+    // Update search filter counts if advanced search is available
+    if (typeof updateFilterCounts === 'function') {
+      updateFilterCounts();
+    }
+    
     devLog("Highlight activated on question:", questionNumber);
   }
 
@@ -4658,9 +4795,9 @@ function updateHighlightButton() {
   } else {
     highlightBtn.classList.remove("active");
     highlightBtn.innerHTML =
-      '<i class="fas fa-lightbulb"></i> Enable Highlight';
-    highlightBtn.style.backgroundColor = "var(--warning-color)";
-    highlightBtn.style.color = "#212529";
+      '<i class="fas fa-lightbulb"></i> Toggle Highlight';
+    highlightBtn.style.backgroundColor = "";
+    highlightBtn.style.color = "";
   }
 }
 
@@ -5227,6 +5364,9 @@ function updateProgressSidebar() {
           case 'incorrect':
             statusIcon = '<i class="fas fa-times-circle"></i>';
             break;
+          case 'preview':
+            statusIcon = '<i class="fas fa-lightbulb"></i>';
+            break;
           case 'viewed':
             statusIcon = '<i class="fas fa-eye"></i>';
             break;
@@ -5253,6 +5393,10 @@ function updateProgressSidebar() {
         case 'incorrect':
           primaryBadgeText = "Wrong";
           primaryBadgeIcon = '<i class="fas fa-times"></i>';
+          break;
+        case 'preview':
+          primaryBadgeText = "Preview";
+          primaryBadgeIcon = '<i class="fas fa-lightbulb"></i>';
           break;
         case 'viewed':
           primaryBadgeText = "Viewed";
@@ -5418,6 +5562,547 @@ function getFavoritesCount() {
   });
   
   return count;
+}
+
+// ========================================
+// Resume Position Management Functions
+// ========================================
+
+// Load resume positions from localStorage
+function loadResumePositions() {
+  try {
+    const savedPositions = localStorage.getItem("examViewerResumePositions");
+    if (savedPositions) {
+      const parsed = JSON.parse(savedPositions);
+      
+      // Validate the structure
+      if (parsed && typeof parsed === 'object') {
+        resumePositions = parsed;
+        devLog("Resume positions loaded from localStorage:", resumePositions);
+      } else {
+        devError("Invalid resume positions data structure, resetting...");
+        resumePositions = {};
+        localStorage.removeItem("examViewerResumePositions");
+      }
+    }
+  } catch (error) {
+    devError("Error loading resume positions:", error);
+    resumePositions = {};
+    // Clear corrupted data
+    try {
+      localStorage.removeItem("examViewerResumePositions");
+    } catch (clearError) {
+      devError("Failed to clear corrupted resume positions:", clearError);
+    }
+  }
+}
+
+// Save resume positions to localStorage
+function saveResumePositions() {
+  try {
+    const dataToSave = JSON.stringify(resumePositions);
+    
+    // Check if data would exceed localStorage limits (roughly 5MB, using 4.5MB threshold)
+    if (dataToSave.length > 4500000) {
+      devError("Resume positions data too large, cleaning up...");
+      
+      // Keep only the 10 most recent positions
+      const sortedPositions = Object.entries(resumePositions)
+        .sort(([,a], [,b]) => (b.timestamp || 0) - (a.timestamp || 0))
+        .slice(0, 10);
+      
+      resumePositions = Object.fromEntries(sortedPositions);
+      localStorage.setItem("examViewerResumePositions", JSON.stringify(resumePositions));
+      showError("Resume positions storage limit reached. Kept only the 10 most recent positions.");
+    } else {
+      localStorage.setItem("examViewerResumePositions", dataToSave);
+      devLog("Resume positions saved to localStorage");
+    }
+  } catch (error) {
+    devError("Error saving resume positions:", error);
+    
+    // If quota exceeded, try to save with reduced data
+    if (error.name === 'QuotaExceededError') {
+      try {
+        // Keep only the 5 most recent positions
+        const sortedPositions = Object.entries(resumePositions)
+          .sort(([,a], [,b]) => (b.timestamp || 0) - (a.timestamp || 0))
+          .slice(0, 5);
+        
+        resumePositions = Object.fromEntries(sortedPositions);
+        localStorage.setItem("examViewerResumePositions", JSON.stringify(resumePositions));
+        showError("Storage quota exceeded. Kept only the 5 most recent resume positions.");
+      } catch (secondError) {
+        devError("Failed to save even after cleanup:", secondError);
+        showError("Unable to save resume positions due to storage constraints.");
+      }
+    }
+  }
+}
+
+// Save current position for an exam
+// Works with both chunked and standard exam formats
+function saveResumePosition(examCode, questionIndex) {
+  if (!settings.enableResumePosition || !settings.autoSavePosition) return;
+  
+  if (!currentQuestions.length || questionIndex < 0 || questionIndex >= currentQuestions.length) {
+    return;
+  }
+  
+  const question = currentQuestions[questionIndex];
+  if (!question || !question.question_number) {
+    devError(`Invalid question at index ${questionIndex} for ${examCode}`);
+    return;
+  }
+  
+  const questionNumber = question.question_number;
+  
+  resumePositions[examCode] = {
+    questionIndex: questionIndex,
+    questionNumber: questionNumber,
+    totalQuestions: currentQuestions.length,
+    timestamp: Date.now(),
+    lastSessionId: statistics.currentSession ? statistics.currentSession.id : null,
+    isChunked: currentExam?.isChunked || false // Track if exam uses chunking
+  };
+  
+  saveResumePositions();
+  devLog(`Saved resume position for ${examCode}: Question ${questionNumber} (Index: ${questionIndex}) [${currentExam?.isChunked ? 'Chunked' : 'Standard'}]`);
+}
+
+// Get saved resume position for an exam
+function getResumePosition(examCode) {
+  return resumePositions[examCode] || null;
+}
+
+// Clear resume position for an exam
+function clearResumePosition(examCode) {
+  if (resumePositions[examCode]) {
+    delete resumePositions[examCode];
+    saveResumePositions();
+    devLog(`Cleared resume position for ${examCode}`);
+  }
+}
+
+// Check if resume position is valid for current exam
+function isResumePositionValid(examCode, resumePosition) {
+  if (!resumePosition || !currentQuestions.length) return false;
+  
+  // Check if question index is within bounds
+  if (resumePosition.questionIndex < 0 || resumePosition.questionIndex >= currentQuestions.length) {
+    return false;
+  }
+  
+  // Check if question number matches (in case exam was modified)
+  const currentQuestion = currentQuestions[resumePosition.questionIndex];
+  if (currentQuestion.question_number !== resumePosition.questionNumber) {
+    return false;
+  }
+  
+  // Check if total questions count matches (detect major exam changes)
+  if (resumePosition.totalQuestions !== currentQuestions.length) {
+    // Allow some tolerance for small changes
+    const difference = Math.abs(resumePosition.totalQuestions - currentQuestions.length);
+    if (difference > 10) {
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+// Clean up invalid or old resume positions
+function cleanupResumePositions() {
+  const now = Date.now();
+  const maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days
+  
+  let cleaned = false;
+  for (const examCode in resumePositions) {
+    const position = resumePositions[examCode];
+    
+    // Check for corrupted or invalid position data
+    if (!position || typeof position !== 'object') {
+      delete resumePositions[examCode];
+      cleaned = true;
+      devLog(`Cleaned corrupted resume position for ${examCode}`);
+      continue;
+    }
+    
+    // Check for missing required fields
+    if (typeof position.questionIndex !== 'number' || 
+        typeof position.questionNumber !== 'number' || 
+        typeof position.timestamp !== 'number') {
+      delete resumePositions[examCode];
+      cleaned = true;
+      devLog(`Cleaned invalid resume position for ${examCode} (missing fields)`);
+      continue;
+    }
+    
+    // Check for age
+    if (now - position.timestamp > maxAge) {
+      delete resumePositions[examCode];
+      cleaned = true;
+      devLog(`Cleaned old resume position for ${examCode}`);
+      continue;
+    }
+    
+    // Check for reasonable bounds
+    if (position.questionIndex < 0 || position.questionNumber < 1 || 
+        position.totalQuestions < 1 || position.questionIndex >= position.totalQuestions) {
+      delete resumePositions[examCode];
+      cleaned = true;
+      devLog(`Cleaned out-of-bounds resume position for ${examCode}`);
+      continue;
+    }
+  }
+  
+  if (cleaned) {
+    saveResumePositions();
+  }
+}
+
+// Reset all resume positions
+function resetAllResumePositions() {
+  if (confirm("Are you sure you want to clear all saved resume positions? This action cannot be undone.")) {
+    resumePositions = {};
+    localStorage.removeItem("examViewerResumePositions");
+    showSuccess("All resume positions have been cleared.");
+    devLog("All resume positions reset");
+  }
+}
+
+// Get resume indicator text for exam card
+function getResumeIndicatorText(examCode) {
+  const position = getResumePosition(examCode);
+  if (!position) return null;
+  
+  const timeAgo = new Date(position.timestamp).toLocaleDateString();
+  return `Resume at Q${position.questionNumber} (${timeAgo})`;
+}
+
+// Check if exam appears to be completed
+function checkIfExamCompleted(examCode, resumePosition) {
+  // If position is at the last question or beyond, consider it completed
+  if (resumePosition.questionIndex >= resumePosition.totalQuestions - 1) {
+    return true;
+  }
+  
+  // Check if we have answered most questions in any session for this exam
+  const totalQuestions = currentQuestions.length || resumePosition.totalQuestions;
+  if (totalQuestions === 0) return false;
+  
+  // Count answered questions across all sessions for this exam
+  let answeredCount = 0;
+  const examName = currentExam?.exam_name || examCode;
+  
+  // Check all sessions (current and previous) for this exam
+  if (statistics.sessions) {
+    statistics.sessions.forEach(session => {
+      if ((session.ec === examCode || session.examCode === examCode || 
+           session.en === examName || session.examName === examName) && 
+          session.questions) {
+        session.questions.forEach(q => {
+          // Only count questions that were actually answered (have attempts)
+          if (q.att && q.att.length > 0) {
+            answeredCount++;
+          }
+        });
+      }
+    });
+  }
+  
+  // Also check current session
+  if (statistics.currentSession && 
+      (statistics.currentSession.ec === examCode || statistics.currentSession.examCode === examCode ||
+       statistics.currentSession.en === examName || statistics.currentSession.examName === examName) &&
+      statistics.currentSession.questions) {
+    statistics.currentSession.questions.forEach(q => {
+      if (q.att && q.att.length > 0) {
+        answeredCount++;
+      }
+    });
+  }
+  
+  // Consider exam completed if 95% or more questions are answered
+  const completionPercentage = (answeredCount / totalQuestions) * 100;
+  devLog(`Exam completion check for ${examCode}: ${answeredCount}/${totalQuestions} (${completionPercentage.toFixed(1)}%)`);
+  
+  return completionPercentage >= 95;
+}
+
+// Get previous answers for a question from current or previous sessions
+function getPreviousAnswers(questionNumber) {
+  if (!questionNumber) return null;
+  
+  devLog("🔍 getPreviousAnswers called for question:", questionNumber);
+  
+  // Check current session first - prioritize current session for fresh starts
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    devLog("📊 Current session has", statistics.currentSession.questions.length, "questions");
+    
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    devLog("🔍 Found in current session:", found);
+    
+    if (found && found.att && found.att.length > 0) {
+      const lastAttempt = found.att[found.att.length - 1];
+      devLog("📝 Last attempt:", lastAttempt);
+      return {
+        selectedAnswers: lastAttempt.a || [],
+        isCorrect: lastAttempt.c,
+        wasValidated: true
+      };
+    }
+  }
+  
+  // If current session is very new (< 30 seconds old), don't show previous session answers
+  // This ensures "Start Fresh" truly starts fresh
+  // BUT only if this is not a resume session (resume sessions should always show previous answers)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) { // Less than 30 seconds old
+      devLog("🚫 Session is fresh (<30s) and not a resume session, not showing previous answers");
+      return null; // Don't show previous answers for fresh sessions
+    }
+  }
+  
+  // For older sessions, fall back to previous answers
+  const recentAnswer = getMostRecentAnswer(questionNumber);
+  
+  if (!recentAnswer) return null;
+  
+  return {
+    selectedAnswers: recentAnswer.selectedAnswers || [],
+    isCorrect: recentAnswer.isCorrect,
+    wasValidated: true
+  };
+}
+
+// Restore previous answers when resuming or navigating to a previously answered question
+function restorePreviousAnswers(questionNumber) {
+  devLog("🔄 restorePreviousAnswers called for question:", questionNumber);
+  
+  const previousAnswers = getPreviousAnswers(questionNumber);
+  if (!previousAnswers) {
+    devLog("❌ No previous answers found for question:", questionNumber);
+    return false; // No previous answers found
+  }
+  
+  devLog("✅ Found previous answers:", previousAnswers);
+  
+  // Don't restore the visual state - let the question appear fresh
+  // But keep the statistical data for progress tracking
+  selectedAnswers.clear();
+  isValidated = false;
+  
+  devLog("🔄 Question has previous answers but keeping fresh UI state");
+  devLog("🔄 Progress indicators will show it as answered based on statistics");
+  
+  // Return true to indicate that previous data exists (for progress tracking)
+  // but the UI remains fresh for new interaction
+  devLog(`Question ${questionNumber} has previous answers but UI kept fresh for new interaction`);
+  
+  return true; // Successfully restored
+}
+
+// Apply validation visual styles to answer options
+function applyValidationVisuals(questionNumber) {
+  const question = currentQuestions[currentQuestionIndex];
+  if (!question || !question.answers) return;
+  
+  // Get correct answers from the question data
+  const correctAnswers = new Set(
+    question.answers
+      .filter(answer => answer.is_correct === "true" || answer.is_correct === true)
+      .map(answer => answer.letter)
+  );
+  
+  // Update answer elements with validation classes
+  const answerElements = document.querySelectorAll(".answer-option");
+  answerElements.forEach((element) => {
+    const letter = element
+      .querySelector(".answer-letter")
+      ?.textContent.charAt(0);
+    
+    if (!letter) return;
+    
+    const isSelected = selectedAnswers.has(letter);
+    const isCorrect = correctAnswers.has(letter);
+    
+    // Remove any existing validation classes
+    element.classList.remove("correct", "incorrect", "correct-not-selected", "disabled");
+    
+    // Apply validation classes
+    element.classList.add("disabled");
+    
+    if (isSelected && isCorrect) {
+      element.classList.add("correct");
+    } else if (isSelected && !isCorrect) {
+      element.classList.add("incorrect");
+    } else if (!isSelected && isCorrect) {
+      element.classList.add("correct-not-selected");
+    }
+  });
+}
+
+// Update the answer selection UI to reflect current selectedAnswers state
+function updateAnswerSelectionUI() {
+  const answerElements = document.querySelectorAll('.answer-option');
+  
+  answerElements.forEach(element => {
+    const letter = element.dataset.answer;
+    if (letter) {
+      if (selectedAnswers.has(letter)) {
+        element.classList.add('selected');
+      } else {
+        element.classList.remove('selected');
+      }
+    }
+  });
+  
+  // Update validate button state
+  updateValidateButtonState();
+}
+
+// Update validate button state based on current selection and validation status
+function updateValidateButtonState() {
+  const validateBtn = document.getElementById("validateBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  
+  if (!validateBtn || !resetBtn) return;
+  
+  if (isValidated) {
+    // If already validated, show reset button
+    validateBtn.style.display = "none";
+    resetBtn.style.display = "inline-flex";
+  } else {
+    // If not validated, show validate button
+    validateBtn.style.display = "inline-flex";
+    resetBtn.style.display = "none";
+  }
+}
+
+// Handle resume position logic during exam loading
+// Compatible with both chunked and standard exam formats
+async function handleResumePosition(examCode) {
+  if (!settings.enableResumePosition) return;
+  
+  try {
+    const resumePosition = getResumePosition(examCode);
+    if (!resumePosition) return;
+    
+    // Check if exam is completed (at last question or 100% answered)
+    const isExamCompleted = checkIfExamCompleted(examCode, resumePosition);
+    if (isExamCompleted) {
+      devLog(`Exam ${examCode} appears to be completed, clearing resume position`);
+      clearResumePosition(examCode);
+      return;
+    }
+    
+    // Validate resume position
+    if (!isResumePositionValid(examCode, resumePosition)) {
+      devLog(`Invalid resume position for ${examCode}, clearing...`);
+      clearResumePosition(examCode);
+      return;
+    }
+    
+    // Show resume dialog
+    const shouldResume = await showResumeDialog(examCode, resumePosition);
+    if (shouldResume) {
+      // Mark this session as a resume session to enable previous answers loading
+      if (statistics.currentSession) {
+        statistics.currentSession.isResumeSession = true;
+        devLog("✅ Marked session as resume session");
+      }
+      
+      // Double-check bounds before setting
+      if (resumePosition.questionIndex >= 0 && resumePosition.questionIndex < currentQuestions.length) {
+        currentQuestionIndex = resumePosition.questionIndex;
+        
+        // For chunked exams, ensure the target question chunk is loaded
+        if (currentExam?.isChunked && currentQuestions[resumePosition.questionIndex]?.isPlaceholder) {
+          devLog(`Loading chunk for resumed position in chunked exam ${examCode}`);
+          await ensureQuestionLoaded(examCode, resumePosition.questionIndex);
+          // Update currentQuestions after chunk loading
+          currentQuestions = isSearchActive ? currentQuestions : [...allQuestions];
+        }
+        
+        devLog(`Resumed ${examCode} at question ${resumePosition.questionNumber} (Index: ${resumePosition.questionIndex}) [${currentExam?.isChunked ? 'Chunked' : 'Standard'}]`);
+      } else {
+        devError(`Resume position out of bounds for ${examCode}, starting fresh`);
+        currentQuestionIndex = 0;
+        clearResumePosition(examCode);
+      }
+    } else {
+      // User chose to start fresh - restart completely
+      currentQuestionIndex = 0;
+      clearResumePosition(examCode);
+      
+      // Start a fresh session to avoid showing previous answers
+      endCurrentSession();
+      startExamSession(examCode, currentExam.exam_name);
+      
+      // Clear question status cache to ensure fresh state
+      clearQuestionStatusCache();
+      
+      devLog(`Started fresh for ${examCode}, cleared resume position and started new session`);
+    }
+  } catch (error) {
+    devError(`Error handling resume position for ${examCode}:`, error);
+    // Fail safe: start from beginning
+    currentQuestionIndex = 0;
+    clearResumePosition(examCode);
+  }
+}
+
+// Show resume dialog to user
+function showResumeDialog(examCode, resumePosition) {
+  return new Promise((resolve) => {
+    const timeAgo = new Date(resumePosition.timestamp).toLocaleDateString();
+    const progress = Math.round((resumePosition.questionIndex / resumePosition.totalQuestions) * 100);
+    
+    const message = `You previously stopped at Question ${resumePosition.questionNumber} (${progress}% complete) on ${timeAgo}.\n\nWould you like to continue from where you left off?`;
+    
+    // Create a custom dialog with proper buttons
+    const dialog = document.createElement('div');
+    dialog.className = 'resume-dialog-overlay';
+    dialog.innerHTML = `
+      <div class="resume-dialog">
+        <h3>Resume Study Session</h3>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+        <div class="resume-dialog-buttons">
+          <button class="btn btn-primary" id="resumeBtn">Continue (Q${resumePosition.questionNumber})</button>
+          <button class="btn btn-secondary" id="startFreshBtn">Start Fresh</button>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(dialog);
+    
+    // Handle button clicks
+    document.getElementById('resumeBtn').addEventListener('click', () => {
+      document.body.removeChild(dialog);
+      resolve(true);
+    });
+    
+    document.getElementById('startFreshBtn').addEventListener('click', () => {
+      document.body.removeChild(dialog);
+      resolve(false);
+    });
+    
+    // Handle escape key
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        document.body.removeChild(dialog);
+        document.removeEventListener('keydown', handleEscape);
+        resolve(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+  });
 }
 
 // Track milestone states to avoid repeated triggers
@@ -5604,12 +6289,113 @@ function getAnsweredQuestionsCount() {
 function isQuestionAnswered(questionNumber) {
   if (!questionNumber) return false;
   
-  // Only check current session - each exam load should start fresh
+  // Check current session first
   if (statistics.currentSession && statistics.currentSession.questions) {
     const found = statistics.currentSession.questions.find(q => 
-      q.questionNumber.toString() === questionNumber.toString()
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
     );
-    if (found) return true;
+    
+    // Consider a question answered if it has attempts OR if first action was recorded (including preview)
+    if (found && ((found.att && found.att.length > 0) || found.far || found.firstActionRecorded)) {
+      return true;
+    }
+  }
+  
+  // If current session is very new (< 30 seconds old), don't show previous session progress
+  // This ensures "Start Fresh" truly starts fresh in UI
+  // BUT only if this is not a resume session (resume sessions should always show previous progress)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) { // Less than 30 seconds old
+      return false; // Don't show previous progress for fresh sessions
+    }
+  }
+  
+  // Also check previous sessions for this exam (for older sessions)
+  if (currentExam && statistics.sessions) {
+    const examCode = Object.keys(availableExams).find(code => 
+      availableExams[code] === currentExam.exam_name
+    ) || currentExam.exam_name;
+    
+    const examName = currentExam.exam_name;
+    
+    for (const session of statistics.sessions) {
+      // Check if this session is for the current exam
+      if ((session.ec === examCode || session.examCode === examCode || 
+           session.en === examName || session.examName === examName) && 
+          session.questions) {
+        
+        const found = session.questions.find(q => 
+          (q.qn && q.qn.toString() === questionNumber.toString()) ||
+          (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+        );
+        
+        // Consider a question answered if it has attempts OR if first action was recorded (including preview)
+        if (found && ((found.att && found.att.length > 0) || found.far || found.firstActionRecorded)) {
+          return true;
+        }
+      }
+    }
+  }
+  
+  return false;
+}
+
+// Check if a question was answered in preview mode (with highlight)
+function isQuestionAnsweredInPreview(questionNumber) {
+  if (!questionNumber) return false;
+  
+  // Check current session first
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    if (found) {
+      const firstActionType = found.fat || found.firstActionType;
+      if (firstActionType === "p" || firstActionType === "preview") {
+        return true;
+      }
+    }
+  }
+  
+  // If current session is very new, don't show previous session results
+  // BUT only if this is not a resume session (resume sessions should always show previous results)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) {
+      return false;
+    }
+  }
+  
+  // Check previous sessions
+  if (currentExam && statistics.sessions) {
+    const examCode = Object.keys(availableExams).find(code => 
+      availableExams[code] === currentExam.exam_name
+    ) || currentExam.exam_name;
+    
+    const examName = currentExam.exam_name;
+    
+    for (const session of statistics.sessions) {
+      if ((session.ec === examCode || session.examCode === examCode || 
+           session.en === examName || session.examName === examName) && 
+          session.questions) {
+        
+        const found = session.questions.find(q => 
+          (q.qn && q.qn.toString() === questionNumber.toString()) ||
+          (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+        );
+        
+        if (found) {
+          const firstActionType = found.fat || found.firstActionType;
+          if (firstActionType === "p" || firstActionType === "preview") {
+            return true;
+          }
+        }
+      }
+    }
   }
   
   return false;
@@ -5650,24 +6436,139 @@ function isQuestionVisited(questionNumber) {
 
 // Check if a question was answered correctly
 function isQuestionAnsweredCorrectly(questionNumber) {
-  if (!questionNumber || !statistics.currentSession?.questions) return false;
+  if (!questionNumber) return false;
   
-  const questionAttempt = statistics.currentSession.questions.find(q => 
-    q.questionNumber.toString() === questionNumber.toString()
-  );
+  // Check current session first
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    if (found && found.att && found.att.length > 0) {
+      const lastAttempt = found.att[found.att.length - 1];
+      return lastAttempt.c === true;
+    }
+  }
   
-  return questionAttempt && questionAttempt.isCorrect === true;
+  // If current session is very new, don't show previous session results
+  // BUT only if this is not a resume session (resume sessions should always show previous results)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) {
+      return false;
+    }
+  }
+  
+  // For older sessions, get the most recent answer from any session for this exam
+  const recentAnswer = getMostRecentAnswer(questionNumber);
+  return recentAnswer && recentAnswer.isCorrect === true;
 }
 
 // Check if a question was answered incorrectly
 function isQuestionAnsweredIncorrectly(questionNumber) {
-  if (!questionNumber || !statistics.currentSession?.questions) return false;
+  if (!questionNumber) return false;
   
-  const questionAttempt = statistics.currentSession.questions.find(q => 
-    q.questionNumber.toString() === questionNumber.toString()
-  );
+  // Check current session first
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    if (found && found.att && found.att.length > 0) {
+      const lastAttempt = found.att[found.att.length - 1];
+      return lastAttempt.c === false;
+    }
+  }
   
-  return questionAttempt && questionAttempt.isCorrect === false;
+  // If current session is very new, don't show previous session results
+  // BUT only if this is not a resume session (resume sessions should always show previous results)
+  if (statistics.currentSession && !statistics.currentSession.isResumeSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) {
+      return false;
+    }
+  }
+  
+  // For older sessions, get the most recent answer from any session for this exam
+  const recentAnswer = getMostRecentAnswer(questionNumber);
+  return recentAnswer && recentAnswer.isCorrect === false;
+}
+
+// Get the most recent answer for a question across all sessions for this exam
+function getMostRecentAnswer(questionNumber) {
+  if (!questionNumber || !currentExam) return null;
+  
+  devLog("🔍 getMostRecentAnswer called for question:", questionNumber);
+  
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  ) || currentExam.exam_name;
+  
+  const examName = currentExam.exam_name;
+  devLog("📚 Looking for answers in exam:", examName, "Code:", examCode);
+  
+  let mostRecentAttempt = null;
+  let mostRecentTimestamp = 0;
+  
+  // Check current session first
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    if (found && found.att && found.att.length > 0) {
+      const lastAttempt = found.att[found.att.length - 1];
+      mostRecentAttempt = {
+        isCorrect: lastAttempt.c,
+        selectedAnswers: lastAttempt.a || [],
+        timestamp: statistics.currentSession.st || Date.now()
+      };
+      mostRecentTimestamp = statistics.currentSession.st || Date.now();
+    }
+  }
+  
+  // Check previous sessions
+  if (statistics.sessions) {
+    devLog("📊 Checking", statistics.sessions.length, "previous sessions");
+    
+    for (const session of statistics.sessions) {
+      const sessionExamCode = session.ec || session.examCode;
+      const sessionExamName = session.en || session.examName;
+      const sessionMatches = (sessionExamCode === examCode || sessionExamName === examName);
+      
+      devLog("🔍 Session:", sessionExamCode, sessionExamName, "Matches:", sessionMatches, "Questions:", session.questions?.length || 0);
+      
+      if (sessionMatches && session.questions && 
+          (session.st || session.startTime || 0) > mostRecentTimestamp) {
+        
+        const found = session.questions.find(q => 
+          (q.qn && q.qn.toString() === questionNumber.toString()) ||
+          (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+        );
+        
+        devLog("🔍 Found question in session:", found);
+        
+        if (found && found.att && found.att.length > 0) {
+          const lastAttempt = found.att[found.att.length - 1];
+          devLog("✅ Found previous answer:", lastAttempt);
+          mostRecentAttempt = {
+            isCorrect: lastAttempt.c,
+            selectedAnswers: lastAttempt.a || [],
+            timestamp: session.st || session.startTime || 0
+          };
+          mostRecentTimestamp = session.st || session.startTime || 0;
+        }
+      }
+    }
+  } else {
+    devLog("❌ No previous sessions found");
+  }
+  
+  devLog("📝 Final result:", mostRecentAttempt);
+  return mostRecentAttempt;
 }
 
 // Check if a question has notes
@@ -5715,6 +6616,7 @@ function getQuestionStatus(questionNumber) {
     isViewed: isQuestionVisited(questionNumber) && !isQuestionAnswered(questionNumber),
     isAnsweredCorrectly: isQuestionAnsweredCorrectly(questionNumber),
     isAnsweredIncorrectly: isQuestionAnsweredIncorrectly(questionNumber),
+    isAnsweredInPreview: isQuestionAnsweredInPreview(questionNumber),
     isFavorite: isQuestionFavorite(questionNumber),
     hasNotes: hasQuestionNotes(questionNumber),
     isCategorized: isQuestionCategorized(questionNumber),
@@ -5726,6 +6628,8 @@ function getQuestionStatus(questionNumber) {
     status.primaryStatus = 'correct';
   } else if (status.isAnsweredIncorrectly) {
     status.primaryStatus = 'incorrect';
+  } else if (status.isAnsweredInPreview) {
+    status.primaryStatus = 'preview';
   } else if (status.isViewed) {
     status.primaryStatus = 'viewed';
   } else {
@@ -5990,6 +6894,25 @@ async function navigateToQuestionIndex(newIndex, addToHistory = true) {
     // Standard navigation for loaded questions
     displayCurrentQuestion();
     updateProgressSidebar();
+    
+    // Auto-save resume position (works with both chunked and standard formats)
+    if (currentExam && settings.enableResumePosition && settings.autoSavePosition) {
+      // Try to find the exam code from availableExams mapping first
+      let examCode = Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam?.exam_name
+      );
+      
+      // Fallback to exam_name if not found in mapping
+      if (!examCode) {
+        examCode = currentExam?.exam_name;
+      }
+      
+      if (examCode) {
+        saveResumePosition(examCode, newIndex);
+      } else {
+        devError("Could not determine exam code for resume position saving");
+      }
+    }
   }
 }
 
@@ -6016,6 +6939,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadSettings();
   loadStatistics();
   loadFavorites();
+  loadResumePositions();
+  
+  // Clean up old resume positions
+  cleanupResumePositions();
 
   // Apply theme
   applyTheme(settings.darkMode);

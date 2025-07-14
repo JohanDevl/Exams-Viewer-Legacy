@@ -92,6 +92,7 @@ data/
 - **Settings Management**: Persistent settings for UI preferences, sidebar state, and display options
 - **Advanced Search & Filters**: Comprehensive search system with text search, auto-completion, and status filters
 - **Informative Tooltips**: CSS-only tooltip system with keyboard shortcuts, disabled by default with settings toggle, mobile-optimized touch support
+- **Resume Study Position**: Intelligent position tracking across browser sessions with auto-save capability and resume dialogs
 - **Performance Optimizations**: Lazy loading for large datasets, intelligent caching with service worker, automatic image compression
 
 ### Backend Features
@@ -399,6 +400,100 @@ The enhanced mobile navigation system provides a complete touch-optimized experi
 - **Chunk Creation**: Automatically triggered after scraping operations for exams >= 100 questions
 - **Error Handling**: Graceful fallback to legacy format if chunk loading fails
 - **Performance Testing**: Monitor chunk loading times and user experience impact
+
+## Resume Study Position System
+
+### Architecture Overview
+The resume study position system provides seamless continuation of study sessions across browser restarts, device switches, and extended breaks. It intelligently tracks user progress and offers contextual resumption options.
+
+### Key Components
+
+#### Position Tracking System
+- **Automatic Position Saving**: Continuously tracks current question position during navigation
+- **Session Persistence**: Maintains position data across browser sessions using localStorage
+- **Cross-Device Sync**: Position data available on any device accessing the same browser profile
+- **Intelligent Storage**: Only saves position when meaningful progress has been made
+
+#### Resume Dialog System
+- **Smart Detection**: Automatically detects when returning to a previously studied exam
+- **User Choice Options**: Continue from saved position or start fresh with clear options
+- **Visual Progress Context**: Shows saved position information to help users decide
+- **Graceful Fallback**: Seamlessly handles cases where saved positions become invalid
+
+#### Auto-Save Integration
+- **Optional Auto-Save**: User-controlled automatic position saving on every question navigation
+- **Settings Integration**: Configurable through Settings > Study Management section
+- **Performance Optimized**: Efficient storage updates without UI impact
+- **Disabled by Default**: Conservative approach requiring explicit user opt-in
+
+### Critical Implementation Details
+
+#### Function Architecture
+- **`saveStudyPosition(examCode, questionIndex)`**: Core position saving functionality
+- **`getStudyPosition(examCode)`**: Retrieves saved position for specific exam
+- **`showResumeDialog(examCode, savedPosition)`**: Displays resume options to user
+- **`clearStudyPosition(examCode)`**: Removes saved position when starting fresh
+
+#### Data Structure
+```javascript
+// localStorage: study_positions
+{
+  "examCode": {
+    "questionIndex": 42,
+    "timestamp": 1626789012345,
+    "totalQuestions": 100,
+    "examTitle": "Sample Exam"
+  }
+}
+```
+
+#### Integration Points
+- **Exam Loading**: Checks for saved positions when loading exam data
+- **Navigation System**: Integrates with existing navigation functions
+- **Settings System**: Provides user control over auto-save behavior
+- **Statistics System**: Coordinates with progress tracking for consistent experience
+
+### User Experience Flow
+1. **Initial Study**: User studies exam questions and navigates through content
+2. **Automatic Tracking**: System tracks position and optionally auto-saves based on settings
+3. **Session End**: User closes browser or navigates away
+4. **Return Visit**: User returns to same exam later
+5. **Resume Dialog**: System presents Continue/Start Fresh options with context
+6. **Seamless Continuation**: User can resume exactly where they left off
+
+### Technical Implementation Details
+
+#### Position Validation
+- **Boundary Checking**: Ensures saved positions remain within valid question ranges
+- **Data Integrity**: Validates saved position data before presenting resume options
+- **Error Handling**: Gracefully handles corrupted or invalid position data
+- **Automatic Cleanup**: Removes outdated or invalid position entries
+
+#### Performance Considerations
+- **Efficient Storage**: Minimal localStorage usage with optimized data structure
+- **Lazy Loading**: Position data loaded only when needed
+- **Memory Management**: Proper cleanup of position data in memory
+- **Background Updates**: Non-blocking position saves during navigation
+
+### Settings Integration
+- **Resume Study Position**: Master toggle for entire feature (disabled by default)
+- **Auto-Save Position**: Optional automatic saving on navigation (disabled by default)
+- **Clear All Positions**: Utility to reset all saved positions
+- **Position Management**: View and manage saved positions per exam
+
+### Critical Business Rules
+1. **User Consent**: Feature disabled by default requiring explicit user activation
+2. **Data Privacy**: Position data stored locally, never transmitted externally
+3. **Graceful Degradation**: System works normally when resume feature is disabled
+4. **Position Accuracy**: Saved positions must remain accurate across session boundaries
+5. **Visual Feedback**: Clear indication of resumed vs fresh session state
+
+### Developer Guidelines
+- **Position Tracking**: Always call `saveStudyPosition()` during navigation when feature is enabled
+- **Resume Logic**: Check for saved positions before displaying exam content
+- **Settings Sync**: Ensure resume feature respects user preferences
+- **Error Handling**: Gracefully handle invalid or corrupted position data
+- **Performance**: Minimize localStorage operations and optimize for smooth navigation
 
 ## GitHub Actions Automation
 
