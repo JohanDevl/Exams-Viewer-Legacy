@@ -3976,7 +3976,7 @@ body {
 
 /* Base tooltip styles - only active when enabled */
 .tooltips-enabled [data-tooltip] {
-  position: relative;
+  position: relative !important;
   cursor: help;
 }
 
@@ -3995,13 +3995,14 @@ body {
   font-size: 0.875rem;
   line-height: 1.5;
   white-space: pre-wrap;
-  z-index: 9999;
+  z-index: 99999;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   max-width: 350px;
   min-width: 200px;
+  width: max-content;
   word-wrap: break-word;
 }
 
@@ -4041,7 +4042,7 @@ body {
 }
 
 .tooltips-enabled [data-tooltip-position="bottom"]::before {
-  top: 100%;
+  top: calc(100% + 5px);
   bottom: auto;
   left: 50%;
   transform: translateX(-50%);
@@ -4052,16 +4053,17 @@ body {
   font-size: 0.875rem;
   line-height: 1.5;
   white-space: pre-wrap;
-  z-index: 9999;
+  z-index: 99999;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   max-width: 350px;
   min-width: 200px;
+  width: max-content;
   word-wrap: break-word;
 }
 
 .tooltips-enabled [data-tooltip-position="bottom"]:hover::before,
 .tooltips-enabled [data-tooltip-position="bottom"]:focus::before {
-  transform: translateX(-50%) translateY(5px);
+  transform: translateX(-50%) translateY(10px);
 }
 
 .tooltips-enabled [data-tooltip-position="bottom"]::after {
@@ -4074,7 +4076,7 @@ body {
 
 .tooltips-enabled [data-tooltip-position="bottom"]:hover::after,
 .tooltips-enabled [data-tooltip-position="bottom"]:focus::after {
-  transform: translateX(-50%) translateY(4px);
+  transform: translateX(-50%) translateY(8px);
 }
 
 .tooltips-enabled [data-tooltip-position="left"]::before {
@@ -4090,10 +4092,11 @@ body {
   font-size: 0.875rem;
   line-height: 1.5;
   white-space: pre-wrap;
-  z-index: 9999;
+  z-index: 99999;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   max-width: 350px;
   min-width: 200px;
+  width: max-content;
   word-wrap: break-word;
 }
 
@@ -4130,10 +4133,11 @@ body {
   font-size: 0.875rem;
   line-height: 1.5;
   white-space: pre-wrap;
-  z-index: 9999;
+  z-index: 99999;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   max-width: 350px;
   min-width: 200px;
+  width: max-content;
   word-wrap: break-word;
 }
 
