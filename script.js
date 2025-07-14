@@ -5030,6 +5030,24 @@ function exportToPDF() {
   showSuccess('Print dialog opened. Choose "Save as PDF" to export.');
 }
 
+// Helper function to get exam code and generate filename
+function getExamCodeAndFilename(format, suffix = '') {
+  // Get the exam code using the same logic as the filtering functions
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  ) || 'exam';
+  
+  // Generate timestamp
+  const now = new Date();
+  const timestamp = now.toISOString().replace(/[:.]/g, '-').split('T')[0] + '_' + 
+    now.toTimeString().split(' ')[0].replace(/:/g, '-');
+  
+  // Generate filename
+  const filename = `${examCode}-${suffix || 'export'}-${timestamp}.${format}`;
+  
+  return { examCode, filename };
+}
+
 // Enhanced Export Functions
 function exportToTXT(questions, options = {}) {
   if (!questions || questions.length === 0) {
@@ -5099,14 +5117,21 @@ function exportToTXT(questions, options = {}) {
     }
     
     // User notes
-    if (includeUserNotes && currentExam && favoritesData.favorites[currentExam.exam_code]) {
-      const questionData = favoritesData.favorites[currentExam.exam_code][questionNumber];
-      if (questionData && questionData.note) {
-        content += `Personal Note: ${questionData.note}\n`;
-        if (questionData.category) {
-          content += `Category: ${questionData.category}\n`;
+    if (includeUserNotes && currentExam) {
+      // Get the exam code using the same logic as the filtering functions
+      const examCode = Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam.exam_name
+      );
+      
+      if (examCode && favoritesData.favorites[examCode]) {
+        const questionData = favoritesData.favorites[examCode][questionNumber];
+        if (questionData && questionData.note) {
+          content += `Personal Note: ${questionData.note}\n`;
+          if (questionData.category) {
+            content += `Category: ${questionData.category}\n`;
+          }
+          content += "\n";
         }
-        content += "\n";
       }
     }
     
@@ -5116,6 +5141,7 @@ function exportToTXT(questions, options = {}) {
       question.comments.forEach((comment, commentIndex) => {
         if (commentIndex < 5) { // Limit to first 5 comments
           let commentText = comment.content || comment.comment || "";
+          // Remove HTML tags but preserve URLs
           commentText = commentText.replace(/<[^>]*>/g, '');
           commentText = commentText.replace(/\s+/g, ' ').trim();
           const selectedAnswer = comment.selected_answer || "N/A";
@@ -5129,11 +5155,12 @@ function exportToTXT(questions, options = {}) {
   });
 
   // Create and download file
+  const { filename } = getExamCodeAndFilename('txt', 'questions');
   const blob = new Blob([content], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = `${currentExam.exam_code}-questions-${new Date().toISOString().split('T')[0]}.txt`;
+  link.download = filename;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -5207,12 +5234,19 @@ function exportToCSV(questions, options = {}) {
       let category = "";
       let isFavorite = "No";
       
-      if (currentExam && favoritesData.favorites[currentExam.exam_code]) {
-        const questionData = favoritesData.favorites[currentExam.exam_code][questionNumber];
-        if (questionData) {
-          userNote = (questionData.note || "").replace(/"/g, '""');
-          category = questionData.category || "";
-          isFavorite = questionData.isFavorite ? "Yes" : "No";
+      if (currentExam) {
+        // Get the exam code using the same logic as the filtering functions
+        const examCode = Object.keys(availableExams).find(code => 
+          availableExams[code] === currentExam.exam_name
+        );
+        
+        if (examCode && favoritesData.favorites[examCode]) {
+          const questionData = favoritesData.favorites[examCode][questionNumber];
+          if (questionData) {
+            userNote = (questionData.note || "").replace(/"/g, '""');
+            category = questionData.category || "";
+            isFavorite = questionData.isFavorite ? "Yes" : "No";
+          }
         }
       }
       
@@ -5248,11 +5282,12 @@ function exportToCSV(questions, options = {}) {
   });
 
   // Create and download file
+  const { filename } = getExamCodeAndFilename('csv', 'questions');
   const blob = new Blob([csvContent], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = `${currentExam.exam_code}-questions-${new Date().toISOString().split('T')[0]}.csv`;
+  link.download = filename;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -5277,11 +5312,14 @@ function exportToEnhancedJSON(questions, options = {}) {
     includeMetadata = true
   } = options;
 
+  // Get the exam code for metadata
+  const { examCode } = getExamCodeAndFilename('json');
+  
   const exportData = {
     metadata: {
       version: "2.0",
       exportDate: new Date().toISOString(),
-      examCode: currentExam.exam_code,
+      examCode: examCode,
       examName: currentExam.exam_name,
       totalQuestions: questions.length,
       exportOptions: options,
@@ -5314,15 +5352,22 @@ function exportToEnhancedJSON(questions, options = {}) {
     }
 
     // User data
-    if (includeUserNotes && currentExam && favoritesData.favorites[currentExam.exam_code]) {
-      const questionData = favoritesData.favorites[currentExam.exam_code][questionNumber];
-      if (questionData) {
-        exportQuestion.userData = {
-          isFavorite: questionData.isFavorite || false,
-          category: questionData.category || null,
-          note: questionData.note || null,
-          timestamp: questionData.timestamp || null
-        };
+    if (includeUserNotes && currentExam) {
+      // Get the exam code using the same logic as the filtering functions
+      const examCode = Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam.exam_name
+      );
+      
+      if (examCode && favoritesData.favorites[examCode]) {
+        const questionData = favoritesData.favorites[examCode][questionNumber];
+        if (questionData) {
+          exportQuestion.userData = {
+            isFavorite: questionData.isFavorite || false,
+            category: questionData.category || null,
+            note: questionData.note || null,
+            timestamp: questionData.timestamp || null
+          };
+        }
       }
     }
 
@@ -5354,11 +5399,12 @@ function exportToEnhancedJSON(questions, options = {}) {
   }
 
   // Create and download file
+  const { filename } = getExamCodeAndFilename('json', 'enhanced-export');
   const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = `${currentExam.exam_code}-enhanced-export-${new Date().toISOString().split('T')[0]}.json`;
+  link.download = filename;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -5602,21 +5648,44 @@ function updateFilterAvailability() {
   });
   
   // Update UI based on counts
+  const allOption = document.querySelector('input[name="contentFilter"][value="all"]');
   const favoritesOption = document.querySelector('input[name="contentFilter"][value="favorites"]');
   const notesOption = document.querySelector('input[name="contentFilter"][value="notes"]');
   const answeredOption = document.querySelector('input[name="contentFilter"][value="answered"]');
   const categoryOption = document.querySelector('input[name="contentFilter"][value="category"]');
   
+  // Add filter count for "All Questions" showing total questions
+  if (allOption) {
+    const allLabel = allOption.closest('label');
+    const optionMain = allLabel.querySelector('.option-main');
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
+    
+    const totalQuestions = currentQuestions ? currentQuestions.length : 0;
+    countSpan.textContent = `(${totalQuestions} available)`;
+  }
+  
   if (favoritesOption) {
     const favoritesLabel = favoritesOption.closest('label');
-    const favoritesIcon = favoritesLabel.querySelector('i');
-    const favoritesText = favoritesLabel.lastChild;
+    const optionMain = favoritesLabel.querySelector('.option-main');
+    
+    // Find or create count span
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
     
     if (favoritesCount === 0) {
       favoritesOption.disabled = true;
       favoritesLabel.style.opacity = '0.5';
       favoritesLabel.style.cursor = 'not-allowed';
-      favoritesText.textContent = ' Favorites Only (0 available)';
+      countSpan.textContent = '(0 available)';
       
       // If currently selected, switch to "all"
       if (favoritesOption.checked) {
@@ -5626,19 +5695,27 @@ function updateFilterAvailability() {
       favoritesOption.disabled = false;
       favoritesLabel.style.opacity = '1';
       favoritesLabel.style.cursor = 'pointer';
-      favoritesText.textContent = ` Favorites Only (${favoritesCount} available)`;
+      countSpan.textContent = `(${favoritesCount} available)`;
     }
   }
   
   if (notesOption) {
     const notesLabel = notesOption.closest('label');
-    const notesText = notesLabel.lastChild;
+    const optionMain = notesLabel.querySelector('.option-main');
+    
+    // Find or create count span
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
     
     if (notesCount === 0) {
       notesOption.disabled = true;
       notesLabel.style.opacity = '0.5';
       notesLabel.style.cursor = 'not-allowed';
-      notesText.textContent = ' Questions with Notes (0 available)';
+      countSpan.textContent = '(0 available)';
       
       if (notesOption.checked) {
         document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
@@ -5647,19 +5724,27 @@ function updateFilterAvailability() {
       notesOption.disabled = false;
       notesLabel.style.opacity = '1';
       notesLabel.style.cursor = 'pointer';
-      notesText.textContent = ` Questions with Notes (${notesCount} available)`;
+      countSpan.textContent = `(${notesCount} available)`;
     }
   }
   
   if (answeredOption) {
     const answeredLabel = answeredOption.closest('label');
-    const answeredText = answeredLabel.lastChild;
+    const optionMain = answeredLabel.querySelector('.option-main');
+    
+    // Find or create count span
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
     
     if (answeredCount === 0) {
       answeredOption.disabled = true;
       answeredLabel.style.opacity = '0.5';
       answeredLabel.style.cursor = 'not-allowed';
-      answeredText.textContent = ' Answered Questions (0 available)';
+      countSpan.textContent = '(0 available)';
       
       if (answeredOption.checked) {
         document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
@@ -5668,20 +5753,28 @@ function updateFilterAvailability() {
       answeredOption.disabled = false;
       answeredLabel.style.opacity = '1';
       answeredLabel.style.cursor = 'pointer';
-      answeredText.textContent = ` Answered Questions (${answeredCount} available)`;
+      countSpan.textContent = `(${answeredCount} available)`;
     }
   }
   
   if (categoryOption) {
     const categoryLabel = categoryOption.closest('label');
-    const categoryText = categoryLabel.lastChild;
+    const optionMain = categoryLabel.querySelector('.option-main');
     const categoriesCount = categoriesSet.size;
+    
+    // Find or create count span
+    let countSpan = optionMain.querySelector('.filter-count');
+    if (!countSpan) {
+      countSpan = document.createElement('span');
+      countSpan.className = 'filter-count';
+      optionMain.appendChild(countSpan);
+    }
     
     if (categoriesCount === 0) {
       categoryOption.disabled = true;
       categoryLabel.style.opacity = '0.5';
       categoryLabel.style.cursor = 'not-allowed';
-      categoryText.textContent = ' By Category (0 available)';
+      countSpan.textContent = '(0 available)';
       
       if (categoryOption.checked) {
         document.querySelector('input[name="contentFilter"][value="all"]').checked = true;
@@ -5690,7 +5783,7 @@ function updateFilterAvailability() {
       categoryOption.disabled = false;
       categoryLabel.style.opacity = '1';
       categoryLabel.style.cursor = 'pointer';
-      categoryText.textContent = ` By Category (${categoriesCount} available)`;
+      countSpan.textContent = `(${categoriesCount} available)`;
     }
   }
 }
@@ -6041,25 +6134,32 @@ function exportToPDFWithOptions(questions, options) {
     }
 
     // User notes
-    if (includeUserNotes && currentExam && favoritesData.favorites[currentExam.exam_code]) {
-      const questionData = favoritesData.favorites[currentExam.exam_code][questionNumber];
-      if (questionData && (questionData.note || questionData.isFavorite)) {
-        printDocument.write(`<div class="user-note">`);
-        printDocument.write(`<div class="user-note-header">Personal Notes:</div>`);
-        
-        if (questionData.isFavorite) {
-          printDocument.write(`<div>⭐ Favorited</div>`);
+    if (includeUserNotes && currentExam) {
+      // Get the exam code using the same logic as the filtering functions
+      const examCode = Object.keys(availableExams).find(code => 
+        availableExams[code] === currentExam.exam_name
+      );
+      
+      if (examCode && favoritesData.favorites[examCode]) {
+        const questionData = favoritesData.favorites[examCode][questionNumber];
+        if (questionData && (questionData.note || questionData.isFavorite)) {
+          printDocument.write(`<div class="user-note">`);
+          printDocument.write(`<div class="user-note-header">Personal Notes:</div>`);
+          
+          if (questionData.isFavorite) {
+            printDocument.write(`<div>⭐ Favorited</div>`);
+          }
+          
+          if (questionData.category) {
+            printDocument.write(`<div>Category: ${questionData.category}</div>`);
+          }
+          
+          if (questionData.note) {
+            printDocument.write(`<div>Note: ${questionData.note}</div>`);
+          }
+          
+          printDocument.write(`</div>`);
         }
-        
-        if (questionData.category) {
-          printDocument.write(`<div>Category: ${questionData.category}</div>`);
-        }
-        
-        if (questionData.note) {
-          printDocument.write(`<div>Note: ${questionData.note}</div>`);
-        }
-        
-        printDocument.write(`</div>`);
       }
     }
 
@@ -6072,7 +6172,10 @@ function exportToPDFWithOptions(questions, options) {
       
       comments.forEach((comment, commentIndex) => {
         if (commentIndex < 10) { // Limit to first 10 comments for PDF
-          const commentText = comment.content || comment.comment || "";
+          const commentText = formatCommentText(
+            comment.content || comment.comment || "",
+            question.images
+          );
           const selectedAnswer = comment.selected_answer || "N/A";
           
           printDocument.write(`

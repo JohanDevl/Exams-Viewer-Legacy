@@ -2352,6 +2352,34 @@ body {
   background-color: var(--bg-primary);
 }
 
+/* Special layout for content filter options only */
+.export-filter-options .radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 60px;
+}
+
+.export-filter-options .radio-option .option-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.export-filter-options .radio-option .option-main .main-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.export-filter-options .radio-option .option-main i {
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
 .radio-option:hover,
 .checkbox-option:hover {
   border-color: var(--accent-color);
@@ -2383,6 +2411,11 @@ body {
   border-radius: 50%;
   position: relative;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.export-filter-options .radio-custom {
+  margin: 0; /* Remove any default margin */
 }
 
 .checkbox-custom {
@@ -2397,6 +2430,15 @@ body {
 .checkbox-option input[type="checkbox"]:checked + .checkbox-custom {
   border-color: var(--accent-color);
   background-color: var(--accent-color);
+}
+
+.export-filter-options .filter-count {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.85em;
+  margin-left: 0; /* No offset - same column as main text */
+  line-height: 1.2;
+  height: 1.2em;
 }
 
 .radio-custom::after {
