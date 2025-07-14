@@ -5297,6 +5297,9 @@ function updateProgressSidebar() {
           case 'incorrect':
             statusIcon = '<i class="fas fa-times-circle"></i>';
             break;
+          case 'preview':
+            statusIcon = '<i class="fas fa-lightbulb"></i>';
+            break;
           case 'viewed':
             statusIcon = '<i class="fas fa-eye"></i>';
             break;
@@ -5323,6 +5326,10 @@ function updateProgressSidebar() {
         case 'incorrect':
           primaryBadgeText = "Wrong";
           primaryBadgeIcon = '<i class="fas fa-times"></i>';
+          break;
+        case 'preview':
+          primaryBadgeText = "Preview";
+          primaryBadgeIcon = '<i class="fas fa-lightbulb"></i>';
           break;
         case 'viewed':
           primaryBadgeText = "Viewed";
@@ -6214,7 +6221,11 @@ function isQuestionAnswered(questionNumber) {
       (q.qn && q.qn.toString() === questionNumber.toString()) ||
       (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
     );
-    if (found && found.att && found.att.length > 0) return true;
+    
+    // Consider a question answered if it has attempts OR if first action was recorded (including preview)
+    if (found && ((found.att && found.att.length > 0) || found.far || found.firstActionRecorded)) {
+      return true;
+    }
   }
   
   // If current session is very new (< 30 seconds old), don't show previous session progress
@@ -6245,7 +6256,68 @@ function isQuestionAnswered(questionNumber) {
           (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
         );
         
-        if (found && found.att && found.att.length > 0) return true;
+        // Consider a question answered if it has attempts OR if first action was recorded (including preview)
+        if (found && ((found.att && found.att.length > 0) || found.far || found.firstActionRecorded)) {
+          return true;
+        }
+      }
+    }
+  }
+  
+  return false;
+}
+
+// Check if a question was answered in preview mode (with highlight)
+function isQuestionAnsweredInPreview(questionNumber) {
+  if (!questionNumber) return false;
+  
+  // Check current session first
+  if (statistics.currentSession && statistics.currentSession.questions) {
+    const found = statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+    
+    if (found) {
+      const firstActionType = found.fat || found.firstActionType;
+      if (firstActionType === "p" || firstActionType === "preview") {
+        return true;
+      }
+    }
+  }
+  
+  // If current session is very new, don't show previous session results
+  if (statistics.currentSession) {
+    const sessionAge = Date.now() - (statistics.currentSession.st || Date.now());
+    if (sessionAge < 30000) {
+      return false;
+    }
+  }
+  
+  // Check previous sessions
+  if (currentExam && statistics.sessions) {
+    const examCode = Object.keys(availableExams).find(code => 
+      availableExams[code] === currentExam.exam_name
+    ) || currentExam.exam_name;
+    
+    const examName = currentExam.exam_name;
+    
+    for (const session of statistics.sessions) {
+      if ((session.ec === examCode || session.examCode === examCode || 
+           session.en === examName || session.examName === examName) && 
+          session.questions) {
+        
+        const found = session.questions.find(q => 
+          (q.qn && q.qn.toString() === questionNumber.toString()) ||
+          (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+        );
+        
+        if (found) {
+          const firstActionType = found.fat || found.firstActionType;
+          if (firstActionType === "p" || firstActionType === "preview") {
+            return true;
+          }
+        }
       }
     }
   }
@@ -6450,6 +6522,7 @@ function getQuestionStatus(questionNumber) {
     isViewed: isQuestionVisited(questionNumber) && !isQuestionAnswered(questionNumber),
     isAnsweredCorrectly: isQuestionAnsweredCorrectly(questionNumber),
     isAnsweredIncorrectly: isQuestionAnsweredIncorrectly(questionNumber),
+    isAnsweredInPreview: isQuestionAnsweredInPreview(questionNumber),
     isFavorite: isQuestionFavorite(questionNumber),
     hasNotes: hasQuestionNotes(questionNumber),
     isCategorized: isQuestionCategorized(questionNumber),
@@ -6461,6 +6534,8 @@ function getQuestionStatus(questionNumber) {
     status.primaryStatus = 'correct';
   } else if (status.isAnsweredIncorrectly) {
     status.primaryStatus = 'incorrect';
+  } else if (status.isAnsweredInPreview) {
+    status.primaryStatus = 'preview';
   } else if (status.isViewed) {
     status.primaryStatus = 'viewed';
   } else {

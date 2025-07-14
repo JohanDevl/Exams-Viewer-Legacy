@@ -2557,6 +2557,12 @@ body {
   border: 1px solid rgba(220, 53, 69, 0.3);
 }
 
+.status-badge.preview {
+  background-color: rgba(255, 193, 7, 0.20);
+  color: #f39c12;
+  border: 1px solid rgba(255, 193, 7, 0.4);
+}
+
 .status-badge.with-notes {
   background-color: rgba(102, 16, 242, 0.15);
   color: #6610f2;
@@ -2592,6 +2598,12 @@ body {
   background-color: rgba(244, 67, 54, 0.2);
   color: #f44336;
   border: 1px solid rgba(244, 67, 54, 0.4);
+}
+
+[data-theme="dark"] .status-badge.preview {
+  background-color: rgba(243, 156, 18, 0.25);
+  color: #f39c12;
+  border: 1px solid rgba(243, 156, 18, 0.5);
 }
 
 [data-theme="dark"] .status-badge.with-notes {
@@ -3683,6 +3695,10 @@ body {
   color: var(--success-color);
 }
 
+.preview-icon {
+  color: #f39c12;
+}
+
 .unanswered-icon {
   color: var(--text-muted);
 }
@@ -3725,6 +3741,26 @@ body {
 }
 
 .question-item.unanswered {
+  border-left: 4px solid var(--text-muted);
+}
+
+.question-item.preview {
+  border-left: 4px solid #f39c12;
+}
+
+.question-item.correct {
+  border-left: 4px solid var(--success-color);
+}
+
+.question-item.incorrect {
+  border-left: 4px solid var(--error-color);
+}
+
+.question-item.viewed {
+  border-left: 4px solid var(--warning-color);
+}
+
+.question-item.new {
   border-left: 4px solid var(--text-muted);
 }
 
