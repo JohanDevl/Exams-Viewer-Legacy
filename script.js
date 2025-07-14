@@ -22,6 +22,7 @@ let settings = {
   sidebarOpen: false,
   enableLazyLoading: false, // Lazy loading disabled by default
   showMainProgressBar: true, // Main progress bar enabled by default
+  showTooltips: false, // Tooltips disabled by default
 };
 
 // Available exams mapping (will be populated dynamically)
@@ -2802,11 +2803,16 @@ function loadSettings() {
       settings.enableLazyLoading;
     document.getElementById("showMainProgressBar").checked =
       settings.showMainProgressBar;
+    document.getElementById("showTooltips").checked =
+      settings.showTooltips;
     isHighlightEnabled = settings.highlightDefault;
     applyTheme(settings.darkMode);
     
     // Apply toolbar visibility setting immediately
     updateToolbarVisibility();
+    
+    // Apply tooltip visibility setting immediately
+    updateTooltipVisibility();
     
     // Restore sidebar state
     sidebarOpen = settings.sidebarOpen;
@@ -2843,12 +2849,18 @@ function saveSettings() {
   settings.showMainProgressBar = document.getElementById(
     "showMainProgressBar"
   ).checked;
+  settings.showTooltips = document.getElementById(
+    "showTooltips"
+  ).checked;
   localStorage.setItem("examViewerSettings", JSON.stringify(settings));
   isHighlightEnabled = settings.highlightDefault;
   applyTheme(settings.darkMode);
   
   // Update main progress bar visibility
   updateMainProgressBarVisibility();
+  
+  // Update tooltip visibility
+  updateTooltipVisibility();
 }
 
 // Apply dark/light theme
@@ -3152,6 +3164,40 @@ function setupEventListeners() {
   document.getElementById("toggleSearchBtn").addEventListener("click", (e) => {
     e.stopPropagation(); // Prevent double trigger
     toggleSearchSection();
+  });
+
+  // Mobile tooltip touch handling
+  setupMobileTooltips();
+}
+
+// Setup mobile tooltip handling for touch devices
+function setupMobileTooltips() {
+  // Add touch event listeners for tooltips on mobile
+  document.addEventListener('touchstart', (e) => {
+    const tooltipElement = e.target.closest('[data-tooltip]');
+    if (tooltipElement && settings.showTooltips) {
+      // Clear any existing focus
+      document.querySelectorAll('[data-tooltip]:focus').forEach(el => {
+        if (el !== tooltipElement) el.blur();
+      });
+      
+      // Focus the tooltip element to show tooltip
+      tooltipElement.focus();
+      
+      // Auto-hide after 3 seconds on mobile
+      setTimeout(() => {
+        if (document.activeElement === tooltipElement) {
+          tooltipElement.blur();
+        }
+      }, 3000);
+    }
+  });
+  
+  // Hide tooltip when touching outside
+  document.addEventListener('touchstart', (e) => {
+    if (!e.target.closest('[data-tooltip]')) {
+      document.querySelectorAll('[data-tooltip]:focus').forEach(el => el.blur());
+    }
   });
 }
 
@@ -5223,6 +5269,16 @@ function updateToolbarVisibility() {
   const toolbar = document.getElementById("questionToolbar");
   if (toolbar) {
     toolbar.style.display = settings.showQuestionToolbar ? "block" : "none";
+  }
+}
+
+// Update tooltip visibility based on settings
+function updateTooltipVisibility() {
+  const body = document.body;
+  if (settings.showTooltips) {
+    body.classList.add('tooltips-enabled');
+  } else {
+    body.classList.remove('tooltips-enabled');
   }
 }
 

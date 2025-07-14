@@ -3969,3 +3969,203 @@ body {
     padding: 0.25rem 0.5rem;
   }
 }
+
+/* ============================
+   TOOLTIPS SYSTEM
+   ============================ */
+
+/* Base tooltip styles - only active when enabled */
+.tooltips-enabled [data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+/* Tooltip content */
+.tooltips-enabled [data-tooltip]:hover::before,
+.tooltips-enabled [data-tooltip]:focus::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 280px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Tooltip arrow */
+.tooltips-enabled [data-tooltip]:hover::after,
+.tooltips-enabled [data-tooltip]:focus::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(1px);
+  border: 5px solid transparent;
+  border-top-color: var(--text-primary);
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Show tooltip on hover/focus */
+.tooltips-enabled [data-tooltip]:hover::before,
+.tooltips-enabled [data-tooltip]:hover::after,
+.tooltips-enabled [data-tooltip]:focus::before,
+.tooltips-enabled [data-tooltip]:focus::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.tooltips-enabled [data-tooltip]:hover::after,
+.tooltips-enabled [data-tooltip]:focus::after {
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* Tooltip positioning variants */
+.tooltips-enabled [data-tooltip-position="top"]::before {
+  bottom: 100%;
+  top: auto;
+}
+
+.tooltips-enabled [data-tooltip-position="bottom"]::before {
+  top: 100%;
+  bottom: auto;
+  transform: translateX(-50%);
+}
+
+.tooltips-enabled [data-tooltip-position="bottom"]:hover::before,
+.tooltips-enabled [data-tooltip-position="bottom"]:focus::before {
+  transform: translateX(-50%) translateY(5px);
+}
+
+.tooltips-enabled [data-tooltip-position="bottom"]::after {
+  top: 100%;
+  bottom: auto;
+  border-top-color: transparent;
+  border-bottom-color: var(--text-primary);
+  transform: translateX(-50%) translateY(-1px);
+}
+
+.tooltips-enabled [data-tooltip-position="bottom"]:hover::after,
+.tooltips-enabled [data-tooltip-position="bottom"]:focus::after {
+  transform: translateX(-50%) translateY(4px);
+}
+
+.tooltips-enabled [data-tooltip-position="left"]::before {
+  top: 50%;
+  bottom: auto;
+  left: auto;
+  right: 100%;
+  transform: translateY(-50%);
+}
+
+.tooltips-enabled [data-tooltip-position="left"]:hover::before,
+.tooltips-enabled [data-tooltip-position="left"]:focus::before {
+  transform: translateY(-50%) translateX(-5px);
+}
+
+.tooltips-enabled [data-tooltip-position="left"]::after {
+  top: 50%;
+  bottom: auto;
+  left: auto;
+  right: 100%;
+  border-top-color: transparent;
+  border-left-color: var(--text-primary);
+  transform: translateY(-50%) translateX(1px);
+}
+
+.tooltips-enabled [data-tooltip-position="left"]:hover::after,
+.tooltips-enabled [data-tooltip-position="left"]:focus::after {
+  transform: translateY(-50%) translateX(-4px);
+}
+
+.tooltips-enabled [data-tooltip-position="right"]::before {
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  left: 100%;
+  transform: translateY(-50%);
+}
+
+.tooltips-enabled [data-tooltip-position="right"]:hover::before,
+.tooltips-enabled [data-tooltip-position="right"]:focus::before {
+  transform: translateY(-50%) translateX(5px);
+}
+
+.tooltips-enabled [data-tooltip-position="right"]::after {
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  left: 100%;
+  border-top-color: transparent;
+  border-right-color: var(--text-primary);
+  transform: translateY(-50%) translateX(-1px);
+}
+
+.tooltips-enabled [data-tooltip-position="right"]:hover::after,
+.tooltips-enabled [data-tooltip-position="right"]:focus::after {
+  transform: translateY(-50%) translateX(4px);
+}
+
+/* Mobile adaptations */
+@media (max-width: 768px) {
+  /* Disable hover-based tooltips on mobile, use touch events instead */
+  .tooltips-enabled [data-tooltip]:hover::before,
+  .tooltips-enabled [data-tooltip]:hover::after {
+    opacity: 0;
+  }
+  
+  /* Make tooltips larger on mobile */
+  .tooltips-enabled [data-tooltip]:focus::before {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    max-width: 250px;
+  }
+  
+  /* Adjust tooltip positioning for mobile */
+  .tooltips-enabled [data-tooltip]:focus::before {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: auto;
+    background: var(--text-primary);
+    border-radius: 0.5rem;
+    z-index: 10000;
+  }
+  
+  .tooltips-enabled [data-tooltip]:focus::after {
+    display: none; /* Hide arrow on mobile */
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .tooltips-enabled [data-tooltip]:hover::before,
+  .tooltips-enabled [data-tooltip]:focus::before {
+    border: 2px solid var(--border-color);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .tooltips-enabled [data-tooltip]:hover::before,
+  .tooltips-enabled [data-tooltip]:hover::after,
+  .tooltips-enabled [data-tooltip]:focus::before,
+  .tooltips-enabled [data-tooltip]:focus::after {
+    transition: none;
+  }
+}
