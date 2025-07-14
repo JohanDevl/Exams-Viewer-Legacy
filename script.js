@@ -3107,7 +3107,15 @@ function setupEventListeners() {
     .addEventListener("click", toggleDiscussion);
 
   // Export
-  document.getElementById("exportBtn").addEventListener("click", exportToPDF);
+  document.getElementById("exportBtn").addEventListener("click", showExportModal);
+  
+  // Close modal when clicking outside
+  document.addEventListener("click", (e) => {
+    const exportModal = document.getElementById("exportOptionsModal");
+    if (e.target === exportModal) {
+      hideExportModal();
+    }
+  });
 
   // Favorites and revision mode
   document
@@ -5022,6 +5030,648 @@ function exportToPDF() {
   showSuccess('Print dialog opened. Choose "Save as PDF" to export.');
 }
 
+// Enhanced Export Functions
+function exportToTXT(questions, options = {}) {
+  if (!questions || questions.length === 0) {
+    showError("No questions to export");
+    return;
+  }
+
+  const {
+    includeQuestions = true,
+    includeAnswers = true,
+    includeDiscussions = true,
+    includeImages = false,
+    includeUserNotes = true,
+    includeMetadata = true
+  } = options;
+
+  let content = "";
+  
+  // Add metadata
+  if (includeMetadata) {
+    content += `${currentExam.exam_name}\n`;
+    content += `${'='.repeat(currentExam.exam_name.length)}\n\n`;
+    content += `Total Questions: ${questions.length}\n`;
+    content += `Generated on: ${new Date().toLocaleDateString()}\n`;
+    content += `Export Format: Plain Text\n\n`;
+    content += `${'='.repeat(50)}\n\n`;
+  }
+
+  questions.forEach((question, index) => {
+    const questionNumber = question.question_number || index + 1;
+    
+    // Question header
+    content += `Question ${questionNumber}\n`;
+    content += `${'-'.repeat(20)}\n\n`;
+    
+    // Question text
+    if (includeQuestions) {
+      let questionText = question.question || "";
+      // Remove HTML tags for plain text
+      questionText = questionText.replace(/<[^>]*>/g, '');
+      // Clean up multiple spaces and newlines
+      questionText = questionText.replace(/\s+/g, ' ').trim();
+      content += `${questionText}\n\n`;
+    }
+    
+    // Answers
+    if (includeAnswers && question.answers) {
+      content += "Answers:\n";
+      const correctAnswers = new Set((question.most_voted || "").split(""));
+      
+      question.answers.forEach((answer) => {
+        const answerLetter = answer.charAt(0);
+        let answerText = answer.substring(3);
+        answerText = answerText.replace(/<[^>]*>/g, '');
+        answerText = answerText.replace(/\s+/g, ' ').trim();
+        
+        const isCorrect = correctAnswers.has(answerLetter);
+        content += `${answerLetter}. ${answerText} ${isCorrect ? '✓' : ''}\n`;
+      });
+      content += "\n";
+    }
+    
+    // User notes
+    if (includeUserNotes && currentExam && favoritesData.favorites[currentExam.exam_code]) {
+      const questionData = favoritesData.favorites[currentExam.exam_code][questionNumber];
+      if (questionData && questionData.note) {
+        content += `Personal Note: ${questionData.note}\n`;
+        if (questionData.category) {
+          content += `Category: ${questionData.category}\n`;
+        }
+        content += "\n";
+      }
+    }
+    
+    // Discussion
+    if (includeDiscussions && question.comments && question.comments.length > 0) {
+      content += "Discussion:\n";
+      question.comments.forEach((comment, commentIndex) => {
+        if (commentIndex < 5) { // Limit to first 5 comments
+          let commentText = comment.comment || "";
+          commentText = commentText.replace(/<[^>]*>/g, '');
+          commentText = commentText.replace(/\s+/g, ' ').trim();
+          content += `- ${commentText}\n`;
+        }
+      });
+      content += "\n";
+    }
+    
+    content += `${'-'.repeat(50)}\n\n`;
+  });
+
+  // Create and download file
+  const blob = new Blob([content], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${currentExam.exam_code}-questions-${new Date().toISOString().split('T')[0]}.txt`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  
+  showSuccess(`Text file exported successfully! (${questions.length} questions)`);
+}
+
+function exportToCSV(questions, options = {}) {
+  if (!questions || questions.length === 0) {
+    showError("No questions to export");
+    return;
+  }
+
+  const {
+    includeQuestions = true,
+    includeAnswers = true,
+    includeDiscussions = true,
+    includeUserNotes = true,
+    includeMetadata = true
+  } = options;
+
+  let csvContent = "";
+  
+  // CSV Header
+  const headers = ["Question Number"];
+  if (includeQuestions) headers.push("Question Text");
+  if (includeAnswers) headers.push("Answers", "Correct Answer");
+  if (includeUserNotes) headers.push("User Note", "Category", "Is Favorite");
+  if (includeDiscussions) headers.push("Discussion Count", "Top Comment");
+  if (includeMetadata) headers.push("Export Date", "Exam Code");
+  
+  csvContent += headers.map(h => `"${h}"`).join(",") + "\n";
+  
+  questions.forEach((question, index) => {
+    const questionNumber = question.question_number || index + 1;
+    const row = [];
+    
+    // Question number
+    row.push(`"${questionNumber}"`);
+    
+    // Question text
+    if (includeQuestions) {
+      let questionText = question.question || "";
+      questionText = questionText.replace(/<[^>]*>/g, '');
+      questionText = questionText.replace(/"/g, '""'); // Escape quotes
+      questionText = questionText.replace(/\s+/g, ' ').trim();
+      row.push(`"${questionText}"`);
+    }
+    
+    // Answers
+    if (includeAnswers) {
+      const answers = question.answers || [];
+      const answersText = answers.map(a => {
+        let text = a.replace(/<[^>]*>/g, '');
+        text = text.replace(/"/g, '""');
+        return text.replace(/\s+/g, ' ').trim();
+      }).join("; ");
+      row.push(`"${answersText}"`);
+      row.push(`"${question.most_voted || ""}"`);
+    }
+    
+    // User notes
+    if (includeUserNotes) {
+      let userNote = "";
+      let category = "";
+      let isFavorite = "No";
+      
+      if (currentExam && favoritesData.favorites[currentExam.exam_code]) {
+        const questionData = favoritesData.favorites[currentExam.exam_code][questionNumber];
+        if (questionData) {
+          userNote = (questionData.note || "").replace(/"/g, '""');
+          category = questionData.category || "";
+          isFavorite = questionData.isFavorite ? "Yes" : "No";
+        }
+      }
+      
+      row.push(`"${userNote}"`);
+      row.push(`"${category}"`);
+      row.push(`"${isFavorite}"`);
+    }
+    
+    // Discussion
+    if (includeDiscussions) {
+      const comments = question.comments || [];
+      row.push(`"${comments.length}"`);
+      
+      if (comments.length > 0) {
+        let topComment = comments[0].comment || "";
+        topComment = topComment.replace(/<[^>]*>/g, '');
+        topComment = topComment.replace(/"/g, '""');
+        topComment = topComment.replace(/\s+/g, ' ').trim();
+        row.push(`"${topComment}"`);
+      } else {
+        row.push('""');
+      }
+    }
+    
+    // Metadata
+    if (includeMetadata) {
+      row.push(`"${new Date().toISOString().split('T')[0]}"`);
+      row.push(`"${currentExam.exam_code}"`);
+    }
+    
+    csvContent += row.join(",") + "\n";
+  });
+
+  // Create and download file
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${currentExam.exam_code}-questions-${new Date().toISOString().split('T')[0]}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  
+  showSuccess(`CSV file exported successfully! (${questions.length} questions)`);
+}
+
+function exportToEnhancedJSON(questions, options = {}) {
+  if (!questions || questions.length === 0) {
+    showError("No questions to export");
+    return;
+  }
+
+  const {
+    includeQuestions = true,
+    includeAnswers = true,
+    includeDiscussions = true,
+    includeImages = true,
+    includeUserNotes = true,
+    includeMetadata = true
+  } = options;
+
+  const exportData = {
+    metadata: {
+      version: "2.0",
+      exportDate: new Date().toISOString(),
+      examCode: currentExam.exam_code,
+      examName: currentExam.exam_name,
+      totalQuestions: questions.length,
+      exportOptions: options,
+      generatedBy: "Exams-Viewer Enhanced Export"
+    },
+    questions: []
+  };
+
+  questions.forEach((question, index) => {
+    const questionNumber = question.question_number || index + 1;
+    const exportQuestion = {
+      questionNumber,
+      originalIndex: index
+    };
+
+    // Question content
+    if (includeQuestions) {
+      exportQuestion.question = question.question;
+    }
+
+    // Answers
+    if (includeAnswers) {
+      exportQuestion.answers = question.answers;
+      exportQuestion.correctAnswer = question.most_voted;
+    }
+
+    // Images
+    if (includeImages && question.images) {
+      exportQuestion.images = question.images;
+    }
+
+    // User data
+    if (includeUserNotes && currentExam && favoritesData.favorites[currentExam.exam_code]) {
+      const questionData = favoritesData.favorites[currentExam.exam_code][questionNumber];
+      if (questionData) {
+        exportQuestion.userData = {
+          isFavorite: questionData.isFavorite || false,
+          category: questionData.category || null,
+          note: questionData.note || null,
+          timestamp: questionData.timestamp || null
+        };
+      }
+    }
+
+    // Discussion
+    if (includeDiscussions && question.comments) {
+      exportQuestion.discussion = {
+        totalComments: question.comments.length,
+        comments: question.comments.map(comment => ({
+          comment: comment.comment,
+          upvotes: comment.upvotes || 0,
+          downvotes: comment.downvotes || 0
+        }))
+      };
+    }
+
+    exportData.questions.push(exportQuestion);
+  });
+
+  // Add user statistics if available
+  if (includeMetadata && statistics) {
+    exportData.statistics = {
+      totalSessions: statistics.sessions.length,
+      totalQuestions: statistics.totalStats.totalQuestions,
+      totalCorrect: statistics.totalStats.totalCorrect,
+      totalIncorrect: statistics.totalStats.totalIncorrect,
+      averageAccuracy: statistics.totalStats.totalQuestions > 0 ? 
+        ((statistics.totalStats.totalCorrect / statistics.totalStats.totalQuestions) * 100).toFixed(1) : 0
+    };
+  }
+
+  // Create and download file
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${currentExam.exam_code}-enhanced-export-${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  
+  showSuccess(`Enhanced JSON exported successfully! (${questions.length} questions)`);
+}
+
+// Question Filtering Functions for Export
+function getFilteredQuestionsForExport(filterType, categories = []) {
+  if (!currentQuestions || currentQuestions.length === 0) {
+    return [];
+  }
+
+  const examCode = currentExam.exam_code;
+  const examFavorites = favoritesData.favorites[examCode] || {};
+  
+  switch (filterType) {
+    case 'all':
+      return currentQuestions;
+      
+    case 'favorites':
+      return currentQuestions.filter(question => {
+        const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+        const questionData = examFavorites[questionNumber];
+        return questionData && questionData.isFavorite;
+      });
+      
+    case 'answered':
+      return currentQuestions.filter(question => {
+        const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+        return isQuestionAnswered(questionNumber);
+      });
+      
+    case 'notes':
+      return currentQuestions.filter(question => {
+        const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+        const questionData = examFavorites[questionNumber];
+        return questionData && questionData.note && questionData.note.trim() !== '';
+      });
+      
+    case 'category':
+      if (!categories || categories.length === 0) {
+        return [];
+      }
+      return currentQuestions.filter(question => {
+        const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
+        const questionData = examFavorites[questionNumber];
+        return questionData && questionData.category && categories.includes(questionData.category);
+      });
+      
+    default:
+      return currentQuestions;
+  }
+}
+
+function getAvailableCategories() {
+  const examCode = currentExam.exam_code;
+  const examFavorites = favoritesData.favorites[examCode] || {};
+  const categories = new Set();
+  
+  // Add default categories that are in use
+  Object.values(examFavorites).forEach(questionData => {
+    if (questionData.category) {
+      categories.add(questionData.category);
+    }
+  });
+  
+  return Array.from(categories).sort();
+}
+
+function estimateExportSize(questions, format, options) {
+  if (!questions || questions.length === 0) return 0;
+  
+  const baseSize = questions.length * 200; // Base size per question
+  let multiplier = 1;
+  
+  switch (format) {
+    case 'pdf':
+      multiplier = 10; // PDF is larger
+      break;
+    case 'json':
+      multiplier = 3; // JSON with formatting
+      break;
+    case 'txt':
+      multiplier = 1; // Plain text is smallest
+      break;
+    case 'csv':
+      multiplier = 0.5; // CSV is compact
+      break;
+  }
+  
+  // Adjust based on options
+  let optionsMultiplier = 1;
+  if (options.includeImages) optionsMultiplier += 2;
+  if (options.includeDiscussions) optionsMultiplier += 1;
+  if (options.includeUserNotes) optionsMultiplier += 0.5;
+  
+  return Math.round(baseSize * multiplier * optionsMultiplier);
+}
+
+function formatFileSize(bytes) {
+  if (bytes === 0) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}
+
+// Enhanced Export Modal Functions
+function showExportModal() {
+  const modal = document.getElementById('exportOptionsModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    populateExportCategories();
+    updateExportPreview();
+    setupExportModalEventListeners();
+  }
+}
+
+function hideExportModal() {
+  const modal = document.getElementById('exportOptionsModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function populateExportCategories() {
+  const categoryList = document.getElementById('exportCategoryList');
+  if (!categoryList) return;
+  
+  categoryList.innerHTML = '';
+  const categories = getAvailableCategories();
+  
+  if (categories.length === 0) {
+    categoryList.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">No categories available</p>';
+    return;
+  }
+  
+  categories.forEach(category => {
+    const label = document.createElement('label');
+    label.className = 'checkbox-option';
+    label.innerHTML = `
+      <input type="checkbox" name="exportCategory" value="${category}">
+      <span class="checkbox-custom"></span>
+      <i class="fas fa-tag"></i> ${category}
+    `;
+    categoryList.appendChild(label);
+  });
+}
+
+function updateExportPreview() {
+  const formatRadio = document.querySelector('input[name="exportFormat"]:checked');
+  const filterRadio = document.querySelector('input[name="contentFilter"]:checked');
+  
+  if (!formatRadio || !filterRadio) return;
+  
+  const format = formatRadio.value;
+  const filter = filterRadio.value;
+  
+  // Get selected categories if filter is 'category'
+  let selectedCategories = [];
+  if (filter === 'category') {
+    selectedCategories = Array.from(document.querySelectorAll('input[name="exportCategory"]:checked'))
+      .map(cb => cb.value);
+  }
+  
+  // Get filtered questions
+  const filteredQuestions = getFilteredQuestionsForExport(filter, selectedCategories);
+  
+  // Get content options
+  const options = {
+    includeQuestions: document.getElementById('includeQuestions').checked,
+    includeAnswers: document.getElementById('includeAnswers').checked,
+    includeDiscussions: document.getElementById('includeDiscussions').checked,
+    includeImages: document.getElementById('includeImages').checked,
+    includeUserNotes: document.getElementById('includeUserNotes').checked,
+    includeMetadata: document.getElementById('includeMetadata').checked
+  };
+  
+  // Update preview text
+  const previewText = document.getElementById('exportPreviewText');
+  const questionCount = document.getElementById('exportQuestionCount');
+  const estimatedSize = document.getElementById('exportEstimatedSize');
+  
+  if (previewText) {
+    let filterText = '';
+    switch (filter) {
+      case 'all': filterText = 'all questions'; break;
+      case 'favorites': filterText = 'favorite questions'; break;
+      case 'answered': filterText = 'answered questions'; break;
+      case 'notes': filterText = 'questions with notes'; break;
+      case 'category': filterText = `questions in ${selectedCategories.length} categories`; break;
+    }
+    
+    previewText.textContent = `Export ${filterText} as ${format.toUpperCase()}`;
+  }
+  
+  if (questionCount) {
+    questionCount.textContent = `${filteredQuestions.length} questions`;
+  }
+  
+  if (estimatedSize) {
+    const sizeBytes = estimateExportSize(filteredQuestions, format, options);
+    estimatedSize.textContent = `~${formatFileSize(sizeBytes)}`;
+  }
+}
+
+function setupExportModalEventListeners() {
+  // Format selection
+  document.querySelectorAll('input[name="exportFormat"]').forEach(radio => {
+    radio.addEventListener('change', updateExportPreview);
+  });
+  
+  // Filter selection
+  document.querySelectorAll('input[name="contentFilter"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const categorySection = document.getElementById('categorySelection');
+      if (radio.value === 'category') {
+        categorySection.style.display = 'block';
+      } else {
+        categorySection.style.display = 'none';
+      }
+      updateExportPreview();
+    });
+  });
+  
+  // Category selection
+  document.addEventListener('change', (e) => {
+    if (e.target.name === 'exportCategory') {
+      updateExportPreview();
+    }
+  });
+  
+  // Content options
+  document.querySelectorAll('#exportOptionsModal input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', updateExportPreview);
+  });
+  
+  // Modal buttons
+  document.getElementById('closeExportModal').addEventListener('click', hideExportModal);
+  document.getElementById('cancelExportBtn').addEventListener('click', hideExportModal);
+  document.getElementById('startExportBtn').addEventListener('click', performExport);
+}
+
+function performExport() {
+  const formatRadio = document.querySelector('input[name="exportFormat"]:checked');
+  const filterRadio = document.querySelector('input[name="contentFilter"]:checked');
+  
+  if (!formatRadio || !filterRadio) {
+    showError('Please select export format and content filter');
+    return;
+  }
+  
+  const format = formatRadio.value;
+  const filter = filterRadio.value;
+  
+  // Get selected categories if filter is 'category'
+  let selectedCategories = [];
+  if (filter === 'category') {
+    selectedCategories = Array.from(document.querySelectorAll('input[name="exportCategory"]:checked'))
+      .map(cb => cb.value);
+      
+    if (selectedCategories.length === 0) {
+      showError('Please select at least one category');
+      return;
+    }
+  }
+  
+  // Get filtered questions
+  const questionsToExport = getFilteredQuestionsForExport(filter, selectedCategories);
+  
+  if (questionsToExport.length === 0) {
+    showError('No questions match the selected criteria');
+    return;
+  }
+  
+  // Get content options
+  const options = {
+    includeQuestions: document.getElementById('includeQuestions').checked,
+    includeAnswers: document.getElementById('includeAnswers').checked,
+    includeDiscussions: document.getElementById('includeDiscussions').checked,
+    includeImages: document.getElementById('includeImages').checked,
+    includeUserNotes: document.getElementById('includeUserNotes').checked,
+    includeMetadata: document.getElementById('includeMetadata').checked
+  };
+  
+  // Perform export based on format
+  try {
+    switch (format) {
+      case 'pdf':
+        exportToPDFWithOptions(questionsToExport, options);
+        break;
+      case 'json':
+        exportToEnhancedJSON(questionsToExport, options);
+        break;
+      case 'txt':
+        exportToTXT(questionsToExport, options);
+        break;
+      case 'csv':
+        exportToCSV(questionsToExport, options);
+        break;
+      default:
+        showError('Invalid export format');
+        return;
+    }
+    
+    // Close modal on successful export
+    hideExportModal();
+    
+  } catch (error) {
+    showError(`Export failed: ${error.message}`);
+  }
+}
+
+function exportToPDFWithOptions(questions, options) {
+  // Temporarily override current questions for PDF export
+  const originalQuestions = currentQuestions;
+  currentQuestions = questions;
+  
+  try {
+    exportToPDF(); // Use existing PDF export function
+  } finally {
+    currentQuestions = originalQuestions;
+  }
+}
+
 // Toggle legal information display
 function toggleLegalInfo() {
   devLog("toggleLegalInfo called"); // Debug log
@@ -5166,7 +5816,10 @@ document.addEventListener("keydown", async function (e) {
     case "Escape":
       e.preventDefault();
       // Escape: Close modals, toggle sidebar, or clear search
-      if (document.querySelector('.modal[style*="block"]')) {
+      if (document.getElementById('exportOptionsModal').style.display === 'flex') {
+        // Close export modal
+        hideExportModal();
+      } else if (document.querySelector('.modal[style*="block"]')) {
         // Close any open modal
         const openModal = document.querySelector('.modal[style*="block"]');
         openModal.style.display = "none";
