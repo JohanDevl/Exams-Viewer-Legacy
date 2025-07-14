@@ -4210,3 +4210,250 @@ body {
     transition: none;
   }
 }
+
+/* Hide mobile navigation on desktop */
+.mobile-nav-bottom {
+  display: none;
+}
+
+/* Hide swipe indicators on desktop */
+.swipe-indicator {
+  display: none;
+}
+
+/* Enhanced Mobile Navigation Styles */
+@media (max-width: 480px) {
+  /* Hide entire navigation section on mobile */
+  .navigation-section {
+    display: none !important;
+  }
+  
+  /* Mobile bottom navigation */
+  .mobile-nav-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-nav-bottom .nav-btn {
+    flex: 1;
+    max-width: 80px;
+    margin: 0 0.25rem;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    min-height: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+
+  .mobile-nav-bottom .nav-btn i {
+    font-size: 1.2rem;
+  }
+
+  /* Add bottom padding to prevent content overlap with mobile nav */
+  .question-section {
+    padding-bottom: 80px;
+  }
+
+  /* Enhanced touch targets for navigation buttons */
+  .nav-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Enhanced touch targets for answer options */
+  .answer-option {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .answer-option input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+  }
+
+  /* Enhanced touch targets for inputs */
+  .exam-input,
+  .question-jump input {
+    min-height: 44px;
+    font-size: 0.9rem;
+    padding: 0.75rem;
+    touch-action: manipulation;
+  }
+
+  /* Enhanced touch targets for buttons */
+  .exam-load-btn,
+  .favorites-actions button,
+  .export-actions button {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Swipe gesture indicator */
+  .swipe-indicator {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--accent-color);
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: block; /* Override the default display: none */
+  }
+
+  .swipe-indicator.left {
+    left: 20px;
+  }
+
+  .swipe-indicator.right {
+    right: 20px;
+  }
+
+  .swipe-indicator.show {
+    opacity: 1;
+  }
+
+  /* Touch feedback for interactive elements */
+  .touch-feedback {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .touch-feedback::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+    pointer-events: none;
+  }
+
+  .touch-feedback:active::before {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Enhanced spacing for mobile */
+  .nav-controls {
+    gap: 0.75rem;
+  }
+
+  .nav-controls-secondary {
+    gap: 0.75rem;
+  }
+
+  .favorites-actions {
+    gap: 0.75rem;
+  }
+
+  .export-actions {
+    gap: 0.75rem;
+  }
+
+  /* Better visual hierarchy for mobile */
+  .question-info {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .question-jump {
+    min-width: 140px;
+  }
+
+  .question-jump input {
+    width: 80px;
+    min-height: 44px;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  /* Mobile-optimized progress elements */
+  .progress-stats-item,
+  .current-session-stats-item,
+  .exam-info-item {
+    padding: 0.75rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .progress-bar {
+    height: 8px;
+  }
+
+  .progress-fill {
+    height: 8px;
+  }
+
+  /* Mobile-optimized sidebar */
+  .sidebar {
+    padding: 0.75rem;
+  }
+
+  .sidebar .nav-btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Better modal experience on mobile */
+  .modal-content {
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  /* Enhanced mobile keyboard support */
+  .keyboard-shortcut {
+    padding: 0.5rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
