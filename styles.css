@@ -3885,6 +3885,52 @@ body {
   box-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
 }
 
+/* Mobile responsiveness for status badges */
+@media (max-width: 768px) {
+  .status-badge {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.3rem;
+    margin-left: 0.2rem;
+  }
+  
+  .status-badge i {
+    font-size: 0.55rem;
+  }
+  
+  .question-status-indicators {
+    gap: 0.2rem;
+    margin-top: 0.2rem;
+  }
+  
+  .secondary-badges {
+    gap: 0.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .status-badge {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.25rem;
+  }
+  
+  .question-status-indicators {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+  
+  .primary-status,
+  .secondary-badges {
+    width: 100%;
+  }
+  
+  .secondary-badges {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.15rem;
+  }
+}
+
 /* Mobile responsiveness for changelog */
 @media (max-width: 768px) {
   .changelog-modal-content {

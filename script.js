@@ -4178,6 +4178,9 @@ function validateAnswers() {
     updateFilterCounts();
   }
   
+  // Clear cache since answer status has changed
+  clearQuestionStatusCache();
+  
   // Update progress sidebar to reflect answered status
   updateProgressSidebar();
 }
@@ -5367,8 +5370,18 @@ function isQuestionCategorized(questionNumber) {
   return questionData && questionData.category && questionData.category.trim().length > 0;
 }
 
-// Get comprehensive question status
+// Simple cache for question status to improve performance
+let questionStatusCache = new Map();
+
+// Get comprehensive question status (with caching for performance)
 function getQuestionStatus(questionNumber) {
+  const cacheKey = `${currentExam?.exam_name || 'unknown'}_${questionNumber}`;
+  
+  // Check cache first (cache is invalidated when statistics change)
+  if (questionStatusCache.has(cacheKey)) {
+    return questionStatusCache.get(cacheKey);
+  }
+  
   const status = {
     isNew: !isQuestionVisited(questionNumber) && !isQuestionAnswered(questionNumber),
     isViewed: isQuestionVisited(questionNumber) && !isQuestionAnswered(questionNumber),
@@ -5391,7 +5404,19 @@ function getQuestionStatus(questionNumber) {
     status.primaryStatus = 'new';
   }
   
+  // Cache the result (limit cache size to prevent memory leaks)
+  if (questionStatusCache.size > 200) {
+    const firstKey = questionStatusCache.keys().next().value;
+    questionStatusCache.delete(firstKey);
+  }
+  questionStatusCache.set(cacheKey, status);
+  
   return status;
+}
+
+// Clear question status cache when statistics or favorites change
+function clearQuestionStatusCache() {
+  questionStatusCache.clear();
 }
 
 // Track question visit
@@ -5406,6 +5431,7 @@ function trackQuestionVisit(questionNumber) {
   const questionNumberStr = questionNumber.toString();
   if (!statistics.currentSession.vq.includes(questionNumberStr)) {
     statistics.currentSession.vq.push(questionNumberStr);
+    clearQuestionStatusCache(); // Clear cache when visit status changes
     saveStatistics(); // Save to localStorage
   }
 }
