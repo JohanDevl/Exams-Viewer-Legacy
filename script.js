@@ -5087,11 +5087,12 @@ function exportToTXT(questions, options = {}) {
         answerText = answerText.replace(/\s+/g, ' ').trim();
         
         const isCorrect = correctAnswers.has(answerLetter);
-        content += `${answerLetter}. ${answerText} ${isCorrect ? '✓' : ''}\n`;
+        const showCorrect = includeCorrectAnswers && isCorrect;
+        content += `${answerLetter}. ${answerText} ${showCorrect ? '✓' : ''}\n`;
       });
       
       // Most Voted Answer(s)
-      if (mostVoted) {
+      if (includeCorrectAnswers && mostVoted) {
         content += `\nMost Voted Answer(s): ${mostVoted}\n`;
       }
       content += "\n";
@@ -5160,7 +5161,10 @@ function exportToCSV(questions, options = {}) {
   // CSV Header
   const headers = ["Question Number"];
   if (includeQuestions) headers.push("Question Text");
-  if (includeAnswers) headers.push("Answers", "Correct Answer");
+  if (includeAnswers) {
+    headers.push("Answers");
+    if (includeCorrectAnswers) headers.push("Correct Answer");
+  }
   if (includeUserNotes) headers.push("User Note", "Category", "Is Favorite");
   if (includeDiscussions) headers.push("Discussion Count", "Top Comment");
   if (includeMetadata) headers.push("Export Date", "Exam Code");
@@ -5192,7 +5196,9 @@ function exportToCSV(questions, options = {}) {
         return text.replace(/\s+/g, ' ').trim();
       }).join("; ");
       row.push(`"${answersText}"`);
-      row.push(`"${question.most_voted || ""}"`);
+      if (includeCorrectAnswers) {
+        row.push(`"${question.most_voted || ""}"`);
+      }
     }
     
     // User notes
@@ -5264,6 +5270,7 @@ function exportToEnhancedJSON(questions, options = {}) {
   const {
     includeQuestions = true,
     includeAnswers = true,
+    includeCorrectAnswers = true,
     includeDiscussions = true,
     includeImages = true,
     includeUserNotes = true,
@@ -5366,19 +5373,51 @@ function getFilteredQuestionsForExport(filterType, categories = []) {
     return [];
   }
 
-  const examCode = currentExam.exam_code;
+  // Use the same exam code logic as isQuestionFavorite
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  if (!examCode) {
+    console.warn('No exam code found for current exam');
+    return filterType === 'all' ? currentQuestions : [];
+  }
+  
   const examFavorites = favoritesData.favorites[examCode] || {};
+  
+  // Debug logging
+  console.log('Filter type:', filterType);
+  console.log('Exam code found:', examCode);
+  console.log('Current exam name:', currentExam.exam_name);
+  console.log('Available favorites:', examFavorites);
+  console.log('Total questions:', currentQuestions.length);
   
   switch (filterType) {
     case 'all':
       return currentQuestions;
       
     case 'favorites':
-      return currentQuestions.filter(question => {
+      const filteredFavorites = currentQuestions.filter(question => {
         const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
-        const questionData = examFavorites[questionNumber];
-        return questionData && questionData.isFavorite;
+        // Use string key like isQuestionFavorite does
+        const questionData = examFavorites[questionNumber.toString()];
+        const isFav = questionData && questionData.isFavorite;
+        
+        // Debug specific questions
+        if (questionNumber <= 3) {
+          console.log(`Question ${questionNumber}:`, {
+            questionData,
+            isFavorite: isFav,
+            hasData: !!questionData,
+            keyUsed: questionNumber.toString()
+          });
+        }
+        
+        return isFav;
       });
+      
+      console.log('Filtered favorites count:', filteredFavorites.length);
+      return filteredFavorites;
       
     case 'answered':
       return currentQuestions.filter(question => {
@@ -5389,7 +5428,7 @@ function getFilteredQuestionsForExport(filterType, categories = []) {
     case 'notes':
       return currentQuestions.filter(question => {
         const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
-        const questionData = examFavorites[questionNumber];
+        const questionData = examFavorites[questionNumber.toString()];
         return questionData && questionData.note && questionData.note.trim() !== '';
       });
       
@@ -5399,7 +5438,7 @@ function getFilteredQuestionsForExport(filterType, categories = []) {
       }
       return currentQuestions.filter(question => {
         const questionNumber = question.question_number || currentQuestions.indexOf(question) + 1;
-        const questionData = examFavorites[questionNumber];
+        const questionData = examFavorites[questionNumber.toString()];
         return questionData && questionData.category && categories.includes(questionData.category);
       });
       
@@ -5409,18 +5448,33 @@ function getFilteredQuestionsForExport(filterType, categories = []) {
 }
 
 function getAvailableCategories() {
-  const examCode = currentExam.exam_code;
+  // Use the same exam code logic as isQuestionFavorite
+  const examCode = Object.keys(availableExams).find(code => 
+    availableExams[code] === currentExam.exam_name
+  );
+  
+  if (!examCode) {
+    console.warn('No exam code found for categories');
+    return [];
+  }
+  
   const examFavorites = favoritesData.favorites[examCode] || {};
   const categories = new Set();
+  
+  console.log('Getting categories for exam:', examCode);
+  console.log('Favorites data:', examFavorites);
   
   // Add default categories that are in use
   Object.values(examFavorites).forEach(questionData => {
     if (questionData.category) {
       categories.add(questionData.category);
+      console.log('Found category:', questionData.category);
     }
   });
   
-  return Array.from(categories).sort();
+  const result = Array.from(categories).sort();
+  console.log('Available categories:', result);
+  return result;
 }
 
 function estimateExportSize(questions, format, options) {
@@ -5523,13 +5577,19 @@ function updateExportPreview() {
   const filteredQuestions = getFilteredQuestionsForExport(filter, selectedCategories);
   
   // Get content options
+  const getCheckboxValue = (id) => {
+    const element = document.getElementById(id);
+    return element ? element.checked : true;
+  };
+  
   const options = {
-    includeQuestions: document.getElementById('includeQuestions')?.checked || true,
-    includeAnswers: document.getElementById('includeAnswers')?.checked || true,
-    includeDiscussions: document.getElementById('includeDiscussions')?.checked || true,
-    includeImages: document.getElementById('includeImages')?.checked || true,
-    includeUserNotes: document.getElementById('includeUserNotes')?.checked || true,
-    includeMetadata: document.getElementById('includeMetadata')?.checked || true
+    includeQuestions: getCheckboxValue('includeQuestions'),
+    includeAnswers: getCheckboxValue('includeAnswers'),
+    includeCorrectAnswers: getCheckboxValue('includeCorrectAnswers'),
+    includeDiscussions: getCheckboxValue('includeDiscussions'),
+    includeImages: getCheckboxValue('includeImages'),
+    includeUserNotes: getCheckboxValue('includeUserNotes'),
+    includeMetadata: getCheckboxValue('includeMetadata')
   };
   
   // Update preview text
@@ -5584,9 +5644,16 @@ function setupExportModalEventListeners() {
     });
   });
   
-  // Content options
-  document.querySelectorAll('#exportOptionsModal input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', updateExportPreview);
+  // Content options - Add specific IDs for better targeting
+  const contentOptionIds = ['includeQuestions', 'includeAnswers', 'includeCorrectAnswers', 'includeDiscussions', 'includeImages', 'includeUserNotes', 'includeMetadata'];
+  contentOptionIds.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.addEventListener('change', () => {
+        console.log(`${id} changed to:`, element.checked);
+        updateExportPreview();
+      });
+    }
   });
   
   // Modal buttons
@@ -5595,11 +5662,14 @@ function setupExportModalEventListeners() {
   document.getElementById('startExportBtn').addEventListener('click', performExport);
   
   // Category selection (delegated event listener)
-  document.getElementById('exportCategoryList').addEventListener('change', (e) => {
-    if (e.target.name === 'exportCategory') {
-      updateExportPreview();
-    }
-  });
+  const categoryList = document.getElementById('exportCategoryList');
+  if (categoryList) {
+    categoryList.addEventListener('change', (e) => {
+      if (e.target.name === 'exportCategory') {
+        updateExportPreview();
+      }
+    });
+  }
 }
 
 function performExport() {
@@ -5635,21 +5705,27 @@ function performExport() {
   }
   
   // Get content options
+  const getCheckboxValue = (id) => {
+    const element = document.getElementById(id);
+    return element ? element.checked : true;
+  };
+  
   const options = {
-    includeQuestions: document.getElementById('includeQuestions')?.checked || true,
-    includeAnswers: document.getElementById('includeAnswers')?.checked || true,
-    includeDiscussions: document.getElementById('includeDiscussions')?.checked || true,
-    includeImages: document.getElementById('includeImages')?.checked || true,
-    includeUserNotes: document.getElementById('includeUserNotes')?.checked || true,
-    includeMetadata: document.getElementById('includeMetadata')?.checked || true
+    includeQuestions: getCheckboxValue('includeQuestions'),
+    includeAnswers: getCheckboxValue('includeAnswers'),
+    includeCorrectAnswers: getCheckboxValue('includeCorrectAnswers'),
+    includeDiscussions: getCheckboxValue('includeDiscussions'),
+    includeImages: getCheckboxValue('includeImages'),
+    includeUserNotes: getCheckboxValue('includeUserNotes'),
+    includeMetadata: getCheckboxValue('includeMetadata')
   };
   
   // Debug: Log options to console (can be removed in production)
-  // console.log('Export options:', options);
-  // console.log('Questions to export:', questionsToExport.length);
-  // if (questionsToExport.length > 0) {
-  //   console.log('First question comments:', questionsToExport[0].comments);
-  // }
+  console.log('Export options:', options);
+  console.log('Questions to export:', questionsToExport.length);
+  if (questionsToExport.length > 0) {
+    console.log('First question comments:', questionsToExport[0].comments);
+  }
   
   // Perform export based on format
   try {
@@ -5688,6 +5764,7 @@ function exportToPDFWithOptions(questions, options) {
   const {
     includeQuestions = true,
     includeAnswers = true,
+    includeCorrectAnswers = true,
     includeDiscussions = true,
     includeImages = true,
     includeUserNotes = true,
@@ -5801,10 +5878,11 @@ function exportToPDFWithOptions(questions, options) {
 
         const isCorrect = correctAnswers.has(answerLetter);
         const fullAnswer = answerLetter + ". " + answerText;
+        const showCorrect = includeCorrectAnswers && isCorrect;
 
         printDocument.write(`
-          <div class="answer ${isCorrect ? "correct-answer" : ""}">
-              ${fullAnswer} ${isCorrect ? "✓" : ""}
+          <div class="answer ${showCorrect ? "correct-answer" : ""}">
+              ${fullAnswer} ${showCorrect ? "✓" : ""}
           </div>
         `);
       });
@@ -5812,7 +5890,7 @@ function exportToPDFWithOptions(questions, options) {
       printDocument.write(`</div>`);
       
       // Most Voted Answer(s)
-      if (mostVoted) {
+      if (includeCorrectAnswers && mostVoted) {
         printDocument.write(`
           <div style="margin-top: 10px; font-weight: bold; color: #28a745;">
               Most Voted Answer(s): ${mostVoted}
