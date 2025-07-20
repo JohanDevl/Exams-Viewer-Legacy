@@ -286,7 +286,6 @@
         applyTheme,
         loadSettingsUI,
         saveSettingsUI,
-        updateMainProgressBarVisibility,
         updateToolbarVisibility,
         updateTooltipVisibility,
         updateAdvancedSearchVisibility,
@@ -320,8 +319,6 @@
         resetMilestoneStates,
         animateNumberChange,
         updateMainProgressBarVisibility,
-        updateToolbarVisibility,
-        updateTooltipVisibility,
         showExportModal,
         hideExportModal,
         showKeyboardHelp,
@@ -345,7 +342,6 @@
       window.applyTheme = applyTheme;
       window.loadSettingsUI = loadSettingsUI;
       window.saveSettingsUI = saveSettingsUI;
-      window.updateMainProgressBarVisibility = updateMainProgressBarVisibility;
       window.updateToolbarVisibility = updateToolbarVisibility;
       window.updateTooltipVisibility = updateTooltipVisibility;
       window.updateAdvancedSearchVisibility = updateAdvancedSearchVisibility;
@@ -375,8 +371,6 @@
       window.resetMilestoneStates = resetMilestoneStates;
       window.animateNumberChange = animateNumberChange;
       window.updateMainProgressBarVisibility = updateMainProgressBarVisibility;
-      window.updateToolbarVisibility = updateToolbarVisibility;
-      window.updateTooltipVisibility = updateTooltipVisibility;
       window.showExportModal = showExportModal;
       window.hideExportModal = hideExportModal;
       window.showKeyboardHelp = showKeyboardHelp;
@@ -521,15 +515,38 @@
         
         // Test compression/decompression
         addToLog("🗜️ Testing compression with model data", 'info');
+        
+        // Create test data with full property names (not compressed)
         const testData = {
-          sessions: [session],
-          currentSession: session,
-          totalStats: { totalQuestions: 10, totalCorrect: 7 }
+          sessions: [{
+            id: "test-session-123",
+            examCode: "TEST-EXAM",
+            examName: "Test Exam Name",
+            startTime: Date.now(),
+            endTime: null,
+            questions: [],
+            visitedQuestions: [],
+            totalQuestions: 100,
+            correctAnswers: 0,
+            incorrectAnswers: 0,
+            previewAnswers: 0,
+            totalTime: 0,
+            completed: false
+          }],
+          currentSession: null,
+          totalStats: { 
+            totalQuestions: 10, 
+            totalCorrect: 7,
+            totalIncorrect: 3,
+            totalPreview: 0,
+            totalTime: 0,
+            examStats: {}
+          }
         };
         
         const compressed = compressData(testData);
         const decompressed = decompressData(compressed);
-        const matches = JSON.stringify(testData).length === JSON.stringify(decompressed).length;
+        const matches = JSON.stringify(testData) === JSON.stringify(decompressed);
         addToLog(`🔄 Model compression test: ${matches ? '✅ SUCCESS' : '❌ FAILED'}`, matches ? 'success' : 'error');
         addToLog(`📦 Compression ratio: ${(compressed.length / JSON.stringify(testData).length * 100).toFixed(1)}%`, 'info');
       };

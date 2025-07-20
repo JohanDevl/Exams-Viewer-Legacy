@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modular Test - Fixed</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .test-section { background: #fff; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-buttons { margin: 15px 0; }
+        .test-buttons button { 
+            margin: 5px; padding: 10px 15px; border: none; border-radius: 4px; 
+            cursor: pointer; color: white; font-weight: bold;
+        }
+        .btn-storage { background: #007bff; }
+        .btn-settings { background: #ff6b35; }
+        .btn-models { background: #20c997; }
+        .btn-ui { background: #e83e8c; }
+        .btn-clear { background: #dc3545; }
+        
+        .console-log { 
+            background: #2d3748; color: #e2e8f0; padding: 15px; border-radius: 8px; 
+            font-family: monospace; font-size: 12px; max-height: 400px; overflow-y: auto; 
+        }
+        .log-success { color: #68d391; }
+        .log-error { color: #fc8181; }
+        .log-info { color: #63b3ed; }
+        
+        #loadingSection { display: none; background: #007bff; color: white; padding: 10px; text-align: center; margin: 10px 0; border-radius: 4px; }
+        #errorMessage { display: none; background: #dc3545; color: white; padding: 10px; margin: 10px 0; border-radius: 4px; }
+        #successMessage { display: none; background: #28a745; color: white; padding: 10px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧪 Modular Architecture Test - Fixed</h1>
+            <p>Testing all 4 modules: Storage, Settings, Data Models, UI Effects</p>
+        </header>
+
+        <div class="test-section">
+            <h3>Module Tests</h3>
+            <div class="test-buttons">
+                <button id="testStorage" class="btn-storage">📦 Test Storage</button>
+                <button id="testSettings" class="btn-settings">⚙️ Test Settings</button>
+                <button id="testModels" class="btn-models">🏗️ Test Models</button>
+                <button id="testUI" class="btn-ui">🎨 Test UI Effects</button>
+                <button id="clearLog" class="btn-clear">🗑️ Clear Log</button>
+            </div>
+        </div>
+
+        <!-- Test UI Elements -->
+        <div id="loadingSection">⏳ Loading...</div>
+        <div id="errorMessage">Error message</div>
+        <div id="successMessage">Success message</div>
+
+        <div class="console-log">
+            <strong class="log-success">Console Output:</strong><br>
+            <div id="logContent"></div>
+        </div>
+    </div>
+
+    <!-- Global Variables -->
+    <script>
+        // Minimal global variables
+        window.settings = {
+            showDiscussionDefault: false,
+            highlightDefault: false,
+            darkMode: false,
+            showQuestionToolbar: false,
+            showAdvancedSearch: false,
+            sidebarOpen: false,
+            enableLazyLoading: false,
+            showMainProgressBar: true,
+            showTooltips: false,
+            enableResumePosition: false,
+            autoSavePosition: false,
+        };
+
+        window.statistics = {
+            sessions: [],
+            currentSession: null,
+            totalStats: {
+                totalQuestions: 0,
+                totalCorrect: 0,
+                totalIncorrect: 0,
+                totalPreview: 0,
+                totalTime: 0,
+                examStats: {},
+            },
+        };
+
+        window.favoritesData = {
+            favorites: {},
+            categories: ["Important", "Review", "Difficult"],
+            customCategories: [],
+        };
+
+        window.currentQuestions = [];
+        window.currentExam = { exam_name: "Test Exam" };
+
+        // Console logging
+        function addLog(message, type = 'log') {
+            const logContent = document.getElementById('logContent');
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = { log: '#e2e8f0', error: '#fc8181', success: '#68d391', info: '#63b3ed' };
+            logContent.innerHTML += `<div style="color: ${colors[type]}; margin: 2px 0;">[${timestamp}] ${message}</div>`;
+            logContent.scrollTop = logContent.scrollHeight;
+        }
+
+        // Mock functions
+        window.showError = (msg) => addLog(`ERROR: ${msg}`, 'error');
+        window.showSuccess = (msg) => addLog(`SUCCESS: ${msg}`, 'success');
+        window.saveStatistics = () => addLog('Statistics saved', 'info');
+        window.recalculateTotalStats = () => addLog('Total stats recalculated', 'info');
+    </script>
+
+    <!-- Module Loading -->
+    <script type="module">
+        let modules = {};
+
+        try {
+            // Import all modules
+            modules.storage = await import('./js/modules/storage.js');
+            modules.settings = await import('./js/modules/settings.js');
+            modules.models = await import('./js/core/models.js');
+            modules.uiEffects = await import('./js/modules/ui-effects.js');
+
+            addLog('🎉 All modules loaded successfully!', 'success');
+            addLog(`📦 Storage: ${Object.keys(modules.storage).length} exports`, 'info');
+            addLog(`⚙️ Settings: ${Object.keys(modules.settings).length} exports`, 'info');
+            addLog(`🏗️ Models: ${Object.keys(modules.models).length} exports`, 'info');
+            addLog(`🎨 UI Effects: ${Object.keys(modules.uiEffects).length} exports`, 'info');
+
+        } catch (error) {
+            addLog(`❌ Module loading failed: ${error.message}`, 'error');
+            console.error('Module loading error:', error);
+        }
+
+        // Test functions
+        window.testStorage = function() {
+            addLog('🧪 Testing Storage Module...', 'info');
+            
+            try {
+                // Test compression
+                const testData = { test: 'data', number: 42 };
+                const compressed = modules.models.compressData(testData);
+                const decompressed = modules.models.decompressData(compressed);
+                addLog(`✅ Compression test: ${compressed.length} chars`, 'success');
+                
+                // Test localStorage simulation
+                modules.storage.saveStatistics();
+                addLog('✅ Statistics save test', 'success');
+                
+            } catch (error) {
+                addLog(`❌ Storage test failed: ${error.message}`, 'error');
+            }
+        };
+
+        window.testSettings = function() {
+            addLog('⚙️ Testing Settings Module...', 'info');
+            
+            try {
+                // Test theme
+                modules.settings.applyTheme(true);
+                addLog('✅ Dark theme applied', 'success');
+                
+                setTimeout(() => {
+                    modules.settings.applyTheme(false);
+                    addLog('✅ Light theme applied', 'success');
+                }, 1000);
+                
+            } catch (error) {
+                addLog(`❌ Settings test failed: ${error.message}`, 'error');
+            }
+        };
+
+        window.testModels = function() {
+            addLog('🏗️ Testing Data Models...', 'info');
+            
+            try {
+                // Test ExamSession
+                const session = new modules.models.ExamSession('TEST', 'Test Exam');
+                addLog(`✅ Session created: ${session.id}`, 'success');
+                
+                // Test QuestionAttempt
+                const attempt = new modules.models.QuestionAttempt(1, ['A', 'B']);
+                attempt.addAttempt(['A'], false, 10);
+                addLog(`✅ Question attempt: ${attempt.attempts.length} attempts`, 'success');
+                
+            } catch (error) {
+                addLog(`❌ Models test failed: ${error.message}`, 'error');
+            }
+        };
+
+        window.testUI = function() {
+            addLog('🎨 Testing UI Effects...', 'info');
+            
+            try {
+                // Test loading
+                modules.uiEffects.showLoading(true);
+                addLog('⏳ Loading indicator shown', 'info');
+                
+                setTimeout(() => {
+                    modules.uiEffects.showLoading(false);
+                    addLog('✅ Loading indicator hidden', 'success');
+                }, 1000);
+                
+                // Test messages
+                setTimeout(() => {
+                    modules.uiEffects.showError('Test error message');
+                    addLog('❌ Error message displayed', 'info');
+                }, 1500);
+                
+                setTimeout(() => {
+                    modules.uiEffects.showSuccess('Test success message');
+                    addLog('✅ Success message displayed', 'success');
+                }, 2500);
+                
+            } catch (error) {
+                addLog(`❌ UI Effects test failed: ${error.message}`, 'error');
+            }
+        };
+
+        window.clearLog = function() {
+            document.getElementById('logContent').innerHTML = '';
+            addLog('🗑️ Log cleared', 'info');
+        };
+
+        // Setup event listeners
+        document.getElementById('testStorage').addEventListener('click', testStorage);
+        document.getElementById('testSettings').addEventListener('click', testSettings);
+        document.getElementById('testModels').addEventListener('click', testModels);
+        document.getElementById('testUI').addEventListener('click', testUI);
+        document.getElementById('clearLog').addEventListener('click', clearLog);
+
+        addLog('🚀 Test environment ready!', 'success');
+        addLog('Click buttons above to test each module', 'info');
+
+    </script>
+</body>
+</html>

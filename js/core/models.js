@@ -280,7 +280,7 @@ function compressData(data) {
       questionNumber: "qn",
       userAnswers: "ua",
       attempts: "att",
-      timeSpent: "ts",
+      timeSpent: "tsp",
       isCorrect: "ic",
       finalScore: "fs",
       resetCount: "rc",
@@ -289,7 +289,7 @@ function compressData(data) {
       firstActionType: "fat",
       firstActionRecorded: "far",
       selectedAnswers: "a",
-      timestamp: "ts",
+      timestamp: "tms",
       wasHighlightEnabled: "whe",
       totalCorrect: "tc",
       totalIncorrect: "ti",
@@ -298,16 +298,19 @@ function compressData(data) {
     };
 
     const valueMap = {
-      true: 1,
-      false: 0,
-      null: "n",
+      true: "_T",
+      false: "_F",
+      null: "_N",
     };
 
     function compress(obj) {
       if (obj === null || obj === undefined) return obj;
       if (typeof obj !== "object") {
-        // Compress boolean and null values
-        return valueMap.hasOwnProperty(obj) ? valueMap[obj] : obj;
+        // Only compress boolean and null values, not numbers
+        if (typeof obj === "boolean" || obj === null) {
+          return valueMap.hasOwnProperty(obj) ? valueMap[obj] : obj;
+        }
+        return obj;
       }
       if (Array.isArray(obj)) return obj.map(compress);
 
@@ -354,6 +357,7 @@ function decompressData(compressedData) {
       qn: "questionNumber",
       ua: "userAnswers",
       att: "attempts",
+      tsp: "timeSpent",
       ic: "isCorrect",
       fs: "finalScore",
       rc: "resetCount",
@@ -362,7 +366,7 @@ function decompressData(compressedData) {
       fat: "firstActionType",
       far: "firstActionRecorded",
       a: "selectedAnswers",
-      t: "timeSpent",
+      tms: "timestamp",
       whe: "wasHighlightEnabled",
       tc: "totalCorrect",
       ti: "totalIncorrect",
@@ -371,16 +375,20 @@ function decompressData(compressedData) {
     };
 
     const reverseValueMap = {
-      1: true,
-      0: false,
-      n: null,
+      "_T": true,
+      "_F": false,
+      "_N": null,
     };
 
     function decompress(obj) {
       if (obj === null || obj === undefined) return obj;
       if (typeof obj !== "object") {
-        // Decompress boolean and null values
-        return reverseValueMap.hasOwnProperty(obj) ? reverseValueMap[obj] : obj;
+        // Only decompress values that are actually in our reverse map
+        // Don't convert numbers to booleans
+        if (reverseValueMap.hasOwnProperty(obj)) {
+          return reverseValueMap[obj];
+        }
+        return obj;
       }
       if (Array.isArray(obj)) return obj.map(decompress);
 
