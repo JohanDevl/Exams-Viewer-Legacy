@@ -43,150 +43,9 @@ const devError = (...args) => {
 };
 
 // ===========================
-// DATA COMPRESSION
+// NOTE: Data compression functions moved to js/core/models.js
+// This ensures compression logic stays with the data models
 // ===========================
-
-/**
- * Compress data using custom property name mapping to reduce localStorage size
- */
-function compressData(data) {
-  try {
-    const propertyMap = {
-      // Statistics mappings
-      sessions: "s",
-      currentSession: "cs",
-      totalStats: "ts",
-      examCode: "ec",
-      examName: "en",
-      startTime: "st",
-      endTime: "et",
-      questions: "q",
-      visitedQuestions: "vq",
-      totalQuestions: "tq",
-      correctAnswers: "ca",
-      incorrectAnswers: "ia",
-      previewAnswers: "pa",
-      totalTime: "tt",
-      completed: "c",
-      questionNumber: "qn",
-      correctAnswers: "ca",
-      userAnswers: "ua",
-      attempts: "att",
-      startTime: "st",
-      endTime: "et",
-      timeSpent: "ts",
-      isCorrect: "ic",
-      finalScore: "fs",
-      resetCount: "rc",
-      highlightButtonClicks: "hbc",
-      highlightViewCount: "hvc",
-      firstActionType: "fat",
-      firstActionRecorded: "far",
-      selectedAnswers: "a",
-      isCorrect: "c",
-      timeSpent: "t",
-      timestamp: "ts",
-      wasHighlightEnabled: "whe",
-      totalCorrect: "tc",
-      totalIncorrect: "ti",
-      totalPreview: "tp",
-      examStats: "es",
-    };
-
-    function compress(obj) {
-      if (obj === null || obj === undefined) return obj;
-      if (typeof obj !== "object") return obj;
-      if (Array.isArray(obj)) return obj.map(compress);
-
-      const compressed = {};
-      for (const [key, value] of Object.entries(obj)) {
-        const newKey = propertyMap[key] || key;
-        compressed[newKey] = compress(value);
-      }
-      return compressed;
-    }
-
-    const compressed = compress(data);
-    return JSON.stringify(compressed);
-  } catch (error) {
-    devError("Error compressing data:", error);
-    return JSON.stringify(data); // Fallback to uncompressed
-  }
-}
-
-/**
- * Decompress data with reverse property mapping, with fallback to regular JSON parsing
- */
-function decompressData(compressedData) {
-  try {
-    const reversePropertyMap = {
-      // Reverse statistics mappings
-      s: "sessions",
-      cs: "currentSession",
-      ts: "totalStats",
-      ec: "examCode",
-      en: "examName",
-      st: "startTime",
-      et: "endTime",
-      q: "questions",
-      vq: "visitedQuestions",
-      tq: "totalQuestions",
-      ca: "correctAnswers",
-      ia: "incorrectAnswers",
-      pa: "previewAnswers",
-      tt: "totalTime",
-      c: "completed",
-      qn: "questionNumber",
-      ua: "userAnswers",
-      att: "attempts",
-      ic: "isCorrect",
-      fs: "finalScore",
-      rc: "resetCount",
-      hbc: "highlightButtonClicks",
-      hvc: "highlightViewCount",
-      fat: "firstActionType",
-      far: "firstActionRecorded",
-      a: "selectedAnswers",
-      t: "timeSpent",
-      whe: "wasHighlightEnabled",
-      tc: "totalCorrect",
-      ti: "totalIncorrect",
-      tp: "totalPreview",
-      es: "examStats",
-    };
-
-    function decompress(obj) {
-      if (obj === null || obj === undefined) return obj;
-      if (typeof obj !== "object") return obj;
-      if (Array.isArray(obj)) return obj.map(decompress);
-
-      const decompressed = {};
-      for (const [key, value] of Object.entries(obj)) {
-        const newKey = reversePropertyMap[key] || key;
-        decompressed[newKey] = decompress(value);
-      }
-      return decompressed;
-    }
-
-    const parsed = JSON.parse(compressedData);
-    return decompress(parsed);
-  } catch (error) {
-    devError("Error decompressing data:", error);
-    // Return default statistics structure if decompression fails
-    return {
-      sessions: [],
-      currentSession: null,
-      totalStats: {
-        totalQuestions: 0,
-        totalCorrect: 0,
-        totalIncorrect: 0,
-        totalPreview: 0,
-        totalTime: 0,
-        examStats: {},
-      },
-    };
-  }
-}
 
 // ===========================
 // CORRUPTED DATA CLEANUP
@@ -233,7 +92,8 @@ function clearCorruptedData() {
  */
 function saveStatistics() {
   try {
-    const compressedData = compressData(statistics);
+    // Use compression from models module
+    const compressedData = window.compressData ? window.compressData(statistics) : JSON.stringify(statistics);
     
     // Calculate size in KB
     const sizeKB = (new Blob([compressedData]).size / 1024).toFixed(2);
@@ -274,7 +134,8 @@ function loadStatistics() {
       return;
     }
 
-    const loadedData = decompressData(savedData);
+    // Use decompression from models module
+    const loadedData = window.decompressData ? window.decompressData(savedData) : JSON.parse(savedData);
     
     // Migrate old data format to new format if needed
     if (loadedData) {
@@ -586,10 +447,6 @@ export {
   isDevelopmentMode,
   devLog,
   devError,
-  
-  // Data compression
-  compressData,
-  decompressData,
   
   // Data cleanup
   clearCorruptedData,

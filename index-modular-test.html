@@ -24,7 +24,7 @@
 
       <!-- Test Section -->
       <div class="test-section" style="background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 8px;">
-        <h3>🧪 Modules Storage & Settings Test</h3>
+        <h3>🧪 Modules Storage, Settings & Data Models Test</h3>
         <div id="test-results" style="margin: 10px 0;">
           <p><strong>Tests en cours...</strong></p>
         </div>
@@ -41,6 +41,12 @@
           </button>
           <button id="testTheme" style="margin: 5px; padding: 10px 15px; background: #8e44ad; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🎨 Test Theme Toggle
+          </button>
+          <button id="testModels" style="margin: 5px; padding: 10px 15px; background: #20c997; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🏗️ Test Data Models
+          </button>
+          <button id="testSession" style="margin: 5px; padding: 10px 15px; background: #fd7e14; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            📝 Test Session Management
           </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
@@ -266,8 +272,21 @@
         initializeSettings,
       } from './js/modules/settings.js';
 
+      // Also import data models module
+      import {
+        ExamSession,
+        QuestionAttempt,
+        compressData,
+        decompressData,
+        startExamSession,
+        endCurrentSession,
+        trackQuestionAttempt,
+        trackQuestionVisit,
+      } from './js/core/models.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
+      addToLog("🏗️ Data Models module imported successfully!", 'success');
 
       // Make settings functions available globally for testing
       window.applyTheme = applyTheme;
@@ -279,6 +298,16 @@
       window.updateAdvancedSearchVisibility = updateAdvancedSearchVisibility;
       window.setupSettingsEventListeners = setupSettingsEventListeners;
       window.initializeSettings = initializeSettings;
+
+      // Make data models functions available globally for testing
+      window.ExamSession = ExamSession;
+      window.QuestionAttempt = QuestionAttempt;
+      window.compressData = compressData;
+      window.decompressData = decompressData;
+      window.startExamSession = startExamSession;
+      window.endCurrentSession = endCurrentSession;
+      window.trackQuestionAttempt = trackQuestionAttempt;
+      window.trackQuestionVisit = trackQuestionVisit;
 
       // Initialize settings module
       initializeSettings();
@@ -392,6 +421,72 @@
         }, 1000);
       };
 
+      // Test data models
+      window.testModels = function() {
+        addToLog("🏗️ Testing Data Models...", 'info');
+        
+        // Test ExamSession class
+        addToLog("📝 Testing ExamSession class", 'info');
+        const session = new ExamSession('TEST-EXAM', 'Test Exam Name');
+        addToLog(`✅ Session created - ID: ${session.id}, Code: ${session.examCode}`, 'success');
+        
+        // Test QuestionAttempt class
+        addToLog("❓ Testing QuestionAttempt class", 'info');
+        const attempt = new QuestionAttempt(1, ['A', 'B']);
+        attempt.addAttempt(['A'], false, 10, false);
+        attempt.addAttempt(['A', 'B'], true, 15, true);
+        addToLog(`✅ Question attempt created - Final score: ${attempt.finalScore}%`, 'success');
+        addToLog(`📊 Attempts: ${attempt.attempts.length}, Time: ${attempt.timeSpent}s`, 'info');
+        
+        // Test compression/decompression
+        addToLog("🗜️ Testing compression with model data", 'info');
+        const testData = {
+          sessions: [session],
+          currentSession: session,
+          totalStats: { totalQuestions: 10, totalCorrect: 7 }
+        };
+        
+        const compressed = compressData(testData);
+        const decompressed = decompressData(compressed);
+        const matches = JSON.stringify(testData).length === JSON.stringify(decompressed).length;
+        addToLog(`🔄 Model compression test: ${matches ? '✅ SUCCESS' : '❌ FAILED'}`, matches ? 'success' : 'error');
+        addToLog(`📦 Compression ratio: ${(compressed.length / JSON.stringify(testData).length * 100).toFixed(1)}%`, 'info');
+      };
+
+      // Test session management
+      window.testSession = function() {
+        addToLog("📝 Testing Session Management...", 'info');
+        
+        // Initialize statistics if not exists
+        if (!statistics.sessions) {
+          statistics.sessions = [];
+        }
+        
+        // Start a new session
+        addToLog("🚀 Starting new exam session", 'info');
+        const session = startExamSession('TEST-EXAM-2', 'Test Exam Session');
+        addToLog(`✅ Session started - ID: ${session?.id || 'N/A'}`, session ? 'success' : 'error');
+        
+        // Track some question visits
+        addToLog("👀 Tracking question visits", 'info');
+        trackQuestionVisit(1);
+        trackQuestionVisit(2);
+        trackQuestionVisit(3);
+        addToLog(`📊 Visited questions: ${statistics.currentSession?.visitedQuestions?.length || 0}`, 'info');
+        
+        // Track question attempts
+        addToLog("❓ Tracking question attempts", 'info');
+        trackQuestionAttempt(1, ['A'], ['A', 'B'], false, 10);
+        trackQuestionAttempt(1, ['A', 'B'], ['A', 'B'], true, 15);
+        addToLog(`✅ Question attempts tracked`, 'success');
+        
+        // End session
+        addToLog("🏁 Ending current session", 'info');
+        const endedSession = endCurrentSession();
+        addToLog(`✅ Session ended - Total time: ${endedSession?.totalTime || 0}s`, 'success');
+        addToLog(`📊 Total sessions: ${statistics.sessions?.length || 0}`, 'info');
+      };
+
       window.clearTests = function() {
         document.getElementById('log-content').innerHTML = '';
         addToLog("🗑️ Test logs cleared", 'info');
@@ -408,6 +503,8 @@
       document.getElementById('testCompression').addEventListener('click', testCompression);
       document.getElementById('testSettings').addEventListener('click', testSettings);
       document.getElementById('testTheme').addEventListener('click', testTheme);
+      document.getElementById('testModels').addEventListener('click', testModels);
+      document.getElementById('testSession').addEventListener('click', testSession);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
@@ -423,7 +520,7 @@
       });
 
       addToLog("🚀 Modular test environment ready!", 'success');
-      addToLog("Click buttons above to test storage & settings modules functionality", 'info');
+      addToLog("Click buttons above to test Storage, Settings & Data Models modules functionality", 'info');
     </script>
   </body>
 </html>

@@ -10,8 +10,6 @@ import {
   isDevelopmentMode,
   devLog,
   devError,
-  compressData,
-  decompressData,
   clearCorruptedData,
   saveStatistics,
   loadStatistics,
@@ -49,12 +47,22 @@ import {
   initializeSettings,
 } from './modules/settings.js';
 
+// Import data models module
+import {
+  ExamSession,
+  QuestionAttempt,
+  compressData,
+  decompressData,
+  startExamSession,
+  endCurrentSession,
+  trackQuestionAttempt,
+  trackQuestionVisit,
+} from './core/models.js';
+
 // Make storage functions globally available for now (backward compatibility)
 window.isDevelopmentMode = isDevelopmentMode;
 window.devLog = devLog;
 window.devError = devError;
-window.compressData = compressData;
-window.decompressData = decompressData;
 window.clearCorruptedData = clearCorruptedData;
 window.saveStatistics = saveStatistics;
 window.loadStatistics = loadStatistics;
@@ -89,6 +97,16 @@ window.handleAutoSavePositionToggle = handleAutoSavePositionToggle;
 window.setupSettingsEventListeners = setupSettingsEventListeners;
 window.initializeSettings = initializeSettings;
 
+// Make data models globally available for now (backward compatibility)
+window.ExamSession = ExamSession;
+window.QuestionAttempt = QuestionAttempt;
+window.compressData = compressData;
+window.decompressData = decompressData;
+window.startExamSession = startExamSession;
+window.endCurrentSession = endCurrentSession;
+window.trackQuestionAttempt = trackQuestionAttempt;
+window.trackQuestionVisit = trackQuestionVisit;
+
 // Initialize global settings object if not exists
 if (!window.settings) {
   window.settings = {
@@ -108,6 +126,7 @@ if (!window.settings) {
 
 console.log("📦 Storage module loaded successfully");
 console.log("⚙️ Settings module loaded successfully");
+console.log("🏗️ Data Models module loaded successfully");
 console.log("⚙️ Global settings object initialized");
 
 // ===========================
@@ -122,5 +141,5 @@ console.log("⚙️ Global settings object initialized");
 // For testing purposes, we'll include a minimal implementation
 
 console.log("🚀 Modular architecture initialized");
-console.log("📦 Available modules: Storage, Settings");
+console.log("📦 Available modules: Storage, Settings, Data Models");
 console.log("⚠️  Other functionality still loading from script.js");
