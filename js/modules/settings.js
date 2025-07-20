@@ -24,9 +24,20 @@
 function applyTheme(isDark = null) {
   const body = document.body;
   const darkModeBtn = document.getElementById("darkModeBtn");
+  const darkModeToggle = document.getElementById("darkModeToggle");
   
   // Use parameter if provided, otherwise use settings
   const darkMode = isDark !== null ? isDark : (window.settings?.darkMode || false);
+  
+  // Update settings object if parameter was provided
+  if (isDark !== null && window.settings) {
+    window.settings.darkMode = isDark;
+  }
+  
+  // Update checkbox to match the theme
+  if (darkModeToggle) {
+    darkModeToggle.checked = darkMode;
+  }
   
   if (darkMode) {
     body.classList.add("dark-mode");
