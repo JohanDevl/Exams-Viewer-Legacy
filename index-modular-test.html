@@ -54,6 +54,9 @@
           <button id="testModals" style="margin: 5px; padding: 10px 15px; background: #6610f2; color: white; border: none; border-radius: 4px; cursor: pointer;">
             📱 Test Modals
           </button>
+          <button id="testStatistics" style="margin: 5px; padding: 10px 15px; background: #17a2b8; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            📊 Test Statistics
+          </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
           </button>
@@ -333,10 +336,25 @@
         renderMarkdown,
       } from './js/modules/ui-effects.js';
 
+      // Also import statistics module
+      import {
+        recalculateTotalStats,
+        getCurrentSessionStats,
+        getGlobalStats,
+        updateSessionStats,
+        updateGlobalStats,
+        isQuestionAnswered,
+        getMostRecentAnswer,
+        getQuestionStatus,
+        cleanCorruptedStatistics,
+        clearQuestionStatusCache,
+      } from './js/modules/statistics.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
       addToLog("🏗️ Data Models module imported successfully!", 'success');
       addToLog("🎨 UI Effects module imported successfully!", 'success');
+      addToLog("📊 Statistics module imported successfully!", 'success');
 
       // Make settings functions available globally for testing
       window.applyTheme = applyTheme;
@@ -383,6 +401,18 @@
       window.showQuestionNumberSuggestions = showQuestionNumberSuggestions;
       window.hideAutocompleteSuggestions = hideAutocompleteSuggestions;
       window.renderMarkdown = renderMarkdown;
+
+      // Make statistics functions available globally for testing
+      window.recalculateTotalStats = recalculateTotalStats;
+      window.getCurrentSessionStats = getCurrentSessionStats;
+      window.getGlobalStats = getGlobalStats;
+      window.updateSessionStats = updateSessionStats;
+      window.updateGlobalStats = updateGlobalStats;
+      window.isQuestionAnswered = isQuestionAnswered;
+      window.getMostRecentAnswer = getMostRecentAnswer;
+      window.getQuestionStatus = getQuestionStatus;
+      window.cleanCorruptedStatistics = cleanCorruptedStatistics;
+      window.clearQuestionStatusCache = clearQuestionStatusCache;
 
       // Initialize settings module
       initializeSettings();
@@ -692,6 +722,119 @@
         }, 6000);
       };
 
+      // Test statistics module
+      window.testStatistics = function() {
+        addToLog("📊 Testing Statistics Module...", 'info');
+        
+        try {
+          // Initialize statistics object if not exists
+          if (!window.statistics) {
+            window.statistics = {
+              sessions: [],
+              currentSession: null,
+              totalStats: {
+                totalQuestions: 0,
+                totalCorrect: 0,
+                totalIncorrect: 0,
+                totalPreview: 0,
+                totalTime: 0,
+                examStats: {},
+              }
+            };
+          }
+
+          // Create test session data
+          addToLog("🎯 Creating test session data", 'info');
+          window.statistics.sessions = [
+            {
+              examCode: "TEST-001",
+              examName: "Test Exam 1",
+              startTime: Date.now() - 3600000, // 1 hour ago
+              endTime: Date.now() - 3000000,   // 50 minutes ago
+              totalQuestions: 50,
+              correctAnswers: 35,
+              incorrectAnswers: 10,
+              previewAnswers: 5,
+              totalTime: 600, // 10 minutes
+              completed: true,
+              questions: [
+                { questionNumber: 1, userAnswers: ['A'], endTime: Date.now() - 3500000 },
+                { questionNumber: 2, userAnswers: ['B', 'C'], endTime: Date.now() - 3400000 }
+              ]
+            },
+            {
+              examCode: "TEST-002", 
+              examName: "Test Exam 2",
+              startTime: Date.now() - 1800000, // 30 minutes ago
+              endTime: Date.now() - 900000,    // 15 minutes ago
+              totalQuestions: 30,
+              correctAnswers: 20,
+              incorrectAnswers: 8,
+              previewAnswers: 2,
+              totalTime: 450, // 7.5 minutes
+              completed: true
+            }
+          ];
+
+          // Test global stats calculation
+          addToLog("📈 Testing global stats calculation", 'info');
+          recalculateTotalStats();
+          const globalStats = getGlobalStats();
+          addToLog(`✅ Global stats: ${globalStats.totalQuestions} questions, ${globalStats.overallAccuracy}% accuracy`, 'success');
+          addToLog(`📊 Total sessions: ${globalStats.totalSessions}, Exams: ${globalStats.examsCount}`, 'info');
+
+          // Test current session (simulate active session)
+          addToLog("⏱️ Testing current session stats", 'info');
+          window.statistics.currentSession = {
+            examCode: "TEST-CURRENT",
+            examName: "Current Test",
+            startTime: Date.now() - 300000, // 5 minutes ago
+            totalQuestions: 20,
+            correctAnswers: 12,
+            incorrectAnswers: 3,
+            previewAnswers: 1,
+            totalTime: 240 // 4 minutes
+          };
+
+          const currentStats = getCurrentSessionStats();
+          addToLog(`✅ Current session: ${currentStats.accuracy}% accuracy, ${currentStats.totalAnswered} answered`, 'success');
+
+          // Test question status tracking
+          addToLog("❓ Testing question status tracking", 'info');
+          window.currentExam = { exam_code: "TEST-001", exam_name: "Test Exam 1" };
+          
+          const isAnswered = isQuestionAnswered(0); // Check first question
+          addToLog(`✅ Question 1 answered: ${isAnswered}`, 'success');
+          
+          if (isAnswered) {
+            const recentAnswer = getMostRecentAnswer(0);
+            addToLog(`📝 Most recent answer: ${recentAnswer ? recentAnswer.join(', ') : 'None'}`, 'info');
+          }
+
+          // Test question status cache
+          addToLog("💾 Testing question status cache", 'info');
+          const questionStatus = getQuestionStatus(0);
+          addToLog(`✅ Question status cached: ${questionStatus.isAnswered}`, 'success');
+          
+          clearQuestionStatusCache();
+          addToLog("🗑️ Question status cache cleared", 'info');
+
+          // Test data cleanup
+          addToLog("🧹 Testing data cleanup", 'info');
+          cleanCorruptedStatistics();
+          addToLog("✅ Statistics cleaned successfully", 'success');
+
+          // Display updated global stats
+          recalculateTotalStats();
+          const finalStats = getGlobalStats();
+          addToLog(`📊 Final stats: ${finalStats.totalCorrect}/${finalStats.totalQuestions} (${finalStats.overallAccuracy}%)`, 'success');
+          addToLog(`⏱️ Total time: ${Math.round(finalStats.totalTime / 60)} minutes`, 'info');
+
+        } catch (error) {
+          addToLog(`❌ Statistics test failed: ${error.message}`, 'error');
+        }
+      };
+
       window.clearTests = function() {
         document.getElementById('log-content').innerHTML = '';
         addToLog("🗑️ Test logs cleared", 'info');
@@ -712,6 +855,7 @@
       document.getElementById('testSession').addEventListener('click', testSession);
       document.getElementById('testUIEffects').addEventListener('click', testUIEffects);
       document.getElementById('testModals').addEventListener('click', testModals);
+      document.getElementById('testStatistics').addEventListener('click', testStatistics);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
