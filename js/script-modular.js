@@ -59,6 +59,36 @@ import {
   trackQuestionVisit,
 } from './core/models.js';
 
+// Import UI effects module
+import {
+  showLoading,
+  showError,
+  showSuccess,
+  showSwipeIndicator,
+  hideSwipeIndicators,
+  addHapticFeedback,
+  addProgressMilestoneEffects,
+  triggerMilestoneAnimation,
+  hideMainProgressBar,
+  resetMilestoneStates,
+  animateNumberChange,
+  updateMainProgressBarVisibility,
+  updateToolbarVisibility,
+  updateTooltipVisibility,
+  showExportModal,
+  hideExportModal,
+  showKeyboardHelp,
+  closeKeyboardHelp,
+  displayChangelog,
+  toggleSidebar,
+  toggleSearchSection,
+  toggleLegalInfo,
+  showValidationResults,
+  showQuestionNumberSuggestions,
+  hideAutocompleteSuggestions,
+  renderMarkdown,
+} from './modules/ui-effects.js';
+
 // Make storage functions globally available for now (backward compatibility)
 window.isDevelopmentMode = isDevelopmentMode;
 window.devLog = devLog;
@@ -107,6 +137,34 @@ window.endCurrentSession = endCurrentSession;
 window.trackQuestionAttempt = trackQuestionAttempt;
 window.trackQuestionVisit = trackQuestionVisit;
 
+// Make UI effects functions globally available for now (backward compatibility)
+window.showLoading = showLoading;
+window.showError = showError;
+window.showSuccess = showSuccess;
+window.showSwipeIndicator = showSwipeIndicator;
+window.hideSwipeIndicators = hideSwipeIndicators;
+window.addHapticFeedback = addHapticFeedback;
+window.addProgressMilestoneEffects = addProgressMilestoneEffects;
+window.triggerMilestoneAnimation = triggerMilestoneAnimation;
+window.hideMainProgressBar = hideMainProgressBar;
+window.resetMilestoneStates = resetMilestoneStates;
+window.animateNumberChange = animateNumberChange;
+window.updateMainProgressBarVisibility = updateMainProgressBarVisibility;
+window.updateToolbarVisibility = updateToolbarVisibility;
+window.updateTooltipVisibility = updateTooltipVisibility;
+window.showExportModal = showExportModal;
+window.hideExportModal = hideExportModal;
+window.showKeyboardHelp = showKeyboardHelp;
+window.closeKeyboardHelp = closeKeyboardHelp;
+window.displayChangelog = displayChangelog;
+window.toggleSidebar = toggleSidebar;
+window.toggleSearchSection = toggleSearchSection;
+window.toggleLegalInfo = toggleLegalInfo;
+window.showValidationResults = showValidationResults;
+window.showQuestionNumberSuggestions = showQuestionNumberSuggestions;
+window.hideAutocompleteSuggestions = hideAutocompleteSuggestions;
+window.renderMarkdown = renderMarkdown;
+
 // Initialize global settings object if not exists
 if (!window.settings) {
   window.settings = {
@@ -127,6 +185,7 @@ if (!window.settings) {
 console.log("📦 Storage module loaded successfully");
 console.log("⚙️ Settings module loaded successfully");
 console.log("🏗️ Data Models module loaded successfully");
+console.log("🎨 UI Effects module loaded successfully");
 console.log("⚙️ Global settings object initialized");
 
 // ===========================
@@ -141,5 +200,5 @@ console.log("⚙️ Global settings object initialized");
 // For testing purposes, we'll include a minimal implementation
 
 console.log("🚀 Modular architecture initialized");
-console.log("📦 Available modules: Storage, Settings, Data Models");
+console.log("📦 Available modules: Storage, Settings, Data Models, UI Effects");
 console.log("⚠️  Other functionality still loading from script.js");

@@ -24,7 +24,7 @@
 
       <!-- Test Section -->
       <div class="test-section" style="background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 8px;">
-        <h3>🧪 Modules Storage, Settings & Data Models Test</h3>
+        <h3>🧪 Modules Storage, Settings, Data Models & UI Effects Test</h3>
         <div id="test-results" style="margin: 10px 0;">
           <p><strong>Tests en cours...</strong></p>
         </div>
@@ -47,6 +47,12 @@
           </button>
           <button id="testSession" style="margin: 5px; padding: 10px 15px; background: #fd7e14; color: white; border: none; border-radius: 4px; cursor: pointer;">
             📝 Test Session Management
+          </button>
+          <button id="testUIEffects" style="margin: 5px; padding: 10px 15px; background: #e83e8c; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🎨 Test UI Effects
+          </button>
+          <button id="testModals" style="margin: 5px; padding: 10px 15px; background: #6610f2; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            📱 Test Modals
           </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
@@ -119,6 +125,24 @@
             📂 Load Settings
           </button>
         </div>
+      </div>
+
+      <!-- UI Elements for Testing -->
+      <div id="loadingSection" style="display: none; background: #007bff; color: white; padding: 10px; text-align: center; margin: 20px 0; border-radius: 4px;">
+        ⏳ Loading...
+      </div>
+      
+      <div id="errorMessage" style="display: none; background: #dc3545; color: white; padding: 10px; margin: 20px 0; border-radius: 4px;">
+        Error message will appear here
+      </div>
+      
+      <div id="successMessage" style="display: none; background: #28a745; color: white; padding: 10px; margin: 20px 0; border-radius: 4px;">
+        Success message will appear here
+      </div>
+
+      <div id="legal-info" style="display: none; background: #f8f9fa; padding: 15px; margin: 20px 0; border-radius: 4px; border: 1px solid #dee2e6;">
+        <h4>Legal Information Test</h4>
+        <p>This is a test of the legal info toggle functionality. It should show/hide when the toggle function is called.</p>
       </div>
 
       <!-- Console Log Display -->
@@ -282,9 +306,40 @@
         trackQuestionVisit,
       } from './js/core/models.js';
 
+      // Also import UI effects module
+      import {
+        showLoading,
+        showError,
+        showSuccess,
+        showSwipeIndicator,
+        hideSwipeIndicators,
+        addHapticFeedback,
+        addProgressMilestoneEffects,
+        triggerMilestoneAnimation,
+        hideMainProgressBar,
+        resetMilestoneStates,
+        animateNumberChange,
+        updateMainProgressBarVisibility,
+        updateToolbarVisibility,
+        updateTooltipVisibility,
+        showExportModal,
+        hideExportModal,
+        showKeyboardHelp,
+        closeKeyboardHelp,
+        displayChangelog,
+        toggleSidebar,
+        toggleSearchSection,
+        toggleLegalInfo,
+        showValidationResults,
+        showQuestionNumberSuggestions,
+        hideAutocompleteSuggestions,
+        renderMarkdown,
+      } from './js/modules/ui-effects.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
       addToLog("🏗️ Data Models module imported successfully!", 'success');
+      addToLog("🎨 UI Effects module imported successfully!", 'success');
 
       // Make settings functions available globally for testing
       window.applyTheme = applyTheme;
@@ -306,6 +361,34 @@
       window.endCurrentSession = endCurrentSession;
       window.trackQuestionAttempt = trackQuestionAttempt;
       window.trackQuestionVisit = trackQuestionVisit;
+
+      // Make UI effects functions available globally for testing
+      window.showLoading = showLoading;
+      window.showError = showError;
+      window.showSuccess = showSuccess;
+      window.showSwipeIndicator = showSwipeIndicator;
+      window.hideSwipeIndicators = hideSwipeIndicators;
+      window.addHapticFeedback = addHapticFeedback;
+      window.addProgressMilestoneEffects = addProgressMilestoneEffects;
+      window.triggerMilestoneAnimation = triggerMilestoneAnimation;
+      window.hideMainProgressBar = hideMainProgressBar;
+      window.resetMilestoneStates = resetMilestoneStates;
+      window.animateNumberChange = animateNumberChange;
+      window.updateMainProgressBarVisibility = updateMainProgressBarVisibility;
+      window.updateToolbarVisibility = updateToolbarVisibility;
+      window.updateTooltipVisibility = updateTooltipVisibility;
+      window.showExportModal = showExportModal;
+      window.hideExportModal = hideExportModal;
+      window.showKeyboardHelp = showKeyboardHelp;
+      window.closeKeyboardHelp = closeKeyboardHelp;
+      window.displayChangelog = displayChangelog;
+      window.toggleSidebar = toggleSidebar;
+      window.toggleSearchSection = toggleSearchSection;
+      window.toggleLegalInfo = toggleLegalInfo;
+      window.showValidationResults = showValidationResults;
+      window.showQuestionNumberSuggestions = showQuestionNumberSuggestions;
+      window.hideAutocompleteSuggestions = hideAutocompleteSuggestions;
+      window.renderMarkdown = renderMarkdown;
 
       // Initialize settings module
       initializeSettings();
@@ -485,6 +568,113 @@
         addToLog(`📊 Total sessions: ${statistics.sessions?.length || 0}`, 'info');
       };
 
+      // Test UI effects
+      window.testUIEffects = function() {
+        addToLog("🎨 Testing UI Effects...", 'info');
+        
+        // Test loading indicator
+        addToLog("⏳ Testing loading indicator", 'info');
+        showLoading(true);
+        setTimeout(() => {
+          showLoading(false);
+          addToLog("✅ Loading indicator test completed", 'success');
+        }, 1000);
+        
+        // Test error/success messages
+        addToLog("📢 Testing message display", 'info');
+        setTimeout(() => {
+          showError("This is a test error message");
+          addToLog("❌ Error message displayed", 'info');
+        }, 1500);
+        
+        setTimeout(() => {
+          showSuccess("This is a test success message");
+          addToLog("✅ Success message displayed", 'success');
+        }, 2500);
+        
+        // Test swipe indicators
+        addToLog("👆 Testing swipe indicators", 'info');
+        setTimeout(() => {
+          showSwipeIndicator('left');
+          setTimeout(() => showSwipeIndicator('right'), 500);
+          addToLog("📱 Swipe indicators tested", 'success');
+        }, 4000);
+        
+        // Test haptic feedback
+        addToLog("📳 Testing haptic feedback", 'info');
+        setTimeout(() => {
+          addHapticFeedback();
+          addToLog("📳 Haptic feedback triggered", 'info');
+        }, 5000);
+        
+        // Test number animation
+        addToLog("🔢 Testing number animation", 'info');
+        const testElement = document.createElement('div');
+        testElement.id = 'numberTest';
+        testElement.style.cssText = 'font-size: 2em; margin: 10px; color: #007bff;';
+        testElement.textContent = '0';
+        document.querySelector('.test-section').appendChild(testElement);
+        
+        setTimeout(() => {
+          animateNumberChange(testElement, 100);
+          addToLog("🔢 Number animation from 0 to 100", 'success');
+        }, 5500);
+        
+        setTimeout(() => {
+          testElement.remove();
+          addToLog("🧹 Cleaned up test element", 'info');
+        }, 7000);
+      };
+
+      // Test modals
+      window.testModals = function() {
+        addToLog("📱 Testing Modals...", 'info');
+        
+        // Test keyboard help modal
+        addToLog("⌨️ Testing keyboard help modal", 'info');
+        showKeyboardHelp();
+        addToLog("✅ Keyboard help modal opened", 'success');
+        
+        setTimeout(() => {
+          closeKeyboardHelp();
+          addToLog("❌ Keyboard help modal closed", 'info');
+        }, 2000);
+        
+        // Test validation results
+        addToLog("✅ Testing validation feedback", 'info');
+        setTimeout(() => {
+          // Create temporary validation element
+          const validationElement = document.createElement('div');
+          validationElement.id = 'answerInstructions';
+          validationElement.style.cssText = 'margin: 10px; padding: 10px; border-radius: 4px;';
+          document.querySelector('.test-section').appendChild(validationElement);
+          
+          // Simulate selected answers
+          window.selectedAnswers = new Set(['A', 'B']);
+          showValidationResults(['A', 'B']);
+          addToLog("✅ Correct answer validation displayed", 'success');
+          
+          setTimeout(() => {
+            window.selectedAnswers = new Set(['A']);
+            showValidationResults(['A', 'B']);
+            addToLog("⚠️ Incorrect answer validation displayed", 'info');
+          }, 1500);
+          
+          setTimeout(() => {
+            validationElement.remove();
+            addToLog("🧹 Cleaned up validation test", 'info');
+          }, 3000);
+        }, 2500);
+        
+        // Test toggle functions
+        addToLog("🔄 Testing toggle functions", 'info');
+        setTimeout(() => {
+          toggleLegalInfo();
+          addToLog("📋 Legal info toggled", 'info');
+          setTimeout(() => toggleLegalInfo(), 1000);
+        }, 6000);
+      };
+
       window.clearTests = function() {
         document.getElementById('log-content').innerHTML = '';
         addToLog("🗑️ Test logs cleared", 'info');
@@ -503,6 +693,8 @@
       document.getElementById('testTheme').addEventListener('click', testTheme);
       document.getElementById('testModels').addEventListener('click', testModels);
       document.getElementById('testSession').addEventListener('click', testSession);
+      document.getElementById('testUIEffects').addEventListener('click', testUIEffects);
+      document.getElementById('testModals').addEventListener('click', testModals);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
@@ -518,7 +710,7 @@
       });
 
       addToLog("🚀 Modular test environment ready!", 'success');
-      addToLog("Click buttons above to test Storage, Settings & Data Models modules functionality", 'info');
+      addToLog("Click buttons above to test Storage, Settings, Data Models & UI Effects modules functionality", 'info');
     </script>
   </body>
 </html>
