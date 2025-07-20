@@ -11,6 +11,87 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
+    
+    <!-- Mobile Navigation Styles -->
+    <style>
+      .swipe-indicator {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 123, 255, 0.9);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+      }
+      
+      .swipe-indicator.left {
+        left: 20px;
+      }
+      
+      .swipe-indicator.right {
+        right: 20px;
+      }
+      
+      .swipe-indicator.show {
+        opacity: 1;
+      }
+      
+      .mobile-nav-bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--bg-color, white);
+        border-top: 1px solid var(--border-color, #ddd);
+        display: flex;
+        justify-content: space-around;
+        padding: 8px;
+        z-index: 1000;
+        box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+      }
+      
+      .mobile-nav-bottom .nav-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 8px 12px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        min-height: 44px;
+        min-width: 44px;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+      }
+      
+      .mobile-nav-bottom .nav-btn:hover {
+        background: var(--hover-color, #f5f5f5);
+      }
+      
+      .mobile-nav-bottom .nav-btn i {
+        font-size: 16px;
+        margin-bottom: 2px;
+      }
+      
+      .mobile-nav-bottom .nav-btn span {
+        font-size: 11px;
+        font-weight: 500;
+      }
+      
+      .touch-feedback {
+        transition: transform 0.1s;
+      }
+      
+      .touch-feedback:active {
+        transform: scale(0.95);
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -65,6 +146,9 @@
           </button>
           <button id="testResume" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             📍 Test Resume
+          </button>
+          <button id="testMobile" style="margin: 5px; padding: 10px 15px; background: #ff6b35; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            📱 Test Mobile Nav
           </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
@@ -243,6 +327,42 @@
         addToLog("🧹 Obsolete data cleaned", 'info');
       }
 
+      // Mobile navigation mock functions
+      function navigateQuestion(direction) {
+        addToLog(`🧭 Navigate question: ${direction > 0 ? 'Next' : 'Previous'}`, 'info');
+        return Promise.resolve();
+      }
+
+      function navigateToRandomQuestion() {
+        addToLog("🎲 Navigate to random question", 'info');
+        return Promise.resolve();
+      }
+
+      function toggleSidebar() {
+        addToLog("🗂️ Toggle sidebar", 'info');
+      }
+
+      function closeSidebar() {
+        addToLog("❌ Close sidebar", 'info');
+      }
+
+      // Add some DOM elements for mobile testing
+      if (!document.getElementById('questionSection')) {
+        const questionSection = document.createElement('div');
+        questionSection.id = 'questionSection';
+        questionSection.style.cssText = 'height: 200px; background: #f5f5f5; margin: 10px 0; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold;';
+        questionSection.innerHTML = '📱 Mock Question Section (for touch testing)';
+        document.querySelector('.container').appendChild(questionSection);
+      }
+
+      if (!document.getElementById('sidebar')) {
+        const sidebar = document.createElement('div');
+        sidebar.id = 'sidebar';
+        sidebar.style.cssText = 'position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background: white; border-left: 1px solid #ddd; transition: right 0.3s; z-index: 1000;';
+        sidebar.innerHTML = '<div style="padding: 20px;">📱 Mock Sidebar (for swipe testing)</div>';
+        document.body.appendChild(sidebar);
+      }
+
       // Console logging system
       function addToLog(message, type = 'log') {
         const logContent = document.getElementById('log-content');
@@ -413,6 +533,25 @@
         handleNavigationChange,
       } from './js/modules/resume-position.js';
 
+      // Also import mobile navigation module
+      import {
+        setupMobileTooltips,
+        setupTouchGestures,
+        manageSwipeIndicators,
+        createSwipeIndicators,
+        showSwipeIndicator,
+        hideSwipeIndicators,
+        addHapticFeedback,
+        setupTouchFeedback,
+        createMobileBottomNavigation,
+        setupSidebarSwipeToClose,
+        handleMobileResize,
+        setupMobileResizeListener,
+        isMobileDevice,
+        refreshMobileNavigation,
+        initializeMobileNavigation,
+      } from './js/modules/mobile-navigation.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
       addToLog("🏗️ Data Models module imported successfully!", 'success');
@@ -421,10 +560,15 @@
       addToLog("⭐ Favorites module imported successfully!", 'success');
       addToLog("🔍 Search module imported successfully!", 'success');
       addToLog("📍 Resume Position module imported successfully!", 'success');
+      addToLog("📱 Mobile Navigation module imported successfully!", 'success');
 
-      // Make settings functions available globally for testing
+      // Make functions available globally for testing
       window.applyTheme = applyTheme;
       window.loadSettingsUI = loadSettingsUI;
+      window.navigateQuestion = navigateQuestion;
+      window.navigateToRandomQuestion = navigateToRandomQuestion;
+      window.toggleSidebar = toggleSidebar;
+      window.closeSidebar = closeSidebar;
       window.saveSettingsUI = saveSettingsUI;
       window.updateToolbarVisibility = updateToolbarVisibility;
       window.updateTooltipVisibility = updateTooltipVisibility;
@@ -589,6 +733,63 @@
         
         devLog("This is a dev log message");
         devError("This is a dev error message");
+      };
+
+      // Test mobile navigation module
+      window.testMobile = function() {
+        addToLog("📱 Testing Mobile Navigation Module...", 'info');
+        
+        // Test device detection
+        const isMobile = isMobileDevice();
+        addToLog(`📱 Device type: ${isMobile ? 'Mobile' : 'Desktop'} (width: ${window.innerWidth}px)`, 'info');
+        
+        // Test haptic feedback (if available)
+        addToLog("🔊 Testing haptic feedback...", 'info');
+        addHapticFeedback();
+        addToLog("🔊 Haptic feedback triggered (vibration if supported)", 'success');
+        
+        // Test swipe indicators
+        addToLog("👈👉 Testing swipe indicators...", 'info');
+        manageSwipeIndicators();
+        createSwipeIndicators();
+        addToLog("👈👉 Swipe indicators managed", 'success');
+        
+        // Test mobile tooltips setup
+        addToLog("💬 Testing mobile tooltips setup...", 'info');
+        setupMobileTooltips();
+        addToLog("💬 Mobile tooltips configured", 'success');
+        
+        // Test touch feedback setup
+        addToLog("👆 Testing touch feedback setup...", 'info');
+        setupTouchFeedback();
+        addToLog("👆 Touch feedback configured", 'success');
+        
+        // Test mobile bottom navigation
+        addToLog("🔢 Testing mobile bottom navigation...", 'info');
+        createMobileBottomNavigation();
+        const mobileNav = document.getElementById('mobileBottomNav');
+        if (isMobile && window.currentQuestions?.length > 0) {
+          addToLog(`🔢 Mobile nav: ${mobileNav ? '✅ CREATED' : '❌ NOT CREATED'}`, mobileNav ? 'success' : 'info');
+        } else {
+          addToLog("🔢 Mobile nav: Not needed (desktop or no exam loaded)", 'info');
+        }
+        
+        // Test sidebar swipe-to-close
+        addToLog("🗂️ Testing sidebar swipe-to-close...", 'info');
+        setupSidebarSwipeToClose();
+        addToLog("🗂️ Sidebar swipe-to-close configured", 'success');
+        
+        // Test resize listener
+        addToLog("📏 Testing resize listener...", 'info');
+        setupMobileResizeListener();
+        addToLog("📏 Resize listener configured", 'success');
+        
+        // Test mobile navigation initialization
+        addToLog("🚀 Testing mobile navigation initialization...", 'info');
+        initializeMobileNavigation();
+        addToLog("🚀 Mobile navigation fully initialized", 'success');
+        
+        addToLog("📱 Mobile Navigation Module test completed!", 'success');
       };
 
       // Test settings module
@@ -1393,6 +1594,7 @@
       document.getElementById('testFavorites').addEventListener('click', testFavorites);
       document.getElementById('testSearch').addEventListener('click', testSearch);
       document.getElementById('testResume').addEventListener('click', testResume);
+      document.getElementById('testMobile').addEventListener('click', testMobile);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
