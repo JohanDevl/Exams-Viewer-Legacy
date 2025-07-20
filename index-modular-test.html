@@ -159,6 +159,9 @@
           <button id="testLazyLoading" style="margin: 5px; padding: 10px 15px; background: #20c997; color: white; border: none; border-radius: 4px; cursor: pointer;">
             ⚡ Test Lazy Loading
           </button>
+          <button id="testStateManagement" style="margin: 5px; padding: 10px 15px; background: #6610f2; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🏛️ Test State Management
+          </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
           </button>
@@ -601,8 +604,7 @@
       // Also import search module
       import {
         initializeSearchInterface,
-        resetSearchState,
-        getSearchState,
+        resetSearchUI,
         clearSearchCache,
         searchQuestions,
         applyTextSearch,
@@ -701,6 +703,38 @@
         initializeLazyLoading,
       } from './js/modules/lazy-loading.js';
 
+      // Also import core state management module
+      import {
+        getExamState,
+        getSearchState,
+        getAppSettings,
+        getExamDiscovery,
+        getLazyLoadingState,
+        getFavoritesState,
+        getStatisticsState,
+        getResumeState,
+        getNavigationState,
+        getAllState,
+        updateExamState,
+        updateSearchState,
+        updateAppSettings,
+        updateExamDiscovery,
+        updateLazyLoadingState,
+        updateFavoritesState,
+        updateStatisticsState,
+        updateResumeState,
+        updateNavigationState,
+        resetExamState,
+        resetSearchUI,
+        resetLazyLoadingState,
+        resetNavigationState,
+        resetAllState,
+        initializeState,
+        initializeGlobalState,
+        syncGlobalState,
+        getStateSummary,
+      } from './js/core/state.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
       addToLog("🏗️ Data Models module imported successfully!", 'success');
@@ -713,6 +747,7 @@
       addToLog("🧭 Enhanced Navigation module imported successfully!", 'success');
       addToLog("📚 Exam Loader module imported successfully!", 'success');
       addToLog("⚡ Lazy Loading module imported successfully!", 'success');
+      addToLog("🏛️ Core State Management module imported successfully!", 'success');
 
       // Make functions available globally for testing
       window.applyTheme = applyTheme;
@@ -804,7 +839,7 @@
 
       // Make search functions available globally for testing
       window.initializeSearchInterface = initializeSearchInterface;
-      window.resetSearchState = resetSearchState;
+      window.resetSearchUI = resetSearchUI;
       window.getSearchState = getSearchState;
       window.clearSearchCache = clearSearchCache;
       window.searchQuestions = searchQuestions;
@@ -853,6 +888,36 @@
       window.resetLazyLoadingConfig = resetLazyLoadingConfig;
       window.createPerformanceMonitor = createPerformanceMonitor;
       window.initializeLazyLoading = initializeLazyLoading;
+
+      // Make state management functions available globally for testing
+      window.getExamState = getExamState;
+      window.getSearchState = getSearchState;
+      window.getAppSettings = getAppSettings;
+      window.getExamDiscovery = getExamDiscovery;
+      window.getLazyLoadingState = getLazyLoadingState;
+      window.getFavoritesState = getFavoritesState;
+      window.getStatisticsState = getStatisticsState;
+      window.getResumeState = getResumeState;
+      window.getNavigationState = getNavigationState;
+      window.getAllState = getAllState;
+      window.updateExamState = updateExamState;
+      window.updateSearchState = updateSearchState;
+      window.updateAppSettings = updateAppSettings;
+      window.updateExamDiscovery = updateExamDiscovery;
+      window.updateLazyLoadingState = updateLazyLoadingState;
+      window.updateFavoritesState = updateFavoritesState;
+      window.updateStatisticsState = updateStatisticsState;
+      window.updateResumeState = updateResumeState;
+      window.updateNavigationState = updateNavigationState;
+      window.resetExamState = resetExamState;
+      window.resetSearchUI = resetSearchUI;
+      window.resetLazyLoadingState = resetLazyLoadingState;
+      window.resetNavigationState = resetNavigationState;
+      window.resetAllState = resetAllState;
+      window.initializeState = initializeState;
+      window.initializeGlobalState = initializeGlobalState;
+      window.syncGlobalState = syncGlobalState;
+      window.getStateSummary = getStateSummary;
 
       // Initialize settings module
       initializeSettings();
@@ -1643,7 +1708,7 @@
           window.isQuestionFavorite = (index) => index === 0 || index === 2; // Questions 1 and 3 favorites
 
           // Reset to full question set for filter testing
-          resetSearchState();
+          resetSearchUI();
           
           // Test filter counts
           updateFilterCounts();
@@ -2129,6 +2194,193 @@
         }
       };
 
+      // Test state management module
+      window.testStateManagement = function() {
+        addToLog("🏛️ Testing State Management Module...", 'info');
+        
+        try {
+          // Test state initialization
+          addToLog("🚀 Testing state initialization", 'info');
+          
+          initializeState();
+          addToLog("✅ State management system initialized", 'success');
+
+          // Test state access functions
+          addToLog("📊 Testing state access functions", 'info');
+          
+          const examState = getExamState();
+          const searchState = getSearchState();
+          const appSettings = getAppSettings();
+          const examDiscovery = getExamDiscovery();
+          const lazyLoadingState = getLazyLoadingState();
+          const favoritesState = getFavoritesState();
+          const statisticsState = getStatisticsState();
+          const resumeState = getResumeState();
+          const navigationState = getNavigationState();
+          
+          addToLog(`✅ Exam state: ${Object.keys(examState).length} properties`, 'success');
+          addToLog(`✅ Search state: ${Object.keys(searchState).length} properties`, 'success');
+          addToLog(`✅ App settings: ${Object.keys(appSettings).length} properties`, 'success');
+          addToLog(`✅ All state objects accessible`, 'success');
+
+          // Test state modification functions
+          addToLog("✏️ Testing state modification", 'info');
+          
+          // Test exam state updates
+          updateExamState({
+            currentQuestionIndex: 5,
+            isValidated: true,
+            selectedAnswers: new Set(['A', 'B'])
+          });
+          
+          const updatedExamState = getExamState();
+          addToLog(`✅ Exam state updated: index=${updatedExamState.currentQuestionIndex}, validated=${updatedExamState.isValidated}`, 'success');
+          
+          // Test search state updates
+          updateSearchState({
+            isSearchActive: true,
+            allQuestions: [{ id: 1 }, { id: 2 }, { id: 3 }]
+          });
+          
+          const updatedSearchState = getSearchState();
+          addToLog(`✅ Search state updated: active=${updatedSearchState.isSearchActive}, questions=${updatedSearchState.allQuestions.length}`, 'success');
+          
+          // Test settings updates
+          updateAppSettings({
+            darkMode: true,
+            enableLazyLoading: true,
+            showTooltips: true
+          });
+          
+          const updatedSettings = getAppSettings();
+          addToLog(`✅ Settings updated: darkMode=${updatedSettings.darkMode}, lazyLoading=${updatedSettings.enableLazyLoading}`, 'success');
+
+          // Test lazy loading state updates
+          updateLazyLoadingState({
+            isChunkedExam: true,
+            totalChunks: 10,
+            chunkSize: 50
+          });
+          
+          const updatedLazyState = getLazyLoadingState();
+          addToLog(`✅ Lazy loading updated: chunked=${updatedLazyState.isChunkedExam}, chunks=${updatedLazyState.totalChunks}`, 'success');
+
+          // Test state summary
+          addToLog("📋 Testing state summary", 'info');
+          
+          const summary = getStateSummary();
+          addToLog(`✅ State summary generated: ${Object.keys(summary).length} sections`, 'success');
+          addToLog(`📊 Exam: ${summary.exam.questionsCount} questions, index ${summary.exam.currentIndex}`, 'info');
+          addToLog(`🔍 Search: ${summary.search.allQuestionsCount} all, ${summary.search.filteredQuestionsCount} filtered`, 'info');
+          addToLog(`⚡ Lazy: ${summary.lazyLoading.loadedChunks}/${summary.lazyLoading.totalChunks} chunks loaded`, 'info');
+
+          // Test all state access
+          addToLog("🌐 Testing comprehensive state access", 'info');
+          
+          const allState = getAllState();
+          const stateKeys = Object.keys(allState);
+          addToLog(`✅ All state access: ${stateKeys.join(', ')}`, 'success');
+          
+          // Verify all expected state sections exist
+          const expectedSections = ['exam', 'search', 'settings', 'discovery', 'lazyLoading', 'favorites', 'statistics', 'resume', 'navigation'];
+          const missingSections = expectedSections.filter(section => !stateKeys.includes(section));
+          
+          if (missingSections.length === 0) {
+            addToLog(`✅ All expected state sections present`, 'success');
+          } else {
+            addToLog(`⚠️ Missing state sections: ${missingSections.join(', ')}`, 'error');
+          }
+
+          // Test state reset functions
+          addToLog("🔄 Testing state reset functions", 'info');
+          
+          // Reset exam state
+          resetExamState();
+          const resetExam = getExamState();
+          addToLog(`✅ Exam reset: index=${resetExam.currentQuestionIndex}, validated=${resetExam.isValidated}`, 'success');
+          
+          // Reset search state  
+          resetSearchUI();
+          const resetSearch = getSearchState();
+          addToLog(`✅ Search reset: active=${resetSearch.isSearchActive}, questions=${resetSearch.allQuestions.length}`, 'success');
+          
+          // Reset lazy loading state
+          resetLazyLoadingState();
+          const resetLazy = getLazyLoadingState();
+          addToLog(`✅ Lazy loading reset: chunked=${resetLazy.isChunkedExam}, chunks=${resetLazy.totalChunks}`, 'success');
+          
+          // Reset navigation state
+          resetNavigationState();
+          const resetNav = getNavigationState();
+          addToLog(`✅ Navigation reset: history=${resetNav.history.length}, sidebar=${resetNav.sidebarOpen}`, 'success');
+
+          // Test global state initialization (for backward compatibility)
+          addToLog("🌍 Testing global state initialization", 'info');
+          
+          // First set some state values
+          updateExamState({ currentQuestionIndex: 10 });
+          updateSearchState({ isSearchActive: true });
+          updateAppSettings({ darkMode: false });
+          
+          // Initialize global variables
+          initializeGlobalState();
+          
+          // Check that global variables are set correctly
+          const globalIndexMatch = window.currentQuestionIndex === 10;
+          const globalSearchMatch = window.isSearchActive === true;
+          const globalDarkMatch = window.settings.darkMode === false;
+          
+          addToLog(`✅ Global exam index: ${globalIndexMatch ? 'OK' : 'FAIL'}`, globalIndexMatch ? 'success' : 'error');
+          addToLog(`✅ Global search active: ${globalSearchMatch ? 'OK' : 'FAIL'}`, globalSearchMatch ? 'success' : 'error');
+          addToLog(`✅ Global dark mode: ${globalDarkMatch ? 'OK' : 'FAIL'}`, globalDarkMatch ? 'success' : 'error');
+
+          // Test state synchronization
+          addToLog("🔄 Testing state synchronization", 'info');
+          
+          // Modify global variables directly
+          window.currentQuestionIndex = 20;
+          window.isSearchActive = false;
+          window.settings.darkMode = true;
+          
+          // Sync back to state objects
+          syncGlobalState();
+          
+          // Check that state objects are updated
+          const syncedExam = getExamState();
+          const syncedSearch = getSearchState();
+          const syncedSettings = getAppSettings();
+          
+          const syncIndexMatch = syncedExam.currentQuestionIndex === 20;
+          const syncSearchMatch = syncedSearch.isSearchActive === false;
+          const syncDarkMatch = syncedSettings.darkMode === true;
+          
+          addToLog(`✅ Sync exam index: ${syncIndexMatch ? 'OK' : 'FAIL'}`, syncIndexMatch ? 'success' : 'error');
+          addToLog(`✅ Sync search active: ${syncSearchMatch ? 'OK' : 'FAIL'}`, syncSearchMatch ? 'success' : 'error');
+          addToLog(`✅ Sync dark mode: ${syncDarkMatch ? 'OK' : 'FAIL'}`, syncDarkMatch ? 'success' : 'error');
+
+          // Test complete state reset
+          addToLog("🧹 Testing complete state reset", 'info');
+          
+          resetAllState();
+          const finalSummary = getStateSummary();
+          
+          addToLog(`✅ After reset: exam questions=${finalSummary.exam.questionsCount}, search active=${finalSummary.search.isSearchActive}`, 'success');
+          addToLog(`✅ After reset: lazy chunks=${finalSummary.lazyLoading.loadedChunks}, nav history=${finalSummary.navigation.historyLength}`, 'success');
+
+          // Final summary
+          addToLog("📊 State Management Module Test Summary", 'success');
+          addToLog("✅ State initialization and access functions", 'success');
+          addToLog("✅ State modification and update functions", 'success');
+          addToLog("✅ State reset and cleanup functions", 'success');
+          addToLog("✅ Global state backward compatibility", 'success');
+          addToLog("✅ State synchronization between objects and globals", 'success');
+          addToLog("✅ Comprehensive state summary and debugging", 'success');
+
+        } catch (error) {
+          addToLog(`❌ State Management test failed: ${error.message}`, 'error');
+        }
+      };
+
       window.clearTests = function() {
         document.getElementById('log-content').innerHTML = '';
         addToLog("🗑️ Test logs cleared", 'info');
@@ -2157,6 +2409,7 @@
       document.getElementById('testEnhanced').addEventListener('click', testEnhanced);
       document.getElementById('testExamLoader').addEventListener('click', testExamLoader);
       document.getElementById('testLazyLoading').addEventListener('click', testLazyLoading);
+      document.getElementById('testStateManagement').addEventListener('click', testStateManagement);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       

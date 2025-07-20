@@ -31,7 +31,7 @@ function initializeSearchInterface() {
     }
     
     // Clear previous search state
-    resetSearchState();
+    resetSearchUI();
     
     // Update filter counts
     if (typeof window.updateFilterCounts === 'function') {
@@ -49,19 +49,10 @@ function initializeSearchInterface() {
 }
 
 /**
- * Reset search state to original questions
+ * Reset search UI and filters (UI-specific reset, not state management)
  */
-function resetSearchState() {
+function resetSearchUI() {
   try {
-    isSearchActive = false;
-    filteredQuestions = [];
-    searchCache = {};
-    
-    // Restore original questions
-    if (allQuestions.length > 0) {
-      window.currentQuestions = [...allQuestions];
-    }
-    
     // Clear search input if it exists
     const searchInput = document.getElementById("questionSearch");
     if (searchInput) {
@@ -78,11 +69,11 @@ function resetSearchState() {
     });
     
     if (typeof window.devLog === 'function') {
-      window.devLog("🔄 Search state reset");
+      window.devLog("🔄 Search UI reset");
     }
   } catch (error) {
     if (typeof window.devError === 'function') {
-      window.devError("Error resetting search state:", error);
+      window.devError("Error resetting search UI:", error);
     }
   }
 }
@@ -299,7 +290,7 @@ function resetAllFilters() {
     });
     
     // Reset search state
-    resetSearchState();
+    resetSearchUI();
     
     // Update filter counts
     if (typeof window.updateFilterCounts === 'function') {
@@ -629,17 +620,6 @@ function setupSearchEventListeners() {
 // PUBLIC API
 // ===========================
 
-/**
- * Get current search state
- */
-function getSearchState() {
-  return {
-    isSearchActive,
-    totalQuestions: allQuestions.length,
-    filteredQuestions: window.currentQuestions?.length || 0,
-    cacheSize: Object.keys(searchCache).length
-  };
-}
 
 /**
  * Clear search cache
@@ -659,8 +639,7 @@ function clearSearchCache() {
 export {
   // Search state management
   initializeSearchInterface,
-  resetSearchState,
-  getSearchState,
+  resetSearchUI,
   clearSearchCache,
   
   // Text search functions
