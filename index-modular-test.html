@@ -63,6 +63,9 @@
           <button id="testSearch" style="margin: 5px; padding: 10px 15px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔍 Test Search
           </button>
+          <button id="testResume" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            📍 Test Resume
+          </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
           </button>
@@ -394,6 +397,22 @@
         setupSearchEventListeners,
       } from './js/modules/search.js';
 
+      // Also import resume position module
+      import {
+        saveStudyPosition,
+        getStudyPosition,
+        clearStudyPosition,
+        autoSavePosition,
+        setupAutoSave,
+        showResumeDialog,
+        checkAndShowResumeDialog,
+        resumeToPosition,
+        validateSavedPosition,
+        cleanInvalidPositions,
+        initializeResumePosition,
+        handleNavigationChange,
+      } from './js/modules/resume-position.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
       addToLog("🏗️ Data Models module imported successfully!", 'success');
@@ -401,6 +420,7 @@
       addToLog("📊 Statistics module imported successfully!", 'success');
       addToLog("⭐ Favorites module imported successfully!", 'success');
       addToLog("🔍 Search module imported successfully!", 'success');
+      addToLog("📍 Resume Position module imported successfully!", 'success');
 
       // Make settings functions available globally for testing
       window.applyTheme = applyTheme;
@@ -493,6 +513,20 @@
       window.handleSearchInput = handleSearchInput;
       window.handleFilterChange = handleFilterChange;
       window.setupSearchEventListeners = setupSearchEventListeners;
+
+      // Make resume position functions available globally for testing
+      window.saveStudyPosition = saveStudyPosition;
+      window.getStudyPosition = getStudyPosition;
+      window.clearStudyPosition = clearStudyPosition;
+      window.autoSavePosition = autoSavePosition;
+      window.setupAutoSave = setupAutoSave;
+      window.showResumeDialog = showResumeDialog;
+      window.checkAndShowResumeDialog = checkAndShowResumeDialog;
+      window.resumeToPosition = resumeToPosition;
+      window.validateSavedPosition = validateSavedPosition;
+      window.cleanInvalidPositions = cleanInvalidPositions;
+      window.initializeResumePosition = initializeResumePosition;
+      window.handleNavigationChange = handleNavigationChange;
 
       // Initialize settings module
       initializeSettings();
@@ -1183,6 +1217,158 @@
         }
       };
 
+      // Test resume position module
+      window.testResume = function() {
+        addToLog("📍 Testing Resume Position Module...", 'info');
+        
+        try {
+          // Enable resume position feature for testing
+          if (!window.settings) {
+            window.settings = {};
+          }
+          window.settings.enableResumePosition = true;
+          window.settings.autoSavePosition = true;
+
+          // Set up test exam and questions
+          const testExamCode = "RESUME-TEST";
+          window.currentExam = { 
+            exam_code: testExamCode, 
+            exam_name: "Resume Position Test Exam" 
+          };
+          window.currentQuestions = new Array(20).fill().map((_, i) => ({ 
+            question_number: i + 1, 
+            question: `Test question ${i + 1}` 
+          }));
+          window.currentQuestionIndex = 0;
+
+          // Test basic position saving
+          addToLog("💾 Testing position saving", 'info');
+          
+          const saveResult = saveStudyPosition(testExamCode, 5);
+          addToLog(`✅ Save position result: ${saveResult}`, saveResult ? 'success' : 'error');
+          
+          // Test position retrieval
+          addToLog("📍 Testing position retrieval", 'info');
+          
+          const savedPosition = getStudyPosition(testExamCode);
+          addToLog(`✅ Retrieved position: Question ${savedPosition ? savedPosition.questionNumber : 'None'}`, 'success');
+          
+          if (savedPosition) {
+            addToLog(`📅 Saved on: ${new Date(savedPosition.timestamp).toLocaleString()}`, 'info');
+            addToLog(`📊 Progress: ${savedPosition.questionNumber}/${savedPosition.totalQuestions}`, 'info');
+          }
+
+          // Test position validation
+          addToLog("✅ Testing position validation", 'info');
+          
+          const isValid = validateSavedPosition(savedPosition, window.currentExam);
+          addToLog(`✅ Position validation: ${isValid}`, isValid ? 'success' : 'error');
+
+          // Test auto-save functionality
+          addToLog("🤖 Testing auto-save", 'info');
+          
+          window.currentQuestionIndex = 8;
+          const autoSaveResult = autoSavePosition();
+          addToLog(`✅ Auto-save result: ${autoSaveResult}`, autoSaveResult ? 'success' : 'error');
+          
+          // Verify auto-save worked
+          const autoSavedPosition = getStudyPosition(testExamCode);
+          addToLog(`📍 Auto-saved position: Question ${autoSavedPosition ? autoSavedPosition.questionNumber : 'None'}`, 'info');
+
+          // Test navigation change handling
+          addToLog("🧭 Testing navigation change handling", 'info');
+          
+          handleNavigationChange(12);
+          const navPosition = getStudyPosition(testExamCode);
+          addToLog(`✅ Navigation change: Question ${navPosition ? navPosition.questionNumber : 'None'}`, 'success');
+
+          // Test position cleaning
+          addToLog("🧹 Testing position cleaning", 'info');
+          
+          // Create an old position for testing
+          const oldPosition = {
+            questionIndex: 3,
+            timestamp: Date.now() - (35 * 24 * 60 * 60 * 1000), // 35 days old
+            questionNumber: 4,
+            totalQuestions: 20,
+            examTitle: "Old Test"
+          };
+          
+          const resumePositions = JSON.parse(localStorage.getItem("examViewerResumePositions") || "{}");
+          resumePositions["OLD-EXAM"] = oldPosition;
+          localStorage.setItem("examViewerResumePositions", JSON.stringify(resumePositions));
+          
+          const cleanedCount = cleanInvalidPositions();
+          addToLog(`✅ Cleaned positions: ${cleanedCount} removed`, 'success');
+
+          // Test resume dialog (without actually showing it)
+          addToLog("💬 Testing resume dialog preparation", 'info');
+          
+          const currentPosition = getStudyPosition(testExamCode);
+          if (currentPosition) {
+            addToLog("✅ Resume dialog data ready", 'success');
+            addToLog(`📋 Would show: "Continue from Question ${currentPosition.questionNumber}?"`, 'info');
+          }
+
+          // Test position resumption (mock)
+          addToLog("▶️ Testing position resumption", 'info');
+          
+          if (currentPosition) {
+            // Mock navigation function
+            window.navigateToQuestionIndex = (index) => {
+              window.currentQuestionIndex = index;
+              addToLog(`🧭 Navigated to question ${index + 1}`, 'info');
+            };
+            
+            const resumeResult = resumeToPosition(currentPosition);
+            addToLog(`✅ Resume result: ${resumeResult}`, resumeResult ? 'success' : 'error');
+            addToLog(`📍 Current position: Question ${window.currentQuestionIndex + 1}`, 'info');
+          }
+
+          // Test position clearing
+          addToLog("🗑️ Testing position clearing", 'info');
+          
+          const clearResult = clearStudyPosition(testExamCode);
+          addToLog(`✅ Clear result: ${clearResult}`, clearResult ? 'success' : 'error');
+          
+          const clearedPosition = getStudyPosition(testExamCode);
+          addToLog(`📍 Position after clear: ${clearedPosition ? 'Still exists' : 'Cleared'}`, !clearedPosition ? 'success' : 'error');
+
+          // Test with disabled feature
+          addToLog("🚫 Testing with disabled feature", 'info');
+          
+          window.settings.enableResumePosition = false;
+          const disabledSaveResult = saveStudyPosition(testExamCode, 10);
+          addToLog(`✅ Save when disabled: ${disabledSaveResult}`, !disabledSaveResult ? 'success' : 'error');
+
+          // Restore settings
+          window.settings.enableResumePosition = true;
+
+          // Test edge cases
+          addToLog("⚠️ Testing edge cases", 'info');
+          
+          const invalidSave1 = saveStudyPosition("", 5);
+          addToLog(`✅ Empty exam code: ${invalidSave1}`, !invalidSave1 ? 'success' : 'error');
+          
+          const invalidSave2 = saveStudyPosition(testExamCode, -1);
+          addToLog(`✅ Negative index: ${invalidSave2}`, !invalidSave2 ? 'success' : 'error');
+          
+          const invalidSave3 = saveStudyPosition(testExamCode, 0);
+          addToLog(`✅ Zero index (start): ${invalidSave3}`, !invalidSave3 ? 'success' : 'error');
+
+          // Final summary
+          addToLog("📊 Resume Position Module Test Summary", 'success');
+          addToLog("✅ Position saving and retrieval", 'success');
+          addToLog("✅ Auto-save functionality", 'success');
+          addToLog("✅ Position validation and cleaning", 'success');
+          addToLog("✅ Navigation change handling", 'success');
+          addToLog("✅ Edge case handling", 'success');
+
+        } catch (error) {
+          addToLog(`❌ Resume Position test failed: ${error.message}`, 'error');
+        }
+      };
+
       window.clearTests = function() {
         document.getElementById('log-content').innerHTML = '';
         addToLog("🗑️ Test logs cleared", 'info');
@@ -1206,6 +1392,7 @@
       document.getElementById('testStatistics').addEventListener('click', testStatistics);
       document.getElementById('testFavorites').addEventListener('click', testFavorites);
       document.getElementById('testSearch').addEventListener('click', testSearch);
+      document.getElementById('testResume').addEventListener('click', testResume);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
