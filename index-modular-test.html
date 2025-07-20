@@ -150,6 +150,9 @@
           <button id="testMobile" style="margin: 5px; padding: 10px 15px; background: #ff6b35; color: white; border: none; border-radius: 4px; cursor: pointer;">
             📱 Test Mobile Nav
           </button>
+          <button id="testEnhanced" style="margin: 5px; padding: 10px 15px; background: #17a2b8; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🧭 Test Enhanced Nav
+          </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
           </button>
@@ -346,7 +349,49 @@
         addToLog("❌ Close sidebar", 'info');
       }
 
-      // Add some DOM elements for mobile testing
+      // Enhanced navigation mock functions
+      function getQuestionStatus(questionNumber) {
+        return {
+          primaryStatus: 'new',
+          isFavorite: false,
+          hasNotes: false,
+          isCategorized: false
+        };
+      }
+
+      function getAnsweredQuestionsCount() {
+        return Math.floor(Math.random() * 20); // Mock answered count
+      }
+
+      function truncateText(text, maxLength) {
+        return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+      }
+
+      function saveSettings() {
+        addToLog("💾 Settings saved", 'info');
+      }
+
+      function animateNumberChange(element, newValue) {
+        if (element) element.textContent = newValue;
+      }
+
+      function addProgressMilestoneEffects(percentage) {
+        addToLog(`🎯 Progress milestone: ${percentage.toFixed(1)}%`, 'info');
+      }
+
+      function resetMilestoneStates() {
+        addToLog("🔄 Milestone states reset", 'info');
+      }
+
+      function hideExportModal() {
+        addToLog("❌ Export modal hidden", 'info');
+      }
+
+      function showKeyboardHelp() {
+        addToLog("⌨️ Keyboard help shown", 'info');
+      }
+
+      // Add some DOM elements for testing
       if (!document.getElementById('questionSection')) {
         const questionSection = document.createElement('div');
         questionSection.id = 'questionSection';
@@ -361,6 +406,59 @@
         sidebar.style.cssText = 'position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background: white; border-left: 1px solid #ddd; transition: right 0.3s; z-index: 1000;';
         sidebar.innerHTML = '<div style="padding: 20px;">📱 Mock Sidebar (for swipe testing)</div>';
         document.body.appendChild(sidebar);
+      }
+
+      // Enhanced navigation DOM elements
+      if (!document.getElementById('progressSidebar')) {
+        const progressSidebar = document.createElement('div');
+        progressSidebar.id = 'progressSidebar';
+        progressSidebar.style.cssText = 'position: fixed; top: 0; right: -350px; width: 350px; height: 100vh; background: white; border-left: 1px solid #ddd; transition: right 0.3s; z-index: 1000;';
+        progressSidebar.innerHTML = `
+          <div style="padding: 20px;">
+            <h3>🧭 Mock Progress Sidebar</h3>
+            <div class="question-list" style="max-height: 400px; overflow-y: auto; background: #f8f9fa; padding: 10px; border-radius: 4px;">
+              Mock question list items will appear here
+            </div>
+            <div style="margin-top: 20px;">
+              <div style="background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden;">
+                <div id="overallProgress" style="background: #007bff; height: 100%; width: 0%; transition: width 0.3s;"></div>
+              </div>
+              <div id="progressText" style="margin-top: 5px; font-size: 12px; color: #666;">0/0 (0%)</div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(progressSidebar);
+      }
+
+      if (!document.getElementById('sidebarOverlay')) {
+        const overlay = document.createElement('div');
+        overlay.id = 'sidebarOverlay';
+        overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; display: none;';
+        document.body.appendChild(overlay);
+      }
+
+      if (!document.getElementById('historyBackBtn')) {
+        const backBtn = document.createElement('button');
+        backBtn.id = 'historyBackBtn';
+        backBtn.innerHTML = '⬅️ Back';
+        backBtn.style.cssText = 'margin: 5px; padding: 8px 12px; background: #6c757d; color: white; border: none; border-radius: 4px;';
+        document.querySelector('.container').appendChild(backBtn);
+      }
+
+      if (!document.getElementById('historyForwardBtn')) {
+        const forwardBtn = document.createElement('button');
+        forwardBtn.id = 'historyForwardBtn';
+        forwardBtn.innerHTML = '➡️ Forward';
+        forwardBtn.style.cssText = 'margin: 5px; padding: 8px 12px; background: #6c757d; color: white; border: none; border-radius: 4px;';
+        document.querySelector('.container').appendChild(forwardBtn);
+      }
+
+      if (!document.getElementById('sidebarToggle')) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.id = 'sidebarToggle';
+        toggleBtn.innerHTML = '<i class="fas fa-bars"></i> Toggle Sidebar';
+        toggleBtn.style.cssText = 'margin: 5px; padding: 8px 12px; background: #17a2b8; color: white; border: none; border-radius: 4px;';
+        document.querySelector('.container').appendChild(toggleBtn);
       }
 
       // Console logging system
@@ -549,6 +647,30 @@
         initializeMobileNavigation,
       } from './js/modules/mobile-navigation.js';
 
+      // Also import enhanced navigation module
+      import {
+        addToNavigationHistory,
+        navigateHistoryBack,
+        navigateHistoryForward,
+        updateHistoryButtons,
+        clearNavigationHistory,
+        getNavigationHistoryState,
+        toggleSidebar,
+        openSidebar,
+        closeSidebar,
+        isSidebarOpen,
+        updateProgressSidebar,
+        updateProgressBar,
+        updateMainProgressBar,
+        getFavoritesCount,
+        setupKeyboardShortcuts,
+        handleKeyboardShortcuts,
+        removeKeyboardShortcuts,
+        initializeEnhancedNavigation,
+        refreshEnhancedNavigation,
+        navigateToQuestionWithHistory,
+      } from './js/modules/enhanced-navigation.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
       addToLog("🏗️ Data Models module imported successfully!", 'success');
@@ -558,6 +680,7 @@
       addToLog("🔍 Search module imported successfully!", 'success');
       addToLog("📍 Resume Position module imported successfully!", 'success');
       addToLog("📱 Mobile Navigation module imported successfully!", 'success');
+      addToLog("🧭 Enhanced Navigation module imported successfully!", 'success');
 
       // Make functions available globally for testing
       window.applyTheme = applyTheme;
@@ -566,6 +689,15 @@
       window.navigateToRandomQuestion = navigateToRandomQuestion;
       window.toggleSidebar = toggleSidebar;
       window.closeSidebar = closeSidebar;
+      window.getQuestionStatus = getQuestionStatus;
+      window.getAnsweredQuestionsCount = getAnsweredQuestionsCount;
+      window.truncateText = truncateText;
+      window.saveSettings = saveSettings;
+      window.animateNumberChange = animateNumberChange;
+      window.addProgressMilestoneEffects = addProgressMilestoneEffects;
+      window.resetMilestoneStates = resetMilestoneStates;
+      window.hideExportModal = hideExportModal;
+      window.showKeyboardHelp = showKeyboardHelp;
       window.saveSettingsUI = saveSettingsUI;
       window.updateToolbarVisibility = updateToolbarVisibility;
       window.updateTooltipVisibility = updateTooltipVisibility;
@@ -787,6 +919,95 @@
         addToLog("🚀 Mobile navigation fully initialized", 'success');
         
         addToLog("📱 Mobile Navigation Module test completed!", 'success');
+      };
+
+      // Test enhanced navigation module
+      window.testEnhanced = function() {
+        addToLog("🧭 Testing Enhanced Navigation Module...", 'info');
+        
+        // Test navigation history management
+        addToLog("📚 Testing navigation history...", 'info');
+        clearNavigationHistory();
+        addToNavigationHistory(0);
+        addToNavigationHistory(5);
+        addToNavigationHistory(10);
+        
+        const historyState = getNavigationHistoryState();
+        addToLog(`✅ History: ${historyState.totalEntries} entries, can go back: ${historyState.canGoBack}`, 'success');
+        
+        // Test history navigation (mock)
+        addToLog("⬅️ Testing history back navigation...", 'info');
+        navigateHistoryBack();
+        const backState = getNavigationHistoryState();
+        addToLog(`✅ After back: index ${backState.currentIndex}, can go forward: ${backState.canGoForward}`, 'success');
+        
+        // Test history forward navigation (mock)
+        addToLog("➡️ Testing history forward navigation...", 'info');
+        navigateHistoryForward();
+        const forwardState = getNavigationHistoryState();
+        addToLog(`✅ After forward: index ${forwardState.currentIndex}`, 'success');
+        
+        // Test sidebar management
+        addToLog("🗂️ Testing sidebar management...", 'info');
+        const initialSidebarState = isSidebarOpen();
+        addToLog(`📊 Initial sidebar state: ${initialSidebarState ? 'Open' : 'Closed'}`, 'info');
+        
+        toggleSidebar();
+        const toggledState = isSidebarOpen();
+        addToLog(`🔄 After toggle: ${toggledState ? 'Open' : 'Closed'}`, 'success');
+        
+        openSidebar();
+        addToLog(`✅ Open sidebar: ${isSidebarOpen() ? 'Success' : 'Failed'}`, isSidebarOpen() ? 'success' : 'error');
+        
+        closeSidebar();
+        addToLog(`✅ Close sidebar: ${!isSidebarOpen() ? 'Success' : 'Failed'}`, !isSidebarOpen() ? 'success' : 'error');
+        
+        // Test progress sidebar update
+        addToLog("📊 Testing progress sidebar update...", 'info');
+        updateProgressSidebar();
+        addToLog("✅ Progress sidebar updated", 'success');
+        
+        // Test progress bars
+        addToLog("📈 Testing progress bars...", 'info');
+        updateProgressBar();
+        updateMainProgressBar();
+        addToLog("✅ Progress bars updated", 'success');
+        
+        // Test favorites count
+        addToLog("⭐ Testing favorites count...", 'info');
+        const favCount = getFavoritesCount();
+        addToLog(`✅ Favorites count: ${favCount}`, 'success');
+        
+        // Test keyboard shortcuts setup
+        addToLog("⌨️ Testing keyboard shortcuts setup...", 'info');
+        setupKeyboardShortcuts();
+        addToLog("✅ Keyboard shortcuts configured", 'success');
+        
+        // Test enhanced navigation initialization
+        addToLog("🚀 Testing enhanced navigation initialization...", 'info');
+        initializeEnhancedNavigation();
+        addToLog("✅ Enhanced navigation initialized", 'success');
+        
+        // Test navigation refresh
+        addToLog("🔄 Testing enhanced navigation refresh...", 'info');
+        refreshEnhancedNavigation();
+        addToLog("✅ Enhanced navigation refreshed", 'success');
+        
+        // Test question navigation with history
+        addToLog("🧭 Testing question navigation with history...", 'info');
+        
+        // Mock navigation function for testing
+        window.navigateToQuestionIndex = (index, addHistory) => {
+          window.currentQuestionIndex = index;
+          addToLog(`🧭 Navigated to question ${index + 1} (addHistory: ${addHistory !== false})`, 'info');
+          return Promise.resolve();
+        };
+        
+        navigateToQuestionWithHistory(3);
+        const finalHistoryState = getNavigationHistoryState();
+        addToLog(`✅ Navigation with history: ${finalHistoryState.totalEntries} total entries`, 'success');
+        
+        addToLog("🧭 Enhanced Navigation Module test completed!", 'success');
       };
 
       // Test settings module
@@ -1592,6 +1813,7 @@
       document.getElementById('testSearch').addEventListener('click', testSearch);
       document.getElementById('testResume').addEventListener('click', testResume);
       document.getElementById('testMobile').addEventListener('click', testMobile);
+      document.getElementById('testEnhanced').addEventListener('click', testEnhanced);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
