@@ -12,8 +12,12 @@
  *   startExamSession, updateAdvancedSearchVisibility, initializeSearchInterface, handleResumePosition,
  *   displayCurrentQuestion, clearNavigationHistory, updateProgressSidebar, updateHistoryButtons,
  *   updateQuestionJumpMaxValue, testQuestionJumpField, resetFavoritesData, exportFavorites,
- *   isDevelopmentMode, loadChunk, preloadChunks, assembleCurrentQuestions
+ *   isDevelopmentMode
+ * - Lazy Loading Module: checkForChunkedExam, loadChunk, preloadChunks, assembleCurrentQuestions
  */
+
+// Import lazy loading functions
+// Note: These will be imported by the main script that uses this module
 
 // ===========================
 // EXAM DISCOVERY FUNCTIONS
@@ -366,7 +370,7 @@ async function loadExam(examCode) {
     }
 
     // Check if this exam has chunked version for lazy loading
-    const isChunked = await checkForChunkedExam(examCode);
+    const isChunked = await window.checkForChunkedExam(examCode);
 
     if (isChunked) {
       // Load first chunk immediately for chunked exams
@@ -551,40 +555,7 @@ async function loadExam(examCode) {
   }
 }
 
-/**
- * Check for chunked exam version
- */
-async function checkForChunkedExam(examCode) {
-  // Always check for chunked version first for optimal performance
-  // If chunks exist, prefer lazy loading regardless of settings for large exams
-
-  try {
-    const metadataResponse = await fetch(`data/${examCode}/metadata.json`);
-    if (metadataResponse.ok) {
-      const metadata = await metadataResponse.json();
-      if (metadata.chunked && metadata.total_questions > (window.lazyLoadingConfig?.chunkSize || 50)) {
-        // Respect user preference - only use lazy loading if explicitly enabled
-        if (window.settings?.enableLazyLoading) {
-          if (window.lazyLoadingConfig) {
-            window.lazyLoadingConfig.isChunkedExam = true;
-            window.lazyLoadingConfig.examMetadata = metadata;
-            window.lazyLoadingConfig.totalChunks = metadata.total_chunks || Math.ceil(metadata.total_questions / window.lazyLoadingConfig.chunkSize);
-          }
-          console.log(`🚀 Lazy loading activated for ${examCode}: ${metadata.total_questions} questions in ${window.lazyLoadingConfig.totalChunks} chunks (user setting)`);
-          return true;
-        } else {
-          console.log(`⚡ Chunked version available for ${examCode} but lazy loading disabled in settings`);
-        }
-      }
-    }
-  } catch (error) {
-    console.log(`No chunked version available for ${examCode}, using standard loading`);
-  }
-  if (window.lazyLoadingConfig) {
-    window.lazyLoadingConfig.isChunkedExam = false;
-  }
-  return false;
-}
+// Note: checkForChunkedExam is now provided by the Lazy Loading module
 
 // ===========================
 // IMAGE PROCESSING FUNCTIONS
@@ -666,7 +637,6 @@ export {
   
   // Exam loading
   loadExam,
-  checkForChunkedExam,
   
   // Image processing
   processEmbeddedImages,

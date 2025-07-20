@@ -156,6 +156,9 @@
           <button id="testExamLoader" style="margin: 5px; padding: 10px 15px; background: #fd7e14; color: white; border: none; border-radius: 4px; cursor: pointer;">
             📚 Test Exam Loader
           </button>
+          <button id="testLazyLoading" style="margin: 5px; padding: 10px 15px; background: #20c997; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            ⚡ Test Lazy Loading
+          </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
           </button>
@@ -680,9 +683,23 @@
         getResumeIndicatorText,
         getTimeAgo,
         loadExam,
-        checkForChunkedExam,
         processEmbeddedImages,
       } from './js/modules/exam-loader.js';
+
+      // Also import lazy loading module
+      import {
+        checkForChunkedExam,
+        loadChunk,
+        preloadChunks,
+        getChunkIdForQuestion,
+        ensureQuestionLoaded,
+        assembleCurrentQuestions,
+        clearUnusedChunks,
+        getMemoryStats,
+        resetLazyLoadingConfig,
+        createPerformanceMonitor,
+        initializeLazyLoading,
+      } from './js/modules/lazy-loading.js';
 
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
@@ -695,6 +712,7 @@
       addToLog("📱 Mobile Navigation module imported successfully!", 'success');
       addToLog("🧭 Enhanced Navigation module imported successfully!", 'success');
       addToLog("📚 Exam Loader module imported successfully!", 'success');
+      addToLog("⚡ Lazy Loading module imported successfully!", 'success');
 
       // Make functions available globally for testing
       window.applyTheme = applyTheme;
@@ -821,8 +839,20 @@
       window.getResumeIndicatorText = getResumeIndicatorText;
       window.getTimeAgo = getTimeAgo;
       window.loadExam = loadExam;
-      window.checkForChunkedExam = checkForChunkedExam;
       window.processEmbeddedImages = processEmbeddedImages;
+
+      // Make lazy loading functions available globally for testing
+      window.checkForChunkedExam = checkForChunkedExam;
+      window.loadChunk = loadChunk;
+      window.preloadChunks = preloadChunks;
+      window.getChunkIdForQuestion = getChunkIdForQuestion;
+      window.ensureQuestionLoaded = ensureQuestionLoaded;
+      window.assembleCurrentQuestions = assembleCurrentQuestions;
+      window.clearUnusedChunks = clearUnusedChunks;
+      window.getMemoryStats = getMemoryStats;
+      window.resetLazyLoadingConfig = resetLazyLoadingConfig;
+      window.createPerformanceMonitor = createPerformanceMonitor;
+      window.initializeLazyLoading = initializeLazyLoading;
 
       // Initialize settings module
       initializeSettings();
@@ -1965,6 +1995,140 @@
         }
       };
 
+      // Test lazy loading module
+      window.testLazyLoading = async function() {
+        addToLog("⚡ Testing Lazy Loading Module...", 'info');
+        
+        try {
+          // Initialize lazy loading system
+          addToLog("🚀 Testing initialization", 'info');
+          
+          initializeLazyLoading();
+          addToLog("✅ Lazy loading system initialized", 'success');
+          
+          // Test configuration
+          const initialStats = getMemoryStats();
+          addToLog(`✅ Memory stats: ${initialStats.isChunked ? 'Chunked' : 'Standard'} exam`, 'success');
+
+          // Test chunk ID calculation
+          addToLog("🧮 Testing chunk calculations", 'info');
+          
+          const chunkId1 = getChunkIdForQuestion(0);
+          const chunkId2 = getChunkIdForQuestion(49);
+          const chunkId3 = getChunkIdForQuestion(50);
+          const chunkId4 = getChunkIdForQuestion(150);
+          
+          addToLog(`✅ Chunk IDs: Q1→${chunkId1}, Q50→${chunkId2}, Q51→${chunkId3}, Q151→${chunkId4}`, 'success');
+
+          // Test performance monitor
+          addToLog("📊 Testing performance monitoring", 'info');
+          
+          const monitor = createPerformanceMonitor();
+          const timer = monitor.startTimer();
+          
+          // Simulate some work
+          await new Promise(resolve => setTimeout(resolve, 10));
+          
+          monitor.recordLoad(timer);
+          const stats = monitor.getStats();
+          addToLog(`✅ Performance: ${stats.chunksLoaded} chunks, avg ${stats.averageLoadTime.toFixed(2)}ms`, 'success');
+
+          // Test memory management
+          addToLog("🧹 Testing memory management", 'info');
+          
+          // Set up mock chunked exam
+          window.lazyLoadingConfig.isChunkedExam = true;
+          window.lazyLoadingConfig.totalChunks = 5;
+          window.lazyLoadingConfig.chunkSize = 50;
+          window.lazyLoadingConfig.examMetadata = {
+            total_questions: 250,
+            exam_name: "Test Chunked Exam"
+          };
+          
+          // Add some mock chunks
+          window.lazyLoadingConfig.loadedChunks.set(0, [{ question_number: 1 }]);
+          window.lazyLoadingConfig.loadedChunks.set(1, [{ question_number: 51 }]);
+          window.lazyLoadingConfig.loadedChunks.set(2, [{ question_number: 101 }]);
+          window.lazyLoadingConfig.loadedChunks.set(3, [{ question_number: 151 }]);
+          window.lazyLoadingConfig.loadedChunks.set(4, [{ question_number: 201 }]);
+          
+          const memoryBefore = getMemoryStats();
+          addToLog(`✅ Before cleanup: ${memoryBefore.loadedChunks}/${memoryBefore.totalChunks} chunks loaded`, 'info');
+          
+          // Test memory cleanup (keep chunks around current position)
+          const clearedCount = clearUnusedChunks(75, 1); // Keep only chunks around question 75 (chunk 1)
+          const memoryAfter = getMemoryStats();
+          addToLog(`✅ After cleanup: ${clearedCount} chunks cleared, ${memoryAfter.loadedChunks} remaining`, 'success');
+
+          // Test question assembly
+          addToLog("🧩 Testing question assembly", 'info');
+          
+          const assembled = assembleCurrentQuestions();
+          addToLog(`✅ Assembled ${assembled.length} questions (${assembled.filter(q => q.isPlaceholder).length} placeholders)`, 'success');
+          
+          // Test a few assembled questions
+          const firstQuestion = assembled[0];
+          const placeholderQuestion = assembled[100]; // Should be a placeholder
+          addToLog(`✅ First question: ${firstQuestion.isPlaceholder ? 'Placeholder' : 'Real'} - Q${firstQuestion.question_number}`, 'info');
+          addToLog(`✅ Question 101: ${placeholderQuestion.isPlaceholder ? 'Placeholder' : 'Real'} - Q${placeholderQuestion.question_number}`, 'info');
+
+          // Test chunked exam detection with mock
+          addToLog("🔍 Testing chunked exam detection", 'info');
+          
+          // This will try to fetch metadata.json (will fail but that's expected)
+          const isChunked1 = await checkForChunkedExam("TEST-CHUNKED-EXAM").catch(() => false);
+          addToLog(`✅ Chunked detection (no file): ${isChunked1 ? 'Chunked' : 'Standard'}`, 'success');
+
+          // Test with lazy loading disabled
+          const originalSetting = window.settings.enableLazyLoading;
+          window.settings.enableLazyLoading = false;
+          
+          const isChunked2 = await checkForChunkedExam("TEST-CHUNKED-EXAM").catch(() => false);
+          addToLog(`✅ Chunked detection (disabled): ${isChunked2 ? 'Chunked' : 'Standard'}`, 'success');
+          
+          // Restore setting
+          window.settings.enableLazyLoading = originalSetting;
+
+          // Test configuration reset
+          addToLog("🔄 Testing configuration reset", 'info');
+          
+          resetLazyLoadingConfig();
+          const resetStats = getMemoryStats();
+          addToLog(`✅ After reset: ${resetStats.loadedChunks} chunks, ${resetStats.isChunked ? 'chunked' : 'standard'} mode`, 'success');
+
+          // Test edge cases
+          addToLog("⚠️ Testing edge cases", 'info');
+          
+          // Test with no lazy loading config
+          const originalConfig = window.lazyLoadingConfig;
+          window.lazyLoadingConfig = null;
+          
+          const edgeChunkId = getChunkIdForQuestion(100);
+          addToLog(`✅ No config chunk ID: ${edgeChunkId}`, 'success');
+          
+          const edgeEnsure = await ensureQuestionLoaded("TEST", 50);
+          addToLog(`✅ No config ensure: ${edgeEnsure}`, 'success');
+          
+          const edgeAssemble = assembleCurrentQuestions();
+          addToLog(`✅ No config assembly: ${edgeAssemble.length} questions`, 'success');
+          
+          // Restore config
+          window.lazyLoadingConfig = originalConfig;
+
+          // Final summary
+          addToLog("📊 Lazy Loading Module Test Summary", 'success');
+          addToLog("✅ System initialization and configuration", 'success');
+          addToLog("✅ Chunk calculations and performance monitoring", 'success');
+          addToLog("✅ Memory management and cleanup", 'success');
+          addToLog("✅ Question assembly with placeholders", 'success');
+          addToLog("✅ Chunked exam detection logic", 'success');
+          addToLog("✅ Edge case handling", 'success');
+
+        } catch (error) {
+          addToLog(`❌ Lazy Loading test failed: ${error.message}`, 'error');
+        }
+      };
+
       window.clearTests = function() {
         document.getElementById('log-content').innerHTML = '';
         addToLog("🗑️ Test logs cleared", 'info');
@@ -1992,6 +2156,7 @@
       document.getElementById('testMobile').addEventListener('click', testMobile);
       document.getElementById('testEnhanced').addEventListener('click', testEnhanced);
       document.getElementById('testExamLoader').addEventListener('click', testExamLoader);
+      document.getElementById('testLazyLoading').addEventListener('click', testLazyLoading);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
