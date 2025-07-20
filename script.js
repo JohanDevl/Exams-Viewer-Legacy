@@ -7712,14 +7712,14 @@ function isQuestionAnsweredIncorrectly(questionNumber) {
 function getMostRecentAnswer(questionNumber) {
   if (!questionNumber || !currentExam) return null;
   
-  devLog("🔍 getMostRecentAnswer called for question:", questionNumber);
+  // devLog("🔍 getMostRecentAnswer called for question:", questionNumber); // Temporarily disabled to fix infinite loop
   
   const examCode = Object.keys(availableExams).find(code => 
     availableExams[code] === currentExam.exam_name
   ) || currentExam.exam_name;
   
   const examName = currentExam.exam_name;
-  devLog("📚 Looking for answers in exam:", examName, "Code:", examCode);
+  // devLog("📚 Looking for answers in exam:", examName, "Code:", examCode); // Temporarily disabled
   
   let mostRecentAttempt = null;
   let mostRecentTimestamp = 0;
@@ -7744,14 +7744,14 @@ function getMostRecentAnswer(questionNumber) {
   
   // Check previous sessions
   if (statistics.sessions) {
-    devLog("📊 Checking", statistics.sessions.length, "previous sessions");
+    // devLog("📊 Checking", statistics.sessions.length, "previous sessions"); // Temporarily disabled
     
     for (const session of statistics.sessions) {
       const sessionExamCode = session.ec || session.examCode;
       const sessionExamName = session.en || session.examName;
       const sessionMatches = (sessionExamCode === examCode || sessionExamName === examName);
       
-      devLog("🔍 Session:", sessionExamCode, sessionExamName, "Matches:", sessionMatches, "Questions:", session.questions?.length || 0);
+      // devLog("🔍 Session:", sessionExamCode, sessionExamName, "Matches:", sessionMatches, "Questions:", session.questions?.length || 0); // Temporarily disabled
       
       if (sessionMatches && session.questions && 
           (session.st || session.startTime || 0) > mostRecentTimestamp) {
@@ -7761,11 +7761,11 @@ function getMostRecentAnswer(questionNumber) {
           (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
         );
         
-        devLog("🔍 Found question in session:", found);
+        // devLog("🔍 Found question in session:", found); // Temporarily disabled
         
         if (found && found.att && found.att.length > 0) {
           const lastAttempt = found.att[found.att.length - 1];
-          devLog("✅ Found previous answer:", lastAttempt);
+          // devLog("✅ Found previous answer:", lastAttempt); // Temporarily disabled
           mostRecentAttempt = {
             isCorrect: lastAttempt.c,
             selectedAnswers: lastAttempt.a || [],
@@ -7776,10 +7776,10 @@ function getMostRecentAnswer(questionNumber) {
       }
     }
   } else {
-    devLog("❌ No previous sessions found");
+    // devLog("❌ No previous sessions found"); // Temporarily disabled
   }
   
-  devLog("📝 Final result:", mostRecentAttempt);
+  // devLog("📝 Final result:", mostRecentAttempt); // Temporarily disabled
   return mostRecentAttempt;
 }
 
