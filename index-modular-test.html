@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exams Viewer - Modular Test</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1><i class="fas fa-graduation-cap"></i> Exams Viewer - Modular Test</h1>
+        <p>
+          Testing modular architecture - Storage Module
+        </p>
+      </header>
+
+      <!-- Test Section -->
+      <div class="test-section" style="background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 8px;">
+        <h3>🧪 Module Storage Test</h3>
+        <div id="test-results" style="margin: 10px 0;">
+          <p><strong>Tests en cours...</strong></p>
+        </div>
+        
+        <div class="test-buttons" style="margin: 15px 0;">
+          <button id="testStorage" style="margin: 5px; padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🧪 Test Storage Functions
+          </button>
+          <button id="testCompression" style="margin: 5px; padding: 10px 15px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🗜️ Test Compression
+          </button>
+          <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🔧 Test Dev Mode
+          </button>
+          <button id="clearTests" style="margin: 5px; padding: 10px 15px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🗑️ Clear Tests
+          </button>
+        </div>
+      </div>
+
+      <!-- Console Log Display -->
+      <div id="console-log" style="background: #2d3748; color: #e2e8f0; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 12px; max-height: 300px; overflow-y: auto; margin: 20px 0;">
+        <strong style="color: #68d391;">Console Output:</strong><br>
+        <div id="log-content"></div>
+      </div>
+    </div>
+
+    <!-- Global Variables (minimal for testing) -->
+    <script>
+      // Global variables required by storage module
+      let settings = {
+        showDiscussionDefault: false,
+        highlightDefault: false,
+        darkMode: false,
+        showQuestionToolbar: false,
+        showAdvancedSearch: false,
+        sidebarOpen: false,
+        enableLazyLoading: false,
+        showMainProgressBar: true,
+        showTooltips: false,
+        enableResumePosition: false,
+        autoSavePosition: false,
+      };
+
+      let favoritesData = {
+        favorites: {},
+        categories: ["Important", "Review", "Difficult"],
+        customCategories: [],
+        isRevisionMode: false,
+        revisionFilter: {
+          showFavorites: true,
+          showCategories: [],
+          showNotes: true,
+        },
+      };
+
+      let statistics = {
+        sessions: [],
+        currentSession: null,
+        totalStats: {
+          totalQuestions: 0,
+          totalCorrect: 0,
+          totalIncorrect: 0,
+          totalPreview: 0,
+          totalTime: 0,
+          examStats: {},
+        },
+      };
+
+      let resumePositions = {};
+      let currentQuestions = [];
+      let currentExam = { exam_name: "Test Exam" };
+
+      // Mock functions required by storage module
+      function showError(message) {
+        addToLog(`❌ ERROR: ${message}`, 'error');
+      }
+
+      function showSuccess(message) {
+        addToLog(`✅ SUCCESS: ${message}`, 'success');
+      }
+
+      function applyTheme() {
+        addToLog("🎨 Theme applied", 'info');
+      }
+
+      function updateToolbarVisibility() {
+        addToLog("🔧 Toolbar visibility updated", 'info');
+      }
+
+      function updateTooltipVisibility() {
+        addToLog("💬 Tooltip visibility updated", 'info');
+      }
+
+      function recalculateTotalStats() {
+        addToLog("📊 Total stats recalculated", 'info');
+      }
+
+      function cleanCorruptedStatistics() {
+        addToLog("🧹 Corrupted statistics cleaned", 'info');
+      }
+
+      function cleanupObsoleteData() {
+        addToLog("🧹 Obsolete data cleaned", 'info');
+      }
+
+      // Console logging system
+      function addToLog(message, type = 'log') {
+        const logContent = document.getElementById('log-content');
+        const timestamp = new Date().toLocaleTimeString();
+        const colors = {
+          log: '#e2e8f0',
+          error: '#fc8181',
+          success: '#68d391',
+          info: '#63b3ed'
+        };
+        
+        logContent.innerHTML += `<div style="color: ${colors[type]}; margin: 2px 0;">[${timestamp}] ${message}</div>`;
+        logContent.scrollTop = logContent.scrollHeight;
+      }
+
+      // Override console methods to capture output
+      const originalLog = console.log;
+      const originalError = console.error;
+      
+      console.log = function(...args) {
+        addToLog(args.join(' '), 'log');
+        originalLog.apply(console, args);
+      };
+      
+      console.error = function(...args) {
+        addToLog(args.join(' '), 'error');
+        originalError.apply(console, args);
+      };
+    </script>
+
+    <!-- Load modular script -->
+    <script type="module">
+      import {
+        isDevelopmentMode,
+        devLog,
+        devError,
+        compressData,
+        decompressData,
+        clearCorruptedData,
+        saveStatistics,
+        loadStatistics,
+        saveFavorites,
+        loadFavorites,
+        loadSettings,
+        saveSettings,
+        loadResumePositions,
+        saveResumePositions,
+        saveResumePosition,
+        getResumePosition,
+        clearResumePosition,
+      } from './js/modules/storage.js';
+
+      addToLog("📦 Storage module imported successfully!", 'success');
+
+      // Test functions
+      window.testStorage = function() {
+        addToLog("🧪 Testing Storage Functions...", 'info');
+        
+        // Test statistics
+        statistics.totalStats.totalQuestions = 42;
+        saveStatistics();
+        addToLog("✅ Statistics saved", 'success');
+        
+        statistics.totalStats.totalQuestions = 0; // Reset
+        loadStatistics();
+        addToLog(`📊 Statistics loaded - totalQuestions: ${statistics.totalStats.totalQuestions}`, 'info');
+        
+        // Test favorites
+        favoritesData.favorites['TEST'] = { 1: { isFavorite: true, note: 'Test note' } };
+        saveFavorites();
+        addToLog("⭐ Favorites saved", 'success');
+        
+        favoritesData.favorites = {}; // Reset
+        loadFavorites();
+        const testFav = favoritesData.favorites['TEST'];
+        addToLog(`⭐ Favorites loaded - TEST exam has ${Object.keys(testFav || {}).length} items`, 'info');
+        
+        // Test resume positions
+        saveResumePosition('TEST-EXAM', 5);
+        addToLog("📍 Resume position saved", 'success');
+        
+        const position = getResumePosition('TEST-EXAM');
+        addToLog(`📍 Resume position loaded - question ${position?.questionNumber || 'none'}`, 'info');
+      };
+
+      window.testCompression = function() {
+        addToLog("🗜️ Testing Compression...", 'info');
+        
+        const testData = {
+          sessions: [
+            { examCode: 'TEST', examName: 'Test Exam', totalQuestions: 100 }
+          ],
+          totalStats: { totalQuestions: 50, totalCorrect: 30 }
+        };
+        
+        const compressed = compressData(testData);
+        addToLog(`📦 Original size: ${JSON.stringify(testData).length} chars`, 'info');
+        addToLog(`📦 Compressed size: ${compressed.length} chars`, 'info');
+        
+        const decompressed = decompressData(compressed);
+        const matches = JSON.stringify(testData) === JSON.stringify(decompressed);
+        addToLog(`🔄 Compression/Decompression: ${matches ? '✅ SUCCESS' : '❌ FAILED'}`, matches ? 'success' : 'error');
+      };
+
+      window.testDevMode = function() {
+        addToLog("🔧 Testing Development Mode...", 'info');
+        
+        const isDevMode = isDevelopmentMode();
+        addToLog(`🔧 Development mode: ${isDevMode ? '✅ ENABLED' : '❌ DISABLED'}`, isDevMode ? 'success' : 'info');
+        
+        devLog("This is a dev log message");
+        devError("This is a dev error message");
+      };
+
+      window.clearTests = function() {
+        document.getElementById('log-content').innerHTML = '';
+        addToLog("🗑️ Test logs cleared", 'info');
+        
+        // Clear localStorage test data
+        localStorage.removeItem('examViewerStatistics');
+        localStorage.removeItem('examViewerFavorites');
+        localStorage.removeItem('examViewerResumePositions');
+        addToLog("🗑️ Test localStorage data cleared", 'info');
+      };
+
+      // Setup event listeners
+      document.getElementById('testStorage').addEventListener('click', testStorage);
+      document.getElementById('testCompression').addEventListener('click', testCompression);
+      document.getElementById('testDevMode').addEventListener('click', testDevMode);
+      document.getElementById('clearTests').addEventListener('click', clearTests);
+
+      addToLog("🚀 Modular test environment ready!", 'success');
+      addToLog("Click buttons above to test storage module functionality", 'info');
+    </script>
+  </body>
+</html>
