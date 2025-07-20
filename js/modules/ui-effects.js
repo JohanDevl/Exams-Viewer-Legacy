@@ -438,35 +438,6 @@ function displayChangelog() {
 // TOGGLE FUNCTIONS
 // ===========================
 
-/**
- * Toggle sidebar with animation and overlay
- */
-function toggleSidebar() {
-  const sidebar = document.getElementById("progressSidebar");
-  const overlay = document.getElementById("sidebarOverlay");
-  
-  if (!sidebar) return;
-  
-  const isOpen = sidebar.classList.contains("open");
-  
-  if (isOpen) {
-    sidebar.classList.remove("open");
-    if (overlay) overlay.style.display = "none";
-    if (window.sidebarOpen !== undefined) window.sidebarOpen = false;
-  } else {
-    sidebar.classList.add("open");
-    if (overlay) overlay.style.display = "block";
-    if (window.sidebarOpen !== undefined) window.sidebarOpen = true;
-  }
-  
-  // Save sidebar state to settings
-  if (window.settings) {
-    window.settings.sidebarOpen = !isOpen;
-    if (typeof window.saveSettings === 'function') {
-      window.saveSettings();
-    }
-  }
-}
 
 /**
  * Toggle search section collapse/expand
@@ -631,7 +602,6 @@ export {
   displayChangelog,
   
   // Toggle functions
-  toggleSidebar,
   toggleSearchSection,
   toggleLegalInfo,
   
