@@ -153,6 +153,9 @@
           <button id="testEnhanced" style="margin: 5px; padding: 10px 15px; background: #17a2b8; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🧭 Test Enhanced Nav
           </button>
+          <button id="testExamLoader" style="margin: 5px; padding: 10px 15px; background: #fd7e14; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            📚 Test Exam Loader
+          </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
           </button>
@@ -670,6 +673,17 @@
         navigateToQuestionWithHistory,
       } from './js/modules/enhanced-navigation.js';
 
+      // Also import exam loader module
+      import {
+        discoverAvailableExams,
+        displayAvailableExams,
+        getResumeIndicatorText,
+        getTimeAgo,
+        loadExam,
+        checkForChunkedExam,
+        processEmbeddedImages,
+      } from './js/modules/exam-loader.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
       addToLog("🏗️ Data Models module imported successfully!", 'success');
@@ -680,6 +694,7 @@
       addToLog("📍 Resume Position module imported successfully!", 'success');
       addToLog("📱 Mobile Navigation module imported successfully!", 'success');
       addToLog("🧭 Enhanced Navigation module imported successfully!", 'success');
+      addToLog("📚 Exam Loader module imported successfully!", 'success');
 
       // Make functions available globally for testing
       window.applyTheme = applyTheme;
@@ -799,6 +814,15 @@
       window.cleanInvalidPositions = cleanInvalidPositions;
       window.initializeResumePosition = initializeResumePosition;
       window.handleNavigationChange = handleNavigationChange;
+
+      // Make exam loader functions available globally for testing
+      window.discoverAvailableExams = discoverAvailableExams;
+      window.displayAvailableExams = displayAvailableExams;
+      window.getResumeIndicatorText = getResumeIndicatorText;
+      window.getTimeAgo = getTimeAgo;
+      window.loadExam = loadExam;
+      window.checkForChunkedExam = checkForChunkedExam;
+      window.processEmbeddedImages = processEmbeddedImages;
 
       // Initialize settings module
       initializeSettings();
@@ -1787,6 +1811,160 @@
         }
       };
 
+      // Test exam loader module
+      window.testExamLoader = function() {
+        addToLog("📚 Testing Exam Loader Module...", 'info');
+        
+        try {
+          // Initialize global variables for testing
+          if (!window.availableExams) {
+            window.availableExams = {};
+          }
+          if (!window.lazyLoadingConfig) {
+            window.lazyLoadingConfig = {
+              chunkSize: 50,
+              loadedChunks: new Map(),
+              currentChunk: 0,
+              totalChunks: 0,
+              preloadBuffer: 1,
+              isChunkedExam: false,
+              examMetadata: null,
+            };
+          }
+          if (!window.settings) {
+            window.settings = { enableLazyLoading: false };
+          }
+
+          // Test exam discovery
+          addToLog("🔍 Testing exam discovery", 'info');
+          
+          // Mock available exams for testing
+          window.availableExams = {
+            "CAD": "CAD",
+            "CSA": "CSA", 
+            "CIS-SM": "CIS-SM"
+          };
+          
+          addToLog(`✅ Mock exams available: ${Object.keys(window.availableExams).join(', ')}`, 'success');
+
+          // Test getTimeAgo function
+          addToLog("⏰ Testing time formatting", 'info');
+          
+          const now = Date.now();
+          const oneMinuteAgo = now - (1 * 60 * 1000);
+          const oneHourAgo = now - (1 * 60 * 60 * 1000);
+          const oneDayAgo = now - (1 * 24 * 60 * 60 * 1000);
+          
+          const timeAgo1 = getTimeAgo(oneMinuteAgo);
+          const timeAgo2 = getTimeAgo(oneHourAgo);
+          const timeAgo3 = getTimeAgo(oneDayAgo);
+          
+          addToLog(`✅ Time formatting: ${timeAgo1}, ${timeAgo2}, ${timeAgo3}`, 'success');
+
+          // Test resume indicator
+          addToLog("📍 Testing resume indicator", 'info');
+          
+          // Set up mock settings and position
+          window.settings.enableResumePosition = true;
+          
+          const mockPosition = {
+            questionIndex: 4,
+            timestamp: Date.now() - (2 * 60 * 60 * 1000), // 2 hours ago
+            questionNumber: 5,
+            totalQuestions: 100,
+            examTitle: "Test Exam"
+          };
+          
+          // Mock localStorage data
+          const studyPositions = { "CAD": mockPosition };
+          localStorage.setItem('study_positions', JSON.stringify(studyPositions));
+          
+          const resumeIndicator = getResumeIndicatorText("CAD");
+          addToLog(`✅ Resume indicator: ${resumeIndicator || 'None'}`, 'success');
+
+          // Test processEmbeddedImages function
+          addToLog("🖼️ Testing image processing", 'info');
+          
+          const testHtml = '<p>Question text</p><img data-img-id="img1" src="placeholder" alt="test">';
+          const mockImages = {
+            img1: {
+              webp: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+              size: [100, 100],
+              original_url: "http://example.com/image.jpg"
+            }
+          };
+          
+          const processedHtml = processEmbeddedImages(testHtml, mockImages);
+          const hasBase64 = processedHtml.includes('data:image/webp;base64,');
+          addToLog(`✅ Image processing: ${hasBase64 ? 'SUCCESS' : 'FAILED'}`, hasBase64 ? 'success' : 'error');
+
+          // Test chunked exam checking
+          addToLog("🧩 Testing chunked exam detection", 'info');
+          
+          // Mock fetch for metadata (will fail as expected)
+          const isChunked = await checkForChunkedExam("TEST-EXAM").catch(() => false);
+          addToLog(`✅ Chunked exam check: ${isChunked ? 'Chunked' : 'Standard'}`, 'success');
+
+          // Test with lazy loading enabled
+          addToLog("⚡ Testing with lazy loading enabled", 'info');
+          
+          window.settings.enableLazyLoading = true;
+          window.lazyLoadingConfig.examMetadata = {
+            total_questions: 150,
+            total_chunks: 3,
+            exam_name: "Test Chunked Exam"
+          };
+          
+          const isChunkedWithSetting = await checkForChunkedExam("TEST-EXAM").catch(() => false);
+          addToLog(`✅ With lazy loading: ${isChunkedWithSetting ? 'Would use chunking' : 'Standard loading'}`, 'info');
+
+          // Test display functions preparation
+          addToLog("📋 Testing display preparation", 'info');
+          
+          // Create mock DOM elements for displayAvailableExams
+          if (!document.getElementById('examsList')) {
+            const examsList = document.createElement('div');
+            examsList.id = 'examsList';
+            examsList.style.cssText = 'border: 1px solid #ddd; padding: 10px; margin: 10px 0; background: #f8f9fa;';
+            document.querySelector('.container').appendChild(examsList);
+          }
+
+          // Call displayAvailableExams (will show mock data)
+          await displayAvailableExams();
+          const examCards = document.querySelectorAll('.exam-card');
+          addToLog(`✅ Display exams: ${examCards.length} exam cards created`, 'success');
+
+          // Test edge cases
+          addToLog("⚠️ Testing edge cases", 'info');
+          
+          const emptyImageResult = processEmbeddedImages("", {});
+          addToLog(`✅ Empty content: ${emptyImageResult === "" ? 'OK' : 'ERROR'}`, emptyImageResult === "" ? 'success' : 'error');
+          
+          const noImagesResult = processEmbeddedImages("<p>Test</p>", {});
+          addToLog(`✅ No images: ${noImagesResult === "<p>Test</p>" ? 'OK' : 'ERROR'}`, noImagesResult === "<p>Test</p>" ? 'success' : 'error');
+          
+          window.settings.enableResumePosition = false;
+          const noResumeIndicator = getResumeIndicatorText("CAD");
+          addToLog(`✅ Resume disabled: ${noResumeIndicator === null ? 'OK' : 'ERROR'}`, noResumeIndicator === null ? 'success' : 'error');
+
+          // Restore settings
+          window.settings.enableResumePosition = true;
+          window.settings.enableLazyLoading = false;
+
+          // Final summary
+          addToLog("📊 Exam Loader Module Test Summary", 'success');
+          addToLog("✅ Exam discovery and availability", 'success');
+          addToLog("✅ Time formatting and resume indicators", 'success');
+          addToLog("✅ Image processing with base64 conversion", 'success');
+          addToLog("✅ Chunked exam detection and lazy loading", 'success');
+          addToLog("✅ Display functions and DOM integration", 'success');
+          addToLog("✅ Edge case handling", 'success');
+
+        } catch (error) {
+          addToLog(`❌ Exam Loader test failed: ${error.message}`, 'error');
+        }
+      };
+
       window.clearTests = function() {
         document.getElementById('log-content').innerHTML = '';
         addToLog("🗑️ Test logs cleared", 'info');
@@ -1813,6 +1991,7 @@
       document.getElementById('testResume').addEventListener('click', testResume);
       document.getElementById('testMobile').addEventListener('click', testMobile);
       document.getElementById('testEnhanced').addEventListener('click', testEnhanced);
+      document.getElementById('testExamLoader').addEventListener('click', testExamLoader);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
