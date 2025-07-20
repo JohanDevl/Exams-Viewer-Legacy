@@ -89,8 +89,26 @@ window.handleAutoSavePositionToggle = handleAutoSavePositionToggle;
 window.setupSettingsEventListeners = setupSettingsEventListeners;
 window.initializeSettings = initializeSettings;
 
+// Initialize global settings object if not exists
+if (!window.settings) {
+  window.settings = {
+    showDiscussionDefault: false,
+    highlightDefault: false,
+    darkMode: false,
+    showQuestionToolbar: false,
+    showAdvancedSearch: false,
+    sidebarOpen: false,
+    enableLazyLoading: false,
+    showMainProgressBar: true,
+    showTooltips: false,
+    enableResumePosition: false,
+    autoSavePosition: false,
+  };
+}
+
 console.log("📦 Storage module loaded successfully");
 console.log("⚙️ Settings module loaded successfully");
+console.log("⚙️ Global settings object initialized");
 
 // ===========================
 // TEMPORARY: Load remaining script.js functionality

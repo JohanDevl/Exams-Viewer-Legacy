@@ -52,10 +52,25 @@ function loadSettingsUI() {
     if (savedSettings) {
       const loadedSettings = JSON.parse(savedSettings);
       
-      // Merge with default settings to ensure all properties exist
-      if (window.settings) {
-        Object.assign(window.settings, loadedSettings);
+      // Ensure settings object exists
+      if (!window.settings) {
+        window.settings = {
+          showDiscussionDefault: false,
+          highlightDefault: false,
+          darkMode: false,
+          showQuestionToolbar: false,
+          showAdvancedSearch: false,
+          sidebarOpen: false,
+          enableLazyLoading: false,
+          showMainProgressBar: true,
+          showTooltips: false,
+          enableResumePosition: false,
+          autoSavePosition: false,
+        };
       }
+      
+      // Merge with default settings to ensure all properties exist
+      Object.assign(window.settings, loadedSettings);
       
       // Apply settings to UI elements
       const elements = {
@@ -105,9 +120,21 @@ function loadSettingsUI() {
  */
 function saveSettingsUI() {
   try {
+    // Ensure settings object exists
     if (!window.settings) {
-      console.error("Settings object not available");
-      return;
+      window.settings = {
+        showDiscussionDefault: false,
+        highlightDefault: false,
+        darkMode: false,
+        showQuestionToolbar: false,
+        showAdvancedSearch: false,
+        sidebarOpen: false,
+        enableLazyLoading: false,
+        showMainProgressBar: true,
+        showTooltips: false,
+        enableResumePosition: false,
+        autoSavePosition: false,
+      };
     }
     
     // Update settings object from UI elements
