@@ -57,6 +57,9 @@
           <button id="testStatistics" style="margin: 5px; padding: 10px 15px; background: #17a2b8; color: white; border: none; border-radius: 4px; cursor: pointer;">
             📊 Test Statistics
           </button>
+          <button id="testFavorites" style="margin: 5px; padding: 10px 15px; background: #ffc107; color: black; border: none; border-radius: 4px; cursor: pointer;">
+            ⭐ Test Favorites
+          </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
           </button>
@@ -350,11 +353,31 @@
         clearQuestionStatusCache,
       } from './js/modules/statistics.js';
 
+      // Also import favorites module
+      import {
+        toggleQuestionFavorite,
+        isQuestionFavorite,
+        getQuestionFavoriteData,
+        getCurrentExamFavorites,
+        updateQuestionNote,
+        getQuestionNote,
+        addCustomCategory,
+        removeCustomCategory,
+        getAllCategories,
+        updateQuestionCategory,
+        toggleRevisionMode,
+        updateRevisionFilter,
+        getFilteredQuestions,
+        getFavoritesStats,
+        cleanupObsoleteData,
+      } from './js/modules/favorites.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
       addToLog("🏗️ Data Models module imported successfully!", 'success');
       addToLog("🎨 UI Effects module imported successfully!", 'success');
       addToLog("📊 Statistics module imported successfully!", 'success');
+      addToLog("⭐ Favorites module imported successfully!", 'success');
 
       // Make settings functions available globally for testing
       window.applyTheme = applyTheme;
@@ -413,6 +436,23 @@
       window.getQuestionStatus = getQuestionStatus;
       window.cleanCorruptedStatistics = cleanCorruptedStatistics;
       window.clearQuestionStatusCache = clearQuestionStatusCache;
+
+      // Make favorites functions available globally for testing
+      window.toggleQuestionFavorite = toggleQuestionFavorite;
+      window.isQuestionFavorite = isQuestionFavorite;
+      window.getQuestionFavoriteData = getQuestionFavoriteData;
+      window.getCurrentExamFavorites = getCurrentExamFavorites;
+      window.updateQuestionNote = updateQuestionNote;
+      window.getQuestionNote = getQuestionNote;
+      window.addCustomCategory = addCustomCategory;
+      window.removeCustomCategory = removeCustomCategory;
+      window.getAllCategories = getAllCategories;
+      window.updateQuestionCategory = updateQuestionCategory;
+      window.toggleRevisionMode = toggleRevisionMode;
+      window.updateRevisionFilter = updateRevisionFilter;
+      window.getFilteredQuestions = getFilteredQuestions;
+      window.getFavoritesStats = getFavoritesStats;
+      window.cleanupObsoleteData = cleanupObsoleteData;
 
       // Initialize settings module
       initializeSettings();
@@ -835,6 +875,118 @@
         }
       };
 
+      // Test favorites module
+      window.testFavorites = function() {
+        addToLog("⭐ Testing Favorites Module...", 'info');
+        
+        try {
+          // Initialize favorites data if not exists
+          if (!window.favoritesData) {
+            window.favoritesData = {
+              favorites: {},
+              categories: ["Important", "Review", "Difficult"],
+              customCategories: [],
+              isRevisionMode: false,
+              revisionFilter: {
+                showFavorites: true,
+                showCategories: [],
+                showNotes: true,
+              },
+            };
+          }
+
+          // Set up test exam
+          window.currentExam = { exam_code: "FAV-TEST", exam_name: "Favorites Test Exam" };
+          window.currentQuestions = new Array(10).fill().map((_, i) => ({ 
+            question_number: i + 1, 
+            question: `Test question ${i + 1}` 
+          }));
+
+          // Test favorites management
+          addToLog("⭐ Testing favorites management", 'info');
+          
+          // Add question to favorites
+          const success = toggleQuestionFavorite(0, 'Important');
+          addToLog(`✅ Toggle favorite result: ${success}`, success ? 'success' : 'error');
+          
+          // Check if question is favorite
+          const isFavorite = isQuestionFavorite(0);
+          addToLog(`✅ Question 1 is favorite: ${isFavorite}`, 'success');
+          
+          // Get favorite data
+          const favoriteData = getQuestionFavoriteData(0);
+          addToLog(`📝 Favorite data: ${favoriteData ? favoriteData.category : 'None'}`, 'info');
+
+          // Test notes management
+          addToLog("📝 Testing notes management", 'info');
+          
+          const noteSuccess = updateQuestionNote(0, "This is a test note for question 1");
+          addToLog(`✅ Add note result: ${noteSuccess}`, noteSuccess ? 'success' : 'error');
+          
+          const note = getQuestionNote(0);
+          addToLog(`📄 Retrieved note: "${note}"`, 'info');
+
+          // Test custom categories
+          addToLog("📁 Testing custom categories", 'info');
+          
+          const categorySuccess = addCustomCategory("My Custom Category");
+          addToLog(`✅ Add custom category: ${categorySuccess}`, categorySuccess ? 'success' : 'error');
+          
+          const allCategories = getAllCategories();
+          addToLog(`📁 All categories: ${allCategories.join(', ')}`, 'info');
+          
+          // Update question category
+          const updateCatSuccess = updateQuestionCategory(0, "My Custom Category");
+          addToLog(`✅ Update category: ${updateCatSuccess}`, updateCatSuccess ? 'success' : 'error');
+
+          // Test revision mode
+          addToLog("🔄 Testing revision mode", 'info');
+          
+          const revisionMode = toggleRevisionMode();
+          addToLog(`✅ Revision mode: ${revisionMode ? 'ON' : 'OFF'}`, 'success');
+          
+          // Update revision filter
+          const filterSuccess = updateRevisionFilter({
+            showFavorites: true,
+            showCategories: ["My Custom Category"],
+            showNotes: true
+          });
+          addToLog(`✅ Filter update: ${filterSuccess}`, filterSuccess ? 'success' : 'error');
+
+          // Test filtered questions
+          const filteredQuestions = getFilteredQuestions();
+          addToLog(`🔍 Filtered questions: ${filteredQuestions.length} questions`, 'info');
+
+          // Test favorites statistics
+          addToLog("📊 Testing favorites statistics", 'info');
+          
+          // Add more test favorites
+          toggleQuestionFavorite(1, 'Review');
+          updateQuestionNote(1, "Another test note");
+          toggleQuestionFavorite(2, 'Difficult');
+          
+          const stats = getFavoritesStats();
+          addToLog(`📊 Stats: ${stats.totalFavorites} favorites, ${stats.totalNotes} notes`, 'success');
+          addToLog(`📁 Category counts: ${JSON.stringify(stats.categoryCounts)}`, 'info');
+
+          // Test data cleanup
+          addToLog("🧹 Testing data cleanup", 'info');
+          const cleanupCount = cleanupObsoleteData();
+          addToLog(`✅ Cleanup completed: ${cleanupCount} items cleaned`, 'success');
+
+          // Test current exam favorites
+          const examFavorites = getCurrentExamFavorites();
+          addToLog(`⭐ Current exam favorites: ${Object.keys(examFavorites).length} items`, 'success');
+
+          // Test removing category
+          const removeSuccess = removeCustomCategory("My Custom Category");
+          addToLog(`✅ Remove category: ${removeSuccess}`, removeSuccess ? 'success' : 'error');
+
+        } catch (error) {
+          addToLog(`❌ Favorites test failed: ${error.message}`, 'error');
+        }
+      };
+
       window.clearTests = function() {
         document.getElementById('log-content').innerHTML = '';
         addToLog("🗑️ Test logs cleared", 'info');
@@ -856,6 +1008,7 @@
       document.getElementById('testUIEffects').addEventListener('click', testUIEffects);
       document.getElementById('testModals').addEventListener('click', testModals);
       document.getElementById('testStatistics').addEventListener('click', testStatistics);
+      document.getElementById('testFavorites').addEventListener('click', testFavorites);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
