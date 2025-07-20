@@ -60,6 +60,9 @@
           <button id="testFavorites" style="margin: 5px; padding: 10px 15px; background: #ffc107; color: black; border: none; border-radius: 4px; cursor: pointer;">
             ⭐ Test Favorites
           </button>
+          <button id="testSearch" style="margin: 5px; padding: 10px 15px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            🔍 Test Search
+          </button>
           <button id="testDevMode" style="margin: 5px; padding: 10px 15px; background: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;">
             🔧 Test Dev Mode
           </button>
@@ -372,12 +375,32 @@
         cleanupObsoleteData,
       } from './js/modules/favorites.js';
 
+      // Also import search module
+      import {
+        initializeSearchInterface,
+        resetSearchState,
+        getSearchState,
+        clearSearchCache,
+        searchQuestions,
+        applyTextSearch,
+        applyStatusFilters,
+        applyCurrentFilters,
+        resetAllFilters,
+        getQuestionNumberSuggestions,
+        showAutocompleteSuggestions,
+        updateFilterCounts,
+        handleSearchInput,
+        handleFilterChange,
+        setupSearchEventListeners,
+      } from './js/modules/search.js';
+
       addToLog("📦 Storage module imported successfully!", 'success');
       addToLog("⚙️ Settings module imported successfully!", 'success');
       addToLog("🏗️ Data Models module imported successfully!", 'success');
       addToLog("🎨 UI Effects module imported successfully!", 'success');
       addToLog("📊 Statistics module imported successfully!", 'success');
       addToLog("⭐ Favorites module imported successfully!", 'success');
+      addToLog("🔍 Search module imported successfully!", 'success');
 
       // Make settings functions available globally for testing
       window.applyTheme = applyTheme;
@@ -453,6 +476,23 @@
       window.getFilteredQuestions = getFilteredQuestions;
       window.getFavoritesStats = getFavoritesStats;
       window.cleanupObsoleteData = cleanupObsoleteData;
+
+      // Make search functions available globally for testing
+      window.initializeSearchInterface = initializeSearchInterface;
+      window.resetSearchState = resetSearchState;
+      window.getSearchState = getSearchState;
+      window.clearSearchCache = clearSearchCache;
+      window.searchQuestions = searchQuestions;
+      window.applyTextSearch = applyTextSearch;
+      window.applyStatusFilters = applyStatusFilters;
+      window.applyCurrentFilters = applyCurrentFilters;
+      window.resetAllFilters = resetAllFilters;
+      window.getQuestionNumberSuggestions = getQuestionNumberSuggestions;
+      window.showAutocompleteSuggestions = showAutocompleteSuggestions;
+      window.updateFilterCounts = updateFilterCounts;
+      window.handleSearchInput = handleSearchInput;
+      window.handleFilterChange = handleFilterChange;
+      window.setupSearchEventListeners = setupSearchEventListeners;
 
       // Initialize settings module
       initializeSettings();
@@ -987,6 +1027,162 @@
         }
       };
 
+      // Test search module
+      window.testSearch = function() {
+        addToLog("🔍 Testing Search Module...", 'info');
+        
+        try {
+          // Create test questions with searchable content
+          const testQuestions = [
+            {
+              question_number: 1,
+              question: "What is JavaScript used for in web development?",
+              answers: [
+                { text: "Frontend scripting" },
+                { text: "Backend development" },
+                { text: "Database management" },
+                { text: "All of the above" }
+              ],
+              comments: "JavaScript is a versatile programming language"
+            },
+            {
+              question_number: 2,
+              question: "Which HTML tag is used for creating links?",
+              answers: [
+                { text: "<a>" },
+                { text: "<link>" },
+                { text: "<href>" },
+                { text: "<url>" }
+              ],
+              comments: "The anchor tag creates hyperlinks"
+            },
+            {
+              question_number: 3,
+              question: "What does CSS stand for?",
+              answers: [
+                { text: "Cascading Style Sheets" },
+                { text: "Computer Style System" },
+                { text: "Creative Style Solution" },
+                { text: "Code Style Standard" }
+              ],
+              comments: "CSS controls the presentation and layout"
+            },
+            {
+              question_number: 4,
+              question: "Which JavaScript framework is popular for building user interfaces?",
+              answers: [
+                { text: "React" },
+                { text: "Express" },
+                { text: "Node.js" },
+                { text: "MongoDB" }
+              ],
+              comments: "React is a frontend JavaScript library"
+            },
+            {
+              question_number: 5,
+              question: "What is the purpose of HTML semantic elements?",
+              answers: [
+                { text: "Better structure and meaning" },
+                { text: "Faster loading" },
+                { text: "Better graphics" },
+                { text: "Smaller file size" }
+              ],
+              comments: "Semantic HTML improves accessibility and SEO"
+            }
+          ];
+
+          // Set up test environment
+          window.currentQuestions = [...testQuestions];
+          window.currentExam = { exam_code: "SEARCH-TEST", exam_name: "Search Test Exam" };
+
+          // Initialize search interface
+          addToLog("🔧 Initializing search interface", 'info');
+          initializeSearchInterface();
+          const initialState = getSearchState();
+          addToLog(`✅ Initialized: ${initialState.totalQuestions} questions available`, 'success');
+
+          // Test text search
+          addToLog("🔍 Testing text search functionality", 'info');
+          
+          // Search for "JavaScript"
+          const jsResults = searchQuestions("JavaScript");
+          addToLog(`✅ "JavaScript" search: ${jsResults.length}/5 results`, 'success');
+          
+          // Search for "HTML"
+          const htmlResults = searchQuestions("HTML");
+          addToLog(`✅ "HTML" search: ${htmlResults.length}/5 results`, 'success');
+          
+          // Multi-word search
+          const multiResults = searchQuestions("JavaScript framework");
+          addToLog(`✅ "JavaScript framework" search: ${multiResults.length}/5 results`, 'success');
+
+          // Test search application
+          addToLog("🎯 Testing search application", 'info');
+          applyTextSearch("CSS");
+          addToLog(`✅ Applied "CSS" search: ${window.currentQuestions.length} questions`, 'success');
+
+          // Test question number suggestions
+          addToLog("💡 Testing auto-completion", 'info');
+          const suggestions1 = getQuestionNumberSuggestions("1");
+          addToLog(`✅ Suggestions for "1": ${suggestions1.length} items`, 'success');
+          
+          const suggestions3 = getQuestionNumberSuggestions("3");
+          addToLog(`✅ Suggestions for "3": ${suggestions3.length} items`, 'success');
+
+          // Test status filters (mock some data)
+          addToLog("🔍 Testing status filters", 'info');
+          
+          // Mock some answered questions
+          window.isQuestionAnswered = (index) => index < 2; // Questions 1-2 answered
+          window.isQuestionFavorite = (index) => index === 0 || index === 2; // Questions 1 and 3 favorites
+
+          // Reset to full question set for filter testing
+          resetSearchState();
+          
+          // Test filter counts
+          updateFilterCounts();
+          addToLog("✅ Filter counts updated", 'success');
+
+          // Test status filter application
+          const answeredQuestions = applyStatusFilters(testQuestions);
+          addToLog(`✅ Status filters: ${answeredQuestions.length} questions`, 'success');
+
+          // Test search state management
+          addToLog("📊 Testing search state management", 'info');
+          const currentState = getSearchState();
+          addToLog(`📊 Search state: ${currentState.filteredQuestions}/${currentState.totalQuestions} questions`, 'info');
+          addToLog(`💾 Cache size: ${currentState.cacheSize} entries`, 'info');
+
+          // Test cache clearing
+          clearSearchCache();
+          const clearedState = getSearchState();
+          addToLog(`✅ Cache cleared: ${clearedState.cacheSize} entries`, 'success');
+
+          // Test filter reset
+          addToLog("🔄 Testing filter reset", 'info');
+          resetAllFilters();
+          addToLog(`✅ Filters reset: ${window.currentQuestions.length} questions`, 'success');
+
+          // Test complex scenario: search + filters
+          addToLog("🎯 Testing complex search scenario", 'info');
+          
+          // Apply text search
+          applyTextSearch("web");
+          addToLog(`🔍 Text search "web": ${window.currentQuestions.length} questions`, 'info');
+          
+          // Apply additional filters (this would need DOM elements in real scenario)
+          addToLog("✅ Complex search scenario completed", 'success');
+
+          // Final state report
+          const finalState = getSearchState();
+          addToLog(`📊 Final state: ${finalState.isSearchActive ? 'Active' : 'Inactive'} search`, 'success');
+          addToLog(`📊 Questions: ${finalState.filteredQuestions}/${finalState.totalQuestions}`, 'info');
+
+        } catch (error) {
+          addToLog(`❌ Search test failed: ${error.message}`, 'error');
+        }
+      };
+
       window.clearTests = function() {
         document.getElementById('log-content').innerHTML = '';
         addToLog("🗑️ Test logs cleared", 'info');
@@ -1009,6 +1205,7 @@
       document.getElementById('testModals').addEventListener('click', testModals);
       document.getElementById('testStatistics').addEventListener('click', testStatistics);
       document.getElementById('testFavorites').addEventListener('click', testFavorites);
+      document.getElementById('testSearch').addEventListener('click', testSearch);
       document.getElementById('testDevMode').addEventListener('click', testDevMode);
       document.getElementById('clearTests').addEventListener('click', clearTests);
       
