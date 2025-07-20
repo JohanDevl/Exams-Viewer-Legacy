@@ -67,46 +67,6 @@ function showSuccess(message) {
   }, 3000);
 }
 
-// ===========================
-// MOBILE TOUCH AND SWIPE EFFECTS
-// ===========================
-
-/**
- * Show swipe direction indicator
- */
-function showSwipeIndicator(direction) {
-  const indicator = document.createElement('div');
-  indicator.className = 'swipe-indicator';
-  indicator.innerHTML = direction === 'left' ? '←' : '→';
-  indicator.style.cssText = `
-    position: fixed; top: 50%; ${direction}: 20px; 
-    z-index: 1000; font-size: 2em; color: #007bff;
-    opacity: 0.8; pointer-events: none;
-  `;
-  document.body.appendChild(indicator);
-  
-  setTimeout(() => indicator.remove(), 300);
-}
-
-/**
- * Hide all swipe indicators
- */
-function hideSwipeIndicators() {
-  const indicators = document.querySelectorAll('.swipe-indicator');
-  indicators.forEach(indicator => {
-    indicator.style.opacity = '0';
-    setTimeout(() => indicator.remove(), 200);
-  });
-}
-
-/**
- * Add haptic feedback vibration
- */
-function addHapticFeedback() {
-  if ('vibrate' in navigator) {
-    navigator.vibrate(50); // Short vibration
-  }
-}
 
 // ===========================
 // PROGRESS MILESTONE ANIMATIONS
@@ -648,11 +608,6 @@ export {
   showLoading,
   showError,
   showSuccess,
-  
-  // Mobile touch effects
-  showSwipeIndicator,
-  hideSwipeIndicators,
-  addHapticFeedback,
   
   // Progress milestone animations
   addProgressMilestoneEffects,
