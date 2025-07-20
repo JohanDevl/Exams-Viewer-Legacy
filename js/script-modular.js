@@ -29,7 +29,6 @@ import {
   applyTheme,
   loadSettingsUI,
   saveSettingsUI,
-  updateMainProgressBarVisibility,
   updateToolbarVisibility,
   updateTooltipVisibility,
   updateAdvancedSearchVisibility,
@@ -110,7 +109,6 @@ window.clearResumePosition = clearResumePosition;
 window.applyTheme = applyTheme;
 window.loadSettingsUI = loadSettingsUI;
 window.saveSettingsUI = saveSettingsUI;
-window.updateMainProgressBarVisibility = updateMainProgressBarVisibility;
 window.updateToolbarVisibility = updateToolbarVisibility;
 window.updateTooltipVisibility = updateTooltipVisibility;
 window.updateAdvancedSearchVisibility = updateAdvancedSearchVisibility;

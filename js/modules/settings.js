@@ -236,24 +236,7 @@ function saveSettingsUI() {
 // UI VISIBILITY MANAGEMENT
 // ===========================
 
-/**
- * Show/hide main progress bar based on settings
- */
-function updateMainProgressBarVisibility() {
-  if (!window.settings) return;
-  
-  const mainProgressSection = document.getElementById("mainProgressSection");
-  if (mainProgressSection) {
-    if (window.settings.showMainProgressBar && window.currentQuestions && window.currentQuestions.length > 0) {
-      mainProgressSection.style.display = "block";
-      if (typeof window.updateMainProgressBar === 'function') {
-        window.updateMainProgressBar();
-      }
-    } else {
-      mainProgressSection.style.display = "none";
-    }
-  }
-}
+// NOTE: updateMainProgressBarVisibility moved to ui-effects.js module
 
 /**
  * Show/hide question toolbar based on settings
@@ -561,8 +544,7 @@ export {
   loadSettingsUI,
   saveSettingsUI,
   
-  // UI visibility management
-  updateMainProgressBarVisibility,
+  // UI visibility management  
   updateToolbarVisibility,
   updateTooltipVisibility,
   updateAdvancedSearchVisibility,
