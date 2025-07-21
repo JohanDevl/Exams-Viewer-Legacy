@@ -677,36 +677,54 @@ function clearQuestionStatusCacheForQuestion(questionIndex) {
 }
 
 /**
- * Get cached question status or calculate it
+ * Get cached question status or calculate it - SIMPLIFIED to use current session directly
  */
 function getQuestionStatus(questionIndex) {
   if (questionStatusCache[questionIndex]) {
     return questionStatusCache[questionIndex];
   }
 
-  console.log(`🔍 Calculating new status for index ${questionIndex}`);
-  const isAnswered = isQuestionAnsweredInCurrentSession(questionIndex);
-  console.log(`📊 Q${questionIndex}: isAnswered = ${isAnswered}`);
-  
-  const mostRecentAnswer = isAnswered ? getMostRecentAnswerCurrentSession(questionIndex) : null;
-  if (mostRecentAnswer) {
-    console.log(`📝 Q${questionIndex}: mostRecentAnswer found, isCorrect = ${mostRecentAnswer.isCorrect}`);
+  // Get the actual question to get its question_number
+  const actualQuestion = window.currentQuestions?.[questionIndex];
+  if (!actualQuestion) {
+    return { primaryStatus: 'new', isAnswered: false, isFavorite: false, hasNotes: false, isCategorized: false };
   }
   
-  // Calculate primary status based on answer history
+  const questionNumber = actualQuestion.question_number;
+  console.log(`🎯 Q${questionIndex} (${questionNumber}): checking status...`);
+  
+  // Look directly in current session for this question
+  let questionAttempt = null;
+  if (window.statistics?.currentSession?.questions) {
+    questionAttempt = window.statistics.currentSession.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNumber.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    );
+  }
+  
   let primaryStatus = 'new';
-  if (isAnswered && mostRecentAnswer) {
-    console.log(`🎯 Q${questionIndex}: mostRecentAnswer.isCorrect = ${mostRecentAnswer.isCorrect} (type: ${typeof mostRecentAnswer.isCorrect})`);
-    if (mostRecentAnswer.isCorrect === true) {
-      primaryStatus = 'correct';
-    } else if (mostRecentAnswer.isCorrect === false) {
-      primaryStatus = 'incorrect';
-    } else if (mostRecentAnswer.isPreview) {
-      primaryStatus = 'preview';
-    } else {
-      primaryStatus = 'viewed';
+  let isAnswered = false;
+  
+  if (questionAttempt) {
+    // Check if has user answers
+    const hasAnswers = (questionAttempt.ua && questionAttempt.ua.length > 0) || 
+                      (questionAttempt.userAnswers && questionAttempt.userAnswers.length > 0);
+    
+    if (hasAnswers) {
+      isAnswered = true;
+      // Use the isCorrect property directly from the attempt
+      const isCorrect = questionAttempt.ic !== undefined ? questionAttempt.ic : questionAttempt.isCorrect;
+      
+      console.log(`📊 Q${questionIndex}: hasAnswers=true, isCorrect=${isCorrect}`);
+      
+      if (isCorrect === true) {
+        primaryStatus = 'correct';
+      } else if (isCorrect === false) {
+        primaryStatus = 'incorrect'; 
+      } else {
+        primaryStatus = 'viewed'; // Answered but correctness unknown
+      }
     }
-    console.log(`🏷️ Q${questionIndex}: calculated primaryStatus = ${primaryStatus}`);
   }
   
   // Check favorites status
@@ -716,7 +734,7 @@ function getQuestionStatus(questionIndex) {
   
   // Check notes status  
   const questionNote = typeof window.getQuestionNote === 'function'
-    ? window.getQuestionNote(questionIndex - 1) // Convert to 0-based index
+    ? window.getQuestionNote(questionIndex) // Already 0-based index
     : '';
   const hasNotes = questionNote && questionNote.trim().length > 0;
   
@@ -726,7 +744,7 @@ function getQuestionStatus(questionIndex) {
   questionStatusCache[questionIndex] = {
     // Legacy format for backward compatibility
     isAnswered,
-    mostRecentAnswer,
+    mostRecentAnswer: null, // Not used in simplified version
     lastUpdated: Date.now(),
     // New format for enhanced navigation
     primaryStatus,
