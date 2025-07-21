@@ -1250,41 +1250,51 @@ function updateProgressTab() {
     const studyHours = Math.floor(globalStats.totalTime / 3600);
     const studyMinutes = Math.floor((globalStats.totalTime % 3600) / 60);
     
+    // Calculate real answered questions from global stats
+    const realAnsweredQuestions = globalStats.totalCorrect + globalStats.totalIncorrect + globalStats.totalPreview;
+    
     content += `
       <div class="stats-grid">
         <div class="stat-card total-questions">
-          <div class="stat-icon">📚</div>
+          <div class="stat-icon-circle">
+            <div class="icon-content">📚</div>
+          </div>
           <div class="stat-content">
-            <div class="stat-number">${globalStats.totalQuestions.toLocaleString()}</div>
-            <div class="stat-label">Questions Answered</div>
+            <div class="stat-number">${realAnsweredQuestions.toLocaleString()}</div>
+            <div class="stat-label">QUESTIONS ANSWERED</div>
             <div class="stat-sublabel">All Time</div>
           </div>
         </div>
         
         <div class="stat-card accuracy">
-          <div class="stat-icon">🎯</div>
+          <div class="stat-icon-circle">
+            <div class="icon-content">🎯</div>
+          </div>
           <div class="stat-content">
             <div class="stat-number">${globalStats.overallAccuracy}%</div>
-            <div class="stat-label">Overall Accuracy</div>
+            <div class="stat-label">OVERALL ACCURACY</div>
             <div class="stat-sublabel">${globalStats.totalCorrect}/${globalStats.totalAnswered} correct</div>
           </div>
-          <div class="accuracy-bar" style="width: ${globalStats.overallAccuracy}%"></div>
         </div>
         
         <div class="stat-card sessions">
-          <div class="stat-icon">📅</div>
+          <div class="stat-icon-circle">
+            <div class="icon-content">📅</div>
+          </div>
           <div class="stat-content">
             <div class="stat-number">${globalStats.totalSessions}</div>
-            <div class="stat-label">Study Sessions</div>
+            <div class="stat-label">STUDY SESSIONS</div>
             <div class="stat-sublabel">${globalStats.examsCount} exams studied</div>
           </div>
         </div>
         
         <div class="stat-card study-time">
-          <div class="stat-icon">⏰</div>
+          <div class="stat-icon-circle">
+            <div class="icon-content">⏰</div>
+          </div>
           <div class="stat-content">
             <div class="stat-number">${studyHours}h ${studyMinutes}m</div>
-            <div class="stat-label">Study Time</div>
+            <div class="stat-label">STUDY TIME</div>
             <div class="stat-sublabel">${globalStats.totalSessions > 0 ? Math.round(globalStats.totalTime / globalStats.totalSessions / 60) : 0}m avg/session</div>
           </div>
         </div>
@@ -1311,42 +1321,47 @@ function updateProgressTab() {
     const trendColor = trendDirection > 0 ? "#4CAF50" : trendDirection < 0 ? "#f44336" : "#9E9E9E";
     
     content += `
-      <div class="progress-card analytics-card">
-        <div class="card-header">
-          <h3><i class="fas fa-chart-line"></i> Learning Analytics</h3>
+      <div class="analytics-section">
+        <div class="analytics-header">
+          <div class="analytics-icon-circle">
+            <div class="icon-content">📊</div>
+          </div>
+          <h3>Learning Analytics</h3>
         </div>
         
-        <div class="trend-overview">
-          <div class="trend-indicator" style="--trend-color: ${trendColor}">
-            <div class="trend-icon">${trendIcon}</div>
-            <div class="trend-content">
-              <div class="trend-status">${trendText}</div>
-              <div class="trend-value">${Math.abs(trendDirection)}% change</div>
+        <div class="analytics-content">
+          <div class="trend-card">
+            <div class="trend-status-indicator" style="background-color: ${trendColor}">
+              <span class="trend-emoji">${trendIcon}</span>
+            </div>
+            <div class="trend-details">
+              <div class="trend-title">${trendText}</div>
+              <div class="trend-subtitle">${Math.abs(trendDirection)}% change</div>
             </div>
           </div>
-        </div>
-        
-        <div class="accuracy-timeline">
-          <div class="timeline-label">Recent Accuracy Trend:</div>
-          <div class="timeline-points">
-            ${accuracyTrend.map((accuracy, index) => `
-              <div class="timeline-point ${index === accuracyTrend.length - 1 ? 'current' : ''}" 
-                   style="height: ${Math.max(accuracy, 5)}%">
-                <span class="point-value">${accuracy}%</span>
-              </div>
-            `).join('')}
+          
+          <div class="accuracy-progress-section">
+            <div class="progress-label">Recent Accuracy Trend:</div>
+            <div class="accuracy-chart">
+              ${accuracyTrend.map((accuracy, index) => `
+                <div class="chart-bar ${index === accuracyTrend.length - 1 ? 'current' : ''}" 
+                     style="height: ${Math.max(accuracy * 0.8, 8)}px; background-color: ${accuracy >= 80 ? '#4CAF50' : accuracy >= 60 ? '#FF9800' : '#f44336'}">
+                  <div class="bar-label">${accuracy}%</div>
+                </div>
+              `).join('')}
+            </div>
           </div>
-        </div>
-        
-        <div class="insights">
-          <div class="insight-item">
-            <span class="insight-icon">💡</span>
-            <span class="insight-text">
+          
+          <div class="insight-card">
+            <div class="insight-icon-circle" style="background-color: ${trendColor}">
+              <span>💡</span>
+            </div>
+            <div class="insight-message">
               ${trendDirection > 5 ? "Great progress! Keep up the excellent work." :
                 trendDirection > 0 ? "You're improving steadily. Nice work!" :
                 trendDirection === 0 ? "Consistent performance. Try challenging yourself more!" :
                 "Focus on reviewing incorrect answers to improve."}
-            </span>
+            </div>
           </div>
         </div>
       </div>
