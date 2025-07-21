@@ -676,12 +676,19 @@ function clearQuestionStatusCache() {
  * Get cached question status or calculate it
  */
 function getQuestionStatus(questionIndex) {
+  console.log(`🎯 getQuestionStatus called with index: ${questionIndex}`);
+  
   if (questionStatusCache[questionIndex]) {
+    console.log(`📋 Returning cached status for index ${questionIndex}:`, questionStatusCache[questionIndex]);
     return questionStatusCache[questionIndex];
   }
 
+  console.log(`🔍 Calculating new status for index ${questionIndex}`);
   const isAnswered = isQuestionAnsweredInCurrentSession(questionIndex);
+  console.log(`📊 isAnswered result: ${isAnswered}`);
+  
   const mostRecentAnswer = isAnswered ? getMostRecentAnswerCurrentSession(questionIndex) : null;
+  console.log(`📝 mostRecentAnswer:`, mostRecentAnswer);
   
   // Calculate primary status based on answer history
   let primaryStatus = 'new';
@@ -723,6 +730,7 @@ function getQuestionStatus(questionIndex) {
     isCategorized
   };
 
+  console.log(`✅ Final status for index ${questionIndex}:`, questionStatusCache[questionIndex]);
   return questionStatusCache[questionIndex];
 }
 

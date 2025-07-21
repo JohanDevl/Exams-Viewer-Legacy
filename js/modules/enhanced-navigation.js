@@ -284,7 +284,7 @@ function updateProgressSidebar() {
         questionPreview = `Chunk ${question.chunkId + 1} - Loading...`;
       } else {
         const questionStatus = typeof window.getQuestionStatus === 'function' 
-          ? window.getQuestionStatus(question.question_number)
+          ? window.getQuestionStatus(index)
           : { primaryStatus: 'new', isFavorite: false, hasNotes: false, isCategorized: false };
         
         questionPreview = typeof window.truncateText === 'function'
@@ -539,9 +539,9 @@ function getFavoritesCount() {
     if (!window.currentQuestions?.length || !window.currentExam) return 0;
     
     let count = 0;
-    window.currentQuestions.forEach(question => {
+    window.currentQuestions.forEach((question, index) => {
       if (typeof window.isQuestionFavorite === 'function' && 
-          window.isQuestionFavorite(question.question_number)) {
+          window.isQuestionFavorite(index)) {
         count++;
       }
     });
