@@ -100,9 +100,8 @@ import {
   animateNumberChange,
   showExportModal,
   hideExportModal,
-  showValidationFeedbackModal,
-  showChangelogModal,
   showKeyboardHelp,
+  displayChangelog,
 } from './js/modules/ui-effects.js';
 
 // Statistics system
@@ -320,9 +319,8 @@ function exposeGlobalFunctions() {
   window.animateNumberChange = animateNumberChange;
   window.showExportModal = showExportModal;
   window.hideExportModal = hideExportModal;
-  window.showValidationFeedbackModal = showValidationFeedbackModal;
-  window.showChangelogModal = showChangelogModal;
   window.showKeyboardHelp = showKeyboardHelp;
+  window.displayChangelog = displayChangelog;
 
   // Statistics system
   window.recalculateTotalStats = recalculateTotalStats;
