@@ -421,6 +421,11 @@ function displayCurrentQuestion(fromToggleAction = false) {
     // Track question visit for status indicators
     if (question.question_number && typeof window.trackQuestionVisit === 'function') {
       window.trackQuestionVisit(question.question_number);
+      
+      // Clear cache for this question to ensure status updates
+      if (typeof window.clearQuestionStatusCacheForQuestion === 'function') {
+        window.clearQuestionStatusCacheForQuestion(window.currentQuestionIndex);
+      }
     }
 
     // Reset state first
