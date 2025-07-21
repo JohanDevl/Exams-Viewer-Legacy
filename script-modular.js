@@ -614,6 +614,23 @@ function setupMainEventListeners() {
     sidebarOverlay.addEventListener("click", closeSidebar);
   }
 
+  // Keyboard help button
+  const keyboardHelpBtn = document.getElementById("keyboardHelpBtn");
+  if (keyboardHelpBtn) {
+    keyboardHelpBtn.addEventListener("click", showKeyboardHelp);
+  }
+
+  // History navigation buttons
+  const historyBackBtn = document.getElementById("historyBackBtn");
+  if (historyBackBtn) {
+    historyBackBtn.addEventListener("click", navigateHistoryBack);
+  }
+  
+  const historyForwardBtn = document.getElementById("historyForwardBtn");
+  if (historyForwardBtn) {
+    historyForwardBtn.addEventListener("click", navigateHistoryForward);
+  }
+
   // Previous/Next navigation buttons
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
