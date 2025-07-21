@@ -114,6 +114,7 @@ import {
   isQuestionAnswered,
   isQuestionAnsweredInCurrentSession,
   getMostRecentAnswer,
+  getMostRecentAnswerCurrentSession,
   getQuestionStatus,
   clearQuestionStatusCache,
   cleanCorruptedStatistics,
@@ -334,6 +335,7 @@ function exposeGlobalFunctions() {
   window.isQuestionAnswered = isQuestionAnswered;
   window.isQuestionAnsweredInCurrentSession = isQuestionAnsweredInCurrentSession;
   window.getMostRecentAnswer = getMostRecentAnswer;
+  window.getMostRecentAnswerCurrentSession = getMostRecentAnswerCurrentSession;
   window.getQuestionStatus = getQuestionStatus;
   window.clearQuestionStatusCache = clearQuestionStatusCache;
   window.cleanCorruptedStatistics = cleanCorruptedStatistics;

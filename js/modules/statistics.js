@@ -439,6 +439,50 @@ function isQuestionAnswered(questionIndex) {
 }
 
 /**
+ * Get the most recent answer for a question in current session only
+ */
+function getMostRecentAnswerCurrentSession(questionIndex) {
+  try {
+    const questionNumber = questionIndex + 1; // Convert to 1-based
+    
+    // DEBUG: Check if we have the actual question data
+    const actualQuestion = window.currentQuestions?.[questionIndex];
+    const actualQuestionNumber = actualQuestion?.question_number;
+    
+    // Use actual question number if available
+    const targetQuestionNumber = actualQuestionNumber || questionNumber;
+
+    // Check ONLY current session
+    if (window.statistics?.currentSession?.questions) {
+      const questionData = window.statistics.currentSession.questions.find(q => 
+        (q.qn && q.qn.toString() === targetQuestionNumber.toString()) ||
+        (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
+      );
+      if (questionData) {
+        const userAnswers = questionData.userAnswers || questionData.ua || [];
+        const endTime = questionData.endTime || questionData.et || 0;
+        
+        if (userAnswers.length > 0 && endTime > 0) {
+          return {
+            answers: userAnswers,
+            isCorrect: questionData.isCorrect || questionData.ic || null,
+            isPreview: false, // Current session, so not preview
+            endTime: endTime
+          };
+        }
+      }
+    }
+
+    return null;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error getting most recent answer for current session:", error);
+    }
+    return null;
+  }
+}
+
+/**
  * Get the most recent answer for a question across all sessions
  */
 function getMostRecentAnswer(questionIndex) {
@@ -637,7 +681,7 @@ function getQuestionStatus(questionIndex) {
   }
 
   const isAnswered = isQuestionAnsweredInCurrentSession(questionIndex);
-  const mostRecentAnswer = isAnswered ? getMostRecentAnswer(questionIndex) : null;
+  const mostRecentAnswer = isAnswered ? getMostRecentAnswerCurrentSession(questionIndex) : null;
   
   // Calculate primary status based on answer history
   let primaryStatus = 'new';
@@ -701,6 +745,7 @@ export {
   isQuestionAnswered,
   isQuestionAnsweredInCurrentSession,
   getMostRecentAnswer,
+  getMostRecentAnswerCurrentSession,
   getQuestionStatus,
   
   // Data cleanup
