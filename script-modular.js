@@ -714,12 +714,20 @@ function setupMainEventListeners() {
   const darkModeBtn = document.getElementById("darkModeBtn");
   if (darkModeBtn) {
     darkModeBtn.addEventListener("click", () => {
+      console.log("🎨 Dark mode button clicked");
       const toggle = document.getElementById("darkModeToggle");
       if (toggle) {
+        const oldValue = toggle.checked;
         toggle.checked = !toggle.checked;
+        console.log(`🔄 Toggle changed from ${oldValue} to ${toggle.checked}`);
+        console.log("📄 window.settings before:", window.settings);
+        
         if (typeof window.saveSettingsUI === 'function') {
           window.saveSettingsUI();
         }
+        
+        console.log("📄 window.settings after:", window.settings);
+        console.log("🎨 Body classes:", document.body.className);
       }
     });
   }

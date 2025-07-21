@@ -22,12 +22,16 @@
  * Apply dark/light theme to the UI
  */
 function applyTheme(isDark = null) {
+  console.log("🎨 applyTheme() called with isDark:", isDark);
+  console.log("📄 window.settings in applyTheme:", window.settings);
+  
   const body = document.body;
   const darkModeBtn = document.getElementById("darkModeBtn");
   const darkModeToggle = document.getElementById("darkModeToggle");
   
   // Use parameter if provided, otherwise use settings
   const darkMode = isDark !== null ? isDark : (window.settings?.darkMode || false);
+  console.log("🎨 Calculated darkMode value:", darkMode);
   
   // Update settings object if parameter was provided
   if (isDark !== null && window.settings) {
@@ -40,18 +44,24 @@ function applyTheme(isDark = null) {
   }
   
   if (darkMode) {
+    console.log("🌙 Applying DARK mode - adding dark-mode class");
     body.classList.add("dark-mode");
     if (darkModeBtn) {
       darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
       darkModeBtn.title = "Switch to Light Mode";
+      console.log("🌅 Dark mode button updated to sun icon");
     }
   } else {
+    console.log("☀️ Applying LIGHT mode - removing dark-mode class");
     body.classList.remove("dark-mode");
     if (darkModeBtn) {
       darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
       darkModeBtn.title = "Switch to Dark Mode";
+      console.log("🌙 Dark mode button updated to moon icon");
     }
   }
+  console.log("🎨 Final body classes:", body.className);
+  console.log("🎨 applyTheme() completed");
 }
 
 /**
