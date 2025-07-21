@@ -897,7 +897,6 @@ function validateAnswers() {
       } else {
         console.log(`❌ trackQuestionAttempt function not available`);
       }
-      }
     } catch (error) {
       if (typeof window.devError === 'function') {
         window.devError("❌ Error tracking question attempt:", error);
