@@ -439,6 +439,12 @@ function startExamSession(examCode, examName) {
       endCurrentSession();
     }
 
+    // Clear question status cache for fresh start
+    if (typeof window.clearQuestionStatusCache === 'function') {
+      window.clearQuestionStatusCache();
+      console.log(`🧹 Cleared question status cache for new session`);
+    }
+
     // Create new session
     const session = new ExamSession(examCode, examName);
     console.log(`🆕 Created new ExamSession:`, session);
