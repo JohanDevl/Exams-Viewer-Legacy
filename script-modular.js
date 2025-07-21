@@ -1164,7 +1164,7 @@ function updateSessionsTab() {
 }
 
 /**
- * Update progress tab with comprehensive progress tracking
+ * Update progress tab with modern visual design and comprehensive tracking
  */
 function updateProgressTab() {
   const progressContent = document.getElementById("progressTab");
@@ -1173,92 +1173,126 @@ function updateProgressTab() {
   const currentSessionStats = getCurrentSessionStats();
   const globalStats = getGlobalStats();
   
-  let content = "";
+  let content = `
+    <div class="progress-dashboard">
+  `;
   
-  // Current Session Progress
+  // Current Session Progress Card
   if (window.statistics?.currentSession && currentSessionStats.totalQuestions > 0) {
     const completionPercentage = (currentSessionStats.totalAnswered / currentSessionStats.totalQuestions * 100).toFixed(1);
+    const accuracyColor = currentSessionStats.accuracy >= 80 ? '#4CAF50' : currentSessionStats.accuracy >= 60 ? '#FF9800' : '#f44336';
     
     content += `
-      <div class="progress-section current-session-progress">
-        <h4>Current Session Progress</h4>
-        <div class="progress-metrics">
-          <div class="progress-bar-container">
-            <div class="progress-bar" style="width: ${completionPercentage}%"></div>
-            <span class="progress-text">${completionPercentage}% Complete</span>
-          </div>
-          
-          <div class="progress-stats-grid">
-            <div class="progress-stat">
-              <div class="stat-value">${currentSessionStats.totalAnswered}</div>
-              <div class="stat-label">Answered</div>
-            </div>
-            <div class="progress-stat">
-              <div class="stat-value">${currentSessionStats.totalQuestions - currentSessionStats.totalAnswered}</div>
-              <div class="stat-label">Remaining</div>
-            </div>
-            <div class="progress-stat">
-              <div class="stat-value">${currentSessionStats.accuracy}%</div>
-              <div class="stat-label">Accuracy</div>
-            </div>
-            <div class="progress-stat">
-              <div class="stat-value">${Math.round(currentSessionStats.timeSpent / 60)}m</div>
-              <div class="stat-label">Time</div>
-            </div>
-          </div>
-          
-          <div class="answer-breakdown">
-            <div class="answer-type correct">
-              <span class="count">${currentSessionStats.correctAnswers}</span>
-              <span class="label">Correct</span>
-            </div>
-            <div class="answer-type incorrect">
-              <span class="count">${currentSessionStats.incorrectAnswers}</span>
-              <span class="label">Incorrect</span>
-            </div>
-            <div class="answer-type preview">
-              <span class="count">${currentSessionStats.previewAnswers}</span>
-              <span class="label">Preview</span>
-            </div>
-          </div>
+      <div class="progress-card current-session-card">
+        <div class="card-header">
+          <h3><i class="fas fa-play-circle"></i> Current Session</h3>
+          <div class="session-badge active">Live</div>
         </div>
-      </div>
-    `;
-  }
-  
-  // Global Progress Overview
-  if (globalStats.totalQuestions > 0) {
-    content += `
-      <div class="progress-section global-progress">
-        <h4>All Time Progress</h4>
-        <div class="global-metrics">
-          <div class="metric-card">
-            <div class="metric-value">${globalStats.totalQuestions}</div>
-            <div class="metric-label">Total Questions</div>
+        
+        <div class="progress-visual">
+          <div class="circular-progress" style="--progress: ${completionPercentage}%">
+            <div class="progress-value">${completionPercentage}%</div>
+            <div class="progress-label">Complete</div>
           </div>
-          <div class="metric-card">
-            <div class="metric-value">${globalStats.totalSessions}</div>
-            <div class="metric-label">Total Sessions</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">${globalStats.examsCount}</div>
-            <div class="metric-label">Exams Studied</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">${globalStats.overallAccuracy}%</div>
-            <div class="metric-label">Overall Accuracy</div>
+          
+          <div class="session-metrics">
+            <div class="metric answered">
+              <span class="metric-number">${currentSessionStats.totalAnswered}</span>
+              <span class="metric-text">Answered</span>
+            </div>
+            <div class="metric remaining">
+              <span class="metric-number">${currentSessionStats.totalQuestions - currentSessionStats.totalAnswered}</span>
+              <span class="metric-text">Remaining</span>
+            </div>
           </div>
         </div>
         
-        <div class="total-time-spent">
-          <strong>Total Study Time:</strong> 
-          ${Math.floor(globalStats.totalTime / 3600)}h ${Math.floor((globalStats.totalTime % 3600) / 60)}m
+        <div class="performance-indicators">
+          <div class="performance-item accuracy" style="--accuracy-color: ${accuracyColor}">
+            <div class="indicator-icon">🎯</div>
+            <div class="indicator-content">
+              <span class="indicator-value">${currentSessionStats.accuracy}%</span>
+              <span class="indicator-label">Accuracy</span>
+            </div>
+          </div>
+          
+          <div class="performance-item time">
+            <div class="indicator-icon">⏱️</div>
+            <div class="indicator-content">
+              <span class="indicator-value">${Math.round(currentSessionStats.timeSpent / 60)}m</span>
+              <span class="indicator-label">Time Spent</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="answer-distribution">
+          <div class="distribution-item correct" style="width: ${currentSessionStats.totalAnswered > 0 ? (currentSessionStats.correctAnswers / currentSessionStats.totalAnswered) * 100 : 0}%">
+            <span class="count">${currentSessionStats.correctAnswers}</span>
+          </div>
+          <div class="distribution-item incorrect" style="width: ${currentSessionStats.totalAnswered > 0 ? (currentSessionStats.incorrectAnswers / currentSessionStats.totalAnswered) * 100 : 0}%">
+            <span class="count">${currentSessionStats.incorrectAnswers}</span>
+          </div>
+          <div class="distribution-item preview" style="width: ${currentSessionStats.totalAnswered > 0 ? (currentSessionStats.previewAnswers / currentSessionStats.totalAnswered) * 100 : 0}%">
+            <span class="count">${currentSessionStats.previewAnswers}</span>
+          </div>
+        </div>
+        <div class="distribution-labels">
+          <span class="label correct">✓ Correct</span>
+          <span class="label incorrect">✗ Incorrect</span>
+          <span class="label preview">👁 Preview</span>
         </div>
       </div>
     `;
   }
   
-  // Learning Analytics
+  // Global Statistics Cards Grid
+  if (globalStats.totalQuestions > 0) {
+    const studyHours = Math.floor(globalStats.totalTime / 3600);
+    const studyMinutes = Math.floor((globalStats.totalTime % 3600) / 60);
+    
+    content += `
+      <div class="stats-grid">
+        <div class="stat-card total-questions">
+          <div class="stat-icon">📚</div>
+          <div class="stat-content">
+            <div class="stat-number">${globalStats.totalQuestions.toLocaleString()}</div>
+            <div class="stat-label">Questions Answered</div>
+            <div class="stat-sublabel">All Time</div>
+          </div>
+        </div>
+        
+        <div class="stat-card accuracy">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-content">
+            <div class="stat-number">${globalStats.overallAccuracy}%</div>
+            <div class="stat-label">Overall Accuracy</div>
+            <div class="stat-sublabel">${globalStats.totalCorrect}/${globalStats.totalAnswered} correct</div>
+          </div>
+          <div class="accuracy-bar" style="width: ${globalStats.overallAccuracy}%"></div>
+        </div>
+        
+        <div class="stat-card sessions">
+          <div class="stat-icon">📅</div>
+          <div class="stat-content">
+            <div class="stat-number">${globalStats.totalSessions}</div>
+            <div class="stat-label">Study Sessions</div>
+            <div class="stat-sublabel">${globalStats.examsCount} exams studied</div>
+          </div>
+        </div>
+        
+        <div class="stat-card study-time">
+          <div class="stat-icon">⏰</div>
+          <div class="stat-content">
+            <div class="stat-number">${studyHours}h ${studyMinutes}m</div>
+            <div class="stat-label">Study Time</div>
+            <div class="stat-sublabel">${globalStats.totalSessions > 0 ? Math.round(globalStats.totalTime / globalStats.totalSessions / 60) : 0}m avg/session</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  // Learning Analytics & Trends
   if (window.statistics?.sessions?.length > 0) {
     const recentSessions = window.statistics.sessions.slice(-5);
     const accuracyTrend = recentSessions.map(session => {
@@ -1274,26 +1308,61 @@ function updateProgressTab() {
     
     const trendIcon = trendDirection > 0 ? "📈" : trendDirection < 0 ? "📉" : "➡️";
     const trendText = trendDirection > 0 ? "Improving" : trendDirection < 0 ? "Declining" : "Stable";
+    const trendColor = trendDirection > 0 ? "#4CAF50" : trendDirection < 0 ? "#f44336" : "#9E9E9E";
     
     content += `
-      <div class="progress-section learning-analytics">
-        <h4>Learning Analytics</h4>
-        <div class="trend-analysis">
-          <div class="trend-indicator">
-            <span class="trend-icon">${trendIcon}</span>
-            <span class="trend-text">${trendText}</span>
-            <span class="trend-value">${Math.abs(trendDirection)}% change</span>
+      <div class="progress-card analytics-card">
+        <div class="card-header">
+          <h3><i class="fas fa-chart-line"></i> Learning Analytics</h3>
+        </div>
+        
+        <div class="trend-overview">
+          <div class="trend-indicator" style="--trend-color: ${trendColor}">
+            <div class="trend-icon">${trendIcon}</div>
+            <div class="trend-content">
+              <div class="trend-status">${trendText}</div>
+              <div class="trend-value">${Math.abs(trendDirection)}% change</div>
+            </div>
           </div>
-          <div class="recent-accuracy">
-            Recent accuracy: ${accuracyTrend.join('% → ')}%
+        </div>
+        
+        <div class="accuracy-timeline">
+          <div class="timeline-label">Recent Accuracy Trend:</div>
+          <div class="timeline-points">
+            ${accuracyTrend.map((accuracy, index) => `
+              <div class="timeline-point ${index === accuracyTrend.length - 1 ? 'current' : ''}" 
+                   style="height: ${Math.max(accuracy, 5)}%">
+                <span class="point-value">${accuracy}%</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        
+        <div class="insights">
+          <div class="insight-item">
+            <span class="insight-icon">💡</span>
+            <span class="insight-text">
+              ${trendDirection > 5 ? "Great progress! Keep up the excellent work." :
+                trendDirection > 0 ? "You're improving steadily. Nice work!" :
+                trendDirection === 0 ? "Consistent performance. Try challenging yourself more!" :
+                "Focus on reviewing incorrect answers to improve."}
+            </span>
           </div>
         </div>
       </div>
     `;
   }
   
-  if (content === "") {
-    content = '<div class="no-data">Start answering questions to see your progress!</div>';
+  content += `</div>`; // Close progress-dashboard
+  
+  if (globalStats.totalQuestions === 0 && (!window.statistics?.currentSession || currentSessionStats.totalQuestions === 0)) {
+    content = `
+      <div class="empty-progress">
+        <div class="empty-icon">📈</div>
+        <h3>Ready to Track Your Progress?</h3>
+        <p>Start answering questions to see detailed analytics, trends, and insights about your learning journey!</p>
+      </div>
+    `;
   }
   
   progressContent.innerHTML = content;
