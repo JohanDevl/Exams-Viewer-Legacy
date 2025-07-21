@@ -70,6 +70,7 @@ import {
   saveSettings,
   getResumePosition,
   saveResumePosition,
+  clearResumePosition,
   isDevelopmentMode,
   devLog,
   devError,
@@ -290,6 +291,7 @@ function exposeGlobalFunctions() {
   window.saveSettings = saveSettings;
   window.getResumePosition = getResumePosition;
   window.saveResumePosition = saveResumePosition;
+  window.clearResumePosition = clearResumePosition;
   window.isDevelopmentMode = isDevelopmentMode;
   window.devLog = devLog;
   window.devError = devError;
@@ -436,6 +438,16 @@ function exposeGlobalFunctions() {
   window.resetLazyLoadingConfig = resetLazyLoadingConfig;
   window.createPerformanceMonitor = createPerformanceMonitor;
   window.initializeLazyLoading = initializeLazyLoading;
+
+  // Statistics UI functions
+  window.displayStatistics = displayStatistics;
+  window.showStatsTab = showStatsTab;
+  window.updateOverviewTab = updateOverviewTab;
+  window.updateExamsTab = updateExamsTab;
+  window.updateSessionsTab = updateSessionsTab;
+  window.updateProgressTab = updateProgressTab;
+  window.exportStatistics = exportStatistics;
+  window.resetAllStatistics = resetAllStatistics;
 
   devLog("🌍 All functions exposed globally for backward compatibility");
 }
@@ -619,6 +631,99 @@ function setupMainEventListeners() {
     resetBtn.addEventListener("click", resetAnswers);
   }
 
+  // Statistics button
+  const statisticsBtn = document.getElementById("statisticsBtn");
+  if (statisticsBtn) {
+    statisticsBtn.addEventListener("click", () => {
+      if (typeof window.displayStatistics === 'function') {
+        window.displayStatistics();
+      }
+    });
+  }
+
+  // Close stats modal
+  const closeStatsModal = document.getElementById("closeStatsModal");
+  if (closeStatsModal) {
+    closeStatsModal.addEventListener("click", () => {
+      const modal = document.getElementById("statisticsModal");
+      if (modal) modal.style.display = "none";
+    });
+  }
+
+  // Statistics tabs
+  document.querySelectorAll(".stats-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      if (typeof window.showStatsTab === 'function') {
+        window.showStatsTab(tab.dataset.tab);
+      }
+    });
+  });
+
+  // Export stats button
+  const exportStatsBtn = document.getElementById("exportStatsBtn");
+  if (exportStatsBtn) {
+    exportStatsBtn.addEventListener("click", () => {
+      if (typeof window.exportStatistics === 'function') {
+        window.exportStatistics();
+      }
+    });
+  }
+
+  // Reset stats button
+  const resetStatsBtn = document.getElementById("resetStatsBtn");
+  if (resetStatsBtn) {
+    resetStatsBtn.addEventListener("click", () => {
+      if (typeof window.resetAllStatistics === 'function') {
+        window.resetAllStatistics();
+      }
+    });
+  }
+
+  // Settings button
+  const settingsBtn = document.getElementById("settingsBtn");
+  if (settingsBtn) {
+    settingsBtn.addEventListener("click", () => {
+      const modal = document.getElementById("settingsModal");
+      if (modal) modal.style.display = "flex";
+    });
+  }
+
+  // Close settings modal
+  const closeModal = document.getElementById("closeModal");
+  if (closeModal) {
+    closeModal.addEventListener("click", () => {
+      const modal = document.getElementById("settingsModal");
+      if (modal) modal.style.display = "none";
+      if (typeof window.saveSettings === 'function') {
+        window.saveSettings();
+      }
+    });
+  }
+
+  // Dark mode toggle in settings
+  const darkModeToggle = document.getElementById("darkModeToggle");
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("change", () => {
+      if (typeof window.saveSettingsUI === 'function') {
+        window.saveSettingsUI();
+      }
+    });
+  }
+
+  // Quick dark mode toggle button
+  const darkModeBtn = document.getElementById("darkModeBtn");
+  if (darkModeBtn) {
+    darkModeBtn.addEventListener("click", () => {
+      const toggle = document.getElementById("darkModeToggle");
+      if (toggle) {
+        toggle.checked = !toggle.checked;
+        if (typeof window.saveSettingsUI === 'function') {
+          window.saveSettingsUI();
+        }
+      }
+    });
+  }
+
   devLog("🔗 Main event listeners setup complete");
 }
 
@@ -649,6 +754,199 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 });
+
+// ===========================
+// MISSING STATISTICS FUNCTIONS
+// ===========================
+
+/**
+ * Display statistics modal
+ */
+function displayStatistics() {
+  const modal = document.getElementById("statisticsModal");
+  if (modal) {
+    modal.style.display = "flex";
+    showStatsTab("overview");
+    updateOverviewTab();
+    updateExamsTab();
+    updateSessionsTab();
+    updateProgressTab();
+  }
+}
+
+/**
+ * Show specific statistics tab
+ */
+function showStatsTab(tabName) {
+  const tabs = document.querySelectorAll(".stats-tab");
+  tabs.forEach((tab) => {
+    tab.classList.remove("active");
+    if (tab.dataset.tab === tabName) {
+      tab.classList.add("active");
+    }
+  });
+
+  const contents = document.querySelectorAll(".stats-tab-content");
+  contents.forEach((content) => {
+    content.classList.remove("active");
+  });
+
+  const targetTab = document.getElementById(`${tabName}Tab`);
+  if (targetTab) {
+    targetTab.classList.add("active");
+  }
+}
+
+/**
+ * Update overview tab
+ */
+function updateOverviewTab() {
+  if (typeof recalculateTotalStats === 'function') {
+    recalculateTotalStats();
+  }
+
+  const totalStats = window.statistics?.totalStats;
+  if (!totalStats) return;
+
+  const elements = {
+    totalQuestions: document.getElementById("totalQuestions"),
+    totalCorrect: document.getElementById("totalCorrect"),
+    totalIncorrect: document.getElementById("totalIncorrect"),
+    totalPreview: document.getElementById("totalPreview")
+  };
+
+  Object.entries(elements).forEach(([key, element]) => {
+    if (element && totalStats[key] !== undefined) {
+      element.textContent = totalStats[key];
+    }
+  });
+}
+
+/**
+ * Update exams tab
+ */
+function updateExamsTab() {
+  const examsList = document.getElementById("examStatsList");
+  if (!examsList || !window.statistics?.totalStats?.examStats) return;
+
+  examsList.innerHTML = "";
+  Object.entries(window.statistics.totalStats.examStats).forEach(([exam, stats]) => {
+    const examDiv = document.createElement("div");
+    examDiv.className = "exam-stat-item";
+    examDiv.innerHTML = `
+      <strong>${exam}</strong><br>
+      Questions: ${stats.questions || 0} | Correct: ${stats.correct || 0} | Incorrect: ${stats.incorrect || 0}
+    `;
+    examsList.appendChild(examDiv);
+  });
+}
+
+/**
+ * Update sessions tab
+ */
+function updateSessionsTab() {
+  const sessionsList = document.getElementById("sessionsList");
+  if (!sessionsList || !window.statistics?.sessions) return;
+
+  sessionsList.innerHTML = "";
+  const recentSessions = window.statistics.sessions.slice(-10).reverse();
+  
+  recentSessions.forEach(session => {
+    const sessionDiv = document.createElement("div");
+    sessionDiv.className = "session-item";
+    const examName = session.en || session.examName || "Unknown Exam";
+    const date = new Date(session.st || session.startTime).toLocaleDateString();
+    sessionDiv.innerHTML = `
+      <strong>${examName}</strong> - ${date}<br>
+      Questions: ${(session.q || session.questions || []).length}
+    `;
+    sessionsList.appendChild(sessionDiv);
+  });
+}
+
+/**
+ * Update progress tab
+ */
+function updateProgressTab() {
+  // Simple implementation - can be enhanced
+  const progressContent = document.getElementById("progressTab");
+  if (progressContent && window.statistics?.totalStats) {
+    const stats = window.statistics.totalStats;
+    const totalQuestions = stats.totalQuestions || 0;
+    const accuracy = totalQuestions > 0 ? ((stats.totalCorrect || 0) / totalQuestions * 100).toFixed(1) : 0;
+    
+    let content = `<p>Overall Accuracy: ${accuracy}%</p>`;
+    progressContent.innerHTML = content;
+  }
+}
+
+/**
+ * Export statistics
+ */
+function exportStatistics() {
+  try {
+    const dataToExport = {
+      statistics: window.statistics,
+      exportDate: new Date().toISOString(),
+      version: "1.0"
+    };
+    
+    const blob = new Blob([JSON.stringify(dataToExport, null, 2)], {
+      type: "application/json"
+    });
+    
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `exams-viewer-statistics-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    if (typeof showSuccess === 'function') {
+      showSuccess("Statistics exported successfully!");
+    }
+  } catch (error) {
+    if (typeof showError === 'function') {
+      showError("Failed to export statistics: " + error.message);
+    }
+  }
+}
+
+/**
+ * Reset all statistics
+ */
+function resetAllStatistics() {
+  if (confirm("Are you sure you want to reset ALL statistics? This action cannot be undone.")) {
+    window.statistics = {
+      sessions: [],
+      currentSession: null,
+      totalStats: {
+        totalQuestions: 0,
+        totalCorrect: 0,
+        totalIncorrect: 0,
+        totalPreview: 0,
+        totalTime: 0,
+        examStats: {}
+      }
+    };
+    
+    if (typeof saveStatistics === 'function') {
+      saveStatistics();
+    }
+    
+    // Refresh the display
+    updateOverviewTab();
+    updateExamsTab();
+    updateSessionsTab();
+    updateProgressTab();
+    
+    if (typeof showSuccess === 'function') {
+      showSuccess("All statistics have been reset!");
+    }
+  }
+}
 
 // ===========================
 // DEVELOPMENT UTILITIES
