@@ -125,8 +125,7 @@ import {
 import {
   toggleQuestionFavorite,
   isQuestionFavorite,
-  addQuestionNote,
-  removeQuestionNote,
+  updateQuestionNote,
   getQuestionNote,
   addCustomCategory,
   removeCustomCategory,
@@ -135,9 +134,6 @@ import {
   updateRevisionFilter,
   getFilteredQuestions,
   getFavoritesStats,
-  resetFavoritesData,
-  exportFavorites,
-  importFavorites,
   cleanupObsoleteData,
 } from './js/modules/favorites.js';
 
@@ -345,8 +341,7 @@ function exposeGlobalFunctions() {
   // Favorites and notes
   window.toggleQuestionFavorite = toggleQuestionFavorite;
   window.isQuestionFavorite = isQuestionFavorite;
-  window.addQuestionNote = addQuestionNote;
-  window.removeQuestionNote = removeQuestionNote;
+  window.updateQuestionNote = updateQuestionNote;
   window.getQuestionNote = getQuestionNote;
   window.addCustomCategory = addCustomCategory;
   window.removeCustomCategory = removeCustomCategory;
@@ -355,9 +350,10 @@ function exposeGlobalFunctions() {
   window.updateRevisionFilter = updateRevisionFilter;
   window.getFilteredQuestions = getFilteredQuestions;
   window.getFavoritesStats = getFavoritesStats;
-  window.resetFavoritesData = resetFavoritesData;
-  window.exportFavorites = exportFavorites;
-  window.importFavorites = importFavorites;
+  // Note: resetFavoritesData, exportFavorites, importFavorites not implemented in favorites module yet
+  // window.resetFavoritesData = resetFavoritesData;
+  // window.exportFavorites = exportFavorites;
+  // window.importFavorites = importFavorites;
   window.cleanupObsoleteData = cleanupObsoleteData;
 
   // Search and filter
