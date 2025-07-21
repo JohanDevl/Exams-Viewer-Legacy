@@ -98,7 +98,6 @@ import {
   showSuccess,
   showSwipeIndicator,
   hideSwipeIndicators,
-  addHapticFeedback,
   addProgressMilestoneEffects,
   triggerMilestoneAnimation,
   resetMilestoneStates,
@@ -322,7 +321,7 @@ function exposeGlobalFunctions() {
   window.showSuccess = showSuccess;
   window.showSwipeIndicator = showSwipeIndicator;
   window.hideSwipeIndicators = hideSwipeIndicators;
-  window.addHapticFeedback = addHapticFeedback;
+  window.addHapticFeedback = mobileHapticFeedback;
   window.addProgressMilestoneEffects = addProgressMilestoneEffects;
   window.triggerMilestoneAnimation = triggerMilestoneAnimation;
   window.resetMilestoneStates = resetMilestoneStates;
