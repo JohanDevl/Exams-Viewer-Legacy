@@ -852,16 +852,11 @@ function showStatsTab(tabName) {
 }
 
 /**
- * Update overview tab with CURRENT SESSION stats instead of global totals
+ * Update overview tab with CURRENT SESSION answered questions stats
  */
 function updateOverviewTab() {
-  // Use current session stats instead of global totals for better UX
+  // Use current session stats - focus on answered questions only
   const currentSessionStats = getCurrentSessionStats();
-  if (!currentSessionStats) {
-    console.log("❌ No current session stats available");
-    return;
-  }
-
   console.log("📊 Overview tab - Current session stats:", currentSessionStats);
 
   const elements = {
@@ -871,12 +866,49 @@ function updateOverviewTab() {
     totalPreview: document.getElementById("totalPreview")
   };
 
+  // Calculate actual answered questions from current session
+  let correctAnswers = 0;
+  let incorrectAnswers = 0;
+  let previewAnswers = 0;
+  
+  // Count from current session questions directly
+  if (window.statistics?.currentSession?.questions) {
+    window.statistics.currentSession.questions.forEach(question => {
+      const hasAnswers = (question.ua && question.ua.length > 0) || 
+                        (question.userAnswers && question.userAnswers.length > 0);
+      
+      if (hasAnswers) {
+        const isCorrect = question.ic !== undefined ? question.ic : question.isCorrect;
+        if (isCorrect === true) {
+          correctAnswers++;
+        } else if (isCorrect === false) {
+          incorrectAnswers++;
+        }
+      }
+      
+      // Count preview/highlight activities
+      const hasPreviewActivity = (question.hvc && question.hvc > 0) || 
+                                 (question.hbc && question.hbc > 0) ||
+                                 (question.fat === 'p') ||
+                                 (question.att && question.att.some(att => att.whe));
+      
+      if (hasPreviewActivity && !hasAnswers) {
+        previewAnswers++;
+      }
+    });
+  }
+
+  // Total answered questions = correct + incorrect + preview
+  const totalAnsweredQuestions = correctAnswers + incorrectAnswers + previewAnswers;
+
+  console.log(`📊 Direct count - Correct: ${correctAnswers}, Incorrect: ${incorrectAnswers}, Preview: ${previewAnswers}, Total: ${totalAnsweredQuestions}`);
+
   // Map current session stats to display elements
   const statsMapping = {
-    totalQuestions: currentSessionStats.totalQuestions || 0,
-    totalCorrect: currentSessionStats.correctAnswers || 0,
-    totalIncorrect: currentSessionStats.incorrectAnswers || 0,
-    totalPreview: currentSessionStats.previewAnswers || 0
+    totalQuestions: totalAnsweredQuestions, // Show answered questions, not total exam questions
+    totalCorrect: correctAnswers,
+    totalIncorrect: incorrectAnswers,
+    totalPreview: previewAnswers
   };
 
   Object.entries(elements).forEach(([key, element]) => {
