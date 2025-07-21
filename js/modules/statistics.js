@@ -316,6 +316,48 @@ function updateGlobalStats() {
 // ===========================
 
 /**
+ * Check if a question has been answered in current session only (for sidebar display)
+ */
+function isQuestionAnsweredInCurrentSession(questionIndex) {
+  try {
+    const questionNumber = questionIndex + 1; // Convert to 1-based
+    
+    // DEBUG: Check if we have the actual question data
+    const actualQuestion = window.currentQuestions?.[questionIndex];
+    const actualQuestionNumber = actualQuestion?.question_number;
+    
+    console.log(`🔍 isQuestionAnsweredInCurrentSession(index ${questionIndex})`);
+    console.log(`🔍 Using question number: ${actualQuestionNumber || questionNumber}`);
+    
+    // Use actual question number if available
+    const targetQuestionNumber = actualQuestionNumber || questionNumber;
+    
+    // Check ONLY current session - not previous sessions
+    if (window.statistics?.currentSession?.questions) {
+      const currentQuestionData = window.statistics.currentSession.questions.find(q => 
+        (q.qn && q.qn.toString() === targetQuestionNumber.toString()) ||
+        (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
+      );
+      console.log(`🔍 Current session only - Q${targetQuestionNumber}:`, currentQuestionData);
+      if (currentQuestionData && (currentQuestionData.userAnswers?.length > 0 || currentQuestionData.ua?.length > 0)) {
+        console.log(`✅ Found answer in CURRENT session for question ${targetQuestionNumber}`);
+        return true;
+      }
+    } else {
+      console.log(`❌ No current session questions data`);
+    }
+
+    console.log(`❌ Question ${targetQuestionNumber} (index ${questionIndex}) is NOT answered in current session`);
+    return false;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error checking if question is answered in current session:", error);
+    }
+    return false;
+  }
+}
+
+/**
  * Check if a question has been answered in current or previous sessions
  */
 function isQuestionAnswered(questionIndex) {
@@ -594,7 +636,7 @@ function getQuestionStatus(questionIndex) {
     return questionStatusCache[questionIndex];
   }
 
-  const isAnswered = isQuestionAnswered(questionIndex);
+  const isAnswered = isQuestionAnsweredInCurrentSession(questionIndex);
   const mostRecentAnswer = isAnswered ? getMostRecentAnswer(questionIndex) : null;
   
   // Calculate primary status based on answer history
@@ -657,6 +699,7 @@ export {
   
   // Question status tracking
   isQuestionAnswered,
+  isQuestionAnsweredInCurrentSession,
   getMostRecentAnswer,
   getQuestionStatus,
   

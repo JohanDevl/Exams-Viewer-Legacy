@@ -112,6 +112,7 @@ import {
   getCurrentSessionStats,
   getGlobalStats,
   isQuestionAnswered,
+  isQuestionAnsweredInCurrentSession,
   getMostRecentAnswer,
   getQuestionStatus,
   clearQuestionStatusCache,
@@ -331,6 +332,7 @@ function exposeGlobalFunctions() {
   window.getCurrentSessionStats = getCurrentSessionStats;
   window.getGlobalStats = getGlobalStats;
   window.isQuestionAnswered = isQuestionAnswered;
+  window.isQuestionAnsweredInCurrentSession = isQuestionAnsweredInCurrentSession;
   window.getMostRecentAnswer = getMostRecentAnswer;
   window.getQuestionStatus = getQuestionStatus;
   window.clearQuestionStatusCache = clearQuestionStatusCache;
