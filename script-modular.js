@@ -920,13 +920,13 @@ function updateOverviewTab() {
 }
 
 /**
- * Update exams tab with current session focus
+ * Update exams tab with modern visual design and clean layout
  */
 function updateExamsTab() {
   const examsList = document.getElementById("examStatsList");
   if (!examsList) return;
 
-  examsList.innerHTML = "";
+  let content = "";
   
   // Show current session exam first if available
   if (window.statistics?.currentSession && window.currentExam) {
@@ -966,48 +966,56 @@ function updateExamsTab() {
     
     const totalAnsweredQuestions = correctAnswers + incorrectAnswers + previewAnswers;
     const accuracy = (correctAnswers + incorrectAnswers) > 0 ? Math.round((correctAnswers / (correctAnswers + incorrectAnswers)) * 100) : 0;
+    const accuracyColor = accuracy >= 80 ? '#4CAF50' : accuracy >= 60 ? '#FF9800' : '#f44336';
     
     if (examCode && totalAnsweredQuestions > 0) {
-      const examDiv = document.createElement("div");
-      examDiv.className = "exam-stat-item current-session";
-      examDiv.innerHTML = `
-        <div class="exam-header">
-          <strong>${examName}</strong>
-          <span class="session-badge">Current Session</span>
-        </div>
-        <div class="exam-stats">
-          <div class="stat-group">
-            <span class="stat-label">Total Questions:</span>
-            <span class="stat-value">${totalAnsweredQuestions}</span>
+      content += `
+        <div style="background: #2a2a2a; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #444;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: #fff; font-size: 18px;">📚 ${examName}</h3>
+            <span style="background: #4CAF50; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold;">CURRENT SESSION</span>
           </div>
-          <div class="stat-group">
-            <span class="stat-label">Correct:</span>
-            <span class="stat-value correct">${correctAnswers}</span>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin-bottom: 15px;">
+            <div style="text-align: center; background: #1a1a1a; padding: 15px; border-radius: 8px;">
+              <div style="font-size: 24px; font-weight: bold; color: #4CAF50; margin-bottom: 5px;">${totalAnsweredQuestions}</div>
+              <div style="font-size: 12px; color: #bbb; text-transform: uppercase;">Total Questions</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 15px; border-radius: 8px;">
+              <div style="font-size: 24px; font-weight: bold; color: #4CAF50; margin-bottom: 5px;">${correctAnswers}</div>
+              <div style="font-size: 12px; color: #bbb; text-transform: uppercase;">Correct</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 15px; border-radius: 8px;">
+              <div style="font-size: 24px; font-weight: bold; color: #f44336; margin-bottom: 5px;">${incorrectAnswers}</div>
+              <div style="font-size: 12px; color: #bbb; text-transform: uppercase;">Incorrect</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 15px; border-radius: 8px;">
+              <div style="font-size: 24px; font-weight: bold; color: #FF9800; margin-bottom: 5px;">${previewAnswers}</div>
+              <div style="font-size: 12px; color: #bbb; text-transform: uppercase;">Preview</div>
+            </div>
           </div>
-          <div class="stat-group">
-            <span class="stat-label">Incorrect:</span>
-            <span class="stat-value incorrect">${incorrectAnswers}</span>
-          </div>
-          <div class="stat-group">
-            <span class="stat-label">Preview:</span>
-            <span class="stat-value preview">${previewAnswers}</span>
-          </div>
-          <div class="stat-group">
-            <span class="stat-label">Accuracy:</span>
-            <span class="stat-value">${accuracy}%</span>
+          
+          <div style="display: flex; align-items: center; justify-content: center; background: #1a1a1a; padding: 15px; border-radius: 8px;">
+            <div style="display: flex; align-items: center;">
+              <span style="font-size: 18px; margin-right: 10px;">🎯</span>
+              <div>
+                <span style="font-size: 20px; font-weight: bold; color: ${accuracyColor};">${accuracy}%</span>
+                <span style="font-size: 14px; color: #bbb; margin-left: 5px;">Accuracy</span>
+              </div>
+            </div>
           </div>
         </div>
       `;
-      examsList.appendChild(examDiv);
     }
   }
   
   // Show global exam stats if available
   if (window.statistics?.totalStats?.examStats) {
-    const globalExamsTitle = document.createElement("div");
-    globalExamsTitle.className = "exams-section-title";
-    globalExamsTitle.innerHTML = "<h4>All Time Statistics</h4>";
-    examsList.appendChild(globalExamsTitle);
+    content += `
+      <div style="margin-bottom: 15px;">
+        <h4 style="color: #fff; margin: 0 0 15px 0; font-size: 16px; font-weight: 600;">All Time Statistics</h4>
+      </div>
+    `;
     
     Object.entries(window.statistics.totalStats.examStats).forEach(([examCode, stats]) => {
       // Calculate answered questions for global stats (not total questions in exam)
@@ -1015,44 +1023,58 @@ function updateExamsTab() {
       const accuracy = (stats.totalCorrect || 0) + (stats.totalIncorrect || 0) > 0 
         ? Math.round(((stats.totalCorrect || 0) / ((stats.totalCorrect || 0) + (stats.totalIncorrect || 0))) * 100) 
         : 0;
+      const accuracyColor = accuracy >= 80 ? '#4CAF50' : accuracy >= 60 ? '#FF9800' : '#f44336';
       
-      const examDiv = document.createElement("div");
-      examDiv.className = "exam-stat-item global-stats";
-      examDiv.innerHTML = `
-        <div class="exam-header">
-          <strong>${stats.examName || examCode}</strong>
-          <span class="sessions-count">${stats.sessionsCount || 0} sessions</span>
-        </div>
-        <div class="exam-stats">
-          <div class="stat-group">
-            <span class="stat-label">Total Questions:</span>
-            <span class="stat-value">${totalAnsweredGlobal}</span>
+      content += `
+        <div style="background: #2a2a2a; border-radius: 12px; padding: 20px; margin-bottom: 15px; border: 1px solid #444;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center;">
+              <div style="width: 40px; height: 40px; background: #2196F3; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 18px;">📊</div>
+              <div>
+                <h3 style="margin: 0; color: #fff; font-size: 18px;">${stats.examName || examCode}</h3>
+                <div style="font-size: 12px; color: #bbb;">${stats.sessionsCount || 0} sessions</div>
+              </div>
+            </div>
           </div>
-          <div class="stat-group">
-            <span class="stat-label">Correct:</span>
-            <span class="stat-value correct">${stats.totalCorrect || 0}</span>
-          </div>
-          <div class="stat-group">
-            <span class="stat-label">Incorrect:</span>
-            <span class="stat-value incorrect">${stats.totalIncorrect || 0}</span>
-          </div>
-          <div class="stat-group">
-            <span class="stat-label">Preview:</span>
-            <span class="stat-value preview">${stats.totalPreview || 0}</span>
-          </div>
-          <div class="stat-group">
-            <span class="stat-label">Accuracy:</span>
-            <span class="stat-value">${accuracy}%</span>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px;">
+            <div style="text-align: center; background: #1a1a1a; padding: 12px; border-radius: 6px;">
+              <div style="font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 3px;">${totalAnsweredGlobal}</div>
+              <div style="font-size: 10px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Total<br>Questions</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 12px; border-radius: 6px;">
+              <div style="font-size: 20px; font-weight: bold; color: #4CAF50; margin-bottom: 3px;">${stats.totalCorrect || 0}</div>
+              <div style="font-size: 10px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Correct</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 12px; border-radius: 6px;">
+              <div style="font-size: 20px; font-weight: bold; color: #f44336; margin-bottom: 3px;">${stats.totalIncorrect || 0}</div>
+              <div style="font-size: 10px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Incorrect</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 12px; border-radius: 6px;">
+              <div style="font-size: 20px; font-weight: bold; color: #FF9800; margin-bottom: 3px;">${stats.totalPreview || 0}</div>
+              <div style="font-size: 10px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Preview</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 12px; border-radius: 6px;">
+              <div style="font-size: 20px; font-weight: bold; color: ${accuracyColor}; margin-bottom: 3px;">${accuracy}%</div>
+              <div style="font-size: 10px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Accuracy</div>
+            </div>
           </div>
         </div>
       `;
-      examsList.appendChild(examDiv);
     });
   }
   
-  if (examsList.children.length === 0) {
-    examsList.innerHTML = '<div class="no-data">No exam statistics available yet.</div>';
+  if (content === "") {
+    content = `
+      <div style="text-align: center; padding: 60px 20px; background: #2a2a2a; border-radius: 12px; border: 1px solid #444;">
+        <div style="font-size: 48px; margin-bottom: 20px;">📚</div>
+        <h3 style="color: #fff; margin-bottom: 15px;">No Exam Statistics</h3>
+        <p style="color: #bbb; font-size: 14px;">Start studying exams to see your performance statistics here!</p>
+      </div>
+    `;
   }
+  
+  examsList.innerHTML = content;
 }
 
 /**
