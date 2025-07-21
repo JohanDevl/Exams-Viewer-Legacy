@@ -101,6 +101,7 @@ import {
   animateNumberChange,
   showExportModal,
   hideExportModal,
+  hideMainProgressBar,
   showKeyboardHelp,
   displayChangelog,
   updateMainProgressBarVisibility,
@@ -327,6 +328,7 @@ function exposeGlobalFunctions() {
   window.animateNumberChange = animateNumberChange;
   window.showExportModal = showExportModal;
   window.hideExportModal = hideExportModal;
+  window.hideMainProgressBar = hideMainProgressBar;
   window.showKeyboardHelp = showKeyboardHelp;
   window.displayChangelog = displayChangelog;
 
