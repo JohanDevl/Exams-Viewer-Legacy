@@ -287,9 +287,12 @@ function updateProgressSidebar() {
           ? window.getQuestionStatus(index)
           : { primaryStatus: 'new', isFavorite: false, hasNotes: false, isCategorized: false };
         
+        // Escape HTML and truncate question text to prevent layout issues
+        const questionText = question.question || "";
+        const cleanText = questionText.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, ' ');
         questionPreview = typeof window.truncateText === 'function'
-          ? window.truncateText(question.question || "", 60)
-          : (question.question || "").substring(0, 60) + '...';
+          ? window.truncateText(cleanText, 60)
+          : cleanText.substring(0, 60) + (cleanText.length > 60 ? '...' : '');
         
         // Determine main status class and icon based on current question and status
         if (isCurrentQuestion) {
