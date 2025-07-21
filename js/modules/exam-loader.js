@@ -382,6 +382,8 @@ async function loadExam(examCode) {
       // Set up exam data
       window.currentExam = {
         exam_name: window.lazyLoadingConfig.examMetadata.exam_name || examCode,
+        exam_code: examCode,
+        code: examCode,
         questions: [], // Will be assembled dynamically
         isChunked: true
       };
@@ -407,6 +409,8 @@ async function loadExam(examCode) {
       // Store the complete exam data object
       window.currentExam = {
         exam_name: data.exam_name || examCode,
+        exam_code: examCode,
+        code: examCode,
         questions: data.questions,
         isChunked: false
       };

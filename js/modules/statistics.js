@@ -321,16 +321,28 @@ function updateGlobalStats() {
 function isQuestionAnswered(questionIndex) {
   try {
     const questionNumber = questionIndex + 1; // Convert to 1-based
-    console.log(`🔍 isQuestionAnswered(index ${questionIndex} = question #${questionNumber}) - checking...`);
+    
+    // DEBUG: Check if we have the actual question data
+    const actualQuestion = window.currentQuestions?.[questionIndex];
+    const actualQuestionNumber = actualQuestion?.question_number;
+    
+    console.log(`🔍 isQuestionAnswered(index ${questionIndex})`);
+    console.log(`🔍 Calculated questionNumber: ${questionNumber}`);
+    console.log(`🔍 Actual question data:`, actualQuestion);
+    console.log(`🔍 Actual question_number: ${actualQuestionNumber}`);
+    
+    // Use actual question number if available
+    const targetQuestionNumber = actualQuestionNumber || questionNumber;
+    console.log(`🔍 Using target question number: ${targetQuestionNumber}`);
     
     // Check current session first - search by questionNumber, not array index
     if (window.statistics?.currentSession?.questions) {
       const currentQuestionData = window.statistics.currentSession.questions.find(
-        q => q.questionNumber === questionNumber
+        q => q.questionNumber === targetQuestionNumber
       );
-      console.log(`🔍 Current session question data for Q${questionNumber}:`, currentQuestionData);
+      console.log(`🔍 Current session question data for Q${targetQuestionNumber}:`, currentQuestionData);
       if (currentQuestionData && (currentQuestionData.userAnswers?.length > 0 || currentQuestionData.ua?.length > 0)) {
-        console.log(`✅ Found answer in current session for question ${questionNumber}`);
+        console.log(`✅ Found answer in current session for question ${targetQuestionNumber}`);
         return true;
       }
     } else {
@@ -339,10 +351,12 @@ function isQuestionAnswered(questionIndex) {
 
     // Check previous sessions for same exam
     if (window.currentExam && window.statistics?.sessions) {
+      console.log(`📄 Current exam object:`, window.currentExam);
       const examCode = window.currentExam.exam_code || window.currentExam.code;
       console.log(`📋 Checking previous sessions for exam: ${examCode}`);
       if (!examCode) {
-        console.log(`❌ No exam code found`);
+        console.log(`❌ No exam code found in currentExam:`, window.currentExam);
+        console.log(`❌ Available properties:`, Object.keys(window.currentExam || {}));
         return false;
       }
 
@@ -354,11 +368,11 @@ function isQuestionAnswered(questionIndex) {
       for (const session of examSessions) {
         if (session.questions) {
           // Search by questionNumber, not array index
-          const questionData = session.questions.find(q => q.questionNumber === questionNumber);
+          const questionData = session.questions.find(q => q.questionNumber === targetQuestionNumber);
           if (questionData) {
             console.log(`🔍 Found question data in previous session:`, questionData);
             if (questionData.userAnswers?.length > 0 || questionData.ua?.length > 0) {
-              console.log(`✅ Found answer in previous session for question ${questionNumber}`);
+              console.log(`✅ Found answer in previous session for question ${targetQuestionNumber}`);
               return true;
             }
           }
@@ -368,7 +382,7 @@ function isQuestionAnswered(questionIndex) {
       console.log(`❌ No current exam or statistics sessions`);
     }
 
-    console.log(`❌ Question ${questionNumber} (index ${questionIndex}) is NOT answered`);
+    console.log(`❌ Question ${targetQuestionNumber} (index ${questionIndex}) is NOT answered`);
     return false;
   } catch (error) {
     if (typeof window.devError === 'function') {
