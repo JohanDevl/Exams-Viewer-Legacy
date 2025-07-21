@@ -1164,7 +1164,7 @@ function updateSessionsTab() {
 }
 
 /**
- * Update progress tab with modern visual design and comprehensive tracking
+ * Update progress tab with clean, simple design using inline styles
  */
 function updateProgressTab() {
   const progressContent = document.getElementById("progressTab");
@@ -1173,136 +1173,93 @@ function updateProgressTab() {
   const currentSessionStats = getCurrentSessionStats();
   const globalStats = getGlobalStats();
   
-  let content = `
-    <div class="progress-dashboard">
-  `;
+  let content = "";
   
-  // Current Session Progress Card
+  // Current Session Stats (if active)
   if (window.statistics?.currentSession && currentSessionStats.totalQuestions > 0) {
     const completionPercentage = (currentSessionStats.totalAnswered / currentSessionStats.totalQuestions * 100).toFixed(1);
     const accuracyColor = currentSessionStats.accuracy >= 80 ? '#4CAF50' : currentSessionStats.accuracy >= 60 ? '#FF9800' : '#f44336';
     
     content += `
-      <div class="progress-card current-session-card">
-        <div class="card-header">
-          <h3><i class="fas fa-play-circle"></i> Current Session</h3>
-          <div class="session-badge active">Live</div>
+      <div style="background: #2a2a2a; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #444;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+          <h3 style="margin: 0; color: #fff; font-size: 18px;">📺 Current Session</h3>
+          <span style="background: #4CAF50; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;">LIVE</span>
         </div>
         
-        <div class="progress-visual">
-          <div class="circular-progress" style="--progress: ${completionPercentage}%">
-            <div class="progress-value">${completionPercentage}%</div>
-            <div class="progress-label">Complete</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; text-align: center;">
+          <div>
+            <div style="font-size: 24px; font-weight: bold; color: #4CAF50;">${currentSessionStats.totalAnswered}</div>
+            <div style="font-size: 12px; color: #bbb;">Answered</div>
           </div>
-          
-          <div class="session-metrics">
-            <div class="metric answered">
-              <span class="metric-number">${currentSessionStats.totalAnswered}</span>
-              <span class="metric-text">Answered</span>
-            </div>
-            <div class="metric remaining">
-              <span class="metric-number">${currentSessionStats.totalQuestions - currentSessionStats.totalAnswered}</span>
-              <span class="metric-text">Remaining</span>
-            </div>
+          <div>
+            <div style="font-size: 24px; font-weight: bold; color: ${accuracyColor};">${currentSessionStats.accuracy}%</div>
+            <div style="font-size: 12px; color: #bbb;">Accuracy</div>
+          </div>
+          <div>
+            <div style="font-size: 24px; font-weight: bold; color: #FF9800;">${Math.round(currentSessionStats.timeSpent / 60)}m</div>
+            <div style="font-size: 12px; color: #bbb;">Time</div>
           </div>
         </div>
         
-        <div class="performance-indicators">
-          <div class="performance-item accuracy" style="--accuracy-color: ${accuracyColor}">
-            <div class="indicator-icon">🎯</div>
-            <div class="indicator-content">
-              <span class="indicator-value">${currentSessionStats.accuracy}%</span>
-              <span class="indicator-label">Accuracy</span>
-            </div>
+        <div style="margin-top: 15px;">
+          <div style="background: #1a1a1a; border-radius: 8px; height: 8px; overflow: hidden;">
+            <div style="height: 100%; background: #4CAF50; width: ${completionPercentage}%; transition: width 0.3s ease;"></div>
           </div>
-          
-          <div class="performance-item time">
-            <div class="indicator-icon">⏱️</div>
-            <div class="indicator-content">
-              <span class="indicator-value">${Math.round(currentSessionStats.timeSpent / 60)}m</span>
-              <span class="indicator-label">Time Spent</span>
-            </div>
-          </div>
+          <div style="text-align: center; margin-top: 8px; font-size: 14px; color: #bbb;">${completionPercentage}% Complete</div>
         </div>
         
-        <div class="answer-distribution">
-          <div class="distribution-item correct" style="width: ${currentSessionStats.totalAnswered > 0 ? (currentSessionStats.correctAnswers / currentSessionStats.totalAnswered) * 100 : 0}%">
-            <span class="count">${currentSessionStats.correctAnswers}</span>
-          </div>
-          <div class="distribution-item incorrect" style="width: ${currentSessionStats.totalAnswered > 0 ? (currentSessionStats.incorrectAnswers / currentSessionStats.totalAnswered) * 100 : 0}%">
-            <span class="count">${currentSessionStats.incorrectAnswers}</span>
-          </div>
-          <div class="distribution-item preview" style="width: ${currentSessionStats.totalAnswered > 0 ? (currentSessionStats.previewAnswers / currentSessionStats.totalAnswered) * 100 : 0}%">
-            <span class="count">${currentSessionStats.previewAnswers}</span>
-          </div>
-        </div>
-        <div class="distribution-labels">
-          <span class="label correct">✓ Correct</span>
-          <span class="label incorrect">✗ Incorrect</span>
-          <span class="label preview">👁 Preview</span>
+        <div style="display: flex; justify-content: space-around; margin-top: 15px; font-size: 14px;">
+          <span style="color: #4CAF50;">✓ ${currentSessionStats.correctAnswers}</span>
+          <span style="color: #f44336;">✗ ${currentSessionStats.incorrectAnswers}</span>
+          <span style="color: #FF9800;">👁 ${currentSessionStats.previewAnswers}</span>
         </div>
       </div>
     `;
   }
   
-  // Global Statistics Cards Grid
+  // Global Statistics Grid
   if (globalStats.totalQuestions > 0) {
     const studyHours = Math.floor(globalStats.totalTime / 3600);
     const studyMinutes = Math.floor((globalStats.totalTime % 3600) / 60);
-    
-    // Calculate real answered questions from global stats
     const realAnsweredQuestions = globalStats.totalCorrect + globalStats.totalIncorrect + globalStats.totalPreview;
     
     content += `
-      <div class="stats-grid">
-        <div class="stat-card total-questions">
-          <div class="stat-icon-circle">
-            <div class="icon-content">📚</div>
-          </div>
-          <div class="stat-content">
-            <div class="stat-number">${realAnsweredQuestions.toLocaleString()}</div>
-            <div class="stat-label">QUESTIONS ANSWERED</div>
-            <div class="stat-sublabel">All Time</div>
-          </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+        
+        <div style="background: #2a2a2a; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #444;">
+          <div style="width: 50px; height: 50px; background: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 20px;">📚</div>
+          <div style="font-size: 28px; font-weight: bold; color: #4CAF50; margin-bottom: 5px;">${realAnsweredQuestions}</div>
+          <div style="font-size: 14px; color: #bbb; text-transform: uppercase; letter-spacing: 1px;">Questions Answered</div>
+          <div style="font-size: 12px; color: #888; margin-top: 5px;">All Time</div>
         </div>
         
-        <div class="stat-card accuracy">
-          <div class="stat-icon-circle">
-            <div class="icon-content">🎯</div>
-          </div>
-          <div class="stat-content">
-            <div class="stat-number">${globalStats.overallAccuracy}%</div>
-            <div class="stat-label">OVERALL ACCURACY</div>
-            <div class="stat-sublabel">${globalStats.totalCorrect}/${globalStats.totalAnswered} correct</div>
-          </div>
+        <div style="background: #2a2a2a; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #444;">
+          <div style="width: 50px; height: 50px; background: #FF9800; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 20px;">🎯</div>
+          <div style="font-size: 28px; font-weight: bold; color: #FF9800; margin-bottom: 5px;">${globalStats.overallAccuracy}%</div>
+          <div style="font-size: 14px; color: #bbb; text-transform: uppercase; letter-spacing: 1px;">Overall Accuracy</div>
+          <div style="font-size: 12px; color: #888; margin-top: 5px;">${globalStats.totalCorrect}/${globalStats.totalAnswered} correct</div>
         </div>
         
-        <div class="stat-card sessions">
-          <div class="stat-icon-circle">
-            <div class="icon-content">📅</div>
-          </div>
-          <div class="stat-content">
-            <div class="stat-number">${globalStats.totalSessions}</div>
-            <div class="stat-label">STUDY SESSIONS</div>
-            <div class="stat-sublabel">${globalStats.examsCount} exams studied</div>
-          </div>
+        <div style="background: #2a2a2a; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #444;">
+          <div style="width: 50px; height: 50px; background: #2196F3; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 20px;">📅</div>
+          <div style="font-size: 28px; font-weight: bold; color: #2196F3; margin-bottom: 5px;">${globalStats.totalSessions}</div>
+          <div style="font-size: 14px; color: #bbb; text-transform: uppercase; letter-spacing: 1px;">Study Sessions</div>
+          <div style="font-size: 12px; color: #888; margin-top: 5px;">${globalStats.examsCount} exams studied</div>
         </div>
         
-        <div class="stat-card study-time">
-          <div class="stat-icon-circle">
-            <div class="icon-content">⏰</div>
-          </div>
-          <div class="stat-content">
-            <div class="stat-number">${studyHours}h ${studyMinutes}m</div>
-            <div class="stat-label">STUDY TIME</div>
-            <div class="stat-sublabel">${globalStats.totalSessions > 0 ? Math.round(globalStats.totalTime / globalStats.totalSessions / 60) : 0}m avg/session</div>
-          </div>
+        <div style="background: #2a2a2a; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #444;">
+          <div style="width: 50px; height: 50px; background: #9C27B0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 20px;">⏰</div>
+          <div style="font-size: 28px; font-weight: bold; color: #9C27B0; margin-bottom: 5px;">${studyHours}h ${studyMinutes}m</div>
+          <div style="font-size: 14px; color: #bbb; text-transform: uppercase; letter-spacing: 1px;">Study Time</div>
+          <div style="font-size: 12px; color: #888; margin-top: 5px;">${globalStats.totalSessions > 0 ? Math.round(globalStats.totalTime / globalStats.totalSessions / 60) : 0}m avg/session</div>
         </div>
+        
       </div>
     `;
   }
   
-  // Learning Analytics & Trends
+  // Learning Analytics
   if (window.statistics?.sessions?.length > 0) {
     const recentSessions = window.statistics.sessions.slice(-5);
     const accuracyTrend = recentSessions.map(session => {
@@ -1321,61 +1278,58 @@ function updateProgressTab() {
     const trendColor = trendDirection > 0 ? "#4CAF50" : trendDirection < 0 ? "#f44336" : "#9E9E9E";
     
     content += `
-      <div class="analytics-section">
-        <div class="analytics-header">
-          <div class="analytics-icon-circle">
-            <div class="icon-content">📊</div>
-          </div>
-          <h3>Learning Analytics</h3>
+      <div style="background: #2a2a2a; border-radius: 12px; padding: 20px; border: 1px solid #444;">
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+          <div style="width: 40px; height: 40px; background: #FF9800; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 18px;">📊</div>
+          <h3 style="margin: 0; color: #fff; font-size: 18px;">Learning Analytics</h3>
         </div>
         
-        <div class="analytics-content">
-          <div class="trend-card">
-            <div class="trend-status-indicator" style="background-color: ${trendColor}">
-              <span class="trend-emoji">${trendIcon}</span>
-            </div>
-            <div class="trend-details">
-              <div class="trend-title">${trendText}</div>
-              <div class="trend-subtitle">${Math.abs(trendDirection)}% change</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; background: #1a1a1a; padding: 15px; border-radius: 8px;">
+          <div style="display: flex; align-items: center;">
+            <span style="font-size: 24px; margin-right: 10px;">${trendIcon}</span>
+            <div>
+              <div style="font-weight: bold; color: ${trendColor}; font-size: 16px;">${trendText}</div>
+              <div style="font-size: 12px; color: #bbb;">${Math.abs(trendDirection)}% change</div>
             </div>
           </div>
-          
-          <div class="accuracy-progress-section">
-            <div class="progress-label">Recent Accuracy Trend:</div>
-            <div class="accuracy-chart">
-              ${accuracyTrend.map((accuracy, index) => `
-                <div class="chart-bar ${index === accuracyTrend.length - 1 ? 'current' : ''}" 
-                     style="height: ${Math.max(accuracy * 0.8, 8)}px; background-color: ${accuracy >= 80 ? '#4CAF50' : accuracy >= 60 ? '#FF9800' : '#f44336'}">
-                  <div class="bar-label">${accuracy}%</div>
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+          <div style="font-size: 14px; color: #bbb; margin-bottom: 10px;">Recent Accuracy Trend:</div>
+          <div style="display: flex; align-items: end; justify-content: space-around; height: 60px; background: #1a1a1a; padding: 10px; border-radius: 8px;">
+            ${accuracyTrend.map((accuracy, index) => {
+              const barColor = accuracy >= 80 ? '#4CAF50' : accuracy >= 60 ? '#FF9800' : '#f44336';
+              const height = Math.max((accuracy / 100) * 40, 4);
+              return `
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                  <div style="font-size: 10px; color: #bbb; margin-bottom: 5px;">${accuracy}%</div>
+                  <div style="width: 20px; height: ${height}px; background: ${barColor}; border-radius: 2px; ${index === accuracyTrend.length - 1 ? 'box-shadow: 0 0 8px ' + barColor + ';' : ''}"></div>
                 </div>
-              `).join('')}
-            </div>
+              `;
+            }).join('')}
           </div>
-          
-          <div class="insight-card">
-            <div class="insight-icon-circle" style="background-color: ${trendColor}">
-              <span>💡</span>
-            </div>
-            <div class="insight-message">
-              ${trendDirection > 5 ? "Great progress! Keep up the excellent work." :
-                trendDirection > 0 ? "You're improving steadily. Nice work!" :
-                trendDirection === 0 ? "Consistent performance. Try challenging yourself more!" :
-                "Focus on reviewing incorrect answers to improve."}
-            </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; background: #1a1a1a; padding: 15px; border-radius: 8px;">
+          <div style="width: 30px; height: 30px; background: ${trendColor}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 16px;">💡</div>
+          <div style="color: #bbb; font-size: 14px;">
+            ${trendDirection > 5 ? "Great progress! Keep up the excellent work." :
+              trendDirection > 0 ? "You're improving steadily. Nice work!" :
+              trendDirection === 0 ? "Consistent performance. Try challenging yourself more!" :
+              "Focus on reviewing incorrect answers to improve."}
           </div>
         </div>
       </div>
     `;
   }
   
-  content += `</div>`; // Close progress-dashboard
-  
+  // Empty state
   if (globalStats.totalQuestions === 0 && (!window.statistics?.currentSession || currentSessionStats.totalQuestions === 0)) {
     content = `
-      <div class="empty-progress">
-        <div class="empty-icon">📈</div>
-        <h3>Ready to Track Your Progress?</h3>
-        <p>Start answering questions to see detailed analytics, trends, and insights about your learning journey!</p>
+      <div style="text-align: center; padding: 60px 20px; background: #2a2a2a; border-radius: 12px; border: 1px solid #444;">
+        <div style="font-size: 48px; margin-bottom: 20px;">📈</div>
+        <h3 style="color: #fff; margin-bottom: 15px;">Ready to Track Your Progress?</h3>
+        <p style="color: #bbb; font-size: 14px; max-width: 400px; margin: 0 auto;">Start answering questions to see detailed analytics, trends, and insights about your learning journey!</p>
       </div>
     `;
   }
