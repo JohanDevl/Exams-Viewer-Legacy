@@ -320,14 +320,17 @@ function updateGlobalStats() {
  */
 function isQuestionAnswered(questionIndex) {
   try {
-    console.log(`🔍 isQuestionAnswered(${questionIndex}) - checking...`);
+    const questionNumber = questionIndex + 1; // Convert to 1-based
+    console.log(`🔍 isQuestionAnswered(index ${questionIndex} = question #${questionNumber}) - checking...`);
     
-    // Check current session first
+    // Check current session first - search by questionNumber, not array index
     if (window.statistics?.currentSession?.questions) {
-      const currentQuestionData = window.statistics.currentSession.questions[questionIndex];
-      console.log(`🔍 Current session question data:`, currentQuestionData);
+      const currentQuestionData = window.statistics.currentSession.questions.find(
+        q => q.questionNumber === questionNumber
+      );
+      console.log(`🔍 Current session question data for Q${questionNumber}:`, currentQuestionData);
       if (currentQuestionData && (currentQuestionData.userAnswers?.length > 0 || currentQuestionData.ua?.length > 0)) {
-        console.log(`✅ Found answer in current session for question ${questionIndex}`);
+        console.log(`✅ Found answer in current session for question ${questionNumber}`);
         return true;
       }
     } else {
@@ -337,22 +340,35 @@ function isQuestionAnswered(questionIndex) {
     // Check previous sessions for same exam
     if (window.currentExam && window.statistics?.sessions) {
       const examCode = window.currentExam.exam_code || window.currentExam.code;
-      if (!examCode) return false;
+      console.log(`📋 Checking previous sessions for exam: ${examCode}`);
+      if (!examCode) {
+        console.log(`❌ No exam code found`);
+        return false;
+      }
 
       const examSessions = window.statistics.sessions.filter(session => 
         (session.examCode || session.ec) === examCode
       );
+      console.log(`📁 Found ${examSessions.length} previous sessions for this exam`);
 
       for (const session of examSessions) {
-        if (session.questions && session.questions[questionIndex]) {
-          const questionData = session.questions[questionIndex];
-          if (questionData.userAnswers?.length > 0 || questionData.ua?.length > 0) {
-            return true;
+        if (session.questions) {
+          // Search by questionNumber, not array index
+          const questionData = session.questions.find(q => q.questionNumber === questionNumber);
+          if (questionData) {
+            console.log(`🔍 Found question data in previous session:`, questionData);
+            if (questionData.userAnswers?.length > 0 || questionData.ua?.length > 0) {
+              console.log(`✅ Found answer in previous session for question ${questionNumber}`);
+              return true;
+            }
           }
         }
       }
+    } else {
+      console.log(`❌ No current exam or statistics sessions`);
     }
 
+    console.log(`❌ Question ${questionNumber} (index ${questionIndex}) is NOT answered`);
     return false;
   } catch (error) {
     if (typeof window.devError === 'function') {
@@ -367,22 +383,27 @@ function isQuestionAnswered(questionIndex) {
  */
 function getMostRecentAnswer(questionIndex) {
   try {
+    const questionNumber = questionIndex + 1; // Convert to 1-based
     let mostRecentAnswer = null;
     let mostRecentTime = 0;
 
-    // Check current session first
-    if (window.statistics?.currentSession?.questions?.[questionIndex]) {
-      const questionData = window.statistics.currentSession.questions[questionIndex];
-      const userAnswers = questionData.userAnswers || questionData.ua || [];
-      const endTime = questionData.endTime || questionData.et || 0;
-      
-      if (userAnswers.length > 0 && endTime > mostRecentTime) {
-        mostRecentAnswer = userAnswers;
-        mostRecentTime = endTime;
+    // Check current session first - search by questionNumber
+    if (window.statistics?.currentSession?.questions) {
+      const questionData = window.statistics.currentSession.questions.find(
+        q => q.questionNumber === questionNumber
+      );
+      if (questionData) {
+        const userAnswers = questionData.userAnswers || questionData.ua || [];
+        const endTime = questionData.endTime || questionData.et || 0;
+        
+        if (userAnswers.length > 0 && endTime > mostRecentTime) {
+          mostRecentAnswer = userAnswers;
+          mostRecentTime = endTime;
+        }
       }
     }
 
-    // Check previous sessions
+    // Check previous sessions - search by questionNumber
     if (window.currentExam && window.statistics?.sessions) {
       const examCode = window.currentExam.exam_code || window.currentExam.code;
       if (examCode) {
@@ -391,14 +412,16 @@ function getMostRecentAnswer(questionIndex) {
         );
 
         for (const session of examSessions) {
-          if (session.questions?.[questionIndex]) {
-            const questionData = session.questions[questionIndex];
-            const userAnswers = questionData.userAnswers || questionData.ua || [];
-            const endTime = questionData.endTime || questionData.et || 0;
-            
-            if (userAnswers.length > 0 && endTime > mostRecentTime) {
-              mostRecentAnswer = userAnswers;
-              mostRecentTime = endTime;
+          if (session.questions) {
+            const questionData = session.questions.find(q => q.questionNumber === questionNumber);
+            if (questionData) {
+              const userAnswers = questionData.userAnswers || questionData.ua || [];
+              const endTime = questionData.endTime || questionData.et || 0;
+              
+              if (userAnswers.length > 0 && endTime > mostRecentTime) {
+                mostRecentAnswer = userAnswers;
+                mostRecentTime = endTime;
+              }
             }
           }
         }
