@@ -117,6 +117,7 @@ import {
   getMostRecentAnswerCurrentSession,
   getQuestionStatus,
   clearQuestionStatusCache,
+  clearQuestionStatusCacheForQuestion,
   cleanCorruptedStatistics,
 } from './js/modules/statistics.js';
 
@@ -338,6 +339,7 @@ function exposeGlobalFunctions() {
   window.getMostRecentAnswerCurrentSession = getMostRecentAnswerCurrentSession;
   window.getQuestionStatus = getQuestionStatus;
   window.clearQuestionStatusCache = clearQuestionStatusCache;
+  window.clearQuestionStatusCacheForQuestion = clearQuestionStatusCacheForQuestion;
   window.cleanCorruptedStatistics = cleanCorruptedStatistics;
 
   // Favorites and notes

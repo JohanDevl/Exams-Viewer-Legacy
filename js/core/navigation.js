@@ -924,11 +924,11 @@ function validateAnswers() {
       console.log("✅ Filter counts updated");
     }
     
-    // Clear cache since answer status has changed
-    if (typeof window.clearQuestionStatusCache === 'function') {
-      console.log("🗄 Clearing question status cache...");
-      window.clearQuestionStatusCache();
-      console.log("✅ Question status cache cleared");
+    // Clear cache for this specific question only (performance optimization)
+    if (typeof window.clearQuestionStatusCacheForQuestion === 'function') {
+      console.log(`🗄 Clearing cache for question index ${window.currentQuestionIndex}...`);
+      window.clearQuestionStatusCacheForQuestion(window.currentQuestionIndex);
+      console.log("✅ Question status cache cleared for current question");
     }
     
     // Update progress sidebar to reflect answered status

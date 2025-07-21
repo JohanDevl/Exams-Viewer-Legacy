@@ -326,9 +326,6 @@ function isQuestionAnsweredInCurrentSession(questionIndex) {
     const actualQuestion = window.currentQuestions?.[questionIndex];
     const actualQuestionNumber = actualQuestion?.question_number;
     
-    console.log(`🔍 isQuestionAnsweredInCurrentSession(index ${questionIndex})`);
-    console.log(`🔍 Using question number: ${actualQuestionNumber || questionNumber}`);
-    
     // Use actual question number if available
     const targetQuestionNumber = actualQuestionNumber || questionNumber;
     
@@ -338,16 +335,11 @@ function isQuestionAnsweredInCurrentSession(questionIndex) {
         (q.qn && q.qn.toString() === targetQuestionNumber.toString()) ||
         (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
       );
-      console.log(`🔍 Current session only - Q${targetQuestionNumber}:`, currentQuestionData);
       if (currentQuestionData && (currentQuestionData.userAnswers?.length > 0 || currentQuestionData.ua?.length > 0)) {
-        console.log(`✅ Found answer in CURRENT session for question ${targetQuestionNumber}`);
+        console.log(`✅ Q${questionIndex} (${targetQuestionNumber}): answered in current session`);
         return true;
       }
-    } else {
-      console.log(`❌ No current session questions data`);
     }
-
-    console.log(`❌ Question ${targetQuestionNumber} (index ${questionIndex}) is NOT answered in current session`);
     return false;
   } catch (error) {
     if (typeof window.devError === 'function') {
@@ -673,22 +665,31 @@ function clearQuestionStatusCache() {
 }
 
 /**
+ * Clear status cache for a specific question only (performance optimized)
+ */
+function clearQuestionStatusCacheForQuestion(questionIndex) {
+  if (questionStatusCache[questionIndex]) {
+    console.log(`🧹 Clearing cache for question index ${questionIndex}`);
+    delete questionStatusCache[questionIndex];
+  }
+}
+
+/**
  * Get cached question status or calculate it
  */
 function getQuestionStatus(questionIndex) {
-  console.log(`🎯 getQuestionStatus called with index: ${questionIndex}`);
-  
   if (questionStatusCache[questionIndex]) {
-    console.log(`📋 Returning cached status for index ${questionIndex}:`, questionStatusCache[questionIndex]);
     return questionStatusCache[questionIndex];
   }
 
   console.log(`🔍 Calculating new status for index ${questionIndex}`);
   const isAnswered = isQuestionAnsweredInCurrentSession(questionIndex);
-  console.log(`📊 isAnswered result: ${isAnswered}`);
+  console.log(`📊 Q${questionIndex}: isAnswered = ${isAnswered}`);
   
   const mostRecentAnswer = isAnswered ? getMostRecentAnswerCurrentSession(questionIndex) : null;
-  console.log(`📝 mostRecentAnswer:`, mostRecentAnswer);
+  if (mostRecentAnswer) {
+    console.log(`📝 Q${questionIndex}: mostRecentAnswer found, isCorrect = ${mostRecentAnswer.isCorrect}`);
+  }
   
   // Calculate primary status based on answer history
   let primaryStatus = 'new';
@@ -730,7 +731,7 @@ function getQuestionStatus(questionIndex) {
     isCategorized
   };
 
-  console.log(`✅ Final status for index ${questionIndex}:`, questionStatusCache[questionIndex]);
+  console.log(`✅ Q${questionIndex}: final status = ${primaryStatus}`);
   return questionStatusCache[questionIndex];
 }
 
@@ -759,4 +760,5 @@ export {
   // Data cleanup
   cleanCorruptedStatistics,
   clearQuestionStatusCache,
+  clearQuestionStatusCacheForQuestion,
 };
