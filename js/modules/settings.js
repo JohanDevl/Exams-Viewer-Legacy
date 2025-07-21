@@ -44,24 +44,27 @@ function applyTheme(isDark = null) {
   }
   
   if (darkMode) {
-    console.log("🌙 Applying DARK mode - adding dark-mode class");
-    body.classList.add("dark-mode");
+    console.log("🌙 Applying DARK mode - setting data-theme='dark'");
+    body.setAttribute("data-theme", "dark");
+    body.classList.remove("dark-mode"); // Remove old class if exists
     if (darkModeBtn) {
       darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
       darkModeBtn.title = "Switch to Light Mode";
       console.log("🌅 Dark mode button updated to sun icon");
     }
   } else {
-    console.log("☀️ Applying LIGHT mode - removing dark-mode class");
-    body.classList.remove("dark-mode");
+    console.log("☀️ Applying LIGHT mode - removing data-theme attribute");
+    body.removeAttribute("data-theme");
+    body.classList.remove("dark-mode"); // Remove old class if exists
     if (darkModeBtn) {
       darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
       darkModeBtn.title = "Switch to Dark Mode";
       console.log("🌙 Dark mode button updated to moon icon");
     }
   }
+  console.log("🎨 Final body data-theme:", body.getAttribute("data-theme"));
   console.log("🎨 Final body classes:", body.className);
-  console.log("🎨 applyTheme() completed");
+  console.log("🎨 applyTheme() completed - FIXED!");
 }
 
 /**
