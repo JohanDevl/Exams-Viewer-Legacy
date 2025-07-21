@@ -593,18 +593,35 @@ function trackQuestionAttempt(questionNumber, selectedAnswers, correctAnswers, i
 function trackQuestionVisit(questionNumber) {
   try {
     if (!window.statistics || !window.statistics.currentSession) {
+      console.log(`❌ trackQuestionVisit: No current session for Q${questionNumber}`);
       return;
     }
 
     const session = window.statistics.currentSession;
     const questionNum = parseInt(questionNumber);
     
+    // Add to visitedQuestions array (legacy)
     if (!session.visitedQuestions.includes(questionNum)) {
       session.visitedQuestions.push(questionNum);
+    }
+    
+    // IMPORTANT: Also create/find QuestionAttempt for status tracking
+    let questionAttempt = session.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNum.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNum.toString())
+    );
+    
+    if (!questionAttempt) {
+      // Create a basic QuestionAttempt for visited questions
+      questionAttempt = new QuestionAttempt(questionNum, []); // No correct answers yet
+      session.questions.push(questionAttempt);
+      console.log(`📝 trackQuestionVisit: Created QuestionAttempt for Q${questionNum}`);
+    } else {
+      console.log(`📝 trackQuestionVisit: QuestionAttempt already exists for Q${questionNum}`);
+    }
       
-      if (typeof window.saveStatistics === 'function') {
-        window.saveStatistics();
-      }
+    if (typeof window.saveStatistics === 'function') {
+      window.saveStatistics();
     }
   } catch (error) {
     if (typeof window.devError === 'function') {
