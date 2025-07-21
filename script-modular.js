@@ -597,6 +597,23 @@ function setupMainEventListeners() {
     exportBtn.addEventListener("click", showExportModal);
   }
 
+  // Sidebar toggle button
+  const sidebarToggle = document.getElementById("sidebarToggle");
+  if (sidebarToggle) {
+    sidebarToggle.addEventListener("click", toggleSidebar);
+  }
+
+  // Sidebar close button and overlay
+  const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+  if (closeSidebarBtn) {
+    closeSidebarBtn.addEventListener("click", closeSidebar);
+  }
+  
+  const sidebarOverlay = document.getElementById("sidebarOverlay");
+  if (sidebarOverlay) {
+    sidebarOverlay.addEventListener("click", closeSidebar);
+  }
+
   // Previous/Next navigation buttons
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
