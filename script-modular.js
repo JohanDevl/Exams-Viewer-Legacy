@@ -855,9 +855,15 @@ function showStatsTab(tabName) {
  * Update overview tab with CURRENT SESSION answered questions stats
  */
 function updateOverviewTab() {
-  // Use current session stats - focus on answered questions only
-  const currentSessionStats = getCurrentSessionStats();
-  console.log("📊 Overview tab - Current session stats:", currentSessionStats);
+  console.log("🔍 DEBUG - Full statistics object:", window.statistics);
+  console.log("🔍 DEBUG - Current session:", window.statistics?.currentSession);
+  
+  if (window.statistics?.currentSession?.questions) {
+    console.log("🔍 DEBUG - Current session questions:", window.statistics.currentSession.questions);
+    console.log("🔍 DEBUG - Number of questions in session:", window.statistics.currentSession.questions.length);
+  } else {
+    console.log("❌ DEBUG - No current session questions found");
+  }
 
   const elements = {
     totalQuestions: document.getElementById("totalQuestions"),
@@ -872,17 +878,27 @@ function updateOverviewTab() {
   let previewAnswers = 0;
   
   // Count from current session questions directly
-  if (window.statistics?.currentSession?.questions) {
-    window.statistics.currentSession.questions.forEach(question => {
+  if (window.statistics?.currentSession?.questions && window.statistics.currentSession.questions.length > 0) {
+    console.log("✅ Found current session questions, analyzing...");
+    
+    window.statistics.currentSession.questions.forEach((question, index) => {
+      console.log(`🔍 Question ${index + 1}:`, question);
+      
       const hasAnswers = (question.ua && question.ua.length > 0) || 
                         (question.userAnswers && question.userAnswers.length > 0);
       
+      console.log(`  - Has answers: ${hasAnswers}`);
+      
       if (hasAnswers) {
         const isCorrect = question.ic !== undefined ? question.ic : question.isCorrect;
+        console.log(`  - IsCorrect: ${isCorrect}`);
+        
         if (isCorrect === true) {
           correctAnswers++;
+          console.log(`  ✅ Counted as correct`);
         } else if (isCorrect === false) {
           incorrectAnswers++;
+          console.log(`  ❌ Counted as incorrect`);
         }
       }
       
@@ -892,16 +908,29 @@ function updateOverviewTab() {
                                  (question.fat === 'p') ||
                                  (question.att && question.att.some(att => att.whe));
       
+      console.log(`  - Has preview activity: ${hasPreviewActivity}`);
+      
       if (hasPreviewActivity && !hasAnswers) {
         previewAnswers++;
+        console.log(`  👁️ Counted as preview`);
       }
     });
+  } else {
+    console.log("❌ No current session or no questions in current session");
+    
+    // Fallback: try to get data from global statistics if current session is empty
+    if (window.statistics?.totalStats) {
+      console.log("🔄 Fallback: Using global statistics");
+      correctAnswers = window.statistics.totalStats.totalCorrect || 0;
+      incorrectAnswers = window.statistics.totalStats.totalIncorrect || 0;
+      previewAnswers = window.statistics.totalStats.totalPreview || 0;
+    }
   }
 
   // Total answered questions = correct + incorrect + preview
   const totalAnsweredQuestions = correctAnswers + incorrectAnswers + previewAnswers;
 
-  console.log(`📊 Direct count - Correct: ${correctAnswers}, Incorrect: ${incorrectAnswers}, Preview: ${previewAnswers}, Total: ${totalAnsweredQuestions}`);
+  console.log(`📊 Final count - Correct: ${correctAnswers}, Incorrect: ${incorrectAnswers}, Preview: ${previewAnswers}, Total: ${totalAnsweredQuestions}`);
 
   // Map current session stats to display elements
   const statsMapping = {
@@ -929,12 +958,45 @@ function updateExamsTab() {
   examsList.innerHTML = "";
   
   // Show current session exam first if available
-  const currentSessionStats = getCurrentSessionStats();
   if (window.statistics?.currentSession && window.currentExam) {
     const examCode = window.currentExam.exam_code || window.currentExam.code;
     const examName = window.currentExam.title || window.currentExam.exam_name || examCode;
     
-    if (examCode && currentSessionStats.totalQuestions > 0) {
+    // Calculate answered questions from current session
+    let correctAnswers = 0;
+    let incorrectAnswers = 0;
+    let previewAnswers = 0;
+    
+    if (window.statistics.currentSession.questions && window.statistics.currentSession.questions.length > 0) {
+      window.statistics.currentSession.questions.forEach(question => {
+        const hasAnswers = (question.ua && question.ua.length > 0) || 
+                          (question.userAnswers && question.userAnswers.length > 0);
+        
+        if (hasAnswers) {
+          const isCorrect = question.ic !== undefined ? question.ic : question.isCorrect;
+          if (isCorrect === true) {
+            correctAnswers++;
+          } else if (isCorrect === false) {
+            incorrectAnswers++;
+          }
+        }
+        
+        // Count preview/highlight activities
+        const hasPreviewActivity = (question.hvc && question.hvc > 0) || 
+                                   (question.hbc && question.hbc > 0) ||
+                                   (question.fat === 'p') ||
+                                   (question.att && question.att.some(att => att.whe));
+        
+        if (hasPreviewActivity && !hasAnswers) {
+          previewAnswers++;
+        }
+      });
+    }
+    
+    const totalAnsweredQuestions = correctAnswers + incorrectAnswers + previewAnswers;
+    const accuracy = (correctAnswers + incorrectAnswers) > 0 ? Math.round((correctAnswers / (correctAnswers + incorrectAnswers)) * 100) : 0;
+    
+    if (examCode && totalAnsweredQuestions > 0) {
       const examDiv = document.createElement("div");
       examDiv.className = "exam-stat-item current-session";
       examDiv.innerHTML = `
@@ -944,20 +1006,24 @@ function updateExamsTab() {
         </div>
         <div class="exam-stats">
           <div class="stat-group">
-            <span class="stat-label">Questions:</span>
-            <span class="stat-value">${currentSessionStats.totalAnswered}/${currentSessionStats.totalQuestions}</span>
+            <span class="stat-label">Total Questions:</span>
+            <span class="stat-value">${totalAnsweredQuestions}</span>
           </div>
           <div class="stat-group">
             <span class="stat-label">Correct:</span>
-            <span class="stat-value correct">${currentSessionStats.correctAnswers}</span>
+            <span class="stat-value correct">${correctAnswers}</span>
           </div>
           <div class="stat-group">
             <span class="stat-label">Incorrect:</span>
-            <span class="stat-value incorrect">${currentSessionStats.incorrectAnswers}</span>
+            <span class="stat-value incorrect">${incorrectAnswers}</span>
+          </div>
+          <div class="stat-group">
+            <span class="stat-label">Preview:</span>
+            <span class="stat-value preview">${previewAnswers}</span>
           </div>
           <div class="stat-group">
             <span class="stat-label">Accuracy:</span>
-            <span class="stat-value">${currentSessionStats.accuracy}%</span>
+            <span class="stat-value">${accuracy}%</span>
           </div>
         </div>
       `;
