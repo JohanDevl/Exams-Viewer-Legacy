@@ -43,6 +43,7 @@ import {
 import {
   navigateQuestion,
   navigateToQuestionIndex,
+  navigateToQuestionAsync,
   navigateToRandomQuestion,
   jumpToQuestion,
   jumpToQuestionNumber,
@@ -270,6 +271,7 @@ function exposeGlobalFunctions() {
   // Core navigation
   window.navigateQuestion = navigateQuestion;
   window.navigateToQuestionIndex = navigateToQuestionIndex;
+  window.navigateToQuestionAsync = navigateToQuestionAsync;
   window.navigateToRandomQuestion = navigateToRandomQuestion;
   window.jumpToQuestion = jumpToQuestion;
   window.jumpToQuestionNumber = jumpToQuestionNumber;
