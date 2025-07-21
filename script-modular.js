@@ -62,8 +62,6 @@ import {
 
 // Storage management
 import {
-  loadData,
-  saveData,
   loadStatistics,
   saveStatistics,
   loadFavorites,
@@ -75,7 +73,7 @@ import {
   isDevelopmentMode,
   devLog,
   devError,
-  cleanupStorage,
+  clearCorruptedData,
 } from './js/modules/storage.js';
 
 // Settings and configuration
@@ -285,8 +283,6 @@ function exposeGlobalFunctions() {
   window.updateQuestionJumpMaxValue = updateQuestionJumpMaxValue;
 
   // Storage management
-  window.loadData = loadData;
-  window.saveData = saveData;
   window.loadStatistics = loadStatistics;
   window.saveStatistics = saveStatistics;
   window.loadFavorites = loadFavorites;
@@ -298,7 +294,7 @@ function exposeGlobalFunctions() {
   window.isDevelopmentMode = isDevelopmentMode;
   window.devLog = devLog;
   window.devError = devError;
-  window.cleanupStorage = cleanupStorage;
+  window.clearCorruptedData = clearCorruptedData;
 
   // Settings and configuration
   window.loadSettingsUI = loadSettingsUI;
