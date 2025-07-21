@@ -455,9 +455,11 @@ function getMostRecentAnswerCurrentSession(questionIndex) {
         const endTime = questionData.endTime || questionData.et || 0;
         
         if (userAnswers.length > 0 && endTime > 0) {
+          const isCorrect = questionData.isCorrect !== undefined ? questionData.isCorrect : questionData.ic;
+          console.log(`📝 Q${questionIndex}: Retrieved answer data - isCorrect: ${isCorrect}, userAnswers:`, userAnswers);
           return {
             answers: userAnswers,
-            isCorrect: questionData.isCorrect || questionData.ic || null,
+            isCorrect: isCorrect,
             isPreview: false, // Current session, so not preview
             endTime: endTime
           };
@@ -694,6 +696,7 @@ function getQuestionStatus(questionIndex) {
   // Calculate primary status based on answer history
   let primaryStatus = 'new';
   if (isAnswered && mostRecentAnswer) {
+    console.log(`🎯 Q${questionIndex}: mostRecentAnswer.isCorrect = ${mostRecentAnswer.isCorrect} (type: ${typeof mostRecentAnswer.isCorrect})`);
     if (mostRecentAnswer.isCorrect === true) {
       primaryStatus = 'correct';
     } else if (mostRecentAnswer.isCorrect === false) {
@@ -703,11 +706,12 @@ function getQuestionStatus(questionIndex) {
     } else {
       primaryStatus = 'viewed';
     }
+    console.log(`🏷️ Q${questionIndex}: calculated primaryStatus = ${primaryStatus}`);
   }
   
   // Check favorites status
   const isFavorite = typeof window.isQuestionFavorite === 'function' 
-    ? window.isQuestionFavorite(questionIndex - 1) // Convert to 0-based index
+    ? window.isQuestionFavorite(questionIndex) // Already 0-based index
     : false;
   
   // Check notes status  
