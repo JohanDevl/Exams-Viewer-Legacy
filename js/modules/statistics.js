@@ -706,24 +706,46 @@ function getQuestionStatus(questionIndex) {
   let isAnswered = false;
   
   if (questionAttempt) {
+    // Question was visited/tracked
+    isAnswered = false;
+    
     // Check if has user answers
     const hasAnswers = (questionAttempt.ua && questionAttempt.ua.length > 0) || 
                       (questionAttempt.userAnswers && questionAttempt.userAnswers.length > 0);
+    
+    // Check for preview/highlight activity
+    const highlightViews = questionAttempt.hvc || 0;
+    const highlightClicks = questionAttempt.hbc || 0;
+    const firstActionType = questionAttempt.fat || null;
+    const hasHighlightAttempts = questionAttempt.att && questionAttempt.att.some(attempt => attempt.whe);
+    
+    const hasPreviewActivity = highlightViews > 0 || highlightClicks > 0 || 
+                              firstActionType === 'p' || hasHighlightAttempts;
+    
+    console.log(`📊 Q${questionIndex}: hasAnswers=${hasAnswers}, hasPreviewActivity=${hasPreviewActivity}`);
     
     if (hasAnswers) {
       isAnswered = true;
       // Use the isCorrect property directly from the attempt
       const isCorrect = questionAttempt.ic !== undefined ? questionAttempt.ic : questionAttempt.isCorrect;
       
-      console.log(`📊 Q${questionIndex}: hasAnswers=true, isCorrect=${isCorrect}`);
+      console.log(`📊 Q${questionIndex}: answered, isCorrect=${isCorrect}`);
       
       if (isCorrect === true) {
         primaryStatus = 'correct';
       } else if (isCorrect === false) {
         primaryStatus = 'incorrect'; 
       } else {
-        primaryStatus = 'viewed'; // Answered but correctness unknown
+        primaryStatus = 'viewed'; // Answered but correctness not determined yet
       }
+    } else if (hasPreviewActivity) {
+      // Question was previewed/highlighted but not answered
+      primaryStatus = 'preview';
+      console.log(`👁️ Q${questionIndex}: preview mode (hvc=${highlightViews}, hbc=${highlightClicks}, fat=${firstActionType})`);
+    } else {
+      // Question was visited but neither answered nor previewed
+      primaryStatus = 'viewed';
+      console.log(`👀 Q${questionIndex}: viewed but not answered or previewed`);
     }
   }
   
