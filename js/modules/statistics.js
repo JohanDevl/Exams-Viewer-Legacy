@@ -337,8 +337,9 @@ function isQuestionAnswered(questionIndex) {
     
     // Check current session first - search by questionNumber, not array index
     if (window.statistics?.currentSession?.questions) {
-      const currentQuestionData = window.statistics.currentSession.questions.find(
-        q => q.questionNumber === targetQuestionNumber
+      const currentQuestionData = window.statistics.currentSession.questions.find(q => 
+        (q.qn && q.qn.toString() === targetQuestionNumber.toString()) ||
+        (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
       );
       console.log(`🔍 Current session question data for Q${targetQuestionNumber}:`, currentQuestionData);
       if (currentQuestionData && (currentQuestionData.userAnswers?.length > 0 || currentQuestionData.ua?.length > 0)) {
@@ -368,7 +369,10 @@ function isQuestionAnswered(questionIndex) {
       for (const session of examSessions) {
         if (session.questions) {
           // Search by questionNumber, not array index
-          const questionData = session.questions.find(q => q.questionNumber === targetQuestionNumber);
+          const questionData = session.questions.find(q => 
+            (q.qn && q.qn.toString() === targetQuestionNumber.toString()) ||
+            (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
+          );
           if (questionData) {
             console.log(`🔍 Found question data in previous session:`, questionData);
             if (questionData.userAnswers?.length > 0 || questionData.ua?.length > 0) {
@@ -398,13 +402,21 @@ function isQuestionAnswered(questionIndex) {
 function getMostRecentAnswer(questionIndex) {
   try {
     const questionNumber = questionIndex + 1; // Convert to 1-based
+    
+    // DEBUG: Check if we have the actual question data
+    const actualQuestion = window.currentQuestions?.[questionIndex];
+    const actualQuestionNumber = actualQuestion?.question_number;
+    
+    // Use actual question number if available
+    const targetQuestionNumber = actualQuestionNumber || questionNumber;
     let mostRecentAnswer = null;
     let mostRecentTime = 0;
 
     // Check current session first - search by questionNumber
     if (window.statistics?.currentSession?.questions) {
-      const questionData = window.statistics.currentSession.questions.find(
-        q => q.questionNumber === questionNumber
+      const questionData = window.statistics.currentSession.questions.find(q => 
+        (q.qn && q.qn.toString() === targetQuestionNumber.toString()) ||
+        (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
       );
       if (questionData) {
         const userAnswers = questionData.userAnswers || questionData.ua || [];
@@ -427,7 +439,10 @@ function getMostRecentAnswer(questionIndex) {
 
         for (const session of examSessions) {
           if (session.questions) {
-            const questionData = session.questions.find(q => q.questionNumber === questionNumber);
+            const questionData = session.questions.find(q => 
+              (q.qn && q.qn.toString() === targetQuestionNumber.toString()) ||
+              (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
+            );
             if (questionData) {
               const userAnswers = questionData.userAnswers || questionData.ua || [];
               const endTime = questionData.endTime || questionData.et || 0;

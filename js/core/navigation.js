@@ -874,6 +874,11 @@ function validateAnswers() {
     }
 
     try {
+      console.log(`📅 About to track question attempt:`);
+      console.log(`📅 question.question_number: ${question.question_number}`);
+      console.log(`📅 currentQuestionIndex: ${window.currentQuestionIndex}`);
+      console.log(`📅 isCorrect: ${isCorrect}`);
+      
       if (typeof window.trackQuestionAttempt === 'function') {
         window.trackQuestionAttempt(
           question.question_number,
@@ -887,6 +892,11 @@ function validateAnswers() {
         if (typeof window.devLog === 'function') {
           window.devLog("📊 Question attempt tracked successfully");
         }
+        
+        console.log(`✅ Successfully tracked Q${question.question_number} at index ${window.currentQuestionIndex}`);
+      } else {
+        console.log(`❌ trackQuestionAttempt function not available`);
+      }
       }
     } catch (error) {
       if (typeof window.devError === 'function') {
