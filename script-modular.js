@@ -852,15 +852,17 @@ function showStatsTab(tabName) {
 }
 
 /**
- * Update overview tab
+ * Update overview tab with CURRENT SESSION stats instead of global totals
  */
 function updateOverviewTab() {
-  if (typeof recalculateTotalStats === 'function') {
-    recalculateTotalStats();
+  // Use current session stats instead of global totals for better UX
+  const currentSessionStats = getCurrentSessionStats();
+  if (!currentSessionStats) {
+    console.log("❌ No current session stats available");
+    return;
   }
 
-  const totalStats = window.statistics?.totalStats;
-  if (!totalStats) return;
+  console.log("📊 Overview tab - Current session stats:", currentSessionStats);
 
   const elements = {
     totalQuestions: document.getElementById("totalQuestions"),
@@ -869,69 +871,353 @@ function updateOverviewTab() {
     totalPreview: document.getElementById("totalPreview")
   };
 
+  // Map current session stats to display elements
+  const statsMapping = {
+    totalQuestions: currentSessionStats.totalQuestions || 0,
+    totalCorrect: currentSessionStats.correctAnswers || 0,
+    totalIncorrect: currentSessionStats.incorrectAnswers || 0,
+    totalPreview: currentSessionStats.previewAnswers || 0
+  };
+
   Object.entries(elements).forEach(([key, element]) => {
-    if (element && totalStats[key] !== undefined) {
-      element.textContent = totalStats[key];
+    if (element && statsMapping[key] !== undefined) {
+      element.textContent = statsMapping[key];
+      console.log(`📊 Updated ${key}: ${statsMapping[key]}`);
     }
   });
 }
 
 /**
- * Update exams tab
+ * Update exams tab with current session focus
  */
 function updateExamsTab() {
   const examsList = document.getElementById("examStatsList");
-  if (!examsList || !window.statistics?.totalStats?.examStats) return;
+  if (!examsList) return;
 
   examsList.innerHTML = "";
-  Object.entries(window.statistics.totalStats.examStats).forEach(([exam, stats]) => {
-    const examDiv = document.createElement("div");
-    examDiv.className = "exam-stat-item";
-    examDiv.innerHTML = `
-      <strong>${exam}</strong><br>
-      Questions: ${stats.questions || 0} | Correct: ${stats.correct || 0} | Incorrect: ${stats.incorrect || 0}
-    `;
-    examsList.appendChild(examDiv);
-  });
+  
+  // Show current session exam first if available
+  const currentSessionStats = getCurrentSessionStats();
+  if (window.statistics?.currentSession && window.currentExam) {
+    const examCode = window.currentExam.exam_code || window.currentExam.code;
+    const examName = window.currentExam.title || window.currentExam.exam_name || examCode;
+    
+    if (examCode && currentSessionStats.totalQuestions > 0) {
+      const examDiv = document.createElement("div");
+      examDiv.className = "exam-stat-item current-session";
+      examDiv.innerHTML = `
+        <div class="exam-header">
+          <strong>${examName}</strong>
+          <span class="session-badge">Current Session</span>
+        </div>
+        <div class="exam-stats">
+          <div class="stat-group">
+            <span class="stat-label">Questions:</span>
+            <span class="stat-value">${currentSessionStats.totalAnswered}/${currentSessionStats.totalQuestions}</span>
+          </div>
+          <div class="stat-group">
+            <span class="stat-label">Correct:</span>
+            <span class="stat-value correct">${currentSessionStats.correctAnswers}</span>
+          </div>
+          <div class="stat-group">
+            <span class="stat-label">Incorrect:</span>
+            <span class="stat-value incorrect">${currentSessionStats.incorrectAnswers}</span>
+          </div>
+          <div class="stat-group">
+            <span class="stat-label">Accuracy:</span>
+            <span class="stat-value">${currentSessionStats.accuracy}%</span>
+          </div>
+        </div>
+      `;
+      examsList.appendChild(examDiv);
+    }
+  }
+  
+  // Show global exam stats if available
+  if (window.statistics?.totalStats?.examStats) {
+    const globalExamsTitle = document.createElement("div");
+    globalExamsTitle.className = "exams-section-title";
+    globalExamsTitle.innerHTML = "<h4>All Time Statistics</h4>";
+    examsList.appendChild(globalExamsTitle);
+    
+    Object.entries(window.statistics.totalStats.examStats).forEach(([examCode, stats]) => {
+      const examDiv = document.createElement("div");
+      examDiv.className = "exam-stat-item global-stats";
+      examDiv.innerHTML = `
+        <div class="exam-header">
+          <strong>${stats.examName || examCode}</strong>
+          <span class="sessions-count">${stats.sessionsCount || 0} sessions</span>
+        </div>
+        <div class="exam-stats">
+          <div class="stat-group">
+            <span class="stat-label">Total Questions:</span>
+            <span class="stat-value">${stats.totalQuestions || 0}</span>
+          </div>
+          <div class="stat-group">
+            <span class="stat-label">Correct:</span>
+            <span class="stat-value correct">${stats.totalCorrect || 0}</span>
+          </div>
+          <div class="stat-group">
+            <span class="stat-label">Incorrect:</span>
+            <span class="stat-value incorrect">${stats.totalIncorrect || 0}</span>
+          </div>
+          <div class="stat-group">
+            <span class="stat-label">Accuracy:</span>
+            <span class="stat-value">${stats.totalCorrect > 0 ? Math.round((stats.totalCorrect / (stats.totalCorrect + stats.totalIncorrect)) * 100) : 0}%</span>
+          </div>
+        </div>
+      `;
+      examsList.appendChild(examDiv);
+    });
+  }
+  
+  if (examsList.children.length === 0) {
+    examsList.innerHTML = '<div class="no-data">No exam statistics available yet.</div>';
+  }
 }
 
 /**
- * Update sessions tab
+ * Update sessions tab with enhanced display
  */
 function updateSessionsTab() {
   const sessionsList = document.getElementById("sessionsList");
-  if (!sessionsList || !window.statistics?.sessions) return;
+  if (!sessionsList) return;
 
   sessionsList.innerHTML = "";
-  const recentSessions = window.statistics.sessions.slice(-10).reverse();
   
-  recentSessions.forEach(session => {
+  // Show current session first
+  if (window.statistics?.currentSession) {
+    const currentSession = window.statistics.currentSession;
+    const currentSessionStats = getCurrentSessionStats();
+    
     const sessionDiv = document.createElement("div");
-    sessionDiv.className = "session-item";
-    const examName = session.en || session.examName || "Unknown Exam";
-    const date = new Date(session.st || session.startTime).toLocaleDateString();
+    sessionDiv.className = "session-item current-session";
+    const examName = currentSession.examName || currentSession.en || (window.currentExam?.title) || "Current Exam";
+    const startTime = currentSession.startTime || currentSession.st || Date.now();
+    const date = new Date(startTime).toLocaleString();
+    const duration = Math.round((Date.now() - startTime) / 1000 / 60); // minutes
+    
     sessionDiv.innerHTML = `
-      <strong>${examName}</strong> - ${date}<br>
-      Questions: ${(session.q || session.questions || []).length}
+      <div class="session-header">
+        <strong>${examName}</strong>
+        <span class="current-badge">Active Session</span>
+      </div>
+      <div class="session-details">
+        <div class="session-info">
+          <span class="session-date">${date}</span>
+          <span class="session-duration">${duration}min</span>
+        </div>
+        <div class="session-stats">
+          <span class="questions-stats">${currentSessionStats.totalAnswered}/${currentSessionStats.totalQuestions} questions</span>
+          <span class="accuracy-stats">${currentSessionStats.accuracy}% accuracy</span>
+          <span class="answers-breakdown">
+            <span class="correct">${currentSessionStats.correctAnswers} ✓</span>
+            <span class="incorrect">${currentSessionStats.incorrectAnswers} ✗</span>
+            <span class="preview">${currentSessionStats.previewAnswers} 👁</span>
+          </span>
+        </div>
+      </div>
     `;
     sessionsList.appendChild(sessionDiv);
-  });
+  }
+  
+  // Show historical sessions
+  if (window.statistics?.sessions?.length > 0) {
+    const pastSessionsTitle = document.createElement("div");
+    pastSessionsTitle.className = "sessions-section-title";
+    pastSessionsTitle.innerHTML = "<h4>Previous Sessions</h4>";
+    sessionsList.appendChild(pastSessionsTitle);
+    
+    const recentSessions = window.statistics.sessions.slice(-10).reverse();
+    
+    recentSessions.forEach((session, index) => {
+      const sessionDiv = document.createElement("div");
+      sessionDiv.className = "session-item past-session";
+      
+      const examName = session.examName || session.en || "Unknown Exam";
+      const startTime = session.startTime || session.st;
+      const endTime = session.endTime || session.et;
+      const date = startTime ? new Date(startTime).toLocaleDateString() : "Unknown Date";
+      const time = startTime ? new Date(startTime).toLocaleTimeString() : "";
+      
+      const totalQuestions = session.totalQuestions || session.tq || 0;
+      const correctAnswers = session.correctAnswers || session.ca || 0;
+      const incorrectAnswers = session.incorrectAnswers || session.ia || 0;
+      const previewAnswers = session.previewAnswers || session.pa || 0;
+      const totalTime = session.totalTime || session.tt || 0;
+      
+      const accuracy = (correctAnswers + incorrectAnswers) > 0 
+        ? Math.round((correctAnswers / (correctAnswers + incorrectAnswers)) * 100) 
+        : 0;
+      
+      const duration = totalTime > 0 
+        ? `${Math.round(totalTime / 60)}min` 
+        : (startTime && endTime ? `${Math.round((endTime - startTime) / 1000 / 60)}min` : "");
+      
+      sessionDiv.innerHTML = `
+        <div class="session-header">
+          <strong>${examName}</strong>
+          <span class="session-index">#${recentSessions.length - index}</span>
+        </div>
+        <div class="session-details">
+          <div class="session-info">
+            <span class="session-date">${date} ${time}</span>
+            ${duration ? `<span class="session-duration">${duration}</span>` : ''}
+          </div>
+          <div class="session-stats">
+            <span class="questions-stats">${correctAnswers + incorrectAnswers}/${totalQuestions} questions</span>
+            <span class="accuracy-stats">${accuracy}% accuracy</span>
+            <span class="answers-breakdown">
+              <span class="correct">${correctAnswers} ✓</span>
+              <span class="incorrect">${incorrectAnswers} ✗</span>
+              <span class="preview">${previewAnswers} 👁</span>
+            </span>
+          </div>
+        </div>
+      `;
+      sessionsList.appendChild(sessionDiv);
+    });
+  }
+  
+  if (sessionsList.children.length === 0) {
+    sessionsList.innerHTML = '<div class="no-data">No session data available yet.</div>';
+  }
 }
 
 /**
- * Update progress tab
+ * Update progress tab with comprehensive progress tracking
  */
 function updateProgressTab() {
-  // Simple implementation - can be enhanced
   const progressContent = document.getElementById("progressTab");
-  if (progressContent && window.statistics?.totalStats) {
-    const stats = window.statistics.totalStats;
-    const totalQuestions = stats.totalQuestions || 0;
-    const accuracy = totalQuestions > 0 ? ((stats.totalCorrect || 0) / totalQuestions * 100).toFixed(1) : 0;
+  if (!progressContent) return;
+
+  const currentSessionStats = getCurrentSessionStats();
+  const globalStats = getGlobalStats();
+  
+  let content = "";
+  
+  // Current Session Progress
+  if (window.statistics?.currentSession && currentSessionStats.totalQuestions > 0) {
+    const completionPercentage = (currentSessionStats.totalAnswered / currentSessionStats.totalQuestions * 100).toFixed(1);
     
-    let content = `<p>Overall Accuracy: ${accuracy}%</p>`;
-    progressContent.innerHTML = content;
+    content += `
+      <div class="progress-section current-session-progress">
+        <h4>Current Session Progress</h4>
+        <div class="progress-metrics">
+          <div class="progress-bar-container">
+            <div class="progress-bar" style="width: ${completionPercentage}%"></div>
+            <span class="progress-text">${completionPercentage}% Complete</span>
+          </div>
+          
+          <div class="progress-stats-grid">
+            <div class="progress-stat">
+              <div class="stat-value">${currentSessionStats.totalAnswered}</div>
+              <div class="stat-label">Answered</div>
+            </div>
+            <div class="progress-stat">
+              <div class="stat-value">${currentSessionStats.totalQuestions - currentSessionStats.totalAnswered}</div>
+              <div class="stat-label">Remaining</div>
+            </div>
+            <div class="progress-stat">
+              <div class="stat-value">${currentSessionStats.accuracy}%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="progress-stat">
+              <div class="stat-value">${Math.round(currentSessionStats.timeSpent / 60)}m</div>
+              <div class="stat-label">Time</div>
+            </div>
+          </div>
+          
+          <div class="answer-breakdown">
+            <div class="answer-type correct">
+              <span class="count">${currentSessionStats.correctAnswers}</span>
+              <span class="label">Correct</span>
+            </div>
+            <div class="answer-type incorrect">
+              <span class="count">${currentSessionStats.incorrectAnswers}</span>
+              <span class="label">Incorrect</span>
+            </div>
+            <div class="answer-type preview">
+              <span class="count">${currentSessionStats.previewAnswers}</span>
+              <span class="label">Preview</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
   }
+  
+  // Global Progress Overview
+  if (globalStats.totalQuestions > 0) {
+    content += `
+      <div class="progress-section global-progress">
+        <h4>All Time Progress</h4>
+        <div class="global-metrics">
+          <div class="metric-card">
+            <div class="metric-value">${globalStats.totalQuestions}</div>
+            <div class="metric-label">Total Questions</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">${globalStats.totalSessions}</div>
+            <div class="metric-label">Total Sessions</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">${globalStats.examsCount}</div>
+            <div class="metric-label">Exams Studied</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">${globalStats.overallAccuracy}%</div>
+            <div class="metric-label">Overall Accuracy</div>
+          </div>
+        </div>
+        
+        <div class="total-time-spent">
+          <strong>Total Study Time:</strong> 
+          ${Math.floor(globalStats.totalTime / 3600)}h ${Math.floor((globalStats.totalTime % 3600) / 60)}m
+        </div>
+      </div>
+    `;
+  }
+  
+  // Learning Analytics
+  if (window.statistics?.sessions?.length > 0) {
+    const recentSessions = window.statistics.sessions.slice(-5);
+    const accuracyTrend = recentSessions.map(session => {
+      const correct = session.correctAnswers || session.ca || 0;
+      const incorrect = session.incorrectAnswers || session.ia || 0;
+      const total = correct + incorrect;
+      return total > 0 ? Math.round((correct / total) * 100) : 0;
+    });
+    
+    const trendDirection = accuracyTrend.length >= 2 
+      ? accuracyTrend[accuracyTrend.length - 1] - accuracyTrend[0]
+      : 0;
+    
+    const trendIcon = trendDirection > 0 ? "📈" : trendDirection < 0 ? "📉" : "➡️";
+    const trendText = trendDirection > 0 ? "Improving" : trendDirection < 0 ? "Declining" : "Stable";
+    
+    content += `
+      <div class="progress-section learning-analytics">
+        <h4>Learning Analytics</h4>
+        <div class="trend-analysis">
+          <div class="trend-indicator">
+            <span class="trend-icon">${trendIcon}</span>
+            <span class="trend-text">${trendText}</span>
+            <span class="trend-value">${Math.abs(trendDirection)}% change</span>
+          </div>
+          <div class="recent-accuracy">
+            Recent accuracy: ${accuracyTrend.join('% → ')}%
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  if (content === "") {
+    content = '<div class="no-data">Start answering questions to see your progress!</div>';
+  }
+  
+  progressContent.innerHTML = content;
 }
 
 /**
