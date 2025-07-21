@@ -591,7 +591,6 @@ export {
   
   // Visibility controls
   updateMainProgressBarVisibility,
-  hideMainProgressBar,
   updateToolbarVisibility,
   updateTooltipVisibility,
   
