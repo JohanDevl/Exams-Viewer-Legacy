@@ -1078,63 +1078,70 @@ function updateExamsTab() {
 }
 
 /**
- * Update sessions tab with enhanced display
+ * Update sessions tab with modern visual cards design
  */
 function updateSessionsTab() {
   const sessionsList = document.getElementById("sessionsList");
   if (!sessionsList) return;
 
-  sessionsList.innerHTML = "";
+  let content = "";
   
   // Show current session first
   if (window.statistics?.currentSession) {
     const currentSession = window.statistics.currentSession;
     const currentSessionStats = getCurrentSessionStats();
     
-    const sessionDiv = document.createElement("div");
-    sessionDiv.className = "session-item current-session";
     const examName = currentSession.examName || currentSession.en || (window.currentExam?.title) || "Current Exam";
     const startTime = currentSession.startTime || currentSession.st || Date.now();
     const date = new Date(startTime).toLocaleString();
     const duration = Math.round((Date.now() - startTime) / 1000 / 60); // minutes
+    const accuracyColor = currentSessionStats.accuracy >= 80 ? '#4CAF50' : currentSessionStats.accuracy >= 60 ? '#FF9800' : '#f44336';
     
-    sessionDiv.innerHTML = `
-      <div class="session-header">
-        <strong>${examName}</strong>
-        <span class="current-badge">Active Session</span>
-      </div>
-      <div class="session-details">
-        <div class="session-info">
-          <span class="session-date">${date}</span>
-          <span class="session-duration">${duration}min</span>
+    content += `
+      <div style="background: #2a2a2a; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #444; border-left: 4px solid #4CAF50;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+          <div style="display: flex; align-items: center;">
+            <div style="width: 12px; height: 12px; background: #4CAF50; border-radius: 50%; margin-right: 10px; animation: pulse 2s infinite;"></div>
+            <h3 style="margin: 0; color: #fff; font-size: 18px;">${examName}</h3>
+          </div>
+          <span style="background: #4CAF50; color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold;">ACTIVE SESSION</span>
         </div>
-        <div class="session-stats">
-          <span class="questions-stats">${currentSessionStats.totalAnswered}/${currentSessionStats.totalQuestions} questions</span>
-          <span class="accuracy-stats">${currentSessionStats.accuracy}% accuracy</span>
-          <span class="answers-breakdown">
-            <span class="correct">${currentSessionStats.correctAnswers} ✓</span>
-            <span class="incorrect">${currentSessionStats.incorrectAnswers} ✗</span>
-            <span class="preview">${currentSessionStats.previewAnswers} 👁</span>
-          </span>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 13px; color: #bbb;">
+          <span>${date}</span>
+          <span>${duration}min</span>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+          <div style="text-align: center; background: #1a1a1a; padding: 12px; border-radius: 6px;">
+            <div style="font-size: 18px; color: #4CAF50; font-weight: bold;">${currentSessionStats.totalAnswered}/${currentSessionStats.totalQuestions}</div>
+            <div style="font-size: 11px; color: #bbb; text-transform: uppercase;">Questions</div>
+          </div>
+          <div style="text-align: center; background: #1a1a1a; padding: 12px; border-radius: 6px;">
+            <div style="font-size: 18px; color: ${accuracyColor}; font-weight: bold;">${currentSessionStats.accuracy}%</div>
+            <div style="font-size: 11px; color: #bbb; text-transform: uppercase;">Accuracy</div>
+          </div>
+          <div style="text-align: center; background: #1a1a1a; padding: 12px; border-radius: 6px; display: flex; justify-content: center; align-items: center; gap: 8px;">
+            <span style="color: #4CAF50; font-size: 14px;">${currentSessionStats.correctAnswers} ✓</span>
+            <span style="color: #f44336; font-size: 14px;">${currentSessionStats.incorrectAnswers} ✗</span>
+            <span style="color: #FF9800; font-size: 14px;">${currentSessionStats.previewAnswers} 👁</span>
+          </div>
         </div>
       </div>
     `;
-    sessionsList.appendChild(sessionDiv);
   }
   
   // Show historical sessions
   if (window.statistics?.sessions?.length > 0) {
-    const pastSessionsTitle = document.createElement("div");
-    pastSessionsTitle.className = "sessions-section-title";
-    pastSessionsTitle.innerHTML = "<h4>Previous Sessions</h4>";
-    sessionsList.appendChild(pastSessionsTitle);
+    content += `
+      <div style="margin-bottom: 15px;">
+        <h4 style="color: #fff; margin: 0 0 15px 0; font-size: 16px; font-weight: 600;">Previous Sessions</h4>
+      </div>
+    `;
     
     const recentSessions = window.statistics.sessions.slice(-10).reverse();
     
     recentSessions.forEach((session, index) => {
-      const sessionDiv = document.createElement("div");
-      sessionDiv.className = "session-item past-session";
-      
       const examName = session.examName || session.en || "Unknown Exam";
       const startTime = session.startTime || session.st;
       const endTime = session.endTime || session.et;
@@ -1150,39 +1157,66 @@ function updateSessionsTab() {
       const accuracy = (correctAnswers + incorrectAnswers) > 0 
         ? Math.round((correctAnswers / (correctAnswers + incorrectAnswers)) * 100) 
         : 0;
+      const accuracyColor = accuracy >= 80 ? '#4CAF50' : accuracy >= 60 ? '#FF9800' : '#f44336';
       
       const duration = totalTime > 0 
         ? `${Math.round(totalTime / 60)}min` 
-        : (startTime && endTime ? `${Math.round((endTime - startTime) / 1000 / 60)}min` : "");
+        : (startTime && endTime ? `${Math.round((endTime - startTime) / 1000 / 60)}min` : "0min");
       
-      sessionDiv.innerHTML = `
-        <div class="session-header">
-          <strong>${examName}</strong>
-          <span class="session-index">#${recentSessions.length - index}</span>
-        </div>
-        <div class="session-details">
-          <div class="session-info">
-            <span class="session-date">${date} ${time}</span>
-            ${duration ? `<span class="session-duration">${duration}</span>` : ''}
+      const sessionNumber = recentSessions.length - index;
+      
+      content += `
+        <div style="background: #2a2a2a; border-radius: 12px; padding: 18px; margin-bottom: 12px; border: 1px solid #444;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center;">
+              <div style="width: 32px; height: 32px; background: #444; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 12px; color: #bbb; font-weight: bold;">${examName.charAt(0)}</div>
+              <div>
+                <h4 style="margin: 0; color: #fff; font-size: 16px;">${examName}</h4>
+                <div style="font-size: 11px; color: #888;">${date} ${time}</div>
+              </div>
+            </div>
+            <span style="background: #444; color: #bbb; padding: 2px 8px; border-radius: 8px; font-size: 11px; font-weight: bold;">#${sessionNumber}</span>
           </div>
-          <div class="session-stats">
-            <span class="questions-stats">${correctAnswers + incorrectAnswers}/${totalQuestions} questions</span>
-            <span class="accuracy-stats">${accuracy}% accuracy</span>
-            <span class="answers-breakdown">
-              <span class="correct">${correctAnswers} ✓</span>
-              <span class="incorrect">${incorrectAnswers} ✗</span>
-              <span class="preview">${previewAnswers} 👁</span>
-            </span>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;">
+            <div style="text-align: center; background: #1a1a1a; padding: 10px 8px; border-radius: 4px;">
+              <div style="font-size: 16px; color: #4CAF50; font-weight: bold;">${correctAnswers + incorrectAnswers}/${totalQuestions}</div>
+              <div style="font-size: 9px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Questions</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 10px 8px; border-radius: 4px;">
+              <div style="font-size: 16px; color: ${accuracyColor}; font-weight: bold;">${accuracy}%</div>
+              <div style="font-size: 9px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Accuracy</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 10px 8px; border-radius: 4px;">
+              <div style="font-size: 16px; color: #FF9800; font-weight: bold;">${duration}</div>
+              <div style="font-size: 9px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Duration</div>
+            </div>
+            <div style="text-align: center; background: #1a1a1a; padding: 10px 8px; border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px;">
+              <div style="display: flex; gap: 6px; font-size: 12px;">
+                <span style="color: #4CAF50;">${correctAnswers} ✓</span>
+                <span style="color: #f44336;">${incorrectAnswers} ✗</span>
+                <span style="color: #FF9800;">${previewAnswers} 👁</span>
+              </div>
+              <div style="font-size: 9px; color: #bbb; text-transform: uppercase;">Answers</div>
+            </div>
           </div>
         </div>
       `;
-      sessionsList.appendChild(sessionDiv);
     });
   }
   
-  if (sessionsList.children.length === 0) {
-    sessionsList.innerHTML = '<div class="no-data">No session data available yet.</div>';
+  // Empty state
+  if (content === "") {
+    content = `
+      <div style="text-align: center; padding: 60px 20px; background: #2a2a2a; border-radius: 12px; border: 1px solid #444;">
+        <div style="font-size: 48px; margin-bottom: 20px;">📅</div>
+        <h3 style="color: #fff; margin-bottom: 15px;">No Session History</h3>
+        <p style="color: #bbb; font-size: 14px;">Start studying to see your session history and track your progress over time!</p>
+      </div>
+    `;
   }
+  
+  sessionsList.innerHTML = content;
 }
 
 /**
