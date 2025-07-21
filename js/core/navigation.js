@@ -945,6 +945,17 @@ function validateAnswers() {
       console.log("✅ Progress sidebar updated");
     }
 
+    // Update progress bars to reflect new answer count
+    if (typeof window.updateProgressBar === 'function') {
+      window.updateProgressBar();
+      console.log("📊 Progress bar updated");
+    }
+    
+    if (typeof window.updateMainProgressBar === 'function') {
+      window.updateMainProgressBar();
+      console.log("📊 Main progress bar updated");
+    }
+
     if (typeof window.devLog === 'function') {
       window.devLog("✅ validateAnswers() completed successfully");
     }

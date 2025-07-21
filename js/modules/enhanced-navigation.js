@@ -535,6 +535,45 @@ function updateMainProgressBar() {
 }
 
 /**
+ * Get count of answered questions in current session
+ */
+function getAnsweredQuestionsCount() {
+  try {
+    if (!window.currentQuestions?.length || !window.statistics?.currentSession) return 0;
+    
+    let count = 0;
+    
+    // Count questions that have answers in current session
+    window.currentQuestions.forEach((question, index) => {
+      const questionNumber = question.question_number;
+      
+      // Look for this question in current session
+      const questionAttempt = window.statistics.currentSession.questions?.find(q => 
+        (q.qn && q.qn.toString() === questionNumber.toString()) ||
+        (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+      );
+      
+      if (questionAttempt) {
+        // Check if has user answers
+        const hasAnswers = (questionAttempt.ua && questionAttempt.ua.length > 0) || 
+                          (questionAttempt.userAnswers && questionAttempt.userAnswers.length > 0);
+        if (hasAnswers) {
+          count++;
+        }
+      }
+    });
+    
+    console.log(`📊 getAnsweredQuestionsCount: ${count}/${window.currentQuestions.length} questions answered`);
+    return count;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error counting answered questions:", error);
+    }
+    return 0;
+  }
+}
+
+/**
  * Get count of favorite questions in current exam
  */
 function getFavoritesCount() {
@@ -921,6 +960,7 @@ export {
   updateProgressSidebar,
   updateProgressBar,
   updateMainProgressBar,
+  getAnsweredQuestionsCount,
   getFavoritesCount,
   
   // Keyboard shortcuts

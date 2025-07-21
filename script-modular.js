@@ -205,6 +205,7 @@ import {
   updateProgressSidebar,
   updateProgressBar,
   updateMainProgressBar,
+  getAnsweredQuestionsCount,
   getFavoritesCount,
   setupKeyboardShortcuts,
   handleKeyboardShortcuts,
@@ -418,6 +419,7 @@ function exposeGlobalFunctions() {
   window.updateProgressSidebar = updateProgressSidebar;
   window.updateProgressBar = updateProgressBar;
   window.updateMainProgressBar = updateMainProgressBar;
+  window.getAnsweredQuestionsCount = getAnsweredQuestionsCount;
   window.getFavoritesCount = getFavoritesCount;
   window.setupKeyboardShortcuts = setupKeyboardShortcuts;
   window.handleKeyboardShortcuts = handleKeyboardShortcuts;
