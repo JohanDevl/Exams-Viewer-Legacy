@@ -320,12 +320,18 @@ function updateGlobalStats() {
  */
 function isQuestionAnswered(questionIndex) {
   try {
+    console.log(`🔍 isQuestionAnswered(${questionIndex}) - checking...`);
+    
     // Check current session first
     if (window.statistics?.currentSession?.questions) {
       const currentQuestionData = window.statistics.currentSession.questions[questionIndex];
+      console.log(`🔍 Current session question data:`, currentQuestionData);
       if (currentQuestionData && (currentQuestionData.userAnswers?.length > 0 || currentQuestionData.ua?.length > 0)) {
+        console.log(`✅ Found answer in current session for question ${questionIndex}`);
         return true;
       }
+    } else {
+      console.log(`❌ No current session or questions data`);
     }
 
     // Check previous sessions for same exam
@@ -538,11 +544,45 @@ function getQuestionStatus(questionIndex) {
 
   const isAnswered = isQuestionAnswered(questionIndex);
   const mostRecentAnswer = isAnswered ? getMostRecentAnswer(questionIndex) : null;
+  
+  // Calculate primary status based on answer history
+  let primaryStatus = 'new';
+  if (isAnswered && mostRecentAnswer) {
+    if (mostRecentAnswer.isCorrect === true) {
+      primaryStatus = 'correct';
+    } else if (mostRecentAnswer.isCorrect === false) {
+      primaryStatus = 'incorrect';
+    } else if (mostRecentAnswer.isPreview) {
+      primaryStatus = 'preview';
+    } else {
+      primaryStatus = 'viewed';
+    }
+  }
+  
+  // Check favorites status
+  const isFavorite = typeof window.isQuestionFavorite === 'function' 
+    ? window.isQuestionFavorite(questionIndex - 1) // Convert to 0-based index
+    : false;
+  
+  // Check notes status  
+  const questionNote = typeof window.getQuestionNote === 'function'
+    ? window.getQuestionNote(questionIndex - 1) // Convert to 0-based index
+    : '';
+  const hasNotes = questionNote && questionNote.trim().length > 0;
+  
+  // For now, assume not categorized (can be enhanced later)
+  const isCategorized = false;
 
   questionStatusCache[questionIndex] = {
+    // Legacy format for backward compatibility
     isAnswered,
     mostRecentAnswer,
     lastUpdated: Date.now(),
+    // New format for enhanced navigation
+    primaryStatus,
+    isFavorite,
+    hasNotes,
+    isCategorized
   };
 
   return questionStatusCache[questionIndex];
