@@ -84,7 +84,6 @@ import {
   updateToolbarVisibility,
   updateTooltipVisibility,
   updateAdvancedSearchVisibility,
-  updateMainProgressBarVisibility,
   setupSettingsEventListeners,
   initializeSettings,
 } from './js/modules/settings.js';
@@ -102,6 +101,7 @@ import {
   hideExportModal,
   showKeyboardHelp,
   displayChangelog,
+  updateMainProgressBarVisibility,
 } from './js/modules/ui-effects.js';
 
 // Statistics system
