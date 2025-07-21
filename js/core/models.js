@@ -431,19 +431,29 @@ function decompressData(compressedData) {
  */
 function startExamSession(examCode, examName) {
   try {
+    console.log(`🚀 Starting exam session for: ${examName} (${examCode})`);
+    
     // End current session if exists
     if (window.statistics && window.statistics.currentSession) {
+      console.log(`🔄 Ending existing session before starting new one`);
       endCurrentSession();
     }
 
     // Create new session
     const session = new ExamSession(examCode, examName);
+    console.log(`🆕 Created new ExamSession:`, session);
+    
     if (window.currentQuestions) {
       session.totalQuestions = window.currentQuestions.length;
+      console.log(`📝 Set total questions: ${session.totalQuestions}`);
     }
     
     if (window.statistics) {
       window.statistics.currentSession = session;
+      console.log(`✅ Assigned session to window.statistics.currentSession`);
+      console.log(`📋 Full statistics object:`, window.statistics);
+    } else {
+      console.log(`❌ No window.statistics object found!`);
     }
     
     if (typeof window.saveStatistics === 'function') {
@@ -454,6 +464,7 @@ function startExamSession(examCode, examName) {
       window.devLog(`📝 Started new session for ${examName} (${examCode})`);
     }
     
+    console.log(`✅ Successfully started exam session for ${examName}`);
     return session;
   } catch (error) {
     if (typeof window.devError === 'function') {
@@ -517,7 +528,11 @@ function endCurrentSession() {
  */
 function trackQuestionAttempt(questionNumber, selectedAnswers, correctAnswers, isCorrect, timeSpent, wasHighlightEnabled = false) {
   try {
+    console.log(`📊 trackQuestionAttempt(Q${questionNumber}) called - isCorrect: ${isCorrect}`);
+    console.log(`📊 Current statistics object:`, window.statistics);
+    
     if (!window.statistics || !window.statistics.currentSession) {
+      console.log(`❌ NO CURRENT SESSION! Cannot track question attempt for Q${questionNumber}`);
       if (typeof window.devError === 'function') {
         window.devError("No current session to track question attempt");
       }
@@ -525,6 +540,7 @@ function trackQuestionAttempt(questionNumber, selectedAnswers, correctAnswers, i
     }
 
     const session = window.statistics.currentSession;
+    console.log(`📊 Using current session:`, session);
     
     // Find existing QuestionAttempt or create new one
     let questionAttempt = session.questions.find(q => 
