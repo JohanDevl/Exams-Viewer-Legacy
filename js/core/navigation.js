@@ -441,32 +441,16 @@ function displayCurrentQuestion(fromToggleAction = false) {
     // Track highlight view if highlight is already enabled when viewing this question
     if (window.isHighlightEnabled && window.statistics?.currentSession && !fromToggleAction) {
       const questionNumber = question.question_number;
-
-      // Find existing question attempt or create new one
-      let questionAttempt = window.statistics.currentSession.questions?.find(
-        (q) => q.questionNumber === questionNumber
-      );
-
-      if (!questionAttempt && typeof window.QuestionAttempt === 'function') {
-        const mostVoted = question.most_voted || "";
-        const correctAnswers = Array.from(new Set(mostVoted.split("")));
-        questionAttempt = new window.QuestionAttempt(questionNumber, correctAnswers);
-        window.statistics.currentSession.questions.push(questionAttempt);
+      
+      // Track highlight view using the new function
+      if (typeof window.trackQuestionHighlight === 'function') {
+        window.trackQuestionHighlight(questionNumber, 'view');
+        console.log(`🔦 Tracked highlight view for Q${questionNumber}`);
       }
-
-      // Increment highlight view count
-      if (questionAttempt?.addHighlightView) {
-        questionAttempt.addHighlightView();
-        if (typeof window.updateSessionStats === 'function') {
-          window.updateSessionStats();
-        }
-        if (typeof window.saveStatistics === 'function') {
-          window.saveStatistics();
-        }
-        
-        if (typeof window.devLog === 'function') {
-          window.devLog("Question viewed with highlight active:", questionNumber);
-        }
+      
+      // Clear cache to refresh sidebar with new preview status
+      if (typeof window.clearQuestionStatusCacheForQuestion === 'function') {
+        window.clearQuestionStatusCacheForQuestion(window.currentQuestionIndex);
       }
     }
 
@@ -707,7 +691,8 @@ function updateQuestionStatistics() {
     // Find the question attempt in statistics
     const questions = window.statistics.currentSession.q || window.statistics.currentSession.questions || [];
     const questionAttempt = questions.find(
-      (q) => (q.qn || q.questionNumber) === questionNumber
+      (q) => (q.qn && q.qn.toString() === questionNumber.toString()) ||
+             (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
     );
 
     if (!questionAttempt) {
@@ -990,8 +975,8 @@ function resetAnswers() {
         window.statistics.currentSession.questions.push(questionAttempt);
       }
 
-      if (questionAttempt?.incrementResetCount) {
-        questionAttempt.incrementResetCount();
+      if (questionAttempt?.addReset) {
+        questionAttempt.addReset();
         
         if (typeof window.updateSessionStats === 'function') {
           window.updateSessionStats();

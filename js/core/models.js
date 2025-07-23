@@ -630,6 +630,74 @@ function trackQuestionVisit(questionNumber) {
   }
 }
 
+/**
+ * Track highlight/preview actions on a question
+ */
+function trackQuestionHighlight(questionNumber, actionType = 'view') {
+  try {
+    console.log(`🔦 trackQuestionHighlight(Q${questionNumber}, ${actionType}) called`);
+    
+    if (!window.statistics || !window.statistics.currentSession) {
+      console.log(`❌ trackQuestionHighlight: No current session for Q${questionNumber}`);
+      return;
+    }
+
+    const session = window.statistics.currentSession;
+    const questionNum = parseInt(questionNumber);
+    
+    // Find or create QuestionAttempt
+    let questionAttempt = session.questions.find(q => 
+      (q.qn && q.qn.toString() === questionNum.toString()) ||
+      (q.questionNumber && q.questionNumber.toString() === questionNum.toString())
+    );
+    
+    if (!questionAttempt) {
+      // Create new QuestionAttempt for this question
+      questionAttempt = new QuestionAttempt(questionNum, []); 
+      session.questions.push(questionAttempt);
+      console.log(`🔦 Created new QuestionAttempt for Q${questionNum}`);
+    }
+    
+    // Track highlight action
+    if (actionType === 'button_click') {
+      questionAttempt.addHighlightButtonClick();
+      console.log(`🔦 Added highlight button click for Q${questionNum}. Total: ${questionAttempt.hbc}`);
+    } else if (actionType === 'view') {
+      questionAttempt.addHighlightView();
+      console.log(`🔦 Added highlight view for Q${questionNum}. Total: ${questionAttempt.hvc}`);
+    }
+    
+    // Set first action type as preview if not already set
+    if (!questionAttempt.far) {
+      questionAttempt.fat = 'p'; // preview
+      questionAttempt.far = true;
+      console.log(`🔦 Set first action type as preview for Q${questionNum}`);
+    }
+    
+    // Update session preview count
+    if (actionType === 'button_click') {
+      session.previewAnswers = (session.previewAnswers || session.pa || 0) + 1;
+      console.log(`🔦 Updated session preview count: ${session.previewAnswers}`);
+    }
+    
+    // Add to visitedQuestions if not already there
+    if (!session.visitedQuestions.includes(questionNum)) {
+      session.visitedQuestions.push(questionNum);
+    }
+    
+    if (typeof window.saveStatistics === 'function') {
+      window.saveStatistics();
+    }
+    
+    console.log(`✅ Successfully tracked highlight action for Q${questionNum}`);
+    return questionAttempt;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error tracking question highlight:", error);
+    }
+  }
+}
+
 // ===========================
 // MODULE EXPORTS
 // ===========================
@@ -649,4 +717,5 @@ export {
   endCurrentSession,
   trackQuestionAttempt,
   trackQuestionVisit,
+  trackQuestionHighlight,
 };

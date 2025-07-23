@@ -17,7 +17,7 @@
 /**
  * Toggle favorite status for a question
  */
-function toggleQuestionFavorite(questionIndex, category = 'Important') {
+function toggleQuestionFavorite(questionIndex, category = null) {
   try {
     if (!window.currentExam || !window.currentQuestions) {
       if (typeof window.devError === 'function') {
@@ -43,24 +43,37 @@ function toggleQuestionFavorite(questionIndex, category = 'Important') {
     const currentFavorite = window.favoritesData.favorites[examCode][questionNumber];
 
     if (currentFavorite && currentFavorite.isFavorite) {
-      // Remove from favorites
-      delete window.favoritesData.favorites[examCode][questionNumber];
+      // Remove from favorites but KEEP the entry with category/notes
+      currentFavorite.isFavorite = false;
+      currentFavorite.lastModified = Date.now();
       
       if (typeof window.devLog === 'function') {
-        window.devLog(`⭐ Removed question ${questionNumber} from favorites`);
+        window.devLog(`⭐ Removed question ${questionNumber} from favorites (keeping category/notes)`);
       }
     } else {
-      // Add to favorites
-      window.favoritesData.favorites[examCode][questionNumber] = {
-        isFavorite: true,
-        category: category,
-        note: currentFavorite?.note || '',
-        dateAdded: Date.now(),
-        lastModified: Date.now(),
-      };
+      // Add to favorites - preserve existing category and note if they exist
+      if (currentFavorite) {
+        // Update existing entry
+        currentFavorite.isFavorite = true;
+        currentFavorite.lastModified = Date.now();
+        if (!currentFavorite.dateAdded) {
+          currentFavorite.dateAdded = Date.now();
+        }
+        // Keep existing category and note
+      } else {
+        // Create new entry - only set category if provided
+        window.favoritesData.favorites[examCode][questionNumber] = {
+          isFavorite: true,
+          category: category, // Can be null
+          note: '',
+          dateAdded: Date.now(),
+          lastModified: Date.now(),
+        };
+      }
       
+      const currentCategory = currentFavorite?.category || category;
       if (typeof window.devLog === 'function') {
-        window.devLog(`⭐ Added question ${questionNumber} to favorites (${category})`);
+        window.devLog(`⭐ Added question ${questionNumber} to favorites (${currentCategory})`);
       }
     }
 
@@ -391,22 +404,39 @@ function updateQuestionCategory(questionIndex, newCategory) {
     if (!examCode) return false;
 
     const questionNumber = questionIndex + 1; // Convert to 1-based
-    const favorite = window.favoritesData.favorites[examCode]?.[questionNumber];
+    let favorite = window.favoritesData.favorites[examCode]?.[questionNumber];
 
+    // If question is not yet in favorites data, create entry WITHOUT making it favorite
     if (!favorite) {
-      if (typeof window.devError === 'function') {
-        window.devError("Cannot update category: question is not a favorite");
+      // Initialize favorites for this exam if needed
+      if (!window.favoritesData.favorites[examCode]) {
+        window.favoritesData.favorites[examCode] = {};
       }
-      return false;
+
+      // Create new entry but keep isFavorite as false
+      favorite = {
+        isFavorite: false,  // Don't automatically add to favorites
+        category: null,
+        note: "",
+        timestamp: Date.now(),
+        lastModified: Date.now()
+      };
+      window.favoritesData.favorites[examCode][questionNumber] = favorite;
+
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📁 Created question ${questionNumber} entry for categorization (not favorited)`);
+      }
     }
 
-    // Verify category exists
-    const allCategories = getAllCategories();
-    if (!allCategories.includes(newCategory)) {
-      if (typeof window.devError === 'function') {
-        window.devError(`Category "${newCategory}" does not exist`);
+    // Verify category exists (null is allowed to clear category)
+    if (newCategory !== null && newCategory !== "") {
+      const allCategories = getAllCategories();
+      if (!allCategories.includes(newCategory)) {
+        if (typeof window.devError === 'function') {
+          window.devError(`Category "${newCategory}" does not exist`);
+        }
+        return false;
       }
-      return false;
     }
 
     // Update category
@@ -419,7 +449,8 @@ function updateQuestionCategory(questionIndex, newCategory) {
     }
 
     if (typeof window.devLog === 'function') {
-      window.devLog(`📁 Updated question ${questionNumber} category to: ${newCategory}`);
+      const categoryText = newCategory || "none";
+      window.devLog(`📁 Updated question ${questionNumber} category to: ${categoryText}`);
     }
 
     return true;
@@ -591,6 +622,41 @@ function getFavoritesStats() {
       totalNotes: 0,
       recentlyAdded: [],
     };
+  }
+}
+
+/**
+ * Get the category of a specific question
+ * @param {number} questionIndex - The index of the question
+ * @returns {string|null} The category name or null if not found
+ */
+export function getQuestionCategory(questionIndex) {
+  try {
+    const examCode = window.currentExamCode;
+    if (!examCode) return null;
+
+    // Use window.favoritesData directly instead of getState()
+    if (!window.favoritesData || !window.favoritesData.favorites) {
+      return null;
+    }
+    
+    const favorites = window.favoritesData.favorites[examCode] || {};
+    
+    // Get question number (1-based)
+    const questionNumber = questionIndex + 1;
+    const favorite = favorites[questionNumber];
+    
+    // Return category if it exists, regardless of favorite status
+    if (favorite && favorite.category) {
+      return favorite.category;
+    }
+    
+    return null;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error getting question category:", error);
+    }
+    return null;
   }
 }
 

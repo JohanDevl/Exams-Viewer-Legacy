@@ -387,6 +387,9 @@ async function loadExam(examCode) {
         questions: [], // Will be assembled dynamically
         isChunked: true
       };
+      
+      // Set global exam code for favorites system
+      window.currentExamCode = examCode;
 
       // Preload nearby chunks
       await window.preloadChunks(examCode, 0);
@@ -414,6 +417,9 @@ async function loadExam(examCode) {
         questions: data.questions,
         isChunked: false
       };
+      
+      // Set global exam code for favorites system
+      window.currentExamCode = examCode;
 
       // Sort questions by question_number numerically with robust comparison
       window.allQuestions = data.questions.sort((a, b) => {
@@ -504,6 +510,14 @@ async function loadExam(examCode) {
     }
     if (typeof window.updateHistoryButtons === 'function') {
       window.updateHistoryButtons();
+    }
+    
+    // Initialize favorites UI and category dropdown
+    if (typeof window.updateFavoritesUI === 'function') {
+      window.updateFavoritesUI();
+    }
+    if (typeof window.updateCategoryDropdown === 'function') {
+      window.updateCategoryDropdown();
     }
 
     // Update question jump field max value immediately and with delay

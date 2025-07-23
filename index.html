@@ -379,21 +379,6 @@
                 <i class="far fa-sticky-note"></i>
               </button>
             </div>
-            <div id="questionNote" class="question-note" style="display: none">
-              <textarea
-                id="noteTextarea"
-                placeholder="Add your note here..."
-                rows="3"
-              ></textarea>
-              <div class="note-actions">
-                <button id="saveNoteBtn" class="save-note-btn">
-                  <i class="fas fa-save"></i> Save
-                </button>
-                <button id="cancelNoteBtn" class="cancel-note-btn">
-                  <i class="fas fa-times"></i> Cancel
-                </button>
-              </div>
-            </div>
           </div>
 
           <div class="question-content">
@@ -447,6 +432,45 @@
                 the scraped data. Please verify if something seems
                 incorrect.</span
               >
+            </div>
+          </div>
+
+          <!-- Notes Section -->
+          <div id="questionNote" class="question-note-full-width" style="display: none">
+            <!-- Read-only view -->
+            <div id="noteReadView" class="note-read-view">
+              <div class="note-header">
+                <h4><i class="fas fa-sticky-note"></i> Personal Note</h4>
+              </div>
+              <div id="noteDisplayText" class="note-display-text">No note added yet.</div>
+              <div class="note-read-actions">
+                <button id="editNoteBtn" class="edit-note-btn">
+                  <i class="fas fa-edit"></i> Edit Note
+                </button>
+                <button id="cancelNoteViewBtn" class="cancel-note-btn">
+                  <i class="fas fa-times"></i> Close
+                </button>
+              </div>
+            </div>
+            
+            <!-- Edit view -->
+            <div id="noteEditView" class="note-edit-view" style="display: none">
+              <div class="note-header">
+                <h4><i class="fas fa-edit"></i> Edit Note</h4>
+              </div>
+              <textarea
+                id="noteTextarea"
+                placeholder="Add your personal note here..."
+                rows="6"
+              ></textarea>
+              <div class="note-edit-actions">
+                <button id="saveNoteBtn" class="save-note-btn">
+                  <i class="fas fa-save"></i> Save Note
+                </button>
+                <button id="cancelNoteBtn" class="cancel-note-btn">
+                  <i class="fas fa-times"></i> Cancel
+                </button>
+              </div>
             </div>
           </div>
 

@@ -267,8 +267,13 @@ function updateTooltipVisibility() {
 function showExportModal() {
   const modal = document.getElementById("exportOptionsModal");
   if (modal) {
-    modal.style.display = "block";
+    modal.style.display = "flex"; // Use flex instead of block for proper centering
     modal.classList.add("fade-in");
+    
+    // Update export preview when modal opens
+    if (typeof window.updateExportPreview === 'function') {
+      window.updateExportPreview();
+    }
   }
 }
 
@@ -293,17 +298,62 @@ function showKeyboardHelp() {
     modal = document.createElement('div');
     modal.id = 'keyboardHelpModal';
     modal.className = 'modal keyboard-help-modal';
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      margin: 0;
+      padding: 0;
+    `;
     modal.innerHTML = `
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h2>
-          <button class="close-btn" onclick="closeKeyboardHelp()">
+      <div class="modal-content" style="
+        background: #2a2a2a;
+        border-radius: 12px;
+        padding: 0;
+        max-width: 800px;
+        max-height: 80vh;
+        overflow-y: auto;
+        margin: auto;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 1px solid #444;
+        position: relative;
+      ">
+        <div class="modal-header" style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px;
+          border-bottom: 1px solid #444;
+        ">
+          <h2 style="margin: 0; color: #fff;"><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h2>
+          <button class="close-btn" onclick="closeKeyboardHelp()" style="
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+          " onmouseover="this.style.backgroundColor='#444'" onmouseout="this.style.backgroundColor='transparent'">
             <i class="fas fa-times"></i>
           </button>
         </div>
-        <div class="modal-body">
-          <div class="shortcuts-grid">
-            <div class="shortcut-section">
+        <div class="modal-body" style="padding: 20px; color: #fff;">
+          <div class="shortcuts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div class="shortcut-section" style="padding: 15px; border-radius: 8px; border: 1px solid #444;">
               <h3>Navigation</h3>
               <div class="shortcut-item">
                 <kbd>←</kbd><kbd>→</kbd> <span>Previous/Next Question</span>
@@ -312,29 +362,32 @@ function showKeyboardHelp() {
                 <kbd>H</kbd><kbd>L</kbd> <span>Previous/Next (Vim style)</span>
               </div>
               <div class="shortcut-item">
-                <kbd>J</kbd><kbd>K</kbd> <span>Jump 5 Questions</span>
+                <kbd>J</kbd><kbd>K</kbd> <span>Jump 5 Questions Back/Forward</span>
               </div>
               <div class="shortcut-item">
-                <kbd>Ctrl</kbd>+<kbd>J</kbd><kbd>K</kbd> <span>Jump 10 Questions</span>
+                <kbd>Page↑</kbd><kbd>Page↓</kbd> <span>Jump 10 Questions</span>
               </div>
               <div class="shortcut-item">
                 <kbd>Home</kbd><kbd>End</kbd> <span>First/Last Question</span>
               </div>
               <div class="shortcut-item">
-                <kbd>1-9</kbd> <span>Jump to Question 1-9</span>
+                <kbd>Space</kbd> <span>Next Question</span>
+              </div>
+              <div class="shortcut-item">
+                <kbd>Enter</kbd> <span>Next Question</span>
               </div>
             </div>
             
-            <div class="shortcut-section">
+            <div class="shortcut-section" style="padding: 15px; border-radius: 8px; border: 1px solid #444;">
               <h3>Actions</h3>
               <div class="shortcut-item">
-                <kbd>Space</kbd> <span>Validate Answers</span>
-              </div>
-              <div class="shortcut-item">
-                <kbd>V</kbd> <span>Validate/Preview</span>
+                <kbd>V</kbd> <span>Validate Answers</span>
               </div>
               <div class="shortcut-item">
                 <kbd>R</kbd> <span>Random Question</span>
+              </div>
+              <div class="shortcut-item">
+                <kbd>Ctrl</kbd>+<kbd>R</kbd> <span>Reset Question</span>
               </div>
               <div class="shortcut-item">
                 <kbd>F</kbd> <span>Toggle Favorite</span>
@@ -343,23 +396,20 @@ function showKeyboardHelp() {
                 <kbd>N</kbd> <span>Add/Edit Note</span>
               </div>
               <div class="shortcut-item">
-                <kbd>H</kbd> <span>Toggle Highlight</span>
+                <kbd>T</kbd> <span>Toggle Highlight</span>
               </div>
             </div>
             
-            <div class="shortcut-section">
+            <div class="shortcut-section" style="padding: 15px; border-radius: 8px; border: 1px solid #444;">
               <h3>Interface</h3>
               <div class="shortcut-item">
-                <kbd>S</kbd> <span>Toggle Sidebar</span>
+                <kbd>Ctrl</kbd>+<kbd>S</kbd> <span>Toggle Sidebar</span>
               </div>
               <div class="shortcut-item">
-                <kbd>D</kbd> <span>Toggle Discussion</span>
+                <kbd>S</kbd> <span>Focus Search</span>
               </div>
               <div class="shortcut-item">
-                <kbd>Ctrl</kbd>+<kbd>B</kbd> <span>Back in History</span>
-              </div>
-              <div class="shortcut-item">
-                <kbd>Ctrl</kbd>+<kbd>F</kbd> <span>Forward in History</span>
+                <kbd>Escape</kbd> <span>Close Modal/Sidebar</span>
               </div>
               <div class="shortcut-item">
                 <kbd>?</kbd> <span>Show This Help</span>

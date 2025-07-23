@@ -554,11 +554,20 @@ function getAnsweredQuestionsCount() {
       );
       
       if (questionAttempt) {
-        // Check if has user answers
+        // Check if has user answers (actual validation)
         const hasAnswers = (questionAttempt.ua && questionAttempt.ua.length > 0) || 
                           (questionAttempt.userAnswers && questionAttempt.userAnswers.length > 0);
-        if (hasAnswers) {
+        
+        // Check if preview was the first action (should count as "answered" for progress)
+        const hasPreviewAsFirstAction = questionAttempt.fat === 'p' && questionAttempt.far;
+        
+        // Check if has any highlight interactions
+        const hasHighlightInteractions = (questionAttempt.hbc && questionAttempt.hbc > 0) || 
+                                        (questionAttempt.hvc && questionAttempt.hvc > 0);
+        
+        if (hasAnswers || (hasPreviewAsFirstAction && hasHighlightInteractions)) {
           count++;
+          console.log(`📊 Q${questionNumber}: counted as answered (hasAnswers: ${hasAnswers}, preview first: ${hasPreviewAsFirstAction}, highlights: ${hasHighlightInteractions})`);
         }
       }
     });
@@ -827,15 +836,6 @@ async function handleKeyboardShortcuts(e) {
         break;
     }
 
-    // Number keys for quick navigation
-    if (e.key >= "1" && e.key <= "9" && !e.ctrlKey && !e.metaKey && !e.altKey) {
-      e.preventDefault();
-      const questionNumber = parseInt(e.key);
-      if (questionNumber <= window.currentQuestions.length && 
-          typeof window.navigateToQuestionIndex === 'function') {
-        window.navigateToQuestionIndex(questionNumber - 1);
-      }
-    }
   } catch (error) {
     if (typeof window.devError === 'function') {
       window.devError("Error handling keyboard shortcuts:", error);
