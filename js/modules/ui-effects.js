@@ -439,44 +439,48 @@ function closeKeyboardHelp() {
  * Display changelog modal with loading and error handling
  */
 function displayChangelog() {
-  let modal = document.getElementById('changelogModal');
+  const modal = document.getElementById('changelogModal');
+  const content = document.getElementById('changelogContent');
   
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'changelogModal';
-    modal.className = 'modal changelog-modal';
-    modal.innerHTML = `
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2><i class="fas fa-list-alt"></i> Changelog</h2>
-          <button class="close-btn" onclick="this.closest('.modal').style.display='none'">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id="changelogContent">Loading changelog...</div>
-        </div>
-      </div>
-      <div class="modal-overlay" onclick="this.closest('.modal').style.display='none'"></div>
-    `;
-    document.body.appendChild(modal);
+  if (!modal || !content) {
+    console.error('Changelog modal or content element not found');
+    return;
   }
   
-  modal.style.display = 'block';
+  // Show modal
+  modal.style.display = 'flex';
+  
+  // Show loading state
+  content.innerHTML = `
+    <div class="loading-spinner">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>Loading changelog...</p>
+    </div>
+  `;
   
   // Load changelog content
   fetch('CHANGELOG.md')
-    .then(response => response.text())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Failed to load changelog: ${response.status}`);
+      }
+      return response.text();
+    })
     .then(text => {
-      const content = document.getElementById('changelogContent');
       if (content) {
         content.innerHTML = renderMarkdown(text);
       }
     })
     .catch(error => {
-      const content = document.getElementById('changelogContent');
+      console.error('Failed to load changelog:', error);
       if (content) {
-        content.innerHTML = '<p class="error">Failed to load changelog. Please check the repository for updates.</p>';
+        content.innerHTML = `
+          <div class="error-message">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Failed to load changelog. Please check the repository for updates.</p>
+            <p class="error-details">${error.message}</p>
+          </div>
+        `;
       }
     });
 }

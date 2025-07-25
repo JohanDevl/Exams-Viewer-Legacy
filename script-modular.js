@@ -962,6 +962,25 @@ function setupMainEventListeners() {
     });
   }
 
+  // Changelog button
+  const changelogBtn = document.getElementById("changelogBtn");
+  if (changelogBtn) {
+    changelogBtn.addEventListener("click", () => {
+      if (typeof window.displayChangelog === 'function') {
+        window.displayChangelog();
+      }
+    });
+  }
+
+  // Close changelog modal
+  const closeChangelogModal = document.getElementById("closeChangelogModal");
+  if (closeChangelogModal) {
+    closeChangelogModal.addEventListener("click", () => {
+      const modal = document.getElementById("changelogModal");
+      if (modal) modal.style.display = "none";
+    });
+  }
+
   // Close settings modal
   const closeModal = document.getElementById("closeModal");
   if (closeModal) {
