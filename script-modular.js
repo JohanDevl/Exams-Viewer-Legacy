@@ -145,6 +145,7 @@ import {
 // Search and filter system
 import {
   initializeSearchInterface,
+  resetSearchInterface,
   resetSearchUI,
   clearSearchCache,
   searchQuestions,
@@ -155,6 +156,9 @@ import {
   getQuestionNumberSuggestions,
   showAutocompleteSuggestions,
   updateFilterCounts,
+  updateCategoryFilters,
+  updateSearchResultsDisplay,
+  updateResetFiltersButtonVisibility,
   handleSearchInput,
   handleFilterChange,
   setupSearchEventListeners,
@@ -224,6 +228,7 @@ import {
 import {
   discoverAvailableExams,
   displayAvailableExams,
+  populateExamSelect,
   getResumeIndicatorText,
   getTimeAgo,
   loadExam,
@@ -373,6 +378,7 @@ function exposeGlobalFunctions() {
 
   // Search and filter
   window.initializeSearchInterface = initializeSearchInterface;
+  window.resetSearchInterface = resetSearchInterface;
   window.resetSearchUI = resetSearchUI;
   window.clearSearchCache = clearSearchCache;
   window.searchQuestions = searchQuestions;
@@ -383,6 +389,9 @@ function exposeGlobalFunctions() {
   window.getQuestionNumberSuggestions = getQuestionNumberSuggestions;
   window.showAutocompleteSuggestions = showAutocompleteSuggestions;
   window.updateFilterCounts = updateFilterCounts;
+  window.updateCategoryFilters = updateCategoryFilters;
+  window.updateSearchResultsDisplay = updateSearchResultsDisplay;
+  window.updateResetFiltersButtonVisibility = updateResetFiltersButtonVisibility;
   window.handleSearchInput = handleSearchInput;
   window.handleFilterChange = handleFilterChange;
   window.setupSearchEventListeners = setupSearchEventListeners;
@@ -441,6 +450,7 @@ function exposeGlobalFunctions() {
   // Exam loading
   window.discoverAvailableExams = discoverAvailableExams;
   window.displayAvailableExams = displayAvailableExams;
+  window.populateExamSelect = populateExamSelect;
   window.getResumeIndicatorText = getResumeIndicatorText;
   window.getTimeAgo = getTimeAgo;
   window.loadExam = loadExam;
@@ -518,6 +528,7 @@ async function initializeApplication() {
 
     // 8. Discover and display available exams
     await discoverAvailableExams();
+    await populateExamSelect(); // Populate select with question counts
     await displayAvailableExams();
     devLog("✅ Exams discovered and displayed");
 
@@ -584,12 +595,20 @@ function setupMainEventListeners() {
     });
   }
 
-  // Load exam on Enter key
-  const examCodeInput = document.getElementById("examCode");
-  if (examCodeInput) {
-    examCodeInput.addEventListener("keypress", async (e) => {
+  // Load exam on selection change
+  const examCodeSelect = document.getElementById("examCode");
+  if (examCodeSelect) {
+    examCodeSelect.addEventListener("change", async (e) => {
+      const examCode = e.target.value.trim();
+      if (examCode) {
+        await loadExam(examCode.toUpperCase());
+      }
+    });
+    
+    // Also handle Enter key for manual typing
+    examCodeSelect.addEventListener("keypress", async (e) => {
       if (e.key === "Enter") {
-        const examCode = examCodeInput.value.trim();
+        const examCode = e.target.value.trim();
         if (examCode) {
           await loadExam(examCode.toUpperCase());
         }
@@ -660,17 +679,29 @@ function setupMainEventListeners() {
     randomBtn.addEventListener("click", navigateToRandomQuestion);
   }
 
-  // Question jump input
+  // Question jump input and button
   const questionJumpInput = document.getElementById("questionJump");
+  const jumpBtn = document.getElementById("jumpBtn");
+  
+  const handleJumpToQuestion = () => {
+    if (questionJumpInput) {
+      const questionNum = parseInt(questionJumpInput.value, 10);
+      if (!isNaN(questionNum) && questionNum > 0) {
+        jumpToQuestionNumber(questionNum);
+      }
+    }
+  };
+  
   if (questionJumpInput) {
     questionJumpInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
-        const questionNum = parseInt(questionJumpInput.value, 10);
-        if (!isNaN(questionNum) && questionNum > 0) {
-          jumpToQuestionNumber(questionNum);
-        }
+        handleJumpToQuestion();
       }
     });
+  }
+  
+  if (jumpBtn) {
+    jumpBtn.addEventListener("click", handleJumpToQuestion);
   }
 
   // Validate answers button

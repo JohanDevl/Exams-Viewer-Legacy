@@ -356,18 +356,16 @@ function isQuestionAnswered(questionIndex) {
   try {
     const questionNumber = questionIndex + 1; // Convert to 1-based
     
-    // DEBUG: Check if we have the actual question data
+    // Get the actual question data
     const actualQuestion = window.currentQuestions?.[questionIndex];
     const actualQuestionNumber = actualQuestion?.question_number;
     
-    console.log(`🔍 isQuestionAnswered(index ${questionIndex})`);
-    console.log(`🔍 Calculated questionNumber: ${questionNumber}`);
-    console.log(`🔍 Actual question data:`, actualQuestion);
-    console.log(`🔍 Actual question_number: ${actualQuestionNumber}`);
-    
-    // Use actual question number if available
+    // Use actual question number if available, fallback to calculated
     const targetQuestionNumber = actualQuestionNumber || questionNumber;
-    console.log(`🔍 Using target question number: ${targetQuestionNumber}`);
+    
+    console.log(`🔍 isQuestionAnswered(${questionIndex}) - Q${targetQuestionNumber}`);
+    console.log(`🔍 Current exam:`, window.currentExam?.exam_code);
+    console.log(`🔍 Current session:`, window.statistics?.currentSession);
     
     // Check current session first - search by questionNumber, not array index
     if (window.statistics?.currentSession?.questions) {
@@ -375,30 +373,41 @@ function isQuestionAnswered(questionIndex) {
         (q.qn && q.qn.toString() === targetQuestionNumber.toString()) ||
         (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
       );
-      console.log(`🔍 Current session question data for Q${targetQuestionNumber}:`, currentQuestionData);
-      if (currentQuestionData && (currentQuestionData.userAnswers?.length > 0 || currentQuestionData.ua?.length > 0)) {
-        console.log(`✅ Found answer in current session for question ${targetQuestionNumber}`);
-        return true;
+      
+      console.log(`🔍 Q${targetQuestionNumber} - Found session data:`, currentQuestionData);
+      
+      if (currentQuestionData) {
+        const hasUserAnswers = (currentQuestionData.userAnswers && currentQuestionData.userAnswers.length > 0) || 
+                              (currentQuestionData.ua && currentQuestionData.ua.length > 0);
+        
+        console.log(`🔍 Q${targetQuestionNumber} - hasUserAnswers: ${hasUserAnswers}`);
+        console.log(`🔍 Q${targetQuestionNumber} - userAnswers:`, currentQuestionData.userAnswers);
+        console.log(`🔍 Q${targetQuestionNumber} - ua:`, currentQuestionData.ua);
+        console.log(`🔍 Q${targetQuestionNumber} - fat (first action):`, currentQuestionData.fat);
+        console.log(`🔍 Q${targetQuestionNumber} - hvc (highlight views):`, currentQuestionData.hvc);
+        
+        if (hasUserAnswers) {
+          console.log(`✅ Q${targetQuestionNumber} IS answered (has real user answers)`);
+          return true;
+        } else {
+          console.log(`❌ Q${targetQuestionNumber} is NOT answered (no real user answers)`);
+        }
       }
-    } else {
-      console.log(`❌ No current session or questions data`);
     }
 
     // Check previous sessions for same exam
     if (window.currentExam && window.statistics?.sessions) {
-      console.log(`📄 Current exam object:`, window.currentExam);
       const examCode = window.currentExam.exam_code || window.currentExam.code;
-      console.log(`📋 Checking previous sessions for exam: ${examCode}`);
       if (!examCode) {
-        console.log(`❌ No exam code found in currentExam:`, window.currentExam);
-        console.log(`❌ Available properties:`, Object.keys(window.currentExam || {}));
+        console.log(`❌ Q${targetQuestionNumber} - No exam code found`);
         return false;
       }
 
       const examSessions = window.statistics.sessions.filter(session => 
         (session.examCode || session.ec) === examCode
       );
-      console.log(`📁 Found ${examSessions.length} previous sessions for this exam`);
+      
+      console.log(`🔍 Q${targetQuestionNumber} - Checking ${examSessions.length} previous sessions for exam ${examCode}`);
 
       for (const session of examSessions) {
         if (session.questions) {
@@ -407,20 +416,27 @@ function isQuestionAnswered(questionIndex) {
             (q.qn && q.qn.toString() === targetQuestionNumber.toString()) ||
             (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
           );
+          
           if (questionData) {
-            console.log(`🔍 Found question data in previous session:`, questionData);
-            if (questionData.userAnswers?.length > 0 || questionData.ua?.length > 0) {
-              console.log(`✅ Found answer in previous session for question ${targetQuestionNumber}`);
+            console.log(`🔍 Q${targetQuestionNumber} - Found in previous session:`, questionData);
+            
+            // Only return true if there are actual user answers (not just previews)
+            const hasRealAnswers = (questionData.userAnswers && questionData.userAnswers.length > 0) || 
+                                   (questionData.ua && questionData.ua.length > 0);
+            
+            if (hasRealAnswers) {
+              console.log(`✅ Q${targetQuestionNumber} - Found real answers in previous session!`);
               return true;
+            } else {
+              console.log(`❌ Q${targetQuestionNumber} - Found in previous session but no real answers`);
             }
           }
         }
       }
-    } else {
-      console.log(`❌ No current exam or statistics sessions`);
+      
+      console.log(`❌ Q${targetQuestionNumber} - Not found in any previous sessions`);
     }
 
-    console.log(`❌ Question ${targetQuestionNumber} (index ${questionIndex}) is NOT answered`);
     return false;
   } catch (error) {
     if (typeof window.devError === 'function') {

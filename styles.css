@@ -2266,6 +2266,59 @@ body {
 @media (max-width: 480px) {
   .favorites-section {
     padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .favorites-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+
+  .favorite-btn {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 0.75rem;
+    justify-content: center;
+    min-touch-target: 44px;
+    font-size: 1.1rem;
+  }
+
+  .note-btn {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0.75rem;
+    justify-content: center;
+    min-touch-target: 44px;
+    font-size: 1.1rem;
+  }
+
+  .category-select {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: unset;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    text-align: center;
+    min-touch-target: 44px;
+  }
+
+  .add-category-btn {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 0.75rem;
+    justify-content: center;
+    min-touch-target: 44px;
+    font-size: 1.1rem;
+  }
+
+  /* Ensure all buttons have proper touch targets */
+  .favorite-btn i,
+  .note-btn i,
+  .add-category-btn i {
+    font-size: 1.2rem;
   }
 
   .question-note {
@@ -3224,28 +3277,64 @@ body {
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  display: block;
 }
 
 .filter-options {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.filter-group {
+  margin-bottom: 1.5rem;
+}
+
+.search-filters {
+  background: var(--bg-primary);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
 }
 
 .filter-checkbox {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   cursor: pointer;
   user-select: none;
   color: var(--text-primary);
   font-size: 0.9rem;
-  transition: color 0.2s ease;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .filter-checkbox:hover {
   color: var(--accent-color);
+  border-color: var(--accent-color);
+  background: var(--bg-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.filter-checkbox:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  opacity: 0.05;
+  z-index: 0;
 }
 
 .filter-checkbox input[type="checkbox"] {
@@ -3253,30 +3342,104 @@ body {
 }
 
 .checkmark {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border: 2px solid var(--border-color);
-  border-radius: 3px;
+  border-radius: 6px;
   position: relative;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   background-color: var(--bg-primary);
+  flex-shrink: 0;
+  z-index: 1;
 }
 
 .filter-checkbox input[type="checkbox"]:checked + .checkmark {
-  background-color: var(--accent-color);
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
   border-color: var(--accent-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.2);
 }
 
 .filter-checkbox input[type="checkbox"]:checked + .checkmark::after {
   content: "";
   position: absolute;
-  left: 5px;
-  top: 1px;
-  width: 4px;
-  height: 8px;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+/* Style spécial pour les filtres cochés - utilisation d'une classe JavaScript */
+.filter-checkbox.checked {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+  border-color: var(--accent-color);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.filter-checkbox.checked:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+/* Style des badges de compteur */
+.filter-checkbox .filter-count {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: auto;
+  min-width: 2rem;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.filter-checkbox.checked .filter-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.filter-checkbox:hover .filter-count {
+  background: var(--accent-color);
+  color: white;
+  transform: scale(1.05);
+}
+
+.filter-checkbox.checked:hover .filter-count {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Style du texte des filtres */
+.filter-checkbox .filter-text {
+  flex: 1;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.filter-checkbox.checked .filter-text {
+  color: white;
+}
+
+/* Animation de transition lors du changement d'état */
+.filter-checkbox {
+  animation: filterSlideIn 0.3s ease-out;
+}
+
+@keyframes filterSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .search-results-info {

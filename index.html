@@ -295,7 +295,7 @@
               <div class="search-input-group">
                 <input
                   type="text"
-                  id="searchInput"
+                  id="questionSearch"
                   placeholder="Search in questions and answers..."
                   class="search-input"
                 />
@@ -313,18 +313,29 @@
                     <label class="filter-checkbox">
                       <input type="checkbox" id="filterAnswered" />
                       <span class="checkmark"></span>
-                      Answered (<span id="answeredCount">0</span>)
+                      <span class="filter-text">Answered</span>
+                      <span class="filter-count" id="answeredCount">0</span>
                     </label>
                     <label class="filter-checkbox">
                       <input type="checkbox" id="filterUnanswered" />
                       <span class="checkmark"></span>
-                      Unanswered (<span id="unansweredCount">0</span>)
+                      <span class="filter-text">Unanswered</span>
+                      <span class="filter-count" id="unansweredCount">0</span>
                     </label>
                     <label class="filter-checkbox">
                       <input type="checkbox" id="filterFavorites" />
                       <span class="checkmark"></span>
-                      Favorites (<span id="favoritesCount">0</span>)
+                      <span class="filter-text">Favorites</span>
+                      <span class="filter-count" id="favoritesCount">0</span>
                     </label>
+                  </div>
+                </div>
+                
+                <!-- Category Filters -->
+                <div class="filter-group" id="categoryFilterGroup" style="display: none;">
+                  <label class="filter-label">Category Filters:</label>
+                  <div class="filter-options" id="categoryFilterOptions">
+                    <!-- Categories will be dynamically added here -->
                   </div>
                 </div>
               </div>

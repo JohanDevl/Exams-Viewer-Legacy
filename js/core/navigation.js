@@ -322,7 +322,8 @@ function goToHome() {
       { id: "navigationSection", display: "none" },
       { id: "questionSection", display: "none" },
       { id: "exportBtn", display: "none" },
-      { id: "homeBtn", display: "none" }
+      { id: "homeBtn", display: "none" },
+      { id: "searchSection", display: "none" }
     ];
     
     uiElements.forEach(({ id, display }) => {

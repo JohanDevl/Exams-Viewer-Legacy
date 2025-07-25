@@ -224,6 +224,51 @@ async function discoverAvailableExams() {
 // ===========================
 
 /**
+ * Populate exam select dropdown with question counts
+ */
+async function populateExamSelect() {
+  const examSelect = document.getElementById("examCode");
+  if (!examSelect) return;
+  
+  // Clear existing options except the first one
+  while (examSelect.children.length > 1) {
+    examSelect.removeChild(examSelect.lastChild);
+  }
+  
+  if (!window.availableExams || Object.keys(window.availableExams).length === 0) {
+    return;
+  }
+  
+  // Add options for each available exam (sorted alphabetically)
+  const sortedExamCodes = Object.keys(window.availableExams).sort();
+  
+  for (const examCode of sortedExamCodes) {
+    // Try to get question count
+    let questionCount = "";
+    try {
+      const response = await fetch(`data/${examCode}/exam.json`);
+      if (response.ok) {
+        const data = await response.json();
+        const count = data.questions?.length || 0;
+        questionCount = ` (${count} questions)`;
+      }
+    } catch (error) {
+      // If we can't get the count, just show the exam code
+      questionCount = "";
+    }
+    
+    const option = document.createElement("option");
+    option.value = examCode;
+    option.textContent = `${examCode}${questionCount}`;
+    examSelect.appendChild(option);
+  }
+  
+  if (typeof window.devLog === 'function') {
+    window.devLog(`📝 Populated exam select with ${sortedExamCodes.length} exams`);
+  }
+}
+
+/**
  * Display available exams
  */
 async function displayAvailableExams() {
@@ -236,7 +281,7 @@ async function displayAvailableExams() {
     examsList.innerHTML = "<p>No exams found in data folder</p>";
     return;
   }
-
+  
   // Create cards for each available exam (sorted alphabetically)
   const sortedExamCodes = Object.keys(window.availableExams).sort();
   for (const code of sortedExamCodes) {
@@ -486,9 +531,13 @@ async function loadExam(examCode) {
       window.updateAdvancedSearchVisibility();
     }
     
-    // Initialize search UI if enabled
-    if (window.settings?.showAdvancedSearch && typeof window.initializeSearchInterface === 'function') {
-      window.initializeSearchInterface();
+    // Reset and initialize search UI if enabled
+    if (window.settings?.showAdvancedSearch) {
+      if (typeof window.resetSearchInterface === 'function') {
+        window.resetSearchInterface();
+      } else if (typeof window.initializeSearchInterface === 'function') {
+        window.initializeSearchInterface();
+      }
     }
     
     // Check for resume position after questions are loaded
@@ -530,6 +579,15 @@ async function loadExam(examCode) {
       if (typeof window.updateQuestionJumpMaxValue === 'function') {
         window.updateQuestionJumpMaxValue();
       }
+      
+      // Update filter counts after everything is loaded
+      if (typeof window.updateFilterCounts === 'function') {
+        window.updateFilterCounts();
+        if (typeof window.devLog === 'function') {
+          window.devLog("🔄 Filter counts updated for new exam");
+        }
+      }
+      
       // Also make the test function available in console
       if (typeof window.isDevelopmentMode === 'function' && window.isDevelopmentMode()) {
         window.testQuestionJumpField = window.testQuestionJumpField;
@@ -554,6 +612,15 @@ async function loadExam(examCode) {
       if (typeof window.updateQuestionJumpMaxValue === 'function') {
         window.updateQuestionJumpMaxValue();
       }
+      
+      // Final update of filter counts to ensure they're correct
+      if (typeof window.updateFilterCounts === 'function') {
+        window.updateFilterCounts();
+        if (typeof window.devLog === 'function') {
+          window.devLog("🔄 Final filter counts update for new exam");
+        }
+      }
+      
       if (typeof window.devLog === 'function') {
         window.devLog("🔄 Final attempt to update max value");
       }
@@ -650,6 +717,7 @@ export {
   
   // Exam display
   displayAvailableExams,
+  populateExamSelect,
   getResumeIndicatorText,
   getTimeAgo,
   

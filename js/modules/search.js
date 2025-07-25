@@ -21,6 +21,66 @@ let allQuestions = [];
 let filteredQuestions = [];
 
 /**
+ * Reset search interface for new exam
+ */
+function resetSearchInterface() {
+  try {
+    // Force sync with global questions data for new exam
+    allQuestions = [...(window.currentQuestions || [])];
+    
+    // Reset search state completely
+    isSearchActive = false;
+    filteredQuestions = [];
+    searchCache = {};
+    
+    // Clear search input
+    const searchInput = document.getElementById("questionSearch");
+    if (searchInput) {
+      searchInput.value = '';
+    }
+    
+    // Reset all filter checkboxes
+    const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites'];
+    filterCheckboxes.forEach(id => {
+      const checkbox = document.getElementById(id);
+      if (checkbox) {
+        checkbox.checked = false;
+        const label = checkbox.closest('.filter-checkbox');
+        if (label) {
+          label.classList.remove('checked');
+        }
+      }
+    });
+    
+    // Clear category filters
+    const categoryCheckboxes = document.querySelectorAll('#categoryFilterOptions input[type="checkbox"]');
+    categoryCheckboxes.forEach(checkbox => {
+      checkbox.checked = false;
+      const label = checkbox.closest('.filter-checkbox');
+      if (label) {
+        label.classList.remove('checked');
+      }
+    });
+    
+    // Update current questions reference
+    window.currentQuestions = [...allQuestions];
+    
+    // Update filter counts with new data
+    if (typeof window.updateFilterCounts === 'function') {
+      window.updateFilterCounts();
+    }
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🔄 Search interface reset for new exam with ${allQuestions.length} questions`);
+    }
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error resetting search interface:", error);
+    }
+  }
+}
+
+/**
  * Initialize search interface
  */
 function initializeSearchInterface() {
@@ -32,6 +92,75 @@ function initializeSearchInterface() {
     
     // Clear previous search state
     resetSearchUI();
+    
+    // Setup toggle search button event listener
+    const toggleSearchBtn = document.getElementById('toggleSearchBtn');
+    const searchHeader = document.getElementById('searchHeader');
+    const searchContent = document.getElementById('searchContent');
+    
+    if (toggleSearchBtn && searchContent) {
+      // Function to toggle search content
+      const toggleSearchContent = () => {
+        const currentToggleBtn = document.getElementById('toggleSearchBtn'); // Get fresh reference
+        const isCollapsed = searchContent.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+          // Expand search content
+          searchContent.classList.remove('collapsed');
+          currentToggleBtn.classList.remove('collapsed');
+          
+          if (typeof window.devLog === 'function') {
+            window.devLog('🔍 Advanced search section expanded');
+          }
+        } else {
+          // Collapse search content
+          searchContent.classList.add('collapsed');
+          currentToggleBtn.classList.add('collapsed');
+          
+          if (typeof window.devLog === 'function') {
+            window.devLog('🔍 Advanced search section collapsed');
+          }
+        }
+      };
+      
+      // Remove existing event listeners to avoid duplicates
+      toggleSearchBtn.replaceWith(toggleSearchBtn.cloneNode(true));
+      const newToggleBtn = document.getElementById('toggleSearchBtn');
+      
+      // Ensure the button state matches the content state
+      if (searchContent.classList.contains('collapsed')) {
+        newToggleBtn.classList.add('collapsed');
+      } else {
+        newToggleBtn.classList.remove('collapsed');
+      }
+      
+      // Add event listener to toggle button
+      newToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event bubbling
+        toggleSearchContent();
+      });
+      
+      // Add event listener to header (clickable header)
+      if (searchHeader) {
+        searchHeader.style.cursor = 'pointer';
+        searchHeader.addEventListener('click', (e) => {
+          // Only toggle if clicked on header, not on button
+          if (e.target !== newToggleBtn && !newToggleBtn.contains(e.target)) {
+            toggleSearchContent();
+          }
+        });
+      }
+      
+      if (typeof window.devLog === 'function') {
+        window.devLog('🔍 Toggle search events added (button and header clickable)');
+      }
+    }
+    
+    // Setup reset filters button
+    const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+    if (resetFiltersBtn) {
+      resetFiltersBtn.addEventListener('click', resetAllFilters);
+    }
     
     // Update filter counts
     if (typeof window.updateFilterCounts === 'function') {
@@ -116,8 +245,17 @@ function searchQuestions(query) {
         .map(answer => (answer.text || '').toLowerCase())
         .join(' ');
       
-      // Search in comments/explanations
-      const commentsText = (question.comments || '').toLowerCase();
+      // Search in comments/explanations - handle different data types
+      let commentsText = '';
+      if (question.comments) {
+        if (typeof question.comments === 'string') {
+          commentsText = question.comments.toLowerCase();
+        } else if (Array.isArray(question.comments)) {
+          commentsText = question.comments.join(' ').toLowerCase();
+        } else if (typeof question.comments === 'object') {
+          commentsText = JSON.stringify(question.comments).toLowerCase();
+        }
+      }
       
       // Combine all searchable text
       const searchableText = `${questionText} ${answersText} ${commentsText}`;
@@ -157,6 +295,9 @@ function applyTextSearch(query) {
       filteredQuestions = [];
     }
     
+    // Update filter counts when search results change (before applying status filters)
+    updateFilterCounts();
+    
     // Apply current filters to search results
     applyCurrentFilters();
     
@@ -180,13 +321,25 @@ function applyStatusFilters(baseQuestions = null) {
   try {
     const questionsToFilter = baseQuestions || (isSearchActive ? filteredQuestions : allQuestions);
     
-    // Get filter states
+    // Get status filter states
     const showAnswered = document.getElementById("filterAnswered")?.checked || false;
     const showUnanswered = document.getElementById("filterUnanswered")?.checked || false;
     const showFavorites = document.getElementById("filterFavorites")?.checked || false;
     
+    // Get active category filters
+    const activeCategoryFilters = [];
+    const categoryCheckboxes = document.querySelectorAll('#categoryFilterOptions input[type="checkbox"]:checked');
+    categoryCheckboxes.forEach(checkbox => {
+      if (checkbox.dataset.category) {
+        activeCategoryFilters.push(checkbox.dataset.category);
+      }
+    });
+    
     // If no filters are active, return all questions
-    if (!showAnswered && !showUnanswered && !showFavorites) {
+    const hasStatusFilters = showAnswered || showUnanswered || showFavorites;
+    const hasCategoryFilters = activeCategoryFilters.length > 0;
+    
+    if (!hasStatusFilters && !hasCategoryFilters) {
       return questionsToFilter;
     }
     
@@ -199,31 +352,33 @@ function applyStatusFilters(baseQuestions = null) {
       
       if (originalIndex === -1) return false;
       
-      let shouldInclude = false;
+      let shouldIncludeByStatus = !hasStatusFilters; // Include by default if no status filters
+      let shouldIncludeByCategory = !hasCategoryFilters; // Include by default if no category filters
       
-      // Check answered/unanswered status
-      const isAnswered = typeof window.isQuestionAnswered === 'function' ? 
-        window.isQuestionAnswered(originalIndex) : false;
-      
-      if (showAnswered && isAnswered) {
-        shouldInclude = true;
-      }
-      
-      if (showUnanswered && !isAnswered) {
-        shouldInclude = true;
-      }
-      
-      // Check favorites status
-      if (showFavorites) {
+      // Check status filters (OR logic)
+      if (hasStatusFilters) {
+        // For filters, only check answers from current session
+        const isAnswered = typeof window.isQuestionAnsweredInCurrentSession === 'function' ? 
+          window.isQuestionAnsweredInCurrentSession(originalIndex) : false;
         const isFavorite = typeof window.isQuestionFavorite === 'function' ? 
           window.isQuestionFavorite(originalIndex) : false;
         
-        if (isFavorite) {
-          shouldInclude = true;
-        }
+        shouldIncludeByStatus = 
+          (showAnswered && isAnswered) ||
+          (showUnanswered && !isAnswered) ||
+          (showFavorites && isFavorite);
       }
       
-      return shouldInclude;
+      // Check category filters (OR logic)
+      if (hasCategoryFilters) {
+        const questionCategory = typeof window.getQuestionCategory === 'function' ? 
+          window.getQuestionCategory(originalIndex) : null;
+        
+        shouldIncludeByCategory = questionCategory && activeCategoryFilters.includes(questionCategory);
+      }
+      
+      // Both status and category filters must pass (AND logic between filter types)
+      return shouldIncludeByStatus && shouldIncludeByCategory;
     });
   } catch (error) {
     if (typeof window.devError === 'function') {
@@ -251,10 +406,28 @@ function applyCurrentFilters() {
     // Update current questions
     window.currentQuestions = finalResults;
     
-    // Update filter counts
-    if (typeof window.updateFilterCounts === 'function') {
-      window.updateFilterCounts();
+    // Update the display with filtered questions
+    if (typeof window.displayCurrentQuestion === 'function') {
+      // If we have results, go to the first question
+      if (finalResults.length > 0) {
+        window.currentQuestionIndex = 0;
+        window.displayCurrentQuestion();
+      }
     }
+    
+    // Update navigation UI
+    if (typeof window.updateProgressSidebar === 'function') {
+      window.updateProgressSidebar();
+    }
+    if (typeof window.updateProgressBar === 'function') {
+      window.updateProgressBar();
+    }
+    
+    // Update results count display
+    updateSearchResultsDisplay(finalResults.length, allQuestions.length);
+    
+    // Don't update filter counts here - they should only update when search changes or data changes
+    // not when status filters are applied
     
     if (typeof window.devLog === 'function') {
       window.devLog(`🔍 Applied filters: ${finalResults.length}/${allQuestions.length} questions`);
@@ -266,6 +439,63 @@ function applyCurrentFilters() {
       window.devError("Error applying current filters:", error);
     }
     return allQuestions;
+  }
+}
+
+/**
+ * Update search results display
+ */
+function updateSearchResultsDisplay(filteredCount, totalCount) {
+  try {
+    const searchResultsCount = document.getElementById('searchResultsCount');
+    if (searchResultsCount) {
+      if (filteredCount === totalCount) {
+        searchResultsCount.textContent = 'Showing all questions';
+      } else {
+        searchResultsCount.textContent = `Showing ${filteredCount} of ${totalCount} questions`;
+      }
+    }
+    
+    // Show/hide reset filters button based on whether filters are active
+    updateResetFiltersButtonVisibility();
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error updating search results display:", error);
+    }
+  }
+}
+
+/**
+ * Update reset filters button visibility
+ */
+function updateResetFiltersButtonVisibility() {
+  try {
+    const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+    if (!resetFiltersBtn) return;
+    
+    // Check if any filters are active
+    const searchInput = document.getElementById("questionSearch");
+    const hasSearchText = searchInput?.value && searchInput.value.trim() !== '';
+    
+    const statusCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites'];
+    const hasStatusFilters = statusCheckboxes.some(id => {
+      const checkbox = document.getElementById(id);
+      return checkbox?.checked;
+    });
+    
+    const categoryCheckboxes = document.querySelectorAll('#categoryFilterOptions input[type="checkbox"]:checked');
+    const hasCategoryFilters = categoryCheckboxes.length > 0;
+    
+    // Show button if any filters are active
+    if (hasSearchText || hasStatusFilters || hasCategoryFilters) {
+      resetFiltersBtn.style.display = 'inline-flex';
+    } else {
+      resetFiltersBtn.style.display = 'none';
+    }
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error updating reset filters button visibility:", error);
+    }
   }
 }
 
@@ -286,16 +516,52 @@ function resetAllFilters() {
       const checkbox = document.getElementById(id);
       if (checkbox) {
         checkbox.checked = false;
+        // Remove checked class from parent label
+        const label = checkbox.closest('.filter-checkbox');
+        if (label) {
+          label.classList.remove('checked');
+        }
+      }
+    });
+    
+    // Clear category filter checkboxes
+    const categoryCheckboxes = document.querySelectorAll('#categoryFilterOptions input[type="checkbox"]');
+    categoryCheckboxes.forEach(checkbox => {
+      checkbox.checked = false;
+      // Remove checked class from parent label
+      const label = checkbox.closest('.filter-checkbox');
+      if (label) {
+        label.classList.remove('checked');
       }
     });
     
     // Reset search state
+    isSearchActive = false;
+    filteredQuestions = [];
+    window.currentQuestions = [...allQuestions];
+    
+    // Reset search UI
     resetSearchUI();
     
-    // Update filter counts
-    if (typeof window.updateFilterCounts === 'function') {
-      window.updateFilterCounts();
+    // Update display
+    if (typeof window.displayCurrentQuestion === 'function') {
+      window.currentQuestionIndex = 0;
+      window.displayCurrentQuestion();
     }
+    
+    // Update navigation UI
+    if (typeof window.updateProgressSidebar === 'function') {
+      window.updateProgressSidebar();
+    }
+    if (typeof window.updateProgressBar === 'function') {
+      window.updateProgressBar();
+    }
+    
+    // Update results count display
+    updateSearchResultsDisplay(allQuestions.length, allQuestions.length);
+    
+    // Update filter counts to show all questions
+    updateFilterCounts();
     
     if (typeof window.devLog === 'function') {
       window.devLog("🗑️ All filters reset");
@@ -464,13 +730,34 @@ function updateFilterCounts() {
     let answeredCount = 0;
     let unansweredCount = 0;
     let favoritesCount = 0;
+    const categoryCounts = {};
     
-    // Count different question types
-    allQuestions.forEach((question, index) => {
-      const isAnswered = typeof window.isQuestionAnswered === 'function' ? 
-        window.isQuestionAnswered(index) : false;
+    // For status filters, always count based on search results (not applied filters)
+    // This shows what's available to filter, not what's already filtered
+    const questionsToCount = isSearchActive && filteredQuestions.length >= 0 ? filteredQuestions : allQuestions;
+    const currentCount = questionsToCount.length;
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🔢 Updating filter counts for ${currentCount} questions (search active: ${isSearchActive})`);
+    }
+    
+    // Count different question types on the currently visible/searched questions
+    questionsToCount.forEach((question, questionIndex) => {
+      // Find the original index in allQuestions for status checking
+      const originalIndex = allQuestions.findIndex(q => 
+        q.question_number === question.question_number ||
+        (q.question === question.question && q.answers?.length === question.answers?.length)
+      );
+      
+      if (originalIndex === -1) return; // Skip if can't find original
+      
+      // For filters, only count answers from current session
+      const isAnswered = typeof window.isQuestionAnsweredInCurrentSession === 'function' ? 
+        window.isQuestionAnsweredInCurrentSession(originalIndex) : false;
       const isFavorite = typeof window.isQuestionFavorite === 'function' ? 
-        window.isQuestionFavorite(index) : false;
+        window.isQuestionFavorite(originalIndex) : false;
+      const category = typeof window.getQuestionCategory === 'function' ? 
+        window.getQuestionCategory(originalIndex) : null;
       
       if (isAnswered) {
         answeredCount++;
@@ -481,31 +768,136 @@ function updateFilterCounts() {
       if (isFavorite) {
         favoritesCount++;
       }
-    });
-    
-    // Update filter labels with counts
-    const filterLabels = {
-      'filterAnsweredLabel': `Answered (${answeredCount})`,
-      'filterUnansweredLabel': `Unanswered (${unansweredCount})`,
-      'filterFavoritesLabel': `Favorites (${favoritesCount})`
-    };
-    
-    Object.entries(filterLabels).forEach(([labelId, text]) => {
-      const label = document.getElementById(labelId);
-      if (label) {
-        label.textContent = text;
+      
+      // Count categories
+      if (category) {
+        categoryCounts[category] = (categoryCounts[category] || 0) + 1;
       }
     });
     
-    // Update total count
+    // Update filter counts in spans
+    const answeredCountSpan = document.getElementById('answeredCount');
+    const unansweredCountSpan = document.getElementById('unansweredCount');
+    const favoritesCountSpan = document.getElementById('favoritesCount');
+    
+    if (answeredCountSpan) {
+      answeredCountSpan.textContent = answeredCount;
+    }
+    if (unansweredCountSpan) {
+      unansweredCountSpan.textContent = unansweredCount;
+    }
+    if (favoritesCountSpan) {
+      favoritesCountSpan.textContent = favoritesCount;
+    }
+    
+    // Update category filters
+    updateCategoryFilters(categoryCounts);
+    
+    // Update total count to reflect current search/filter results
     const totalCountElement = document.getElementById('totalQuestionsCount');
     if (totalCountElement) {
-      totalCountElement.textContent = `Total: ${window.currentQuestions?.length || 0}/${allQuestions.length}`;
+      const totalCount = allQuestions.length;
+      totalCountElement.textContent = `Total: ${currentCount}/${totalCount}`;
     }
     
   } catch (error) {
     if (typeof window.devError === 'function') {
       window.devError("Error updating filter counts:", error);
+    }
+  }
+}
+
+/**
+ * Update category filters dynamically
+ */
+function updateCategoryFilters(categoryCounts) {
+  try {
+    const categoryFilterGroup = document.getElementById('categoryFilterGroup');
+    const categoryFilterOptions = document.getElementById('categoryFilterOptions');
+    
+    if (!categoryFilterGroup || !categoryFilterOptions) {
+      return;
+    }
+    
+    // Save current checkbox states before clearing
+    const currentStates = {};
+    const existingCheckboxes = categoryFilterOptions.querySelectorAll('input[type="checkbox"]');
+    existingCheckboxes.forEach(checkbox => {
+      if (checkbox.dataset.category) {
+        currentStates[checkbox.dataset.category] = checkbox.checked;
+      }
+    });
+    
+    // Clear existing category filters
+    categoryFilterOptions.innerHTML = '';
+    
+    // Show/hide category group based on whether there are categories
+    const hasCategories = Object.keys(categoryCounts).length > 0;
+    categoryFilterGroup.style.display = hasCategories ? 'block' : 'none';
+    
+    if (!hasCategories) {
+      return;
+    }
+    
+    // Create category filter checkboxes
+    Object.entries(categoryCounts).forEach(([category, count]) => {
+      const checkboxLabel = document.createElement('label');
+      checkboxLabel.className = 'filter-checkbox';
+      
+      const checkboxId = `filterCategory${category.replace(/\s+/g, '')}`;
+      
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.id = checkboxId;
+      checkbox.dataset.category = category;
+      
+      // Restore previous checked state if it existed
+      if (currentStates[category]) {
+        checkbox.checked = true;
+        checkboxLabel.classList.add('checked');
+      }
+      
+      // Important: Set the 'for' attribute to associate label with checkbox
+      checkboxLabel.setAttribute('for', checkboxId);
+      
+      const checkmark = document.createElement('span');
+      checkmark.className = 'checkmark';
+      
+      const filterText = document.createElement('span');
+      filterText.className = 'filter-text';
+      filterText.textContent = category;
+      
+      const filterCount = document.createElement('span');
+      filterCount.className = 'filter-count';
+      filterCount.textContent = count;
+      
+      // The order is important for CSS: checkbox, checkmark, text, count
+      checkboxLabel.appendChild(checkbox);
+      checkboxLabel.appendChild(checkmark);
+      checkboxLabel.appendChild(filterText);
+      checkboxLabel.appendChild(filterCount);
+      
+      // Add event listener for category filter
+      checkbox.addEventListener('change', (e) => {
+        // Toggle checked class on label
+        if (e.target.checked) {
+          checkboxLabel.classList.add('checked');
+        } else {
+          checkboxLabel.classList.remove('checked');
+        }
+        handleFilterChange();
+      });
+      
+      categoryFilterOptions.appendChild(checkboxLabel);
+    });
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🏷️ Updated category filters: ${Object.keys(categoryCounts).join(', ')}`);
+    }
+    
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error updating category filters:", error);
     }
   }
 }
@@ -544,6 +936,9 @@ function handleSearchInput(event) {
       }
     }
     
+    // Update reset button visibility
+    updateResetFiltersButtonVisibility();
+    
   } catch (error) {
     if (typeof window.devError === 'function') {
       window.devError("Error handling search input:", error);
@@ -557,6 +952,7 @@ function handleSearchInput(event) {
 function handleFilterChange() {
   try {
     applyCurrentFilters();
+    updateResetFiltersButtonVisibility();
   } catch (error) {
     if (typeof window.devError === 'function') {
       window.devError("Error handling filter change:", error);
@@ -591,17 +987,51 @@ function setupSearchEventListeners() {
       });
     }
     
+    // Search button
+    const searchBtn = document.getElementById("searchBtn");
+    if (searchBtn) {
+      searchBtn.addEventListener('click', () => {
+        const searchInput = document.getElementById("questionSearch");
+        if (searchInput) {
+          handleSearchInput({ target: searchInput });
+        }
+      });
+    }
+    
+    // Clear search button
+    const clearSearchBtn = document.getElementById("clearSearchBtn");
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        const searchInput = document.getElementById("questionSearch");
+        if (searchInput) {
+          searchInput.value = '';
+          handleSearchInput({ target: searchInput });
+        }
+      });
+    }
+    
     // Filter checkboxes
     const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites'];
     filterCheckboxes.forEach(id => {
       const checkbox = document.getElementById(id);
       if (checkbox) {
-        checkbox.addEventListener('change', handleFilterChange);
+        checkbox.addEventListener('change', (e) => {
+          // Toggle checked class on parent label
+          const label = e.target.closest('.filter-checkbox');
+          if (label) {
+            if (e.target.checked) {
+              label.classList.add('checked');
+            } else {
+              label.classList.remove('checked');
+            }
+          }
+          handleFilterChange();
+        });
       }
     });
     
     // Reset filters button
-    const resetButton = document.getElementById("resetFilters");
+    const resetButton = document.getElementById("resetFiltersBtn");
     if (resetButton) {
       resetButton.addEventListener('click', resetAllFilters);
     }
@@ -639,6 +1069,7 @@ function clearSearchCache() {
 export {
   // Search state management
   initializeSearchInterface,
+  resetSearchInterface,
   resetSearchUI,
   clearSearchCache,
   
@@ -657,6 +1088,9 @@ export {
   
   // Filter statistics
   updateFilterCounts,
+  updateCategoryFilters,
+  updateSearchResultsDisplay,
+  updateResetFiltersButtonVisibility,
   
   // Event handlers
   handleSearchInput,

@@ -299,6 +299,14 @@ function updateAdvancedSearchVisibility() {
         window.allQuestions.length > 0) {
       searchSection.style.display = "block";
       
+      // Expand search content by default when first shown
+      const searchContent = document.getElementById('searchContent');
+      const toggleSearchBtn = document.getElementById('toggleSearchBtn');
+      if (searchContent && toggleSearchBtn) {
+        searchContent.classList.remove('collapsed');
+        toggleSearchBtn.classList.remove('collapsed');
+      }
+      
       // Initialize search interface if function available
       if (typeof window.initializeSearchInterface === 'function') {
         window.initializeSearchInterface();
