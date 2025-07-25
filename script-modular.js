@@ -178,6 +178,7 @@ import {
   initializeResumePosition,
   handleNavigationChange,
   debugAnswerRestoration,
+  resetAnswerRestorationTracker,
 } from './js/modules/resume-position.js';
 
 // Mobile navigation
@@ -409,6 +410,7 @@ function exposeGlobalFunctions() {
   window.initializeResumePosition = initializeResumePosition;
   window.handleNavigationChange = handleNavigationChange;
   window.debugAnswerRestoration = debugAnswerRestoration;
+  window.resetAnswerRestorationTracker = resetAnswerRestorationTracker;
 
   // Mobile navigation
   window.setupMobileTooltips = setupMobileTooltips;

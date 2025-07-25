@@ -429,6 +429,11 @@ function displayCurrentQuestion(fromToggleAction = false) {
       }
     }
 
+    // Reset answer restoration tracker for new question
+    if (typeof window.resetAnswerRestorationTracker === 'function') {
+      window.resetAnswerRestorationTracker();
+    }
+
     // Reset state first
     window.selectedAnswers?.clear();
     window.isValidated = false;

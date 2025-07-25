@@ -468,6 +468,9 @@ function restoreQuestionState() {
   }
 }
 
+// Track the last restored question to prevent multiple calls
+let lastRestoredQuestionIndex = -1;
+
 /**
  * Restore selected answers for the current question
  */
@@ -478,9 +481,15 @@ function restoreCurrentQuestionAnswers() {
       return;
     }
 
+    // Prevent multiple calls for the same question
+    if (lastRestoredQuestionIndex === window.currentQuestionIndex) {
+      console.log(`⏭️ Skipping - already restored question ${window.currentQuestionIndex + 1}`);
+      return;
+    }
+    
+    lastRestoredQuestionIndex = window.currentQuestionIndex;
+
     console.log(`🔍 Starting answer restoration for question index ${window.currentQuestionIndex} (question ${window.currentQuestionIndex + 1})`);
-    console.log("📊 Current statistics:", window.statistics);
-    console.log("📈 Current session questions:", window.statistics?.currentSession?.questions);
 
     // Get the most recent answer for current question
     let userAnswers = null;
@@ -534,9 +543,6 @@ function restoreCurrentQuestionAnswers() {
 
     // Update UI to show selected answers
     const answerElements = document.querySelectorAll(".answer-option");
-    console.log(`🎯 Found ${answerElements.length} answer elements to update`);
-    console.log(`🎯 Answer elements:`, answerElements);
-    console.log(`🔤 Current selectedAnswers Set:`, window.selectedAnswers);
     
     if (answerElements.length === 0) {
       console.log("⚠️ No answer elements found - DOM might not be ready yet");
@@ -548,23 +554,23 @@ function restoreCurrentQuestionAnswers() {
       return;
     }
     
-    answerElements.forEach((element, index) => {
+    let restoredCount = 0;
+    answerElements.forEach((element) => {
       const answerLetter = element.querySelector(".answer-letter");
       const letter = answerLetter?.textContent.charAt(0);
-      console.log(`🔤 Answer element ${index}: letter="${letter}", answerLetter element:`, answerLetter);
       
       if (letter && window.selectedAnswers.has(letter)) {
         element.classList.add("selected");
-        console.log(`✅ Selected answer ${letter} for question ${window.currentQuestionIndex + 1}`);
+        restoredCount++;
       } else {
         element.classList.remove("selected");
-        if (letter) {
-          console.log(`➖ Answer ${letter} not in selectedAnswers`);
-        }
       }
     });
+    
+    if (restoredCount > 0) {
+      console.log(`✅ Restored ${restoredCount} answers for question ${window.currentQuestionIndex + 1}:`, Array.from(window.selectedAnswers));
+    }
 
-    console.log(`🔄 Restored answers for question ${window.currentQuestionIndex + 1}:`, Array.from(window.selectedAnswers));
     if (typeof window.devLog === 'function') {
       window.devLog(`🔄 Restored answers for question ${window.currentQuestionIndex + 1}:`, Array.from(window.selectedAnswers));
     }
@@ -715,6 +721,13 @@ function handleNavigationChange(newQuestionIndex) {
 // ===========================
 
 /**
+ * Reset restoration tracker (call when navigating to new questions)
+ */
+function resetAnswerRestorationTracker() {
+  lastRestoredQuestionIndex = -1;
+}
+
+/**
  * Debug function to test answer restoration manually
  */
 function debugAnswerRestoration() {
@@ -724,6 +737,8 @@ function debugAnswerRestoration() {
   console.log("Statistics:", window.statistics);
   console.log("Selected answers before:", window.selectedAnswers);
   
+  // Reset tracker to force restoration
+  resetAnswerRestorationTracker();
   restoreCurrentQuestionAnswers();
   
   console.log("Selected answers after:", window.selectedAnswers);
@@ -762,4 +777,5 @@ export {
   
   // Debug utilities
   debugAnswerRestoration,
+  resetAnswerRestorationTracker,
 };
