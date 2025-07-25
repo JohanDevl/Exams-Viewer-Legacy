@@ -1492,14 +1492,24 @@ function updateOverviewTab() {
   const incorrectPercentage = totalAnsweredQuestions > 0 ? Math.round((globalStats.totalIncorrect / totalAnsweredQuestions) * 100) : 0;
   const previewPercentage = totalAnsweredQuestions > 0 ? Math.round((globalStats.totalPreview / totalAnsweredQuestions) * 100) : 0;
   
-  // Calculate favorites count
+  // Calculate favorites count from favoritesData structure
   let totalFavorites = 0;
-  if (window.favorites && typeof window.favorites === 'object') {
-    Object.values(window.favorites).forEach(examFavorites => {
+  if (window.favoritesData && window.favoritesData.favorites && typeof window.favoritesData.favorites === 'object') {
+    Object.values(window.favoritesData.favorites).forEach(examFavorites => {
       if (examFavorites && typeof examFavorites === 'object') {
-        totalFavorites += Object.keys(examFavorites).length;
+        // Count only questions where isFavorite is true
+        Object.values(examFavorites).forEach(favoriteData => {
+          if (favoriteData && favoriteData.isFavorite === true) {
+            totalFavorites++;
+          }
+        });
       }
     });
+  }
+  
+  if (typeof window.devLog === 'function') {
+    window.devLog(`📊 Calculating favorites: found ${totalFavorites} favorites in total`);
+    window.devLog(`📊 Favorites data structure:`, window.favoritesData?.favorites);
   }
   
   // Format time display
