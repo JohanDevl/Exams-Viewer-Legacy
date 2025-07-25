@@ -438,18 +438,13 @@ function closeKeyboardHelp() {
 /**
  * Display changelog modal with loading and error handling
  */
-function displayChangelog() {
-  const modal = document.getElementById('changelogModal');
-  const content = document.getElementById('changelogContent');
-  
-  if (!modal || !content) {
-    console.error('Changelog modal or content element not found');
-    return;
-  }
-  
+async function displayChangelog() {
+  const modal = document.getElementById("changelogModal");
+  const content = document.getElementById("changelogContent");
+
   // Show modal
-  modal.style.display = 'flex';
-  
+  modal.style.display = "flex";
+
   // Show loading state
   content.innerHTML = `
     <div class="loading-spinner">
@@ -457,32 +452,34 @@ function displayChangelog() {
       <p>Loading changelog...</p>
     </div>
   `;
-  
-  // Load changelog content
-  fetch('CHANGELOG.md')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Failed to load changelog: ${response.status}`);
-      }
-      return response.text();
-    })
-    .then(text => {
-      if (content) {
-        content.innerHTML = renderMarkdown(text);
-      }
-    })
-    .catch(error => {
-      console.error('Failed to load changelog:', error);
-      if (content) {
-        content.innerHTML = `
-          <div class="error-message">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p>Failed to load changelog. Please check the repository for updates.</p>
-            <p class="error-details">${error.message}</p>
-          </div>
-        `;
-      }
-    });
+
+  try {
+    // Fetch changelog content
+    const response = await fetch("CHANGELOG.md");
+    if (!response.ok) {
+      throw new Error(`Failed to load changelog: ${response.status}`);
+    }
+
+    const markdownText = await response.text();
+    const htmlContent = renderMarkdown(markdownText);
+
+    // Display rendered content
+    content.innerHTML = `<div class="markdown-content">${htmlContent}</div>`;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error loading changelog:", error);
+    }
+    content.innerHTML = `
+      <div class="error-state">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Error Loading Changelog</h3>
+        <p>Unable to load the changelog: ${error.message}</p>
+        <button onclick="window.displayChangelog()" class="retry-btn">
+          <i class="fas fa-redo"></i> Retry
+        </button>
+      </div>
+    `;
+  }
 }
 
 // ===========================
