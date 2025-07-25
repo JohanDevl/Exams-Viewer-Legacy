@@ -474,8 +474,13 @@ function restoreQuestionState() {
 function restoreCurrentQuestionAnswers() {
   try {
     if (typeof window.currentQuestionIndex !== 'number') {
+      console.log("❌ currentQuestionIndex is not a number:", window.currentQuestionIndex);
       return;
     }
+
+    console.log(`🔍 Starting answer restoration for question index ${window.currentQuestionIndex} (question ${window.currentQuestionIndex + 1})`);
+    console.log("📊 Current statistics:", window.statistics);
+    console.log("📈 Current session questions:", window.statistics?.currentSession?.questions);
 
     // Get the most recent answer for current question
     let userAnswers = null;
@@ -484,6 +489,25 @@ function restoreCurrentQuestionAnswers() {
       console.log(`🔍 Question ${window.currentQuestionIndex + 1} - Retrieved answers:`, userAnswers);
     } else {
       console.log("❌ getMostRecentAnswer function not available");
+    }
+
+    // Try alternative method to get answers directly from statistics
+    if (!userAnswers || !Array.isArray(userAnswers) || userAnswers.length === 0) {
+      const currentQuestion = window.currentQuestions?.[window.currentQuestionIndex];
+      const questionNumber = currentQuestion?.question_number;
+      console.log(`🔍 Trying direct statistics lookup for question number ${questionNumber}`);
+      
+      if (window.statistics?.currentSession?.questions && questionNumber) {
+        const questionData = window.statistics.currentSession.questions.find(q => 
+          (q.qn && q.qn.toString() === questionNumber.toString()) ||
+          (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+        );
+        console.log(`📋 Found question data:`, questionData);
+        if (questionData) {
+          userAnswers = questionData.userAnswers || questionData.ua || [];
+          console.log(`📝 Direct retrieval - userAnswers:`, userAnswers);
+        }
+      }
     }
 
     if (!userAnswers || !Array.isArray(userAnswers) || userAnswers.length === 0) {
@@ -511,14 +535,32 @@ function restoreCurrentQuestionAnswers() {
     // Update UI to show selected answers
     const answerElements = document.querySelectorAll(".answer-option");
     console.log(`🎯 Found ${answerElements.length} answer elements to update`);
+    console.log(`🎯 Answer elements:`, answerElements);
+    console.log(`🔤 Current selectedAnswers Set:`, window.selectedAnswers);
     
-    answerElements.forEach((element) => {
-      const letter = element.querySelector(".answer-letter")?.textContent.charAt(0);
+    if (answerElements.length === 0) {
+      console.log("⚠️ No answer elements found - DOM might not be ready yet");
+      // Retry after a longer delay
+      setTimeout(() => {
+        console.log("🔄 Retrying answer restoration after delay...");
+        restoreCurrentQuestionAnswers();
+      }, 200);
+      return;
+    }
+    
+    answerElements.forEach((element, index) => {
+      const answerLetter = element.querySelector(".answer-letter");
+      const letter = answerLetter?.textContent.charAt(0);
+      console.log(`🔤 Answer element ${index}: letter="${letter}", answerLetter element:`, answerLetter);
+      
       if (letter && window.selectedAnswers.has(letter)) {
         element.classList.add("selected");
         console.log(`✅ Selected answer ${letter} for question ${window.currentQuestionIndex + 1}`);
       } else {
         element.classList.remove("selected");
+        if (letter) {
+          console.log(`➖ Answer ${letter} not in selectedAnswers`);
+        }
       }
     });
 
@@ -672,6 +714,26 @@ function handleNavigationChange(newQuestionIndex) {
 // MODULE EXPORTS
 // ===========================
 
+/**
+ * Debug function to test answer restoration manually
+ */
+function debugAnswerRestoration() {
+  console.log("🐛 Debug: Manual answer restoration test");
+  console.log("Current question index:", window.currentQuestionIndex);
+  console.log("Current question:", window.currentQuestions?.[window.currentQuestionIndex]);
+  console.log("Statistics:", window.statistics);
+  console.log("Selected answers before:", window.selectedAnswers);
+  
+  restoreCurrentQuestionAnswers();
+  
+  console.log("Selected answers after:", window.selectedAnswers);
+}
+
+// Make debug function available globally for testing
+if (typeof window !== 'undefined') {
+  window.debugAnswerRestoration = debugAnswerRestoration;
+}
+
 // Export all resume position functions for use in other modules
 export {
   // Position tracking
@@ -697,4 +759,7 @@ export {
   // Integration helpers
   initializeResumePosition,
   handleNavigationChange,
+  
+  // Debug utilities
+  debugAnswerRestoration,
 };

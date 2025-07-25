@@ -177,6 +177,7 @@ import {
   cleanInvalidPositions,
   initializeResumePosition,
   handleNavigationChange,
+  debugAnswerRestoration,
 } from './js/modules/resume-position.js';
 
 // Mobile navigation
@@ -407,6 +408,7 @@ function exposeGlobalFunctions() {
   window.cleanInvalidPositions = cleanInvalidPositions;
   window.initializeResumePosition = initializeResumePosition;
   window.handleNavigationChange = handleNavigationChange;
+  window.debugAnswerRestoration = debugAnswerRestoration;
 
   // Mobile navigation
   window.setupMobileTooltips = setupMobileTooltips;
