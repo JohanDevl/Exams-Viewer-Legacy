@@ -8,7 +8,7 @@
  * - Global variables: currentQuestions, currentQuestionIndex, currentExam, selectedAnswers,
  *   isValidated, isHighlightEnabled, questionStartTime, settings, statistics, favoritesData
  * - External functions: addToNavigationHistory, updateProgressSidebar, trackQuestionAttempt,
- *   saveResumePosition, updateFilterCounts, clearQuestionStatusCache, processEmbeddedImages,
+ *   updateFilterCounts, clearQuestionStatusCache, processEmbeddedImages,
  *   trackQuestionVisit, showError, showSuccess, devLog, devError
  */
 
@@ -115,16 +115,6 @@ async function navigateToQuestionIndex(newIndex, addToHistory = true) {
         window.updateProgressSidebar();
       }
       
-      // Auto-save resume position
-      if (window.currentExam && window.settings?.enableResumePosition && window.settings?.autoSavePosition) {
-        const examCode = window.currentExam?.exam_code || window.currentExam?.code || window.currentExam?.exam_name;
-        
-        if (examCode && typeof window.saveStudyPosition === 'function') {
-          window.saveStudyPosition(examCode, newIndex);
-        } else if (typeof window.devError === 'function') {
-          window.devError("Could not determine exam code for resume position saving");
-        }
-      }
 
       if (typeof window.devLog === 'function') {
         window.devLog(`🧭 Navigated to question ${newIndex + 1}/${window.currentQuestions.length}`);
@@ -267,16 +257,6 @@ function updateQuestionJumpMaxValue() {
  */
 function goToHome() {
   try {
-    // Save current position before leaving exam (if auto-save is disabled)
-    if (window.currentExam && window.currentQuestions?.length > 0 && 
-        window.settings?.enableResumePosition && !window.settings?.autoSavePosition) {
-      const examCode = window.currentExam?.exam_code || window.currentExam?.code || window.currentExam?.exam_name;
-      
-      if (examCode && window.currentQuestionIndex < window.currentQuestions.length && 
-          typeof window.saveStudyPosition === 'function') {
-        window.saveStudyPosition(examCode, window.currentQuestionIndex);
-      }
-    }
 
     // End current session if exists
     if (typeof window.endCurrentSession === 'function') {
@@ -429,10 +409,6 @@ function displayCurrentQuestion(fromToggleAction = false) {
       }
     }
 
-    // Reset answer restoration tracker for new question
-    if (typeof window.resetAnswerRestorationTracker === 'function') {
-      window.resetAnswerRestorationTracker();
-    }
 
     // Reset state first
     window.selectedAnswers?.clear();
@@ -576,12 +552,6 @@ function displayCurrentQuestion(fromToggleAction = false) {
       window.updateToolbarVisibility();
     }
 
-    // Restore previously selected answers for this question (after UI is rendered)
-    if (typeof window.restoreCurrentQuestionAnswers === 'function') {
-      setTimeout(() => {
-        window.restoreCurrentQuestionAnswers();
-      }, 50); // Small delay to ensure DOM elements are ready
-    }
 
     if (typeof window.devLog === 'function') {
       window.devLog(`📄 Displayed question ${currentQuestionNumber}`);

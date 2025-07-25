@@ -5,7 +5,7 @@
  * for Exams-Viewer application.
  * 
  * Dependencies: 
- * - Global variables: settings, favoritesData, statistics, resumePositions, currentQuestions, currentExam
+ * - Global variables: settings, favoritesData, statistics, currentQuestions, currentExam
  * - External functions: showError, showSuccess, applyTheme, updateToolbarVisibility, updateTooltipVisibility,
  *   recalculateTotalStats, cleanCorruptedStatistics, cleanupObsoleteData
  */
@@ -60,7 +60,6 @@ function clearCorruptedData() {
       "examViewerStatistics",
       "examViewerSettings", 
       "examViewerFavorites",
-      "examViewerResumePositions"
     ];
     
     for (const key of keys) {
@@ -326,110 +325,6 @@ function saveSettings() {
   }
 }
 
-// ===========================
-// RESUME POSITION STORAGE
-// ===========================
-
-/**
- * Load resume positions from localStorage with validation
- */
-function loadResumePositions() {
-  try {
-    const savedPositions = localStorage.getItem("examViewerResumePositions");
-    if (savedPositions) {
-      const loadedPositions = JSON.parse(savedPositions);
-      
-      // Validate and filter positions that might be corrupted
-      Object.keys(loadedPositions).forEach(examCode => {
-        const position = loadedPositions[examCode];
-        if (position && typeof position.questionIndex === 'number' && position.timestamp) {
-          resumePositions[examCode] = position;
-        } else {
-          devLog(`🧹 Removing invalid resume position for ${examCode}`);
-        }
-      });
-      
-      devLog("📍 Resume positions loaded successfully");
-    }
-  } catch (error) {
-    devError("Failed to load resume positions:", error);
-    resumePositions = {}; // Reset on error
-  }
-}
-
-/**
- * Save resume positions to localStorage with size management
- */
-function saveResumePositions() {
-  try {
-    // Limit the number of saved positions to prevent localStorage bloat
-    const maxPositions = 20;
-    const sortedPositions = Object.entries(resumePositions)
-      .sort(([,a], [,b]) => (b.timestamp || 0) - (a.timestamp || 0))
-      .slice(0, maxPositions);
-    
-    const trimmedPositions = Object.fromEntries(sortedPositions);
-    
-    localStorage.setItem("examViewerResumePositions", JSON.stringify(trimmedPositions));
-    
-    // Update in-memory positions to match saved ones
-    resumePositions = trimmedPositions;
-    
-    devLog("📍 Resume positions saved");
-  } catch (error) {
-    devError("Failed to save resume positions:", error);
-    showError("Failed to save study position. Your progress may not be preserved.");
-  }
-}
-
-/**
- * Save current study position for a specific exam
- */
-function saveResumePosition(examCode, questionIndex) {
-  try {
-    if (!settings.enableResumePosition) return;
-    
-    if (!examCode || typeof questionIndex !== 'number' || questionIndex < 0) {
-      devError("Invalid parameters for saveResumePosition:", { examCode, questionIndex });
-      return;
-    }
-    
-    // Don't save position for very short sessions or at the beginning
-    if (questionIndex === 0) return;
-    
-    resumePositions[examCode] = {
-      questionIndex: questionIndex,
-      timestamp: Date.now(),
-      questionNumber: questionIndex + 1, // Human-readable question number
-      totalQuestions: currentQuestions.length || 0,
-      lastSessionId: statistics.currentSession?.id || null,
-      examTitle: currentExam?.exam_name || examCode
-    };
-    
-    saveResumePositions();
-    devLog(`📍 Saved position for ${examCode}: question ${questionIndex + 1}`);
-  } catch (error) {
-    devError("Failed to save resume position:", error);
-  }
-}
-
-/**
- * Get saved resume position for an exam
- */
-function getResumePosition(examCode) {
-  return resumePositions[examCode] || null;
-}
-
-/**
- * Clear resume position for a specific exam
- */
-function clearResumePosition(examCode) {
-  if (resumePositions[examCode]) {
-    delete resumePositions[examCode];
-    saveResumePositions();
-    devLog(`🗑️ Cleared resume position for ${examCode}`);
-  }
-}
 
 // ===========================
 // MODULE EXPORTS
@@ -457,10 +352,4 @@ export {
   loadSettings,
   saveSettings,
   
-  // Resume position storage
-  loadResumePositions,
-  saveResumePositions,
-  saveResumePosition,
-  getResumePosition,
-  clearResumePosition,
 };

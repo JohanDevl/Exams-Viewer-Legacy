@@ -70,9 +70,6 @@ import {
   saveFavorites,
   loadSettings,
   saveSettings,
-  getResumePosition,
-  saveResumePosition,
-  clearResumePosition,
   isDevelopmentMode,
   devLog,
   devError,
@@ -161,25 +158,6 @@ import {
   setupSearchEventListeners,
 } from './js/modules/search.js';
 
-// Resume position system
-import {
-  saveStudyPosition,
-  getStudyPosition,
-  clearStudyPosition,
-  autoSavePosition,
-  setupAutoSave,
-  showResumeDialog,
-  checkAndShowResumeDialog,
-  resumeToPosition,
-  restoreQuestionState,
-  restoreCurrentQuestionAnswers,
-  validateSavedPosition,
-  cleanInvalidPositions,
-  initializeResumePosition,
-  handleNavigationChange,
-  debugAnswerRestoration,
-  resetAnswerRestorationTracker,
-} from './js/modules/resume-position.js';
 
 // Mobile navigation
 import {
@@ -230,7 +208,6 @@ import {
   discoverAvailableExams,
   displayAvailableExams,
   populateExamSelect,
-  getResumeIndicatorText,
   getTimeAgo,
   loadExam,
   processEmbeddedImages,
@@ -307,9 +284,6 @@ function exposeGlobalFunctions() {
   window.saveFavorites = saveFavorites;
   window.loadSettings = loadSettings;
   window.saveSettings = saveSettings;
-  window.getResumePosition = getResumePosition;
-  window.saveResumePosition = saveResumePosition;
-  window.clearResumePosition = clearResumePosition;
   window.isDevelopmentMode = isDevelopmentMode;
   window.devLog = devLog;
   window.devError = devError;
@@ -394,23 +368,6 @@ function exposeGlobalFunctions() {
   window.handleFilterChange = handleFilterChange;
   window.setupSearchEventListeners = setupSearchEventListeners;
 
-  // Resume position
-  window.saveStudyPosition = saveStudyPosition;
-  window.getStudyPosition = getStudyPosition;
-  window.clearStudyPosition = clearStudyPosition;
-  window.autoSavePosition = autoSavePosition;
-  window.setupAutoSave = setupAutoSave;
-  window.showResumeDialog = showResumeDialog;
-  window.checkAndShowResumeDialog = checkAndShowResumeDialog;
-  window.resumeToPosition = resumeToPosition;
-  window.restoreQuestionState = restoreQuestionState;
-  window.restoreCurrentQuestionAnswers = restoreCurrentQuestionAnswers;
-  window.validateSavedPosition = validateSavedPosition;
-  window.cleanInvalidPositions = cleanInvalidPositions;
-  window.initializeResumePosition = initializeResumePosition;
-  window.handleNavigationChange = handleNavigationChange;
-  window.debugAnswerRestoration = debugAnswerRestoration;
-  window.resetAnswerRestorationTracker = resetAnswerRestorationTracker;
 
   // Mobile navigation
   window.setupMobileTooltips = setupMobileTooltips;
@@ -453,7 +410,6 @@ function exposeGlobalFunctions() {
   window.discoverAvailableExams = discoverAvailableExams;
   window.displayAvailableExams = displayAvailableExams;
   window.populateExamSelect = populateExamSelect;
-  window.getResumeIndicatorText = getResumeIndicatorText;
   window.getTimeAgo = getTimeAgo;
   window.loadExam = loadExam;
   window.processEmbeddedImages = processEmbeddedImages;
@@ -514,9 +470,6 @@ async function initializeApplication() {
     initializeLazyLoading();
     devLog("✅ Lazy loading system initialized");
 
-    // 5. Initialize resume position system
-    initializeResumePosition();
-    devLog("✅ Resume position system initialized");
 
     // 6. Initialize mobile navigation if on mobile device
     if (isMobileDevice()) {
@@ -1086,21 +1039,6 @@ function setupMainEventListeners() {
   // SETTINGS ACTION BUTTONS
   // ===========================
 
-  // Clear All Resume Positions
-  const resetResumePositionsBtn = document.getElementById("resetResumePositionsBtn");
-  if (resetResumePositionsBtn) {
-    resetResumePositionsBtn.addEventListener("click", () => {
-      if (confirm("Are you sure you want to clear all saved resume positions? This cannot be undone.")) {
-        // Clear all resume positions
-        localStorage.removeItem('study_positions');
-        if (typeof window.showSuccess === 'function') {
-          window.showSuccess("All resume positions cleared successfully.");
-        } else {
-          alert("All resume positions cleared successfully.");
-        }
-      }
-    });
-  }
 
   // Export Favorites
   const exportFavoritesBtn = document.getElementById("exportFavoritesBtn");

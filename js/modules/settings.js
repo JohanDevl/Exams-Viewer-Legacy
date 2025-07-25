@@ -88,8 +88,6 @@ function loadSettingsUI() {
           enableLazyLoading: false,
           showMainProgressBar: true,
           showTooltips: false,
-          enableResumePosition: false,
-          autoSavePosition: false,
         };
       }
       
@@ -106,8 +104,6 @@ function loadSettingsUI() {
         enableLazyLoading: document.getElementById("enableLazyLoading"),
         showMainProgressBar: document.getElementById("showMainProgressBar"),
         showTooltips: document.getElementById("showTooltips"),
-        enableResumePosition: document.getElementById("enableResumePosition"),
-        autoSavePosition: document.getElementById("autoSavePosition"),
       };
       
       // Update checkboxes to match loaded settings
@@ -156,8 +152,6 @@ function saveSettingsUI() {
         enableLazyLoading: false,
         showMainProgressBar: true,
         showTooltips: false,
-        enableResumePosition: false,
-        autoSavePosition: false,
       };
     }
     
@@ -171,8 +165,6 @@ function saveSettingsUI() {
       enableLazyLoading: document.getElementById("enableLazyLoading"),
       showMainProgressBar: document.getElementById("showMainProgressBar"),
       showTooltips: document.getElementById("showTooltips"),
-      enableResumePosition: document.getElementById("enableResumePosition"),
-      autoSavePosition: document.getElementById("autoSavePosition"),
     };
     
     // Update settings from UI
@@ -441,33 +433,6 @@ function handleTooltipsToggle() {
   }
 }
 
-/**
- * Handle resume position toggle
- */
-function handleResumePositionToggle() {
-  if (window.settings) {
-    const enableResumePosition = document.getElementById("enableResumePosition");
-    if (enableResumePosition) {
-      window.settings.enableResumePosition = enableResumePosition.checked;
-      console.log("📍 Resume position toggle:", enableResumePosition.checked);
-      saveSettingsUI();
-    }
-  }
-}
-
-/**
- * Handle auto-save position toggle
- */
-function handleAutoSavePositionToggle() {
-  if (window.settings) {
-    const autoSavePosition = document.getElementById("autoSavePosition");
-    if (autoSavePosition) {
-      window.settings.autoSavePosition = autoSavePosition.checked;
-      console.log("💾 Auto-save position toggle:", autoSavePosition.checked);
-      saveSettingsUI();
-    }
-  }
-}
 
 // ===========================
 // SETTINGS INITIALIZATION
@@ -525,17 +490,6 @@ function setupSettingsEventListeners() {
     showTooltips.addEventListener("change", handleTooltipsToggle);
   }
   
-  // Resume position toggle
-  const enableResumePosition = document.getElementById("enableResumePosition");
-  if (enableResumePosition) {
-    enableResumePosition.addEventListener("change", handleResumePositionToggle);
-  }
-  
-  // Auto-save position toggle
-  const autoSavePosition = document.getElementById("autoSavePosition");
-  if (autoSavePosition) {
-    autoSavePosition.addEventListener("change", handleAutoSavePositionToggle);
-  }
   
   console.log("⚙️ Settings event listeners initialized");
 }
@@ -581,8 +535,6 @@ export {
   handleLazyLoadingToggle,
   handleMainProgressBarToggle,
   handleTooltipsToggle,
-  handleResumePositionToggle,
-  handleAutoSavePositionToggle,
   
   // Initialization
   setupSettingsEventListeners,

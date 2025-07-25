@@ -9,7 +9,7 @@
  *   filteredQuestions, isSearchActive, searchCache, lazyLoadingConfig, settings, isHighlightEnabled,
  *   isHighlightTemporaryOverride
  * - External functions: devLog, devError, showLoading, showError, showSuccess, clearQuestionStatusCache,
- *   startExamSession, updateAdvancedSearchVisibility, initializeSearchInterface, initializeResumePosition,
+ *   startExamSession, updateAdvancedSearchVisibility, initializeSearchInterface,
  *   displayCurrentQuestion, clearNavigationHistory, updateProgressSidebar, updateHistoryButtons,
  *   updateQuestionJumpMaxValue, testQuestionJumpField, resetFavoritesData, exportFavorites,
  *   isDevelopmentMode
@@ -302,14 +302,9 @@ async function displayAvailableExams() {
       questionCount = "Click to load";
     }
 
-    // Check for resume position
-    const resumeIndicator = getResumeIndicatorText(code);
-    const resumeHTML = resumeIndicator ? `<div class="resume-indicator">${resumeIndicator}</div>` : '';
-    
     examCard.innerHTML = `
             <div class="exam-code">${code}</div>
             <div class="exam-count">${questionCount}</div>
-            ${resumeHTML}
         `;
 
     examCard.addEventListener("click", () => {
@@ -324,42 +319,6 @@ async function displayAvailableExams() {
   }
 }
 
-/**
- * Get resume indicator text for exam card
- */
-function getResumeIndicatorText(examCode) {
-  if (!window.settings?.enableResumePosition) {
-    return null;
-  }
-  
-  // Get saved position from localStorage or window.resumePositions
-  let savedPosition = null;
-  
-  try {
-    const studyPositions = JSON.parse(localStorage.getItem('study_positions') || '{}');
-    savedPosition = studyPositions[examCode];
-  } catch (error) {
-    if (typeof window.devError === 'function') {
-      window.devError('Error reading study positions:', error);
-    }
-  }
-  
-  if (!savedPosition) {
-    // Try legacy format
-    if (window.resumePositions && window.resumePositions[examCode]) {
-      savedPosition = window.resumePositions[examCode];
-    }
-  }
-  
-  if (savedPosition && savedPosition.questionIndex !== undefined) {
-    const questionNum = savedPosition.questionIndex + 1;
-    const totalQuestions = savedPosition.totalQuestions || '?';
-    const timeAgo = getTimeAgo(savedPosition.timestamp);
-    return `📍 Resume at Q${questionNum}/${totalQuestions} (${timeAgo})`;
-  }
-  
-  return null;
-}
 
 /**
  * Get time ago string for timestamps
@@ -540,10 +499,6 @@ async function loadExam(examCode) {
       }
     }
     
-    // Check for resume position after questions are loaded
-    if (typeof window.initializeResumePosition === 'function') {
-      await window.initializeResumePosition(examCode);
-    }
     
     // Display current question
     if (typeof window.displayCurrentQuestion === 'function') {
@@ -718,7 +673,6 @@ export {
   // Exam display
   displayAvailableExams,
   populateExamSelect,
-  getResumeIndicatorText,
   getTimeAgo,
   
   // Exam loading
