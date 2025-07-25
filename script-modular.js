@@ -1419,6 +1419,14 @@ document.addEventListener("DOMContentLoaded", async () => {
  * Display statistics modal
  */
 function displayStatistics() {
+  // Ensure statistics are recalculated before displaying
+  if (typeof window.recalculateTotalStats === 'function') {
+    window.recalculateTotalStats();
+    if (typeof window.devLog === 'function') {
+      window.devLog("📊 Statistics recalculated before display");
+    }
+  }
+  
   const modal = document.getElementById("statisticsModal");
   if (modal) {
     modal.style.display = "flex";
@@ -1454,9 +1462,24 @@ function showStatsTab(tabName) {
 }
 
 /**
- * Update overview tab with CURRENT SESSION answered questions stats
+ * Update overview tab with GLOBAL statistics from all exams and sessions
  */
 function updateOverviewTab() {
+  // First ensure statistics are recalculated and up to date
+  if (typeof window.recalculateTotalStats === 'function') {
+    window.recalculateTotalStats();
+  }
+  
+  // Use the global statistics function from the statistics module
+  const globalStats = typeof window.getGlobalStats === 'function' 
+    ? window.getGlobalStats() 
+    : {
+        totalQuestions: 0,
+        totalCorrect: 0,
+        totalIncorrect: 0,
+        totalPreview: 0
+      };
+
   const elements = {
     totalQuestions: document.getElementById("totalQuestions"),
     totalCorrect: document.getElementById("totalCorrect"),
@@ -1464,54 +1487,14 @@ function updateOverviewTab() {
     totalPreview: document.getElementById("totalPreview")
   };
 
-  // Calculate actual answered questions from current session
-  let correctAnswers = 0;
-  let incorrectAnswers = 0;
-  let previewAnswers = 0;
+  // Map global stats to display elements - show total answered questions, not all questions
+  const totalAnsweredQuestions = globalStats.totalCorrect + globalStats.totalIncorrect + globalStats.totalPreview;
   
-  // Count from current session questions directly
-  if (window.statistics?.currentSession?.questions && window.statistics.currentSession.questions.length > 0) {
-    window.statistics.currentSession.questions.forEach((question) => {
-      const hasAnswers = (question.ua && question.ua.length > 0) || 
-                        (question.userAnswers && question.userAnswers.length > 0);
-      
-      if (hasAnswers) {
-        const isCorrect = question.ic !== undefined ? question.ic : question.isCorrect;
-        if (isCorrect === true) {
-          correctAnswers++;
-        } else if (isCorrect === false) {
-          incorrectAnswers++;
-        }
-      }
-      
-      // Count preview/highlight activities
-      const hasPreviewActivity = (question.hvc && question.hvc > 0) || 
-                                 (question.hbc && question.hbc > 0) ||
-                                 (question.fat === 'p') ||
-                                 (question.att && question.att.some(att => att.whe));
-      
-      if (hasPreviewActivity && !hasAnswers) {
-        previewAnswers++;
-      }
-    });
-  } else {
-    // Fallback: try to get data from global statistics if current session is empty
-    if (window.statistics?.totalStats) {
-      correctAnswers = window.statistics.totalStats.totalCorrect || 0;
-      incorrectAnswers = window.statistics.totalStats.totalIncorrect || 0;
-      previewAnswers = window.statistics.totalStats.totalPreview || 0;
-    }
-  }
-
-  // Total answered questions = correct + incorrect + preview
-  const totalAnsweredQuestions = correctAnswers + incorrectAnswers + previewAnswers;
-
-  // Map current session stats to display elements
   const statsMapping = {
-    totalQuestions: totalAnsweredQuestions, // Show answered questions, not total exam questions
-    totalCorrect: correctAnswers,
-    totalIncorrect: incorrectAnswers,
-    totalPreview: previewAnswers
+    totalQuestions: totalAnsweredQuestions, // Total questions answered across all sessions
+    totalCorrect: globalStats.totalCorrect,
+    totalIncorrect: globalStats.totalIncorrect,
+    totalPreview: globalStats.totalPreview
   };
 
   Object.entries(elements).forEach(([key, element]) => {
@@ -1519,6 +1502,10 @@ function updateOverviewTab() {
       element.textContent = statsMapping[key];
     }
   });
+  
+  if (typeof window.devLog === 'function') {
+    window.devLog(`📊 Overview updated - Total: ${totalAnsweredQuestions}, Correct: ${globalStats.totalCorrect}, Incorrect: ${globalStats.totalIncorrect}, Preview: ${globalStats.totalPreview}`);
+  }
 }
 
 /**

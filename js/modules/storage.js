@@ -91,6 +91,11 @@ function clearCorruptedData() {
  */
 function saveStatistics() {
   try {
+    // Recalculate total stats before saving to ensure they're up to date
+    if (typeof window.recalculateTotalStats === 'function') {
+      window.recalculateTotalStats();
+    }
+    
     // Use compression from models module
     const compressedData = window.compressData ? window.compressData(statistics) : JSON.stringify(statistics);
     
@@ -99,7 +104,7 @@ function saveStatistics() {
     
     // Only log size in development mode
     if (isDevelopmentMode()) {
-      devLog(`💾 Saving statistics (${sizeKB} KB compressed)`);
+      devLog(`💾 Saving statistics (${sizeKB} KB compressed) with recalculated totals`);
     }
     
     // Check localStorage quota (approximately 5-10MB in most browsers)
@@ -178,8 +183,9 @@ function loadStatistics() {
       devLog("📊 Statistics loaded successfully");
       
       // Recalculate total stats to ensure consistency
-      if (typeof recalculateTotalStats === 'function') {
-        recalculateTotalStats();
+      if (typeof window.recalculateTotalStats === 'function') {
+        window.recalculateTotalStats();
+        devLog("📊 Total statistics recalculated after loading");
       }
       
       // Save the cleaned data back
