@@ -2,22 +2,19 @@
  * Exam Loading & Discovery Module
  * 
  * Handles exam discovery, loading, and initialization for Exams-Viewer application.
- * Includes manifest loading, directory discovery, chunked exam support, and UI initialization.
+ * Includes manifest loading, directory discovery, and UI initialization.
  * 
  * Dependencies: 
  * - Global variables: availableExams, currentExam, allQuestions, currentQuestions, currentQuestionIndex,
- *   filteredQuestions, isSearchActive, searchCache, lazyLoadingConfig, settings, isHighlightEnabled,
+ *   filteredQuestions, isSearchActive, searchCache, settings, isHighlightEnabled,
  *   isHighlightTemporaryOverride
  * - External functions: devLog, devError, showLoading, showError, showSuccess, clearQuestionStatusCache,
  *   startExamSession, updateAdvancedSearchVisibility, initializeSearchInterface,
  *   displayCurrentQuestion, clearNavigationHistory, updateProgressSidebar, updateHistoryButtons,
  *   updateQuestionJumpMaxValue, testQuestionJumpField, resetFavoritesData, exportFavorites,
  *   isDevelopmentMode
- * - Lazy Loading Module: checkForChunkedExam, loadChunk, preloadChunks, assembleCurrentQuestions
  */
 
-// Import lazy loading functions
-// Note: These will be imported by the main script that uses this module
 
 // ===========================
 // EXAM DISCOVERY FUNCTIONS
@@ -366,81 +363,43 @@ async function loadExam(examCode) {
   }
 
   try {
-    // Reset lazy loading state
-    if (window.lazyLoadingConfig) {
-      window.lazyLoadingConfig.loadedChunks.clear();
-      window.lazyLoadingConfig.currentChunk = 0;
-      window.lazyLoadingConfig.examMetadata = null;
+    // Load exam data directly from exam.json
+    const response = await fetch(`data/${examCode}/exam.json`);
+    if (!response.ok) {
+      throw new Error(`Failed to load exam data: ${response.status}`);
     }
 
-    // Check if this exam has chunked version for lazy loading
-    const isChunked = await window.checkForChunkedExam(examCode);
-
-    if (isChunked) {
-      // Load first chunk immediately for chunked exams
-      const firstChunk = await window.loadChunk(examCode, 0);
-      if (firstChunk.length === 0) {
-        throw new Error("Failed to load first chunk of exam data");
-      }
-
-      // Set up exam data
-      window.currentExam = {
-        exam_name: window.lazyLoadingConfig.examMetadata.exam_name || examCode,
-        exam_code: examCode,
-        code: examCode,
-        questions: [], // Will be assembled dynamically
-        isChunked: true
-      };
-      
-      // Set global exam code for favorites system
-      window.currentExamCode = examCode;
-
-      // Preload nearby chunks
-      await window.preloadChunks(examCode, 0);
-
-      // Assemble current questions from loaded chunks
-      window.allQuestions = window.assembleCurrentQuestions();
-      window.currentQuestions = [...window.allQuestions];
-    } else {
-      // Standard loading for smaller exams
-      const response = await fetch(`data/${examCode}/exam.json`);
-      if (!response.ok) {
-        throw new Error(`Failed to load exam data: ${response.status}`);
-      }
-
-      const data = await response.json();
-      if (!data.questions || !Array.isArray(data.questions)) {
-        throw new Error("Invalid exam data format");
-      }
-
-      // Store the complete exam data object
-      window.currentExam = {
-        exam_name: data.exam_name || examCode,
-        exam_code: examCode,
-        code: examCode,
-        questions: data.questions,
-        isChunked: false
-      };
-      
-      // Set global exam code for favorites system
-      window.currentExamCode = examCode;
-
-      // Sort questions by question_number numerically with robust comparison
-      window.allQuestions = data.questions.sort((a, b) => {
-        const numA = parseInt(a.question_number, 10);
-        const numB = parseInt(b.question_number, 10);
-
-        // Handle invalid numbers
-        if (isNaN(numA) && isNaN(numB)) return 0;
-        if (isNaN(numA)) return 1;
-        if (isNaN(numB)) return -1;
-
-        return numA - numB;
-      });
-
-      // Initialize current questions
-      window.currentQuestions = [...window.allQuestions];
+    const data = await response.json();
+    if (!data.questions || !Array.isArray(data.questions)) {
+      throw new Error("Invalid exam data format");
     }
+
+    // Store the complete exam data object
+    window.currentExam = {
+      exam_name: data.exam_name || examCode,
+      exam_code: examCode,
+      code: examCode,
+      questions: data.questions
+    };
+    
+    // Set global exam code for favorites system
+    window.currentExamCode = examCode;
+
+    // Sort questions by question_number numerically with robust comparison
+    window.allQuestions = data.questions.sort((a, b) => {
+      const numA = parseInt(a.question_number, 10);
+      const numB = parseInt(b.question_number, 10);
+
+      // Handle invalid numbers
+      if (isNaN(numA) && isNaN(numB)) return 0;
+      if (isNaN(numA)) return 1;
+      if (isNaN(numB)) return -1;
+
+      return numA - numB;
+    });
+
+    // Initialize current questions
+    window.currentQuestions = [...window.allQuestions];
     
     // Reset search state
     window.filteredQuestions = [];
@@ -595,7 +554,6 @@ async function loadExam(examCode) {
   }
 }
 
-// Note: checkForChunkedExam is now provided by the Lazy Loading module
 
 // ===========================
 // IMAGE PROCESSING FUNCTIONS

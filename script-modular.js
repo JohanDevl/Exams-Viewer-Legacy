@@ -213,20 +213,6 @@ import {
   processEmbeddedImages,
 } from './js/modules/exam-loader.js';
 
-// Lazy loading system
-import {
-  checkForChunkedExam,
-  loadChunk,
-  preloadChunks,
-  getChunkIdForQuestion,
-  ensureQuestionLoaded,
-  assembleCurrentQuestions,
-  clearUnusedChunks,
-  getMemoryStats,
-  resetLazyLoadingConfig,
-  createPerformanceMonitor,
-  initializeLazyLoading,
-} from './js/modules/lazy-loading.js';
 
 // ===========================
 // GLOBAL FUNCTION ASSIGNMENTS
@@ -414,18 +400,6 @@ function exposeGlobalFunctions() {
   window.loadExam = loadExam;
   window.processEmbeddedImages = processEmbeddedImages;
 
-  // Lazy loading
-  window.checkForChunkedExam = checkForChunkedExam;
-  window.loadChunk = loadChunk;
-  window.preloadChunks = preloadChunks;
-  window.getChunkIdForQuestion = getChunkIdForQuestion;
-  window.ensureQuestionLoaded = ensureQuestionLoaded;
-  window.assembleCurrentQuestions = assembleCurrentQuestions;
-  window.clearUnusedChunks = clearUnusedChunks;
-  window.getMemoryStats = getMemoryStats;
-  window.resetLazyLoadingConfig = resetLazyLoadingConfig;
-  window.createPerformanceMonitor = createPerformanceMonitor;
-  window.initializeLazyLoading = initializeLazyLoading;
 
   // Statistics UI functions
   window.displayStatistics = displayStatistics;
@@ -466,9 +440,6 @@ async function initializeApplication() {
     loadFavorites();
     devLog("✅ User data loaded");
 
-    // 4. Initialize lazy loading system
-    initializeLazyLoading();
-    devLog("✅ Lazy loading system initialized");
 
 
     // 6. Initialize mobile navigation if on mobile device

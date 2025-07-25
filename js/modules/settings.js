@@ -85,7 +85,6 @@ function loadSettingsUI() {
           showQuestionToolbar: false,
           showAdvancedSearch: false,
           sidebarOpen: false,
-          enableLazyLoading: false,
           showMainProgressBar: true,
           showTooltips: false,
         };
@@ -101,7 +100,6 @@ function loadSettingsUI() {
         darkMode: document.getElementById("darkModeToggle"),
         showQuestionToolbar: document.getElementById("showQuestionToolbar"),
         showAdvancedSearch: document.getElementById("showAdvancedSearch"),
-        enableLazyLoading: document.getElementById("enableLazyLoading"),
         showMainProgressBar: document.getElementById("showMainProgressBar"),
         showTooltips: document.getElementById("showTooltips"),
       };
@@ -149,7 +147,6 @@ function saveSettingsUI() {
         showQuestionToolbar: false,
         showAdvancedSearch: false,
         sidebarOpen: false,
-        enableLazyLoading: false,
         showMainProgressBar: true,
         showTooltips: false,
       };
@@ -162,7 +159,6 @@ function saveSettingsUI() {
       darkMode: document.getElementById("darkModeToggle"),
       showQuestionToolbar: document.getElementById("showQuestionToolbar"),
       showAdvancedSearch: document.getElementById("showAdvancedSearch"),
-      enableLazyLoading: document.getElementById("enableLazyLoading"),
       showMainProgressBar: document.getElementById("showMainProgressBar"),
       showTooltips: document.getElementById("showTooltips"),
     };
@@ -392,18 +388,6 @@ function handleAdvancedSearchToggle() {
   }
 }
 
-/**
- * Handle lazy loading toggle
- */
-function handleLazyLoadingToggle() {
-  if (window.settings) {
-    const enableLazyLoading = document.getElementById("enableLazyLoading");
-    if (enableLazyLoading) {
-      window.settings.enableLazyLoading = enableLazyLoading.checked;
-      saveSettingsUI();
-    }
-  }
-}
 
 /**
  * Handle main progress bar visibility toggle
@@ -472,11 +456,6 @@ function setupSettingsEventListeners() {
     showAdvancedSearch.addEventListener("change", handleAdvancedSearchToggle);
   }
   
-  // Lazy loading toggle
-  const enableLazyLoading = document.getElementById("enableLazyLoading");
-  if (enableLazyLoading) {
-    enableLazyLoading.addEventListener("change", handleLazyLoadingToggle);
-  }
   
   // Main progress bar toggle
   const showMainProgressBar = document.getElementById("showMainProgressBar");
@@ -532,7 +511,6 @@ export {
   handleShowDiscussionDefaultToggle,
   handleQuestionToolbarToggle,
   handleAdvancedSearchToggle,
-  handleLazyLoadingToggle,
   handleMainProgressBarToggle,
   handleTooltipsToggle,
   

@@ -113,3 +113,4 @@ pids/
 # Claude AI
 .claude/
 *log.md
+CLAUDE.md
