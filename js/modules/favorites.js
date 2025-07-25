@@ -214,7 +214,7 @@ function updateQuestionNote(questionIndex, note) {
       } else {
         window.favoritesData.favorites[examCode][questionNumber] = {
           isFavorite: false,
-          category: 'Important',
+          category: null,
           note: note.trim(),
           dateAdded: Date.now(),
           lastModified: Date.now(),
@@ -346,7 +346,7 @@ function removeCustomCategory(categoryName) {
     Object.values(window.favoritesData.favorites).forEach(examFavorites => {
       Object.values(examFavorites).forEach(favorite => {
         if (favorite.category === categoryName) {
-          favorite.category = 'Important'; // Reset to default
+          favorite.category = null; // Reset to no category
           favorite.lastModified = Date.now();
         }
       });
@@ -384,7 +384,7 @@ function getAllCategories() {
     if (typeof window.devError === 'function') {
       window.devError("Error getting all categories:", error);
     }
-    return ['Important', 'Review', 'Difficult']; // Fallback to defaults
+    return []; // No default categories
   }
 }
 
@@ -459,115 +459,6 @@ function updateQuestionCategory(questionIndex, newCategory) {
       window.devError("Error updating question category:", error);
     }
     return false;
-  }
-}
-
-// ===========================
-// REVISION MODE
-// ===========================
-
-/**
- * Toggle revision mode
- */
-function toggleRevisionMode() {
-  try {
-    window.favoritesData.isRevisionMode = !window.favoritesData.isRevisionMode;
-
-    // Save to localStorage
-    if (typeof window.saveFavorites === 'function') {
-      window.saveFavorites();
-    }
-
-    if (typeof window.devLog === 'function') {
-      window.devLog(`🔄 Revision mode: ${window.favoritesData.isRevisionMode ? 'ON' : 'OFF'}`);
-    }
-
-    // Update UI if functions available
-    if (typeof window.updateFilterCounts === 'function') {
-      window.updateFilterCounts();
-    }
-
-    return window.favoritesData.isRevisionMode;
-  } catch (error) {
-    if (typeof window.devError === 'function') {
-      window.devError("Error toggling revision mode:", error);
-    }
-    return false;
-  }
-}
-
-/**
- * Update revision filter settings
- */
-function updateRevisionFilter(filterSettings) {
-  try {
-    if (!filterSettings || typeof filterSettings !== 'object') {
-      if (typeof window.devError === 'function') {
-        window.devError("Invalid filter settings");
-      }
-      return false;
-    }
-
-    // Update filter settings
-    Object.assign(window.favoritesData.revisionFilter, filterSettings);
-
-    // Save to localStorage
-    if (typeof window.saveFavorites === 'function') {
-      window.saveFavorites();
-    }
-
-    if (typeof window.devLog === 'function') {
-      window.devLog("🔍 Updated revision filter settings");
-    }
-
-    return true;
-  } catch (error) {
-    if (typeof window.devError === 'function') {
-      window.devError("Error updating revision filter:", error);
-    }
-    return false;
-  }
-}
-
-/**
- * Get filtered questions based on revision settings
- */
-function getFilteredQuestions() {
-  try {
-    if (!window.favoritesData.isRevisionMode || !window.currentQuestions) {
-      return window.currentQuestions || [];
-    }
-
-    const examFavorites = getCurrentExamFavorites();
-    const filter = window.favoritesData.revisionFilter;
-
-    return window.currentQuestions.filter((question, index) => {
-      const questionNumber = index + 1;
-      const favorite = examFavorites[questionNumber];
-
-      if (!favorite) return false; // Not a favorite or has notes
-
-      // Check favorite filter
-      if (filter.showFavorites && favorite.isFavorite) {
-        // Check category filter
-        if (filter.showCategories.length === 0 || 
-            filter.showCategories.includes(favorite.category)) {
-          return true;
-        }
-      }
-
-      // Check notes filter
-      if (filter.showNotes && favorite.note && favorite.note.trim() !== '') {
-        return true;
-      }
-
-      return false;
-    });
-  } catch (error) {
-    if (typeof window.devError === 'function') {
-      window.devError("Error getting filtered questions:", error);
-    }
-    return window.currentQuestions || [];
   }
 }
 
@@ -692,7 +583,7 @@ function cleanupObsoleteData() {
               favorite.isFavorite = false;
             }
             if (!favorite.category) {
-              favorite.category = 'Important';
+              favorite.category = null;
             }
             if (!favorite.note) {
               favorite.note = '';
@@ -745,11 +636,6 @@ export {
   removeCustomCategory,
   getAllCategories,
   updateQuestionCategory,
-  
-  // Revision mode
-  toggleRevisionMode,
-  updateRevisionFilter,
-  getFilteredQuestions,
   
   // Statistics & analytics
   getFavoritesStats,

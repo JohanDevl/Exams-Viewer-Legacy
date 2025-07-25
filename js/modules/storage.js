@@ -222,14 +222,8 @@ function loadFavorites() {
       
       // Merge with existing structure to ensure all properties exist
       favoritesData.favorites = loadedData.favorites || {};
-      favoritesData.categories = loadedData.categories || ["Important", "Review", "Difficult"];
+      favoritesData.categories = loadedData.categories || [];
       favoritesData.customCategories = loadedData.customCategories || [];
-      favoritesData.isRevisionMode = loadedData.isRevisionMode || false;
-      favoritesData.revisionFilter = loadedData.revisionFilter || {
-        showFavorites: true,
-        showCategories: [],
-        showNotes: true,
-      };
       
       devLog("⭐ Favorites loaded successfully");
       

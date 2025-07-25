@@ -78,14 +78,8 @@ const lazyLoadingState = {
  */
 const favoritesState = {
   favorites: {}, // { examCode: { questionNumber: { isFavorite: true, category: 'important', note: 'text', timestamp: timestamp } } }
-  categories: ["Important", "Review", "Difficult"], // Default categories
+  categories: [], // Default categories (empty)
   customCategories: [], // User-defined categories
-  isRevisionMode: false, // Track if we're in revision mode
-  revisionFilter: {
-    showFavorites: true,
-    showCategories: [], // Categories to show in revision mode
-    showNotes: true, // Show only questions with notes
-  },
 };
 
 /**
@@ -515,7 +509,6 @@ function getStateSummary() {
     },
     favorites: {
       examCount: Object.keys(favoritesState.favorites).length,
-      isRevisionMode: favoritesState.isRevisionMode,
       categoriesCount: favoritesState.categories.length + favoritesState.customCategories.length,
     },
     statistics: {

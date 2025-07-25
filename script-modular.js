@@ -135,9 +135,6 @@ import {
   removeCustomCategory,
   getAllCategories,
   updateQuestionCategory,
-  toggleRevisionMode,
-  updateRevisionFilter,
-  getFilteredQuestions,
   getFavoritesStats,
   cleanupObsoleteData,
 } from './js/modules/favorites.js';
@@ -366,9 +363,6 @@ function exposeGlobalFunctions() {
   window.removeCustomCategory = removeCustomCategory;
   window.getAllCategories = getAllCategories;
   window.updateQuestionCategory = updateQuestionCategory;
-  window.toggleRevisionMode = toggleRevisionMode;
-  window.updateRevisionFilter = updateRevisionFilter;
-  window.getFilteredQuestions = getFilteredQuestions;
   window.getFavoritesStats = getFavoritesStats;
   // Note: resetFavoritesData, exportFavorites, importFavorites not implemented in favorites module yet
   // window.resetFavoritesData = resetFavoritesData;
@@ -650,6 +644,7 @@ function setupMainEventListeners() {
   if (keyboardHelpBtn) {
     keyboardHelpBtn.addEventListener("click", showKeyboardHelp);
   }
+
 
   // History navigation buttons
   const historyBackBtn = document.getElementById("historyBackBtn");
@@ -1227,12 +1222,6 @@ function setupMainEventListeners() {
             window.favoritesData.favorites = {};
             window.favoritesData.categories = []; // Empty categories instead of defaults
             window.favoritesData.customCategories = [];
-            window.favoritesData.isRevisionMode = false;
-            window.favoritesData.revisionFilter = {
-              showFavorites: true,
-              showCategories: [],
-              showNotes: true,
-            };
           }
           
           // Save the empty state

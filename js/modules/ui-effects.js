@@ -229,14 +229,11 @@ function updateMainProgressBarVisibility() {
 function updateToolbarVisibility() {
   if (!window.settings) return;
   
-  const revisionModeBtn = document.getElementById("revisionModeBtn");
   const questionToolbar = document.getElementById("questionToolbar");
   
   if (window.settings.showQuestionToolbar) {
-    if (revisionModeBtn) revisionModeBtn.style.display = "inline-block";
     if (questionToolbar) questionToolbar.style.display = "flex";
   } else {
-    if (revisionModeBtn) revisionModeBtn.style.display = "none";
     if (questionToolbar) questionToolbar.style.display = "none";
   }
 }
