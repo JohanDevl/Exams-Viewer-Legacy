@@ -1462,7 +1462,7 @@ function showStatsTab(tabName) {
 }
 
 /**
- * Update overview tab with GLOBAL statistics from all exams and sessions
+ * Update overview tab with ENHANCED global statistics from all exams and sessions
  */
 function updateOverviewTab() {
   // First ensure statistics are recalculated and up to date
@@ -1477,34 +1477,118 @@ function updateOverviewTab() {
         totalQuestions: 0,
         totalCorrect: 0,
         totalIncorrect: 0,
-        totalPreview: 0
+        totalPreview: 0,
+        totalAnswered: 0,
+        overallAccuracy: 0,
+        totalTime: 0,
+        averageTimePerQuestion: 0,
+        totalSessions: 0,
+        examsCount: 0
       };
 
+  // Calculate derived metrics
+  const totalAnsweredQuestions = globalStats.totalCorrect + globalStats.totalIncorrect + globalStats.totalPreview;
+  const correctPercentage = totalAnsweredQuestions > 0 ? Math.round((globalStats.totalCorrect / totalAnsweredQuestions) * 100) : 0;
+  const incorrectPercentage = totalAnsweredQuestions > 0 ? Math.round((globalStats.totalIncorrect / totalAnsweredQuestions) * 100) : 0;
+  const previewPercentage = totalAnsweredQuestions > 0 ? Math.round((globalStats.totalPreview / totalAnsweredQuestions) * 100) : 0;
+  
+  // Calculate favorites count
+  let totalFavorites = 0;
+  if (window.favorites && typeof window.favorites === 'object') {
+    Object.values(window.favorites).forEach(examFavorites => {
+      if (examFavorites && typeof examFavorites === 'object') {
+        totalFavorites += Object.keys(examFavorites).length;
+      }
+    });
+  }
+  
+  // Format time display
+  const formatTime = (seconds) => {
+    if (seconds < 60) return `${seconds}s`;
+    if (seconds < 3600) return `${Math.round(seconds / 60)}m`;
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+  };
+  
+  const averageQuestionsPerSession = globalStats.totalSessions > 0 ? 
+    Math.round(totalAnsweredQuestions / globalStats.totalSessions) : 0;
+
+  // Update main metric elements
   const elements = {
+    // Main metrics
     totalQuestions: document.getElementById("totalQuestions"),
     totalCorrect: document.getElementById("totalCorrect"),
     totalIncorrect: document.getElementById("totalIncorrect"),
-    totalPreview: document.getElementById("totalPreview")
+    totalPreview: document.getElementById("totalPreview"),
+    
+    // Additional metrics
+    totalExams: document.getElementById("totalExams"),
+    totalTimeSpent: document.getElementById("totalTimeSpent"),
+    totalSessions: document.getElementById("totalSessions"),
+    totalFavorites: document.getElementById("totalFavorites"),
+    
+    // Percentages and trends
+    correctPercentage: document.getElementById("correctPercentage"),
+    incorrectPercentage: document.getElementById("incorrectPercentage"),
+    previewPercentage: document.getElementById("previewPercentage"),
+    averageTimePerQuestion: document.getElementById("averageTimePerQuestion"),
+    averageQuestionsPerSession: document.getElementById("averageQuestionsPerSession"),
+    
+    // Overall accuracy
+    overallAccuracyPercent: document.getElementById("overallAccuracyPercent"),
+    
+    // Progress segments
+    correctProgressSegment: document.getElementById("correctProgressSegment"),
+    incorrectProgressSegment: document.getElementById("incorrectProgressSegment"),
+    previewProgressSegment: document.getElementById("previewProgressSegment"),
+    correctProgressText: document.getElementById("correctProgressText"),
+    incorrectProgressText: document.getElementById("incorrectProgressText"),
+    previewProgressText: document.getElementById("previewProgressText")
   };
 
-  // Map global stats to display elements - show total answered questions, not all questions
-  const totalAnsweredQuestions = globalStats.totalCorrect + globalStats.totalIncorrect + globalStats.totalPreview;
+  // Update elements
+  if (elements.totalQuestions) elements.totalQuestions.textContent = totalAnsweredQuestions;
+  if (elements.totalCorrect) elements.totalCorrect.textContent = globalStats.totalCorrect;
+  if (elements.totalIncorrect) elements.totalIncorrect.textContent = globalStats.totalIncorrect;
+  if (elements.totalPreview) elements.totalPreview.textContent = globalStats.totalPreview;
+  if (elements.totalExams) elements.totalExams.textContent = globalStats.examsCount;
+  if (elements.totalTimeSpent) elements.totalTimeSpent.textContent = formatTime(globalStats.totalTime);
+  if (elements.totalSessions) elements.totalSessions.textContent = globalStats.totalSessions;
+  if (elements.totalFavorites) elements.totalFavorites.textContent = totalFavorites;
   
-  const statsMapping = {
-    totalQuestions: totalAnsweredQuestions, // Total questions answered across all sessions
-    totalCorrect: globalStats.totalCorrect,
-    totalIncorrect: globalStats.totalIncorrect,
-    totalPreview: globalStats.totalPreview
-  };
-
-  Object.entries(elements).forEach(([key, element]) => {
-    if (element && statsMapping[key] !== undefined) {
-      element.textContent = statsMapping[key];
+  // Update percentage displays
+  if (elements.correctPercentage) elements.correctPercentage.textContent = `${correctPercentage}% correct`;
+  if (elements.incorrectPercentage) elements.incorrectPercentage.textContent = `${incorrectPercentage}% incorrect`;
+  if (elements.previewPercentage) elements.previewPercentage.textContent = `${previewPercentage}% previewed`;
+  if (elements.averageTimePerQuestion) elements.averageTimePerQuestion.textContent = `${globalStats.averageTimePerQuestion}s avg/question`;
+  if (elements.averageQuestionsPerSession) elements.averageQuestionsPerSession.textContent = `${averageQuestionsPerSession} avg questions`;
+  
+  // Update overall accuracy badge
+  if (elements.overallAccuracyPercent) {
+    elements.overallAccuracyPercent.textContent = `${globalStats.overallAccuracy}%`;
+    
+    // Update badge color based on accuracy
+    const accuracyBadge = document.getElementById("overallAccuracyBadge");
+    if (accuracyBadge) {
+      let badgeClass = 'accuracy-low';
+      if (globalStats.overallAccuracy >= 80) badgeClass = 'accuracy-high';
+      else if (globalStats.overallAccuracy >= 60) badgeClass = 'accuracy-medium';
+      
+      accuracyBadge.className = `accuracy-badge ${badgeClass}`;
     }
-  });
+  }
+  
+  // Update progress bar segments
+  if (elements.correctProgressSegment) elements.correctProgressSegment.style.width = `${correctPercentage}%`;
+  if (elements.incorrectProgressSegment) elements.incorrectProgressSegment.style.width = `${incorrectPercentage}%`;
+  if (elements.previewProgressSegment) elements.previewProgressSegment.style.width = `${previewPercentage}%`;
+  if (elements.correctProgressText) elements.correctProgressText.textContent = `${correctPercentage}%`;
+  if (elements.incorrectProgressText) elements.incorrectProgressText.textContent = `${incorrectPercentage}%`;
+  if (elements.previewProgressText) elements.previewProgressText.textContent = `${previewPercentage}%`;
   
   if (typeof window.devLog === 'function') {
-    window.devLog(`📊 Overview updated - Total: ${totalAnsweredQuestions}, Correct: ${globalStats.totalCorrect}, Incorrect: ${globalStats.totalIncorrect}, Preview: ${globalStats.totalPreview}`);
+    window.devLog(`📊 Enhanced Overview updated - Total: ${totalAnsweredQuestions}, Accuracy: ${globalStats.overallAccuracy}%, Exams: ${globalStats.examsCount}, Sessions: ${globalStats.totalSessions}`);
   }
 }
 

@@ -4990,3 +4990,392 @@ body {
     align-items: center;
   }
 }
+
+/* ===========================
+   ENHANCED OVERVIEW STATISTICS
+   =========================== */
+
+/* Overview Summary Section */
+.overview-summary {
+  margin-bottom: 2rem;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.summary-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.accuracy-badge {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+  transition: all 0.3s ease;
+}
+
+.accuracy-badge.accuracy-high {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.accuracy-badge.accuracy-medium {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+}
+
+.accuracy-badge.accuracy-low {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+}
+
+.accuracy-badge:hover {
+  transform: translateY(-2px);
+}
+
+.accuracy-badge.accuracy-high:hover {
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.accuracy-badge.accuracy-medium:hover {
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+}
+
+.accuracy-badge.accuracy-low:hover {
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+}
+
+.accuracy-badge span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+}
+
+.accuracy-badge small {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Enhanced Metrics Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-color: var(--accent-color);
+}
+
+.metric-card:hover::before {
+  opacity: 1;
+}
+
+.metric-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  opacity: 0.1;
+  border-radius: inherit;
+}
+
+.metric-card.primary .metric-icon {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+}
+
+.metric-card.success .metric-icon {
+  background: linear-gradient(135deg, #4caf50, #388e3c);
+}
+
+.metric-card.error .metric-icon {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.metric-card.warning .metric-icon {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.metric-card.info .metric-icon {
+  background: linear-gradient(135deg, #00bcd4, #0097a7);
+}
+
+.metric-card.secondary .metric-icon {
+  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+}
+
+.metric-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.metric-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.metric-trend {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.metric-trend small {
+  font-weight: 500;
+}
+
+/* Progress Visualization */
+.progress-visualization {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.progress-visualization h4 {
+  margin: 0 0 1.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-chart {
+  width: 100%;
+}
+
+.progress-bar-container {
+  width: 100%;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 16px;
+  background-color: var(--bg-tertiary);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 1rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-segment {
+  height: 100%;
+  transition: width 0.8s ease;
+  position: relative;
+}
+
+.progress-segment.correct {
+  background: linear-gradient(90deg, #4caf50, #66bb6a);
+}
+
+.progress-segment.incorrect {
+  background: linear-gradient(90deg, #f44336, #ef5350);
+}
+
+.progress-segment.preview {
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.progress-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.progress-label.correct .color-dot {
+  background: #4caf50;
+}
+
+.progress-label.incorrect .color-dot {
+  background: #f44336;
+}
+
+.progress-label.preview .color-dot {
+  background: #ff9800;
+}
+
+/* Dark Theme Adaptations */
+[data-theme="dark"] .accuracy-badge {
+  background: linear-gradient(135deg, #388e3c, #2e7d32);
+  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.4);
+}
+
+[data-theme="dark"] .accuracy-badge:hover {
+  box-shadow: 0 4px 12px rgba(56, 142, 60, 0.5);
+}
+
+[data-theme="dark"] .metric-card:hover {
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .progress-bar {
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .metric-card {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+  
+  .metric-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+  
+  .metric-value {
+    font-size: 1.75rem;
+  }
+  
+  .summary-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .summary-header h3 {
+    font-size: 1.25rem;
+  }
+  
+  .accuracy-badge {
+    align-self: stretch;
+    text-align: center;
+  }
+  
+  .progress-labels {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .overview-summary,
+  .progress-visualization {
+    margin: 0 -0.5rem;
+    border-radius: 0.75rem;
+  }
+  
+  .metrics-grid {
+    gap: 0.75rem;
+  }
+  
+  .metric-card {
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+  
+  .metric-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.125rem;
+    border-radius: 0.75rem;
+  }
+  
+  .metric-value {
+    font-size: 1.5rem;
+  }
+  
+  .progress-visualization {
+    padding: 1.25rem;
+  }
+}

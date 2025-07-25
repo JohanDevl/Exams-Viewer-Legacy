@@ -528,41 +528,150 @@
             <div class="stats-content">
               <!-- Overview Tab -->
               <div id="overviewTab" class="stats-tab-content active">
-                <div class="stats-grid">
-                  <div class="stat-card">
-                    <div class="stat-icon">
-                      <i class="fas fa-question-circle"></i>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-value" id="totalQuestions">0</div>
-                      <div class="stat-label">Total Questions</div>
-                    </div>
-                  </div>
-                  <div class="stat-card">
-                    <div class="stat-icon success">
-                      <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-value" id="totalCorrect">0</div>
-                      <div class="stat-label">Correct Answers</div>
+                <!-- Main Performance Summary -->
+                <div class="overview-summary">
+                  <div class="summary-header">
+                    <h3><i class="fas fa-chart-line"></i> Performance Overview</h3>
+                    <div class="accuracy-badge" id="overallAccuracyBadge">
+                      <span id="overallAccuracyPercent">0%</span>
+                      <small>Overall Accuracy</small>
                     </div>
                   </div>
-                  <div class="stat-card">
-                    <div class="stat-icon error">
-                      <i class="fas fa-times-circle"></i>
+                  
+                  <!-- Key Metrics Grid -->
+                  <div class="metrics-grid">
+                    <!-- Primary Stats Row -->
+                    <div class="metric-card primary">
+                      <div class="metric-icon">
+                        <i class="fas fa-question-circle"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalQuestions">0</div>
+                        <div class="metric-label">Questions Answered</div>
+                        <div class="metric-trend" id="questionsTrend">
+                          <small>Across all exams</small>
+                        </div>
+                      </div>
                     </div>
-                    <div class="stat-info">
-                      <div class="stat-value" id="totalIncorrect">0</div>
-                      <div class="stat-label">Incorrect Answers</div>
+                    
+                    <div class="metric-card success">
+                      <div class="metric-icon">
+                        <i class="fas fa-check-circle"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalCorrect">0</div>
+                        <div class="metric-label">Correct Answers</div>
+                        <div class="metric-trend" id="correctTrend">
+                          <small id="correctPercentage">0% correct</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card error">
+                      <div class="metric-icon">
+                        <i class="fas fa-times-circle"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalIncorrect">0</div>
+                        <div class="metric-label">Incorrect Answers</div>
+                        <div class="metric-trend" id="incorrectTrend">
+                          <small id="incorrectPercentage">0% incorrect</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card warning">
+                      <div class="metric-icon">
+                        <i class="fas fa-eye"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalPreview">0</div>
+                        <div class="metric-label">Preview Mode</div>
+                        <div class="metric-trend" id="previewTrend">
+                          <small id="previewPercentage">0% previewed</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Secondary Stats Row -->
+                    <div class="metric-card info">
+                      <div class="metric-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalExams">0</div>
+                        <div class="metric-label">Exams Studied</div>
+                        <div class="metric-trend" id="examsTrend">
+                          <small>Different certifications</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card info">
+                      <div class="metric-icon">
+                        <i class="fas fa-clock"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalTimeSpent">0m</div>
+                        <div class="metric-label">Time Studied</div>
+                        <div class="metric-trend" id="timeTrend">
+                          <small id="averageTimePerQuestion">0s avg/question</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card info">
+                      <div class="metric-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalSessions">0</div>
+                        <div class="metric-label">Study Sessions</div>
+                        <div class="metric-trend" id="sessionsTrend">
+                          <small id="averageQuestionsPerSession">0 avg questions</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card secondary">
+                      <div class="metric-icon">
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalFavorites">0</div>
+                        <div class="metric-label">Favorites Saved</div>
+                        <div class="metric-trend" id="favoritesTrend">
+                          <small>Important questions</small>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="stat-card">
-                    <div class="stat-icon warning">
-                      <i class="fas fa-eye"></i>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-value" id="totalPreview">0</div>
-                      <div class="stat-label">Preview Answers</div>
+                </div>
+                
+                <!-- Progress Visualization -->
+                <div class="progress-visualization">
+                  <h4><i class="fas fa-chart-pie"></i> Study Progress Breakdown</h4>
+                  <div class="progress-chart">
+                    <div class="progress-bar-container">
+                      <div class="progress-bar">
+                        <div class="progress-segment correct" id="correctProgressSegment" style="width: 0%"></div>
+                        <div class="progress-segment incorrect" id="incorrectProgressSegment" style="width: 0%"></div>
+                        <div class="progress-segment preview" id="previewProgressSegment" style="width: 0%"></div>
+                      </div>
+                      <div class="progress-labels">
+                        <div class="progress-label correct">
+                          <span class="color-dot"></span>
+                          <span>Correct (<span id="correctProgressText">0%</span>)</span>
+                        </div>
+                        <div class="progress-label incorrect">
+                          <span class="color-dot"></span>
+                          <span>Incorrect (<span id="incorrectProgressText">0%</span>)</span>
+                        </div>
+                        <div class="progress-label preview">
+                          <span class="color-dot"></span>
+                          <span>Preview (<span id="previewProgressText">0%</span>)</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
