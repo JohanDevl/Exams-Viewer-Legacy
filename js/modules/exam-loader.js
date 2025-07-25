@@ -9,7 +9,7 @@
  *   filteredQuestions, isSearchActive, searchCache, lazyLoadingConfig, settings, isHighlightEnabled,
  *   isHighlightTemporaryOverride
  * - External functions: devLog, devError, showLoading, showError, showSuccess, clearQuestionStatusCache,
- *   startExamSession, updateAdvancedSearchVisibility, initializeSearchInterface, handleResumePosition,
+ *   startExamSession, updateAdvancedSearchVisibility, initializeSearchInterface, initializeResumePosition,
  *   displayCurrentQuestion, clearNavigationHistory, updateProgressSidebar, updateHistoryButtons,
  *   updateQuestionJumpMaxValue, testQuestionJumpField, resetFavoritesData, exportFavorites,
  *   isDevelopmentMode
@@ -541,8 +541,8 @@ async function loadExam(examCode) {
     }
     
     // Check for resume position after questions are loaded
-    if (typeof window.handleResumePosition === 'function') {
-      await window.handleResumePosition(examCode);
+    if (typeof window.initializeResumePosition === 'function') {
+      await window.initializeResumePosition(examCode);
     }
     
     // Display current question

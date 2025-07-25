@@ -808,6 +808,31 @@ function updateFilterCounts() {
 }
 
 /**
+ * Calculate category counts for filters
+ */
+function calculateCategoryCounts() {
+  try {
+    const categoryCounts = {};
+    const questionsToCount = isSearchActive && filteredQuestions.length >= 0 ? filteredQuestions : allQuestions;
+    
+    questionsToCount.forEach((question, index) => {
+      const category = typeof window.getQuestionCategory === 'function' 
+        ? window.getQuestionCategory(window.currentExamCode, question.question_number) 
+        : null;
+      
+      if (category) {
+        categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+      }
+    });
+    
+    return categoryCounts;
+  } catch (error) {
+    console.error("Error calculating category counts:", error);
+    return {};
+  }
+}
+
+/**
  * Update category filters dynamically
  */
 function updateCategoryFilters(categoryCounts) {
@@ -817,6 +842,11 @@ function updateCategoryFilters(categoryCounts) {
     
     if (!categoryFilterGroup || !categoryFilterOptions) {
       return;
+    }
+    
+    // If no categoryCounts provided, calculate them
+    if (!categoryCounts || typeof categoryCounts !== 'object') {
+      categoryCounts = calculateCategoryCounts();
     }
     
     // Save current checkbox states before clearing
@@ -832,7 +862,7 @@ function updateCategoryFilters(categoryCounts) {
     categoryFilterOptions.innerHTML = '';
     
     // Show/hide category group based on whether there are categories
-    const hasCategories = Object.keys(categoryCounts).length > 0;
+    const hasCategories = Object.keys(categoryCounts || {}).length > 0;
     categoryFilterGroup.style.display = hasCategories ? 'block' : 'none';
     
     if (!hasCategories) {

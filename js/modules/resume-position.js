@@ -20,6 +20,7 @@
 function saveStudyPosition(examCode, questionIndex) {
   try {
     if (!window.settings?.enableResumePosition) {
+      console.log("📍 Resume position disabled in settings");
       return false;
     }
 
@@ -396,6 +397,11 @@ function resumeToPosition(resumeChoice) {
       window.currentQuestionIndex = resumeChoice.questionIndex;
     }
 
+    // Restore question state after navigation with a small delay to ensure UI updates
+    setTimeout(() => {
+      restoreQuestionState();
+    }, 100);
+
     if (typeof window.showSuccess === 'function') {
       window.showSuccess(`Resumed from Question ${resumeChoice.questionNumber}`);
     }
@@ -410,6 +416,121 @@ function resumeToPosition(resumeChoice) {
       window.devError("Error resuming to position:", error);
     }
     return false;
+  }
+}
+
+/**
+ * Restore question state after resuming position
+ */
+function restoreQuestionState() {
+  try {
+    // Restore selected answers for current question
+    restoreCurrentQuestionAnswers();
+
+    // Update progress sidebar to show answered questions
+    if (typeof window.updateProgressSidebar === 'function') {
+      window.updateProgressSidebar();
+    }
+
+    // Update filter counts to reflect current session state
+    if (typeof window.updateFilterCounts === 'function') {
+      window.updateFilterCounts();
+    }
+
+    // Update favorites UI to show current favorites
+    if (typeof window.updateFavoritesUI === 'function') {
+      window.updateFavoritesUI();
+    }
+
+    // Update category filters if they exist
+    if (typeof window.updateCategoryFilters === 'function') {
+      window.updateCategoryFilters();
+    }
+
+    // Clear any question status cache to force refresh
+    if (typeof window.clearQuestionStatusCache === 'function') {
+      window.clearQuestionStatusCache();
+    }
+
+    // Update history buttons
+    if (typeof window.updateHistoryButtons === 'function') {
+      window.updateHistoryButtons();
+    }
+
+    if (typeof window.devLog === 'function') {
+      window.devLog("🔄 Question state restored after resume");
+    }
+
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error restoring question state:", error);
+    }
+  }
+}
+
+/**
+ * Restore selected answers for the current question
+ */
+function restoreCurrentQuestionAnswers() {
+  try {
+    if (typeof window.currentQuestionIndex !== 'number') {
+      return;
+    }
+
+    // Get the most recent answer for current question
+    let userAnswers = null;
+    if (typeof window.getMostRecentAnswer === 'function') {
+      userAnswers = window.getMostRecentAnswer(window.currentQuestionIndex);
+      console.log(`🔍 Question ${window.currentQuestionIndex + 1} - Retrieved answers:`, userAnswers);
+    } else {
+      console.log("❌ getMostRecentAnswer function not available");
+    }
+
+    if (!userAnswers || !Array.isArray(userAnswers) || userAnswers.length === 0) {
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📝 No previous answers found for question ${window.currentQuestionIndex + 1}`);
+      }
+      return;
+    }
+
+    // Initialize selectedAnswers if it doesn't exist
+    if (!window.selectedAnswers) {
+      window.selectedAnswers = new Set();
+    }
+
+    // Clear current selections
+    window.selectedAnswers.clear();
+
+    // Restore the user's previous answers
+    userAnswers.forEach(answer => {
+      if (typeof answer === 'string') {
+        window.selectedAnswers.add(answer);
+      }
+    });
+
+    // Update UI to show selected answers
+    const answerElements = document.querySelectorAll(".answer-option");
+    console.log(`🎯 Found ${answerElements.length} answer elements to update`);
+    
+    answerElements.forEach((element) => {
+      const letter = element.querySelector(".answer-letter")?.textContent.charAt(0);
+      if (letter && window.selectedAnswers.has(letter)) {
+        element.classList.add("selected");
+        console.log(`✅ Selected answer ${letter} for question ${window.currentQuestionIndex + 1}`);
+      } else {
+        element.classList.remove("selected");
+      }
+    });
+
+    console.log(`🔄 Restored answers for question ${window.currentQuestionIndex + 1}:`, Array.from(window.selectedAnswers));
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🔄 Restored answers for question ${window.currentQuestionIndex + 1}:`, Array.from(window.selectedAnswers));
+    }
+
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error restoring current question answers:", error);
+    }
   }
 }
 
@@ -566,6 +687,8 @@ export {
   showResumeDialog,
   checkAndShowResumeDialog,
   resumeToPosition,
+  restoreQuestionState,
+  restoreCurrentQuestionAnswers,
   
   // Position validation
   validateSavedPosition,

@@ -449,6 +449,7 @@ function handleResumePositionToggle() {
     const enableResumePosition = document.getElementById("enableResumePosition");
     if (enableResumePosition) {
       window.settings.enableResumePosition = enableResumePosition.checked;
+      console.log("📍 Resume position toggle:", enableResumePosition.checked);
       saveSettingsUI();
     }
   }
@@ -462,6 +463,7 @@ function handleAutoSavePositionToggle() {
     const autoSavePosition = document.getElementById("autoSavePosition");
     if (autoSavePosition) {
       window.settings.autoSavePosition = autoSavePosition.checked;
+      console.log("💾 Auto-save position toggle:", autoSavePosition.checked);
       saveSettingsUI();
     }
   }

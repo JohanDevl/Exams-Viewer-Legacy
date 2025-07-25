@@ -119,8 +119,8 @@ async function navigateToQuestionIndex(newIndex, addToHistory = true) {
       if (window.currentExam && window.settings?.enableResumePosition && window.settings?.autoSavePosition) {
         const examCode = window.currentExam?.exam_code || window.currentExam?.code || window.currentExam?.exam_name;
         
-        if (examCode && typeof window.saveResumePosition === 'function') {
-          window.saveResumePosition(examCode, newIndex);
+        if (examCode && typeof window.saveStudyPosition === 'function') {
+          window.saveStudyPosition(examCode, newIndex);
         } else if (typeof window.devError === 'function') {
           window.devError("Could not determine exam code for resume position saving");
         }
@@ -273,8 +273,8 @@ function goToHome() {
       const examCode = window.currentExam?.exam_code || window.currentExam?.code || window.currentExam?.exam_name;
       
       if (examCode && window.currentQuestionIndex < window.currentQuestions.length && 
-          typeof window.saveResumePosition === 'function') {
-        window.saveResumePosition(examCode, window.currentQuestionIndex);
+          typeof window.saveStudyPosition === 'function') {
+        window.saveStudyPosition(examCode, window.currentQuestionIndex);
       }
     }
 
@@ -569,6 +569,13 @@ function displayCurrentQuestion(fromToggleAction = false) {
     // Update toolbar visibility based on settings
     if (typeof window.updateToolbarVisibility === 'function') {
       window.updateToolbarVisibility();
+    }
+
+    // Restore previously selected answers for this question (after UI is rendered)
+    if (typeof window.restoreCurrentQuestionAnswers === 'function') {
+      setTimeout(() => {
+        window.restoreCurrentQuestionAnswers();
+      }, 50); // Small delay to ensure DOM elements are ready
     }
 
     if (typeof window.devLog === 'function') {

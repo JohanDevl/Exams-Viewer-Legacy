@@ -171,6 +171,8 @@ import {
   showResumeDialog,
   checkAndShowResumeDialog,
   resumeToPosition,
+  restoreQuestionState,
+  restoreCurrentQuestionAnswers,
   validateSavedPosition,
   cleanInvalidPositions,
   initializeResumePosition,
@@ -399,6 +401,8 @@ function exposeGlobalFunctions() {
   window.showResumeDialog = showResumeDialog;
   window.checkAndShowResumeDialog = checkAndShowResumeDialog;
   window.resumeToPosition = resumeToPosition;
+  window.restoreQuestionState = restoreQuestionState;
+  window.restoreCurrentQuestionAnswers = restoreCurrentQuestionAnswers;
   window.validateSavedPosition = validateSavedPosition;
   window.cleanInvalidPositions = cleanInvalidPositions;
   window.initializeResumePosition = initializeResumePosition;
