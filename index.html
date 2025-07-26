@@ -1046,12 +1046,17 @@
         class="success-message"
         style="display: none"
       ></div>
+
+      <!-- Development Test Button (only visible in dev mode) -->
+      <div id="devTestButton" class="dev-test-button" style="display: none;">
+        <button id="runTestsBtn" class="btn-dev-test">
+          <i class="fas fa-flask"></i>
+          Run Tests
+        </button>
+      </div>
     </div>
 
     <script type="module" src="script-modular.js"></script>
-    <script src="comprehensive-test-suite.js"></script>
-    <script src="run-tests.js"></script>
-    <script src="automated-test-report.js"></script>
     <script>
       // Register Service Worker for intelligent caching
       if ('serviceWorker' in navigator) {

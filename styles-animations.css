@@ -1,0 +1,463 @@
+/* ============================
+   MODERN ANIMATIONS & MICRO-INTERACTIONS
+   ============================ */
+
+/* Skeleton Loading Animations */
+@keyframes skeletonPulse {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, 
+    var(--bg-secondary) 25%, 
+    var(--bg-tertiary) 50%, 
+    var(--bg-secondary) 75%);
+  background-size: 200px 100%;
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-title {
+  height: 1.5rem;
+  margin-bottom: 1rem;
+  width: 60%;
+}
+
+.skeleton-paragraph {
+  height: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-paragraph:nth-child(odd) {
+  width: 90%;
+}
+
+.skeleton-paragraph:nth-child(even) {
+  width: 75%;
+}
+
+/* Ripple Effect Animation */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.ripple:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(155, 135, 245, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(155, 135, 245, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(155, 135, 245, 0);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+/* Slide In Animations */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+  animation: slideInFromLeft var(--transition-smooth) ease-out;
+}
+
+.slide-in-right {
+  animation: slideInFromRight var(--transition-smooth) ease-out;
+}
+
+.slide-in-top {
+  animation: slideInFromTop var(--transition-smooth) ease-out;
+}
+
+.slide-in-bottom {
+  animation: slideInFromBottom var(--transition-smooth) ease-out;
+}
+
+/* Stagger Animation */
+.stagger-animation > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerIn var(--transition-smooth) ease-out forwards;
+}
+
+.stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-animation > *:nth-child(n+6) { animation-delay: 0.6s; }
+
+@keyframes staggerIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bounce Entrance */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-2000px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.03) translateY(25px);
+  }
+  75% {
+    transform: scale(0.9) translateY(-10px);
+  }
+  90% {
+    transform: scale(1.02) translateY(5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+.bounce-in {
+  animation: bounceIn var(--transition-bounce) ease-out;
+}
+
+/* Flip Animation */
+@keyframes flipIn {
+  0% {
+    transform: perspective(400px) rotateY(90deg);
+    opacity: 0;
+  }
+  40% {
+    transform: perspective(400px) rotateY(-20deg);
+  }
+  60% {
+    transform: perspective(400px) rotateY(10deg);
+    opacity: 1;
+  }
+  80% {
+    transform: perspective(400px) rotateY(-5deg);
+  }
+  100% {
+    transform: perspective(400px) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+.flip-in {
+  animation: flipIn 0.6s ease-out;
+}
+
+/* Glow Effect */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(155, 135, 245, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(155, 135, 245, 0.8),
+                0 0 30px rgba(155, 135, 245, 0.6);
+  }
+}
+
+.glow-animation {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-3px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(3px);
+  }
+}
+
+.shake-animation {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Success Check Animation */
+@keyframes successCheck {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+  100% {
+    stroke-dasharray: 100 0;
+  }
+}
+
+.success-check {
+  stroke-dasharray: 0 100;
+  animation: successCheck 0.8s ease-in-out forwards;
+}
+
+/* Loading Dots */
+@keyframes loadingDots {
+  0%, 20% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.loading-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  animation: loadingDots 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: 0s; }
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* Morphing Button */
+.morph-button {
+  transition: all var(--transition-elastic);
+  position: relative;
+  overflow: hidden;
+}
+
+.morph-button:hover {
+  transform: var(--hover-lift) var(--hover-scale);
+  border-radius: var(--radius-2xl);
+}
+
+.morph-button:active {
+  transform: var(--active-scale);
+  border-radius: var(--radius-sm);
+}
+
+/* Magnetic Effect */
+.magnetic {
+  transition: transform var(--transition-smooth);
+}
+
+.magnetic:hover {
+  transform: scale(1.05) translateZ(0);
+}
+
+/* Text Reveal Animation */
+@keyframes textReveal {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.text-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-reveal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--accent-color);
+  animation: textReveal 1s ease-in-out forwards;
+}
+
+/* Sophisticated Hover States */
+.sophisticated-hover {
+  position: relative;
+  transition: all var(--transition-smooth);
+  overflow: hidden;
+}
+
+.sophisticated-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.sophisticated-hover:hover::before {
+  left: 100%;
+}
+
+.sophisticated-hover:hover {
+  transform: var(--hover-lift);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Enhanced Focus States */
+.enhanced-focus:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-glow);
+  transform: scale(1.02);
+  transition: all var(--transition-fast);
+}
+
+/* Progress Animation */
+@keyframes progressFill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: var(--progress-width, 50%);
+  }
+}
+
+.animated-progress {
+  animation: progressFill 1.5s ease-out forwards;
+}
+
+/* Elastic Scale */
+.elastic-scale {
+  transition: transform var(--transition-elastic);
+}
+
+.elastic-scale:hover {
+  transform: scale(1.1);
+}
+
+.elastic-scale:active {
+  transform: scale(0.95);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .skeleton {
+    animation: none;
+    background: var(--bg-secondary);
+  }
+  
+  .float-animation,
+  .pulse-animation,
+  .glow-animation {
+    animation: none;
+  }
+  
+  .sophisticated-hover::before {
+    display: none;
+  }
+}

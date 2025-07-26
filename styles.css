@@ -6495,3 +6495,82 @@ button:not(.nav-btn):not(.dark-mode-btn):not(.stats-tab):not(.close-btn):focus-v
     padding: 1.25rem;
   }
 }
+
+/* ===========================
+   DEVELOPMENT TEST BUTTON
+   =========================== */
+
+.dev-test-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  opacity: 0.8;
+  transition: var(--transition-normal);
+}
+
+.dev-test-button:hover {
+  opacity: 1;
+  transform: var(--hover-lift);
+}
+
+.btn-dev-test {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition-normal);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.btn-dev-test:hover {
+  transform: var(--hover-lift) var(--hover-scale);
+  box-shadow: var(--shadow-xl);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+.btn-dev-test:active {
+  transform: var(--active-scale);
+}
+
+.btn-dev-test:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.btn-dev-test i {
+  font-size: 1.1em;
+}
+
+[data-theme="dark"] .btn-dev-test {
+  background: linear-gradient(135deg, #8b7bd8 0%, #a697e5 100%);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .btn-dev-test:hover {
+  background: linear-gradient(135deg, #9c8ce0 0%, #b5a8eb 100%);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .dev-test-button {
+    bottom: 80px; /* Above mobile navigation */
+    right: 15px;
+  }
+  
+  .btn-dev-test {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--text-xs);
+  }
+}

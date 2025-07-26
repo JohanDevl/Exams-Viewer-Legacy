@@ -180,6 +180,15 @@ import {
   initializeMobileNavigation,
 } from './js/modules/mobile-navigation.js';
 
+// Development testing (only in dev mode)
+import {
+  initializeDevButton,
+  handleRunTests,
+  loadTestScripts,
+  enableDeveloperLogging,
+  initializeDevelopmentTesting,
+} from './js/modules/dev-testing.js';
+
 // Enhanced navigation
 import {
   addToNavigationHistory,
@@ -395,6 +404,13 @@ function exposeGlobalFunctions() {
   window.initializeEnhancedNavigation = initializeEnhancedNavigation;
   window.refreshEnhancedNavigation = refreshEnhancedNavigation;
   window.navigateToQuestionWithHistory = navigateToQuestionWithHistory;
+
+  // Development testing (only in dev mode)
+  window.initializeDevButton = initializeDevButton;
+  window.handleRunTests = handleRunTests;
+  window.loadTestScripts = loadTestScripts;
+  window.enableDeveloperLogging = enableDeveloperLogging;
+  window.initializeDevelopmentTesting = initializeDevelopmentTesting;
 
   // Exam loading
   window.discoverAvailableExams = discoverAvailableExams;
