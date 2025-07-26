@@ -1,194 +1,287 @@
-# Exams Viewer
+# 🎓 Exams Viewer
 
-An automated tool to scrape and maintain up-to-date exam question data from ExamTopics.com with a modern web interface.
+> **Modern exam practice platform with automated scraping and intelligent features**
 
-## 🌐 Direct Access
+An advanced web application for practicing exam questions from ExamTopics.com with a modern modular architecture, comprehensive statistics, and enhanced user experience.
+
+## 🌐 Live Demo
 
 **🚀 Web Interface**: [https://JohanDevl.github.io/Exams-Viewer/](https://JohanDevl.github.io/Exams-Viewer/)
 
-No installation required! The interface automatically detects your system theme and includes all features.
+> No installation required! Responsive design, dark mode, and all features work directly in your browser.
 
-## 🎯 Main Features
+## ✨ Key Features
 
-### Web Interface
+### 🎯 Modern Learning Experience
+- **📱 Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **⌨️ Advanced Navigation**: Vim-style shortcuts, keyboard navigation, and navigation history
+- **📊 Visual Progress Tracking**: Interactive sidebar with real-time progress indicators
+- **🎨 Smart Status System**: Color-coded question states (new, answered, correct, incorrect)
+- **🏷️ Organization Tools**: Favorites, categories, personal notes, and bookmarking
+- **🌙 Dark Mode**: Automatic theme detection with manual override
 
-- **📱 Responsive design** for all devices
-- **🔍 Advanced search and filtering** with auto-completion
-- **⌨️ Enhanced keyboard navigation** with vim-style shortcuts
-- **📊 Enhanced progress indicator** with animated progress bar and real-time statistics
-- **📊 Visual progress sidebar** with question overview
-- **🎨 Enhanced visual status indicators** with color-coded badges for question states
-- **🏷️ Question organization** with favorites, categories, and personal notes
-- **📚 Navigation history** with back/forward buttons
-- **🌙 Dark mode** with automatic detection
-- **📊 Complete statistics system** with intelligent storage management
-- **🎯 Highlight mode** to preview answers
-- **📄 Enhanced export system** with TXT, CSV, JSON, and PDF formats
-- **⚙️ Flexible export options** with content filtering and selective inclusion
-- **📈 Progress tracking** with visual charts and analytics
-- **📝 Built-in changelog viewer** with Markdown rendering
-- **⚡ Optional lazy loading** for large exams (experimental)
-- **🧹 Data management tools** for storage optimization
-- **🔄 Resume study position** across browser sessions with auto-save capability
+### 🔍 Advanced Search & Filtering
+- **🔎 Intelligent Search**: Text-based search across questions, answers, and comments
+- **🏷️ Status Filters**: Filter by answered, unanswered, favorites, and categories
+- **💡 Auto-completion**: Smart suggestions for question numbers and search terms
+- **📊 Dynamic Counters**: Real-time counts for each filter category
 
-### Performance & Storage
+### 📈 Comprehensive Statistics
+- **📊 Session Tracking**: Detailed progress across multiple study sessions
+- **🎯 Performance Analytics**: Accuracy tracking, time spent, and improvement trends
+- **📋 Global Overview**: Consolidated statistics across all exams
+- **💾 Intelligent Storage**: Optimized data management with corruption prevention
 
-- **🚀 Intelligent caching** with service worker
-- **📦 Chunked loading** for large exams (100+ questions)
-- **🗜️ Automatic image compression** during scraping
-- **💾 Smart storage management** with auto-cleanup
-- **🔧 User-controlled lazy loading** setting
-- **📊 Statistics data optimization** with corruption prevention
+### 📱 Mobile-Optimized Experience
+- **👆 Touch Gestures**: Swipe navigation between questions
+- **📲 Mobile Navigation**: Bottom navigation bar for thumb-friendly access
+- **🔄 Haptic Feedback**: Tactile feedback for better mobile interaction
+- **📱 Responsive Layout**: Adaptive UI for all screen sizes
 
-### Automation
+### 🚀 Performance & Technology
+- **⚡ Modular Architecture**: ES6 modules with clean separation of concerns
+- **🗄️ Service Worker**: Intelligent caching for offline capability
+- **🖼️ Image Optimization**: Automatic WebP compression with fallback
+- **💾 Smart Storage**: Efficient data management and cleanup tools
+- **🔄 Background Updates**: Automatic cache refresh for latest content
 
-- **🤖 Automatic scraping** of ExamTopics questions
-- **🔄 Smart change detection** and incremental updates
-- **📅 Manual triggering** via GitHub Actions
-- **🛡️ Robust error handling** with recovery mechanisms
-- **📝 Detailed logging** of operations
-- **📋 Automated changelog management** with GitHub Actions
-- **🖼️ Image processing** with WebP/JPEG compression
+### 🤖 Automation & Scraping
+- **🔄 Automated Updates**: GitHub Actions for scheduled scraping
+- **🛡️ Respectful Scraping**: Built-in rate limiting and error handling
+- **📊 Change Detection**: Incremental updates with smart diffing
+- **🖼️ Image Processing**: Automatic compression and format optimization
 
-## 📊 Supported Exams
+## 📚 Supported Certifications
 
-The system automatically detects available exams:
+Currently supporting **20+ exams** across multiple ServiceNow certification tracks:
 
+### Core Certifications
 - **CAD** - Certified Application Developer
-- **CAS-PA** - Customer Service Management Professional
-- **CIS-\*** - Complete ServiceNow certification series
 - **CSA** - Certified System Administrator
+- **CAS-PA** - Customer Service Management Professional
 
-_Over 20 exams available with questions, discussions, and statistics._
+### Implementation Specialist (CIS) Series
+- **CIS-APM** - Application Portfolio Management
+- **CIS-CSM** - Customer Service Management  
+- **CIS-Discovery** - Discovery
+- **CIS-EM** - Event Management
+- **CIS-FSM** - Field Service Management
+- **CIS-HAM** - Hardware Asset Management
+- **CIS-HR** - Human Resources
+- **CIS-ITSM** - IT Service Management
+- **CIS-PPM** - Project Portfolio Management
+- **CIS-RC** - Risk and Compliance
+- **CIS-SAM** - Software Asset Management
+- **CIS-SIR** - Security Incident Response
+- **CIS-SM** - Service Mapping
+- **CIS-SPM** - Strategic Portfolio Management
+- **CIS-VR** - Vulnerability Response
+- **CIS-VRM** - Vendor Risk Management
 
-## 🚀 Installation
+> All exams include questions, explanations, discussions, and progress tracking.
 
-### Web Usage Only
+## 🚀 Quick Start
 
-Visit the GitHub Pages URL directly - no installation needed!
+### For Study & Practice
+1. **Visit** [https://JohanDevl.github.io/Exams-Viewer/](https://JohanDevl.github.io/Exams-Viewer/)
+2. **Select** an exam from the dropdown
+3. **Start studying** with our enhanced interface
+4. **Track progress** with real-time statistics
 
-### Development/Scraping
-
+### For Development
 ```bash
+# Clone the repository
 git clone https://github.com/JohanDevl/Exams-Viewer.git
 cd Exams-Viewer
+
+# Install Python dependencies for scraping
 pip install -r requirements.txt
+
+# Start local development server
+python -m http.server 8000
 ```
 
-## 💻 Usage
+## 🏗️ Architecture
 
-### Web Interface
+### Modern Modular Structure
+```
+Exams-Viewer/
+├── 🏠 index.html              # Main application entry point
+├── 🎨 styles.css              # Comprehensive styling with dark mode
+├── 🚀 script-modular.js       # Application bootstrap and module orchestration
+├── 📁 js/                     # Modular JavaScript architecture
+│   ├── 🔧 core/               # Core functionality modules
+│   │   ├── models.js          # Data models and statistics classes
+│   │   ├── navigation.js      # Question navigation and validation
+│   │   └── state.js           # Global state management
+│   └── 📦 modules/            # Feature-specific modules
+│       ├── enhanced-navigation.js  # Progress sidebar and keyboard shortcuts
+│       ├── exam-loader.js          # Exam data loading and management
+│       ├── favorites.js            # Favorites and notes system
+│       ├── mobile-navigation.js    # Touch gestures and mobile UI
+│       ├── search.js               # Advanced search and filtering
+│       ├── settings.js             # Settings management and persistence
+│       ├── statistics.js           # Statistics calculation and tracking
+│       ├── storage.js              # Local storage operations and cleanup
+│       └── ui-effects.js           # UI feedback, animations, and effects
+├── ⚡ service-worker.js        # Intelligent caching and offline support
+├── 📊 data/                   # Exam data repository
+│   ├── {EXAM_CODE}/           # Individual exam folders
+│   │   ├── exam.json          # Complete exam questions and answers
+│   │   └── links.json         # Scraping metadata and source links
+│   └── manifest.json          # Registry of available exams
+├── 🛠️ scripts/               # Python automation tools
+│   ├── scraper.py             # Enhanced scraper with image processing
+│   ├── update_all_exams.py    # Batch update utility
+│   └── create_chunks.py       # Manual chunking tool (optional)
+└── 📚 docs/                   # Comprehensive documentation
+```
 
-1. **Select an exam** from the dropdown list
-2. **Monitor progress**: Watch the animated progress indicator for real-time statistics and completion percentage
-3. **Navigate with keyboard shortcuts**: Use arrow keys, `hjkl` (vim-style), or `Space/Enter` for quick navigation
-4. **Open progress sidebar**: Press `Ctrl+S` or click the hamburger menu to see detailed progress with visual status badges
-5. **Track question status**: Automatic visual indicators show question states (new, viewed, correct, incorrect)
-6. **Organize questions**: Enable question toolbar in settings to access favorites (⭐), categories (🏷️), and notes (📝)
-7. **Use navigation history**: Click Back/Forward buttons to return to previously visited questions
-8. **Access keyboard help**: Press `?` to see all available shortcuts
-9. **Use highlight mode** to preview answers before validation
-10. **Check statistics** in the dedicated panel with detailed analytics
-11. **Export data** with comprehensive format options (TXT, CSV, enhanced JSON, PDF)
-12. **Filter exports** by favorites, notes, answered questions, or categories
-13. **Customize content** with selective inclusion of questions, answers, discussions, images, and user notes
-14. **Manage performance**: Enable lazy loading in settings for large exams
-15. **Clean storage**: Use statistics management tools to optimize space
-16. **Resume study sessions**: Enable position tracking in settings to continue where you left off
+### Key Design Principles
+- **🎯 Separation of Concerns**: Each module handles specific functionality
+- **🔄 Event-Driven Architecture**: Clean communication between modules
+- **📱 Mobile-First Design**: Responsive and touch-optimized interface
+- **⚡ Performance-Focused**: Efficient loading and caching strategies
+- **🛠️ Developer-Friendly**: Clear structure and extensive documentation
 
-### Manual Updates
+## 📖 Usage Guide
 
+### Basic Navigation
+1. **Select Exam**: Choose from the dropdown list of available certifications
+2. **Navigate Questions**: Use keyboard shortcuts, buttons, or touch gestures
+3. **Answer Questions**: Select answers and validate to see results
+4. **Track Progress**: Monitor completion via the progress bar and sidebar
+
+### Advanced Features
+- **📊 Progress Sidebar**: Press `Ctrl+S` or click menu to see detailed question overview
+- **⌨️ Keyboard Shortcuts**: Press `?` for complete shortcut reference
+- **🔍 Search & Filter**: Use advanced search to find specific questions
+- **🏷️ Organization**: Add favorites, categories, and personal notes
+- **📈 Statistics**: View detailed analytics in the Statistics panel
+- **📄 Export**: Export questions and data in multiple formats (PDF, JSON, CSV)
+- **🎯 Highlight Mode**: Preview correct answers before validation
+- **🔄 Resume Sessions**: Continue studying where you left off
+
+### Mobile Features
+- **👆 Swipe Navigation**: Swipe left/right to navigate questions
+- **📱 Bottom Navigation**: Thumb-friendly controls for mobile devices
+- **🔄 Haptic Feedback**: Tactile response for better interaction
+
+## 🔧 Configuration
+
+### Settings Panel
+Access via the gear icon to customize:
+- **🎨 Theme**: Light/dark mode preferences
+- **⌨️ Navigation**: Keyboard shortcut configurations
+- **📊 Statistics**: Progress tracking options
+- **📱 Mobile**: Touch gesture settings
+- **🔄 Session Management**: Auto-save and resume options
+
+### Developer Configuration
 ```bash
-# Update all exams
+# Update all exams manually
 python scripts/update_all_exams.py
 
 # Update specific exam
 python scripts/update_all_exams.py --exam CAD
+
+# Process images with compression
+python scripts/scraper.py --compress-images
 ```
 
-## 🏗️ Project Structure
+## 📚 Documentation
 
-```
-Exams-Viewer/
-├── index.html          # Main web interface
-├── styles.css          # Styles with dark mode support
-├── script-modular.js   # Main JavaScript entry point (modular architecture)
-├── js/                 # Modular JavaScript architecture
-│   ├── core/           # Core functionality modules
-│   │   ├── models.js   # Data models and statistics
-│   │   ├── navigation.js # Question navigation and validation
-│   │   └── state.js    # Global state management
-│   └── modules/        # Feature-specific modules
-│       ├── enhanced-navigation.js # Progress sidebar and keyboard shortcuts
-│       ├── exam-loader.js # Exam data loading and management
-│       ├── favorites.js # Favorites and notes system
-│       ├── mobile-navigation.js # Touch gestures and mobile UI
-│       ├── search.js   # Advanced search and filtering
-│       ├── settings.js # Settings management
-│       ├── statistics.js # Statistics calculation
-│       ├── storage.js  # Local storage operations
-│       └── ui-effects.js # UI feedback and effects
-├── service-worker.js   # Intelligent caching system
-├── data/               # Exam data with folder structure
-│   ├── EXAM_CODE/      # Individual exam folders
-│   │   ├── exam.json   # Main exam questions
-│   │   ├── links.json  # Scraping metadata
-│   │   ├── metadata.json # Chunking information
-│   │   └── chunks/     # Question chunks for large exams
-│   └── manifest.json   # Available exams registry
-├── scripts/            # Python automation scripts
-│   ├── scraper.py      # Enhanced scraper with image compression
-│   ├── create_chunks.py # Chunk generation utility
-│   └── migrate_data_structure.py # Data migration tool
-├── docs/               # Detailed documentation
-└── requirements.txt    # Python dependencies
-```
+### User Guides
+- **[📋 Installation Guide](docs/INSTALLATION.md)** - Setup and configuration
+- **[📖 Usage Guide](docs/USAGE.md)** - Complete feature walkthrough
+- **[🎯 Features Overview](docs/FEATURES.md)** - Detailed feature descriptions
 
-## 📚 Complete Documentation
+### Technical Documentation
+- **[🛠️ Development Guide](docs/DEVELOPMENT.md)** - Developer setup and contribution guidelines
+- **[📊 Statistics System](docs/STATISTICS.md)** - Analytics and tracking implementation
+- **[⌨️ Navigation System](docs/NAVIGATION.md)** - Keyboard shortcuts and navigation features
+- **[🎨 Visual Indicators](docs/VISUAL_STATUS_INDICATORS.md)** - Status system and color coding
+- **[⚡ Performance Guide](docs/PERFORMANCE_OPTIMIZATIONS.md)** - Optimization techniques
+- **[📋 API Reference](docs/API.md)** - Technical API documentation
+- **[🔧 Scraper Documentation](docs/SCRAPER_IMPROVEMENTS.md)** - Scraping system details
 
-- **[📋 Installation Guide](docs/INSTALLATION.md)** - Detailed installation and configuration instructions
-- **[📖 Usage Guide](docs/USAGE.md)** - Complete interface and feature usage
-- **[🎯 Features](docs/FEATURES.md)** - Detailed description of all features
-- **[🛠️ Development Guide](docs/DEVELOPMENT.md)** - Instructions for developers
-- **[📊 Statistics System](docs/STATISTICS.md)** - Statistics system documentation
-- **[⌨️ Navigation Features](docs/NAVIGATION.md)** - Enhanced navigation and keyboard shortcuts
-- **[🎨 Visual Status Indicators](docs/VISUAL_STATUS_INDICATORS.md)** - Color-coded badges and status system
-- **[⚡ Performance Optimizations](docs/PERFORMANCE_OPTIMIZATIONS.md)** - Lazy loading and performance features
-- **[📋 API Documentation](docs/API.md)** - Technical API documentation
-- **[🔧 Scraper Improvements](docs/SCRAPER_IMPROVEMENTS.md)** - Improvement details
-- **[📝 Changelog](CHANGELOG.md)** - Project version history and changes
+## ⚖️ Legal & Ethics
 
-## ⚖️ Legal Compliance
+### 📚 Educational Purpose
+This application is designed **exclusively for educational use** and personal study preparation. Commercial use is strictly prohibited.
 
-### 📋 Educational Use Only
+### 🔒 Content Attribution
+- All exam content is sourced from **ExamTopics.com**
+- Original content ownership belongs to respective certification providers
+- This tool provides a practice interface under fair use principles
+- No content is claimed as original work of this project
 
-This tool is designed **exclusively for educational purposes** and personal study. Commercial use is strictly prohibited.
-
-### 🔒 Content Ownership
-
-- All exam questions belong to their respective owners
-- ExamTopics.com is the original source of scraped content
-- This tool does not claim ownership of any exam materials
-- Content is used under fair use principles for educational purposes
-
-### 🛡️ Respectful Scraping
-
-- Built-in delays (5-10 seconds) between requests
-- Automatic rate limiting detection
-- Server response time monitoring
+### 🛡️ Responsible Scraping
+- **Rate Limiting**: 5-10 second delays between requests
+- **Server Respect**: Automatic detection of rate limiting responses
+- **Error Handling**: Graceful handling of server errors and timeouts
+- **Minimal Impact**: Incremental updates to reduce server load
 
 ## 🤝 Contributing
 
-Contributions are welcome! Check the [Development Guide](docs/DEVELOPMENT.md) for more information.
+We welcome contributions! Here's how to get started:
 
-## 📜 License
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
 
-This project is for educational purposes only. All exam content belongs to its respective owners.
+### Development Setup
+```bash
+# Clone your fork
+git clone https://github.com/yourusername/Exams-Viewer.git
+cd Exams-Viewer
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start development server
+python -m http.server 8000
+```
+
+See [Development Guide](docs/DEVELOPMENT.md) for detailed contribution guidelines.
 
 ## 🆘 Support
 
-If you encounter issues:
+### Getting Help
+1. **📚 Check Documentation**: Browse the comprehensive docs in `/docs/`
+2. **🔍 Search Issues**: Look through [existing issues](../../issues)
+3. **🆕 Create Issue**: Submit a [new issue](../../issues/new) with details
+4. **💬 Discussions**: Join [GitHub Discussions](../../discussions)
 
-1. Check [existing issues](../../issues)
-2. Create a new issue with details
-3. Consult documentation in the `docs/` folder
+### Common Issues
+- **Loading Problems**: Check browser console for JavaScript errors
+- **Mobile Issues**: Ensure touch gestures are enabled in settings
+- **Performance**: Use browser dev tools to monitor network and performance
+- **Data Issues**: Use Statistics panel cleanup tools to reset corrupted data
+
+## 📊 Project Status
+
+- **🎯 Active Development**: Regular updates and feature additions
+- **📱 Production Ready**: Stable and fully functional
+- **🔧 Continuous Integration**: Automated testing and deployment
+- **📈 Growing**: Expanding exam coverage and features
+
+## 📝 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history and feature updates.
+
+## 📜 License
+
+**Educational Use License**: This project is licensed for educational purposes only. All exam content remains the property of its respective owners. See the legal compliance section above for full details.
+
+---
+
+<div align="center">
+
+**🎓 Happy Studying! 📚**
+
+*Built with ❤️ for the ServiceNow community*
+
+</div>
