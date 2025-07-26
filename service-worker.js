@@ -12,13 +12,13 @@ const CACHE_EXPIRY = 6 * 60 * 60 * 1000; // 6 hours in milliseconds (reduced for
 
 // Files to cache immediately
 const STATIC_CACHE_FILES = [
-  '/',
-  '/index.html',
-  '/script-modular.js',
-  '/styles.css',
-  '/favicon.ico',
-  '/favicon.svg',
-  'data/manifest.json'
+  './',
+  './index.html',
+  './script-modular.js',
+  './styles.css',
+  './favicon.ico',
+  './favicon.svg',
+  './data/manifest.json'
 ];
 
 // Cache strategy configuration

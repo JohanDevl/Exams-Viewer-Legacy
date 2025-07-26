@@ -1052,7 +1052,7 @@
     <script>
       // Register Service Worker for intelligent caching
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
+        navigator.serviceWorker.register('./service-worker.js')
           .then(registration => {
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
               console.log('Service Worker registered:', registration);
