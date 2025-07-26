@@ -25,6 +25,22 @@ let touchStartTime = 0;
 let sidebarTouchStartX = 0;
 let sidebarTouchStartY = 0;
 
+// Pull-to-refresh variables
+let pullStartY = 0;
+let pullDistance = 0;
+let isPulling = false;
+let pullToRefreshIndicator = null;
+
+// Pinch-to-zoom variables
+let initialDistance = 0;
+let currentScale = 1;
+let isZooming = false;
+
+// Long press variables
+let longPressTimer = null;
+let longPressTarget = null;
+const LONG_PRESS_DURATION = 800; // milliseconds
+
 // ===========================
 // MOBILE TOOLTIPS SYSTEM
 // ===========================
@@ -124,7 +140,13 @@ function setupTouchGestures() {
  */
 function handleTouchStart(e) {
   try {
-    // Only handle single touch
+    // Handle multi-touch for pinch-to-zoom
+    if (e.touches.length === 2) {
+      handlePinchStart(e);
+      return;
+    }
+    
+    // Only handle single touch for other gestures
     if (e.touches.length !== 1) return;
     
     const touch = e.touches[0];
@@ -132,6 +154,12 @@ function handleTouchStart(e) {
     touchStartY = touch.clientY;
     touchStartTime = Date.now();
     isSwiping = false;
+    
+    // Setup long press detection
+    setupLongPress(e);
+    
+    // Setup pull-to-refresh detection
+    setupPullToRefresh(e);
     
     // Don't interfere with scrolling or form inputs
     // Allow swipe on question content but not on navigation buttons or forms
@@ -150,11 +178,27 @@ function handleTouchStart(e) {
  */
 function handleTouchMove(e) {
   try {
+    // Handle pinch-to-zoom
+    if (e.touches.length === 2) {
+      handlePinchMove(e);
+      return;
+    }
+    
     if (e.touches.length !== 1) return;
     
     const touch = e.touches[0];
     const deltaX = touch.clientX - touchStartX;
     const deltaY = touch.clientY - touchStartY;
+    
+    // Clear long press timer if user moves too much
+    if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
+      clearLongPressTimer();
+    }
+    
+    // Handle pull-to-refresh
+    if (handlePullToRefreshMove(touch, deltaY)) {
+      return;
+    }
     
     // Check if this is a horizontal swipe
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 30) {
@@ -179,6 +223,19 @@ function handleTouchMove(e) {
  */
 async function handleTouchEnd(e) {
   try {
+    // Clear long press timer
+    clearLongPressTimer();
+    
+    // Handle pull-to-refresh end
+    if (isPulling) {
+      handlePullToRefreshEnd();
+    }
+    
+    // Handle pinch-to-zoom end
+    if (isZooming) {
+      isZooming = false;
+    }
+    
     if (!isSwiping) return;
     
     const touch = e.changedTouches[0];
@@ -195,7 +252,7 @@ async function handleTouchEnd(e) {
     // Check if swipe meets criteria
     if (Math.abs(deltaX) > 50 && Math.abs(deltaY) < 100 && deltaTime < 300) {
       // Add haptic feedback
-      addHapticFeedback();
+      addSwipeHaptic();
       
       if (deltaX > 0) {
         // Swipe right - previous question
@@ -318,16 +375,29 @@ function hideSwipeIndicators() {
 }
 
 // ===========================
-// HAPTIC FEEDBACK
+// ENHANCED HAPTIC FEEDBACK
 // ===========================
 
 /**
- * Add haptic feedback for mobile interactions
+ * Enhanced haptic feedback types for different interactions
  */
-function addHapticFeedback() {
+const HapticType = {
+  LIGHT: [10],           // Light tap
+  MEDIUM: [50],          // Standard interaction
+  HEAVY: [100],          // Strong feedback
+  SUCCESS: [50, 20, 50], // Success pattern
+  ERROR: [100, 50, 100, 50, 100], // Error pattern
+  SWIPE: [30],           // Swipe feedback
+  LONG_PRESS: [80, 30, 80] // Long press pattern
+};
+
+/**
+ * Add enhanced haptic feedback for mobile interactions
+ */
+function addHapticFeedback(type = HapticType.MEDIUM) {
   try {
-    if ('vibrate' in navigator) {
-      navigator.vibrate(50); // Short vibration
+    if ('vibrate' in navigator && navigator.vibrate) {
+      navigator.vibrate(type);
     }
   } catch (error) {
     // Silently fail for haptic feedback
@@ -335,6 +405,25 @@ function addHapticFeedback() {
       window.devError("Error adding haptic feedback:", error);
     }
   }
+}
+
+/**
+ * Add specific haptic feedback for different actions
+ */
+function addSuccessHaptic() {
+  addHapticFeedback(HapticType.SUCCESS);
+}
+
+function addErrorHaptic() {
+  addHapticFeedback(HapticType.ERROR);
+}
+
+function addSwipeHaptic() {
+  addHapticFeedback(HapticType.SWIPE);
+}
+
+function addLongPressHaptic() {
+  addHapticFeedback(HapticType.LONG_PRESS);
 }
 
 // ===========================
@@ -509,6 +598,500 @@ function setupMobileResizeListener() {
 }
 
 // ===========================
+// PULL-TO-REFRESH FUNCTIONALITY
+// ===========================
+
+/**
+ * Setup pull-to-refresh detection
+ */
+function setupPullToRefresh(e) {
+  try {
+    const questionSection = document.getElementById('questionSection');
+    if (!questionSection || questionSection.scrollTop > 0) return;
+    
+    pullStartY = e.touches[0].clientY;
+    isPulling = false;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error setting up pull-to-refresh:", error);
+    }
+  }
+}
+
+/**
+ * Handle pull-to-refresh move
+ */
+function handlePullToRefreshMove(touch, deltaY) {
+  try {
+    const questionSection = document.getElementById('questionSection');
+    if (!questionSection || questionSection.scrollTop > 0) return false;
+    
+    if (deltaY > 0 && deltaY > 50) {
+      isPulling = true;
+      pullDistance = Math.min(deltaY, 120);
+      
+      if (!pullToRefreshIndicator) {
+        createPullToRefreshIndicator();
+      }
+      
+      updatePullToRefreshIndicator(pullDistance);
+      return true;
+    }
+    
+    return false;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error handling pull-to-refresh move:", error);
+    }
+    return false;
+  }
+}
+
+/**
+ * Handle pull-to-refresh end
+ */
+async function handlePullToRefreshEnd() {
+  try {
+    if (pullDistance > 80) {
+      // Trigger refresh
+      addSuccessHaptic();
+      await refreshExamData();
+    }
+    
+    hidePullToRefreshIndicator();
+    isPulling = false;
+    pullDistance = 0;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error handling pull-to-refresh end:", error);
+    }
+  }
+}
+
+/**
+ * Create pull-to-refresh indicator
+ */
+function createPullToRefreshIndicator() {
+  try {
+    pullToRefreshIndicator = document.createElement('div');
+    pullToRefreshIndicator.className = 'pull-to-refresh';
+    pullToRefreshIndicator.innerHTML = '<i class="fas fa-arrow-down"></i> Pull to refresh';
+    document.body.appendChild(pullToRefreshIndicator);
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error creating pull-to-refresh indicator:", error);
+    }
+  }
+}
+
+/**
+ * Update pull-to-refresh indicator
+ */
+function updatePullToRefreshIndicator(distance) {
+  try {
+    if (!pullToRefreshIndicator) return;
+    
+    const progress = Math.min(distance / 80, 1);
+    pullToRefreshIndicator.style.opacity = progress;
+    
+    if (distance > 80) {
+      pullToRefreshIndicator.classList.add('active');
+      pullToRefreshIndicator.innerHTML = '<i class="fas fa-sync-alt"></i> Release to refresh';
+    } else {
+      pullToRefreshIndicator.classList.remove('active');
+      pullToRefreshIndicator.innerHTML = '<i class="fas fa-arrow-down"></i> Pull to refresh';
+    }
+    
+    pullToRefreshIndicator.classList.add('show');
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error updating pull-to-refresh indicator:", error);
+    }
+  }
+}
+
+/**
+ * Hide pull-to-refresh indicator
+ */
+function hidePullToRefreshIndicator() {
+  try {
+    if (pullToRefreshIndicator) {
+      pullToRefreshIndicator.classList.remove('show', 'active');
+      setTimeout(() => {
+        if (pullToRefreshIndicator) {
+          pullToRefreshIndicator.remove();
+          pullToRefreshIndicator = null;
+        }
+      }, 300);
+    }
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error hiding pull-to-refresh indicator:", error);
+    }
+  }
+}
+
+/**
+ * Refresh exam data
+ */
+async function refreshExamData() {
+  try {
+    if (typeof window.devLog === 'function') {
+      window.devLog("📱 Refreshing exam data...");
+    }
+    
+    // Trigger exam reload if possible
+    if (typeof window.loadExam === 'function' && window.currentExamCode) {
+      await window.loadExam(window.currentExamCode);
+    }
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog("📱 Exam data refreshed");
+    }
+  } catch (error) {
+    addErrorHaptic();
+    if (typeof window.devError === 'function') {
+      window.devError("Error refreshing exam data:", error);
+    }
+  }
+}
+
+// ===========================
+// PINCH-TO-ZOOM FUNCTIONALITY
+// ===========================
+
+/**
+ * Handle pinch start
+ */
+function handlePinchStart(e) {
+  try {
+    if (e.touches.length !== 2) return;
+    
+    isZooming = true;
+    const touch1 = e.touches[0];
+    const touch2 = e.touches[1];
+    
+    initialDistance = Math.sqrt(
+      Math.pow(touch2.clientX - touch1.clientX, 2) +
+      Math.pow(touch2.clientY - touch1.clientY, 2)
+    );
+    
+    // Find zoomable content
+    const zoomTarget = e.target.closest('img, .question-content');
+    if (zoomTarget) {
+      setupZoomTarget(zoomTarget);
+    }
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error handling pinch start:", error);
+    }
+  }
+}
+
+/**
+ * Handle pinch move
+ */
+function handlePinchMove(e) {
+  try {
+    if (e.touches.length !== 2 || !isZooming) return;
+    
+    e.preventDefault();
+    
+    const touch1 = e.touches[0];
+    const touch2 = e.touches[1];
+    
+    const currentDistance = Math.sqrt(
+      Math.pow(touch2.clientX - touch1.clientX, 2) +
+      Math.pow(touch2.clientY - touch1.clientY, 2)
+    );
+    
+    const scale = currentDistance / initialDistance;
+    currentScale = Math.min(Math.max(scale, 0.5), 3); // Limit scale between 0.5x and 3x
+    
+    const zoomTarget = document.querySelector('.pinch-zoom-content');
+    if (zoomTarget) {
+      zoomTarget.style.transform = `scale(${currentScale})`;
+      
+      if (currentScale > 1) {
+        zoomTarget.classList.add('zoomed');
+      } else {
+        zoomTarget.classList.remove('zoomed');
+      }
+    }
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error handling pinch move:", error);
+    }
+  }
+}
+
+/**
+ * Setup zoom target
+ */
+function setupZoomTarget(element) {
+  try {
+    // Wrap element in zoom container if not already
+    if (!element.closest('.pinch-zoom-container')) {
+      const container = document.createElement('div');
+      container.className = 'pinch-zoom-container';
+      
+      element.parentNode.insertBefore(container, element);
+      container.appendChild(element);
+    }
+    
+    element.classList.add('pinch-zoom-content');
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error setting up zoom target:", error);
+    }
+  }
+}
+
+// ===========================
+// LONG PRESS FUNCTIONALITY
+// ===========================
+
+/**
+ * Setup long press detection
+ */
+function setupLongPress(e) {
+  try {
+    longPressTarget = e.target;
+    
+    longPressTimer = setTimeout(() => {
+      triggerLongPress(e);
+    }, LONG_PRESS_DURATION);
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error setting up long press:", error);
+    }
+  }
+}
+
+/**
+ * Clear long press timer
+ */
+function clearLongPressTimer() {
+  if (longPressTimer) {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+    longPressTarget = null;
+  }
+}
+
+/**
+ * Trigger long press action
+ */
+function triggerLongPress(e) {
+  try {
+    addLongPressHaptic();
+    
+    const target = e.target;
+    
+    // Show context menu for different elements
+    if (target.closest('.question-text')) {
+      showQuestionContextMenu(e);
+    } else if (target.closest('.answer-option')) {
+      showAnswerContextMenu(e);
+    } else if (target.closest('img')) {
+      showImageContextMenu(e);
+    }
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog("📱 Long press triggered");
+    }
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error triggering long press:", error);
+    }
+  }
+}
+
+/**
+ * Show question context menu
+ */
+function showQuestionContextMenu(e) {
+  try {
+    const menu = createContextMenu([
+      { text: 'Copy Question', action: () => copyQuestionText() },
+      { text: 'Add to Favorites', action: () => addQuestionToFavorites() },
+      { text: 'Share Question', action: () => shareQuestion() }
+    ]);
+    
+    showContextMenuAt(menu, e.touches[0].clientX, e.touches[0].clientY);
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error showing question context menu:", error);
+    }
+  }
+}
+
+/**
+ * Show answer context menu
+ */
+function showAnswerContextMenu(e) {
+  try {
+    const menu = createContextMenu([
+      { text: 'Copy Answer', action: () => copyAnswerText(e.target) },
+      { text: 'Explain Answer', action: () => explainAnswer(e.target) }
+    ]);
+    
+    showContextMenuAt(menu, e.touches[0].clientX, e.touches[0].clientY);
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error showing answer context menu:", error);
+    }
+  }
+}
+
+/**
+ * Show image context menu
+ */
+function showImageContextMenu(e) {
+  try {
+    const menu = createContextMenu([
+      { text: 'View Full Size', action: () => viewImageFullSize(e.target) },
+      { text: 'Copy Image URL', action: () => copyImageURL(e.target) }
+    ]);
+    
+    showContextMenuAt(menu, e.touches[0].clientX, e.touches[0].clientY);
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error showing image context menu:", error);
+    }
+  }
+}
+
+/**
+ * Create context menu
+ */
+function createContextMenu(items) {
+  try {
+    const menu = document.createElement('div');
+    menu.className = 'long-press-menu';
+    
+    items.forEach(item => {
+      const button = document.createElement('button');
+      button.textContent = item.text;
+      button.onclick = () => {
+        item.action();
+        hideContextMenu();
+      };
+      menu.appendChild(button);
+    });
+    
+    return menu;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error creating context menu:", error);
+    }
+    return null;
+  }
+}
+
+/**
+ * Show context menu at position
+ */
+function showContextMenuAt(menu, x, y) {
+  try {
+    if (!menu) return;
+    
+    document.body.appendChild(menu);
+    
+    // Position menu
+    menu.style.left = `${Math.min(x, window.innerWidth - 200)}px`;
+    menu.style.top = `${Math.min(y, window.innerHeight - 150)}px`;
+    
+    // Show menu
+    setTimeout(() => menu.classList.add('show'), 10);
+    
+    // Hide menu when clicking outside
+    setTimeout(() => {
+      document.addEventListener('click', hideContextMenu, { once: true });
+      document.addEventListener('touchstart', hideContextMenu, { once: true });
+    }, 100);
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error showing context menu:", error);
+    }
+  }
+}
+
+/**
+ * Hide context menu
+ */
+function hideContextMenu() {
+  try {
+    const menu = document.querySelector('.long-press-menu');
+    if (menu) {
+      menu.classList.remove('show');
+      setTimeout(() => menu.remove(), 150);
+    }
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error hiding context menu:", error);
+    }
+  }
+}
+
+// Context menu actions
+function copyQuestionText() {
+  // Implementation depends on question structure
+  addSuccessHaptic();
+  if (typeof window.devLog === 'function') {
+    window.devLog("📱 Question text copied");
+  }
+}
+
+function addQuestionToFavorites() {
+  // Implementation depends on favorites system
+  addSuccessHaptic();
+  if (typeof window.devLog === 'function') {
+    window.devLog("📱 Question added to favorites");
+  }
+}
+
+function shareQuestion() {
+  // Implementation for sharing
+  addSuccessHaptic();
+  if (typeof window.devLog === 'function') {
+    window.devLog("📱 Question shared");
+  }
+}
+
+function copyAnswerText(target) {
+  // Implementation depends on answer structure
+  addSuccessHaptic();
+  if (typeof window.devLog === 'function') {
+    window.devLog("📱 Answer text copied");
+  }
+}
+
+function explainAnswer(target) {
+  // Implementation for answer explanation
+  addSuccessHaptic();
+  if (typeof window.devLog === 'function') {
+    window.devLog("📱 Answer explanation shown");
+  }
+}
+
+function viewImageFullSize(img) {
+  // Implementation for full-size image view
+  addSuccessHaptic();
+  if (typeof window.devLog === 'function') {
+    window.devLog("📱 Image viewed full size");
+  }
+}
+
+function copyImageURL(img) {
+  // Implementation for copying image URL
+  addSuccessHaptic();
+  if (typeof window.devLog === 'function') {
+    window.devLog("📱 Image URL copied");
+  }
+}
+
+// ===========================
 // MOBILE INITIALIZATION
 // ===========================
 
@@ -597,8 +1180,12 @@ export {
   showSwipeIndicator,
   hideSwipeIndicators,
   
-  // Haptic feedback
+  // Enhanced haptic feedback
   addHapticFeedback,
+  addSuccessHaptic,
+  addErrorHaptic,
+  addSwipeHaptic,
+  addLongPressHaptic,
   
   // Touch feedback
   setupTouchFeedback,
@@ -608,6 +1195,26 @@ export {
   
   // Sidebar swipe-to-close
   setupSidebarSwipeToClose,
+  
+  // Pull-to-refresh
+  setupPullToRefresh,
+  handlePullToRefreshMove,
+  handlePullToRefreshEnd,
+  refreshExamData,
+  
+  // Pinch-to-zoom
+  handlePinchStart,
+  handlePinchMove,
+  setupZoomTarget,
+  
+  // Long press functionality
+  setupLongPress,
+  clearLongPressTimer,
+  triggerLongPress,
+  showQuestionContextMenu,
+  showAnswerContextMenu,
+  showImageContextMenu,
+  hideContextMenu,
   
   // Mobile responsive handling
   handleMobileResize,
