@@ -526,22 +526,67 @@ function toggleLegalInfo() {
  * Show visual feedback for answer validation
  */
 function showValidationResults(correctAnswers) {
+  console.log("🎯 showValidationResults called with:", correctAnswers);
   const instructions = document.getElementById("answerInstructions");
-  if (!instructions) return;
+  if (!instructions) {
+    console.log("❌ showValidationResults: instructions element not found");
+    return;
+  }
   
-  const isCorrect = window.selectedAnswers && 
-    window.selectedAnswers.size === correctAnswers.length &&
-    [...window.selectedAnswers].every(answer => correctAnswers.includes(answer));
-  
-  if (isCorrect) {
-    instructions.className = "answer-instructions success";
-    instructions.innerHTML = '<i class="fas fa-check-circle"></i> Correct! Well done.';
-  } else if (window.selectedAnswers && window.selectedAnswers.size > 0) {
-    instructions.className = "answer-instructions warning";
-    instructions.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Not quite right. Try again!';
-  } else {
+  if (!window.selectedAnswers || window.selectedAnswers.size === 0) {
     instructions.className = "answer-instructions error";
     instructions.innerHTML = '<i class="fas fa-times-circle"></i> Please select an answer first.';
+    return;
+  }
+  
+  // Convert correctAnswers to Set for easier comparison
+  const correctSet = new Set(correctAnswers);
+  const selectedArray = [...window.selectedAnswers];
+  
+  console.log("🎯 correctAnswers type:", typeof correctAnswers, "value:", correctAnswers);
+  console.log("🎯 correctSet:", correctSet);
+  console.log("🎯 selectedArray:", selectedArray);
+  
+  // Calculate correct and incorrect selections
+  const correctSelected = selectedArray.filter(answer => correctSet.has(answer));
+  const incorrectSelected = selectedArray.filter(answer => !correctSet.has(answer));
+  const correctNotSelected = [...correctSet].filter(answer => !window.selectedAnswers.has(answer));
+  
+  console.log("🎯 correctSelected:", correctSelected, "incorrectSelected:", incorrectSelected, "correctNotSelected:", correctNotSelected);
+  
+  // Determine result type  
+  const correctAnswersSize = correctAnswers instanceof Set ? correctAnswers.size : correctAnswers.length;
+  const isFullyCorrect = correctSelected.length === correctAnswersSize && incorrectSelected.length === 0;
+  const hasCorrectAnswers = correctSelected.length > 0;
+  const hasIncorrectAnswers = incorrectSelected.length > 0;
+  const hasMissingAnswers = correctNotSelected.length > 0;
+  
+  console.log("🎯 isFullyCorrect:", isFullyCorrect, "hasCorrectAnswers:", hasCorrectAnswers, "hasIncorrectAnswers:", hasIncorrectAnswers, "hasMissingAnswers:", hasMissingAnswers);
+  
+  if (isFullyCorrect) {
+    console.log("🎯 Setting CORRECT message");
+    instructions.className = "answer-instructions success";
+    instructions.innerHTML = '<i class="fas fa-check-circle"></i> <span>Correct! Well done.</span>';
+  } else if (hasCorrectAnswers && (hasIncorrectAnswers || hasMissingAnswers)) {
+    // Partially correct
+    console.log("🎯 Setting PARTIALLY CORRECT message");
+    instructions.className = "answer-instructions warning";
+    let message = '<i class="fas fa-exclamation-triangle"></i> <span>Partially correct. ';
+    
+    if (hasIncorrectAnswers && hasMissingAnswers) {
+      message += `You selected ${incorrectSelected.length} incorrect answer(s) and missed ${correctNotSelected.length} correct answer(s).`;
+    } else if (hasIncorrectAnswers) {
+      message += `You selected ${incorrectSelected.length} incorrect answer(s).`;
+    } else if (hasMissingAnswers) {
+      message += `You missed ${correctNotSelected.length} correct answer(s).`;
+    }
+    message += '</span>';
+    instructions.innerHTML = message;
+  } else {
+    // Completely incorrect
+    console.log("🎯 Setting INCORRECT message");
+    instructions.className = "answer-instructions error";
+    instructions.innerHTML = '<i class="fas fa-times-circle"></i> <span>Incorrect. None of your selected answers are correct.</span>';
   }
   
   // Add animation
@@ -606,15 +651,184 @@ function hideAutocompleteSuggestions() {
  * Simple markdown to HTML renderer for changelog
  */
 function renderMarkdown(markdown) {
-  return markdown
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    .replace(/^\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-    .replace(/^\*(.*)\*/gim, '<em>$1</em>')
-    .replace(/^\* (.*$)/gim, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
-    .replace(/\n/gim, '<br>');
+  let html = markdown;
+
+  // Convert headers by counting # symbols
+  html = html.replace(/^(#{1,6})\s+(.*$)/gim, (match, hashes, content) => {
+    const level = hashes.length;
+
+    // Add icons for changelog sections (level 3 headers)
+    if (level === 3) {
+      const sectionIcons = {
+        Added:
+          '<i class="fas fa-plus-circle" style="color: var(--success-color);"></i>',
+        Changed:
+          '<i class="fas fa-edit" style="color: var(--accent-color);"></i>',
+        Enhanced:
+          '<i class="fas fa-arrow-up" style="color: var(--accent-color);"></i>',
+        Fixed:
+          '<i class="fas fa-wrench" style="color: var(--warning-color);"></i>',
+        Removed:
+          '<i class="fas fa-minus-circle" style="color: var(--error-color);"></i>',
+        Deprecated:
+          '<i class="fas fa-exclamation-triangle" style="color: var(--warning-color);"></i>',
+        Security:
+          '<i class="fas fa-shield-alt" style="color: var(--error-color);"></i>',
+        Features:
+          '<i class="fas fa-star" style="color: var(--accent-color);"></i>',
+        Technical:
+          '<i class="fas fa-cog" style="color: var(--text-muted);"></i>',
+        Infrastructure:
+          '<i class="fas fa-server" style="color: var(--text-muted);"></i>',
+      };
+
+      const sectionName = content.trim();
+      const icon = sectionIcons[sectionName];
+
+      if (icon) {
+        return `<h${level}>${icon} ${content}</h${level}>`;
+      }
+    }
+
+    return `<h${level}>${content}</h${level}>`;
+  });
+
+  // Convert version badges with dates (including {PR_MERGE_DATE})
+  html = html.replace(
+    /\[([^\]]+)\] - (\{PR_MERGE_DATE\}|\d{4}-\d{2}-\d{2})/g,
+    (match, version, date) => {
+      let badgeClass = "version-badge";
+
+      if (version.includes("Unreleased")) {
+        badgeClass += " unreleased";
+      } else if (version.match(/\d+\.0\.0/)) {
+        badgeClass += " major";
+      } else if (version.match(/\d+\.\d+\.0/)) {
+        badgeClass += " minor";
+      } else {
+        badgeClass += " patch";
+      }
+
+      // Handle {PR_MERGE_DATE} placeholder
+      const displayDate =
+        date === "{PR_MERGE_DATE}"
+          ? '<span style="color: var(--warning-color, #ff9800); font-style: italic;">Pending merge</span>'
+          : `<em>${date}</em>`;
+
+      return `<span class="${badgeClass}">${version}</span> ${displayDate}`;
+    }
+  );
+
+  // Convert [Unreleased] without date
+  html = html.replace(
+    /\[Unreleased\]/g,
+    '<span class="version-badge unreleased">Unreleased</span>'
+  );
+
+  // Convert bold text
+  html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+  // Convert italic text
+  html = html.replace(/\*(.*?)\*/g, "<em>$1</em>");
+
+  // Convert inline code
+  html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+
+  // Convert links
+  html = html.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    '<a href="$2" target="_blank">$1</a>'
+  );
+
+  // Convert horizontal rules
+  html = html.replace(/^---$/gm, "<hr>");
+
+  // Convert unordered lists with support for unlimited nested lists
+  function processNestedLists(lines, startIndex = 0, expectedIndent = 0) {
+    const result = [];
+    let i = startIndex;
+    
+    while (i < lines.length) {
+      const line = lines[i];
+      const listMatch = line.match(/^(\s*)- (.*)$/);
+      
+      if (!listMatch) {
+        if (expectedIndent === 0) {
+          result.push(line);
+        } else {
+          break; // Exit nested processing
+        }
+        i++;
+        continue;
+      }
+      
+      const [, indent, content] = listMatch;
+      const currentIndent = indent.length;
+      
+      if (currentIndent < expectedIndent) {
+        break; // This item belongs to a parent level
+      } else if (currentIndent > expectedIndent) {
+        // This should not happen in well-formed markdown, skip
+        i++;
+        continue;
+      }
+      
+      // Look ahead for nested items
+      const nestedResult = processNestedLists(lines, i + 1, currentIndent + 2);
+      const nestedItems = nestedResult.items;
+      
+      if (nestedItems.length > 0) {
+        result.push(`<li>${content}<ul>${nestedItems.join('')}</ul></li>`);
+      } else {
+        result.push(`<li>${content}</li>`);
+      }
+      
+      i = nestedResult.nextIndex;
+    }
+    
+    return { items: result, nextIndex: i };
+  }
+  
+  const lines = html.split("\n");
+  const processed = processNestedLists(lines);
+  
+  html = processed.items.join("\n");
+  
+  // Wrap consecutive <li> items in <ul> tags
+  html = html.replace(/(<li>.*?<\/li>(?:\n<li>.*?<\/li>)*)/g, (match) => {
+    return `<ul>${match.replace(/\n/g, '')}</ul>`;
+  });
+
+  // Convert line breaks to paragraphs
+  html = html
+    .split("\n\n")
+    .map((paragraph) => {
+      paragraph = paragraph.trim();
+      if (!paragraph) return "";
+
+      // Skip if already wrapped in HTML tags
+      if (paragraph.startsWith("<") && paragraph.endsWith(">")) {
+        return paragraph;
+      }
+
+      // Skip if it's a list
+      if (paragraph.includes("<ul>") || paragraph.includes("<ol>")) {
+        return paragraph;
+      }
+
+      // Skip if it's a header
+      if (paragraph.startsWith("<h")) {
+        return paragraph;
+      }
+
+      return `<p>${paragraph}</p>`;
+    })
+    .join("\n");
+
+  // Clean up extra line breaks
+  html = html.replace(/\n\s*\n/g, "\n");
+
+  return html;
 }
 
 // ===========================

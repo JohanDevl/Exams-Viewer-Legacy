@@ -533,8 +533,8 @@ function displayCurrentQuestion(fromToggleAction = false) {
       window.displayDiscussion(question);
     }
 
-    // Update various UI elements
-    if (typeof window.updateInstructions === 'function') {
+    // Update various UI elements (skip if question is already validated)
+    if (typeof window.updateInstructions === 'function' && !window.isValidated) {
       window.updateInstructions();
     }
     if (typeof window.updateHighlightButton === 'function') {
@@ -637,7 +637,7 @@ function toggleAnswerSelection(letter, element) {
       element.classList.add("selected");
     }
     
-    if (typeof window.updateInstructions === 'function') {
+    if (typeof window.updateInstructions === 'function' && !window.isValidated) {
       window.updateInstructions();
     }
 
@@ -886,8 +886,14 @@ function validateAnswers() {
     updateQuestionStatistics();
 
     // Show validation results
+    console.log("🎯 Checking showValidationResults function...");
+    console.log("🎯 typeof window.showValidationResults:", typeof window.showValidationResults);
+    console.log("🎯 window.showValidationResults:", window.showValidationResults);
     if (typeof window.showValidationResults === 'function') {
+      console.log("🎯 Calling showValidationResults with correctAnswers:", correctAnswers);
       window.showValidationResults(correctAnswers);
+    } else {
+      console.log("❌ showValidationResults is not available!");
     }
     
     // Update filter counts after answer validation
@@ -998,7 +1004,7 @@ function resetAnswers() {
     if (resetBtn) resetBtn.style.display = "none";
 
     // Update instructions and statistics
-    if (typeof window.updateInstructions === 'function') {
+    if (typeof window.updateInstructions === 'function' && !window.isValidated) {
       window.updateInstructions();
     }
     updateQuestionStatistics();

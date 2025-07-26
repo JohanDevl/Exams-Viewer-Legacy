@@ -194,7 +194,7 @@ function saveSettingsUI() {
       if (typeof window.updateHighlightButton === 'function') {
         window.updateHighlightButton();
       }
-      if (typeof window.updateInstructions === 'function') {
+      if (typeof window.updateInstructions === 'function' && !window.isValidated) {
         window.updateInstructions();
       }
       if (typeof window.updateSessionStats === 'function') {

@@ -158,6 +158,7 @@ window.displayChangelog = displayChangelog;
 window.toggleSidebar = toggleSidebar;
 window.toggleSearchSection = toggleSearchSection;
 window.toggleLegalInfo = toggleLegalInfo;
+console.log("🔧 Assigning showValidationResults to window:", typeof showValidationResults, showValidationResults);
 window.showValidationResults = showValidationResults;
 window.showQuestionNumberSuggestions = showQuestionNumberSuggestions;
 window.hideAutocompleteSuggestions = hideAutocompleteSuggestions;

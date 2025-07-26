@@ -104,6 +104,7 @@ import {
   closeKeyboardHelp,
   displayChangelog,
   updateMainProgressBarVisibility,
+  showValidationResults,
 } from './js/modules/ui-effects.js';
 
 // Statistics system
@@ -303,6 +304,7 @@ function exposeGlobalFunctions() {
   window.showKeyboardHelp = showKeyboardHelp;
   window.closeKeyboardHelp = closeKeyboardHelp;
   window.displayChangelog = displayChangelog;
+  window.showValidationResults = showValidationResults;
 
   // Statistics system
   window.recalculateTotalStats = recalculateTotalStats;
@@ -694,7 +696,9 @@ function setupMainEventListeners() {
       updateHighlightButton();
       
       // Update instructions (after displayCurrentQuestion to ensure button state is correct)
-      updateInstructions();
+      if (!window.isValidated) {
+        updateInstructions();
+      }
       
       console.log(`🔦 Highlight mode ${window.isHighlightEnabled ? 'enabled' : 'disabled'}`);
     });
@@ -2199,6 +2203,14 @@ function updateInstructions() {
   if (!instructions || !validateBtn) {
     console.log('❌ updateInstructions: Missing elements - instructions:', !!instructions, 'validateBtn:', !!validateBtn);
     return;
+  }
+
+  // Don't update instructions if question is already validated
+  if (window.isValidated) {
+    console.log('🔍 updateInstructions: Question already validated, skipping update');
+    return;
+  } else {
+    console.log('🔍 updateInstructions: Question not validated, proceeding');
   }
 
   const selectedCount = window.selectedAnswers?.size || 0;
