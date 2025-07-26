@@ -6,6 +6,13 @@
 // Import development utilities from storage module
 import { isDevelopmentMode, devLog, devError } from './storage.js';
 
+// Add devWarn if it doesn't exist
+const devWarn = (...args) => {
+  if (isDevelopmentMode()) {
+    console.warn(...args);
+  }
+};
+
 // ===========================
 // DEV BUTTON MANAGEMENT
 // ===========================
@@ -26,13 +33,81 @@ function initializeDevButton() {
       // Show the dev button
       devButton.style.display = 'block';
       
+      // Initialize button state
+      updateButtonState(runTestsBtn, 'ready');
+      
       // Add click handler
       runTestsBtn.addEventListener('click', handleRunTests);
+      
+      // Preload test scripts in background to reduce first-click delay
+      preloadTestScripts();
       
       devLog('🧪 Development test button initialized');
     }
   } catch (error) {
     console.error('Error initializing dev button:', error);
+  }
+}
+
+/**
+ * Update button state with consistent styling
+ */
+function updateButtonState(button, state) {
+  if (!button) return;
+  
+  const states = {
+    ready: {
+      html: '<i class="fas fa-flask"></i> Run Tests',
+      disabled: false,
+      background: '',
+      title: 'Run comprehensive tests'
+    },
+    loading: {
+      html: '<i class="fas fa-spinner fa-spin"></i> Loading Scripts...',
+      disabled: true,
+      background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+      title: 'Loading test scripts...'
+    },
+    running: {
+      html: '<i class="fas fa-spinner fa-spin"></i> Running Tests...',
+      disabled: true,
+      background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+      title: 'Running tests...'
+    },
+    success: {
+      html: '<i class="fas fa-check"></i> Tests Complete',
+      disabled: true,
+      background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+      title: 'Tests completed successfully'
+    },
+    error: {
+      html: '<i class="fas fa-exclamation-triangle"></i> Error',
+      disabled: true,
+      background: 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)',
+      title: 'Error occurred during testing'
+    }
+  };
+  
+  const config = states[state];
+  if (config) {
+    button.innerHTML = config.html;
+    button.disabled = config.disabled;
+    button.style.background = config.background;
+    button.title = config.title;
+  }
+}
+
+/**
+ * Preload test scripts in background to reduce delay
+ */
+async function preloadTestScripts() {
+  try {
+    devLog('🔄 Preloading test scripts in background...');
+    await loadTestScripts();
+    devLog('✅ Test scripts preloaded successfully');
+  } catch (error) {
+    devWarn('⚠️ Failed to preload test scripts:', error);
+    // Don't throw error - this is just an optimization
   }
 }
 
@@ -44,46 +119,91 @@ async function handleRunTests() {
     const button = document.getElementById('runTestsBtn');
     if (!button) return;
     
-    // Update button state
-    const originalContent = button.innerHTML;
-    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Running...';
-    button.disabled = true;
-    
-    // Load test scripts dynamically
-    await loadTestScripts();
-    
-    // Run the tests
-    if (typeof window.runComprehensiveTests === 'function') {
-      await window.runComprehensiveTests();
-    } else {
-      throw new Error('Test functions not loaded');
+    // Prevent multiple simultaneous test runs
+    if (button.disabled) {
+      devLog('Tests already running, ignoring click');
+      return;
     }
     
-    // Update button state
-    button.innerHTML = '<i class="fas fa-check"></i> Tests Complete';
-    button.style.background = 'linear-gradient(135deg, #059669 0%, #047857 100%)';
+    // Update button state to loading
+    updateButtonState(button, 'loading');
+    
+    devLog('🔄 Loading test scripts...');
+    
+    // Load test scripts dynamically with error handling
+    await loadTestScripts();
+    
+    // Update button to running state
+    updateButtonState(button, 'running');
+    
+    devLog('🧪 Starting test execution...');
+    
+    // Wait a moment for scripts to fully initialize
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    // Try different test execution methods in order of preference
+    let testsExecuted = false;
+    
+    // Method 1: Check for testSuite object and runAllTests method
+    if (window.testSuite && typeof window.testSuite.runAllTests === 'function') {
+      devLog('✅ Found testSuite.runAllTests, executing...');
+      await window.testSuite.runAllTests();
+      testsExecuted = true;
+    }
+    // Method 2: Check for runComprehensiveTests function
+    else if (typeof window.runComprehensiveTests === 'function') {
+      devLog('✅ Found runComprehensiveTests, executing...');
+      await window.runComprehensiveTests();
+      testsExecuted = true;
+    }
+    // Method 3: Check for runManualTests function
+    else if (typeof window.runManualTests === 'function') {
+      devLog('✅ Found runManualTests, executing...');
+      await window.runManualTests();
+      testsExecuted = true;
+    }
+    // Method 4: Try to create test suite manually
+    else if (window.ExamsViewerTestSuite) {
+      devLog('✅ Found ExamsViewerTestSuite class, creating instance...');
+      const testSuite = new window.ExamsViewerTestSuite();
+      await testSuite.runAllTests();
+      testsExecuted = true;
+    }
+    
+    if (!testsExecuted) {
+      // Log available test functions for debugging
+      const availableFunctions = [];
+      if (window.testSuite) availableFunctions.push('testSuite');
+      if (window.runComprehensiveTests) availableFunctions.push('runComprehensiveTests');
+      if (window.runManualTests) availableFunctions.push('runManualTests');
+      if (window.ExamsViewerTestSuite) availableFunctions.push('ExamsViewerTestSuite');
+      
+      devError('Available test functions:', availableFunctions);
+      throw new Error(`Test functions not properly loaded. Available: ${availableFunctions.join(', ')}`);
+    }
+    
+    // Update button state to success
+    updateButtonState(button, 'success');
+    
+    devLog('✅ Tests completed successfully');
     
     // Reset button after delay
     setTimeout(() => {
-      button.innerHTML = originalContent;
-      button.disabled = false;
-      button.style.background = '';
+      updateButtonState(button, 'ready');
     }, 3000);
     
   } catch (error) {
-    console.error('Error running tests:', error);
+    devError('Error running tests:', error);
     
     // Update button to show error
     const button = document.getElementById('runTestsBtn');
     if (button) {
-      button.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error';
-      button.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+      updateButtonState(button, 'error');
+      button.title = `Test Error: ${error.message}`;
       
       setTimeout(() => {
-        button.innerHTML = '<i class="fas fa-flask"></i> Run Tests';
-        button.disabled = false;
-        button.style.background = '';
-      }, 3000);
+        updateButtonState(button, 'ready');
+      }, 5000); // Longer delay for error state
     }
   }
 }
@@ -98,18 +218,60 @@ async function handleRunTests() {
 async function loadTestScripts() {
   try {
     const testScripts = [
-      'tests/comprehensive-test-suite.js',
-      'tests/automated-test-report.js',
-      'tests/run-tests.js'
+      { path: 'tests/comprehensive-test-suite.js', required: true },
+      { path: 'tests/automated-test-report.js', required: false },
+      { path: 'tests/run-tests.js', required: false }
     ];
     
-    for (const scriptPath of testScripts) {
-      await loadScript(scriptPath);
+    const loadPromises = [];
+    
+    for (const script of testScripts) {
+      try {
+        devLog(`📂 Loading ${script.path}...`);
+        const loadPromise = loadScript(script.path);
+        loadPromises.push(loadPromise);
+        
+        // Wait for required scripts, but continue if optional scripts fail
+        if (script.required) {
+          await loadPromise;
+          devLog(`✅ Required script loaded: ${script.path}`);
+        }
+      } catch (error) {
+        if (script.required) {
+          devError(`❌ Failed to load required script: ${script.path}`, error);
+          throw new Error(`Required test script failed to load: ${script.path}`);
+        } else {
+          devWarn(`⚠️ Optional script failed to load: ${script.path}`, error);
+        }
+      }
     }
     
-    devLog('🧪 Test scripts loaded successfully');
+    // Wait for all optional scripts to finish (but don't fail if they error)
+    try {
+      await Promise.allSettled(loadPromises);
+    } catch (error) {
+      devWarn('Some optional scripts failed to load, continuing with available scripts');
+    }
+    
+    // Give scripts time to initialize
+    await new Promise(resolve => setTimeout(resolve, 200));
+    
+    devLog('🧪 Test scripts loading completed');
+    
+    // Verify that at least one test execution method is available
+    const hasTestSuite = window.testSuite && typeof window.testSuite.runAllTests === 'function';
+    const hasRunComprehensive = typeof window.runComprehensiveTests === 'function';
+    const hasRunManual = typeof window.runManualTests === 'function';
+    const hasTestSuiteClass = typeof window.ExamsViewerTestSuite === 'function';
+    
+    if (!hasTestSuite && !hasRunComprehensive && !hasRunManual && !hasTestSuiteClass) {
+      throw new Error('No test execution methods found after loading scripts');
+    }
+    
+    devLog('✅ Test execution methods verified');
+    
   } catch (error) {
-    console.error('Error loading test scripts:', error);
+    devError('Error loading test scripts:', error);
     throw error;
   }
 }
@@ -120,16 +282,40 @@ async function loadTestScripts() {
 function loadScript(src) {
   return new Promise((resolve, reject) => {
     // Check if script is already loaded
-    if (document.querySelector(`script[src="${src}"]`)) {
+    const existingScript = document.querySelector(`script[src="${src}"]`);
+    if (existingScript) {
+      devLog(`📜 Script already loaded: ${src}`);
       resolve();
       return;
     }
     
     const script = document.createElement('script');
     script.src = src;
-    script.onload = resolve;
-    script.onerror = () => reject(new Error(`Failed to load ${src}`));
+    
+    // Add timeout to prevent hanging
+    const timeout = setTimeout(() => {
+      reject(new Error(`Timeout loading ${src}`));
+    }, 10000); // 10 second timeout
+    
+    script.onload = () => {
+      clearTimeout(timeout);
+      devLog(`✅ Script loaded successfully: ${src}`);
+      resolve();
+    };
+    
+    script.onerror = (error) => {
+      clearTimeout(timeout);
+      const errorMsg = `Failed to load ${src}: ${error.message || 'Unknown error'}`;
+      devError(errorMsg);
+      reject(new Error(errorMsg));
+    };
+    
+    // Set script attributes for better loading
+    script.async = true;
+    script.defer = false;
+    
     document.head.appendChild(script);
+    devLog(`📥 Loading script: ${src}`);
   });
 }
 
@@ -277,6 +463,8 @@ export {
   // Button management
   initializeDevButton,
   handleRunTests,
+  updateButtonState,
+  preloadTestScripts,
   
   // Script loading
   loadTestScripts,

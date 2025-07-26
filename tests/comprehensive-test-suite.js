@@ -1040,6 +1040,15 @@ class ExamsViewerTestSuite {
 // Global instance for manual testing
 window.testSuite = new ExamsViewerTestSuite();
 
+// Expose comprehensive test runner function for dev-testing module
+window.runComprehensiveTests = async function() {
+    if (window.testSuite && typeof window.testSuite.runAllTests === 'function') {
+        return await window.testSuite.runAllTests();
+    } else {
+        throw new Error('Test suite not available');
+    }
+};
+
 // Auto-run when page is fully loaded
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
