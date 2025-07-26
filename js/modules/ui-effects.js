@@ -526,10 +526,14 @@ function toggleLegalInfo() {
  * Show visual feedback for answer validation
  */
 function showValidationResults(correctAnswers) {
-  console.log("🎯 showValidationResults called with:", correctAnswers);
+  if (typeof window.devLog === 'function') {
+    window.devLog("🎯 showValidationResults called with:", correctAnswers);
+  }
   const instructions = document.getElementById("answerInstructions");
   if (!instructions) {
-    console.log("❌ showValidationResults: instructions element not found");
+    if (typeof window.devLog === 'function') {
+      window.devLog("❌ showValidationResults: instructions element not found");
+    }
     return;
   }
   
@@ -543,16 +547,20 @@ function showValidationResults(correctAnswers) {
   const correctSet = new Set(correctAnswers);
   const selectedArray = [...window.selectedAnswers];
   
-  console.log("🎯 correctAnswers type:", typeof correctAnswers, "value:", correctAnswers);
-  console.log("🎯 correctSet:", correctSet);
-  console.log("🎯 selectedArray:", selectedArray);
+  if (typeof window.devLog === 'function') {
+    window.devLog("🎯 correctAnswers type:", typeof correctAnswers, "value:", correctAnswers);
+    window.devLog("🎯 correctSet:", correctSet);
+    window.devLog("🎯 selectedArray:", selectedArray);
+  }
   
   // Calculate correct and incorrect selections
   const correctSelected = selectedArray.filter(answer => correctSet.has(answer));
   const incorrectSelected = selectedArray.filter(answer => !correctSet.has(answer));
   const correctNotSelected = [...correctSet].filter(answer => !window.selectedAnswers.has(answer));
   
-  console.log("🎯 correctSelected:", correctSelected, "incorrectSelected:", incorrectSelected, "correctNotSelected:", correctNotSelected);
+  if (typeof window.devLog === 'function') {
+    window.devLog("🎯 correctSelected:", correctSelected, "incorrectSelected:", incorrectSelected, "correctNotSelected:", correctNotSelected);
+  }
   
   // Determine result type  
   const correctAnswersSize = correctAnswers instanceof Set ? correctAnswers.size : correctAnswers.length;
@@ -561,15 +569,21 @@ function showValidationResults(correctAnswers) {
   const hasIncorrectAnswers = incorrectSelected.length > 0;
   const hasMissingAnswers = correctNotSelected.length > 0;
   
-  console.log("🎯 isFullyCorrect:", isFullyCorrect, "hasCorrectAnswers:", hasCorrectAnswers, "hasIncorrectAnswers:", hasIncorrectAnswers, "hasMissingAnswers:", hasMissingAnswers);
+  if (typeof window.devLog === 'function') {
+    window.devLog("🎯 isFullyCorrect:", isFullyCorrect, "hasCorrectAnswers:", hasCorrectAnswers, "hasIncorrectAnswers:", hasIncorrectAnswers, "hasMissingAnswers:", hasMissingAnswers);
+  }
   
   if (isFullyCorrect) {
-    console.log("🎯 Setting CORRECT message");
+    if (typeof window.devLog === 'function') {
+      window.devLog("🎯 Setting CORRECT message");
+    }
     instructions.className = "answer-instructions success";
     instructions.innerHTML = '<i class="fas fa-check-circle"></i> <span>Correct! Well done.</span>';
   } else if (hasCorrectAnswers && (hasIncorrectAnswers || hasMissingAnswers)) {
     // Partially correct
-    console.log("🎯 Setting PARTIALLY CORRECT message");
+    if (typeof window.devLog === 'function') {
+      window.devLog("🎯 Setting PARTIALLY CORRECT message");
+    }
     instructions.className = "answer-instructions warning";
     let message = '<i class="fas fa-exclamation-triangle"></i> <span>Partially correct. ';
     
@@ -584,7 +598,9 @@ function showValidationResults(correctAnswers) {
     instructions.innerHTML = message;
   } else {
     // Completely incorrect
-    console.log("🎯 Setting INCORRECT message");
+    if (typeof window.devLog === 'function') {
+      window.devLog("🎯 Setting INCORRECT message");
+    }
     instructions.className = "answer-instructions error";
     instructions.innerHTML = '<i class="fas fa-times-circle"></i> <span>Incorrect. None of your selected answers are correct.</span>';
   }

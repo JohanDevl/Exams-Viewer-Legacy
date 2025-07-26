@@ -1054,18 +1054,24 @@
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
           .then(registration => {
-            console.log('Service Worker registered:', registration);
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
+              console.log('Service Worker registered:', registration);
+            }
             
             // Listen for cache updates
             navigator.serviceWorker.addEventListener('message', event => {
               if (event.data && event.data.type === 'CACHE_UPDATED') {
-                console.log('Cache updated for:', event.data.url);
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
+                  console.log('Cache updated for:', event.data.url);
+                }
                 // Could show a subtle notification to user about updated content
               }
             });
           })
           .catch(error => {
-            console.log('Service Worker registration failed:', error);
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
+              console.log('Service Worker registration failed:', error);
+            }
           });
       }
     </script>

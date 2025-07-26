@@ -659,7 +659,9 @@ function setupMainEventListeners() {
         // Track highlight button click using the new function (only when activating)
         if (typeof window.trackQuestionHighlight === 'function') {
           window.trackQuestionHighlight(questionNumber, 'button_click');
-          console.log(`🔦 Tracked highlight activation for Q${questionNumber}`);
+          if (typeof window.devLog === 'function') {
+            window.devLog(`🔦 Tracked highlight activation for Q${questionNumber}`);
+          }
         }
       }
       
@@ -700,7 +702,9 @@ function setupMainEventListeners() {
         updateInstructions();
       }
       
-      console.log(`🔦 Highlight mode ${window.isHighlightEnabled ? 'enabled' : 'disabled'}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔦 Highlight mode ${window.isHighlightEnabled ? 'enabled' : 'disabled'}`);
+      }
     });
   }
 
@@ -773,7 +777,9 @@ function setupMainEventListeners() {
         const categorySelect = document.getElementById('categorySelect');
         const selectedCategory = categorySelect?.value || null;
         
-        console.log("⭐ Adding to favorites with category:", selectedCategory || 'no category');
+        if (typeof window.devLog === 'function') {
+          window.devLog("⭐ Adding to favorites with category:", selectedCategory || 'no category');
+        }
         
         // toggleQuestionFavorite takes questionIndex (0-based), not examCode/questionNumber
         if (selectedCategory) {
@@ -862,7 +868,9 @@ function setupMainEventListeners() {
       }
     });
   } else {
-    console.error("❌ Note button not found with id 'noteBtn'");
+    if (typeof window.devLog === 'function') {
+      window.devLog("❌ Note button not found with id 'noteBtn'");
+    }
   }
 
   // Edit note button
@@ -1011,20 +1019,26 @@ function setupMainEventListeners() {
   const darkModeBtn = document.getElementById("darkModeBtn");
   if (darkModeBtn) {
     darkModeBtn.addEventListener("click", () => {
-      console.log("🎨 Dark mode button clicked");
+      if (typeof window.devLog === 'function') {
+        window.devLog("🎨 Dark mode button clicked");
+      }
       const toggle = document.getElementById("darkModeToggle");
       if (toggle) {
         const oldValue = toggle.checked;
         toggle.checked = !toggle.checked;
-        console.log(`🔄 Toggle changed from ${oldValue} to ${toggle.checked}`);
-        console.log("📄 window.settings before:", window.settings);
+        if (typeof window.devLog === 'function') {
+          window.devLog(`🔄 Toggle changed from ${oldValue} to ${toggle.checked}`);
+          window.devLog("📄 window.settings before:", window.settings);
+        }
         
         if (typeof window.saveSettingsUI === 'function') {
           window.saveSettingsUI();
         }
         
-        console.log("📄 window.settings after:", window.settings);
-        console.log("🎨 Body classes:", document.body.className);
+        if (typeof window.devLog === 'function') {
+          window.devLog("📄 window.settings after:", window.settings);
+          window.devLog("🎨 Body classes:", document.body.className);
+        }
       }
     });
   }
@@ -1062,7 +1076,9 @@ function setupMainEventListeners() {
           return;
         }
 
-        console.log("📥 Exporting favorites data:", favoritesData);
+        if (typeof window.devLog === 'function') {
+          window.devLog("📥 Exporting favorites data:", favoritesData);
+        }
 
         const blob = new Blob([favoritesData], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
@@ -1106,7 +1122,9 @@ function setupMainEventListeners() {
           try {
             const importedData = JSON.parse(e.target.result);
             
-            console.log("📤 Importing favorites data:", importedData);
+            if (typeof window.devLog === 'function') {
+              window.devLog("📤 Importing favorites data:", importedData);
+            }
             
             if (confirm("This will replace all existing favorites data. Are you sure?")) {
               // Use correct localStorage key
@@ -1179,7 +1197,9 @@ function setupMainEventListeners() {
             window.updateCategoryDropdown();
           }
           
-          console.log("🗑️ All favorites data reset - favoritesData:", window.favoritesData);
+          if (typeof window.devLog === 'function') {
+            window.devLog("🗑️ All favorites data reset - favoritesData:", window.favoritesData);
+          }
           
           if (typeof window.showSuccess === 'function') {
             window.showSuccess("All favorites data has been completely reset.");
@@ -1320,7 +1340,9 @@ function setupMainEventListeners() {
       }
     });
 
-    console.log("🔧 Universal modal close handlers setup complete");
+    if (typeof window.devLog === 'function') {
+      window.devLog("🔧 Universal modal close handlers setup complete");
+    }
   }
 
   // Initialize modal close handlers
@@ -1347,21 +1369,31 @@ function setupMainEventListeners() {
 
   const startExportBtn = document.getElementById("startExportBtn");
   if (startExportBtn) {
-    console.log("✅ Found startExportBtn, adding event listener");
+    if (typeof window.devLog === 'function') {
+      window.devLog("✅ Found startExportBtn, adding event listener");
+    }
     startExportBtn.addEventListener("click", () => {
-      console.log("🖱️ Export button clicked!");
-      console.log("🔍 Checking if performExport function exists:", typeof window.performExport);
+      if (typeof window.devLog === 'function') {
+        window.devLog("🖱️ Export button clicked!");
+        window.devLog("🔍 Checking if performExport function exists:", typeof window.performExport);
+      }
       
       if (typeof window.performExport === 'function') {
-        console.log("✅ Calling performExport function...");
+        if (typeof window.devLog === 'function') {
+          window.devLog("✅ Calling performExport function...");
+        }
         window.performExport();
       } else {
-        console.error("❌ performExport function not available");
+        if (typeof window.devLog === 'function') {
+          window.devLog("❌ performExport function not available");
+        }
         alert("Export function not available");
       }
     });
   } else {
-    console.error("❌ startExportBtn not found in DOM");
+    if (typeof window.devLog === 'function') {
+      window.devLog("❌ startExportBtn not found in DOM");
+    }
   }
 
   // Update export preview when options change
@@ -2201,25 +2233,35 @@ function updateInstructions() {
   const validateBtn = document.getElementById("validateBtn");
   
   if (!instructions || !validateBtn) {
-    console.log('❌ updateInstructions: Missing elements - instructions:', !!instructions, 'validateBtn:', !!validateBtn);
+    if (typeof window.devLog === 'function') {
+      window.devLog('❌ updateInstructions: Missing elements - instructions:', !!instructions, 'validateBtn:', !!validateBtn);
+    }
     return;
   }
 
   // Don't update instructions if question is already validated
   if (window.isValidated) {
-    console.log('🔍 updateInstructions: Question already validated, skipping update');
+    if (typeof window.devLog === 'function') {
+      window.devLog('🔍 updateInstructions: Question already validated, skipping update');
+    }
     return;
   } else {
-    console.log('🔍 updateInstructions: Question not validated, proceeding');
+    if (typeof window.devLog === 'function') {
+      window.devLog('🔍 updateInstructions: Question not validated, proceeding');
+    }
   }
 
   const selectedCount = window.selectedAnswers?.size || 0;
   
-  console.log('🔍 updateInstructions: isHighlightEnabled =', window.isHighlightEnabled);
-  console.log('🔍 updateInstructions: selectedCount =', selectedCount);
+  if (typeof window.devLog === 'function') {
+    window.devLog('🔍 updateInstructions: isHighlightEnabled =', window.isHighlightEnabled);
+    window.devLog('🔍 updateInstructions: selectedCount =', selectedCount);
+  }
 
   if (window.isHighlightEnabled) {
-    console.log('🔦 updateInstructions: Setting highlight mode instructions');
+    if (typeof window.devLog === 'function') {
+      window.devLog('🔦 updateInstructions: Setting highlight mode instructions');
+    }
     instructions.className = "answer-instructions warning";
     instructions.innerHTML = '<i class="fas fa-lightbulb"></i><span>Highlight mode is active - correct answers are shown. Disable highlight to validate your answers.</span>';
     
@@ -2228,7 +2270,9 @@ function updateInstructions() {
     validateBtn.style.opacity = "0.5";
     validateBtn.style.cursor = "not-allowed";
     validateBtn.title = "Disable highlight mode to validate answers";
-    console.log('🔦 validateBtn disabled - opacity:', validateBtn.style.opacity, 'disabled:', validateBtn.disabled);
+    if (typeof window.devLog === 'function') {
+      window.devLog('🔦 validateBtn disabled - opacity:', validateBtn.style.opacity, 'disabled:', validateBtn.disabled);
+    }
     
     // Hide reset button when highlight is active
     const resetBtn = document.getElementById("resetBtn");
@@ -2236,7 +2280,9 @@ function updateInstructions() {
       resetBtn.style.display = "none";
     }
   } else if (selectedCount === 0) {
-    console.log('ℹ️ updateInstructions: No selections, normal mode');
+    if (typeof window.devLog === 'function') {
+      window.devLog('ℹ️ updateInstructions: No selections, normal mode');
+    }
     instructions.className = "answer-instructions";
     instructions.innerHTML = '<i class="fas fa-info-circle"></i><span>Click on the answers to select them</span>';
     
@@ -2245,7 +2291,9 @@ function updateInstructions() {
     validateBtn.style.opacity = "1";
     validateBtn.style.cursor = "pointer";
     validateBtn.title = "";
-    console.log('✅ validateBtn enabled - opacity:', validateBtn.style.opacity, 'disabled:', validateBtn.disabled);
+    if (typeof window.devLog === 'function') {
+      window.devLog('✅ validateBtn enabled - opacity:', validateBtn.style.opacity, 'disabled:', validateBtn.disabled);
+    }
     
     // Hide reset button when no answers are selected and not validated
     const resetBtn = document.getElementById("resetBtn");
@@ -2253,7 +2301,9 @@ function updateInstructions() {
       resetBtn.style.display = "none";
     }
   } else {
-    console.log('📝 updateInstructions: Has selections, normal mode');
+    if (typeof window.devLog === 'function') {
+      window.devLog('📝 updateInstructions: Has selections, normal mode');
+    }
     instructions.className = "answer-instructions info";
     const plural = selectedCount === 1 ? "answer" : "answers";
     instructions.innerHTML = `<i class="fas fa-check-circle"></i><span>You selected ${selectedCount} ${plural}. Click validate to check your answer.</span>`;
@@ -2263,7 +2313,9 @@ function updateInstructions() {
     validateBtn.style.opacity = "1";
     validateBtn.style.cursor = "pointer";
     validateBtn.title = "";
-    console.log('✅ validateBtn enabled - opacity:', validateBtn.style.opacity, 'disabled:', validateBtn.disabled);
+    if (typeof window.devLog === 'function') {
+      window.devLog('✅ validateBtn enabled - opacity:', validateBtn.style.opacity, 'disabled:', validateBtn.disabled);
+    }
     
     // Show reset button when answers are selected
     const resetBtn = document.getElementById("resetBtn");
@@ -2421,7 +2473,9 @@ function updateFavoritesUI() {
   if (categorySelect) {
     // Show the actual category or empty if none
     categorySelect.value = questionData.category || "";
-    console.log("🏷️ Current question category:", questionData.category || 'no category');
+    if (typeof window.devLog === 'function') {
+      window.devLog("🏷️ Current question category:", questionData.category || 'no category');
+    }
   }
 
   // Update note display and button state
@@ -2733,7 +2787,9 @@ function getSelectedContentOptions() {
     includeMetadata: document.getElementById('includeMetadata')?.checked ?? false
   };
   
-  console.log("🎛️ Export options selected:", options);
+  if (typeof window.devLog === 'function') {
+    window.devLog("🎛️ Export options selected:", options);
+  }
   return options;
 }
 
@@ -2768,10 +2824,14 @@ function getFilteredQuestionsForExport(filter) {
       const selectedCategoriesElements = document.querySelectorAll('.export-category-checkbox:checked');
       const selectedCategories = Array.from(selectedCategoriesElements).map(el => el.value);
       
-      console.log("🏷️ Selected categories for export:", selectedCategories);
+      if (typeof window.devLog === 'function') {
+        window.devLog("🏷️ Selected categories for export:", selectedCategories);
+      }
       
       if (selectedCategories.length === 0) {
-        console.log("⚠️ No categories selected for export");
+        if (typeof window.devLog === 'function') {
+          window.devLog("⚠️ No categories selected for export");
+        }
         return [];
       }
       
@@ -2793,10 +2853,14 @@ function getFilteredQuestionsForExport(filter) {
  * Calculate estimated file size
  */
 function calculateEstimatedFileSize(questions, format, options) {
-  console.log("📏 Calculating file size for:", questions.length, "questions, format:", format);
+  if (typeof window.devLog === 'function') {
+    window.devLog("📏 Calculating file size for:", questions.length, "questions, format:", format);
+  }
   
   if (questions.length === 0) {
-    console.log("❌ No questions to calculate size for");
+    if (typeof window.devLog === 'function') {
+      window.devLog("❌ No questions to calculate size for");
+    }
     return 0;
   }
   
@@ -2835,30 +2899,42 @@ function calculateEstimatedFileSize(questions, format, options) {
     }
   });
   
-  console.log("📏 Base size before format multiplier:", baseSize, "bytes");
+  if (typeof window.devLog === 'function') {
+    window.devLog("📏 Base size before format multiplier:", baseSize, "bytes");
+  }
   
   // Format-specific multipliers
   switch (format) {
     case 'pdf':
       baseSize *= 3; // PDF overhead
-      console.log("📏 PDF multiplier applied (x3)");
+      if (typeof window.devLog === 'function') {
+        window.devLog("📏 PDF multiplier applied (x3)");
+      }
       break;
     case 'json':
       baseSize *= 1.5; // JSON structure overhead
-      console.log("📏 JSON multiplier applied (x1.5)");
+      if (typeof window.devLog === 'function') {
+        window.devLog("📏 JSON multiplier applied (x1.5)");
+      }
       break;
     case 'csv':
       baseSize *= 0.8; // CSV is compact
-      console.log("📏 CSV multiplier applied (x0.8)");
+      if (typeof window.devLog === 'function') {
+        window.devLog("📏 CSV multiplier applied (x0.8)");
+      }
       break;
     case 'txt':
       baseSize *= 1; // Plain text is most compact
-      console.log("📏 TXT multiplier applied (x1)");
+      if (typeof window.devLog === 'function') {
+        window.devLog("📏 TXT multiplier applied (x1)");
+      }
       break;
   }
   
   const finalSize = Math.max(1024, Math.round(baseSize)); // Minimum 1KB
-  console.log("📏 Final calculated size:", finalSize, "bytes");
+  if (typeof window.devLog === 'function') {
+    window.devLog("📏 Final calculated size:", finalSize, "bytes");
+  }
   
   return finalSize;
 }
@@ -2888,15 +2964,21 @@ function populateExportCategories() {
   const allCategories = typeof window.getAllCategories === 'function' ? 
     window.getAllCategories() : [];
   
-  console.log("🏷️ All available categories:", allCategories);
-  console.log("🏷️ Current exam code:", window.currentExamCode);
-  console.log("🏷️ Current exam object:", window.currentExam);
-  console.log("🏷️ Total questions:", window.currentQuestions?.length || 0);
+  if (typeof window.devLog === 'function') {
+    window.devLog("🏷️ All available categories:", allCategories);
+    window.devLog("🏷️ Current exam code:", window.currentExamCode);
+  }
+  if (typeof window.devLog === 'function') {
+    window.devLog("🏷️ Current exam object:", window.currentExam);
+    window.devLog("🏷️ Total questions:", window.currentQuestions?.length || 0);
+  }
   
   // Ensure currentExamCode is available for getQuestionCategory
   if (!window.currentExamCode && window.currentExam) {
     window.currentExamCode = window.currentExam.exam_code || window.currentExam.code;
-    console.log("🔧 Fixed currentExamCode:", window.currentExamCode);
+    if (typeof window.devLog === 'function') {
+      window.devLog("🔧 Fixed currentExamCode:", window.currentExamCode);
+    }
   }
 
   // Filter categories that have questions
@@ -2904,12 +2986,16 @@ function populateExportCategories() {
     // Categories are strings, not objects
     const categoryName = typeof category === 'string' ? category : category.name;
     const questionsInCategory = getQuestionsInCategory(categoryName);
-    console.log(`🔍 Category "${categoryName}" has ${questionsInCategory.length} questions`);
-    console.log(`🔍 Category object:`, category);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🔍 Category "${categoryName}" has ${questionsInCategory.length} questions`);
+      window.devLog(`🔍 Category object:`, category);
+    }
     return questionsInCategory.length > 0;
   });
 
-  console.log("📋 Categories with questions:", categoriesWithQuestions);
+  if (typeof window.devLog === 'function') {
+    window.devLog("📋 Categories with questions:", categoriesWithQuestions);
+  }
 
   // Clear existing content
   categoryListEl.innerHTML = '';
@@ -2960,25 +3046,35 @@ function populateExportCategories() {
  */
 function getQuestionsInCategory(categoryName) {
   const allQuestions = window.currentQuestions || [];
-  console.log(`📋 Checking category "${categoryName}" against ${allQuestions.length} questions`);
+  if (typeof window.devLog === 'function') {
+    window.devLog(`📋 Checking category "${categoryName}" against ${allQuestions.length} questions`);
+  }
   
   const questionsInCategory = allQuestions.filter((_, index) => {
     // Check if question is in the specified category
     if (typeof window.getQuestionCategory === 'function') {
       const questionCategory = window.getQuestionCategory(index);
-      console.log(`🔎 Question ${index + 1} category: "${questionCategory}" (looking for: "${categoryName}")`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔎 Question ${index + 1} category: "${questionCategory}" (looking for: "${categoryName}")`);
+      }
       const matches = questionCategory === categoryName;
       if (matches) {
-        console.log(`✅ Question ${index + 1} matches category "${categoryName}"`);
+        if (typeof window.devLog === 'function') {
+          window.devLog(`✅ Question ${index + 1} matches category "${categoryName}"`);
+        }
       }
       return matches;
     } else {
-      console.log("❌ getQuestionCategory function not available");
+      if (typeof window.devLog === 'function') {
+        window.devLog("❌ getQuestionCategory function not available");
+      }
     }
     return false;
   });
   
-  console.log(`📊 Category "${categoryName}" final count: ${questionsInCategory.length} questions`);
+  if (typeof window.devLog === 'function') {
+    window.devLog(`📊 Category "${categoryName}" final count: ${questionsInCategory.length} questions`);
+  }
   return questionsInCategory;
 }
 
@@ -3024,22 +3120,34 @@ function formatFileSize(bytes) {
  * Perform the actual export
  */
 function performExport() {
-  console.log("🔄 Starting export process...");
+  if (typeof window.devLog === 'function') {
+    window.devLog("🔄 Starting export process...");
+  }
   
   try {
-    console.log("📊 Getting export selections...");
+    if (typeof window.devLog === 'function') {
+      window.devLog("📊 Getting export selections...");
+    }
     const format = getSelectedExportFormat();
     const filter = getSelectedContentFilter();
     const options = getSelectedContentOptions();
     
-    console.log("📝 Export settings:", { format, filter, options });
+    if (typeof window.devLog === 'function') {
+      window.devLog("📝 Export settings:", { format, filter, options });
+    }
     
-    console.log("🔍 Filtering questions...");
+    if (typeof window.devLog === 'function') {
+      window.devLog("🔍 Filtering questions...");
+    }
     const filteredQuestions = getFilteredQuestionsForExport(filter);
-    console.log("📋 Filtered questions count:", filteredQuestions.length);
+    if (typeof window.devLog === 'function') {
+      window.devLog("📋 Filtered questions count:", filteredQuestions.length);
+    }
     
     if (filteredQuestions.length === 0) {
-      console.error("❌ No questions to export");
+      if (typeof window.devLog === 'function') {
+        window.devLog("❌ No questions to export");
+      }
       if (typeof window.showError === 'function') {
         window.showError("No questions to export with the current filter selection.");
       } else {
@@ -3048,7 +3156,9 @@ function performExport() {
       return;
     }
     
-    console.log("✅ Questions ready for export, hiding modal...");
+    if (typeof window.devLog === 'function') {
+      window.devLog("✅ Questions ready for export, hiding modal...");
+    }
     
     // Hide the modal first
     if (typeof window.hideExportModal === 'function') {
@@ -3057,7 +3167,9 @@ function performExport() {
     
     // Show success message
     const successMessage = `Preparing to export ${filteredQuestions.length} questions as ${format.toUpperCase()}...`;
-    console.log("💬 Success message:", successMessage);
+    if (typeof window.devLog === 'function') {
+      window.devLog("💬 Success message:", successMessage);
+    }
     
     if (typeof window.showSuccess === 'function') {
       window.showSuccess(successMessage);
@@ -3065,39 +3177,59 @@ function performExport() {
       alert(successMessage);
     }
     
-    console.log("⏱️ Starting export in 500ms...");
+    if (typeof window.devLog === 'function') {
+      window.devLog("⏱️ Starting export in 500ms...");
+    }
     
     // Perform export based on format
     setTimeout(() => {
-      console.log("🚀 Executing export for format:", format);
+      if (typeof window.devLog === 'function') {
+        window.devLog("🚀 Executing export for format:", format);
+      }
       
       switch (format) {
         case 'pdf':
-          console.log("📄 Starting PDF export");
+          if (typeof window.devLog === 'function') {
+            window.devLog("📄 Starting PDF export");
+          }
           try {
-            console.log("🔍 About to call exportToPDF function...");
-            console.log("🔍 exportToPDF function exists:", typeof exportToPDF);
+            if (typeof window.devLog === 'function') {
+              window.devLog("🔍 About to call exportToPDF function...");
+            }
+            if (typeof window.devLog === 'function') {
+              window.devLog("🔍 exportToPDF function exists:", typeof exportToPDF);
+            }
             exportToPDF(filteredQuestions, options);
-            console.log("✅ exportToPDF function completed");
+            if (typeof window.devLog === 'function') {
+              window.devLog("✅ exportToPDF function completed");
+            }
           } catch (error) {
             console.error("❌ Error in exportToPDF:", error);
             alert("PDF Export Error: " + error.message);
           }
           break;
         case 'json':
-          console.log("📄 Starting JSON export");
+          if (typeof window.devLog === 'function') {
+            window.devLog("📄 Starting JSON export");
+          }
           exportToJSON(filteredQuestions, options);
           break;
         case 'txt':
-          console.log("📄 Starting TXT export");
+          if (typeof window.devLog === 'function') {
+            window.devLog("📄 Starting TXT export");
+          }
           exportToTXT(filteredQuestions, options);
           break;
         case 'csv':
-          console.log("📄 Starting CSV export");
+          if (typeof window.devLog === 'function') {
+            window.devLog("📄 Starting CSV export");
+          }
           exportToCSV(filteredQuestions, options);
           break;
         default:
-          console.error("❌ Unsupported export format:", format);
+          if (typeof window.devLog === 'function') {
+            window.devLog("❌ Unsupported export format:", format);
+          }
           if (typeof window.showError === 'function') {
             window.showError("Unsupported export format: " + format);
           } else {
@@ -3126,11 +3258,15 @@ function performExport() {
  * Export to JSON format
  */
 function exportToJSON(questions, options) {
-  console.log("📦 Starting JSON export with:", questions.length, "questions");
-  console.log("📦 JSON export options:", options);
+  if (typeof window.devLog === 'function') {
+    window.devLog("📦 Starting JSON export with:", questions.length, "questions");
+    window.devLog("📦 JSON export options:", options);
+  }
   
   const examName = window.currentExam?.exam_name || window.currentExam?.code || 'exam';
-  console.log("📦 Exam name for export:", examName);
+  if (typeof window.devLog === 'function') {
+    window.devLog("📦 Exam name for export:", examName);
+  }
   
   const exportData = {
     exam: {
@@ -3275,11 +3411,15 @@ function exportToCSV(questions, options) {
  * Export to PDF format - opens print dialog for PDF save
  */
 function exportToPDF(questions, options) {
-  console.log("📄 PDF export called with", questions.length, "questions");
-  console.log("📄 PDF export options:", options);
+  if (typeof window.devLog === 'function') {
+    window.devLog("📄 PDF export called with", questions.length, "questions");
+    window.devLog("📄 PDF export options:", options);
+  }
   
   if (!questions || questions.length === 0) {
-    console.error("❌ No questions to export");
+    if (typeof window.devLog === 'function') {
+      window.devLog("❌ No questions to export");
+    }
     if (typeof window.showError === 'function') {
       window.showError("No questions loaded to export");
     }
@@ -3296,7 +3436,9 @@ function exportToPDF(questions, options) {
     includeMetadata = true
   } = options;
 
-  console.log("🖨️ Opening print window...");
+  if (typeof window.devLog === 'function') {
+    window.devLog("🖨️ Opening print window...");
+  }
 
   // Create a printable version
   const printWindow = window.open("", "_blank");
@@ -3385,10 +3527,12 @@ function exportToPDF(questions, options) {
       const correctAnswers = mostVoted.split(""); // Convert string to array of letters
       const correctSet = new Set(correctAnswers);
 
-      console.log("📝 Processing answers for question", questionNumber, "- found", answers.length, "answers");
-      console.log("📝 Answer structure:", answers[0]);
-      console.log("📝 Most voted (raw):", mostVoted);
-      console.log("📝 Correct answers (converted):", correctAnswers);
+      if (typeof window.devLog === 'function') {
+        window.devLog("📝 Processing answers for question", questionNumber, "- found", answers.length, "answers");
+        window.devLog("📝 Answer structure:", answers[0]);
+        window.devLog("📝 Most voted (raw):", mostVoted);
+        window.devLog("📝 Correct answers (converted):", correctAnswers);
+      }
 
       printDocument.write(`<div class="answers">`);
 
@@ -3415,7 +3559,9 @@ function exportToPDF(questions, options) {
           answerText = String(answer);
         }
 
-        console.log(`📝 Answer ${answerLetter}: ${answerText.substring(0, 50)}...`);
+        if (typeof window.devLog === 'function') {
+          window.devLog(`📝 Answer ${answerLetter}: ${answerText.substring(0, 50)}...`);
+        }
 
         // Process embedded images in answers
         if (includeImages && question.images && Object.keys(question.images).length > 0) {
@@ -3446,23 +3592,31 @@ function exportToPDF(questions, options) {
       printDocument.write("</div>");
 
       // Show correct answers if enabled
-      console.log("🎯 Checking correct answers section:");
-      console.log("🎯 includeCorrectAnswers:", includeCorrectAnswers);
-      console.log("🎯 correctAnswers:", correctAnswers);
-      console.log("🎯 correctAnswers.length:", correctAnswers.length);
+      if (typeof window.devLog === 'function') {
+        window.devLog("🎯 Checking correct answers section:");
+        window.devLog("🎯 includeCorrectAnswers:", includeCorrectAnswers);
+      }
+      if (typeof window.devLog === 'function') {
+        window.devLog("🎯 correctAnswers:", correctAnswers);
+        window.devLog("🎯 correctAnswers.length:", correctAnswers.length);
+      }
       
       if (includeCorrectAnswers && correctAnswers.length > 0) {
-        console.log("✅ Showing correct answers section");
+        if (typeof window.devLog === 'function') {
+          window.devLog("✅ Showing correct answers section");
+        }
         printDocument.write(`
                 <div style="margin-top: 10px; font-weight: bold; color: #28a745;">
                     Correct Answer(s): ${correctAnswers.join(', ')}
                 </div>
             `);
       } else {
-        console.log("❌ Not showing correct answers because:");
-        console.log("   - includeCorrectAnswers:", includeCorrectAnswers);
-        console.log("   - correctAnswers array:", correctAnswers);
-        console.log("   - is empty?", correctAnswers.length === 0);
+        if (typeof window.devLog === 'function') {
+          window.devLog("❌ Not showing correct answers because:");
+          window.devLog("   - includeCorrectAnswers:", includeCorrectAnswers);
+          window.devLog("   - correctAnswers array:", correctAnswers);
+          window.devLog("   - is empty?", correctAnswers.length === 0);
+        }
       }
     }
 
@@ -3514,12 +3668,16 @@ function exportToPDF(questions, options) {
 
   printDocument.close();
   
-  console.log("✅ Print document ready, opening print dialog...");
+  if (typeof window.devLog === 'function') {
+    window.devLog("✅ Print document ready, opening print dialog...");
+  }
 
   // Wait for content to load, then print
   setTimeout(() => {
     printWindow.print();
-    console.log("🖨️ Print dialog opened");
+    if (typeof window.devLog === 'function') {
+      window.devLog("🖨️ Print dialog opened");
+    }
   }, 1000);
 
   if (typeof window.showSuccess === 'function') {
@@ -3550,27 +3708,37 @@ function escapeCSV(value) {
  * Download file to user's computer
  */
 function downloadFile(content, filename, mimeType) {
-  console.log("💾 Starting download:", filename, "Type:", mimeType, "Size:", content.length, "chars");
+  if (typeof window.devLog === 'function') {
+    window.devLog("💾 Starting download:", filename, "Type:", mimeType, "Size:", content.length, "chars");
+  }
   
   try {
     const blob = new Blob([content], { type: mimeType });
-    console.log("💾 Blob created, size:", blob.size, "bytes");
+    if (typeof window.devLog === 'function') {
+      window.devLog("💾 Blob created, size:", blob.size, "bytes");
+    }
     
     const url = URL.createObjectURL(blob);
-    console.log("💾 Object URL created:", url);
+    if (typeof window.devLog === 'function') {
+      window.devLog("💾 Object URL created:", url);
+    }
     
     const link = document.createElement('a');
     link.href = url;
     link.download = filename;
     document.body.appendChild(link);
     
-    console.log("💾 Clicking download link...");
+    if (typeof window.devLog === 'function') {
+      window.devLog("💾 Clicking download link...");
+    }
     link.click();
     
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
     
-    console.log("✅ Download initiated successfully");
+    if (typeof window.devLog === 'function') {
+      window.devLog("✅ Download initiated successfully");
+    }
     
     if (typeof window.showSuccess === 'function') {
       window.showSuccess(`Export completed: ${filename}`);

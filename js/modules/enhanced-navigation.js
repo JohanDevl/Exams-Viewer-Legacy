@@ -567,12 +567,16 @@ function getAnsweredQuestionsCount() {
         
         if (hasAnswers || (hasPreviewAsFirstAction && hasHighlightInteractions)) {
           count++;
-          console.log(`📊 Q${questionNumber}: counted as answered (hasAnswers: ${hasAnswers}, preview first: ${hasPreviewAsFirstAction}, highlights: ${hasHighlightInteractions})`);
+          if (typeof window.devLog === 'function') {
+            window.devLog(`📊 Q${questionNumber}: counted as answered (hasAnswers: ${hasAnswers}, preview first: ${hasPreviewAsFirstAction}, highlights: ${hasHighlightInteractions})`);
+          }
         }
       }
     });
     
-    console.log(`📊 getAnsweredQuestionsCount: ${count}/${window.currentQuestions.length} questions answered`);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 getAnsweredQuestionsCount: ${count}/${window.currentQuestions.length} questions answered`);
+    }
     return count;
   } catch (error) {
     if (typeof window.devError === 'function') {

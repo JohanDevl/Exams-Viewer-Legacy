@@ -827,7 +827,9 @@ function calculateCategoryCounts() {
     
     return categoryCounts;
   } catch (error) {
-    console.error("Error calculating category counts:", error);
+    if (typeof window.devError === 'function') {
+      window.devError("Error calculating category counts:", error);
+    }
     return {};
   }
 }

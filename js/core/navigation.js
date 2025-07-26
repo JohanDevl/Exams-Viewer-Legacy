@@ -427,7 +427,9 @@ function displayCurrentQuestion(fromToggleAction = false) {
       // Track highlight view using the new function
       if (typeof window.trackQuestionHighlight === 'function') {
         window.trackQuestionHighlight(questionNumber, 'view');
-        console.log(`🔦 Tracked highlight view for Q${questionNumber}`);
+        if (typeof window.devLog === 'function') {
+          window.devLog(`🔦 Tracked highlight view for Q${questionNumber}`);
+        }
       }
       
       // Clear cache to refresh sidebar with new preview status
@@ -847,10 +849,12 @@ function validateAnswers() {
     }
 
     try {
-      console.log(`📅 About to track question attempt:`);
-      console.log(`📅 question.question_number: ${question.question_number}`);
-      console.log(`📅 currentQuestionIndex: ${window.currentQuestionIndex}`);
-      console.log(`📅 isCorrect: ${isCorrect}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📅 About to track question attempt:`);
+        window.devLog(`📅 question.question_number: ${question.question_number}`);
+        window.devLog(`📅 currentQuestionIndex: ${window.currentQuestionIndex}`);
+        window.devLog(`📅 isCorrect: ${isCorrect}`);
+      }
       
       if (typeof window.trackQuestionAttempt === 'function') {
         window.trackQuestionAttempt(
@@ -866,9 +870,13 @@ function validateAnswers() {
           window.devLog("📊 Question attempt tracked successfully");
         }
         
-        console.log(`✅ Successfully tracked Q${question.question_number} at index ${window.currentQuestionIndex}`);
+        if (typeof window.devLog === 'function') {
+          window.devLog(`✅ Successfully tracked Q${question.question_number} at index ${window.currentQuestionIndex}`);
+        }
       } else {
-        console.log(`❌ trackQuestionAttempt function not available`);
+        if (typeof window.devLog === 'function') {
+          window.devLog(`❌ trackQuestionAttempt function not available`);
+        }
       }
     } catch (error) {
       if (typeof window.devError === 'function') {
@@ -886,48 +894,70 @@ function validateAnswers() {
     updateQuestionStatistics();
 
     // Show validation results
-    console.log("🎯 Checking showValidationResults function...");
-    console.log("🎯 typeof window.showValidationResults:", typeof window.showValidationResults);
-    console.log("🎯 window.showValidationResults:", window.showValidationResults);
+    if (typeof window.devLog === 'function') {
+      window.devLog("🎯 Checking showValidationResults function...");
+      window.devLog("🎯 typeof window.showValidationResults:", typeof window.showValidationResults);
+      window.devLog("🎯 window.showValidationResults:", window.showValidationResults);
+    }
     if (typeof window.showValidationResults === 'function') {
-      console.log("🎯 Calling showValidationResults with correctAnswers:", correctAnswers);
+      if (typeof window.devLog === 'function') {
+        window.devLog("🎯 Calling showValidationResults with correctAnswers:", correctAnswers);
+      }
       window.showValidationResults(correctAnswers);
     } else {
-      console.log("❌ showValidationResults is not available!");
+      if (typeof window.devLog === 'function') {
+        window.devLog("❌ showValidationResults is not available!");
+      }
     }
     
     // Update filter counts after answer validation
     if (typeof window.updateFilterCounts === 'function') {
-      console.log("🔄 Updating filter counts after validation...");
+      if (typeof window.devLog === 'function') {
+        window.devLog("🔄 Updating filter counts after validation...");
+      }
       window.updateFilterCounts();
-      console.log("✅ Filter counts updated");
+      if (typeof window.devLog === 'function') {
+        window.devLog("✅ Filter counts updated");
+      }
     }
     
     // Clear cache for this specific question only (performance optimization)
     if (typeof window.clearQuestionStatusCacheForQuestion === 'function') {
-      console.log(`🗄 Clearing cache for question index ${window.currentQuestionIndex}...`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🗄 Clearing cache for question index ${window.currentQuestionIndex}...`);
+      }
       window.clearQuestionStatusCacheForQuestion(window.currentQuestionIndex);
-      console.log("✅ Question status cache cleared for current question");
+      if (typeof window.devLog === 'function') {
+        window.devLog("✅ Question status cache cleared for current question");
+      }
     }
     
     // Update progress sidebar to reflect answered status
     if (typeof window.updateProgressSidebar === 'function') {
-      console.log("📊 Updating progress sidebar after validation...");
-      console.log("Current question index:", window.currentQuestionIndex);
-      console.log("Total questions:", window.currentQuestions?.length);
+      if (typeof window.devLog === 'function') {
+        window.devLog("📊 Updating progress sidebar after validation...");
+        window.devLog("Current question index:", window.currentQuestionIndex);
+        window.devLog("Total questions:", window.currentQuestions?.length);
+      }
       window.updateProgressSidebar();
-      console.log("✅ Progress sidebar updated");
+      if (typeof window.devLog === 'function') {
+        window.devLog("✅ Progress sidebar updated");
+      }
     }
 
     // Update progress bars to reflect new answer count
     if (typeof window.updateProgressBar === 'function') {
       window.updateProgressBar();
-      console.log("📊 Progress bar updated");
+      if (typeof window.devLog === 'function') {
+        window.devLog("📊 Progress bar updated");
+      }
     }
     
     if (typeof window.updateMainProgressBar === 'function') {
       window.updateMainProgressBar();
-      console.log("📊 Main progress bar updated");
+      if (typeof window.devLog === 'function') {
+        window.devLog("📊 Main progress bar updated");
+      }
     }
 
     if (typeof window.devLog === 'function') {

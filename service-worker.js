@@ -1,5 +1,13 @@
 // Service Worker for Intelligent Caching with Background Updates
 const CACHE_NAME = 'exams-viewer-v1';
+
+// Development mode detection
+const isDev = () => {
+  return self.location.hostname === 'localhost' || 
+         self.location.hostname === '127.0.0.1' || 
+         self.location.hostname === '' || 
+         self.location.protocol === 'file:';
+};
 const CACHE_EXPIRY = 6 * 60 * 60 * 1000; // 6 hours in milliseconds (reduced for better freshness)
 
 // Files to cache immediately
@@ -23,11 +31,11 @@ const CACHE_STRATEGIES = {
 
 // Install event - cache static files
 self.addEventListener('install', event => {
-  console.log('Service Worker installing...');
+  if (isDev()) console.log('Service Worker installing...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Caching static files');
+        if (isDev()) console.log('Caching static files');
         return cache.addAll(STATIC_CACHE_FILES);
       })
       .then(() => self.skipWaiting())
@@ -36,14 +44,14 @@ self.addEventListener('install', event => {
 
 // Activate event - clean up old caches
 self.addEventListener('activate', event => {
-  console.log('Service Worker activating...');
+  if (isDev()) console.log('Service Worker activating...');
   event.waitUntil(
     caches.keys()
       .then(cacheNames => {
         return Promise.all(
           cacheNames.map(cacheName => {
             if (cacheName !== CACHE_NAME) {
-              console.log('Deleting old cache:', cacheName);
+              if (isDev()) console.log('Deleting old cache:', cacheName);
               return caches.delete(cacheName);
             }
           })
@@ -117,7 +125,7 @@ async function cacheFirstWithBackgroundUpdate(request) {
   } catch (error) {
     // Network failed, return stale cache if available
     if (cachedResponse) {
-      console.log('Network failed, returning stale cache for:', request.url);
+      if (isDev()) console.log('Network failed, returning stale cache for:', request.url);
       return cachedResponse;
     }
     throw error;
@@ -170,7 +178,7 @@ function scheduleBackgroundUpdate(request, cache) {
   // Use scheduler API if available for better performance, otherwise fallback to setTimeout
   const scheduleBackgroundUpdate = async () => {
     try {
-      console.log('Background updating:', request.url);
+      if (isDev()) console.log('Background updating:', request.url);
       const networkResponse = await fetch(request);
       if (networkResponse.ok) {
         await updateCache(cache, request, networkResponse);
@@ -190,7 +198,7 @@ function scheduleBackgroundUpdate(request, cache) {
         }
       }
     } catch (error) {
-      console.log('Background update failed for:', request.url, error);
+      if (isDev()) console.log('Background update failed for:', request.url, error);
     }
   };
 
@@ -217,7 +225,7 @@ async function getCacheTimestamp(url) {
       return parseInt(timestamp);
     }
   } catch (error) {
-    console.log('Error getting cache timestamp:', error);
+    if (isDev()) console.log('Error getting cache timestamp:', error);
   }
   return null;
 }
@@ -230,7 +238,7 @@ self.addEventListener('message', event => {
 });
 
 async function preloadPopularExams(exams) {
-  console.log('Preloading popular exams:', exams);
+  if (isDev()) console.log('Preloading popular exams:', exams);
   const cache = await caches.open(CACHE_NAME);
   
   for (const examCode of exams.slice(0, 5)) { // Limit to top 5
@@ -239,14 +247,14 @@ async function preloadPopularExams(exams) {
       const cachedResponse = await cache.match(url);
       
       if (!cachedResponse) {
-        console.log('Preloading exam:', examCode);
+        if (isDev()) console.log('Preloading exam:', examCode);
         const response = await fetch(url);
         if (response.ok) {
           await updateCache(cache, new Request(url), response);
         }
       }
     } catch (error) {
-      console.log('Failed to preload exam:', examCode, error);
+      if (isDev()) console.log('Failed to preload exam:', examCode, error);
     }
   }
 }

@@ -336,7 +336,9 @@ function isQuestionAnsweredInCurrentSession(questionIndex) {
         (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
       );
       if (currentQuestionData && (currentQuestionData.userAnswers?.length > 0 || currentQuestionData.ua?.length > 0)) {
-        console.log(`✅ Q${questionIndex} (${targetQuestionNumber}): answered in current session`);
+        if (typeof window.devLog === 'function') {
+          window.devLog(`✅ Q${questionIndex} (${targetQuestionNumber}): answered in current session`);
+        }
         return true;
       }
     }
@@ -363,9 +365,11 @@ function isQuestionAnswered(questionIndex) {
     // Use actual question number if available, fallback to calculated
     const targetQuestionNumber = actualQuestionNumber || questionNumber;
     
-    console.log(`🔍 isQuestionAnswered(${questionIndex}) - Q${targetQuestionNumber}`);
-    console.log(`🔍 Current exam:`, window.currentExam?.exam_code);
-    console.log(`🔍 Current session:`, window.statistics?.currentSession);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🔍 isQuestionAnswered(${questionIndex}) - Q${targetQuestionNumber}`);
+      window.devLog(`🔍 Current exam:`, window.currentExam?.exam_code);
+      window.devLog(`🔍 Current session:`, window.statistics?.currentSession);
+    }
     
     // Check current session first - search by questionNumber, not array index
     if (window.statistics?.currentSession?.questions) {
@@ -374,23 +378,31 @@ function isQuestionAnswered(questionIndex) {
         (q.questionNumber && q.questionNumber.toString() === targetQuestionNumber.toString())
       );
       
-      console.log(`🔍 Q${targetQuestionNumber} - Found session data:`, currentQuestionData);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔍 Q${targetQuestionNumber} - Found session data:`, currentQuestionData);
+      }
       
       if (currentQuestionData) {
         const hasUserAnswers = (currentQuestionData.userAnswers && currentQuestionData.userAnswers.length > 0) || 
                               (currentQuestionData.ua && currentQuestionData.ua.length > 0);
         
-        console.log(`🔍 Q${targetQuestionNumber} - hasUserAnswers: ${hasUserAnswers}`);
-        console.log(`🔍 Q${targetQuestionNumber} - userAnswers:`, currentQuestionData.userAnswers);
-        console.log(`🔍 Q${targetQuestionNumber} - ua:`, currentQuestionData.ua);
-        console.log(`🔍 Q${targetQuestionNumber} - fat (first action):`, currentQuestionData.fat);
-        console.log(`🔍 Q${targetQuestionNumber} - hvc (highlight views):`, currentQuestionData.hvc);
+        if (typeof window.devLog === 'function') {
+          window.devLog(`🔍 Q${targetQuestionNumber} - hasUserAnswers: ${hasUserAnswers}`);
+          window.devLog(`🔍 Q${targetQuestionNumber} - userAnswers:`, currentQuestionData.userAnswers);
+          window.devLog(`🔍 Q${targetQuestionNumber} - ua:`, currentQuestionData.ua);
+          window.devLog(`🔍 Q${targetQuestionNumber} - fat (first action):`, currentQuestionData.fat);
+          window.devLog(`🔍 Q${targetQuestionNumber} - hvc (highlight views):`, currentQuestionData.hvc);
+        }
         
         if (hasUserAnswers) {
-          console.log(`✅ Q${targetQuestionNumber} IS answered (has real user answers)`);
+          if (typeof window.devLog === 'function') {
+            window.devLog(`✅ Q${targetQuestionNumber} IS answered (has real user answers)`);
+          }
           return true;
         } else {
-          console.log(`❌ Q${targetQuestionNumber} is NOT answered (no real user answers)`);
+          if (typeof window.devLog === 'function') {
+            window.devLog(`❌ Q${targetQuestionNumber} is NOT answered (no real user answers)`);
+          }
         }
       }
     }
@@ -399,7 +411,9 @@ function isQuestionAnswered(questionIndex) {
     if (window.currentExam && window.statistics?.sessions) {
       const examCode = window.currentExam.exam_code || window.currentExam.code;
       if (!examCode) {
-        console.log(`❌ Q${targetQuestionNumber} - No exam code found`);
+        if (typeof window.devLog === 'function') {
+          window.devLog(`❌ Q${targetQuestionNumber} - No exam code found`);
+        }
         return false;
       }
 
@@ -407,7 +421,9 @@ function isQuestionAnswered(questionIndex) {
         (session.examCode || session.ec) === examCode
       );
       
-      console.log(`🔍 Q${targetQuestionNumber} - Checking ${examSessions.length} previous sessions for exam ${examCode}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔍 Q${targetQuestionNumber} - Checking ${examSessions.length} previous sessions for exam ${examCode}`);
+      }
 
       for (const session of examSessions) {
         if (session.questions) {
@@ -418,23 +434,31 @@ function isQuestionAnswered(questionIndex) {
           );
           
           if (questionData) {
-            console.log(`🔍 Q${targetQuestionNumber} - Found in previous session:`, questionData);
+            if (typeof window.devLog === 'function') {
+              window.devLog(`🔍 Q${targetQuestionNumber} - Found in previous session:`, questionData);
+            }
             
             // Only return true if there are actual user answers (not just previews)
             const hasRealAnswers = (questionData.userAnswers && questionData.userAnswers.length > 0) || 
                                    (questionData.ua && questionData.ua.length > 0);
             
             if (hasRealAnswers) {
-              console.log(`✅ Q${targetQuestionNumber} - Found real answers in previous session!`);
+              if (typeof window.devLog === 'function') {
+                window.devLog(`✅ Q${targetQuestionNumber} - Found real answers in previous session!`);
+              }
               return true;
             } else {
-              console.log(`❌ Q${targetQuestionNumber} - Found in previous session but no real answers`);
+              if (typeof window.devLog === 'function') {
+                window.devLog(`❌ Q${targetQuestionNumber} - Found in previous session but no real answers`);
+              }
             }
           }
         }
       }
       
-      console.log(`❌ Q${targetQuestionNumber} - Not found in any previous sessions`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`❌ Q${targetQuestionNumber} - Not found in any previous sessions`);
+      }
     }
 
     return false;
@@ -472,7 +496,9 @@ function getMostRecentAnswerCurrentSession(questionIndex) {
         
         if (userAnswers.length > 0 && endTime > 0) {
           const isCorrect = questionData.isCorrect !== undefined ? questionData.isCorrect : questionData.ic;
-          console.log(`📝 Q${questionIndex}: Retrieved answer data - isCorrect: ${isCorrect}, userAnswers:`, userAnswers);
+          if (typeof window.devLog === 'function') {
+            window.devLog(`📝 Q${questionIndex}: Retrieved answer data - isCorrect: ${isCorrect}, userAnswers:`, userAnswers);
+          }
           return {
             answers: userAnswers,
             isCorrect: isCorrect,
@@ -687,7 +713,9 @@ function clearQuestionStatusCache() {
  */
 function clearQuestionStatusCacheForQuestion(questionIndex) {
   if (questionStatusCache[questionIndex]) {
-    console.log(`🧹 Clearing cache for question index ${questionIndex}`);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🧹 Clearing cache for question index ${questionIndex}`);
+    }
     delete questionStatusCache[questionIndex];
   }
 }
@@ -707,7 +735,9 @@ function getQuestionStatus(questionIndex) {
   }
   
   const questionNumber = actualQuestion.question_number;
-  console.log(`🎯 Q${questionIndex} (${questionNumber}): checking status...`);
+  if (typeof window.devLog === 'function') {
+    window.devLog(`🎯 Q${questionIndex} (${questionNumber}): checking status...`);
+  }
   
   // Look directly in current session for this question
   let questionAttempt = null;
@@ -738,14 +768,18 @@ function getQuestionStatus(questionIndex) {
     const hasPreviewActivity = highlightViews > 0 || highlightClicks > 0 || 
                               firstActionType === 'p' || hasHighlightAttempts;
     
-    console.log(`📊 Q${questionIndex}: hasAnswers=${hasAnswers}, hasPreviewActivity=${hasPreviewActivity}`);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 Q${questionIndex}: hasAnswers=${hasAnswers}, hasPreviewActivity=${hasPreviewActivity}`);
+    }
     
     if (hasAnswers) {
       isAnswered = true;
       // Use the isCorrect property directly from the attempt
       const isCorrect = questionAttempt.ic !== undefined ? questionAttempt.ic : questionAttempt.isCorrect;
       
-      console.log(`📊 Q${questionIndex}: answered, isCorrect=${isCorrect}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📊 Q${questionIndex}: answered, isCorrect=${isCorrect}`);
+      }
       
       if (isCorrect === true) {
         primaryStatus = 'correct';
@@ -757,11 +791,15 @@ function getQuestionStatus(questionIndex) {
     } else if (hasPreviewActivity) {
       // Question was previewed/highlighted but not answered
       primaryStatus = 'preview';
-      console.log(`👁️ Q${questionIndex}: preview mode (hvc=${highlightViews}, hbc=${highlightClicks}, fat=${firstActionType})`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`👁️ Q${questionIndex}: preview mode (hvc=${highlightViews}, hbc=${highlightClicks}, fat=${firstActionType})`);
+      }
     } else {
       // Question was visited but neither answered nor previewed
       primaryStatus = 'viewed';
-      console.log(`👀 Q${questionIndex}: viewed but not answered or previewed`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`👀 Q${questionIndex}: viewed but not answered or previewed`);
+      }
     }
   }
   
@@ -791,7 +829,9 @@ function getQuestionStatus(questionIndex) {
     isCategorized
   };
 
-  console.log(`✅ Q${questionIndex}: final status = ${primaryStatus}`);
+  if (typeof window.devLog === 'function') {
+    window.devLog(`✅ Q${questionIndex}: final status = ${primaryStatus}`);
+  }
   return questionStatusCache[questionIndex];
 }
 

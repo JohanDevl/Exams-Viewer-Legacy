@@ -431,35 +431,49 @@ function decompressData(compressedData) {
  */
 function startExamSession(examCode, examName) {
   try {
-    console.log(`🚀 Starting exam session for: ${examName} (${examCode})`);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🚀 Starting exam session for: ${examName} (${examCode})`);
+    }
     
     // End current session if exists
     if (window.statistics && window.statistics.currentSession) {
-      console.log(`🔄 Ending existing session before starting new one`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔄 Ending existing session before starting new one`);
+      }
       endCurrentSession();
     }
 
     // Clear question status cache for fresh start
     if (typeof window.clearQuestionStatusCache === 'function') {
       window.clearQuestionStatusCache();
-      console.log(`🧹 Cleared question status cache for new session`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🧹 Cleared question status cache for new session`);
+      }
     }
 
     // Create new session
     const session = new ExamSession(examCode, examName);
-    console.log(`🆕 Created new ExamSession:`, session);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🆕 Created new ExamSession:`, session);
+    }
     
     if (window.currentQuestions) {
       session.totalQuestions = window.currentQuestions.length;
-      console.log(`📝 Set total questions: ${session.totalQuestions}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📝 Set total questions: ${session.totalQuestions}`);
+      }
     }
     
     if (window.statistics) {
       window.statistics.currentSession = session;
-      console.log(`✅ Assigned session to window.statistics.currentSession`);
-      console.log(`📋 Full statistics object:`, window.statistics);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`✅ Assigned session to window.statistics.currentSession`);
+        window.devLog(`📋 Full statistics object:`, window.statistics);
+      }
     } else {
-      console.log(`❌ No window.statistics object found!`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`❌ No window.statistics object found!`);
+      }
     }
     
     if (typeof window.saveStatistics === 'function') {
@@ -470,7 +484,9 @@ function startExamSession(examCode, examName) {
       window.devLog(`📝 Started new session for ${examName} (${examCode})`);
     }
     
-    console.log(`✅ Successfully started exam session for ${examName}`);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`✅ Successfully started exam session for ${examName}`);
+    }
     return session;
   } catch (error) {
     if (typeof window.devError === 'function') {
@@ -534,11 +550,15 @@ function endCurrentSession() {
  */
 function trackQuestionAttempt(questionNumber, selectedAnswers, correctAnswers, isCorrect, timeSpent, wasHighlightEnabled = false) {
   try {
-    console.log(`📊 trackQuestionAttempt(Q${questionNumber}) called - isCorrect: ${isCorrect}`);
-    console.log(`📊 Current statistics object:`, window.statistics);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 trackQuestionAttempt(Q${questionNumber}) called - isCorrect: ${isCorrect}`);
+      window.devLog(`📊 Current statistics object:`, window.statistics);
+    }
     
     if (!window.statistics || !window.statistics.currentSession) {
-      console.log(`❌ NO CURRENT SESSION! Cannot track question attempt for Q${questionNumber}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`❌ NO CURRENT SESSION! Cannot track question attempt for Q${questionNumber}`);
+      }
       if (typeof window.devError === 'function') {
         window.devError("No current session to track question attempt");
       }
@@ -546,7 +566,9 @@ function trackQuestionAttempt(questionNumber, selectedAnswers, correctAnswers, i
     }
 
     const session = window.statistics.currentSession;
-    console.log(`📊 Using current session:`, session);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 Using current session:`, session);
+    }
     
     // Find existing QuestionAttempt or create new one
     let questionAttempt = session.questions.find(q => 
@@ -593,7 +615,9 @@ function trackQuestionAttempt(questionNumber, selectedAnswers, correctAnswers, i
 function trackQuestionVisit(questionNumber) {
   try {
     if (!window.statistics || !window.statistics.currentSession) {
-      console.log(`❌ trackQuestionVisit: No current session for Q${questionNumber}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`❌ trackQuestionVisit: No current session for Q${questionNumber}`);
+      }
       return;
     }
 
@@ -615,9 +639,13 @@ function trackQuestionVisit(questionNumber) {
       // Create a basic QuestionAttempt for visited questions
       questionAttempt = new QuestionAttempt(questionNum, []); // No correct answers yet
       session.questions.push(questionAttempt);
-      console.log(`📝 trackQuestionVisit: Created QuestionAttempt for Q${questionNum}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📝 trackQuestionVisit: Created QuestionAttempt for Q${questionNum}`);
+      }
     } else {
-      console.log(`📝 trackQuestionVisit: QuestionAttempt already exists for Q${questionNum}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📝 trackQuestionVisit: QuestionAttempt already exists for Q${questionNum}`);
+      }
     }
       
     if (typeof window.saveStatistics === 'function') {
@@ -635,10 +663,14 @@ function trackQuestionVisit(questionNumber) {
  */
 function trackQuestionHighlight(questionNumber, actionType = 'view') {
   try {
-    console.log(`🔦 trackQuestionHighlight(Q${questionNumber}, ${actionType}) called`);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🔦 trackQuestionHighlight(Q${questionNumber}, ${actionType}) called`);
+    }
     
     if (!window.statistics || !window.statistics.currentSession) {
-      console.log(`❌ trackQuestionHighlight: No current session for Q${questionNumber}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`❌ trackQuestionHighlight: No current session for Q${questionNumber}`);
+      }
       return;
     }
 
@@ -655,29 +687,39 @@ function trackQuestionHighlight(questionNumber, actionType = 'view') {
       // Create new QuestionAttempt for this question
       questionAttempt = new QuestionAttempt(questionNum, []); 
       session.questions.push(questionAttempt);
-      console.log(`🔦 Created new QuestionAttempt for Q${questionNum}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔦 Created new QuestionAttempt for Q${questionNum}`);
+      }
     }
     
     // Track highlight action
     if (actionType === 'button_click') {
       questionAttempt.addHighlightButtonClick();
-      console.log(`🔦 Added highlight button click for Q${questionNum}. Total: ${questionAttempt.hbc}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔦 Added highlight button click for Q${questionNum}. Total: ${questionAttempt.hbc}`);
+      }
     } else if (actionType === 'view') {
       questionAttempt.addHighlightView();
-      console.log(`🔦 Added highlight view for Q${questionNum}. Total: ${questionAttempt.hvc}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔦 Added highlight view for Q${questionNum}. Total: ${questionAttempt.hvc}`);
+      }
     }
     
     // Set first action type as preview if not already set
     if (!questionAttempt.far) {
       questionAttempt.fat = 'p'; // preview
       questionAttempt.far = true;
-      console.log(`🔦 Set first action type as preview for Q${questionNum}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔦 Set first action type as preview for Q${questionNum}`);
+      }
     }
     
     // Update session preview count
     if (actionType === 'button_click') {
       session.previewAnswers = (session.previewAnswers || session.pa || 0) + 1;
-      console.log(`🔦 Updated session preview count: ${session.previewAnswers}`);
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔦 Updated session preview count: ${session.previewAnswers}`);
+      }
     }
     
     // Add to visitedQuestions if not already there
@@ -689,7 +731,9 @@ function trackQuestionHighlight(questionNumber, actionType = 'view') {
       window.saveStatistics();
     }
     
-    console.log(`✅ Successfully tracked highlight action for Q${questionNum}`);
+    if (typeof window.devLog === 'function') {
+      window.devLog(`✅ Successfully tracked highlight action for Q${questionNum}`);
+    }
     return questionAttempt;
   } catch (error) {
     if (typeof window.devError === 'function') {

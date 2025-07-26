@@ -22,8 +22,10 @@
  * Apply dark/light theme to the UI
  */
 function applyTheme(isDark = null) {
-  console.log("🎨 applyTheme() called with isDark:", isDark);
-  console.log("📄 window.settings in applyTheme:", window.settings);
+  if (typeof window.devLog === 'function') {
+    window.devLog("🎨 applyTheme() called with isDark:", isDark);
+    window.devLog("📄 window.settings in applyTheme:", window.settings);
+  }
   
   const body = document.body;
   const darkModeBtn = document.getElementById("darkModeBtn");
@@ -31,7 +33,9 @@ function applyTheme(isDark = null) {
   
   // Use parameter if provided, otherwise use settings
   const darkMode = isDark !== null ? isDark : (window.settings?.darkMode || false);
-  console.log("🎨 Calculated darkMode value:", darkMode);
+  if (typeof window.devLog === 'function') {
+    window.devLog("🎨 Calculated darkMode value:", darkMode);
+  }
   
   // Update settings object if parameter was provided
   if (isDark !== null && window.settings) {
@@ -44,27 +48,37 @@ function applyTheme(isDark = null) {
   }
   
   if (darkMode) {
-    console.log("🌙 Applying DARK mode - setting data-theme='dark'");
+    if (typeof window.devLog === 'function') {
+      window.devLog("🌙 Applying DARK mode - setting data-theme='dark'");
+    }
     body.setAttribute("data-theme", "dark");
     body.classList.remove("dark-mode"); // Remove old class if exists
     if (darkModeBtn) {
       darkModeBtn.innerHTML = '<i class="fas fa-sun"></i>';
       darkModeBtn.title = "Switch to Light Mode";
-      console.log("🌅 Dark mode button updated to sun icon");
+      if (typeof window.devLog === 'function') {
+        window.devLog("🌅 Dark mode button updated to sun icon");
+      }
     }
   } else {
-    console.log("☀️ Applying LIGHT mode - removing data-theme attribute");
+    if (typeof window.devLog === 'function') {
+      window.devLog("☀️ Applying LIGHT mode - removing data-theme attribute");
+    }
     body.removeAttribute("data-theme");
     body.classList.remove("dark-mode"); // Remove old class if exists
     if (darkModeBtn) {
       darkModeBtn.innerHTML = '<i class="fas fa-moon"></i>';
       darkModeBtn.title = "Switch to Dark Mode";
-      console.log("🌙 Dark mode button updated to moon icon");
+      if (typeof window.devLog === 'function') {
+        window.devLog("🌙 Dark mode button updated to moon icon");
+      }
     }
   }
-  console.log("🎨 Final body data-theme:", body.getAttribute("data-theme"));
-  console.log("🎨 Final body classes:", body.className);
-  console.log("🎨 applyTheme() completed - FIXED!");
+  if (typeof window.devLog === 'function') {
+    window.devLog("🎨 Final body data-theme:", body.getAttribute("data-theme"));
+    window.devLog("🎨 Final body classes:", body.className);
+    window.devLog("🎨 applyTheme() completed - FIXED!");
+  }
 }
 
 /**
@@ -126,7 +140,9 @@ function loadSettingsUI() {
       updateToolbarVisibility();
       updateTooltipVisibility();
       
-      console.log("⚙️ Settings loaded successfully");
+      if (typeof window.devLog === 'function') {
+        window.devLog("⚙️ Settings loaded successfully");
+      }
     }
   } catch (error) {
     console.error("Failed to load settings:", error);
@@ -222,7 +238,9 @@ function saveSettingsUI() {
       window.saveStatistics();
     }
     
-    console.log("⚙️ Settings saved successfully");
+    if (typeof window.devLog === 'function') {
+      window.devLog("⚙️ Settings saved successfully");
+    }
     
     // Show success message if function available
     if (typeof window.showSuccess === 'function') {
@@ -470,7 +488,9 @@ function setupSettingsEventListeners() {
   }
   
   
-  console.log("⚙️ Settings event listeners initialized");
+  if (typeof window.devLog === 'function') {
+    window.devLog("⚙️ Settings event listeners initialized");
+  }
 }
 
 /**
@@ -486,7 +506,9 @@ function initializeSettings() {
   // Apply initial theme
   applyTheme();
   
-  console.log("⚙️ Settings module initialized");
+  if (typeof window.devLog === 'function') {
+    window.devLog("⚙️ Settings module initialized");
+  }
 }
 
 // ===========================
