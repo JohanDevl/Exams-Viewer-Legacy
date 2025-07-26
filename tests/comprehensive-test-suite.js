@@ -43,67 +43,63 @@ class ExamsViewerTestSuite {
     }
 
     createTestReportingUI() {
+        // Load CSS styles for the test modal
+        const cssLink = document.createElement('link');
+        cssLink.rel = 'stylesheet';
+        cssLink.href = 'tests/test-modal-styles.css';
+        document.head.appendChild(cssLink);
+        
         // Create floating test results panel
         const testPanel = document.createElement('div');
         testPanel.id = 'testResultsPanel';
-        testPanel.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 350px;
-            max-height: 400px;
-            background: var(--bg-secondary, #ffffff);
-            border: 1px solid var(--border-primary, #e5e5e5);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
-            z-index: 10000;
-            font-family: var(--font-family-primary, 'Inter', sans-serif);
-            font-size: 14px;
-            overflow: hidden;
-            display: none;
-        `;
+        testPanel.style.display = 'none';
         
         testPanel.innerHTML = `
-            <div style="padding: 16px; border-bottom: 1px solid var(--border-secondary, #f0f0f0); background: var(--bg-accent, #f8f9fa);">
-                <h3 style="margin: 0; color: var(--text-primary, #000000); font-size: 16px; font-weight: 600;">
-                    🧪 Test Results
-                </h3>
-                <div id="testProgress" style="margin-top: 8px; font-size: 12px; color: var(--text-muted, #666666);">
-                    Initializing tests...
+            <div class="test-header">
+                <div>
+                    <h3 class="test-title">🧪 Test Results</h3>
+                    <div id="testProgress">Initializing tests...</div>
                 </div>
-            </div>
-            <div id="testResultsContent" style="padding: 16px; max-height: 300px; overflow-y: auto;">
-                <div id="testSummary" style="margin-bottom: 16px;"></div>
-                <div id="testDetails"></div>
-            </div>
-            <div style="padding: 12px 16px; border-top: 1px solid var(--border-secondary, #f0f0f0); background: var(--bg-accent, #f8f9fa);">
-                <button id="closeTestPanel" style="
-                    width: 100%; 
-                    padding: 8px; 
-                    border: none; 
-                    background: var(--accent-color, #007bff); 
-                    color: white; 
-                    border-radius: 8px; 
-                    cursor: pointer;
-                    font-weight: 500;
-                ">
-                    Close
+                <button id="closeTestPanel" title="Close test panel" aria-label="Close test panel">
+                    ✕
                 </button>
+            </div>
+            <div id="testResultsContent">
+                <div id="testSummary"></div>
+                <div id="testDetails"></div>
             </div>
         `;
         
         document.body.appendChild(testPanel);
         
         // Add close functionality
-        document.getElementById('closeTestPanel').addEventListener('click', () => {
+        const closeModal = () => {
             testPanel.style.display = 'none';
+            testPanel.removeAttribute('data-visible');
+        };
+        
+        document.getElementById('closeTestPanel').addEventListener('click', closeModal);
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && testPanel.getAttribute('data-visible')) {
+                closeModal();
+            }
+        });
+        
+        // Close when clicking outside the modal content
+        testPanel.addEventListener('click', (e) => {
+            if (e.target === testPanel) {
+                closeModal();
+            }
         });
         
         this.testPanel = testPanel;
     }
 
     showTestPanel() {
-        this.testPanel.style.display = 'block';
+        this.testPanel.style.display = 'flex';
+        this.testPanel.setAttribute('data-visible', 'true');
     }
 
     updateTestProgress(current, total, description) {
@@ -181,13 +177,7 @@ class ExamsViewerTestSuite {
         
         if (detailsEl) {
             detailsEl.innerHTML = this.testResults.details.map(result => `
-                <div style="
-                    padding: 8px; 
-                    margin-bottom: 4px; 
-                    border-radius: 6px; 
-                    background: ${result.passed ? '#f0f9ff' : '#fef2f2'};
-                    border-left: 3px solid ${result.passed ? '#22c55e' : '#ef4444'};
-                ">
+                <div class="test-result-item ${result.passed ? 'passed' : 'failed'}">
                     <div style="font-weight: 500; color: var(--text-primary, #000000);">
                         ${result.passed ? '✅' : '❌'} ${result.name}
                     </div>
