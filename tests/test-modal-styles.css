@@ -3,14 +3,14 @@
  * Styles optimisés pour le modal de résultats de test
  */
 
-/* Style du modal de test principal */
+/* Style du modal de test principal - Positionné à droite */
 #testResultsPanel {
   position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  width: min(90vw, 420px) !important;
-  max-height: min(90vh, 80vh) !important;
+  top: 20px !important;
+  right: 20px !important;
+  transform: none !important;
+  width: min(30vw, 450px) !important;
+  max-height: calc(100vh - 40px) !important;
   background: var(--bg-secondary, #ffffff) !important;
   border: 1px solid var(--border-primary, #e5e5e5) !important;
   border-radius: 12px !important;
@@ -152,11 +152,13 @@
   border-left-color: #ef4444 !important;
 }
 
-/* Responsivité mobile */
+/* Responsivité mobile - Modal à droite même sur mobile */
 @media (max-width: 768px) {
   #testResultsPanel {
-    width: 95vw !important;
-    max-height: 85vh !important;
+    width: min(90vw, 350px) !important;
+    max-height: calc(100vh - 80px) !important;
+    top: 10px !important;
+    right: 10px !important;
     margin: 0 !important;
     border-radius: 8px !important;
   }

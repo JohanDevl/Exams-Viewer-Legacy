@@ -72,20 +72,33 @@ class ExamsViewerTestSuite {
         
         document.body.appendChild(testPanel);
         
-        // Add close functionality
+        // Add close functionality with improved event handling
         const closeModal = () => {
+            console.log('🗑️ Closing test panel...');
             testPanel.style.display = 'none';
             testPanel.removeAttribute('data-visible');
         };
         
-        document.getElementById('closeTestPanel').addEventListener('click', closeModal);
+        // Ensure close button exists and add event listener
+        const closeButton = document.getElementById('closeTestPanel');
+        if (closeButton) {
+            closeButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeModal();
+            });
+            console.log('✅ Close button event listener attached');
+        } else {
+            console.warn('❌ Close button not found');
+        }
         
         // Close on escape key
-        document.addEventListener('keydown', (e) => {
+        const escapeHandler = (e) => {
             if (e.key === 'Escape' && testPanel.getAttribute('data-visible')) {
                 closeModal();
             }
-        });
+        };
+        document.addEventListener('keydown', escapeHandler);
         
         // Close when clicking outside the modal content
         testPanel.addEventListener('click', (e) => {
@@ -93,6 +106,9 @@ class ExamsViewerTestSuite {
                 closeModal();
             }
         });
+        
+        // Global close function for manual access
+        window.closeTestModal = closeModal;
         
         this.testPanel = testPanel;
     }
