@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Test - Exams Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-flask"></i> Simple Test Mode</h1>
+            <p>Testing the simplified test system</p>
+        </header>
+
+        <!-- Development Test Button (only visible in dev mode) -->
+        <div id="devTestButton" class="dev-test-button" style="display: block;">
+            <button id="runTestsBtn" class="btn-dev-test">
+                <i class="fas fa-flask"></i>
+                Run Simple Tests
+            </button>
+        </div>
+    </div>
+
+    <!-- Load main application (needed for window functions) -->
+    <script type="module" src="script-modular.js"></script>
+    
+    <!-- Load simple test module -->
+    <script type="module">
+        import { 
+            handleRunTestsSimple, 
+            initializeSimpleDevButton 
+        } from './js/modules/dev-testing-simple.js';
+        
+        // Wait for DOM and main app to load
+        window.addEventListener('load', () => {
+            console.log('🚀 Simple test page loaded');
+            
+            // Initialize simple test button
+            initializeSimpleDevButton();
+            
+            // Override the button click handler to use simple version
+            const btn = document.getElementById('runTestsBtn');
+            if (btn) {
+                // Clear existing handlers
+                btn.replaceWith(btn.cloneNode(true));
+                const newBtn = document.getElementById('runTestsBtn');
+                newBtn.addEventListener('click', handleRunTestsSimple);
+                console.log('✅ Simple test button configured');
+            }
+        });
+    </script>
+</body>
+</html>
