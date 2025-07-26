@@ -76,22 +76,18 @@ class ExamsViewerTestSuite {
         const closeModal = () => {
             console.log('🗑️ Closing test panel...');
             
-            // Method 1: Try to hide with important styles
-            testPanel.style.setProperty('display', 'none', 'important');
-            testPanel.style.setProperty('visibility', 'hidden', 'important');
+            // Method 1: Hide with important styles and animation
             testPanel.style.setProperty('opacity', '0', 'important');
             testPanel.style.setProperty('transform', 'translateX(100%)', 'important');
+            testPanel.style.setProperty('transition', 'all 0.3s ease', 'important');
             testPanel.removeAttribute('data-visible');
             
-            // Method 2: If still visible after 100ms, remove from DOM
+            // Method 2: Hide after animation completes
             setTimeout(() => {
-                const isStillVisible = testPanel.offsetWidth > 0 && testPanel.offsetHeight > 0;
-                if (isStillVisible) {
-                    console.log('⚠️ Modal still visible, removing from DOM...');
-                    testPanel.remove();
-                }
-                console.log('✅ Test panel hidden');
-            }, 100);
+                testPanel.style.setProperty('display', 'none', 'important');
+                testPanel.style.setProperty('visibility', 'hidden', 'important');
+                console.log('✅ Test panel hidden with animation');
+            }, 300);
         };
         
         // Ensure close button exists and add event listener
@@ -130,9 +126,19 @@ class ExamsViewerTestSuite {
 
     showTestPanel() {
         console.log('📱 Showing test panel...');
+        
+        // Check if panel still exists in DOM
+        if (!this.testPanel || !document.body.contains(this.testPanel)) {
+            console.log('🔄 Test panel not found, recreating...');
+            this.createTestReportingUI(); // Recreate the panel
+        }
+        
+        // Reset all styles for clean opening
         this.testPanel.style.setProperty('display', 'flex', 'important');
         this.testPanel.style.setProperty('visibility', 'visible', 'important');
         this.testPanel.style.setProperty('opacity', '1', 'important');
+        this.testPanel.style.setProperty('transform', 'translateX(0)', 'important');
+        this.testPanel.style.setProperty('transition', 'all 0.3s ease', 'important');
         this.testPanel.setAttribute('data-visible', 'true');
         console.log('✅ Test panel shown');
     }
