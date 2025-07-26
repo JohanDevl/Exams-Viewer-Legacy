@@ -141,6 +141,12 @@ async function handleRunTests() {
     // Wait a moment for scripts to fully initialize
     await new Promise(resolve => setTimeout(resolve, 500));
     
+    // Verify that test functions are now available
+    devLog('🔍 Checking available test functions...');
+    devLog('window.testSuite:', !!window.testSuite);
+    devLog('window.runComprehensiveTests:', !!window.runComprehensiveTests);
+    devLog('window.ExamsViewerTestSuite:', !!window.ExamsViewerTestSuite);
+    
     // Try different test execution methods in order of preference
     let testsExecuted = false;
     
@@ -171,15 +177,37 @@ async function handleRunTests() {
     }
     
     if (!testsExecuted) {
-      // Log available test functions for debugging
+      // Log detailed debugging information
       const availableFunctions = [];
-      if (window.testSuite) availableFunctions.push('testSuite');
+      if (window.testSuite) {
+        availableFunctions.push(`testSuite (has runAllTests: ${!!window.testSuite.runAllTests})`);
+      }
       if (window.runComprehensiveTests) availableFunctions.push('runComprehensiveTests');
       if (window.runManualTests) availableFunctions.push('runManualTests');
       if (window.ExamsViewerTestSuite) availableFunctions.push('ExamsViewerTestSuite');
       
-      devError('Available test functions:', availableFunctions);
-      throw new Error(`Test functions not properly loaded. Available: ${availableFunctions.join(', ')}`);
+      devError('❌ No test functions could be executed');
+      devError('Available functions:', availableFunctions);
+      devError('Scripts loaded but functions not initialized properly');
+      
+      // Try to force creation of test suite if class is available
+      if (window.ExamsViewerTestSuite && !window.testSuite) {
+        devLog('🔧 Attempting to manually create test suite...');
+        try {
+          window.testSuite = new window.ExamsViewerTestSuite();
+          if (window.testSuite && typeof window.testSuite.runAllTests === 'function') {
+            devLog('✅ Manually created test suite, executing...');
+            await window.testSuite.runAllTests();
+            testsExecuted = true;
+          }
+        } catch (createError) {
+          devError('Failed to manually create test suite:', createError);
+        }
+      }
+      
+      if (!testsExecuted) {
+        throw new Error(`Test functions not properly loaded. Available: ${availableFunctions.join(', ')}`);
+      }
     }
     
     // Update button state to success

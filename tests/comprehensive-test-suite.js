@@ -1049,14 +1049,15 @@ window.runComprehensiveTests = async function() {
     }
 };
 
-// Auto-run when page is fully loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => window.testSuite.runAllTests(), 2000);
-    });
-} else {
-    setTimeout(() => window.testSuite.runAllTests(), 2000);
-}
+// Auto-run disabled - tests should be triggered manually via dev button
+// Uncomment below for auto-run behavior if needed:
+// if (document.readyState === 'loading') {
+//     document.addEventListener('DOMContentLoaded', () => {
+//         setTimeout(() => window.testSuite.runAllTests(), 2000);
+//     });
+// } else {
+//     setTimeout(() => window.testSuite.runAllTests(), 2000);
+// }
 
 // Export for module use
 if (typeof module !== 'undefined' && module.exports) {
