@@ -105,6 +105,7 @@ import {
   displayChangelog,
   updateMainProgressBarVisibility,
   showValidationResults,
+  toggleLegalInfo,
 } from './js/modules/ui-effects.js';
 
 // Statistics system
@@ -305,6 +306,7 @@ function exposeGlobalFunctions() {
   window.closeKeyboardHelp = closeKeyboardHelp;
   window.displayChangelog = displayChangelog;
   window.showValidationResults = showValidationResults;
+  window.toggleLegalInfo = toggleLegalInfo;
 
   // Statistics system
   window.recalculateTotalStats = recalculateTotalStats;
