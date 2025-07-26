@@ -977,7 +977,11 @@ class ExamsViewerTestSuite {
     // MAIN TEST RUNNER
     async runAllTests() {
         console.log('🚀 Starting Comprehensive Test Suite for Exams-Viewer...');
-        this.showTestPanel();
+        // Only show panel if explicitly requested (not for automatic background tests)
+        if (window.location.search.includes('show-tests=true') || 
+            (document.getElementById('runTestsBtn') && !document.getElementById('runTestsBtn').disabled)) {
+            this.showTestPanel();
+        }
         
         const testSuites = [
             { name: 'Navigation Functionality', method: this.testNavigationFunctionality },
@@ -1037,11 +1041,18 @@ class ExamsViewerTestSuite {
     }
 }
 
-// Global instance for manual testing
-window.testSuite = new ExamsViewerTestSuite();
+// Global instance for manual testing - Only create when explicitly requested
+if (window.location.search.includes('enable-tests=true') || window.enableTestSuite) {
+    window.testSuite = new ExamsViewerTestSuite();
+}
 
 // Expose comprehensive test runner function for dev-testing module
 window.runComprehensiveTests = async function() {
+    // Create test suite if it doesn't exist
+    if (!window.testSuite) {
+        window.testSuite = new ExamsViewerTestSuite();
+    }
+    
     if (window.testSuite && typeof window.testSuite.runAllTests === 'function') {
         return await window.testSuite.runAllTests();
     } else {
