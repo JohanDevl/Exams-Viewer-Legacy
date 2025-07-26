@@ -75,8 +75,23 @@ class ExamsViewerTestSuite {
         // Add close functionality with improved event handling
         const closeModal = () => {
             console.log('🗑️ Closing test panel...');
-            testPanel.style.display = 'none';
+            
+            // Method 1: Try to hide with important styles
+            testPanel.style.setProperty('display', 'none', 'important');
+            testPanel.style.setProperty('visibility', 'hidden', 'important');
+            testPanel.style.setProperty('opacity', '0', 'important');
+            testPanel.style.setProperty('transform', 'translateX(100%)', 'important');
             testPanel.removeAttribute('data-visible');
+            
+            // Method 2: If still visible after 100ms, remove from DOM
+            setTimeout(() => {
+                const isStillVisible = testPanel.offsetWidth > 0 && testPanel.offsetHeight > 0;
+                if (isStillVisible) {
+                    console.log('⚠️ Modal still visible, removing from DOM...');
+                    testPanel.remove();
+                }
+                console.log('✅ Test panel hidden');
+            }, 100);
         };
         
         // Ensure close button exists and add event listener
@@ -114,8 +129,12 @@ class ExamsViewerTestSuite {
     }
 
     showTestPanel() {
-        this.testPanel.style.display = 'flex';
+        console.log('📱 Showing test panel...');
+        this.testPanel.style.setProperty('display', 'flex', 'important');
+        this.testPanel.style.setProperty('visibility', 'visible', 'important');
+        this.testPanel.style.setProperty('opacity', '1', 'important');
         this.testPanel.setAttribute('data-visible', 'true');
+        console.log('✅ Test panel shown');
     }
 
     updateTestProgress(current, total, description) {
