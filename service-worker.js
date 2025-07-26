@@ -6,7 +6,7 @@ const CACHE_EXPIRY = 6 * 60 * 60 * 1000; // 6 hours in milliseconds (reduced for
 const STATIC_CACHE_FILES = [
   '/',
   '/index.html',
-  '/script.js',
+  '/script-modular.js',
   '/styles.css',
   '/favicon.ico',
   '/favicon.svg',

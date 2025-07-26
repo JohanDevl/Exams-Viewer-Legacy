@@ -112,7 +112,22 @@ python scripts/update_all_exams.py --exam CAD
 Exams-Viewer/
 ├── index.html          # Main web interface
 ├── styles.css          # Styles with dark mode support
-├── script.js           # JavaScript with statistics and lazy loading
+├── script-modular.js   # Main JavaScript entry point (modular architecture)
+├── js/                 # Modular JavaScript architecture
+│   ├── core/           # Core functionality modules
+│   │   ├── models.js   # Data models and statistics
+│   │   ├── navigation.js # Question navigation and validation
+│   │   └── state.js    # Global state management
+│   └── modules/        # Feature-specific modules
+│       ├── enhanced-navigation.js # Progress sidebar and keyboard shortcuts
+│       ├── exam-loader.js # Exam data loading and management
+│       ├── favorites.js # Favorites and notes system
+│       ├── mobile-navigation.js # Touch gestures and mobile UI
+│       ├── search.js   # Advanced search and filtering
+│       ├── settings.js # Settings management
+│       ├── statistics.js # Statistics calculation
+│       ├── storage.js  # Local storage operations
+│       └── ui-effects.js # UI feedback and effects
 ├── service-worker.js   # Intelligent caching system
 ├── data/               # Exam data with folder structure
 │   ├── EXAM_CODE/      # Individual exam folders
