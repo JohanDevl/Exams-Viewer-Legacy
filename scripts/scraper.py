@@ -818,18 +818,10 @@ def update_exam_data(exam_code, progress, rapid_scraping=False, force_rescan=Fal
         if questions_obj.get("error", "") != "":
             return (questions, f"Error occurred while scraping questions. Your connection may be slow or the website may have limited your rate. You can still see {len(questions)} questions. Try again later by refreshing the page.", False)
         
-        # Auto-create chunks if exam is large enough
+        # Auto-chunking disabled - lazy loading no longer needed
         chunk_message = ""
-        if len(questions) >= 100:  # Threshold for chunking
-            try:
-                chunk_success = create_chunks_for_exam_data(exam_code, questions, chunk_size=50)
-                if chunk_success:
-                    chunk_message = f"Auto-created {chunk_success} chunks for performance optimization."
-                else:
-                    chunk_message = "Chunking skipped - already exists or failed"
-            except Exception as e:
-                print(f"Warning: Failed to create chunks for {exam_code}: {e}")
-                chunk_message = "Chunking failed"
+        # Note: Chunk creation has been disabled as lazy loading is no longer used
+        # If you need to manually create chunks, use: python scripts/create_chunks.py
         
         return (questions, chunk_message, True)
         

@@ -108,14 +108,6 @@
               <i class="fas fa-cog"></i>
             </button>
             <button
-              id="revisionModeBtn"
-              class="revision-mode-btn"
-              data-tooltip="Enter Revision Mode&#10;Review your favorites"
-              data-tooltip-position="top"
-            >
-              <i class="fas fa-book"></i>
-            </button>
-            <button
               id="changelogBtn"
               class="changelog-btn"
               data-tooltip="View Changelog&#10;See latest updates"
@@ -295,7 +287,7 @@
               <div class="search-input-group">
                 <input
                   type="text"
-                  id="searchInput"
+                  id="questionSearch"
                   placeholder="Search in questions and answers..."
                   class="search-input"
                 />
@@ -313,18 +305,29 @@
                     <label class="filter-checkbox">
                       <input type="checkbox" id="filterAnswered" />
                       <span class="checkmark"></span>
-                      Answered (<span id="answeredCount">0</span>)
+                      <span class="filter-text">Answered</span>
+                      <span class="filter-count" id="answeredCount">0</span>
                     </label>
                     <label class="filter-checkbox">
                       <input type="checkbox" id="filterUnanswered" />
                       <span class="checkmark"></span>
-                      Unanswered (<span id="unansweredCount">0</span>)
+                      <span class="filter-text">Unanswered</span>
+                      <span class="filter-count" id="unansweredCount">0</span>
                     </label>
                     <label class="filter-checkbox">
                       <input type="checkbox" id="filterFavorites" />
                       <span class="checkmark"></span>
-                      Favorites (<span id="favoritesCount">0</span>)
+                      <span class="filter-text">Favorites</span>
+                      <span class="filter-count" id="favoritesCount">0</span>
                     </label>
+                  </div>
+                </div>
+                
+                <!-- Category Filters -->
+                <div class="filter-group" id="categoryFilterGroup" style="display: none;">
+                  <label class="filter-label">Category Filters:</label>
+                  <div class="filter-options" id="categoryFilterOptions">
+                    <!-- Categories will be dynamically added here -->
                   </div>
                 </div>
               </div>
@@ -378,21 +381,6 @@
               <button id="noteBtn" class="note-btn" data-tooltip="Add Note (N)&#10;Write a personal note" data-tooltip-position="bottom">
                 <i class="far fa-sticky-note"></i>
               </button>
-            </div>
-            <div id="questionNote" class="question-note" style="display: none">
-              <textarea
-                id="noteTextarea"
-                placeholder="Add your note here..."
-                rows="3"
-              ></textarea>
-              <div class="note-actions">
-                <button id="saveNoteBtn" class="save-note-btn">
-                  <i class="fas fa-save"></i> Save
-                </button>
-                <button id="cancelNoteBtn" class="cancel-note-btn">
-                  <i class="fas fa-times"></i> Cancel
-                </button>
-              </div>
             </div>
           </div>
 
@@ -450,6 +438,45 @@
             </div>
           </div>
 
+          <!-- Notes Section -->
+          <div id="questionNote" class="question-note-full-width" style="display: none">
+            <!-- Read-only view -->
+            <div id="noteReadView" class="note-read-view">
+              <div class="note-header">
+                <h4><i class="fas fa-sticky-note"></i> Personal Note</h4>
+              </div>
+              <div id="noteDisplayText" class="note-display-text">No note added yet.</div>
+              <div class="note-read-actions">
+                <button id="editNoteBtn" class="edit-note-btn">
+                  <i class="fas fa-edit"></i> Edit Note
+                </button>
+                <button id="cancelNoteViewBtn" class="cancel-note-btn">
+                  <i class="fas fa-times"></i> Close
+                </button>
+              </div>
+            </div>
+            
+            <!-- Edit view -->
+            <div id="noteEditView" class="note-edit-view" style="display: none">
+              <div class="note-header">
+                <h4><i class="fas fa-edit"></i> Edit Note</h4>
+              </div>
+              <textarea
+                id="noteTextarea"
+                placeholder="Add your personal note here..."
+                rows="6"
+              ></textarea>
+              <div class="note-edit-actions">
+                <button id="saveNoteBtn" class="save-note-btn">
+                  <i class="fas fa-save"></i> Save Note
+                </button>
+                <button id="cancelNoteBtn" class="cancel-note-btn">
+                  <i class="fas fa-times"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Discussion Section -->
           <div class="discussion-section">
             <button id="discussionToggle" class="discussion-toggle" data-tooltip="Toggle Discussion (D)&#10;View community discussion" data-tooltip-position="top">
@@ -501,41 +528,150 @@
             <div class="stats-content">
               <!-- Overview Tab -->
               <div id="overviewTab" class="stats-tab-content active">
-                <div class="stats-grid">
-                  <div class="stat-card">
-                    <div class="stat-icon">
-                      <i class="fas fa-question-circle"></i>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-value" id="totalQuestions">0</div>
-                      <div class="stat-label">Total Questions</div>
-                    </div>
-                  </div>
-                  <div class="stat-card">
-                    <div class="stat-icon success">
-                      <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-value" id="totalCorrect">0</div>
-                      <div class="stat-label">Correct Answers</div>
+                <!-- Main Performance Summary -->
+                <div class="overview-summary">
+                  <div class="summary-header">
+                    <h3><i class="fas fa-chart-line"></i> Performance Overview</h3>
+                    <div class="accuracy-badge" id="overallAccuracyBadge">
+                      <span id="overallAccuracyPercent">0%</span>
+                      <small>Overall Accuracy</small>
                     </div>
                   </div>
-                  <div class="stat-card">
-                    <div class="stat-icon error">
-                      <i class="fas fa-times-circle"></i>
+                  
+                  <!-- Key Metrics Grid -->
+                  <div class="metrics-grid">
+                    <!-- Primary Stats Row -->
+                    <div class="metric-card primary">
+                      <div class="metric-icon">
+                        <i class="fas fa-question-circle"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalQuestions">0</div>
+                        <div class="metric-label">Questions Answered</div>
+                        <div class="metric-trend" id="questionsTrend">
+                          <small>Across all exams</small>
+                        </div>
+                      </div>
                     </div>
-                    <div class="stat-info">
-                      <div class="stat-value" id="totalIncorrect">0</div>
-                      <div class="stat-label">Incorrect Answers</div>
+                    
+                    <div class="metric-card success">
+                      <div class="metric-icon">
+                        <i class="fas fa-check-circle"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalCorrect">0</div>
+                        <div class="metric-label">Correct Answers</div>
+                        <div class="metric-trend" id="correctTrend">
+                          <small id="correctPercentage">0% correct</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card error">
+                      <div class="metric-icon">
+                        <i class="fas fa-times-circle"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalIncorrect">0</div>
+                        <div class="metric-label">Incorrect Answers</div>
+                        <div class="metric-trend" id="incorrectTrend">
+                          <small id="incorrectPercentage">0% incorrect</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card warning">
+                      <div class="metric-icon">
+                        <i class="fas fa-eye"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalPreview">0</div>
+                        <div class="metric-label">Preview Mode</div>
+                        <div class="metric-trend" id="previewTrend">
+                          <small id="previewPercentage">0% previewed</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Secondary Stats Row -->
+                    <div class="metric-card info">
+                      <div class="metric-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalExams">0</div>
+                        <div class="metric-label">Exams Studied</div>
+                        <div class="metric-trend" id="examsTrend">
+                          <small>Different certifications</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card info">
+                      <div class="metric-icon">
+                        <i class="fas fa-clock"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalTimeSpent">0m</div>
+                        <div class="metric-label">Time Studied</div>
+                        <div class="metric-trend" id="timeTrend">
+                          <small id="averageTimePerQuestion">0s avg/question</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card info">
+                      <div class="metric-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalSessions">0</div>
+                        <div class="metric-label">Study Sessions</div>
+                        <div class="metric-trend" id="sessionsTrend">
+                          <small id="averageQuestionsPerSession">0 avg questions</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="metric-card secondary">
+                      <div class="metric-icon">
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalFavorites">0</div>
+                        <div class="metric-label">Favorites Saved</div>
+                        <div class="metric-trend" id="favoritesTrend">
+                          <small>Important questions</small>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="stat-card">
-                    <div class="stat-icon warning">
-                      <i class="fas fa-eye"></i>
-                    </div>
-                    <div class="stat-info">
-                      <div class="stat-value" id="totalPreview">0</div>
-                      <div class="stat-label">Preview Answers</div>
+                </div>
+                
+                <!-- Progress Visualization -->
+                <div class="progress-visualization">
+                  <h4><i class="fas fa-chart-pie"></i> Study Progress Breakdown</h4>
+                  <div class="progress-chart">
+                    <div class="progress-bar-container">
+                      <div class="progress-bar">
+                        <div class="progress-segment correct" id="correctProgressSegment" style="width: 0%"></div>
+                        <div class="progress-segment incorrect" id="incorrectProgressSegment" style="width: 0%"></div>
+                        <div class="progress-segment preview" id="previewProgressSegment" style="width: 0%"></div>
+                      </div>
+                      <div class="progress-labels">
+                        <div class="progress-label correct">
+                          <span class="color-dot"></span>
+                          <span>Correct (<span id="correctProgressText">0%</span>)</span>
+                        </div>
+                        <div class="progress-label incorrect">
+                          <span class="color-dot"></span>
+                          <span>Incorrect (<span id="incorrectProgressText">0%</span>)</span>
+                        </div>
+                        <div class="progress-label preview">
+                          <span class="color-dot"></span>
+                          <span>Preview (<span id="previewProgressText">0%</span>)</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -608,15 +744,6 @@
                 <span class="toggle-slider"></span>
                 Show advanced search and filters
               </label>
-              <label class="toggle-label">
-                <input type="checkbox" id="enableLazyLoading" />
-                <span class="toggle-slider"></span>
-                Enable lazy loading (experimental)
-              </label>
-              <p class="setting-description">
-                Lazy loading loads questions in chunks for better performance on large exams. 
-                May cause brief delays when navigating to unloaded questions.
-              </p>
               <label class="toggle-label" style="margin-top: 1rem;">
                 <input type="checkbox" id="showMainProgressBar" />
                 <span class="toggle-slider"></span>
@@ -637,36 +764,6 @@
               </p>
             </div>
 
-            <div class="setting-group">
-              <h3><i class="fas fa-play"></i> Resume Position</h3>
-              <label class="toggle-label">
-                <input type="checkbox" id="enableResumePosition" />
-                <span class="toggle-slider"></span>
-                Enable resume position across sessions
-              </label>
-              <p class="setting-description">
-                Automatically save your current position in each exam and show a resume dialog when returning to continue where you left off.
-              </p>
-              <label class="toggle-label" style="margin-top: 1rem;">
-                <input type="checkbox" id="autoSavePosition" />
-                <span class="toggle-slider"></span>
-                Auto-save position on question navigation
-              </label>
-              <p class="setting-description">
-                Automatically save your position as you navigate through questions. When disabled, position is only saved when you leave the exam.
-              </p>
-              <div class="favorites-actions" style="margin-top: 1rem;">
-                <button
-                  id="resetResumePositionsBtn"
-                  class="settings-action-btn reset-btn"
-                >
-                  <i class="fas fa-trash-alt"></i> Clear All Resume Positions
-                </button>
-              </div>
-              <p class="setting-description">
-                Clear all saved resume positions for all exams. This will remove all position bookmarks.
-              </p>
-            </div>
 
             <div class="setting-group">
               <h3><i class="fas fa-star"></i> Favorites Management</h3>
@@ -951,24 +1048,30 @@
       ></div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script-modular.js"></script>
     <script>
       // Register Service Worker for intelligent caching
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
+        navigator.serviceWorker.register('./service-worker.js')
           .then(registration => {
-            console.log('Service Worker registered:', registration);
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
+              console.log('Service Worker registered:', registration);
+            }
             
             // Listen for cache updates
             navigator.serviceWorker.addEventListener('message', event => {
               if (event.data && event.data.type === 'CACHE_UPDATED') {
-                console.log('Cache updated for:', event.data.url);
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
+                  console.log('Cache updated for:', event.data.url);
+                }
                 // Could show a subtle notification to user about updated content
               }
             });
           })
           .catch(error => {
-            console.log('Service Worker registration failed:', error);
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
+              console.log('Service Worker registration failed:', error);
+            }
           });
       }
     </script>
