@@ -97,7 +97,7 @@ function saveStatistics() {
     }
     
     // Use compression from models module
-    const compressedData = window.compressData ? window.compressData(statistics) : JSON.stringify(statistics);
+    const compressedData = window.compressData ? window.compressData(window.statistics) : JSON.stringify(window.statistics);
     
     // Calculate size in KB
     const sizeKB = (new Blob([compressedData]).size / 1024).toFixed(2);
@@ -132,6 +132,22 @@ function saveStatistics() {
  */
 function loadStatistics() {
   try {
+    // Initialize window.statistics if it doesn't exist
+    if (!window.statistics) {
+      window.statistics = {
+        sessions: [],
+        currentSession: null,
+        totalStats: {
+          totalQuestions: 0,
+          totalCorrect: 0,
+          totalIncorrect: 0,
+          totalPreview: 0,
+          totalTime: 0,
+          examStats: {},
+        },
+      };
+    }
+
     const savedData = localStorage.getItem("examViewerStatistics");
     if (!savedData) {
       devLog("📊 No saved statistics found, using defaults");
@@ -144,9 +160,9 @@ function loadStatistics() {
     // Migrate old data format to new format if needed
     if (loadedData) {
       // Ensure all required properties exist
-      statistics.sessions = loadedData.sessions || [];
-      statistics.currentSession = loadedData.currentSession || null;
-      statistics.totalStats = loadedData.totalStats || {
+      window.statistics.sessions = loadedData.sessions || [];
+      window.statistics.currentSession = loadedData.currentSession || null;
+      window.statistics.totalStats = loadedData.totalStats || {
         totalQuestions: 0,
         totalCorrect: 0,
         totalIncorrect: 0,
@@ -156,16 +172,16 @@ function loadStatistics() {
       };
 
       // Ensure totalStats has all required properties
-      if (!statistics.totalStats.totalPreview) {
-        statistics.totalStats.totalPreview = 0;
+      if (!window.statistics.totalStats.totalPreview) {
+        window.statistics.totalStats.totalPreview = 0;
       }
-      if (!statistics.totalStats.examStats) {
-        statistics.totalStats.examStats = {};
+      if (!window.statistics.totalStats.examStats) {
+        window.statistics.totalStats.examStats = {};
       }
 
       // Clean up any sessions with corrupted data
-      if (statistics.sessions && Array.isArray(statistics.sessions)) {
-        statistics.sessions = statistics.sessions.filter(session => {
+      if (window.statistics.sessions && Array.isArray(window.statistics.sessions)) {
+        window.statistics.sessions = window.statistics.sessions.filter(session => {
           // Check if session has required properties
           const hasBasicProps = session && 
             (session.ec || session.examCode) && 
@@ -194,8 +210,8 @@ function loadStatistics() {
   } catch (error) {
     devError("Failed to load statistics:", error);
     // Clean corrupted statistics if loading fails
-    if (typeof cleanCorruptedStatistics === 'function') {
-      cleanCorruptedStatistics();
+    if (typeof window.cleanCorruptedStatistics === 'function') {
+      window.cleanCorruptedStatistics();
     }
   }
 }
