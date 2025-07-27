@@ -4,25 +4,86 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.1.0] - 2025-07-27
+
+### Added
+- **🔬 Comprehensive Testing System**: Advanced development and quality assurance tools
+  - Integrated development test modal with real-time feedback
+  - Comprehensive test suite covering core functionality, UI interactions, and edge cases
+  - Automated test reporting with detailed results and performance metrics
+  - Test modal repositioning and improved accessibility
+  - Development mode integration for enhanced debugging capabilities
+
+- **👨‍💻 Developer Information Section**: Enhanced project attribution and community links
+  - Developer profile with social media integration (GitHub, Raycast)
+  - Improved project attribution and contact information
+  - Enhanced visual design with tooltips and hover effects
+
+- **🎨 Modern UI/UX Enhancements**: Complete 2025 design system implementation
+  - Enhanced button styling with modern hover effects and transitions
+  - Improved validation UX with disabled states and visual feedback
+  - Advanced discussion button styling and interaction patterns
+  - Comprehensive responsive design improvements
+  - Enhanced visual hierarchy and spacing consistency
+
+### Enhanced
+- **📊 Statistics System Reliability**: Major improvements to data accuracy and consistency
+  - Fixed session statistics calculation to prioritize first actions only
+  - Improved question status tracking with proper state management
+  - Enhanced progress tracking with accurate answered/preview counts
+  - Fixed duplicate question entries in reset counter UI
+  - Optimized statistics initialization and window object management
+
+- **🔄 Progress Tracking Accuracy**: Comprehensive fixes to question state management
+  - Fixed sidebar status display to use correct question indexing
+  - Enhanced first action type prioritization for accurate progress tracking
+  - Improved question status calculation across all UI components
+  - Fixed preview question inclusion in total question counts
+  - Better handling of question state transitions and history
+
+- **⚙️ Settings System Robustness**: Enhanced configuration management and reliability
+  - Fixed default settings application when localStorage is empty
+  - Improved settings loading logic for both saved and default configurations
+  - Enhanced debugging capabilities with detailed logging
+  - Better error handling in settings initialization process
 
 ### Fixed
-- **Note Button Visual Feedback**: Note button now correctly changes color when note section is displayed
-  - Button becomes active (blue) when note section is shown
-  - Button returns to normal state when note section is closed
-  - Fixed conflict with `updateFavoritesUI()` function that was overriding manual button state
-  - Improved user experience with clear visual indication of note section state
+- **🎯 User Interface Polish**: Critical UX improvements and bug fixes
+  - Note button now correctly changes color when note section is displayed
+  - Fixed conflict with `updateFavoritesUI()` function overriding manual button states
+  - Improved visual feedback for all interactive elements
+  - Fixed test modal positioning, visibility, and close button functionality
+  - Resolved modal reopening issues with proper DOM recreation
 
-- **Settings Default Values**: Fixed issue where default settings were not applied after clearing browser cache
-  - "Show enhanced progress indicator" is now correctly checked by default on fresh installations
-  - Default settings are properly initialized even when localStorage is empty
-  - Improved settings loading logic to handle both saved and default configurations
-  - Enhanced debugging logs for better troubleshooting
+- **🧹 Code Quality & Maintenance**: Codebase cleanup and optimization
+  - Removed obsolete test files and outdated documentation
+  - Updated automated test reporting scripts for better reliability
+  - Cleaned up simple development testing modules
+  - Improved project structure and file organization
+  - Enhanced code maintainability and development workflow
 
 ### Technical Improvements
-- Refactored note button state management to prevent conflicts with UI update functions
-- Improved settings initialization workflow for better reliability
-- Enhanced error handling in settings loading process
+- **🏗️ Architecture Enhancements**: Modern development practices and tooling
+  - Refactored note button state management to prevent UI conflicts
+  - Improved modal lifecycle management with proper cleanup
+  - Enhanced component isolation and state management
+  - Better separation of concerns in testing infrastructure
+  - Optimized event handling and DOM manipulation patterns
+
+- **🔧 Development Experience**: Enhanced tools and debugging capabilities
+  - Comprehensive test coverage with automated reporting
+  - Improved error handling and graceful degradation
+  - Enhanced debugging logs and development feedback
+  - Better development mode integration and tooling
+  - Streamlined development workflow and build processes
+
+### Performance
+- **⚡ UI Responsiveness**: Optimized interactions and animations
+  - Improved button hover effects and transition performance
+  - Enhanced modal rendering and positioning efficiency
+  - Optimized statistics calculation and UI updates
+  - Better event debouncing and throttling where needed
+  - Reduced layout thrashing in progress updates
 
 ## [3.0.0] - 2025-07-26
 
