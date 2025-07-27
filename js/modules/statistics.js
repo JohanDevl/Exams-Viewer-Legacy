@@ -95,7 +95,7 @@ function recalculateTotalStats() {
 }
 
 /**
- * Get performance statistics for current session
+ * Get performance statistics for current session based on FIRST ACTIONS only
  */
 function getCurrentSessionStats() {
   try {
@@ -113,10 +113,35 @@ function getCurrentSessionStats() {
 
     const session = window.statistics.currentSession;
     const totalQuestions = session.totalQuestions || session.tq || 0;
-    const correctAnswers = session.correctAnswers || session.ca || 0;
-    const incorrectAnswers = session.incorrectAnswers || session.ia || 0;
-    const previewAnswers = session.previewAnswers || session.pa || 0;
-    const totalTime = session.totalTime || session.tt || 0;
+    
+    // Count questions by their FIRST action only
+    let correctAnswers = 0;
+    let incorrectAnswers = 0;
+    let previewAnswers = 0;
+    let totalTime = 0;
+    
+    const questions = session.questions || session.q || [];
+    
+    questions.forEach(questionAttempt => {
+      const firstAction = questionAttempt.fat || questionAttempt.firstActionType;
+      const questionTime = questionAttempt.ts || questionAttempt.timeSpent || 0;
+      
+      if (firstAction) {
+        totalTime += questionTime;
+        
+        switch (firstAction) {
+          case 'c': // correct
+            correctAnswers++;
+            break;
+          case 'i': // incorrect
+            incorrectAnswers++;
+            break;
+          case 'p': // preview
+            previewAnswers++;
+            break;
+        }
+      }
+    });
 
     const totalAnswered = correctAnswers + incorrectAnswers;
     const accuracy = totalAnswered > 0 ? Math.round((correctAnswers / totalAnswered) * 100) : 0;
