@@ -7114,3 +7114,139 @@ button.discussion-toggle:hover {
     margin-bottom: 1rem;
   }
 }
+
+/* Developer Info Section */
+.developer-info {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: linear-gradient(135deg, 
+    rgba(155, 135, 245, 0.05) 0%, 
+    rgba(164, 144, 128, 0.05) 100%);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.developer-name {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.025em;
+}
+
+.developer-links {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.developer-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  color: white;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.developer-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.developer-link:hover::before {
+  opacity: 1;
+}
+
+.developer-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.developer-link i {
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.github-link {
+  background: linear-gradient(135deg, #333 0%, #24292e 100%);
+}
+
+.github-link:hover {
+  background: linear-gradient(135deg, #24292e 0%, #1a1e22 100%);
+}
+
+.raycast-link {
+  background: linear-gradient(135deg, #ff6363 0%, #e63946 100%);
+}
+
+.raycast-link:hover {
+  background: linear-gradient(135deg, #e63946 0%, #d62828 100%);
+}
+
+.raycast-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .developer-info {
+  background: linear-gradient(135deg, 
+    rgba(155, 135, 245, 0.1) 0%, 
+    rgba(164, 144, 128, 0.1) 100%);
+}
+
+[data-theme="dark"] .developer-name {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .github-link {
+  background: linear-gradient(135deg, #f0f6fc 0%, #e6edf3 100%);
+  color: #24292e;
+}
+
+[data-theme="dark"] .github-link:hover {
+  background: linear-gradient(135deg, #e6edf3 0%, #d0d7de 100%);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .developer-info {
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-sm);
+  }
+  
+  .developer-name {
+    font-size: var(--text-base);
+  }
+  
+  .developer-link {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .developer-link i {
+    font-size: 1rem;
+  }
+}
