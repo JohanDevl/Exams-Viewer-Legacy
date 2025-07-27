@@ -875,7 +875,6 @@ function setupMainEventListeners() {
 
   // Note button
   const noteBtn = document.getElementById("noteBtn");
-  console.log("Note button found:", noteBtn);
   if (noteBtn) {
     noteBtn.addEventListener("click", () => {
       const noteSection = document.getElementById("questionNote");
