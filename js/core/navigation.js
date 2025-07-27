@@ -692,12 +692,32 @@ function updateQuestionStatistics() {
 
     // Find the question attempt in statistics
     const questions = window.statistics.currentSession.q || window.statistics.currentSession.questions || [];
-    const questionAttempt = questions.find(
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 updateQuestionStatistics: Looking for question ${questionNumber}`);
+      window.devLog(`📊 updateQuestionStatistics: Using data source:`, {
+        hasQ: !!window.statistics.currentSession.q,
+        hasQuestions: !!window.statistics.currentSession.questions,
+        questionsLength: questions.length
+      });
+      window.devLog(`📊 updateQuestionStatistics: Available questions:`, questions.map(q => ({
+        qn: q.qn, 
+        questionNumber: q.questionNumber, 
+        rc: q.rc
+      })));
+    }
+    
+    // Find all matching attempts and take the most recent one (last in array)
+    const matchingAttempts = questions.filter(
       (q) => (q.qn && q.qn.toString() === questionNumber.toString()) ||
              (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
     );
+    const questionAttempt = matchingAttempts.length > 0 ? matchingAttempts[matchingAttempts.length - 1] : null;
 
     if (!questionAttempt) {
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📊 updateQuestionStatistics: No questionAttempt found for question ${questionNumber}`);
+      }
       const resetCount = document.getElementById("resetCount");
       const highlightValidationsCount = document.getElementById("highlightValidationsCount");
       const questionStats = document.getElementById("questionStats");
@@ -709,6 +729,17 @@ function updateQuestionStatistics() {
     }
 
     const resetCount = questionAttempt.rc || questionAttempt.resetCount || 0;
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 updateQuestionStatistics: Found ${matchingAttempts.length} matching attempts, using most recent:`);
+      window.devLog(`📊 updateQuestionStatistics: Selected questionAttempt:`, {
+        qn: questionAttempt.qn,
+        questionNumber: questionAttempt.questionNumber,
+        rc: questionAttempt.rc,
+        resetCount: questionAttempt.resetCount,
+        calculatedResetCount: resetCount
+      });
+    }
 
     // Calculate total highlight interactions using new method or old way
     const totalHighlightInteractions = questionAttempt.getTotalHighlightInteractions
@@ -721,7 +752,19 @@ function updateQuestionStatistics() {
     const highlightValidationsCountElement = document.getElementById("highlightValidationsCount");
     const questionStats = document.getElementById("questionStats");
     
-    if (resetCountElement) resetCountElement.textContent = resetCount;
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 updateQuestionStatistics: DOM elements found:`, {
+        resetCountElement: !!resetCountElement,
+        questionStats: !!questionStats
+      });
+    }
+    
+    if (resetCountElement) {
+      resetCountElement.textContent = resetCount;
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📊 updateQuestionStatistics: Updated resetCountElement.textContent to ${resetCount}`);
+      }
+    }
     if (highlightValidationsCountElement) {
       highlightValidationsCountElement.textContent = totalHighlightInteractions;
     }
@@ -1007,16 +1050,21 @@ function validateAnswers() {
  */
 function resetAnswers() {
   try {
+    // Store validation state before clearing
+    const wasValidated = window.isValidated;
+    
     window.selectedAnswers?.clear();
 
-    // Track reset count for the current question
-    if (window.statistics?.currentSession) {
+    // Track reset count for the current question - only if it was previously validated
+    if (window.statistics?.currentSession && wasValidated) {
       const question = window.currentQuestions[window.currentQuestionIndex || 0];
       const questionNumber = question.question_number;
 
       // Find existing question attempt or create new one
+      // Use string comparison to ensure consistency with different data types
       let questionAttempt = window.statistics.currentSession.questions?.find(
-        (q) => q.questionNumber === questionNumber
+        (q) => (q.qn && q.qn.toString() === questionNumber.toString()) ||
+               (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
       );
 
       if (!questionAttempt && typeof window.QuestionAttempt === 'function') {
@@ -1035,7 +1083,13 @@ function resetAnswers() {
         if (typeof window.saveStatistics === 'function') {
           window.saveStatistics();
         }
+        
+        if (typeof window.devLog === 'function') {
+          window.devLog(`🔄 Reset count incremented for validated question ${questionNumber} (total resets: ${questionAttempt.rc})`);
+        }
       }
+    } else if (typeof window.devLog === 'function') {
+      window.devLog('🔄 Reset triggered but question was not validated - reset count not incremented');
     }
 
     // Reset UI state
@@ -1085,6 +1139,11 @@ function resetAnswers() {
     // Update instructions and statistics
     if (typeof window.updateInstructions === 'function' && !window.isValidated) {
       window.updateInstructions();
+    }
+    
+    // Force update of question statistics after reset tracking
+    if (typeof window.devLog === 'function') {
+      window.devLog('🔄 About to update question statistics after reset');
     }
     updateQuestionStatistics();
 
