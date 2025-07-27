@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- **Note Button Visual Feedback**: Note button now correctly changes color when note section is displayed
+  - Button becomes active (blue) when note section is shown
+  - Button returns to normal state when note section is closed
+  - Fixed conflict with `updateFavoritesUI()` function that was overriding manual button state
+  - Improved user experience with clear visual indication of note section state
+
+- **Settings Default Values**: Fixed issue where default settings were not applied after clearing browser cache
+  - "Show enhanced progress indicator" is now correctly checked by default on fresh installations
+  - Default settings are properly initialized even when localStorage is empty
+  - Improved settings loading logic to handle both saved and default configurations
+  - Enhanced debugging logs for better troubleshooting
+
+### Technical Improvements
+- Refactored note button state management to prevent conflicts with UI update functions
+- Improved settings initialization workflow for better reliability
+- Enhanced error handling in settings loading process
+
 ## [3.0.0] - 2025-07-26
 
 ### Added
