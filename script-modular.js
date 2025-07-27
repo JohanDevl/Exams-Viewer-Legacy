@@ -875,18 +875,35 @@ function setupMainEventListeners() {
 
   // Note button
   const noteBtn = document.getElementById("noteBtn");
+  console.log("Note button found:", noteBtn);
   if (noteBtn) {
     noteBtn.addEventListener("click", () => {
       const noteSection = document.getElementById("questionNote");
+      console.log("Note section:", noteSection);
       if (noteSection) {
         const isVisible = noteSection.style.display !== "none" && noteSection.style.display !== "";
+        console.log("Note section visible:", isVisible);
         
         if (isVisible) {
           // Hide note section
           noteSection.style.display = "none";
+          // Remove active state when hiding
+          noteBtn.classList.remove("active");
+          // Remove manual styles
+          noteBtn.style.backgroundColor = "";
+          noteBtn.style.color = "";
+          console.log("Note hidden, classes after remove:", noteBtn.className);
         } else {
           // Show note section in read mode
           noteSection.style.display = "block";
+          // Add active state when showing
+          noteBtn.classList.add("active");
+          console.log("Note shown, classes after add:", noteBtn.className);
+          
+          // Apply active styles
+          noteBtn.style.backgroundColor = "#007bff";
+          noteBtn.style.color = "white";
+          console.log("Applied manual styles for testing");
           
           // Scroll to the note section so it's visible
           setTimeout(() => {
@@ -918,7 +935,17 @@ function setupMainEventListeners() {
   if (cancelNoteViewBtn) {
     cancelNoteViewBtn.addEventListener("click", () => {
       const noteSection = document.getElementById("questionNote");
-      if (noteSection) noteSection.style.display = "none";
+      if (noteSection) {
+        noteSection.style.display = "none";
+        // Remove active state when closing
+        const noteBtn = document.getElementById("noteBtn");
+        if (noteBtn) {
+          noteBtn.classList.remove("active");
+          // Remove manual styles
+          noteBtn.style.backgroundColor = "";
+          noteBtn.style.color = "";
+        }
+      }
     });
   }
 
@@ -2531,11 +2558,17 @@ function updateFavoritesUI() {
     const currentNote = typeof window.getQuestionNote === 'function' ? 
       window.getQuestionNote(window.currentQuestionIndex) : (questionData.note || "");
     
-    noteBtn.classList.toggle("active", !!currentNote);
-    
     // Update note display if note section is visible
     const noteSection = document.getElementById("questionNote");
-    if (noteSection && noteSection.style.display !== "none") {
+    const isNoteVisible = noteSection && noteSection.style.display !== "none" && noteSection.style.display !== "";
+    
+    // Button is active if note section is visible OR if there's a saved note
+    // Only update if note section is not currently visible (to avoid overriding manual state)
+    if (!isNoteVisible) {
+      noteBtn.classList.toggle("active", !!currentNote);
+    }
+    
+    if (isNoteVisible) {
       showNoteReadView();
     }
   }
