@@ -81,3 +81,27 @@ html body .answer-controls button#resetBtn:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4) !important;
 }
+
+/* Styles pour le bouton Discussion */
+.discussion-section #discussionToggle,
+.discussion-section button#discussionToggle,
+html body .discussion-section #discussionToggle,
+html body .discussion-section button#discussionToggle {
+  background: linear-gradient(135deg, #6f42c1 0%, #007bff 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(111, 66, 193, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.discussion-section #discussionToggle:hover,
+.discussion-section button#discussionToggle:hover,
+html body .discussion-section #discussionToggle:hover,
+html body .discussion-section button#discussionToggle:hover {
+  background: linear-gradient(135deg, #5a359a 0%, #0056b3 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(111, 66, 193, 0.4) !important;
+}
