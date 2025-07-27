@@ -56,3 +56,28 @@ html body .answer-controls button#highlightBtn.active {
   box-shadow: 0 2px 12px rgba(224, 168, 0, 0.4) !important;
   transform: translateY(-1px) !important;
 }
+
+/* Styles pour le bouton Reset */
+.answer-controls #resetBtn,
+.answer-controls button#resetBtn,
+html body .answer-controls #resetBtn,
+html body .answer-controls button#resetBtn {
+  background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3) !important;
+  transition: all 0.3s ease !important;
+  /* Pas de display: flex !important pour permettre au JS de masquer le bouton */
+}
+
+.answer-controls #resetBtn:hover,
+.answer-controls button#resetBtn:hover,
+html body .answer-controls #resetBtn:hover,
+html body .answer-controls button#resetBtn:hover {
+  background: linear-gradient(135deg, #c82333 0%, #e8650e 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4) !important;
+}
