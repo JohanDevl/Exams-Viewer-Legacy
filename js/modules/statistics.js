@@ -771,49 +771,48 @@ function getQuestionStatus(questionIndex) {
       window.devLog(`📊 Q${questionIndex}: hasAnswers=${hasAnswers}, hasPreviewActivity=${hasPreviewActivity}`);
     }
     
-    if (hasAnswers) {
-      isAnswered = true;
+    // PRIORITY: Always use first action type if it exists (regardless of current state)
+    if (firstActionType) {
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📊 Q${questionIndex}: using first action type: ${firstActionType}`);
+      }
       
-      // PRIORITY: Use first action type if available (show what user did first)
-      if (firstActionType) {
-        if (typeof window.devLog === 'function') {
-          window.devLog(`📊 Q${questionIndex}: using first action type: ${firstActionType}`);
-        }
-        
-        switch (firstActionType) {
-          case 'c':
-            primaryStatus = 'correct';
-            break;
-          case 'i':
-            primaryStatus = 'incorrect';
-            break;
-          case 'p':
-            primaryStatus = 'preview';
-            break;
-          default:
-            primaryStatus = 'viewed';
-        }
-      } else {
-        // Fallback: Use current correctness if no first action recorded
-        const isCorrect = questionAttempt.ic !== undefined ? questionAttempt.ic : questionAttempt.isCorrect;
-        
-        if (typeof window.devLog === 'function') {
-          window.devLog(`📊 Q${questionIndex}: no first action, using current isCorrect=${isCorrect}`);
-        }
-        
-        if (isCorrect === true) {
+      switch (firstActionType) {
+        case 'c':
           primaryStatus = 'correct';
-        } else if (isCorrect === false) {
-          primaryStatus = 'incorrect'; 
-        } else {
-          primaryStatus = 'viewed'; // Answered but correctness not determined yet
-        }
+          isAnswered = true;
+          break;
+        case 'i':
+          primaryStatus = 'incorrect';
+          isAnswered = true;
+          break;
+        case 'p':
+          primaryStatus = 'preview';
+          break;
+        default:
+          primaryStatus = 'viewed';
+      }
+    } else if (hasAnswers) {
+      // No first action recorded, but has current answers
+      isAnswered = true;
+      const isCorrect = questionAttempt.ic !== undefined ? questionAttempt.ic : questionAttempt.isCorrect;
+      
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📊 Q${questionIndex}: no first action, using current isCorrect=${isCorrect}`);
+      }
+      
+      if (isCorrect === true) {
+        primaryStatus = 'correct';
+      } else if (isCorrect === false) {
+        primaryStatus = 'incorrect'; 
+      } else {
+        primaryStatus = 'viewed';
       }
     } else if (hasPreviewActivity) {
       // Question was previewed/highlighted but not answered
       primaryStatus = 'preview';
       if (typeof window.devLog === 'function') {
-        window.devLog(`👁️ Q${questionIndex}: preview mode (hvc=${highlightViews}, hbc=${highlightClicks}, fat=${firstActionType})`);
+        window.devLog(`👁️ Q${questionIndex}: preview mode (hvc=${highlightViews}, hbc=${highlightClicks})`);
       }
     } else {
       // Question was visited but neither answered nor previewed
