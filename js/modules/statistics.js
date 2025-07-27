@@ -773,19 +773,41 @@ function getQuestionStatus(questionIndex) {
     
     if (hasAnswers) {
       isAnswered = true;
-      // Use the isCorrect property directly from the attempt
-      const isCorrect = questionAttempt.ic !== undefined ? questionAttempt.ic : questionAttempt.isCorrect;
       
-      if (typeof window.devLog === 'function') {
-        window.devLog(`📊 Q${questionIndex}: answered, isCorrect=${isCorrect}`);
-      }
-      
-      if (isCorrect === true) {
-        primaryStatus = 'correct';
-      } else if (isCorrect === false) {
-        primaryStatus = 'incorrect'; 
+      // PRIORITY: Use first action type if available (show what user did first)
+      if (firstActionType) {
+        if (typeof window.devLog === 'function') {
+          window.devLog(`📊 Q${questionIndex}: using first action type: ${firstActionType}`);
+        }
+        
+        switch (firstActionType) {
+          case 'c':
+            primaryStatus = 'correct';
+            break;
+          case 'i':
+            primaryStatus = 'incorrect';
+            break;
+          case 'p':
+            primaryStatus = 'preview';
+            break;
+          default:
+            primaryStatus = 'viewed';
+        }
       } else {
-        primaryStatus = 'viewed'; // Answered but correctness not determined yet
+        // Fallback: Use current correctness if no first action recorded
+        const isCorrect = questionAttempt.ic !== undefined ? questionAttempt.ic : questionAttempt.isCorrect;
+        
+        if (typeof window.devLog === 'function') {
+          window.devLog(`📊 Q${questionIndex}: no first action, using current isCorrect=${isCorrect}`);
+        }
+        
+        if (isCorrect === true) {
+          primaryStatus = 'correct';
+        } else if (isCorrect === false) {
+          primaryStatus = 'incorrect'; 
+        } else {
+          primaryStatus = 'viewed'; // Answered but correctness not determined yet
+        }
       }
     } else if (hasPreviewActivity) {
       // Question was previewed/highlighted but not answered
