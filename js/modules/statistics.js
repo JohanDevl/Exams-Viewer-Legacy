@@ -904,6 +904,7 @@ function getQuestionStatus(questionIndex) {
 // Export all statistics functions for use in other modules
 export {
   // Statistics calculations
+  calculateSessionStatsFromFirstActions,
   recalculateTotalStats,
   getCurrentSessionStats,
   getGlobalStats,

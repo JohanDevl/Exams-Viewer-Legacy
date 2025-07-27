@@ -110,6 +110,7 @@ import {
 
 // Statistics system
 import {
+  calculateSessionStatsFromFirstActions,
   recalculateTotalStats,
   getCurrentSessionStats,
   getGlobalStats,
@@ -319,6 +320,7 @@ function exposeGlobalFunctions() {
   window.toggleLegalInfo = toggleLegalInfo;
 
   // Statistics system
+  window.calculateSessionStatsFromFirstActions = calculateSessionStatsFromFirstActions;
   window.recalculateTotalStats = recalculateTotalStats;
   window.getCurrentSessionStats = getCurrentSessionStats;
   window.getGlobalStats = getGlobalStats;
@@ -1917,10 +1919,18 @@ function updateSessionsTab() {
       const time = startTime ? new Date(startTime).toLocaleTimeString() : "";
       
       const totalQuestions = session.totalQuestions || session.tq || 0;
-      const correctAnswers = session.correctAnswers || session.ca || 0;
-      const incorrectAnswers = session.incorrectAnswers || session.ia || 0;
-      const previewAnswers = session.previewAnswers || session.pa || 0;
-      const totalTime = session.totalTime || session.tt || 0;
+      
+      // Calculate stats from first actions only (not inflated by multiple attempts)
+      const sessionStats = typeof window.calculateSessionStatsFromFirstActions === 'function'
+        ? window.calculateSessionStatsFromFirstActions(session)
+        : {
+            correctAnswers: session.correctAnswers || session.ca || 0,
+            incorrectAnswers: session.incorrectAnswers || session.ia || 0,
+            previewAnswers: session.previewAnswers || session.pa || 0,
+            totalTime: session.totalTime || session.tt || 0
+          };
+      
+      const { correctAnswers, incorrectAnswers, previewAnswers, totalTime } = sessionStats;
       
       const accuracy = (correctAnswers + incorrectAnswers) > 0 
         ? Math.round((correctAnswers / (correctAnswers + incorrectAnswers)) * 100) 
