@@ -989,26 +989,59 @@ button:not(.nav-btn):not(.dark-mode-btn):not(.stats-tab):not(.close-btn):focus-v
   flex-wrap: wrap;
 }
 
-.validate-btn {
-  padding: 0.75rem 1.5rem;
-  background-color: var(--success-color);
-  color: white;
-  border: none;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.validate-btn, 
+#validateBtn,
+button.validate-btn,
+button#validateBtn.validate-btn {
+  padding: 0.75rem 1.5rem !important;
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important; /* Dégradé vert */
+  color: white !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3) !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
-.validate-btn:hover {
-  background-color: #218838;
+.validate-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
-.validate-btn:disabled {
-  background-color: var(--text-muted);
-  cursor: not-allowed;
+.validate-btn:hover::before {
+  left: 100%;
+}
+
+.validate-btn:hover,
+#validateBtn:hover,
+button.validate-btn:hover,
+button#validateBtn.validate-btn:hover {
+  background: linear-gradient(135deg, #218838 0%, #1ea085 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4) !important;
+}
+
+.validate-btn:disabled,
+#validateBtn:disabled,
+button.validate-btn:disabled,
+button#validateBtn.validate-btn:disabled {
+  background: var(--text-muted) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.5 !important;
 }
 
 .reset-btn {
@@ -1028,33 +1061,92 @@ button:not(.nav-btn):not(.dark-mode-btn):not(.stats-tab):not(.close-btn):focus-v
   background-color: var(--text-secondary);
 }
 
-.highlight-btn {
-  padding: 0.75rem 1.5rem;
-  background-color: var(--warning-color);
-  color: #212529;
-  border: none;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.highlight-btn,
+#highlightBtn,
+button.highlight-btn,
+button#highlightBtn.highlight-btn {
+  padding: 0.75rem 1.5rem !important;
+  background: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%) !important; /* Dégradé orange/jaune */
+  color: #000000 !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3) !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
-.highlight-btn:hover {
-  background-color: #e0a800;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.highlight-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
 }
 
-.highlight-btn.active {
-  background-color: #e0a800;
-  box-shadow: 0 2px 8px rgba(224, 168, 0, 0.3);
-  transform: translateY(-1px);
+.highlight-btn:hover::before {
+  left: 100%;
 }
 
-.highlight-btn.active:hover {
-  background-color: #d39e00;
+.highlight-btn:hover,
+#highlightBtn:hover,
+button.highlight-btn:hover,
+button#highlightBtn.highlight-btn:hover {
+  background: linear-gradient(135deg, #e0a800 0%, #e67e00 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4) !important;
+}
+
+.highlight-btn.active,
+#highlightBtn.active,
+button.highlight-btn.active,
+button#highlightBtn.highlight-btn.active {
+  background: linear-gradient(135deg, #e0a800 0%, #d39e00 100%) !important;
+  box-shadow: 0 2px 12px rgba(224, 168, 0, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+.highlight-btn.active:hover,
+#highlightBtn.active:hover,
+button.highlight-btn.active:hover,
+button#highlightBtn.highlight-btn.active:hover {
+  background: linear-gradient(135deg, #d39e00 0%, #cc9500 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(224, 168, 0, 0.5) !important;
+}
+
+.highlight-btn:disabled,
+#highlightBtn:disabled,
+button.highlight-btn:disabled,
+button#highlightBtn.highlight-btn:disabled {
+  background: var(--text-muted) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.5 !important;
+}
+
+/* Force styles avec spécificité maximale pour contourner les conflits CSS */
+html body .answer-controls #validateBtn,
+html body .answer-controls button#validateBtn {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+  color: white !important;
+  border: none !important;
+}
+
+html body .answer-controls #highlightBtn,
+html body .answer-controls button#highlightBtn {
+  background: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%) !important;
+  color: #000000 !important;
+  border: none !important;
 }
 
 /* Discussion Section */
@@ -2355,17 +2447,40 @@ button:not(.nav-btn):not(.dark-mode-btn):not(.stats-tab):not(.close-btn):focus-v
 }
 
 .favorite-btn.active {
-  background-color: var(--warning-color);
-  color: white;
-  border-color: var(--warning-color);
+  background-color: transparent;
+  color: #000000; /* Étoile noire en mode clair */
+  border-color: #000000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
 }
 
 .favorite-btn.active:hover {
-  background-color: #e0a800;
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
 }
 
 .favorite-btn.active i {
-  color: white;
+  color: #000000;
+  text-shadow: none;
+}
+
+/* Dark mode specific styling for favorites */
+[data-theme="dark"] .favorite-btn.active {
+  background-color: transparent;
+  color: #ffffff; /* Étoile blanche en mode sombre */
+  border-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .favorite-btn.active:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .favorite-btn.active i {
+  color: #ffffff;
+  text-shadow: none;
 }
 
 .favorite-btn i {
@@ -6076,7 +6191,7 @@ button:not(.nav-btn):not(.dark-mode-btn):not(.stats-tab):not(.close-btn):focus-v
   }
 
   .progress-fill {
-    height: 8px;
+    height: 100%;
   }
 
   /* Mobile-optimized sidebar */
@@ -6549,6 +6664,113 @@ button:not(.nav-btn):not(.dark-mode-btn):not(.stats-tab):not(.close-btn):focus-v
   outline-offset: 2px;
 }
 
+/* ===========================
+   KEYBOARD SHORTCUTS MODAL
+   =========================== */
+
+.keyboard-help-modal .modal-content {
+  /* Inherit glassmorphism from parent but ensure proper styling */
+  color: var(--text-primary);
+}
+
+.keyboard-help-content {
+  /* Additional styles specific to keyboard help */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) transparent;
+}
+
+.keyboard-help-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.keyboard-help-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.keyboard-help-content::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.keyboard-help-content::-webkit-scrollbar-thumb:hover {
+  background: var(--border-primary);
+}
+
+.keyboard-help-content .modal-header {
+  background: var(--bg-accent);
+  border-bottom: 1px solid var(--border-secondary);
+  color: var(--text-primary);
+}
+
+.keyboard-help-content .modal-header h2 {
+  color: var(--text-primary);
+}
+
+.keyboard-help-content .modal-body {
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.keyboard-help-content .shortcut-section {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+}
+
+.keyboard-help-content .shortcut-section h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.keyboard-help-content .shortcut-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+  gap: var(--space-sm);
+}
+
+.keyboard-help-content .shortcut-item span {
+  color: var(--text-secondary);
+}
+
+.keyboard-help-content kbd {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 0 var(--border-primary), 0 1px 0 0 var(--border-secondary) inset;
+  color: var(--text-primary);
+  display: inline-block;
+  font-family: var(--font-family-mono, 'Monaco', 'Menlo', 'Ubuntu Mono', monospace);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: 1;
+  padding: var(--space-xs) calc(var(--space-xs) * 1.5);
+  white-space: nowrap;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.keyboard-help-content .close-btn {
+  background: none !important;
+  border: none !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-full);
+  transition: var(--transition-normal);
+  padding: var(--space-xs) !important;
+}
+
+.keyboard-help-content .close-btn:hover {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+.keyboard-help-content .close-btn:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
 .btn-dev-test i {
   font-size: 1.1em;
 }
@@ -6572,5 +6794,261 @@ button:not(.nav-btn):not(.dark-mode-btn):not(.stats-tab):not(.close-btn):focus-v
   .btn-dev-test {
     padding: var(--space-xs) var(--space-sm);
     font-size: var(--text-xs);
+  }
+}
+
+/* ===========================================
+   SETTINGS MODAL LIGHT MODE CONTRAST IMPROVEMENTS  
+   =========================================== */
+
+/* Enhanced settings modal styling - keep glassmorphism like other modals */
+#settingsModal .modal-content {
+  /* Use same glassmorphism as keyboard shortcuts modal */
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+  #settingsModal .modal-content {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+/* Improved toggle switches for light mode contrast */
+#settingsModal .toggle-label {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Enhanced toggle slider for better visibility */
+#settingsModal .toggle-slider {
+  width: 50px;
+  height: 24px;
+  background: #e5e7eb;
+  border-radius: 12px;
+  position: relative;
+  transition: all var(--transition-smooth);
+  border: 2px solid #d1d5db;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+#settingsModal .toggle-slider:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  top: 2px;
+  left: 2px;
+  transition: all var(--transition-smooth);
+  border: 1px solid #d1d5db;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Active state with stronger accent color */
+#settingsModal .toggle-label input[type="checkbox"]:checked + .toggle-slider {
+  background-color: var(--accent-color);
+  border-color: var(--accent-active);
+  box-shadow: inset 0 2px 4px rgba(155, 135, 245, 0.3);
+}
+
+#settingsModal .toggle-label input[type="checkbox"]:checked + .toggle-slider:before {
+  transform: translateX(26px);
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Dark mode specific toggle styling */
+[data-theme="dark"] #settingsModal .toggle-slider {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  box-shadow: var(--neu-shadow-inset-light), var(--neu-shadow-inset-dark);
+}
+
+[data-theme="dark"] #settingsModal .toggle-slider:before {
+  background: var(--bg-primary);
+  border: none;
+  box-shadow: var(--neu-shadow-light), var(--neu-shadow-dark);
+}
+
+[data-theme="dark"] #settingsModal .toggle-label input[type="checkbox"]:checked + .toggle-slider {
+  background-color: var(--accent-color);
+}
+
+[data-theme="dark"] #settingsModal .toggle-label input[type="checkbox"]:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+/* Enhanced text contrast for settings descriptions */
+#settingsModal .setting-description {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--accent-color);
+}
+
+[data-theme="dark"] #settingsModal .setting-description {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+}
+
+/* Enhanced settings group headers */
+#settingsModal .setting-group h3 {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#settingsModal .setting-group h3 i {
+  color: var(--accent-color);
+  font-size: 1.1em;
+}
+
+/* Better spacing and visual hierarchy for settings groups */
+#settingsModal .setting-group {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] #settingsModal .setting-group {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Enhanced button styling in settings modal for better visibility */
+#settingsModal .settings-action-btn {
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.025em;
+  border: 1px solid transparent;
+  transition: all var(--transition-normal);
+  flex: 1; /* Allow buttons to expand equally */
+  min-width: 120px; /* Minimum width for readability */
+  font-size: 0.8rem; /* Smaller font to fit better */
+  padding: 0.625rem 0.75rem; /* Adjust padding */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#settingsModal .settings-action-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Improved layout for favorites actions */
+#settingsModal .favorites-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+/* Responsive button layout */
+@media (max-width: 768px) {
+  #settingsModal .favorites-actions {
+    flex-direction: column;
+  }
+  
+  #settingsModal .settings-action-btn {
+    flex: none;
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  #settingsModal .settings-action-btn {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.625rem;
+    min-width: 110px;
+  }
+}
+
+/* Very wide screens - larger buttons with more space */
+@media (min-width: 1200px) {
+  #settingsModal .settings-action-btn {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    min-width: 140px;
+  }
+  
+  #settingsModal .favorites-actions {
+    gap: 1rem;
+  }
+}
+
+/* Improved focus states for accessibility */
+#settingsModal .toggle-label:focus-within {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+
+#settingsModal .toggle-slider:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+/* Enhanced modal header for settings */
+#settingsModal .modal-header {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border-bottom: 2px solid var(--border-secondary);
+}
+
+#settingsModal .modal-header h2 {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--text-xl);
+}
+
+/* Responsive improvements for mobile */
+@media (max-width: 768px) {
+  #settingsModal .setting-group {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  #settingsModal .toggle-label {
+    font-size: var(--text-sm);
+    margin-bottom: 1rem;
+  }
+  
+  #settingsModal .setting-description {
+    font-size: var(--text-xs);
+    padding: 0.5rem 0.75rem;
+  }
+  
+  #settingsModal .setting-group h3 {
+    font-size: var(--text-base);
+    margin-bottom: 1rem;
   }
 }

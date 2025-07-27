@@ -277,14 +277,22 @@ function updateProgressSidebar() {
       let statusIcon = "";
       let questionPreview = "";
       let statusBadges = "";
+      let originalIndex = -1; // Initialize originalIndex in proper scope
       
       if (isPlaceholder) {
         statusClass = "loading";
         statusIcon = '<i class="fas fa-spinner fa-spin"></i>';
         questionPreview = `Chunk ${question.chunkId + 1} - Loading...`;
       } else {
-        const questionStatus = typeof window.getQuestionStatus === 'function' 
-          ? window.getQuestionStatus(index)
+        // Find the original index in allQuestions for proper status checking
+        const allQuestions = typeof window.getAllQuestions === 'function' ? window.getAllQuestions() : window.allQuestions || [];
+        originalIndex = allQuestions.findIndex(q => 
+          q.question_number === question.question_number ||
+          (q.question === question.question && q.answers?.length === question.answers?.length)
+        );
+        
+        const questionStatus = typeof window.getQuestionStatus === 'function' && originalIndex !== -1
+          ? window.getQuestionStatus(originalIndex)
           : { primaryStatus: 'new', isFavorite: false, hasNotes: false, isCategorized: false };
         
         // Escape HTML and truncate question text to prevent layout issues
@@ -398,7 +406,7 @@ function updateProgressSidebar() {
       }
       
       return `
-        <div class="question-item question-item-enhanced ${statusClass}" data-index="${index}" onclick="navigateToQuestionAsync(${index})">
+        <div class="question-item question-item-enhanced ${statusClass}" data-index="${index}" data-original-index="${originalIndex}" onclick="navigateToQuestionAsync(${index})">
           <div class="question-number">
             ${statusIcon}
             <span>Q${question.question_number || index + 1}</span>
@@ -591,10 +599,14 @@ function getAnsweredQuestionsCount() {
  */
 function getFavoritesCount() {
   try {
-    if (!window.currentQuestions?.length || !window.currentExam) return 0;
+    if (!window.currentExam) return 0;
+    
+    // Always count favorites from ALL questions, not just filtered ones
+    const allQuestions = typeof window.getAllQuestions === 'function' ? window.getAllQuestions() : [];
+    if (!allQuestions.length) return 0;
     
     let count = 0;
-    window.currentQuestions.forEach((question, index) => {
+    allQuestions.forEach((question, index) => {
       if (typeof window.isQuestionFavorite === 'function' && 
           window.isQuestionFavorite(index)) {
         count++;

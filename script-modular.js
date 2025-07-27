@@ -158,6 +158,7 @@ import {
   handleSearchInput,
   handleFilterChange,
   setupSearchEventListeners,
+  getAllQuestions,
 } from './js/modules/search.js';
 
 
@@ -366,6 +367,7 @@ function exposeGlobalFunctions() {
   window.handleSearchInput = handleSearchInput;
   window.handleFilterChange = handleFilterChange;
   window.setupSearchEventListeners = setupSearchEventListeners;
+  window.getAllQuestions = getAllQuestions;
 
 
   // Mobile navigation
@@ -810,8 +812,18 @@ function setupMainEventListeners() {
         if (typeof window.updateFavoritesUI === 'function') {
           window.updateFavoritesUI();
         }
+        
+        // Clear question status cache to force refresh
+        if (typeof window.clearQuestionStatusCacheForQuestion === 'function') {
+          window.clearQuestionStatusCacheForQuestion(window.currentQuestionIndex);
+        }
+        
         if (typeof window.updateProgressSidebar === 'function') {
           window.updateProgressSidebar();
+          // Force sidebar update after a small delay to ensure favorites state is synchronized
+          setTimeout(() => {
+            window.updateProgressSidebar();
+          }, 100);
         }
         
         // Show feedback to user
@@ -2472,9 +2484,16 @@ function updateFavoritesUI() {
   // Get question data using the helper function
   const questionData = getQuestionData(examCode, questionNumber);
   
-  // Use isQuestionFavorite for consistency with the module
-  const isFavorite = typeof window.isQuestionFavorite === 'function' ? 
-    window.isQuestionFavorite(window.currentQuestionIndex) : questionData.isFavorite;
+  // Find the original index in allQuestions to get proper favorite status
+  const allQuestions = typeof window.getAllQuestions === 'function' ? window.getAllQuestions() : [];
+  const originalIndex = allQuestions.findIndex(q => 
+    q.question_number === question.question_number ||
+    (q.question === question.question && q.answers?.length === question.answers?.length)
+  );
+  
+  // Use isQuestionFavorite with original index for consistency with the module
+  const isFavorite = typeof window.isQuestionFavorite === 'function' && originalIndex !== -1 ? 
+    window.isQuestionFavorite(originalIndex) : questionData.isFavorite;
 
   // Update favorite button
   const favoriteBtn = document.getElementById("favoriteBtn");

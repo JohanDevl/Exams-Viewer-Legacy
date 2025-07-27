@@ -511,8 +511,25 @@ function displayCurrentQuestion(fromToggleAction = false) {
     // Reset controls (will be updated by restorePreviousAnswers if needed)
     if (!window.isValidated) {
       const validateBtn = document.getElementById("validateBtn");
+      const highlightBtn = document.getElementById("highlightBtn");
       const resetBtn = document.getElementById("resetBtn");
-      if (validateBtn) validateBtn.style.display = "inline-flex";
+      
+      if (validateBtn) {
+        validateBtn.disabled = false;
+        validateBtn.style.opacity = "1";
+        validateBtn.style.cursor = "pointer";
+        validateBtn.title = "";
+        validateBtn.style.display = "inline-flex";
+      }
+      
+      if (highlightBtn) {
+        highlightBtn.disabled = false;
+        highlightBtn.style.opacity = "1";
+        highlightBtn.style.cursor = "pointer";
+        highlightBtn.title = "";
+        highlightBtn.style.display = "inline-flex";
+      }
+      
       if (resetBtn) resetBtn.style.display = "none";
     }
 
@@ -884,10 +901,25 @@ function validateAnswers() {
       }
     }
 
-    // Update controls
+    // Update controls - disable validate and highlight buttons after validation
     const validateBtn = document.getElementById("validateBtn");
+    const highlightBtn = document.getElementById("highlightBtn");
     const resetBtn = document.getElementById("resetBtn");
-    if (validateBtn) validateBtn.style.display = "none";
+    
+    if (validateBtn) {
+      validateBtn.disabled = true;
+      validateBtn.style.opacity = "0.5";
+      validateBtn.style.cursor = "not-allowed";
+      validateBtn.title = "Answers validated - reset to validate again";
+    }
+    
+    if (highlightBtn) {
+      highlightBtn.disabled = true;
+      highlightBtn.style.opacity = "0.5";
+      highlightBtn.style.cursor = "not-allowed";
+      highlightBtn.title = "Answers validated - reset to highlight again";
+    }
+    
     if (resetBtn) resetBtn.style.display = "inline-flex";
 
     // Update question statistics display
@@ -1027,10 +1059,27 @@ function resetAnswers() {
       }
     });
 
-    // Update controls
+    // Update controls - re-enable validate and highlight buttons after reset
     const validateBtn = document.getElementById("validateBtn");
+    const highlightBtn = document.getElementById("highlightBtn");
     const resetBtn = document.getElementById("resetBtn");
-    if (validateBtn) validateBtn.style.display = "inline-flex";
+    
+    if (validateBtn) {
+      validateBtn.disabled = false;
+      validateBtn.style.opacity = "1";
+      validateBtn.style.cursor = "pointer";
+      validateBtn.title = "";
+      validateBtn.style.display = "inline-flex";
+    }
+    
+    if (highlightBtn) {
+      highlightBtn.disabled = false;
+      highlightBtn.style.opacity = "1";
+      highlightBtn.style.cursor = "pointer";
+      highlightBtn.title = "";
+      highlightBtn.style.display = "inline-flex";
+    }
+    
     if (resetBtn) resetBtn.style.display = "none";
 
     // Update instructions and statistics

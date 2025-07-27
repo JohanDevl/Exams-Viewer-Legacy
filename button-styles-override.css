@@ -1,0 +1,58 @@
+/* Override spécifique pour les boutons - Styles forcés avec spécificité maximale */
+
+/* Styles pour le bouton Validate */
+.answer-controls #validateBtn,
+.answer-controls button#validateBtn,
+html body .answer-controls #validateBtn,
+html body .answer-controls button#validateBtn {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.answer-controls #validateBtn:hover,
+.answer-controls button#validateBtn:hover,
+html body .answer-controls #validateBtn:hover,
+html body .answer-controls button#validateBtn:hover {
+  background: linear-gradient(135deg, #218838 0%, #1ea085 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4) !important;
+}
+
+/* Styles pour le bouton Highlight */
+.answer-controls #highlightBtn,
+.answer-controls button#highlightBtn,
+html body .answer-controls #highlightBtn,
+html body .answer-controls button#highlightBtn {
+  background: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%) !important;
+  color: #000000 !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.answer-controls #highlightBtn:hover,
+.answer-controls button#highlightBtn:hover,
+html body .answer-controls #highlightBtn:hover,
+html body .answer-controls button#highlightBtn:hover {
+  background: linear-gradient(135deg, #e0a800 0%, #e67e00 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4) !important;
+}
+
+.answer-controls #highlightBtn.active,
+.answer-controls button#highlightBtn.active,
+html body .answer-controls #highlightBtn.active,
+html body .answer-controls button#highlightBtn.active {
+  background: linear-gradient(135deg, #e0a800 0%, #d39e00 100%) !important;
+  box-shadow: 0 2px 12px rgba(224, 168, 0, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
