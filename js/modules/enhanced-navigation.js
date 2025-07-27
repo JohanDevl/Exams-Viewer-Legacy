@@ -291,8 +291,8 @@ function updateProgressSidebar() {
           (q.question === question.question && q.answers?.length === question.answers?.length)
         );
         
-        const questionStatus = typeof window.getQuestionStatus === 'function' && originalIndex !== -1
-          ? window.getQuestionStatus(originalIndex)
+        const questionStatus = typeof window.getQuestionStatus === 'function'
+          ? window.getQuestionStatus(index)
           : { primaryStatus: 'new', isFavorite: false, hasNotes: false, isCategorized: false };
         
         // Escape HTML and truncate question text to prevent layout issues
