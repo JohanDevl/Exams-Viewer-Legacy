@@ -51,7 +51,8 @@ function calculateSessionStatsFromFirstActions(session) {
     incorrectAnswers,
     previewAnswers,
     totalTime,
-    totalAnswered: correctAnswers + incorrectAnswers
+    totalAnswered: correctAnswers + incorrectAnswers, // For accuracy calculation
+    totalTouched: correctAnswers + incorrectAnswers + previewAnswers // For question count
   };
 }
 
@@ -160,9 +161,9 @@ function getCurrentSessionStats() {
     
     // Calculate stats using first actions only
     const sessionStats = calculateSessionStatsFromFirstActions(session);
-    const { correctAnswers, incorrectAnswers, previewAnswers, totalTime, totalAnswered } = sessionStats;
+    const { correctAnswers, incorrectAnswers, previewAnswers, totalTime, totalAnswered, totalTouched } = sessionStats;
     const accuracy = totalAnswered > 0 ? Math.round((correctAnswers / totalAnswered) * 100) : 0;
-    const averageTimePerQuestion = totalAnswered > 0 ? Math.round(totalTime / totalAnswered) : 0;
+    const averageTimePerQuestion = totalTouched > 0 ? Math.round(totalTime / totalTouched) : 0;
 
     return {
       totalQuestions,
@@ -172,7 +173,7 @@ function getCurrentSessionStats() {
       accuracy,
       timeSpent: totalTime,
       averageTimePerQuestion,
-      totalAnswered,
+      totalAnswered: totalTouched, // Return total touched questions for display
     };
   } catch (error) {
     if (typeof window.devError === 'function') {

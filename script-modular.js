@@ -1930,10 +1930,10 @@ function updateSessionsTab() {
             totalTime: session.totalTime || session.tt || 0
           };
       
-      const { correctAnswers, incorrectAnswers, previewAnswers, totalTime } = sessionStats;
+      const { correctAnswers, incorrectAnswers, previewAnswers, totalTime, totalAnswered, totalTouched } = sessionStats;
       
-      const accuracy = (correctAnswers + incorrectAnswers) > 0 
-        ? Math.round((correctAnswers / (correctAnswers + incorrectAnswers)) * 100) 
+      const accuracy = totalAnswered > 0 
+        ? Math.round((correctAnswers / totalAnswered) * 100) 
         : 0;
       const accuracyColor = accuracy >= 80 ? '#4CAF50' : accuracy >= 60 ? '#FF9800' : '#f44336';
       
@@ -1958,7 +1958,7 @@ function updateSessionsTab() {
           
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;">
             <div style="text-align: center; background: #1a1a1a; padding: 10px 8px; border-radius: 4px;">
-              <div style="font-size: 16px; color: #4CAF50; font-weight: bold;">${correctAnswers + incorrectAnswers}/${totalQuestions}</div>
+              <div style="font-size: 16px; color: #4CAF50; font-weight: bold;">${totalTouched || (correctAnswers + incorrectAnswers + previewAnswers)}/${totalQuestions}</div>
               <div style="font-size: 9px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Questions</div>
             </div>
             <div style="text-align: center; background: #1a1a1a; padding: 10px 8px; border-radius: 4px;">
