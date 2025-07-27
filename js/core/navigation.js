@@ -401,7 +401,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
     // Track question visit for status indicators
     if (question.question_number && typeof window.trackQuestionVisit === 'function') {
-      window.trackQuestionVisit(question.question_number);
+      window.trackQuestionVisit(parseInt(question.question_number, 10));
       
       // Clear cache for this question to ensure status updates
       if (typeof window.clearQuestionStatusCacheForQuestion === 'function') {
@@ -422,7 +422,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
     // Track highlight view if highlight is already enabled when viewing this question
     if (window.isHighlightEnabled && window.statistics?.currentSession && !fromToggleAction) {
-      const questionNumber = question.question_number;
+      const questionNumber = parseInt(question.question_number, 10);
       
       // Track highlight view using the new function
       if (typeof window.trackQuestionHighlight === 'function') {
@@ -439,7 +439,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
     }
 
     // Update navigation
-    const currentQuestionNumber = question.question_number || (window.currentQuestionIndex + 1);
+    const currentQuestionNumber = parseInt(question.question_number, 10) || (window.currentQuestionIndex + 1);
     
     const questionCounter = document.getElementById("questionCounter");
     if (questionCounter) {
@@ -459,7 +459,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
     // Update question title and link
     const questionTitle = document.getElementById("questionTitle");
     if (questionTitle) {
-      questionTitle.textContent = `Question ${question.question_number || (window.currentQuestionIndex + 1)}`;
+      questionTitle.textContent = `Question ${parseInt(question.question_number, 10) || (window.currentQuestionIndex + 1)}`;
     }
     
     const examTopicsLink = document.getElementById("examTopicsLink");
@@ -502,9 +502,10 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
     // Try to restore previous answers for this question
     if (question.question_number && typeof window.restorePreviousAnswers === 'function') {
-      const restored = window.restorePreviousAnswers(question.question_number);
+      const questionNumberInt = parseInt(question.question_number, 10);
+      const restored = window.restorePreviousAnswers(questionNumberInt);
       if (restored && typeof window.devLog === 'function') {
-        window.devLog(`Restored previous answers for question ${question.question_number}`);
+        window.devLog(`Restored previous answers for question ${questionNumberInt}`);
       }
     }
 
@@ -688,7 +689,7 @@ function updateQuestionStatistics() {
     }
 
     const question = window.currentQuestions[window.currentQuestionIndex || 0];
-    const questionNumber = question.question_number;
+    const questionNumber = parseInt(question.question_number, 10);
 
     // Find the question attempt in statistics
     const questions = window.statistics.currentSession.q || window.statistics.currentSession.questions || [];
@@ -707,12 +708,17 @@ function updateQuestionStatistics() {
       })));
     }
     
-    // Find all matching attempts and take the most recent one (last in array)
-    const matchingAttempts = questions.filter(
-      (q) => (q.qn && q.qn.toString() === questionNumber.toString()) ||
-             (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+    const questionAttempt = questions.find(
+      (q) => (q.qn === questionNumber) || (q.questionNumber === questionNumber)
     );
-    const questionAttempt = matchingAttempts.length > 0 ? matchingAttempts[matchingAttempts.length - 1] : null;
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 updateQuestionStatistics: Search result for Q${questionNumber}:`, {
+        questionAttempt: questionAttempt,
+        foundByQn: questionAttempt ? (questionAttempt.qn === questionNumber) : false,
+        foundByQuestionNumber: questionAttempt ? (questionAttempt.questionNumber === questionNumber) : false
+      });
+    }
 
     if (!questionAttempt) {
       if (typeof window.devLog === 'function') {
@@ -731,8 +737,7 @@ function updateQuestionStatistics() {
     const resetCount = questionAttempt.rc || questionAttempt.resetCount || 0;
     
     if (typeof window.devLog === 'function') {
-      window.devLog(`📊 updateQuestionStatistics: Found ${matchingAttempts.length} matching attempts, using most recent:`);
-      window.devLog(`📊 updateQuestionStatistics: Selected questionAttempt:`, {
+      window.devLog(`📊 updateQuestionStatistics: Found questionAttempt:`, {
         qn: questionAttempt.qn,
         questionNumber: questionAttempt.questionNumber,
         rc: questionAttempt.rc,
@@ -813,7 +818,7 @@ function validateAnswers() {
       // Track highlight answers separately for statistics
       if (window.statistics?.currentSession) {
         const question = window.currentQuestions[window.currentQuestionIndex || 0];
-        const questionNumber = question.question_number;
+        const questionNumber = parseInt(question.question_number, 10);
 
         // Find existing question attempt or create new one
         let questionAttempt = window.statistics.currentSession.questions?.find(
@@ -863,7 +868,7 @@ function validateAnswers() {
     const correctAnswers = new Set(mostVoted.split(""));
 
     if (typeof window.devLog === 'function') {
-      window.devLog("📝 Question:", question.question_number, "Most voted:", mostVoted, "Correct answers:", Array.from(correctAnswers));
+      window.devLog("📝 Question:", parseInt(question.question_number, 10), "Most voted:", mostVoted, "Correct answers:", Array.from(correctAnswers));
       window.devLog("👤 Selected answers:", Array.from(window.selectedAnswers));
     }
 
@@ -911,16 +916,16 @@ function validateAnswers() {
     try {
       if (typeof window.devLog === 'function') {
         window.devLog(`📅 About to track question attempt:`);
-        window.devLog(`📅 question.question_number: ${question.question_number}`);
+        window.devLog(`📅 question.question_number: ${parseInt(question.question_number, 10)}`);
         window.devLog(`📅 currentQuestionIndex: ${window.currentQuestionIndex}`);
         window.devLog(`📅 isCorrect: ${isCorrect}`);
       }
       
       if (typeof window.trackQuestionAttempt === 'function') {
         window.trackQuestionAttempt(
-          question.question_number,
+          parseInt(question.question_number, 10),
+          Array.from(window.selectedAnswers),
           Array.from(correctAnswers),
-          window.selectedAnswers,
           isCorrect,
           timeSpent,
           wasHighlightEnabled
@@ -931,7 +936,7 @@ function validateAnswers() {
         }
         
         if (typeof window.devLog === 'function') {
-          window.devLog(`✅ Successfully tracked Q${question.question_number} at index ${window.currentQuestionIndex}`);
+          window.devLog(`✅ Successfully tracked Q${parseInt(question.question_number, 10)} at index ${window.currentQuestionIndex}`);
         }
       } else {
         if (typeof window.devLog === 'function') {
@@ -1007,6 +1012,27 @@ function validateAnswers() {
       }
     }
     
+    // Update progress sidebar and main progress bar after validation
+    if (typeof window.updateProgressSidebar === 'function') {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🔄 Updating progress sidebar after validation...");
+      }
+      window.updateProgressSidebar();
+      if (typeof window.devLog === 'function') {
+        window.devLog("✅ Progress sidebar updated");
+      }
+    }
+    
+    if (typeof window.updateMainProgressBar === 'function') {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🔄 Updating main progress bar after validation...");
+      }
+      window.updateMainProgressBar();
+      if (typeof window.devLog === 'function') {
+        window.devLog("✅ Main progress bar updated");
+      }
+    }
+    
     // Update progress sidebar to reflect answered status
     if (typeof window.updateProgressSidebar === 'function') {
       if (typeof window.devLog === 'function') {
@@ -1034,6 +1060,13 @@ function validateAnswers() {
         window.devLog("📊 Main progress bar updated");
       }
     }
+    
+    if (typeof window.updateProgressSidebar === 'function') {
+      window.updateProgressSidebar();
+      if (typeof window.devLog === 'function') {
+        window.devLog("📊 Progress sidebar updated");
+      }
+    }
 
     if (typeof window.devLog === 'function') {
       window.devLog("✅ validateAnswers() completed successfully");
@@ -1058,13 +1091,11 @@ function resetAnswers() {
     // Track reset count for the current question - only if it was previously validated
     if (window.statistics?.currentSession && wasValidated) {
       const question = window.currentQuestions[window.currentQuestionIndex || 0];
-      const questionNumber = question.question_number;
+      const questionNumber = parseInt(question.question_number, 10);
 
       // Find existing question attempt or create new one
-      // Use string comparison to ensure consistency with different data types
       let questionAttempt = window.statistics.currentSession.questions?.find(
-        (q) => (q.qn && q.qn.toString() === questionNumber.toString()) ||
-               (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+        (q) => (q.qn === questionNumber) || (q.questionNumber === questionNumber)
       );
 
       if (!questionAttempt && typeof window.QuestionAttempt === 'function') {

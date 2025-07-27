@@ -287,7 +287,7 @@ function updateProgressSidebar() {
         // Find the original index in allQuestions for proper status checking
         const allQuestions = typeof window.getAllQuestions === 'function' ? window.getAllQuestions() : window.allQuestions || [];
         originalIndex = allQuestions.findIndex(q => 
-          q.question_number === question.question_number ||
+          parseInt(q.question_number, 10) === parseInt(question.question_number, 10) ||
           (q.question === question.question && q.answers?.length === question.answers?.length)
         );
         
@@ -409,7 +409,7 @@ function updateProgressSidebar() {
         <div class="question-item question-item-enhanced ${statusClass}" data-index="${index}" data-original-index="${originalIndex}" onclick="navigateToQuestionAsync(${index})">
           <div class="question-number">
             ${statusIcon}
-            <span>Q${question.question_number || index + 1}</span>
+            <span>Q${parseInt(question.question_number, 10) || index + 1}</span>
           </div>
           <div class="question-preview">${questionPreview}</div>
           ${statusBadges}
@@ -553,15 +553,15 @@ function getAnsweredQuestionsCount() {
     
     // Count questions that have answers in current session
     window.currentQuestions.forEach((question, index) => {
-      const questionNumber = question.question_number;
+      const questionNumber = parseInt(question.question_number, 10);
       
       // Look for this question in current session
       const questionAttempt = window.statistics.currentSession.questions?.find(q => 
-        (q.qn && q.qn.toString() === questionNumber.toString()) ||
-        (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+        (q.qn === questionNumber) || (q.questionNumber === questionNumber)
       );
       
       if (questionAttempt) {
+        
         // Check if has user answers (actual validation)
         const hasAnswers = (questionAttempt.ua && questionAttempt.ua.length > 0) || 
                           (questionAttempt.userAnswers && questionAttempt.userAnswers.length > 0);

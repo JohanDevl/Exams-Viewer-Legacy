@@ -415,8 +415,25 @@ function handleMainProgressBarToggle() {
     const showMainProgressBar = document.getElementById("showMainProgressBar");
     if (showMainProgressBar) {
       window.settings.showMainProgressBar = showMainProgressBar.checked;
+      
+      // Clear question status cache to force refresh of progress calculations
+      if (typeof window.clearQuestionStatusCache === 'function') {
+        window.clearQuestionStatusCache();
+        if (typeof window.devLog === 'function') {
+          window.devLog(`⚙️ Main progress bar toggled - cleared question status cache`);
+        }
+      }
+      
       updateMainProgressBarVisibility();
       saveSettingsUI();
+      
+      // Force update of progress sidebar and main progress bar
+      if (typeof window.updateProgressSidebar === 'function') {
+        window.updateProgressSidebar();
+      }
+      if (typeof window.updateMainProgressBar === 'function') {
+        window.updateMainProgressBar();
+      }
     }
   }
 }

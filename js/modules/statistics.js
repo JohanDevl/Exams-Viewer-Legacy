@@ -734,7 +734,7 @@ function getQuestionStatus(questionIndex) {
     return { primaryStatus: 'new', isAnswered: false, isFavorite: false, hasNotes: false, isCategorized: false };
   }
   
-  const questionNumber = actualQuestion.question_number;
+  const questionNumber = parseInt(actualQuestion.question_number, 10);
   if (typeof window.devLog === 'function') {
     window.devLog(`🎯 Q${questionIndex} (${questionNumber}): checking status...`);
   }
@@ -743,8 +743,7 @@ function getQuestionStatus(questionIndex) {
   let questionAttempt = null;
   if (window.statistics?.currentSession?.questions) {
     questionAttempt = window.statistics.currentSession.questions.find(q => 
-      (q.qn && q.qn.toString() === questionNumber.toString()) ||
-      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+      (q.qn === questionNumber) || (q.questionNumber === questionNumber)
     );
   }
   

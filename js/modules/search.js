@@ -350,7 +350,7 @@ function applyStatusFilters(baseQuestions = null) {
     return questionsToFilter.filter((question, index) => {
       // Find the original index in allQuestions
       const originalIndex = allQuestions.findIndex(q => 
-        q.question_number === question.question_number ||
+        parseInt(q.question_number, 10) === parseInt(question.question_number, 10) ||
         (q.question === question.question && q.answers?.length === question.answers?.length)
       );
       
@@ -638,7 +638,7 @@ function getQuestionNumberSuggestions(input) {
     // Look for question numbers that start with the query
     for (let i = 0; i < allQuestions.length; i++) {
       const question = allQuestions[i];
-      const questionNumber = question.question_number || (i + 1);
+      const questionNumber = parseInt(question.question_number, 10) || (i + 1);
       
       // Check if question number starts with query
       if (questionNumber.toString().startsWith(query)) {
@@ -781,7 +781,7 @@ function updateFilterCounts() {
     questionsToCount.forEach((question, questionIndex) => {
       // Find the original index in allQuestions for status checking
       const originalIndex = allQuestions.findIndex(q => 
-        q.question_number === question.question_number ||
+        parseInt(q.question_number, 10) === parseInt(question.question_number, 10) ||
         (q.question === question.question && q.answers?.length === question.answers?.length)
       );
       
@@ -853,7 +853,7 @@ function calculateCategoryCounts() {
     
     questionsToCount.forEach((question, index) => {
       const category = typeof window.getQuestionCategory === 'function' 
-        ? window.getQuestionCategory(window.currentExamCode, question.question_number) 
+        ? window.getQuestionCategory(window.currentExamCode, parseInt(question.question_number, 10)) 
         : null;
       
       if (category) {
