@@ -15,7 +15,48 @@
 // ===========================
 
 /**
- * Recalculate total statistics from all sessions
+ * Calculate session statistics from first actions only
+ */
+function calculateSessionStatsFromFirstActions(session) {
+  let correctAnswers = 0;
+  let incorrectAnswers = 0;
+  let previewAnswers = 0;
+  let totalTime = 0;
+  
+  const questions = session.questions || session.q || [];
+  
+  questions.forEach(questionAttempt => {
+    const firstAction = questionAttempt.fat || questionAttempt.firstActionType;
+    const questionTime = questionAttempt.ts || questionAttempt.timeSpent || 0;
+    
+    if (firstAction) {
+      totalTime += questionTime;
+      
+      switch (firstAction) {
+        case 'c': // correct
+          correctAnswers++;
+          break;
+        case 'i': // incorrect
+          incorrectAnswers++;
+          break;
+        case 'p': // preview
+          previewAnswers++;
+          break;
+      }
+    }
+  });
+  
+  return {
+    correctAnswers,
+    incorrectAnswers,
+    previewAnswers,
+    totalTime,
+    totalAnswered: correctAnswers + incorrectAnswers
+  };
+}
+
+/**
+ * Recalculate total statistics from all sessions based on first actions
  */
 function recalculateTotalStats() {
   try {
@@ -58,12 +99,15 @@ function recalculateTotalStats() {
 
       const examStat = examStats[examCode];
       
-      // Add session data to exam stats
+      // Calculate session stats from first actions
+      const sessionStats = calculateSessionStatsFromFirstActions(session);
+      
+      // Add session data to exam stats (using first actions)
       examStat.totalQuestions += session.totalQuestions || session.tq || 0;
-      examStat.totalCorrect += session.correctAnswers || session.ca || 0;
-      examStat.totalIncorrect += session.incorrectAnswers || session.ia || 0;
-      examStat.totalPreview += session.previewAnswers || session.pa || 0;
-      examStat.totalTime += session.totalTime || session.tt || 0;
+      examStat.totalCorrect += sessionStats.correctAnswers;
+      examStat.totalIncorrect += sessionStats.incorrectAnswers;
+      examStat.totalPreview += sessionStats.previewAnswers;
+      examStat.totalTime += sessionStats.totalTime;
       examStat.sessionsCount++;
       
       // Update last session date
@@ -72,12 +116,12 @@ function recalculateTotalStats() {
         examStat.lastSessionDate = sessionDate;
       }
 
-      // Add to global totals
+      // Add to global totals (using first actions)
       window.statistics.totalStats.totalQuestions += session.totalQuestions || session.tq || 0;
-      window.statistics.totalStats.totalCorrect += session.correctAnswers || session.ca || 0;
-      window.statistics.totalStats.totalIncorrect += session.incorrectAnswers || session.ia || 0;
-      window.statistics.totalStats.totalPreview += session.previewAnswers || session.pa || 0;
-      window.statistics.totalStats.totalTime += session.totalTime || session.tt || 0;
+      window.statistics.totalStats.totalCorrect += sessionStats.correctAnswers;
+      window.statistics.totalStats.totalIncorrect += sessionStats.incorrectAnswers;
+      window.statistics.totalStats.totalPreview += sessionStats.previewAnswers;
+      window.statistics.totalStats.totalTime += sessionStats.totalTime;
     });
 
     // Set exam stats
@@ -114,36 +158,9 @@ function getCurrentSessionStats() {
     const session = window.statistics.currentSession;
     const totalQuestions = session.totalQuestions || session.tq || 0;
     
-    // Count questions by their FIRST action only
-    let correctAnswers = 0;
-    let incorrectAnswers = 0;
-    let previewAnswers = 0;
-    let totalTime = 0;
-    
-    const questions = session.questions || session.q || [];
-    
-    questions.forEach(questionAttempt => {
-      const firstAction = questionAttempt.fat || questionAttempt.firstActionType;
-      const questionTime = questionAttempt.ts || questionAttempt.timeSpent || 0;
-      
-      if (firstAction) {
-        totalTime += questionTime;
-        
-        switch (firstAction) {
-          case 'c': // correct
-            correctAnswers++;
-            break;
-          case 'i': // incorrect
-            incorrectAnswers++;
-            break;
-          case 'p': // preview
-            previewAnswers++;
-            break;
-        }
-      }
-    });
-
-    const totalAnswered = correctAnswers + incorrectAnswers;
+    // Calculate stats using first actions only
+    const sessionStats = calculateSessionStatsFromFirstActions(session);
+    const { correctAnswers, incorrectAnswers, previewAnswers, totalTime, totalAnswered } = sessionStats;
     const accuracy = totalAnswered > 0 ? Math.round((correctAnswers / totalAnswered) * 100) : 0;
     const averageTimePerQuestion = totalAnswered > 0 ? Math.round(totalTime / totalAnswered) : 0;
 
