@@ -28,7 +28,7 @@
 
       <!-- Developer Info -->
       <div class="developer-info">
-        <span class="developer-name">Built with ❤️ by Johan</span>
+        <span class="developer-name">Built by Johan</span>
         <div class="developer-links">
           <a
             href="https://github.com/JohanDevl"
@@ -663,7 +663,6 @@
             <div class="exams-stats" id="examsStats"></div>
           </div>
 
-
           <div id="examsList" class="exams-list"></div>
         </div>
       </main>
@@ -1293,29 +1292,36 @@
 
             // Listen for cache updates and service worker messages
             navigator.serviceWorker.addEventListener("message", (event) => {
-              const isDev = window.location.hostname === "localhost" ||
-                           window.location.hostname === "127.0.0.1" ||
-                           window.location.hostname === "" ||
-                           window.location.protocol === "file:";
-              
+              const isDev =
+                window.location.hostname === "localhost" ||
+                window.location.hostname === "127.0.0.1" ||
+                window.location.hostname === "" ||
+                window.location.protocol === "file:";
+
               if (event.data && event.data.type === "CACHE_UPDATED") {
                 if (isDev) {
                   console.log("Cache updated for:", event.data.url);
                 }
                 // Could show a subtle notification to user about updated content
               }
-              
+
               if (event.data && event.data.type === "SW_UPDATE_AVAILABLE") {
                 if (isDev) {
-                  console.log("Service Worker update available:", event.data.version);
+                  console.log(
+                    "Service Worker update available:",
+                    event.data.version
+                  );
                 }
                 // Show update notification (optional)
                 showSuccess("🔄 Site update installing...", 2000);
               }
-              
+
               if (event.data && event.data.type === "SW_UPDATE_COMPLETE") {
                 if (isDev) {
-                  console.log("Service Worker update complete:", event.data.message);
+                  console.log(
+                    "Service Worker update complete:",
+                    event.data.message
+                  );
                 }
                 // Show completion notification
                 showSuccess("✅ Site updated! Fresh content guaranteed.", 3000);
