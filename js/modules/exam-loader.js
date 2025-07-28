@@ -47,13 +47,7 @@ async function discoverAvailableExams() {
           // Store the complete manifest for optimized UI rendering
           window.examManifest = manifest;
           
-          // Preload popular exams via service worker
-          if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-            navigator.serviceWorker.controller.postMessage({
-              type: 'PRELOAD_EXAMS',
-              exams: manifest.exams.slice(0, 5).map(exam => exam.code) // Top 5 most popular
-            });
-          }
+          // Note: Exam preloading removed - now using on-demand loading strategy
 
           // Create discoveredExams object for backward compatibility
           manifest.exams.forEach(exam => {
@@ -77,13 +71,7 @@ async function discoverAvailableExams() {
             window.devLog("Found legacy manifest with exams:", manifest.exams);
           }
 
-          // Preload popular exams via service worker
-          if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-            navigator.serviceWorker.controller.postMessage({
-              type: 'PRELOAD_EXAMS',
-              exams: manifest.exams.slice(0, 5) // Top 5 most popular
-            });
-          }
+          // Note: Exam preloading removed - now using on-demand loading strategy
 
           // Trust manifest data - no need to verify each exam file exists
           // This eliminates redundant HEAD requests for better performance

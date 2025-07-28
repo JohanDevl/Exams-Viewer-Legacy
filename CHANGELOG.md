@@ -6,12 +6,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Summary
 
+- [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
 - [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
 - [4.0.0] - 2025-07-28: Performance Revolution & Simplified UX
 - [3.1.0] - 2025-07-27: Modern Redesign & Comprehensive Improvements
 - [3.0.0] - 2025-07-26: Modular ES6 Architecture Migration  
 - [2.10.0] - 2025-07-21: Enhanced Export System
 - [2.9.0] - 2025-07-14: Resume Study Position System
+
+## [4.1.1] - 2025-07-28
+
+### 🚀 Performance Improvements
+- **🗑️ Removed Obsolete Exam Preloading System**: Eliminated unnecessary background loading
+  - Removed automatic preloading of top 5 exams from service worker
+  - Eliminated PRELOAD_EXAMS message system between exam-loader and service worker
+  - Reduced initial bandwidth usage and improved startup performance
+  - Aligned with on-demand loading strategy for optimal resource utilization
+
+### 🔧 Technical Changes  
+- **📦 Service Worker Enhancement**: Updated to v3 with cleaner architecture
+  - Removed preloadPopularExams() function and related event listeners
+  - Simplified service worker message handling
+  - Added explanatory comments for removed functionality
+  - Maintained intelligent caching for actually accessed exams
+
+### 🎯 Benefits
+- **⚡ Faster Startup**: No more unnecessary exam downloads at initialization
+- **💾 Bandwidth Savings**: Only load exams when users actually access them
+- **🎯 Resource Efficiency**: Reduced memory footprint and network overhead
+- **🔄 Better UX**: More responsive initial load with smart on-demand fetching
 
 ## [4.1.0] - 2025-07-28
 
