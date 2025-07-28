@@ -110,6 +110,7 @@ import {
 
 // Statistics system
 import {
+  calculateSessionStatsFromFirstActions,
   recalculateTotalStats,
   getCurrentSessionStats,
   getGlobalStats,
@@ -158,6 +159,7 @@ import {
   handleSearchInput,
   handleFilterChange,
   setupSearchEventListeners,
+  getAllQuestions,
 } from './js/modules/search.js';
 
 
@@ -179,6 +181,15 @@ import {
   refreshMobileNavigation,
   initializeMobileNavigation,
 } from './js/modules/mobile-navigation.js';
+
+// Development testing (only in dev mode)
+import {
+  initializeDevButton,
+  handleRunTests,
+  loadTestScripts,
+  enableDeveloperLogging,
+  initializeDevelopmentTesting,
+} from './js/modules/dev-testing.js';
 
 // Enhanced navigation
 import {
@@ -309,6 +320,7 @@ function exposeGlobalFunctions() {
   window.toggleLegalInfo = toggleLegalInfo;
 
   // Statistics system
+  window.calculateSessionStatsFromFirstActions = calculateSessionStatsFromFirstActions;
   window.recalculateTotalStats = recalculateTotalStats;
   window.getCurrentSessionStats = getCurrentSessionStats;
   window.getGlobalStats = getGlobalStats;
@@ -357,6 +369,7 @@ function exposeGlobalFunctions() {
   window.handleSearchInput = handleSearchInput;
   window.handleFilterChange = handleFilterChange;
   window.setupSearchEventListeners = setupSearchEventListeners;
+  window.getAllQuestions = getAllQuestions;
 
 
   // Mobile navigation
@@ -395,6 +408,13 @@ function exposeGlobalFunctions() {
   window.initializeEnhancedNavigation = initializeEnhancedNavigation;
   window.refreshEnhancedNavigation = refreshEnhancedNavigation;
   window.navigateToQuestionWithHistory = navigateToQuestionWithHistory;
+
+  // Development testing (only in dev mode)
+  window.initializeDevButton = initializeDevButton;
+  window.handleRunTests = handleRunTests;
+  window.loadTestScripts = loadTestScripts;
+  window.enableDeveloperLogging = enableDeveloperLogging;
+  window.initializeDevelopmentTesting = initializeDevelopmentTesting;
 
   // Exam loading
   window.discoverAvailableExams = discoverAvailableExams;
@@ -794,8 +814,18 @@ function setupMainEventListeners() {
         if (typeof window.updateFavoritesUI === 'function') {
           window.updateFavoritesUI();
         }
+        
+        // Clear question status cache to force refresh
+        if (typeof window.clearQuestionStatusCacheForQuestion === 'function') {
+          window.clearQuestionStatusCacheForQuestion(window.currentQuestionIndex);
+        }
+        
         if (typeof window.updateProgressSidebar === 'function') {
           window.updateProgressSidebar();
+          // Force sidebar update after a small delay to ensure favorites state is synchronized
+          setTimeout(() => {
+            window.updateProgressSidebar();
+          }, 100);
         }
         
         // Show feedback to user
@@ -848,15 +878,31 @@ function setupMainEventListeners() {
   if (noteBtn) {
     noteBtn.addEventListener("click", () => {
       const noteSection = document.getElementById("questionNote");
+      console.log("Note section:", noteSection);
       if (noteSection) {
         const isVisible = noteSection.style.display !== "none" && noteSection.style.display !== "";
+        console.log("Note section visible:", isVisible);
         
         if (isVisible) {
           // Hide note section
           noteSection.style.display = "none";
+          // Remove active state when hiding
+          noteBtn.classList.remove("active");
+          // Remove manual styles
+          noteBtn.style.backgroundColor = "";
+          noteBtn.style.color = "";
+          console.log("Note hidden, classes after remove:", noteBtn.className);
         } else {
           // Show note section in read mode
           noteSection.style.display = "block";
+          // Add active state when showing
+          noteBtn.classList.add("active");
+          console.log("Note shown, classes after add:", noteBtn.className);
+          
+          // Apply active styles
+          noteBtn.style.backgroundColor = "#007bff";
+          noteBtn.style.color = "white";
+          console.log("Applied manual styles for testing");
           
           // Scroll to the note section so it's visible
           setTimeout(() => {
@@ -888,7 +934,17 @@ function setupMainEventListeners() {
   if (cancelNoteViewBtn) {
     cancelNoteViewBtn.addEventListener("click", () => {
       const noteSection = document.getElementById("questionNote");
-      if (noteSection) noteSection.style.display = "none";
+      if (noteSection) {
+        noteSection.style.display = "none";
+        // Remove active state when closing
+        const noteBtn = document.getElementById("noteBtn");
+        if (noteBtn) {
+          noteBtn.classList.remove("active");
+          // Remove manual styles
+          noteBtn.style.backgroundColor = "";
+          noteBtn.style.color = "";
+        }
+      }
     });
   }
 
@@ -1889,13 +1945,21 @@ function updateSessionsTab() {
       const time = startTime ? new Date(startTime).toLocaleTimeString() : "";
       
       const totalQuestions = session.totalQuestions || session.tq || 0;
-      const correctAnswers = session.correctAnswers || session.ca || 0;
-      const incorrectAnswers = session.incorrectAnswers || session.ia || 0;
-      const previewAnswers = session.previewAnswers || session.pa || 0;
-      const totalTime = session.totalTime || session.tt || 0;
       
-      const accuracy = (correctAnswers + incorrectAnswers) > 0 
-        ? Math.round((correctAnswers / (correctAnswers + incorrectAnswers)) * 100) 
+      // Calculate stats from first actions only (not inflated by multiple attempts)
+      const sessionStats = typeof window.calculateSessionStatsFromFirstActions === 'function'
+        ? window.calculateSessionStatsFromFirstActions(session)
+        : {
+            correctAnswers: session.correctAnswers || session.ca || 0,
+            incorrectAnswers: session.incorrectAnswers || session.ia || 0,
+            previewAnswers: session.previewAnswers || session.pa || 0,
+            totalTime: session.totalTime || session.tt || 0
+          };
+      
+      const { correctAnswers, incorrectAnswers, previewAnswers, totalTime, totalAnswered, totalTouched } = sessionStats;
+      
+      const accuracy = totalAnswered > 0 
+        ? Math.round((correctAnswers / totalAnswered) * 100) 
         : 0;
       const accuracyColor = accuracy >= 80 ? '#4CAF50' : accuracy >= 60 ? '#FF9800' : '#f44336';
       
@@ -1920,7 +1984,7 @@ function updateSessionsTab() {
           
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;">
             <div style="text-align: center; background: #1a1a1a; padding: 10px 8px; border-radius: 4px;">
-              <div style="font-size: 16px; color: #4CAF50; font-weight: bold;">${correctAnswers + incorrectAnswers}/${totalQuestions}</div>
+              <div style="font-size: 16px; color: #4CAF50; font-weight: bold;">${totalTouched || (correctAnswers + incorrectAnswers + previewAnswers)}/${totalQuestions}</div>
               <div style="font-size: 9px; color: #bbb; text-transform: uppercase; line-height: 1.2;">Questions</div>
             </div>
             <div style="text-align: center; background: #1a1a1a; padding: 10px 8px; border-radius: 4px;">
@@ -2456,9 +2520,16 @@ function updateFavoritesUI() {
   // Get question data using the helper function
   const questionData = getQuestionData(examCode, questionNumber);
   
-  // Use isQuestionFavorite for consistency with the module
-  const isFavorite = typeof window.isQuestionFavorite === 'function' ? 
-    window.isQuestionFavorite(window.currentQuestionIndex) : questionData.isFavorite;
+  // Find the original index in allQuestions to get proper favorite status
+  const allQuestions = typeof window.getAllQuestions === 'function' ? window.getAllQuestions() : [];
+  const originalIndex = allQuestions.findIndex(q => 
+    q.question_number === question.question_number ||
+    (q.question === question.question && q.answers?.length === question.answers?.length)
+  );
+  
+  // Use isQuestionFavorite with original index for consistency with the module
+  const isFavorite = typeof window.isQuestionFavorite === 'function' && originalIndex !== -1 ? 
+    window.isQuestionFavorite(originalIndex) : questionData.isFavorite;
 
   // Update favorite button
   const favoriteBtn = document.getElementById("favoriteBtn");
@@ -2486,11 +2557,17 @@ function updateFavoritesUI() {
     const currentNote = typeof window.getQuestionNote === 'function' ? 
       window.getQuestionNote(window.currentQuestionIndex) : (questionData.note || "");
     
-    noteBtn.classList.toggle("active", !!currentNote);
-    
     // Update note display if note section is visible
     const noteSection = document.getElementById("questionNote");
-    if (noteSection && noteSection.style.display !== "none") {
+    const isNoteVisible = noteSection && noteSection.style.display !== "none" && noteSection.style.display !== "";
+    
+    // Button is active if note section is visible OR if there's a saved note
+    // Only update if note section is not currently visible (to avoid overriding manual state)
+    if (!isNoteVisible) {
+      noteBtn.classList.toggle("active", !!currentNote);
+    }
+    
+    if (isNoteVisible) {
       showNoteReadView();
     }
   }

@@ -15,7 +15,49 @@
 // ===========================
 
 /**
- * Recalculate total statistics from all sessions
+ * Calculate session statistics from first actions only
+ */
+function calculateSessionStatsFromFirstActions(session) {
+  let correctAnswers = 0;
+  let incorrectAnswers = 0;
+  let previewAnswers = 0;
+  let totalTime = 0;
+  
+  const questions = session.questions || session.q || [];
+  
+  questions.forEach(questionAttempt => {
+    const firstAction = questionAttempt.fat || questionAttempt.firstActionType;
+    const questionTime = questionAttempt.ts || questionAttempt.timeSpent || 0;
+    
+    if (firstAction) {
+      totalTime += questionTime;
+      
+      switch (firstAction) {
+        case 'c': // correct
+          correctAnswers++;
+          break;
+        case 'i': // incorrect
+          incorrectAnswers++;
+          break;
+        case 'p': // preview
+          previewAnswers++;
+          break;
+      }
+    }
+  });
+  
+  return {
+    correctAnswers,
+    incorrectAnswers,
+    previewAnswers,
+    totalTime,
+    totalAnswered: correctAnswers + incorrectAnswers, // For accuracy calculation
+    totalTouched: correctAnswers + incorrectAnswers + previewAnswers // For question count
+  };
+}
+
+/**
+ * Recalculate total statistics from all sessions based on first actions
  */
 function recalculateTotalStats() {
   try {
@@ -58,12 +100,15 @@ function recalculateTotalStats() {
 
       const examStat = examStats[examCode];
       
-      // Add session data to exam stats
+      // Calculate session stats from first actions
+      const sessionStats = calculateSessionStatsFromFirstActions(session);
+      
+      // Add session data to exam stats (using first actions)
       examStat.totalQuestions += session.totalQuestions || session.tq || 0;
-      examStat.totalCorrect += session.correctAnswers || session.ca || 0;
-      examStat.totalIncorrect += session.incorrectAnswers || session.ia || 0;
-      examStat.totalPreview += session.previewAnswers || session.pa || 0;
-      examStat.totalTime += session.totalTime || session.tt || 0;
+      examStat.totalCorrect += sessionStats.correctAnswers;
+      examStat.totalIncorrect += sessionStats.incorrectAnswers;
+      examStat.totalPreview += sessionStats.previewAnswers;
+      examStat.totalTime += sessionStats.totalTime;
       examStat.sessionsCount++;
       
       // Update last session date
@@ -72,12 +117,12 @@ function recalculateTotalStats() {
         examStat.lastSessionDate = sessionDate;
       }
 
-      // Add to global totals
+      // Add to global totals (using first actions)
       window.statistics.totalStats.totalQuestions += session.totalQuestions || session.tq || 0;
-      window.statistics.totalStats.totalCorrect += session.correctAnswers || session.ca || 0;
-      window.statistics.totalStats.totalIncorrect += session.incorrectAnswers || session.ia || 0;
-      window.statistics.totalStats.totalPreview += session.previewAnswers || session.pa || 0;
-      window.statistics.totalStats.totalTime += session.totalTime || session.tt || 0;
+      window.statistics.totalStats.totalCorrect += sessionStats.correctAnswers;
+      window.statistics.totalStats.totalIncorrect += sessionStats.incorrectAnswers;
+      window.statistics.totalStats.totalPreview += sessionStats.previewAnswers;
+      window.statistics.totalStats.totalTime += sessionStats.totalTime;
     });
 
     // Set exam stats
@@ -95,7 +140,7 @@ function recalculateTotalStats() {
 }
 
 /**
- * Get performance statistics for current session
+ * Get performance statistics for current session based on FIRST ACTIONS only
  */
 function getCurrentSessionStats() {
   try {
@@ -113,14 +158,12 @@ function getCurrentSessionStats() {
 
     const session = window.statistics.currentSession;
     const totalQuestions = session.totalQuestions || session.tq || 0;
-    const correctAnswers = session.correctAnswers || session.ca || 0;
-    const incorrectAnswers = session.incorrectAnswers || session.ia || 0;
-    const previewAnswers = session.previewAnswers || session.pa || 0;
-    const totalTime = session.totalTime || session.tt || 0;
-
-    const totalAnswered = correctAnswers + incorrectAnswers;
+    
+    // Calculate stats using first actions only
+    const sessionStats = calculateSessionStatsFromFirstActions(session);
+    const { correctAnswers, incorrectAnswers, previewAnswers, totalTime, totalAnswered, totalTouched } = sessionStats;
     const accuracy = totalAnswered > 0 ? Math.round((correctAnswers / totalAnswered) * 100) : 0;
-    const averageTimePerQuestion = totalAnswered > 0 ? Math.round(totalTime / totalAnswered) : 0;
+    const averageTimePerQuestion = totalTouched > 0 ? Math.round(totalTime / totalTouched) : 0;
 
     return {
       totalQuestions,
@@ -130,7 +173,7 @@ function getCurrentSessionStats() {
       accuracy,
       timeSpent: totalTime,
       averageTimePerQuestion,
-      totalAnswered,
+      totalAnswered: totalTouched, // Return total touched questions for display
     };
   } catch (error) {
     if (typeof window.devError === 'function') {
@@ -734,7 +777,7 @@ function getQuestionStatus(questionIndex) {
     return { primaryStatus: 'new', isAnswered: false, isFavorite: false, hasNotes: false, isCategorized: false };
   }
   
-  const questionNumber = actualQuestion.question_number;
+  const questionNumber = parseInt(actualQuestion.question_number, 10);
   if (typeof window.devLog === 'function') {
     window.devLog(`🎯 Q${questionIndex} (${questionNumber}): checking status...`);
   }
@@ -743,8 +786,7 @@ function getQuestionStatus(questionIndex) {
   let questionAttempt = null;
   if (window.statistics?.currentSession?.questions) {
     questionAttempt = window.statistics.currentSession.questions.find(q => 
-      (q.qn && q.qn.toString() === questionNumber.toString()) ||
-      (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+      (q.qn === questionNumber) || (q.questionNumber === questionNumber)
     );
   }
   
@@ -772,13 +814,34 @@ function getQuestionStatus(questionIndex) {
       window.devLog(`📊 Q${questionIndex}: hasAnswers=${hasAnswers}, hasPreviewActivity=${hasPreviewActivity}`);
     }
     
-    if (hasAnswers) {
+    // PRIORITY: Always use first action type if it exists (regardless of current state)
+    if (firstActionType) {
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📊 Q${questionIndex}: using first action type: ${firstActionType}`);
+      }
+      
+      switch (firstActionType) {
+        case 'c':
+          primaryStatus = 'correct';
+          isAnswered = true;
+          break;
+        case 'i':
+          primaryStatus = 'incorrect';
+          isAnswered = true;
+          break;
+        case 'p':
+          primaryStatus = 'preview';
+          break;
+        default:
+          primaryStatus = 'viewed';
+      }
+    } else if (hasAnswers) {
+      // No first action recorded, but has current answers
       isAnswered = true;
-      // Use the isCorrect property directly from the attempt
       const isCorrect = questionAttempt.ic !== undefined ? questionAttempt.ic : questionAttempt.isCorrect;
       
       if (typeof window.devLog === 'function') {
-        window.devLog(`📊 Q${questionIndex}: answered, isCorrect=${isCorrect}`);
+        window.devLog(`📊 Q${questionIndex}: no first action, using current isCorrect=${isCorrect}`);
       }
       
       if (isCorrect === true) {
@@ -786,13 +849,13 @@ function getQuestionStatus(questionIndex) {
       } else if (isCorrect === false) {
         primaryStatus = 'incorrect'; 
       } else {
-        primaryStatus = 'viewed'; // Answered but correctness not determined yet
+        primaryStatus = 'viewed';
       }
     } else if (hasPreviewActivity) {
       // Question was previewed/highlighted but not answered
       primaryStatus = 'preview';
       if (typeof window.devLog === 'function') {
-        window.devLog(`👁️ Q${questionIndex}: preview mode (hvc=${highlightViews}, hbc=${highlightClicks}, fat=${firstActionType})`);
+        window.devLog(`👁️ Q${questionIndex}: preview mode (hvc=${highlightViews}, hbc=${highlightClicks})`);
       }
     } else {
       // Question was visited but neither answered nor previewed
@@ -842,6 +905,7 @@ function getQuestionStatus(questionIndex) {
 // Export all statistics functions for use in other modules
 export {
   // Statistics calculations
+  calculateSessionStatsFromFirstActions,
   recalculateTotalStats,
   getCurrentSessionStats,
   getGlobalStats,

@@ -87,62 +87,71 @@ function applyTheme(isDark = null) {
 function loadSettingsUI() {
   try {
     const savedSettings = localStorage.getItem("examViewerSettings");
+    
+    // Ensure settings object exists with defaults
+    if (!window.settings) {
+      window.settings = {
+        showDiscussionDefault: false,
+        highlightDefault: false,
+        darkMode: false,
+        showQuestionToolbar: false,
+        showAdvancedSearch: false,
+        sidebarOpen: false,
+        showMainProgressBar: true,
+        showTooltips: false,
+      };
+    }
+    
     if (savedSettings) {
       const loadedSettings = JSON.parse(savedSettings);
-      
-      // Ensure settings object exists
-      if (!window.settings) {
-        window.settings = {
-          showDiscussionDefault: false,
-          highlightDefault: false,
-          darkMode: false,
-          showQuestionToolbar: false,
-          showAdvancedSearch: false,
-          sidebarOpen: false,
-          showMainProgressBar: true,
-          showTooltips: false,
-        };
-      }
       
       // Merge with default settings to ensure all properties exist
       Object.assign(window.settings, loadedSettings);
       
-      // Apply settings to UI elements
-      const elements = {
-        showDiscussionDefault: document.getElementById("showDiscussionDefault"),
-        highlightDefault: document.getElementById("highlightDefault"),
-        darkMode: document.getElementById("darkModeToggle"),
-        showQuestionToolbar: document.getElementById("showQuestionToolbar"),
-        showAdvancedSearch: document.getElementById("showAdvancedSearch"),
-        showMainProgressBar: document.getElementById("showMainProgressBar"),
-        showTooltips: document.getElementById("showTooltips"),
-      };
-      
-      // Update checkboxes to match loaded settings
-      Object.entries(elements).forEach(([key, element]) => {
-        if (element && window.settings && typeof window.settings[key] !== 'undefined') {
-          element.checked = window.settings[key];
-        }
-      });
-      
-      // Apply global state from settings
-      if (window.settings) {
-        if (typeof window.isHighlightEnabled !== 'undefined') {
-          window.isHighlightEnabled = window.settings.highlightDefault;
-        }
-        if (typeof window.sidebarOpen !== 'undefined') {
-          window.sidebarOpen = window.settings.sidebarOpen;
-        }
-      }
-      
-      // Apply theme and UI updates
-      applyTheme();
-      updateToolbarVisibility();
-      updateTooltipVisibility();
-      
       if (typeof window.devLog === 'function') {
-        window.devLog("⚙️ Settings loaded successfully");
+        window.devLog("⚙️ Settings loaded from localStorage");
       }
+    } else {
+      if (typeof window.devLog === 'function') {
+        window.devLog("⚙️ No saved settings found, using defaults");
+      }
+    }
+    
+    // Apply settings to UI elements
+    const elements = {
+      showDiscussionDefault: document.getElementById("showDiscussionDefault"),
+      highlightDefault: document.getElementById("highlightDefault"),
+      darkMode: document.getElementById("darkModeToggle"),
+      showQuestionToolbar: document.getElementById("showQuestionToolbar"),
+      showAdvancedSearch: document.getElementById("showAdvancedSearch"),
+      showMainProgressBar: document.getElementById("showMainProgressBar"),
+      showTooltips: document.getElementById("showTooltips"),
+    };
+    
+    // Update checkboxes to match loaded settings
+    Object.entries(elements).forEach(([key, element]) => {
+      if (element && window.settings && typeof window.settings[key] !== 'undefined') {
+        element.checked = window.settings[key];
+      }
+    });
+    
+    // Apply global state from settings
+    if (window.settings) {
+      if (typeof window.isHighlightEnabled !== 'undefined') {
+        window.isHighlightEnabled = window.settings.highlightDefault;
+      }
+      if (typeof window.sidebarOpen !== 'undefined') {
+        window.sidebarOpen = window.settings.sidebarOpen;
+      }
+    }
+    
+    // Apply theme and UI updates
+    applyTheme();
+    updateToolbarVisibility();
+    updateTooltipVisibility();
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog("⚙️ Settings applied successfully");
     }
   } catch (error) {
     console.error("Failed to load settings:", error);
@@ -415,8 +424,25 @@ function handleMainProgressBarToggle() {
     const showMainProgressBar = document.getElementById("showMainProgressBar");
     if (showMainProgressBar) {
       window.settings.showMainProgressBar = showMainProgressBar.checked;
+      
+      // Clear question status cache to force refresh of progress calculations
+      if (typeof window.clearQuestionStatusCache === 'function') {
+        window.clearQuestionStatusCache();
+        if (typeof window.devLog === 'function') {
+          window.devLog(`⚙️ Main progress bar toggled - cleared question status cache`);
+        }
+      }
+      
       updateMainProgressBarVisibility();
       saveSettingsUI();
+      
+      // Force update of progress sidebar and main progress bar
+      if (typeof window.updateProgressSidebar === 'function') {
+        window.updateProgressSidebar();
+      }
+      if (typeof window.updateMainProgressBar === 'function') {
+        window.updateMainProgressBar();
+      }
     }
   }
 }

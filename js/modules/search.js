@@ -326,6 +326,10 @@ function applyStatusFilters(baseQuestions = null) {
     const showUnanswered = document.getElementById("filterUnanswered")?.checked || false;
     const showFavorites = document.getElementById("filterFavorites")?.checked || false;
     
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🔍 applyStatusFilters: ${questionsToFilter.length} questions to filter, showFavorites=${showFavorites}`);
+    }
+    
     // Get active category filters
     const activeCategoryFilters = [];
     const categoryCheckboxes = document.querySelectorAll('#categoryFilterOptions input[type="checkbox"]:checked');
@@ -346,7 +350,7 @@ function applyStatusFilters(baseQuestions = null) {
     return questionsToFilter.filter((question, index) => {
       // Find the original index in allQuestions
       const originalIndex = allQuestions.findIndex(q => 
-        q.question_number === question.question_number ||
+        parseInt(q.question_number, 10) === parseInt(question.question_number, 10) ||
         (q.question === question.question && q.answers?.length === question.answers?.length)
       );
       
@@ -357,16 +361,24 @@ function applyStatusFilters(baseQuestions = null) {
       
       // Check status filters (OR logic)
       if (hasStatusFilters) {
-        // For filters, only check answers from current session
-        const isAnswered = typeof window.isQuestionAnsweredInCurrentSession === 'function' ? 
-          window.isQuestionAnsweredInCurrentSession(originalIndex) : false;
+        // Use global isQuestionAnswered for consistency with sidebar display
+        const isAnswered = typeof window.isQuestionAnswered === 'function' ? 
+          window.isQuestionAnswered(originalIndex) : false;
         const isFavorite = typeof window.isQuestionFavorite === 'function' ? 
           window.isQuestionFavorite(originalIndex) : false;
+        
+        if (typeof window.devLog === 'function') {
+          window.devLog(`🔍 Filter check Q${originalIndex}: answered=${isAnswered}, favorite=${isFavorite}, filters: answered=${showAnswered}, unanswered=${showUnanswered}, favorites=${showFavorites}`);
+        }
         
         shouldIncludeByStatus = 
           (showAnswered && isAnswered) ||
           (showUnanswered && !isAnswered) ||
           (showFavorites && isFavorite);
+          
+        if (typeof window.devLog === 'function') {
+          window.devLog(`🔍 Q${originalIndex} shouldIncludeByStatus: ${shouldIncludeByStatus}`);
+        }
       }
       
       // Check category filters (OR logic)
@@ -375,10 +387,20 @@ function applyStatusFilters(baseQuestions = null) {
           window.getQuestionCategory(originalIndex) : null;
         
         shouldIncludeByCategory = questionCategory && activeCategoryFilters.includes(questionCategory);
+        
+        if (typeof window.devLog === 'function') {
+          window.devLog(`🔍 Q${originalIndex} category=${questionCategory}, shouldIncludeByCategory: ${shouldIncludeByCategory}`);
+        }
       }
       
       // Both status and category filters must pass (AND logic between filter types)
-      return shouldIncludeByStatus && shouldIncludeByCategory;
+      const finalResult = shouldIncludeByStatus && shouldIncludeByCategory;
+      
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔍 Q${originalIndex} FINAL RESULT: ${finalResult} (status: ${shouldIncludeByStatus}, category: ${shouldIncludeByCategory})`);
+      }
+      
+      return finalResult;
     });
   } catch (error) {
     if (typeof window.devError === 'function') {
@@ -396,12 +418,26 @@ function applyCurrentFilters() {
     let baseQuestions = allQuestions;
     
     // Apply text search first if active
-    if (isSearchActive && filteredQuestions.length >= 0) {
+    if (isSearchActive && filteredQuestions.length > 0) {
       baseQuestions = filteredQuestions;
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔍 Using filtered questions as base: ${filteredQuestions.length} questions`);
+      }
+    } else {
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🔍 Using all questions as base: ${allQuestions.length} questions (isSearchActive: ${isSearchActive}, filteredQuestions.length: ${filteredQuestions.length})`);
+      }
     }
     
     // Apply status filters
     const finalResults = applyStatusFilters(baseQuestions);
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🔍 applyCurrentFilters: finalResults has ${finalResults.length} questions`);
+      finalResults.forEach((q, i) => {
+        window.devLog(`🔍 Result ${i}: Q${q.question_number} - ${q.question?.substring(0, 50)}...`);
+      });
+    }
     
     // Update current questions
     window.currentQuestions = finalResults;
@@ -602,7 +638,7 @@ function getQuestionNumberSuggestions(input) {
     // Look for question numbers that start with the query
     for (let i = 0; i < allQuestions.length; i++) {
       const question = allQuestions[i];
-      const questionNumber = question.question_number || (i + 1);
+      const questionNumber = parseInt(question.question_number, 10) || (i + 1);
       
       // Check if question number starts with query
       if (questionNumber.toString().startsWith(query)) {
@@ -745,7 +781,7 @@ function updateFilterCounts() {
     questionsToCount.forEach((question, questionIndex) => {
       // Find the original index in allQuestions for status checking
       const originalIndex = allQuestions.findIndex(q => 
-        q.question_number === question.question_number ||
+        parseInt(q.question_number, 10) === parseInt(question.question_number, 10) ||
         (q.question === question.question && q.answers?.length === question.answers?.length)
       );
       
@@ -817,7 +853,7 @@ function calculateCategoryCounts() {
     
     questionsToCount.forEach((question, index) => {
       const category = typeof window.getQuestionCategory === 'function' 
-        ? window.getQuestionCategory(window.currentExamCode, question.question_number) 
+        ? window.getQuestionCategory(window.currentExamCode, parseInt(question.question_number, 10)) 
         : null;
       
       if (category) {
@@ -1097,6 +1133,13 @@ function clearSearchCache() {
 // MODULE EXPORTS
 // ===========================
 
+/**
+ * Get all questions (for other modules that need original question data)
+ */
+function getAllQuestions() {
+  return allQuestions;
+}
+
 // Export all search functions for use in other modules
 export {
   // Search state management
@@ -1128,4 +1171,7 @@ export {
   handleSearchInput,
   handleFilterChange,
   setupSearchEventListeners,
+  
+  // Data access
+  getAllQuestions,
 };

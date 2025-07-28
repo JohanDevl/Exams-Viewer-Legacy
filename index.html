@@ -2,11 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"
+    />
     <title>Exams Viewer</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20250127" />
+    <link rel="stylesheet" href="button-styles-override.css?v=20250127" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
@@ -21,6 +25,45 @@
           Browse and study exam questions from various certification programs
         </p>
       </header>
+
+      <!-- Developer Info -->
+      <div class="developer-info">
+        <span class="developer-name">Built with ❤️ by Johan</span>
+        <div class="developer-links">
+          <a
+            href="https://github.com/JohanDevl"
+            target="_blank"
+            class="developer-link github-link"
+            data-tooltip="GitHub Profile"
+            data-tooltip-position="top"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+          <a
+            href="https://www.raycast.com/xjo_nd?via=johan"
+            target="_blank"
+            class="developer-link raycast-link"
+            data-tooltip="Raycast Profile"
+            data-tooltip-position="top"
+          >
+            <img
+              src="assets/raycast-icon.png"
+              alt="Raycast"
+              class="raycast-icon"
+            />
+          </a>
+          <a
+            href="https://github.com/JohanDevl/Exams-Viewer/issues"
+            target="_blank"
+            class="bug-report-button"
+            data-tooltip="Report issues or suggest improvements"
+            data-tooltip-position="top"
+          >
+            <i class="fas fa-bug"></i>
+            <span>Report a Bug</span>
+          </a>
+        </div>
+      </div>
 
       <!-- Legal Disclaimer -->
       <div class="legal-disclaimer">
@@ -104,7 +147,12 @@
             >
               <i class="fas fa-chart-bar"></i>
             </button>
-            <button id="settingsBtn" class="settings-btn" data-tooltip="Open Settings" data-tooltip-position="top">
+            <button
+              id="settingsBtn"
+              class="settings-btn"
+              data-tooltip="Open Settings"
+              data-tooltip-position="top"
+            >
               <i class="fas fa-cog"></i>
             </button>
             <button
@@ -116,7 +164,13 @@
               <i class="fas fa-history"></i>
             </button>
           </div>
-          <button id="exportBtn" class="export-btn" data-tooltip="Export Questions&#10;Choose format and options" data-tooltip-position="top" style="display: none">
+          <button
+            id="exportBtn"
+            class="export-btn"
+            data-tooltip="Export Questions&#10;Choose format and options"
+            data-tooltip-position="top"
+            style="display: none"
+          >
             <i class="fas fa-download"></i> Export Questions
           </button>
         </div>
@@ -134,39 +188,76 @@
           style="display: none"
         >
           <div class="nav-controls">
-            <button id="prevBtn" class="nav-btn" data-tooltip="Previous Question (← or H)" data-tooltip-position="top">
+            <button
+              id="prevBtn"
+              class="nav-btn"
+              data-tooltip="Previous Question (← or H)"
+              data-tooltip-position="top"
+            >
               <i class="fas fa-chevron-left"></i> Previous
             </button>
             <div class="question-info">
               <span id="questionCounter">Question 1 of 0</span>
             </div>
-            <button id="nextBtn" class="nav-btn" data-tooltip="Next Question (→ or L)" data-tooltip-position="top">
+            <button
+              id="nextBtn"
+              class="nav-btn"
+              data-tooltip="Next Question (→ or L)"
+              data-tooltip-position="top"
+            >
               Next <i class="fas fa-chevron-right"></i>
             </button>
           </div>
-          
+
           <!-- Enhanced Navigation Controls -->
           <div class="nav-controls-enhanced">
             <div class="nav-history">
-              <button id="historyBackBtn" class="nav-btn history" data-tooltip="Go Back in History&#10;Returns to previous question" data-tooltip-position="top" disabled>
+              <button
+                id="historyBackBtn"
+                class="nav-btn history"
+                data-tooltip="Go Back in History&#10;Returns to previous question"
+                data-tooltip-position="top"
+                disabled
+              >
                 <i class="fas fa-undo"></i> Back
               </button>
-              <button id="historyForwardBtn" class="nav-btn history" data-tooltip="Go Forward in History&#10;Returns to next question" data-tooltip-position="top" disabled>
+              <button
+                id="historyForwardBtn"
+                class="nav-btn history"
+                data-tooltip="Go Forward in History&#10;Returns to next question"
+                data-tooltip-position="top"
+                disabled
+              >
                 <i class="fas fa-redo"></i> Forward
               </button>
             </div>
             <div class="nav-quick-actions">
-              <button id="sidebarToggle" class="nav-btn secondary" data-tooltip="Toggle Progress Sidebar&#10;View all questions at once" data-tooltip-position="top">
+              <button
+                id="sidebarToggle"
+                class="nav-btn secondary"
+                data-tooltip="Toggle Progress Sidebar&#10;View all questions at once"
+                data-tooltip-position="top"
+              >
                 <i class="fas fa-bars"></i>
               </button>
-              <button id="keyboardHelpBtn" class="nav-btn secondary" data-tooltip="Keyboard Shortcuts (?)&#10;View all available shortcuts" data-tooltip-position="top">
+              <button
+                id="keyboardHelpBtn"
+                class="nav-btn secondary"
+                data-tooltip="Keyboard Shortcuts (?)&#10;View all available shortcuts"
+                data-tooltip-position="top"
+              >
                 <i class="fas fa-keyboard"></i>
               </button>
             </div>
           </div>
-          
+
           <div class="nav-controls-secondary">
-            <button id="randomBtn" class="nav-btn secondary" data-tooltip="Random Question (R)&#10;Jump to a random question" data-tooltip-position="top">
+            <button
+              id="randomBtn"
+              class="nav-btn secondary"
+              data-tooltip="Random Question (R)&#10;Jump to a random question"
+              data-tooltip-position="top"
+            >
               <i class="fas fa-random"></i> Random
             </button>
             <div class="question-jump">
@@ -178,18 +269,33 @@
                 max="1"
                 inputmode="numeric"
               />
-              <button id="jumpBtn" class="nav-btn secondary" data-tooltip="Go to Question&#10;Navigate to specific question number" data-tooltip-position="top">Go</button>
+              <button
+                id="jumpBtn"
+                class="nav-btn secondary"
+                data-tooltip="Go to Question&#10;Navigate to specific question number"
+                data-tooltip-position="top"
+              >
+                Go
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Enhanced Progress Indicator -->
-        <div id="mainProgressSection" class="main-progress-section" style="display: none">
+        <div
+          id="mainProgressSection"
+          class="main-progress-section"
+          style="display: none"
+        >
           <div class="main-progress-container">
             <div class="progress-header">
               <div class="progress-info">
-                <span id="mainProgressText" class="progress-text">Question 1 of 0</span>
-                <span id="mainProgressPercentage" class="progress-percentage">0%</span>
+                <span id="mainProgressText" class="progress-text"
+                  >Question 1 of 0</span
+                >
+                <span id="mainProgressPercentage" class="progress-percentage"
+                  >0%</span
+                >
               </div>
               <div class="progress-stats">
                 <span class="stat answered">
@@ -208,7 +314,15 @@
             </div>
             <div class="main-progress-bar-container">
               <div class="main-progress-bar">
-                <div id="mainProgressFill" class="progress-fill main" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <div
+                  id="mainProgressFill"
+                  class="progress-fill main"
+                  style="width: 0%"
+                  role="progressbar"
+                  aria-valuenow="0"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
               </div>
             </div>
           </div>
@@ -218,11 +332,16 @@
         <div id="progressSidebar" class="progress-sidebar">
           <div class="sidebar-header">
             <h3><i class="fas fa-list"></i> Question Progress</h3>
-            <button id="closeSidebarBtn" class="close-sidebar-btn" data-tooltip="Close Sidebar (Esc)" data-tooltip-position="left">
+            <button
+              id="closeSidebarBtn"
+              class="close-sidebar-btn"
+              data-tooltip="Close Sidebar (Esc)"
+              data-tooltip-position="left"
+            >
               <i class="fas fa-times"></i>
             </button>
           </div>
-          
+
           <div class="sidebar-content">
             <!-- Overall Progress -->
             <div class="progress-overview">
@@ -231,11 +350,19 @@
               </div>
               <div class="progress-bar-container">
                 <div class="progress-bar">
-                  <div id="overallProgress" class="progress-fill" style="width: 0%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div
+                    id="overallProgress"
+                    class="progress-fill"
+                    style="width: 0%"
+                    role="progressbar"
+                    aria-valuenow="0"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
                 </div>
               </div>
             </div>
-            
+
             <!-- Legend -->
             <div class="progress-legend">
               <div class="legend-item">
@@ -259,7 +386,7 @@
                 <span>Favorite</span>
               </div>
             </div>
-            
+
             <!-- Question List -->
             <div class="question-list" id="questionList">
               <!-- Questions will be populated dynamically -->
@@ -271,11 +398,7 @@
         <div id="sidebarOverlay" class="sidebar-overlay"></div>
 
         <!-- Advanced Search Section -->
-        <div
-          id="searchSection"
-          class="search-section"
-          style="display: none"
-        >
+        <div id="searchSection" class="search-section" style="display: none">
           <div id="searchHeader" class="search-header">
             <h3><i class="fas fa-search"></i> Advanced Search & Filters</h3>
             <button id="toggleSearchBtn" class="toggle-search-btn collapsed">
@@ -322,9 +445,13 @@
                     </label>
                   </div>
                 </div>
-                
+
                 <!-- Category Filters -->
-                <div class="filter-group" id="categoryFilterGroup" style="display: none;">
+                <div
+                  class="filter-group"
+                  id="categoryFilterGroup"
+                  style="display: none"
+                >
                   <label class="filter-label">Category Filters:</label>
                   <div class="filter-options" id="categoryFilterOptions">
                     <!-- Categories will be dynamically added here -->
@@ -335,7 +462,11 @@
                 <span id="searchResultsCount" class="results-count">
                   Showing all questions
                 </span>
-                <button id="resetFiltersBtn" class="reset-filters-btn" style="display: none;">
+                <button
+                  id="resetFiltersBtn"
+                  class="reset-filters-btn"
+                  style="display: none"
+                >
                   <i class="fas fa-undo"></i> Reset Filters
                 </button>
               </div>
@@ -378,7 +509,12 @@
               >
                 <i class="fas fa-plus"></i>
               </button>
-              <button id="noteBtn" class="note-btn" data-tooltip="Add Note (N)&#10;Write a personal note" data-tooltip-position="bottom">
+              <button
+                id="noteBtn"
+                class="note-btn"
+                data-tooltip="Add Note (N)&#10;Write a personal note"
+                data-tooltip-position="bottom"
+              >
                 <i class="far fa-sticky-note"></i>
               </button>
             </div>
@@ -418,14 +554,30 @@
 
             <div id="answersList" class="answers-list"></div>
             <div class="answer-controls">
-              <button id="validateBtn" class="validate-btn" data-tooltip="Validate Answers (V)&#10;Check your answers" data-tooltip-position="top">
+              <button
+                id="validateBtn"
+                class="validate-btn"
+                data-tooltip="Validate Answers (V)&#10;Check your answers"
+                data-tooltip-position="top"
+              >
                 <i class="fas fa-check"></i> Validate Answers
               </button>
-              <button id="resetBtn" class="reset-btn" data-tooltip="Reset Answers&#10;Clear all selections" data-tooltip-position="top" style="display: none">
-                <i class="fas fa-redo"></i> Reset
-              </button>
-              <button id="highlightBtn" class="highlight-btn" data-tooltip="Toggle Highlight (Space)&#10;Preview correct answers" data-tooltip-position="top">
+              <button
+                id="highlightBtn"
+                class="highlight-btn"
+                data-tooltip="Toggle Highlight (Space)&#10;Preview correct answers"
+                data-tooltip-position="top"
+              >
                 <i class="fas fa-lightbulb"></i> Toggle Highlight
+              </button>
+              <button
+                id="resetBtn"
+                class="reset-btn"
+                data-tooltip="Reset Answers&#10;Clear all selections"
+                data-tooltip-position="top"
+                style="display: none"
+              >
+                <i class="fas fa-redo"></i> Reset
               </button>
             </div>
             <div class="disclaimer-message">
@@ -439,13 +591,19 @@
           </div>
 
           <!-- Notes Section -->
-          <div id="questionNote" class="question-note-full-width" style="display: none">
+          <div
+            id="questionNote"
+            class="question-note-full-width"
+            style="display: none"
+          >
             <!-- Read-only view -->
             <div id="noteReadView" class="note-read-view">
               <div class="note-header">
                 <h4><i class="fas fa-sticky-note"></i> Personal Note</h4>
               </div>
-              <div id="noteDisplayText" class="note-display-text">No note added yet.</div>
+              <div id="noteDisplayText" class="note-display-text">
+                No note added yet.
+              </div>
               <div class="note-read-actions">
                 <button id="editNoteBtn" class="edit-note-btn">
                   <i class="fas fa-edit"></i> Edit Note
@@ -455,7 +613,7 @@
                 </button>
               </div>
             </div>
-            
+
             <!-- Edit view -->
             <div id="noteEditView" class="note-edit-view" style="display: none">
               <div class="note-header">
@@ -479,7 +637,12 @@
 
           <!-- Discussion Section -->
           <div class="discussion-section">
-            <button id="discussionToggle" class="discussion-toggle" data-tooltip="Toggle Discussion (D)&#10;View community discussion" data-tooltip-position="top">
+            <button
+              id="discussionToggle"
+              class="discussion-toggle"
+              data-tooltip="Toggle Discussion (D)&#10;View community discussion"
+              data-tooltip-position="top"
+            >
               <i class="fas fa-comments"></i> Show Discussion
             </button>
             <div
@@ -495,7 +658,12 @@
 
         <!-- Available Exams -->
         <div id="availableExams" class="available-exams">
-          <h3>Available Pre-Scraped Exams</h3>
+          <div class="exams-header">
+            <h3>Available Exams</h3>
+            <div class="exams-stats" id="examsStats"></div>
+          </div>
+
+
           <div id="examsList" class="exams-list"></div>
         </div>
       </main>
@@ -531,13 +699,15 @@
                 <!-- Main Performance Summary -->
                 <div class="overview-summary">
                   <div class="summary-header">
-                    <h3><i class="fas fa-chart-line"></i> Performance Overview</h3>
+                    <h3>
+                      <i class="fas fa-chart-line"></i> Performance Overview
+                    </h3>
                     <div class="accuracy-badge" id="overallAccuracyBadge">
                       <span id="overallAccuracyPercent">0%</span>
                       <small>Overall Accuracy</small>
                     </div>
                   </div>
-                  
+
                   <!-- Key Metrics Grid -->
                   <div class="metrics-grid">
                     <!-- Primary Stats Row -->
@@ -553,7 +723,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="metric-card success">
                       <div class="metric-icon">
                         <i class="fas fa-check-circle"></i>
@@ -566,7 +736,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="metric-card error">
                       <div class="metric-icon">
                         <i class="fas fa-times-circle"></i>
@@ -579,7 +749,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="metric-card warning">
                       <div class="metric-icon">
                         <i class="fas fa-eye"></i>
@@ -592,7 +762,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <!-- Secondary Stats Row -->
                     <div class="metric-card info">
                       <div class="metric-icon">
@@ -606,7 +776,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="metric-card info">
                       <div class="metric-icon">
                         <i class="fas fa-clock"></i>
@@ -615,11 +785,13 @@
                         <div class="metric-value" id="totalTimeSpent">0m</div>
                         <div class="metric-label">Time Studied</div>
                         <div class="metric-trend" id="timeTrend">
-                          <small id="averageTimePerQuestion">0s avg/question</small>
+                          <small id="averageTimePerQuestion"
+                            >0s avg/question</small
+                          >
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="metric-card info">
                       <div class="metric-icon">
                         <i class="fas fa-calendar-alt"></i>
@@ -628,11 +800,13 @@
                         <div class="metric-value" id="totalSessions">0</div>
                         <div class="metric-label">Study Sessions</div>
                         <div class="metric-trend" id="sessionsTrend">
-                          <small id="averageQuestionsPerSession">0 avg questions</small>
+                          <small id="averageQuestionsPerSession"
+                            >0 avg questions</small
+                          >
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="metric-card secondary">
                       <div class="metric-icon">
                         <i class="fas fa-star"></i>
@@ -647,29 +821,53 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- Progress Visualization -->
                 <div class="progress-visualization">
-                  <h4><i class="fas fa-chart-pie"></i> Study Progress Breakdown</h4>
+                  <h4>
+                    <i class="fas fa-chart-pie"></i> Study Progress Breakdown
+                  </h4>
                   <div class="progress-chart">
                     <div class="progress-bar-container">
                       <div class="progress-bar">
-                        <div class="progress-segment correct" id="correctProgressSegment" style="width: 0%"></div>
-                        <div class="progress-segment incorrect" id="incorrectProgressSegment" style="width: 0%"></div>
-                        <div class="progress-segment preview" id="previewProgressSegment" style="width: 0%"></div>
+                        <div
+                          class="progress-segment correct"
+                          id="correctProgressSegment"
+                          style="width: 0%"
+                        ></div>
+                        <div
+                          class="progress-segment incorrect"
+                          id="incorrectProgressSegment"
+                          style="width: 0%"
+                        ></div>
+                        <div
+                          class="progress-segment preview"
+                          id="previewProgressSegment"
+                          style="width: 0%"
+                        ></div>
                       </div>
                       <div class="progress-labels">
                         <div class="progress-label correct">
                           <span class="color-dot"></span>
-                          <span>Correct (<span id="correctProgressText">0%</span>)</span>
+                          <span
+                            >Correct (<span id="correctProgressText">0%</span
+                            >)</span
+                          >
                         </div>
                         <div class="progress-label incorrect">
                           <span class="color-dot"></span>
-                          <span>Incorrect (<span id="incorrectProgressText">0%</span>)</span>
+                          <span
+                            >Incorrect (<span id="incorrectProgressText"
+                              >0%</span
+                            >)</span
+                          >
                         </div>
                         <div class="progress-label preview">
                           <span class="color-dot"></span>
-                          <span>Preview (<span id="previewProgressText">0%</span>)</span>
+                          <span
+                            >Preview (<span id="previewProgressText">0%</span
+                            >)</span
+                          >
                         </div>
                       </div>
                     </div>
@@ -744,26 +942,27 @@
                 <span class="toggle-slider"></span>
                 Show advanced search and filters
               </label>
-              <label class="toggle-label" style="margin-top: 1rem;">
+              <label class="toggle-label" style="margin-top: 1rem">
                 <input type="checkbox" id="showMainProgressBar" />
                 <span class="toggle-slider"></span>
                 Show enhanced progress indicator
               </label>
               <p class="setting-description">
-                Display an animated progress bar with statistics in the header area. 
-                Shows answered questions, favorites count, and overall progress percentage.
+                Display an animated progress bar with statistics in the header
+                area. Shows answered questions, favorites count, and overall
+                progress percentage.
               </p>
-              <label class="toggle-label" style="margin-top: 1rem;">
+              <label class="toggle-label" style="margin-top: 1rem">
                 <input type="checkbox" id="showTooltips" />
                 <span class="toggle-slider"></span>
                 Show informative tooltips with keyboard shortcuts
               </label>
               <p class="setting-description">
-                Display helpful tooltips on buttons and interactive elements. 
-                Includes keyboard shortcuts and contextual information for better user guidance.
+                Display helpful tooltips on buttons and interactive elements.
+                Includes keyboard shortcuts and contextual information for
+                better user guidance.
               </p>
             </div>
-
 
             <div class="setting-group">
               <h3><i class="fas fa-star"></i> Favorites Management</h3>
@@ -817,8 +1016,8 @@
                 </button>
               </div>
               <p class="setting-description">
-                Clean old session data to free storage space, or completely reset all statistics.
-                Cleaning keeps the last 20 sessions only.
+                Clean old session data to free storage space, or completely
+                reset all statistics. Cleaning keeps the last 20 sessions only.
               </p>
             </div>
           </div>
@@ -869,22 +1068,27 @@
                 <h3><i class="fas fa-file"></i> Export Format</h3>
                 <div class="export-format-options">
                   <label class="radio-option">
-                    <input type="radio" name="exportFormat" value="pdf" checked>
+                    <input
+                      type="radio"
+                      name="exportFormat"
+                      value="pdf"
+                      checked
+                    />
                     <span class="radio-custom"></span>
                     <i class="fas fa-file-pdf"></i> PDF Document
                   </label>
                   <label class="radio-option">
-                    <input type="radio" name="exportFormat" value="json">
+                    <input type="radio" name="exportFormat" value="json" />
                     <span class="radio-custom"></span>
                     <i class="fas fa-file-code"></i> JSON Data
                   </label>
                   <label class="radio-option">
-                    <input type="radio" name="exportFormat" value="txt">
+                    <input type="radio" name="exportFormat" value="txt" />
                     <span class="radio-custom"></span>
                     <i class="fas fa-file-alt"></i> Plain Text
                   </label>
                   <label class="radio-option">
-                    <input type="radio" name="exportFormat" value="csv">
+                    <input type="radio" name="exportFormat" value="csv" />
                     <span class="radio-custom"></span>
                     <i class="fas fa-file-csv"></i> CSV Spreadsheet
                   </label>
@@ -896,7 +1100,12 @@
                 <h3><i class="fas fa-filter"></i> Content Filter</h3>
                 <div class="export-filter-options">
                   <label class="radio-option">
-                    <input type="radio" name="contentFilter" value="all" checked>
+                    <input
+                      type="radio"
+                      name="contentFilter"
+                      value="all"
+                      checked
+                    />
                     <span class="radio-custom"></span>
                     <div class="option-main">
                       <div class="main-text">
@@ -905,7 +1114,11 @@
                     </div>
                   </label>
                   <label class="radio-option">
-                    <input type="radio" name="contentFilter" value="favorites">
+                    <input
+                      type="radio"
+                      name="contentFilter"
+                      value="favorites"
+                    />
                     <span class="radio-custom"></span>
                     <div class="option-main">
                       <div class="main-text">
@@ -914,7 +1127,7 @@
                     </div>
                   </label>
                   <label class="radio-option">
-                    <input type="radio" name="contentFilter" value="answered">
+                    <input type="radio" name="contentFilter" value="answered" />
                     <span class="radio-custom"></span>
                     <div class="option-main">
                       <div class="main-text">
@@ -923,7 +1136,7 @@
                     </div>
                   </label>
                   <label class="radio-option">
-                    <input type="radio" name="contentFilter" value="notes">
+                    <input type="radio" name="contentFilter" value="notes" />
                     <span class="radio-custom"></span>
                     <div class="option-main">
                       <div class="main-text">
@@ -932,7 +1145,7 @@
                     </div>
                   </label>
                   <label class="radio-option">
-                    <input type="radio" name="contentFilter" value="category">
+                    <input type="radio" name="contentFilter" value="category" />
                     <span class="radio-custom"></span>
                     <div class="option-main">
                       <div class="main-text">
@@ -944,7 +1157,11 @@
               </div>
 
               <!-- Category Selection (shown when "By Category" is selected) -->
-              <div class="export-section" id="categorySelection" style="display: none">
+              <div
+                class="export-section"
+                id="categorySelection"
+                style="display: none"
+              >
                 <h3><i class="fas fa-tags"></i> Select Categories</h3>
                 <div class="category-checkboxes" id="exportCategoryList">
                   <!-- Categories will be populated dynamically -->
@@ -956,37 +1173,37 @@
                 <h3><i class="fas fa-cogs"></i> Content Options</h3>
                 <div class="export-content-options">
                   <label class="checkbox-option">
-                    <input type="checkbox" id="includeQuestions" checked>
+                    <input type="checkbox" id="includeQuestions" checked />
                     <span class="checkbox-custom"></span>
                     <i class="fas fa-question-circle"></i> Include Questions
                   </label>
                   <label class="checkbox-option">
-                    <input type="checkbox" id="includeAnswers" checked>
+                    <input type="checkbox" id="includeAnswers" checked />
                     <span class="checkbox-custom"></span>
                     <i class="fas fa-check"></i> Include Answers
                   </label>
                   <label class="checkbox-option">
-                    <input type="checkbox" id="includeCorrectAnswers" checked>
+                    <input type="checkbox" id="includeCorrectAnswers" checked />
                     <span class="checkbox-custom"></span>
                     <i class="fas fa-check-circle"></i> Include Correct Answers
                   </label>
                   <label class="checkbox-option">
-                    <input type="checkbox" id="includeDiscussions" checked>
+                    <input type="checkbox" id="includeDiscussions" checked />
                     <span class="checkbox-custom"></span>
                     <i class="fas fa-comments"></i> Include Discussions
                   </label>
                   <label class="checkbox-option">
-                    <input type="checkbox" id="includeImages" checked>
+                    <input type="checkbox" id="includeImages" checked />
                     <span class="checkbox-custom"></span>
                     <i class="fas fa-image"></i> Include Images
                   </label>
                   <label class="checkbox-option">
-                    <input type="checkbox" id="includeUserNotes" checked>
+                    <input type="checkbox" id="includeUserNotes" checked />
                     <span class="checkbox-custom"></span>
                     <i class="fas fa-user-edit"></i> Include User Notes
                   </label>
                   <label class="checkbox-option">
-                    <input type="checkbox" id="includeMetadata" checked>
+                    <input type="checkbox" id="includeMetadata" checked />
                     <span class="checkbox-custom"></span>
                     <i class="fas fa-info-circle"></i> Include Metadata
                   </label>
@@ -998,7 +1215,9 @@
                 <div class="export-preview">
                   <div class="preview-info">
                     <i class="fas fa-info-circle"></i>
-                    <span id="exportPreviewText">All questions will be exported as PDF</span>
+                    <span id="exportPreviewText"
+                      >All questions will be exported as PDF</span
+                    >
                   </div>
                   <div class="preview-stats">
                     <span id="exportQuestionCount">0 questions</span>
@@ -1046,31 +1265,55 @@
         class="success-message"
         style="display: none"
       ></div>
+
+      <!-- Development Test Button (only visible in dev mode) -->
+      <div id="devTestButton" class="dev-test-button" style="display: none">
+        <button id="runTestsBtn" class="btn-dev-test">
+          <i class="fas fa-flask"></i>
+          Run Tests
+        </button>
+      </div>
     </div>
 
     <script type="module" src="script-modular.js"></script>
     <script>
       // Register Service Worker for intelligent caching
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then(registration => {
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
-              console.log('Service Worker registered:', registration);
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .then((registration) => {
+            if (
+              window.location.hostname === "localhost" ||
+              window.location.hostname === "127.0.0.1" ||
+              window.location.hostname === "" ||
+              window.location.protocol === "file:"
+            ) {
+              console.log("Service Worker registered:", registration);
             }
-            
+
             // Listen for cache updates
-            navigator.serviceWorker.addEventListener('message', event => {
-              if (event.data && event.data.type === 'CACHE_UPDATED') {
-                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
-                  console.log('Cache updated for:', event.data.url);
+            navigator.serviceWorker.addEventListener("message", (event) => {
+              if (event.data && event.data.type === "CACHE_UPDATED") {
+                if (
+                  window.location.hostname === "localhost" ||
+                  window.location.hostname === "127.0.0.1" ||
+                  window.location.hostname === "" ||
+                  window.location.protocol === "file:"
+                ) {
+                  console.log("Cache updated for:", event.data.url);
                 }
                 // Could show a subtle notification to user about updated content
               }
             });
           })
-          .catch(error => {
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.protocol === 'file:') {
-              console.log('Service Worker registration failed:', error);
+          .catch((error) => {
+            if (
+              window.location.hostname === "localhost" ||
+              window.location.hostname === "127.0.0.1" ||
+              window.location.hostname === "" ||
+              window.location.protocol === "file:"
+            ) {
+              console.log("Service Worker registration failed:", error);
             }
           });
       }

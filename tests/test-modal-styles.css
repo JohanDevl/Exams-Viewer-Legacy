@@ -1,0 +1,246 @@
+/**
+ * Test Modal Styles
+ * Styles optimisés pour le modal de résultats de test
+ */
+
+/* Style du modal de test principal - Positionné à droite */
+#testResultsPanel {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  transform: none !important;
+  width: min(30vw, 450px) !important;
+  max-height: calc(100vh - 40px) !important;
+  background: var(--bg-secondary, #ffffff) !important;
+  border: 1px solid var(--border-primary, #e5e5e5) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  z-index: 10000 !important;
+  font-family: var(--font-family-primary, 'Inter', sans-serif) !important;
+  font-size: 14px !important;
+  overflow: hidden !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+/* Header fixe avec bouton close toujours visible */
+#testResultsPanel .test-header {
+  padding: 16px !important;
+  border-bottom: 1px solid var(--border-secondary, #f0f0f0) !important;
+  background: var(--bg-accent, #f8f9fa) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+}
+
+/* Titre du modal */
+#testResultsPanel .test-title {
+  margin: 0 !important;
+  color: var(--text-primary, #000000) !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+/* Texte de progression */
+#testProgress {
+  margin-top: 8px !important;
+  font-size: 12px !important;
+  color: var(--text-muted, #666666) !important;
+  line-height: 1.4 !important;
+}
+
+/* Bouton de fermeture optimisé */
+#closeTestPanel {
+  background: none !important;
+  border: none !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  color: var(--text-muted, #666666) !important;
+  padding: 4px !important;
+  border-radius: 4px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background-color 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+#closeTestPanel:hover {
+  background-color: var(--border-secondary, #f0f0f0) !important;
+  color: var(--text-primary, #000000) !important;
+}
+
+#closeTestPanel:focus {
+  outline: 2px solid var(--accent-color, #007bff) !important;
+  outline-offset: 2px !important;
+}
+
+/* Zone de contenu avec scroll */
+#testResultsContent {
+  padding: 16px !important;
+  overflow-y: auto !important;
+  flex: 1 !important;
+  max-height: calc(90vh - 140px) !important;
+}
+
+/* Scroll personnalisé pour le contenu */
+#testResultsContent::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+#testResultsContent::-webkit-scrollbar-track {
+  background: var(--border-light, #f1f1f1) !important;
+  border-radius: 3px !important;
+}
+
+#testResultsContent::-webkit-scrollbar-thumb {
+  background: var(--text-muted, #666666) !important;
+  border-radius: 3px !important;
+}
+
+#testResultsContent::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary, #333333) !important;
+}
+
+/* Styles pour le résumé des tests */
+#testSummary {
+  margin-bottom: 16px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 8px !important;
+  text-align: center !important;
+}
+
+#testSummary > div {
+  padding: 8px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+}
+
+/* Détails des tests */
+#testDetails {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+.test-result-item {
+  padding: 8px !important;
+  border-radius: 6px !important;
+  border-left: 3px solid transparent !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+.test-result-item.passed {
+  background: #f0f9ff !important;
+  border-left-color: #22c55e !important;
+}
+
+.test-result-item.failed {
+  background: #fef2f2 !important;
+  border-left-color: #ef4444 !important;
+}
+
+/* Responsivité mobile - Modal à droite même sur mobile */
+@media (max-width: 768px) {
+  #testResultsPanel {
+    width: min(90vw, 350px) !important;
+    max-height: calc(100vh - 80px) !important;
+    top: 10px !important;
+    right: 10px !important;
+    margin: 0 !important;
+    border-radius: 8px !important;
+  }
+  
+  #testResultsPanel .test-header {
+    padding: 12px !important;
+  }
+  
+  #testResultsContent {
+    padding: 12px !important;
+    max-height: calc(85vh - 120px) !important;
+  }
+  
+  #testSummary {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+  
+  .test-result-item {
+    padding: 6px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* Animation d'apparition */
+@keyframes testModalFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+#testResultsPanel[data-visible="true"] {
+  animation: testModalFadeIn 0.2s ease-out forwards !important;
+}
+
+/* Mode sombre */
+[data-theme="dark"] #testResultsPanel {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-primary) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme="dark"] #testResultsPanel .test-header {
+  background: var(--bg-accent) !important;
+  border-bottom-color: var(--border-secondary) !important;
+}
+
+[data-theme="dark"] #closeTestPanel:hover {
+  background-color: var(--border-secondary) !important;
+}
+
+/* Support des contrastes élevés */
+@media (prefers-contrast: high) {
+  #testResultsPanel {
+    border: 2px solid var(--text-primary) !important;
+  }
+  
+  #closeTestPanel {
+    border: 1px solid var(--text-muted) !important;
+  }
+  
+  .test-result-item {
+    border: 1px solid var(--border-primary) !important;
+  }
+}
+
+/* Support du mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  #testResultsPanel {
+    transition: none !important;
+  }
+  
+  #testModalFadeIn {
+    animation: none !important;
+  }
+  
+  #closeTestPanel {
+    transition: none !important;
+  }
+}

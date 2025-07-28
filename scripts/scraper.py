@@ -8,6 +8,7 @@ import hashlib
 import random
 import urllib.robotparser
 import base64
+from datetime import datetime
 from urllib.parse import urljoin, urlparse
 from PIL import Image
 import io
@@ -827,3 +828,87 @@ def update_exam_data(exam_code, progress, rapid_scraping=False, force_rescan=Fal
         
     except Exception as e:
         return [], str(e), False
+
+
+def main():
+    """
+    Main function for direct script execution
+    Allows running the scraper individually with automatic manifest update
+    """
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Scrape exam questions from ExamTopics')
+    parser.add_argument('exam_code', help='Exam code to scrape (e.g., CAD, CSA, CIS-APM)')
+    parser.add_argument('--force-rescan', action='store_true', 
+                        help='Force rescan of links even if they exist')
+    parser.add_argument('--force-update', action='store_true', 
+                        help='Force update existing questions')
+    parser.add_argument('--rapid', action='store_true', 
+                        help='Use rapid scraping mode (less respectful)')
+    
+    args = parser.parse_args()
+    
+    print(f"🚀 Starting scraper for exam: {args.exam_code}")
+    print(f"⏰ Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    if args.force_rescan:
+        print("🔄 Force rescan mode enabled")
+    if args.force_update:
+        print("🔄 Force update mode enabled") 
+    if args.rapid:
+        print("⚡ Rapid scraping mode enabled")
+    
+    # Simple progress tracker for CLI usage
+    class CLIProgress:
+        def progress(self, value, text=""):
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] {text}")
+    
+    progress = CLIProgress()
+    
+    try:
+        # Run the scraper
+        questions, message, success = update_exam_data(
+            args.exam_code, 
+            progress, 
+            rapid_scraping=args.rapid,
+            force_rescan=args.force_rescan, 
+            force_update=args.force_update
+        )
+        
+        if success:
+            question_count = len(questions) if questions else 0
+            print(f"✅ Successfully scraped {question_count} questions for {args.exam_code}")
+            if message:
+                print(f"ℹ️  {message}")
+            
+            # Update manifest after successful scraping
+            print(f"\n🔄 Updating exam manifest...")
+            try:
+                from update_manifest import generate_manifest, validate_manifest, save_manifest
+                
+                # Generate new manifest
+                manifest = generate_manifest()
+                if manifest and validate_manifest(manifest) and save_manifest(manifest):
+                    print(f"✅ Manifest updated successfully with latest exam data")
+                else:
+                    print(f"⚠️  Failed to update manifest - check manually with: python3 scripts/update_manifest.py")
+            except Exception as e:
+                print(f"⚠️  Failed to update manifest: {str(e)}")
+                print(f"   You can update it manually with: python3 scripts/update_manifest.py")
+            
+            print(f"🎉 Scraping completed successfully!")
+            
+        else:
+            print(f"❌ Scraping failed for {args.exam_code}: {message}")
+            return 1
+            
+    except Exception as e:
+        print(f"❌ Error occurred: {str(e)}")
+        return 1
+    
+    return 0
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(main())

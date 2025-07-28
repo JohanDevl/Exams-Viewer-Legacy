@@ -401,7 +401,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
     // Track question visit for status indicators
     if (question.question_number && typeof window.trackQuestionVisit === 'function') {
-      window.trackQuestionVisit(question.question_number);
+      window.trackQuestionVisit(parseInt(question.question_number, 10));
       
       // Clear cache for this question to ensure status updates
       if (typeof window.clearQuestionStatusCacheForQuestion === 'function') {
@@ -422,7 +422,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
     // Track highlight view if highlight is already enabled when viewing this question
     if (window.isHighlightEnabled && window.statistics?.currentSession && !fromToggleAction) {
-      const questionNumber = question.question_number;
+      const questionNumber = parseInt(question.question_number, 10);
       
       // Track highlight view using the new function
       if (typeof window.trackQuestionHighlight === 'function') {
@@ -439,7 +439,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
     }
 
     // Update navigation
-    const currentQuestionNumber = question.question_number || (window.currentQuestionIndex + 1);
+    const currentQuestionNumber = parseInt(question.question_number, 10) || (window.currentQuestionIndex + 1);
     
     const questionCounter = document.getElementById("questionCounter");
     if (questionCounter) {
@@ -459,7 +459,7 @@ function displayCurrentQuestion(fromToggleAction = false) {
     // Update question title and link
     const questionTitle = document.getElementById("questionTitle");
     if (questionTitle) {
-      questionTitle.textContent = `Question ${question.question_number || (window.currentQuestionIndex + 1)}`;
+      questionTitle.textContent = `Question ${parseInt(question.question_number, 10) || (window.currentQuestionIndex + 1)}`;
     }
     
     const examTopicsLink = document.getElementById("examTopicsLink");
@@ -502,17 +502,35 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
     // Try to restore previous answers for this question
     if (question.question_number && typeof window.restorePreviousAnswers === 'function') {
-      const restored = window.restorePreviousAnswers(question.question_number);
+      const questionNumberInt = parseInt(question.question_number, 10);
+      const restored = window.restorePreviousAnswers(questionNumberInt);
       if (restored && typeof window.devLog === 'function') {
-        window.devLog(`Restored previous answers for question ${question.question_number}`);
+        window.devLog(`Restored previous answers for question ${questionNumberInt}`);
       }
     }
 
     // Reset controls (will be updated by restorePreviousAnswers if needed)
     if (!window.isValidated) {
       const validateBtn = document.getElementById("validateBtn");
+      const highlightBtn = document.getElementById("highlightBtn");
       const resetBtn = document.getElementById("resetBtn");
-      if (validateBtn) validateBtn.style.display = "inline-flex";
+      
+      if (validateBtn) {
+        validateBtn.disabled = false;
+        validateBtn.style.opacity = "1";
+        validateBtn.style.cursor = "pointer";
+        validateBtn.title = "";
+        validateBtn.style.display = "inline-flex";
+      }
+      
+      if (highlightBtn) {
+        highlightBtn.disabled = false;
+        highlightBtn.style.opacity = "1";
+        highlightBtn.style.cursor = "pointer";
+        highlightBtn.title = "";
+        highlightBtn.style.display = "inline-flex";
+      }
+      
       if (resetBtn) resetBtn.style.display = "none";
     }
 
@@ -671,16 +689,41 @@ function updateQuestionStatistics() {
     }
 
     const question = window.currentQuestions[window.currentQuestionIndex || 0];
-    const questionNumber = question.question_number;
+    const questionNumber = parseInt(question.question_number, 10);
 
     // Find the question attempt in statistics
     const questions = window.statistics.currentSession.q || window.statistics.currentSession.questions || [];
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 updateQuestionStatistics: Looking for question ${questionNumber}`);
+      window.devLog(`📊 updateQuestionStatistics: Using data source:`, {
+        hasQ: !!window.statistics.currentSession.q,
+        hasQuestions: !!window.statistics.currentSession.questions,
+        questionsLength: questions.length
+      });
+      window.devLog(`📊 updateQuestionStatistics: Available questions:`, questions.map(q => ({
+        qn: q.qn, 
+        questionNumber: q.questionNumber, 
+        rc: q.rc
+      })));
+    }
+    
     const questionAttempt = questions.find(
-      (q) => (q.qn && q.qn.toString() === questionNumber.toString()) ||
-             (q.questionNumber && q.questionNumber.toString() === questionNumber.toString())
+      (q) => (q.qn === questionNumber) || (q.questionNumber === questionNumber)
     );
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 updateQuestionStatistics: Search result for Q${questionNumber}:`, {
+        questionAttempt: questionAttempt,
+        foundByQn: questionAttempt ? (questionAttempt.qn === questionNumber) : false,
+        foundByQuestionNumber: questionAttempt ? (questionAttempt.questionNumber === questionNumber) : false
+      });
+    }
 
     if (!questionAttempt) {
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📊 updateQuestionStatistics: No questionAttempt found for question ${questionNumber}`);
+      }
       const resetCount = document.getElementById("resetCount");
       const highlightValidationsCount = document.getElementById("highlightValidationsCount");
       const questionStats = document.getElementById("questionStats");
@@ -692,6 +735,16 @@ function updateQuestionStatistics() {
     }
 
     const resetCount = questionAttempt.rc || questionAttempt.resetCount || 0;
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 updateQuestionStatistics: Found questionAttempt:`, {
+        qn: questionAttempt.qn,
+        questionNumber: questionAttempt.questionNumber,
+        rc: questionAttempt.rc,
+        resetCount: questionAttempt.resetCount,
+        calculatedResetCount: resetCount
+      });
+    }
 
     // Calculate total highlight interactions using new method or old way
     const totalHighlightInteractions = questionAttempt.getTotalHighlightInteractions
@@ -704,7 +757,19 @@ function updateQuestionStatistics() {
     const highlightValidationsCountElement = document.getElementById("highlightValidationsCount");
     const questionStats = document.getElementById("questionStats");
     
-    if (resetCountElement) resetCountElement.textContent = resetCount;
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 updateQuestionStatistics: DOM elements found:`, {
+        resetCountElement: !!resetCountElement,
+        questionStats: !!questionStats
+      });
+    }
+    
+    if (resetCountElement) {
+      resetCountElement.textContent = resetCount;
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📊 updateQuestionStatistics: Updated resetCountElement.textContent to ${resetCount}`);
+      }
+    }
     if (highlightValidationsCountElement) {
       highlightValidationsCountElement.textContent = totalHighlightInteractions;
     }
@@ -753,7 +818,7 @@ function validateAnswers() {
       // Track highlight answers separately for statistics
       if (window.statistics?.currentSession) {
         const question = window.currentQuestions[window.currentQuestionIndex || 0];
-        const questionNumber = question.question_number;
+        const questionNumber = parseInt(question.question_number, 10);
 
         // Find existing question attempt or create new one
         let questionAttempt = window.statistics.currentSession.questions?.find(
@@ -803,7 +868,7 @@ function validateAnswers() {
     const correctAnswers = new Set(mostVoted.split(""));
 
     if (typeof window.devLog === 'function') {
-      window.devLog("📝 Question:", question.question_number, "Most voted:", mostVoted, "Correct answers:", Array.from(correctAnswers));
+      window.devLog("📝 Question:", parseInt(question.question_number, 10), "Most voted:", mostVoted, "Correct answers:", Array.from(correctAnswers));
       window.devLog("👤 Selected answers:", Array.from(window.selectedAnswers));
     }
 
@@ -851,16 +916,16 @@ function validateAnswers() {
     try {
       if (typeof window.devLog === 'function') {
         window.devLog(`📅 About to track question attempt:`);
-        window.devLog(`📅 question.question_number: ${question.question_number}`);
+        window.devLog(`📅 question.question_number: ${parseInt(question.question_number, 10)}`);
         window.devLog(`📅 currentQuestionIndex: ${window.currentQuestionIndex}`);
         window.devLog(`📅 isCorrect: ${isCorrect}`);
       }
       
       if (typeof window.trackQuestionAttempt === 'function') {
         window.trackQuestionAttempt(
-          question.question_number,
+          parseInt(question.question_number, 10),
+          Array.from(window.selectedAnswers),
           Array.from(correctAnswers),
-          window.selectedAnswers,
           isCorrect,
           timeSpent,
           wasHighlightEnabled
@@ -871,7 +936,7 @@ function validateAnswers() {
         }
         
         if (typeof window.devLog === 'function') {
-          window.devLog(`✅ Successfully tracked Q${question.question_number} at index ${window.currentQuestionIndex}`);
+          window.devLog(`✅ Successfully tracked Q${parseInt(question.question_number, 10)} at index ${window.currentQuestionIndex}`);
         }
       } else {
         if (typeof window.devLog === 'function') {
@@ -884,10 +949,25 @@ function validateAnswers() {
       }
     }
 
-    // Update controls
+    // Update controls - disable validate and highlight buttons after validation
     const validateBtn = document.getElementById("validateBtn");
+    const highlightBtn = document.getElementById("highlightBtn");
     const resetBtn = document.getElementById("resetBtn");
-    if (validateBtn) validateBtn.style.display = "none";
+    
+    if (validateBtn) {
+      validateBtn.disabled = true;
+      validateBtn.style.opacity = "0.5";
+      validateBtn.style.cursor = "not-allowed";
+      validateBtn.title = "Answers validated - reset to validate again";
+    }
+    
+    if (highlightBtn) {
+      highlightBtn.disabled = true;
+      highlightBtn.style.opacity = "0.5";
+      highlightBtn.style.cursor = "not-allowed";
+      highlightBtn.title = "Answers validated - reset to highlight again";
+    }
+    
     if (resetBtn) resetBtn.style.display = "inline-flex";
 
     // Update question statistics display
@@ -932,6 +1012,27 @@ function validateAnswers() {
       }
     }
     
+    // Update progress sidebar and main progress bar after validation
+    if (typeof window.updateProgressSidebar === 'function') {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🔄 Updating progress sidebar after validation...");
+      }
+      window.updateProgressSidebar();
+      if (typeof window.devLog === 'function') {
+        window.devLog("✅ Progress sidebar updated");
+      }
+    }
+    
+    if (typeof window.updateMainProgressBar === 'function') {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🔄 Updating main progress bar after validation...");
+      }
+      window.updateMainProgressBar();
+      if (typeof window.devLog === 'function') {
+        window.devLog("✅ Main progress bar updated");
+      }
+    }
+    
     // Update progress sidebar to reflect answered status
     if (typeof window.updateProgressSidebar === 'function') {
       if (typeof window.devLog === 'function') {
@@ -959,6 +1060,13 @@ function validateAnswers() {
         window.devLog("📊 Main progress bar updated");
       }
     }
+    
+    if (typeof window.updateProgressSidebar === 'function') {
+      window.updateProgressSidebar();
+      if (typeof window.devLog === 'function') {
+        window.devLog("📊 Progress sidebar updated");
+      }
+    }
 
     if (typeof window.devLog === 'function') {
       window.devLog("✅ validateAnswers() completed successfully");
@@ -975,16 +1083,19 @@ function validateAnswers() {
  */
 function resetAnswers() {
   try {
+    // Store validation state before clearing
+    const wasValidated = window.isValidated;
+    
     window.selectedAnswers?.clear();
 
-    // Track reset count for the current question
-    if (window.statistics?.currentSession) {
+    // Track reset count for the current question - only if it was previously validated
+    if (window.statistics?.currentSession && wasValidated) {
       const question = window.currentQuestions[window.currentQuestionIndex || 0];
-      const questionNumber = question.question_number;
+      const questionNumber = parseInt(question.question_number, 10);
 
       // Find existing question attempt or create new one
       let questionAttempt = window.statistics.currentSession.questions?.find(
-        (q) => q.questionNumber === questionNumber
+        (q) => (q.qn === questionNumber) || (q.questionNumber === questionNumber)
       );
 
       if (!questionAttempt && typeof window.QuestionAttempt === 'function') {
@@ -1003,7 +1114,13 @@ function resetAnswers() {
         if (typeof window.saveStatistics === 'function') {
           window.saveStatistics();
         }
+        
+        if (typeof window.devLog === 'function') {
+          window.devLog(`🔄 Reset count incremented for validated question ${questionNumber} (total resets: ${questionAttempt.rc})`);
+        }
       }
+    } else if (typeof window.devLog === 'function') {
+      window.devLog('🔄 Reset triggered but question was not validated - reset count not incremented');
     }
 
     // Reset UI state
@@ -1027,15 +1144,37 @@ function resetAnswers() {
       }
     });
 
-    // Update controls
+    // Update controls - re-enable validate and highlight buttons after reset
     const validateBtn = document.getElementById("validateBtn");
+    const highlightBtn = document.getElementById("highlightBtn");
     const resetBtn = document.getElementById("resetBtn");
-    if (validateBtn) validateBtn.style.display = "inline-flex";
+    
+    if (validateBtn) {
+      validateBtn.disabled = false;
+      validateBtn.style.opacity = "1";
+      validateBtn.style.cursor = "pointer";
+      validateBtn.title = "";
+      validateBtn.style.display = "inline-flex";
+    }
+    
+    if (highlightBtn) {
+      highlightBtn.disabled = false;
+      highlightBtn.style.opacity = "1";
+      highlightBtn.style.cursor = "pointer";
+      highlightBtn.title = "";
+      highlightBtn.style.display = "inline-flex";
+    }
+    
     if (resetBtn) resetBtn.style.display = "none";
 
     // Update instructions and statistics
     if (typeof window.updateInstructions === 'function' && !window.isValidated) {
       window.updateInstructions();
+    }
+    
+    // Force update of question statistics after reset tracking
+    if (typeof window.devLog === 'function') {
+      window.devLog('🔄 About to update question statistics after reset');
     }
     updateQuestionStatistics();
 

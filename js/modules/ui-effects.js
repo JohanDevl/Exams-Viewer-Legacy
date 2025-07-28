@@ -296,30 +296,15 @@ function showKeyboardHelp() {
     modal.id = 'keyboardHelpModal';
     modal.className = 'modal keyboard-help-modal';
     modal.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.7);
       display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      margin: 0;
-      padding: 0;
     `;
     modal.innerHTML = `
-      <div class="modal-content" style="
-        background: #2a2a2a;
-        border-radius: 12px;
+      <div class="modal-content keyboard-help-content" style="
         padding: 0;
         max-width: 800px;
         max-height: 80vh;
         overflow-y: auto;
         margin: auto;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        border: 1px solid #444;
         position: relative;
       ">
         <div class="modal-header" style="
@@ -327,30 +312,23 @@ function showKeyboardHelp() {
           justify-content: space-between;
           align-items: center;
           padding: 20px;
-          border-bottom: 1px solid #444;
         ">
-          <h2 style="margin: 0; color: #fff;"><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h2>
+          <h2 style="margin: 0;"><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h2>
           <button class="close-btn" onclick="closeKeyboardHelp()" style="
-            background: none;
-            border: none;
-            color: #fff;
             font-size: 24px;
             cursor: pointer;
-            padding: 0;
             width: 30px;
             height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            transition: background-color 0.2s;
-          " onmouseover="this.style.backgroundColor='#444'" onmouseout="this.style.backgroundColor='transparent'">
+          ">
             <i class="fas fa-times"></i>
           </button>
         </div>
-        <div class="modal-body" style="padding: 20px; color: #fff;">
+        <div class="modal-body" style="padding: 20px;">
           <div class="shortcuts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-            <div class="shortcut-section" style="padding: 15px; border-radius: 8px; border: 1px solid #444;">
+            <div class="shortcut-section" style="padding: 15px;">
               <h3>Navigation</h3>
               <div class="shortcut-item">
                 <kbd>←</kbd><kbd>→</kbd> <span>Previous/Next Question</span>
@@ -375,7 +353,7 @@ function showKeyboardHelp() {
               </div>
             </div>
             
-            <div class="shortcut-section" style="padding: 15px; border-radius: 8px; border: 1px solid #444;">
+            <div class="shortcut-section" style="padding: 15px;">
               <h3>Actions</h3>
               <div class="shortcut-item">
                 <kbd>V</kbd> <span>Validate Answers</span>
@@ -397,7 +375,7 @@ function showKeyboardHelp() {
               </div>
             </div>
             
-            <div class="shortcut-section" style="padding: 15px; border-radius: 8px; border: 1px solid #444;">
+            <div class="shortcut-section" style="padding: 15px;">
               <h3>Interface</h3>
               <div class="shortcut-item">
                 <kbd>Ctrl</kbd>+<kbd>S</kbd> <span>Toggle Sidebar</span>

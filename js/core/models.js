@@ -127,7 +127,7 @@ class ExamSession {
  */
 class QuestionAttempt {
   constructor(questionNumber, correctAnswers) {
-    this.qn = questionNumber; // Shortened property name
+    this.qn = parseInt(questionNumber, 10); // Shortened property name - ensure integer
     this.ca = correctAnswers; // Array of correct answer letters - shortened
     this.ua = []; // Array of user selected answers - shortened
     this.att = []; // Array of attempt objects - shortened
@@ -194,6 +194,11 @@ class QuestionAttempt {
 
   addHighlightView() {
     this.hvc++;
+  }
+
+  // Backward compatibility getter
+  get questionNumber() {
+    return this.qn;
   }
 
   getTotalHighlightInteractions() {
