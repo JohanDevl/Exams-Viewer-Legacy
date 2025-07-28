@@ -676,7 +676,7 @@ function handlePullToRefreshMove(touch, deltaY) {
  */
 async function handlePullToRefreshEnd() {
   try {
-    if (pullDistance > 80) {
+    if (pullDistance > 120) { // Increased threshold to prevent accidental triggers
       // Trigger refresh
       addSuccessHaptic();
       await refreshExamData();
@@ -764,13 +764,21 @@ async function refreshExamData() {
       window.devLog("📱 Refreshing exam data...");
     }
     
-    // Trigger exam reload if possible
-    if (typeof window.loadExam === 'function' && window.currentExamCode) {
+    // Only trigger reload if there's actually an exam loaded
+    // This prevents unnecessary reloads when pull-to-refresh is triggered accidentally
+    if (typeof window.loadExam === 'function' && window.currentExamCode && window.currentQuestions?.length > 0) {
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📱 Reloading exam ${window.currentExamCode} via pull-to-refresh`);
+      }
       await window.loadExam(window.currentExamCode);
+    } else {
+      if (typeof window.devLog === 'function') {
+        window.devLog("📱 Pull-to-refresh triggered but no exam loaded, ignoring");
+      }
     }
     
     if (typeof window.devLog === 'function') {
-      window.devLog("📱 Exam data refreshed");
+      window.devLog("📱 Exam data refresh completed");
     }
   } catch (error) {
     addErrorHaptic();
