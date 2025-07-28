@@ -337,7 +337,7 @@ function showKeyboardHelp() {
                 <kbd>H</kbd><kbd>L</kbd> <span>Previous/Next (Vim style)</span>
               </div>
               <div class="shortcut-item">
-                <kbd>J</kbd><kbd>K</kbd> <span>Jump 5 Questions Back/Forward</span>
+                <kbd>K</kbd><kbd>J</kbd> <span>Jump 5 Questions Back/Forward</span>
               </div>
               <div class="shortcut-item">
                 <kbd>Page↑</kbd><kbd>Page↓</kbd> <span>Jump 10 Questions</span>
