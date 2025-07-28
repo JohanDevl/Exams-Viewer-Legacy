@@ -102,6 +102,7 @@ import {
   hideMainProgressBar,
   showKeyboardHelp,
   closeKeyboardHelp,
+  showShortcutFeedback,
   displayChangelog,
   updateMainProgressBarVisibility,
   showValidationResults,
@@ -315,6 +316,7 @@ function exposeGlobalFunctions() {
   window.hideMainProgressBar = hideMainProgressBar;
   window.showKeyboardHelp = showKeyboardHelp;
   window.closeKeyboardHelp = closeKeyboardHelp;
+  window.showShortcutFeedback = showShortcutFeedback;
   window.displayChangelog = displayChangelog;
   window.showValidationResults = showValidationResults;
   window.toggleLegalInfo = toggleLegalInfo;
@@ -838,12 +840,12 @@ function setupMainEventListeners() {
           window.clearQuestionStatusCacheForQuestion(window.currentQuestionIndex);
         }
         
+        // Update progress after short delay to ensure favorites data is synchronized
+        // This updates both sidebar and main progress bar automatically with smooth animation
         if (typeof window.updateProgressSidebar === 'function') {
-          window.updateProgressSidebar();
-          // Force sidebar update after a small delay to ensure favorites state is synchronized
           setTimeout(() => {
             window.updateProgressSidebar();
-          }, 100);
+          }, 50);
         }
         
         // Show feedback to user
@@ -3852,5 +3854,11 @@ function downloadFile(content, filename, mimeType) {
 window.updateExportPreview = updateExportPreview;
 window.performExport = performExport;
 // hideExportModal is already defined in ui-effects.js module
+
+// ===========================
+// DEVELOPMENT TESTING SUPPORT
+// ===========================
+
+// Load test script for Issue #16 in development environment
 
 devLog("📦 script-modular.js loaded successfully");

@@ -6,11 +6,56 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Summary
 
+- [4.2.0] - 2025-07-28: Enhanced Keyboard Shortcuts with Visual Feedback
 - [4.1.2] - 2025-07-28: Mobile Navigation & Performance Fixes
 - [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
 - [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
 - [4.0.0] - 2025-07-28: Performance Revolution & Simplified UX
-- [3.1.0] - 2025-07-27: Modern Redesign & Comprehensive Improvements
+
+## [4.2.0] - 2025-07-28
+
+### ✨ New Features
+- **⌨️ Enhanced Keyboard Shortcuts**: Complete keyboard shortcuts system with visual feedback (Issue #16)
+  - Added Export shortcut (E key) to open export modal with single keypress
+  - Implemented visual feedback notifications for all keyboard shortcuts (F, N, V, E, arrows)
+  - Updated help modal (?) to include new E shortcut in Actions section
+  - Enhanced shortcut documentation with proper categorization
+
+### 🐛 Bug Fixes
+- **⭐ Favorites Counter Sync**: Fixed favorites count not updating in main progress bar
+  - Resolved data source inconsistency between session-based and persistent data
+  - Aligned getFavoritesCount() with same data source as answered questions counter
+  - Fixed timing issues with progress bar updates after favorites toggle
+- **🔧 Browser Shortcuts Conflict**: Prevented keyboard shortcuts from blocking essential browser functions
+  - Fixed Ctrl+V (paste), Ctrl+T (new tab), Ctrl+F (find), Ctrl+N (new tab) being blocked
+  - Refined preventDefault() logic to only block explicitly handled combinations
+  - Preserved browser shortcuts while maintaining app functionality
+- **📊 Progress Animation**: Eliminated overlapping animations causing visual glitches
+  - Fixed "buggy" transition when favorites count updates from 0 to 1
+  - Optimized to single smooth animation instead of conflicting multiple calls
+  - Reduced update delay from 100ms to 50ms for better responsiveness
+
+### 🚀 Performance Improvements
+- **⚡ Reduced Redundant Calls**: Optimized progress bar update frequency
+  - Eliminated duplicate updateMainProgressBar() calls (reduced from 4 to 1 per action)
+  - Streamlined favorites toggle workflow to prevent unnecessary processing
+  - Improved animation performance with conflict-free update timing
+
+### 🎨 User Experience Enhancements
+- **🎯 Visual Feedback System**: Real-time confirmation for keyboard shortcuts
+  - Glassmorphism-styled notifications appear in top-right corner for 2 seconds
+  - Smooth slideInRight/slideOutRight animations with automatic cleanup
+  - Clear indication of which shortcut was activated and its action
+- **📖 Improved Documentation**: Enhanced help modal with better organization
+  - Fixed J/K navigation documentation (K=back, J=forward) to match Vim conventions
+  - Added comprehensive shortcut listing in categorized sections
+  - Updated keyboard shortcuts test suite for validation
+
+### 🔧 Technical Improvements
+- **🧹 Code Cleanup**: Removed obsolete test files and references
+  - Eliminated 404 errors from deleted test file imports
+  - Cleaned debug logging for production readiness
+  - Streamlined codebase by removing development artifacts
 
 ## [4.1.2] - 2025-07-28
 
@@ -919,6 +964,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- [4.2.0] - 2025-07-28: Enhanced Keyboard Shortcuts with Visual Feedback
 - [4.1.2] - 2025-07-28: Mobile Navigation & Performance Fixes
 - [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
 - [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
