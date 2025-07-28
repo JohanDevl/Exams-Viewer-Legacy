@@ -305,6 +305,29 @@ function manageSwipeIndicators() {
 }
 
 /**
+ * Optimized update for swipe indicators - only updates if needed (mobile performance)
+ */
+function updateSwipeIndicators() {
+  try {
+    const leftIndicator = document.getElementById('swipeIndicatorLeft');
+    const rightIndicator = document.getElementById('swipeIndicatorRight');
+    const isMobile = window.innerWidth <= 480;
+    
+    // Quick check: if we're mobile and indicators exist, no work needed
+    if (isMobile && leftIndicator && rightIndicator) {
+      return;
+    }
+    
+    // Otherwise fall back to full management
+    manageSwipeIndicators();
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error updating swipe indicators:", error);
+    }
+  }
+}
+
+/**
  * Create swipe indicators for mobile
  */
 function createSwipeIndicators() {
@@ -1176,6 +1199,7 @@ export {
   
   // Swipe indicators
   manageSwipeIndicators,
+  updateSwipeIndicators,
   createSwipeIndicators,
   showSwipeIndicator,
   hideSwipeIndicators,
