@@ -511,6 +511,11 @@ function updateMainProgressBar() {
     const favoritesCount = getFavoritesCount();
     const remainingCount = totalQuestions - answeredCount;
     const answerPercentage = (answeredCount / totalQuestions) * 100;
+    
+    // Debug log for favorites count
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📊 Main progress bar update - Favorites count: ${favoritesCount}`);
+    }
 
     // Update progress bar with smooth animation
     progressFill.style.width = `${answerPercentage}%`;
@@ -612,6 +617,11 @@ function getFavoritesCount() {
         count++;
       }
     });
+    
+    // Debug log for favorites count calculation
+    if (typeof window.devLog === 'function') {
+      window.devLog(`⭐ getFavoritesCount() calculated: ${count} favorites`);
+    }
     
     return count;
   } catch (error) {

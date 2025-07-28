@@ -849,8 +849,15 @@ function setupMainEventListeners() {
         }
         
         // Update main progress bar to reflect favorites count change
+        // Add delay to ensure favorites data is synchronized
         if (typeof window.updateMainProgressBar === 'function') {
-          window.updateMainProgressBar();
+          setTimeout(() => {
+            // Clear any cached data that might affect favorites count
+            if (typeof window.clearQuestionStatusCache === 'function') {
+              window.clearQuestionStatusCache();
+            }
+            window.updateMainProgressBar();
+          }, 150);
         }
         
         // Show feedback to user
