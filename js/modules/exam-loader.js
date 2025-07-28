@@ -27,17 +27,54 @@ async function discoverAvailableExams() {
   try {
     const discoveredExams = {};
 
-    // Method 1: Try to load manifest file first (most efficient, no 404 errors)
+    // Method 1: Try to load optimized manifest file first (most efficient)
     if (typeof window.devLog === 'function') {
-      window.devLog("Attempting to load manifest file...");
+      window.devLog("Attempting to load optimized manifest file...");
     }
     try {
+      // Load manifest file (now updated with v3.0 format)
       const manifestResponse = await fetch("data/manifest.json");
+      
       if (manifestResponse.ok) {
         const manifest = await manifestResponse.json();
-        if (manifest.exams && Array.isArray(manifest.exams)) {
+        
+        // Handle new manifest format (v3.0)
+        if (manifest.version === "3.0" && manifest.exams && Array.isArray(manifest.exams)) {
           if (typeof window.devLog === 'function') {
-            window.devLog("Found manifest file with exams:", manifest.exams);
+            window.devLog("Found optimized manifest v3.0 with", manifest.totalExams, "exams");
+          }
+          
+          // Store the complete manifest for optimized UI rendering
+          window.examManifest = manifest;
+          
+          // Preload popular exams via service worker
+          if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.controller.postMessage({
+              type: 'PRELOAD_EXAMS',
+              exams: manifest.exams.slice(0, 5).map(exam => exam.code) // Top 5 most popular
+            });
+          }
+
+          // Create discoveredExams object for backward compatibility
+          manifest.exams.forEach(exam => {
+            discoveredExams[exam.code] = exam.code;
+          });
+
+          if (Object.keys(discoveredExams).length > 0) {
+            window.availableExams = discoveredExams;
+            if (typeof window.devLog === 'function') {
+              window.devLog(
+                "Successfully loaded exams from optimized manifest:",
+                Object.keys(window.availableExams)
+              );
+            }
+            return window.availableExams;
+          }
+        }
+        // Handle old manifest format (v2.0)
+        else if (manifest.exams && Array.isArray(manifest.exams)) {
+          if (typeof window.devLog === 'function') {
+            window.devLog("Found legacy manifest with exams:", manifest.exams);
           }
 
           // Preload popular exams via service worker
@@ -58,7 +95,7 @@ async function discoverAvailableExams() {
             window.availableExams = discoveredExams;
             if (typeof window.devLog === 'function') {
               window.devLog(
-                "Successfully loaded exams from manifest:",
+                "Successfully loaded exams from legacy manifest:",
                 Object.keys(window.availableExams)
               );
             }
@@ -221,7 +258,7 @@ async function discoverAvailableExams() {
 // ===========================
 
 /**
- * Populate exam select dropdown with question counts
+ * Populate exam select dropdown with question counts from manifest
  */
 async function populateExamSelect() {
   const examSelect = document.getElementById("examCode");
@@ -232,6 +269,23 @@ async function populateExamSelect() {
     examSelect.removeChild(examSelect.lastChild);
   }
   
+  // Use manifest data for optimized loading
+  if (window.examManifest && window.examManifest.exams) {
+    // Use manifest data - no need for individual HTTP requests
+    for (const exam of window.examManifest.exams) {
+      const option = document.createElement("option");
+      option.value = exam.code;
+      option.textContent = `${exam.name} (${exam.questionCount} questions)`;
+      examSelect.appendChild(option);
+    }
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📝 Populated exam select with ${window.examManifest.exams.length} exams from manifest`);
+    }
+    return;
+  }
+  
+  // Fallback to old method if manifest not available
   if (!window.availableExams || Object.keys(window.availableExams).length === 0) {
     return;
   }
@@ -266,7 +320,7 @@ async function populateExamSelect() {
 }
 
 /**
- * Display available exams
+ * Display available exams with optimized manifest data
  */
 async function displayAvailableExams() {
   const examsList = document.getElementById("examsList");
@@ -274,6 +328,39 @@ async function displayAvailableExams() {
   
   examsList.innerHTML = "";
 
+  // Use manifest data for optimized display
+  if (window.examManifest && window.examManifest.exams) {
+    // Update stats and category filter
+    updateExamStats();
+    
+    // Create cards from manifest data - no HTTP requests needed
+    for (const exam of window.examManifest.exams) {
+      const examCard = document.createElement("div");
+      examCard.className = "exam-card";
+
+      examCard.innerHTML = `
+        <div class="exam-name">${exam.code}</div>
+        <div class="exam-count">${exam.questionCount} questions</div>
+      `;
+
+      examCard.addEventListener("click", () => {
+        const examCodeField = document.getElementById("examCode");
+        if (examCodeField) {
+          examCodeField.value = exam.code;
+        }
+        loadExam(exam.code);
+      });
+
+      examsList.appendChild(examCard);
+    }
+    
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📋 Displayed ${window.examManifest.exams.length} exams from manifest`);
+    }
+    return;
+  }
+
+  // Fallback to old method if manifest not available
   if (!window.availableExams || Object.keys(window.availableExams).length === 0) {
     examsList.innerHTML = "<p>No exams found in data folder</p>";
     return;
@@ -315,6 +402,29 @@ async function displayAvailableExams() {
     examsList.appendChild(examCard);
   }
 }
+
+/**
+ * Update exam statistics display
+ */
+function updateExamStats() {
+  const statsElement = document.getElementById("examsStats");
+  if (!statsElement || !window.examManifest) return;
+  
+  const { totalExams, totalQuestions } = window.examManifest;
+  
+  statsElement.innerHTML = `
+    <div class="stat-item">
+      <span class="stat-number">${totalExams}</span>
+      <span>exams</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">${totalQuestions.toLocaleString()}</span>
+      <span>questions</span>
+    </div>
+  `;
+}
+
+
 
 
 /**
@@ -631,6 +741,7 @@ export {
   // Exam display
   displayAvailableExams,
   populateExamSelect,
+  updateExamStats,
   getTimeAgo,
   
   // Exam loading

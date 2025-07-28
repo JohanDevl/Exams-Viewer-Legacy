@@ -1353,19 +1353,101 @@ button.discussion-toggle:hover {
   opacity: 1;
 }
 
+/* Exam card header with code and category */
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
 .exam-code {
   font-weight: 600;
   font-size: var(--text-xl);
   color: var(--text-primary);
-  margin-bottom: var(--space-sm);
   letter-spacing: -0.025em;
 }
 
-.exam-count {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+.exam-category {
+  font-size: var(--text-xs);
   font-weight: 500;
+  color: var(--text-muted);
+  background-color: var(--bg-accent);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
+
+/* Exam name styling */
+.exam-name {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Question count styling */
+.exam-count {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+/* Category filter styling */
+.exam-card[data-category] {
+  position: relative;
+}
+
+.exam-card[data-category*="CIS"]::before {
+  background: linear-gradient(90deg, var(--color-blue-500), var(--color-cyan-500));
+}
+
+.exam-card[data-category*="CSA"]::before {
+  background: linear-gradient(90deg, var(--color-green-500), var(--color-emerald-500));
+}
+
+.exam-card[data-category*="CAD"]::before {
+  background: linear-gradient(90deg, var(--color-purple-500), var(--color-violet-500));
+}
+
+.exam-card[data-category*="CAS"]::before {
+  background: linear-gradient(90deg, var(--color-orange-500), var(--color-amber-500));
+}
+
+/* Exams header with stats */
+.exams-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.exams-stats {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.exams-stats .stat-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.exams-stats .stat-number {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+
 
 
 /* Modal with Glassmorphism */
@@ -2549,22 +2631,6 @@ button.discussion-toggle:hover {
   font-size: 1.1rem;
 }
 
-.category-select {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: 0.375rem;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.3s ease;
-  min-width: 140px;
-}
-
-.category-select:focus {
-  outline: none;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 2px rgba(255, 75, 75, 0.1);
-}
 
 .add-category-btn {
   padding: 0.5rem 0.75rem;
@@ -2876,9 +2942,6 @@ button.discussion-toggle:hover {
     justify-content: center;
   }
 
-  .category-select {
-    min-width: unset;
-  }
 
   .category-input-group {
     flex-direction: column;
@@ -2921,15 +2984,6 @@ button.discussion-toggle:hover {
     font-size: 1.1rem;
   }
 
-  .category-select {
-    grid-column: 1;
-    grid-row: 2;
-    min-width: unset;
-    padding: 0.75rem;
-    font-size: 0.95rem;
-    text-align: center;
-    min-touch-target: 44px;
-  }
 
   .add-category-btn {
     grid-column: 2;

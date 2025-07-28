@@ -6,12 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Summary
 
+- [4.0.0] - {PR_MERGE_DATE}: Performance Revolution & Simplified UX
 - [3.1.0] - 2025-07-27: Modern Redesign & Comprehensive Improvements
 - [3.0.0] - 2025-07-26: Modular ES6 Architecture Migration  
 - [2.10.0] - 2025-07-21: Enhanced Export System
 - [2.9.0] - 2025-07-14: Resume Study Position System
 
-## [3.1.0] - 2025-07-27
+## [4.0.0] - {PR_MERGE_DATE}
 
 ### Added
 - **🔬 Comprehensive Testing System**: Advanced development and quality assurance tools
@@ -32,6 +33,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Advanced discussion button styling and interaction patterns
   - Comprehensive responsive design improvements
   - Enhanced visual hierarchy and spacing consistency
+
+- **🐛 Bug Report Integration**: User feedback and issue tracking system
+  - Added prominent "Report a Bug" button in developer section
+  - Direct integration with GitHub Issues for streamlined bug reporting
+  - Clear visual design with icon and explicit text labeling
+  - Responsive design with mobile-optimized touch targets
+  - Enhanced user guidance for reporting issues and suggestions
+
+- **⚡ Performance Optimization v3.0**: Simplified manifest system for maximum performance
+  - Removed complex category filters and status indicators for cleaner UX
+  - Simplified exam cards displaying only essential information (name + question count)
+  - Streamlined statistics showing only exams and questions count
+  - 90%+ improvement in initial loading performance (1 vs 20+ HTTP requests)
+  - Centered exam names for better visual balance and readability
+
+- **🛠️ Enhanced Python Scripts**: Automated manifest management and documentation
+  - Automatic manifest updates after individual exam scraping (`scraper.py`)
+  - Comprehensive CLI interface for scraper with advanced options (`--force-rescan`, `--force-update`, `--rapid`)
+  - Complete scripts documentation in `docs/scripts/` with detailed usage guides
+  - Cleaned up temporary Python files and organized documentation structure
+  - Enhanced error handling and fallback mechanisms for manifest updates
 
 ### Changed
 - **📊 Statistics System**: Major reliability improvements for data accuracy and consistency
@@ -61,6 +83,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Better separation of concerns in testing infrastructure
   - Optimized performance for UI interactions and animations
 
+- **📋 Data Structure Simplification**: Streamlined exam data management
+  - Removed category-based exam organization and filtering for simplified UX
+  - Updated manifest.json structure (v3.0) with only essential fields
+  - Simplified exam display cards with centered names and question counts
+  - Removed status indicators (COMPLETE/IN PROGRESS) for cleaner interface
+  - Enhanced manifest generation script with improved documentation and validation
+
+- **🎯 User Interface Optimization**: Focus on essential information and better performance
+  - Eliminated complex category dropdowns and filters for simplified navigation
+  - Centered exam names in cards for improved visual alignment
+  - Streamlined homepage statistics to show only relevant metrics (exams/questions)
+  - Improved manifest question count accuracy with real-time data validation
+  - Enhanced loading performance through simplified data structure
+
 ### Fixed
 - **🎯 User Interface**: Critical UX improvements and visual feedback
   - Note button now correctly changes color when note section is displayed
@@ -80,6 +116,45 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Cleaned up simple development testing modules
   - Improved project structure and file organization
   - Enhanced code maintainability and development workflow
+
+- **📊 Data Accuracy**: Corrected exam question counts and manifest consistency
+  - Fixed incorrect question counts in manifest (e.g., CSA now shows accurate 369 questions vs. previous 200)
+  - Resolved manifest loading issues with proper file path configuration in frontend
+  - Corrected exam-loader.js to load from correct manifest.json path
+  - Enhanced manifest generation to use real question counts from exam.json files
+  - Improved data validation and backup creation during manifest updates
+
+- **🎨 Visual Design Improvements**: Enhanced user experience and accessibility
+  - Fixed exam name centering in cards for better visual balance
+  - Removed unused CSS styles related to categories and status indicators
+  - Cleaned up obsolete styling rules and improved code maintainability
+  - Enhanced responsive design for mobile devices
+  - Improved visual hierarchy and information density
+
+## [3.1.0] - 2025-07-27
+
+### Added
+- **🔬 Comprehensive Testing System**: Advanced development and quality assurance tools
+  - Integrated development test modal with real-time feedback
+  - Comprehensive test suite covering core functionality, UI interactions, and edge cases
+  - Automated test reporting with detailed results and performance metrics
+
+- **👨‍💻 Developer Information Section**: Enhanced project attribution and community links
+  - Developer profile with social media integration (GitHub, Raycast)
+  - Improved project attribution and contact information
+  - Enhanced visual design with tooltips and hover effects
+
+### Changed
+- **📊 Statistics System**: Major reliability improvements for data accuracy and consistency
+  - Session statistics calculation now prioritizes first actions only
+  - Improved question status tracking with proper state management
+  - Enhanced progress tracking with accurate answered/preview counts
+
+### Fixed
+- **🎯 User Interface**: Critical UX improvements and visual feedback
+  - Note button now correctly changes color when note section is displayed
+  - Fixed conflict with `updateFavoritesUI()` function overriding manual button states
+  - Improved visual feedback for all interactive elements
 
 ## [3.0.0] - 2025-07-26
 

@@ -1,27 +1,148 @@
 {
+  "version": "3.0",
+  "generated": "2025-07-28T07:38:50.408557",
+  "totalExams": 20,
+  "totalQuestions": 2593,
   "exams": [
-    "CAD",
-    "CAS-PA",
-    "CIS-APM",
-    "CIS-CPG",
-    "CIS-CSM",
-    "CIS-Discovery",
-    "CIS-EM",
-    "CIS-FSM",
-    "CIS-HAM",
-    "CIS-HR",
-    "CIS-ITSM",
-    "CIS-PPM",
-    "CIS-RC",
-    "CIS-SAM",
-    "CIS-SIR",
-    "CIS-SM",
-    "CIS-SPM",
-    "CIS-VR",
-    "CIS-VRM",
-    "CSA"
-  ],
-  "last_updated": "2025-07-07",
-  "total_exams": 20,
-  "structure_version": "2.0"
+    {
+      "code": "CAD",
+      "name": "CAD",
+      "description": "CAD certification exam questions",
+      "questionCount": 158,
+      "lastUpdated": "2025-07-27T22:50:00.961912"
+    },
+    {
+      "code": "CAS-PA",
+      "name": "CAS-PA",
+      "description": "CAS-PA certification exam questions",
+      "questionCount": 79,
+      "lastUpdated": "2025-07-27T22:50:00.963990"
+    },
+    {
+      "code": "CIS-APM",
+      "name": "CIS-APM",
+      "description": "CIS-APM certification exam questions",
+      "questionCount": 24,
+      "lastUpdated": "2025-07-27T22:50:00.965823"
+    },
+    {
+      "code": "CIS-CPG",
+      "name": "CIS-CPG",
+      "description": "CIS-CPG certification exam questions",
+      "questionCount": 32,
+      "lastUpdated": "2025-07-27T22:50:00.966905"
+    },
+    {
+      "code": "CIS-CSM",
+      "name": "CIS-CSM",
+      "description": "CIS-CSM certification exam questions",
+      "questionCount": 240,
+      "lastUpdated": "2025-07-27T22:50:00.972085"
+    },
+    {
+      "code": "CIS-Discovery",
+      "name": "CIS-Discovery",
+      "description": "CIS-Discovery certification exam questions",
+      "questionCount": 104,
+      "lastUpdated": "2025-07-27T22:50:00.977189"
+    },
+    {
+      "code": "CIS-EM",
+      "name": "CIS-EM",
+      "description": "CIS-EM certification exam questions",
+      "questionCount": 109,
+      "lastUpdated": "2025-07-27T22:50:00.982355"
+    },
+    {
+      "code": "CIS-FSM",
+      "name": "CIS-FSM",
+      "description": "CIS-FSM certification exam questions",
+      "questionCount": 44,
+      "lastUpdated": "2025-07-27T22:50:00.983177"
+    },
+    {
+      "code": "CIS-HAM",
+      "name": "CIS-HAM",
+      "description": "CIS-HAM certification exam questions",
+      "questionCount": 180,
+      "lastUpdated": "2025-07-27T22:50:00.984669"
+    },
+    {
+      "code": "CIS-HR",
+      "name": "CIS-HR",
+      "description": "CIS-HR certification exam questions",
+      "questionCount": 169,
+      "lastUpdated": "2025-07-27T22:50:00.986260"
+    },
+    {
+      "code": "CIS-ITSM",
+      "name": "CIS-ITSM",
+      "description": "CIS-ITSM certification exam questions",
+      "questionCount": 224,
+      "lastUpdated": "2025-07-27T22:50:00.987440"
+    },
+    {
+      "code": "CIS-PPM",
+      "name": "CIS-PPM",
+      "description": "CIS-PPM certification exam questions",
+      "questionCount": 166,
+      "lastUpdated": "2025-07-27T22:50:00.988872"
+    },
+    {
+      "code": "CIS-RC",
+      "name": "CIS-RC",
+      "description": "CIS-RC certification exam questions",
+      "questionCount": 179,
+      "lastUpdated": "2025-07-27T22:50:00.990506"
+    },
+    {
+      "code": "CIS-SAM",
+      "name": "CIS-SAM",
+      "description": "CIS-SAM certification exam questions",
+      "questionCount": 191,
+      "lastUpdated": "2025-07-27T22:50:00.994354"
+    },
+    {
+      "code": "CIS-SIR",
+      "name": "CIS-SIR",
+      "description": "CIS-SIR certification exam questions",
+      "questionCount": 117,
+      "lastUpdated": "2025-07-27T22:50:00.995956"
+    },
+    {
+      "code": "CIS-SM",
+      "name": "CIS-SM",
+      "description": "CIS-SM certification exam questions",
+      "questionCount": 39,
+      "lastUpdated": "2025-07-27T22:50:00.998230"
+    },
+    {
+      "code": "CIS-SPM",
+      "name": "CIS-SPM",
+      "description": "CIS-SPM certification exam questions",
+      "questionCount": 51,
+      "lastUpdated": "2025-07-27T22:50:00.999093"
+    },
+    {
+      "code": "CIS-VR",
+      "name": "CIS-VR",
+      "description": "CIS-VR certification exam questions",
+      "questionCount": 59,
+      "lastUpdated": "2025-07-27T22:50:01.000355"
+    },
+    {
+      "code": "CIS-VRM",
+      "name": "CIS-VRM",
+      "description": "CIS-VRM certification exam questions",
+      "questionCount": 59,
+      "lastUpdated": "2025-07-27T22:50:01.002532"
+    },
+    {
+      "code": "CSA",
+      "name": "CSA",
+      "description": "CSA certification exam questions",
+      "questionCount": 369,
+      "lastUpdated": "2025-07-27T22:50:01.005735"
+    }
+  ]
 }

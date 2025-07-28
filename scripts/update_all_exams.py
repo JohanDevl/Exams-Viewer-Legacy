@@ -182,6 +182,21 @@ def main():
     
     print(f"📝 Detailed log saved to update_log.json")
     
+    # Update manifest after successful scraping
+    if successful_updates > 0:
+        print(f"\n🔄 Updating exam manifest...")
+        try:
+            from update_manifest import generate_manifest, validate_manifest, save_manifest
+            
+            # Generate new manifest
+            manifest = generate_manifest()
+            if manifest and validate_manifest(manifest) and save_manifest(manifest):
+                print(f"✅ Manifest updated successfully with latest exam data")
+            else:
+                print(f"⚠️  Failed to update manifest - check manually")
+        except Exception as e:
+            print(f"⚠️  Failed to update manifest: {str(e)}")
+    
     # Exit with appropriate code
     if failed_updates > 0:
         print(f"⚠️  Completed with {failed_updates} failures")
