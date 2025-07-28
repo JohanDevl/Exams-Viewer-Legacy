@@ -612,41 +612,32 @@ function getAnsweredQuestionsCount() {
 }
 
 /**
- * Get count of favorite questions in current exam
+ * Get count of favorite questions in current session (for progress bar consistency)
  */
 function getFavoritesCount() {
   try {
-    if (!window.currentExam) return 0;
-    
-    // Always count favorites from ALL questions, not just filtered ones
-    const allQuestions = typeof window.getAllQuestions === 'function' ? window.getAllQuestions() : [];
-    if (!allQuestions.length) return 0;
+    if (!window.currentQuestions?.length) return 0;
     
     let count = 0;
-    allQuestions.forEach((question, index) => {
-      // Use getQuestionStatus like the sidebar does, instead of isQuestionFavorite directly
-      const questionStatus = typeof window.getQuestionStatus === 'function'
-        ? window.getQuestionStatus(index)
-        : { isFavorite: false };
-      
-      const isFav = questionStatus.isFavorite;
+    
+    // Count favorites from current questions (like answered count does)
+    window.currentQuestions.forEach((question, index) => {
+      // Use direct isQuestionFavorite check like the session data
+      const isFav = typeof window.isQuestionFavorite === 'function' && 
+                    window.isQuestionFavorite(index);
       if (isFav) {
         count++;
       }
       
       // Debug first few questions
       if (index < 3 && typeof window.devLog === 'function') {
-        window.devLog(`🔍 Question ${index}: getQuestionStatus.isFavorite = ${isFav}`);
-        // Also check the direct method for comparison
-        const directFav = typeof window.isQuestionFavorite === 'function' && 
-                          window.isQuestionFavorite(index);
-        window.devLog(`🔍 Question ${index}: isQuestionFavorite direct = ${directFav}`);
+        window.devLog(`🔍 Current Question ${index} (Q${question.question_number}): isFavorite = ${isFav}`);
       }
     });
     
     // Debug log for favorites count calculation
     if (typeof window.devLog === 'function') {
-      window.devLog(`⭐ getFavoritesCount() calculated: ${count} favorites`);
+      window.devLog(`⭐ getFavoritesCount() calculated: ${count} favorites from currentQuestions`);
     }
     
     return count;
