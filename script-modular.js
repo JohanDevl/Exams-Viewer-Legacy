@@ -840,13 +840,12 @@ function setupMainEventListeners() {
           window.clearQuestionStatusCacheForQuestion(window.currentQuestionIndex);
         }
         
+        // Update progress after short delay to ensure favorites data is synchronized
+        // This updates both sidebar and main progress bar automatically with smooth animation
         if (typeof window.updateProgressSidebar === 'function') {
-          window.updateProgressSidebar();
-          // Force sidebar update after a small delay to ensure favorites state is synchronized
-          // This also updates the main progress bar automatically
           setTimeout(() => {
             window.updateProgressSidebar();
-          }, 100);
+          }, 50);
         }
         
         // Show feedback to user
