@@ -1,5 +1,5 @@
 // Service Worker for Intelligent Caching with Background Updates
-const CACHE_NAME = 'exams-viewer-v1';
+const CACHE_NAME = 'exams-viewer-v2'; // Bumped version to clear old cache
 
 // Development mode detection
 const isDev = () => {
@@ -10,12 +10,8 @@ const isDev = () => {
 };
 const CACHE_EXPIRY = 6 * 60 * 60 * 1000; // 6 hours in milliseconds (reduced for better freshness)
 
-// Files to cache immediately
+// Files to cache immediately - Only essential assets, NOT the main site files
 const STATIC_CACHE_FILES = [
-  './',
-  './index.html',
-  './script-modular.js',
-  './styles.css',
   './favicon.ico',
   './favicon.svg',
   './data/manifest.json'
@@ -26,7 +22,7 @@ const CACHE_STRATEGIES = {
   examData: 'cache-first-with-background-update',
   chunks: 'cache-first-with-background-update', 
   manifest: 'network-first',
-  static: 'cache-first'
+  static: 'network-first' // Changed to network-first to avoid caching site files
 };
 
 // Install event - cache static files
@@ -38,7 +34,18 @@ self.addEventListener('install', event => {
         if (isDev()) console.log('Caching static files');
         return cache.addAll(STATIC_CACHE_FILES);
       })
-      .then(() => self.skipWaiting())
+      .then(() => {
+        // Notify all clients that a new version is available
+        self.clients.matchAll().then(clients => {
+          clients.forEach(client => {
+            client.postMessage({
+              type: 'SW_UPDATE_AVAILABLE',
+              version: CACHE_NAME
+            });
+          });
+        });
+        return self.skipWaiting();
+      })
   );
 });
 
@@ -48,16 +55,25 @@ self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
       .then(cacheNames => {
-        return Promise.all(
-          cacheNames.map(cacheName => {
-            if (cacheName !== CACHE_NAME) {
-              if (isDev()) console.log('Deleting old cache:', cacheName);
-              return caches.delete(cacheName);
-            }
-          })
-        );
+        const oldCaches = cacheNames.filter(cacheName => cacheName !== CACHE_NAME);
+        if (oldCaches.length > 0) {
+          if (isDev()) console.log('Deleting old caches:', oldCaches);
+          return Promise.all(oldCaches.map(cacheName => caches.delete(cacheName)));
+        }
       })
       .then(() => self.clients.claim())
+      .then(() => {
+        // Notify all clients that the update is complete
+        return self.clients.matchAll().then(clients => {
+          clients.forEach(client => {
+            client.postMessage({
+              type: 'SW_UPDATE_COMPLETE',
+              version: CACHE_NAME,
+              message: 'Cache strategy updated - site files will always be fresh!'
+            });
+          });
+        });
+      })
   );
 });
 
@@ -67,6 +83,16 @@ self.addEventListener('fetch', event => {
   
   // Only handle GET requests
   if (event.request.method !== 'GET') {
+    return;
+  }
+
+  // Skip caching for main site files (HTML, JS, CSS) to always get fresh versions
+  if (url.pathname.endsWith('.html') || 
+      url.pathname.endsWith('.js') || 
+      url.pathname.endsWith('.css') ||
+      url.pathname === '/' ||
+      url.pathname === './') {
+    // Pass through to network without caching
     return;
   }
 

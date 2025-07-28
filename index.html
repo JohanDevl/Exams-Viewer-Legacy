@@ -1291,18 +1291,34 @@
               console.log("Service Worker registered:", registration);
             }
 
-            // Listen for cache updates
+            // Listen for cache updates and service worker messages
             navigator.serviceWorker.addEventListener("message", (event) => {
+              const isDev = window.location.hostname === "localhost" ||
+                           window.location.hostname === "127.0.0.1" ||
+                           window.location.hostname === "" ||
+                           window.location.protocol === "file:";
+              
               if (event.data && event.data.type === "CACHE_UPDATED") {
-                if (
-                  window.location.hostname === "localhost" ||
-                  window.location.hostname === "127.0.0.1" ||
-                  window.location.hostname === "" ||
-                  window.location.protocol === "file:"
-                ) {
+                if (isDev) {
                   console.log("Cache updated for:", event.data.url);
                 }
                 // Could show a subtle notification to user about updated content
+              }
+              
+              if (event.data && event.data.type === "SW_UPDATE_AVAILABLE") {
+                if (isDev) {
+                  console.log("Service Worker update available:", event.data.version);
+                }
+                // Show update notification (optional)
+                showSuccess("🔄 Site update installing...", 2000);
+              }
+              
+              if (event.data && event.data.type === "SW_UPDATE_COMPLETE") {
+                if (isDev) {
+                  console.log("Service Worker update complete:", event.data.message);
+                }
+                // Show completion notification
+                showSuccess("✅ Site updated! Fresh content guaranteed.", 3000);
               }
             });
           })

@@ -6,11 +6,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Summary
 
+- [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
 - [4.0.0] - 2025-07-28: Performance Revolution & Simplified UX
 - [3.1.0] - 2025-07-27: Modern Redesign & Comprehensive Improvements
 - [3.0.0] - 2025-07-26: Modular ES6 Architecture Migration  
 - [2.10.0] - 2025-07-21: Enhanced Export System
 - [2.9.0] - 2025-07-14: Resume Study Position System
+
+## [4.1.0] - 2025-07-28
+
+### 🚀 Fixed
+- **🔄 Smart Cache Strategy**: Resolved cache persistence issues preventing fresh deployments
+  - Site files (HTML, CSS, JS) no longer cached - always fresh from network
+  - User data (sessions, settings, statistics) remains cached in localStorage
+  - Automatic cache cleanup for existing users with seamless transitions
+  - Service worker upgrade notifications with user-friendly messages
+
+### 🔧 Changed  
+- **📦 Service Worker Enhancement**: Improved caching intelligence (v1 → v2)
+  - Network-first strategy for site assets ensures immediate updates
+  - Cache-first strategy maintained for exam data for optimal performance
+  - Automatic old cache purge prevents stale content issues
+  - Real-time update notifications during service worker transitions
+
+### 🎯 Technical Improvements
+- **⚡ Deployment Optimization**: Enhanced user experience for version updates
+  - Backward-compatible cache management for existing users
+  - Graceful cache migration with zero data loss
+  - Improved service worker lifecycle management
+  - Enhanced development debugging with detailed cache operations logging
 
 ## [4.0.0] - 2025-07-28
 
