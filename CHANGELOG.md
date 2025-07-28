@@ -11,7 +11,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
 - [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
 - [4.0.0] - 2025-07-28: Performance Revolution & Simplified UX
-- [3.1.0] - 2025-07-27: Modern Redesign & Comprehensive Improvements
 
 ## [4.2.0] - 2025-07-28
 
@@ -965,6 +964,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- [4.2.0] - 2025-07-28: Enhanced Keyboard Shortcuts with Visual Feedback
 - [4.1.2] - 2025-07-28: Mobile Navigation & Performance Fixes
 - [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
 - [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
