@@ -7210,6 +7210,39 @@ button.discussion-toggle:hover {
   z-index: 1;
 }
 
+.bug-report-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  border: none;
+  cursor: pointer;
+}
+
+.bug-report-button:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  color: white;
+}
+
+.bug-report-button i {
+  font-size: 0.875rem;
+}
+
+.bug-report-button span {
+  white-space: nowrap;
+}
+
 /* Dark mode adjustments */
 [data-theme="dark"] .developer-info {
   background: linear-gradient(135deg, 
@@ -7230,6 +7263,14 @@ button.discussion-toggle:hover {
   background: linear-gradient(135deg, #e6edf3 0%, #d0d7de 100%);
 }
 
+[data-theme="dark"] .bug-report-button {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+[data-theme="dark"] .bug-report-button:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
   .developer-info {
@@ -7248,5 +7289,14 @@ button.discussion-toggle:hover {
   
   .developer-link i {
     font-size: 1rem;
+  }
+  
+  .bug-report-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .bug-report-button i {
+    font-size: 0.8rem;
   }
 }
