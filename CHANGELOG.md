@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Summary
 
+- [4.1.2] - 2025-07-28: Mobile Navigation & Performance Fixes
 - [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
 - [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
 - [4.0.0] - 2025-07-28: Performance Revolution & Simplified UX
@@ -13,6 +14,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - [3.0.0] - 2025-07-26: Modular ES6 Architecture Migration  
 - [2.10.0] - 2025-07-21: Enhanced Export System
 - [2.9.0] - 2025-07-14: Resume Study Position System
+
+## [4.1.2] - 2025-07-28
+
+### 🐛 Bug Fixes
+- **📱 Mobile Navigation Issue**: Fixed critical bug where scrolling up to select box caused unwanted exam reloading
+  - Added duplicate exam detection to prevent unnecessary reloads in select box event handlers
+  - Enhanced pull-to-refresh logic with better accidental trigger prevention
+  - Increased pull-to-refresh threshold from 80px to 120px for more deliberate gestures
+  - Added validation in refreshExamData() to ensure exam is actually loaded before refresh
+
+### 🚀 Performance Improvements  
+- **⚡ Mobile Question Loading**: Optimized question display performance on touch devices
+  - Eliminated redundant displayCurrentQuestion() calls (reduced from 3 to 1)
+  - Added intelligent caching for processed question and answer text
+  - Optimized mobile navigation creation (only create if not exists)
+  - Enhanced swipe indicators with efficient updateSwipeIndicators() function
+
+### 🔧 Technical Improvements
+- **🛠️ Mobile Infrastructure**: Enhanced mobile navigation reliability and debugging
+  - Fixed "Sidebar not found" error by correcting element ID from 'sidebar' to 'progressSidebar'
+  - Added deferred sidebar swipe-to-close setup in enhanced navigation initialization
+  - Improved mobile event handling with better gesture detection accuracy
+  - Enhanced development logging for mobile navigation debugging
+
+### 🎯 Mobile User Experience
+- **📱 Touch Interaction**: Significantly improved mobile navigation fluidity
+  - Prevents accidental exam reloading during normal mobile navigation
+  - Preserves user progress when scrolling between UI elements
+  - Enhanced touch responsiveness with more accurate gesture recognition
+  - Better handling of mobile device orientation and screen size changes
 
 ## [4.1.1] - 2025-07-28
 
