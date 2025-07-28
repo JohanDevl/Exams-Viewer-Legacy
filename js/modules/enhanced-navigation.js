@@ -476,11 +476,23 @@ function updateProgressBar() {
  */
 function updateMainProgressBar() {
   try {
+    if (typeof window.devLog === 'function') {
+      window.devLog("🔄 updateMainProgressBar() called");
+    }
+    
     const mainProgressSection = document.getElementById("mainProgressSection");
-    if (!mainProgressSection || !window.currentQuestions?.length) return;
+    if (!mainProgressSection || !window.currentQuestions?.length) {
+      if (typeof window.devLog === 'function') {
+        window.devLog("❌ updateMainProgressBar() early return - no section or questions");
+      }
+      return;
+    }
 
     // Check if the main progress bar is enabled in settings
     if (!window.settings?.showMainProgressBar) {
+      if (typeof window.devLog === 'function') {
+        window.devLog("❌ updateMainProgressBar() disabled in settings");
+      }
       mainProgressSection.style.display = "none";
       return;
     }
