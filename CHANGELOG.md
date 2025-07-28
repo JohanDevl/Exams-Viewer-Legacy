@@ -6,13 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Summary
 
+- [4.1.2] - 2025-07-28: Mobile Navigation & Performance Fixes
 - [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
 - [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
 - [4.0.0] - 2025-07-28: Performance Revolution & Simplified UX
 - [3.1.0] - 2025-07-27: Modern Redesign & Comprehensive Improvements
-- [3.0.0] - 2025-07-26: Modular ES6 Architecture Migration  
-- [2.10.0] - 2025-07-21: Enhanced Export System
-- [2.9.0] - 2025-07-14: Resume Study Position System
+
+## [4.1.2] - 2025-07-28
+
+### 🐛 Bug Fixes
+- **📱 Mobile Navigation Issue**: Fixed critical bug where scrolling up to select box caused unwanted exam reloading
+  - Added duplicate exam detection to prevent unnecessary reloads in select box event handlers
+  - Enhanced pull-to-refresh logic with better accidental trigger prevention
+  - Increased pull-to-refresh threshold from 80px to 120px for more deliberate gestures
+  - Added validation in refreshExamData() to ensure exam is actually loaded before refresh
+
+### 🚀 Performance Improvements  
+- **⚡ Mobile Question Loading**: Optimized question display performance on touch devices
+  - Eliminated redundant displayCurrentQuestion() calls (reduced from 3 to 1)
+  - Added intelligent caching for processed question and answer text
+  - Optimized mobile navigation creation (only create if not exists)
+  - Enhanced swipe indicators with efficient updateSwipeIndicators() function
+
+### 🔧 Technical Improvements
+- **🛠️ Mobile Infrastructure**: Enhanced mobile navigation reliability and debugging
+  - Fixed "Sidebar not found" error by correcting element ID from 'sidebar' to 'progressSidebar'
+  - Added deferred sidebar swipe-to-close setup in enhanced navigation initialization
+  - Improved mobile event handling with better gesture detection accuracy
+  - Enhanced development logging for mobile navigation debugging
+
+### 🎯 Mobile User Experience
+- **📱 Touch Interaction**: Significantly improved mobile navigation fluidity
+  - Prevents accidental exam reloading during normal mobile navigation
+  - Preserves user progress when scrolling between UI elements
+  - Enhanced touch responsiveness with more accurate gesture recognition
+  - Better handling of mobile device orientation and screen size changes
 
 ## [4.1.1] - 2025-07-28
 
@@ -891,19 +919,26 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
-- **v3.1.x**: Modern redesign with comprehensive testing system, enhanced UI/UX, statistics reliability improvements, and development experience enhancements
-- **v3.0.x**: Modular ES6 architecture migration with enhanced validation feedback and comprehensive documentation
-- **v2.10.x**: Enhanced export system with flexible options, modal interface, and comprehensive format support
-- **v2.9.x**: Resume study position system with intelligent session tracking and cross-session progress indicators
-- **v2.8.x**: Enhanced mobile navigation system with swipe gestures, touch-optimized UI, and mobile bottom navigation bar
-- **v2.7.x**: Informative tooltips system with keyboard shortcuts and enhanced user guidance
-- **v2.6.x**: Enhanced visual status indicators with color-coded badges and question organization system
-- **v2.5.x**: Enhanced navigation system with keyboard shortcuts, progress sidebar, history, animated progress indicator, embedded image display fixes, and performance optimizations
-- **v2.4.x**: Advanced search and filtering system with smart auto-completion
-- **v2.3.x**: Toolbar visibility toggle and UI declutter option
-- **v2.2.x**: Changelog functionality and improvements
-- **v2.1.x**: Favorites and study management features
-- **v2.0.x**: Complete redesign with dark mode and statistics
-- **v1.5.x**: Multi-exam support and responsive design
-- **v1.0.x**: Initial stable release with core functionality
-- **v0.1.x**: Proof of concept and project setup
+- [4.1.2] - 2025-07-28: Mobile Navigation & Performance Fixes
+- [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
+- [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
+- [4.0.0] - 2025-07-28: Performance Revolution & Simplified UX
+- [3.1.0] - 2025-07-27: Modern Redesign & Comprehensive Improvements
+- [3.0.0] - 2025-07-26: Modular ES6 Architecture Migration  
+- [2.10.0] - 2025-07-14: Enhanced Export System
+- [2.9.0] - 2025-07-14: Resume Study Position System
+- [2.8.0] - 2025-07-14: Advanced Search Filtering & UI Enhancements
+- [2.7.0] - 2025-07-14: Enhanced Statistics & UI Refinements
+- [2.6.0] - 2025-07-14: Progressive Web App Features & Comprehensive Improvements
+- [2.5.3] - 2025-07-13: Minor Bug Fixes & Stability Improvements
+- [2.5.2] - 2025-07-13: Question Navigation & Export Enhancements
+- [2.5.1] - 2025-07-13: Bug Fixes & Performance Optimizations
+- [2.5.0] - 2025-07-13: Enhanced Statistics & Mobile Experience
+- [2.4.0] - 2025-07-13: Advanced Analytics & Performance Optimization
+- [2.3.0] - 2025-07-09: Mobile Experience & User Interface Enhancements
+- [2.2.0] - 2025-07-09: Enhanced Search & Filter System
+- [2.1.0] - 2025-07-09: Comprehensive Export System & UI Improvements
+- [2.0.0] - 2025-07-08: Advanced Statistics & Session Management
+- [1.5.0] - 2025-07-05: Enhanced User Experience & Statistics
+- [1.0.0] - 2025-07-04: Core Features & Functionality
+- [0.1.0] - 2025-07-04: Initial Release

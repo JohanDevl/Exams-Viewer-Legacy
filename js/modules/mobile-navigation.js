@@ -305,6 +305,29 @@ function manageSwipeIndicators() {
 }
 
 /**
+ * Optimized update for swipe indicators - only updates if needed (mobile performance)
+ */
+function updateSwipeIndicators() {
+  try {
+    const leftIndicator = document.getElementById('swipeIndicatorLeft');
+    const rightIndicator = document.getElementById('swipeIndicatorRight');
+    const isMobile = window.innerWidth <= 480;
+    
+    // Quick check: if we're mobile and indicators exist, no work needed
+    if (isMobile && leftIndicator && rightIndicator) {
+      return;
+    }
+    
+    // Otherwise fall back to full management
+    manageSwipeIndicators();
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error updating swipe indicators:", error);
+    }
+  }
+}
+
+/**
  * Create swipe indicators for mobile
  */
 function createSwipeIndicators() {
@@ -526,10 +549,11 @@ function createMobileBottomNavigation() {
  */
 function setupSidebarSwipeToClose() {
   try {
-    const sidebar = document.getElementById('sidebar');
+    const sidebar = document.getElementById('progressSidebar');
     if (!sidebar) {
-      if (typeof window.devError === 'function') {
-        window.devError("Sidebar not found for swipe-to-close setup");
+      // Sidebar might not be created yet during early initialization - setup later
+      if (typeof window.devLog === 'function') {
+        window.devLog("📱 Sidebar not ready yet, will setup swipe-to-close when sidebar is available");
       }
       return;
     }
@@ -652,7 +676,7 @@ function handlePullToRefreshMove(touch, deltaY) {
  */
 async function handlePullToRefreshEnd() {
   try {
-    if (pullDistance > 80) {
+    if (pullDistance > 120) { // Increased threshold to prevent accidental triggers
       // Trigger refresh
       addSuccessHaptic();
       await refreshExamData();
@@ -740,13 +764,21 @@ async function refreshExamData() {
       window.devLog("📱 Refreshing exam data...");
     }
     
-    // Trigger exam reload if possible
-    if (typeof window.loadExam === 'function' && window.currentExamCode) {
+    // Only trigger reload if there's actually an exam loaded
+    // This prevents unnecessary reloads when pull-to-refresh is triggered accidentally
+    if (typeof window.loadExam === 'function' && window.currentExamCode && window.currentQuestions?.length > 0) {
+      if (typeof window.devLog === 'function') {
+        window.devLog(`📱 Reloading exam ${window.currentExamCode} via pull-to-refresh`);
+      }
       await window.loadExam(window.currentExamCode);
+    } else {
+      if (typeof window.devLog === 'function') {
+        window.devLog("📱 Pull-to-refresh triggered but no exam loaded, ignoring");
+      }
     }
     
     if (typeof window.devLog === 'function') {
-      window.devLog("📱 Exam data refreshed");
+      window.devLog("📱 Exam data refresh completed");
     }
   } catch (error) {
     addErrorHaptic();
@@ -1109,7 +1141,7 @@ function initializeMobileNavigation() {
     // Setup touch feedback
     setupTouchFeedback();
     
-    // Setup sidebar swipe-to-close
+    // Setup sidebar swipe-to-close (will be retried later if sidebar isn't ready)
     setupSidebarSwipeToClose();
     
     // Setup mobile bottom navigation
@@ -1176,6 +1208,7 @@ export {
   
   // Swipe indicators
   manageSwipeIndicators,
+  updateSwipeIndicators,
   createSwipeIndicators,
   showSwipeIndicator,
   hideSwipeIndicators,

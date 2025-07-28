@@ -551,7 +551,16 @@ function setupMainEventListeners() {
     examCodeSelect.addEventListener("change", async (e) => {
       const examCode = e.target.value.trim();
       if (examCode) {
-        await loadExam(examCode.toUpperCase());
+        const newExamCode = examCode.toUpperCase();
+        
+        // Prevent reloading the same exam (fixes mobile reloading issue)
+        const currentExamCode = window.currentExam?.exam_code || window.currentExam?.code || window.currentExam?.exam_name;
+        if (currentExamCode && currentExamCode.toUpperCase() === newExamCode) {
+          devLog(`📱 Prevented unnecessary reload of exam ${newExamCode} (already loaded)`);
+          return;
+        }
+        
+        await loadExam(newExamCode);
       }
     });
     
@@ -560,7 +569,16 @@ function setupMainEventListeners() {
       if (e.key === "Enter") {
         const examCode = e.target.value.trim();
         if (examCode) {
-          await loadExam(examCode.toUpperCase());
+          const newExamCode = examCode.toUpperCase();
+          
+          // Prevent reloading the same exam (fixes mobile reloading issue)
+          const currentExamCode = window.currentExam?.exam_code || window.currentExam?.code || window.currentExam?.exam_name;
+          if (currentExamCode && currentExamCode.toUpperCase() === newExamCode) {
+            devLog(`📱 Prevented unnecessary reload of exam ${newExamCode} (already loaded)`);
+            return;
+          }
+          
+          await loadExam(newExamCode);
         }
       }
     });

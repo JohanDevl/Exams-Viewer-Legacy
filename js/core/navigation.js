@@ -86,8 +86,8 @@ async function navigateToQuestionIndex(newIndex, addToHistory = true) {
         const examCode = window.currentExam?.exam_code || window.currentExam?.code || window.currentExam?.exam_name;
         
         if (examCode) {
-          // Show placeholder immediately while loading
-          displayCurrentQuestion();
+          // Show lightweight placeholder without full display processing
+          displayPlaceholderQuestion(newIndex);
           if (typeof window.updateProgressSidebar === 'function') {
             window.updateProgressSidebar();
           }
@@ -98,7 +98,7 @@ async function navigateToQuestionIndex(newIndex, addToHistory = true) {
             if (success) {
               // Update current questions after successful loading
               window.currentQuestions = window.isSearchActive ? window.currentQuestions : [...window.allQuestions];
-              // Refresh display with loaded content
+              // Now do full display with loaded content
               displayCurrentQuestion();
               if (typeof window.updateProgressSidebar === 'function') {
                 window.updateProgressSidebar();
@@ -354,6 +354,53 @@ function goToHome() {
 // ===========================
 
 /**
+ * Display lightweight placeholder for loading questions (mobile optimized)
+ */
+function displayPlaceholderQuestion(questionIndex) {
+  try {
+    const question = window.currentQuestions[questionIndex];
+    if (!question?.isPlaceholder) return;
+
+    // Minimal UI updates for placeholder - avoid expensive operations
+    const questionTextElement = document.getElementById("questionText");
+    const answersList = document.getElementById("answersList");
+    
+    if (questionTextElement && answersList) {
+      // Clear existing content efficiently
+      questionTextElement.textContent = '';
+      answersList.textContent = '';
+      
+      // Create simple loading placeholder without DOM manipulation overhead
+      questionTextElement.innerHTML = `
+        <div class="loading-placeholder">
+          <div class="spinner"></div>
+          <p>Loading question ${question.question_number}...</p>
+        </div>
+      `;
+    }
+
+    // Update only essential navigation elements
+    const questionCounter = document.getElementById("questionCounter");
+    if (questionCounter) {
+      questionCounter.textContent = `${questionIndex + 1} of ${window.currentQuestions.length} questions`;
+    }
+    
+    const questionTitle = document.getElementById("questionTitle");
+    if (questionTitle) {
+      questionTitle.textContent = `Question ${question.question_number || (questionIndex + 1)}`;
+    }
+
+    if (typeof window.devLog === 'function') {
+      window.devLog(`📱 Displayed lightweight placeholder for Q${question.question_number}`);
+    }
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error displaying placeholder question:", error);
+    }
+  }
+}
+
+/**
  * Display current question
  */
 function displayCurrentQuestion(fromToggleAction = false) {
@@ -362,13 +409,15 @@ function displayCurrentQuestion(fromToggleAction = false) {
 
     const question = window.currentQuestions[window.currentQuestionIndex || 0];
     
-    // Create mobile bottom navigation if needed
-    if (typeof window.createMobileBottomNavigation === 'function') {
+    // Create mobile bottom navigation only once or when needed (not on every question change)
+    if (typeof window.createMobileBottomNavigation === 'function' && !document.querySelector('.mobile-bottom-nav')) {
       window.createMobileBottomNavigation();
     }
     
-    // Manage swipe indicators for current question
-    if (typeof window.manageSwipeIndicators === 'function') {
+    // Manage swipe indicators efficiently - only update, don't recreate
+    if (typeof window.updateSwipeIndicators === 'function') {
+      window.updateSwipeIndicators();
+    } else if (typeof window.manageSwipeIndicators === 'function') {
       window.manageSwipeIndicators();
     }
     
@@ -467,29 +516,38 @@ function displayCurrentQuestion(fromToggleAction = false) {
       examTopicsLink.href = question.link || "#";
     }
 
-    // Process question text and handle embedded images
+    // Process question text and handle embedded images (cached for performance)
     let questionText = question.question || "";
     
-    // Replace embedded image references with base64 data
-    if (question.images && Object.keys(question.images).length > 0) {
-      if (typeof window.processEmbeddedImages === 'function') {
-        questionText = window.processEmbeddedImages(questionText, question.images);
+    // Check if images are already processed (cached)
+    if (!question._processedText) {
+      // Replace embedded image references with base64 data
+      if (question.images && Object.keys(question.images).length > 0) {
+        if (typeof window.processEmbeddedImages === 'function') {
+          questionText = window.processEmbeddedImages(questionText, question.images);
+        }
       }
-    }
-    
-    // Fix any remaining image paths to point to ExamTopics.com (fallback)
-    const originalText = questionText;
-    questionText = questionText.replace(
-      /src="\/assets\/media\/exam-media\//g,
-      'src="https://www.examtopics.com/assets/media/exam-media/'
-    );
+      
+      // Fix any remaining image paths to point to ExamTopics.com (fallback)
+      const originalText = questionText;
+      questionText = questionText.replace(
+        /src="\/assets\/media\/exam-media\//g,
+        'src="https://www.examtopics.com/assets/media/exam-media/'
+      );
 
-    // Debug log image processing
-    if (question.images && Object.keys(question.images).length > 0 && typeof window.devLog === 'function') {
-      window.devLog("🖼️ Processed embedded images:", Object.keys(question.images).length, "images found");
-    }
-    if (originalText !== questionText && typeof window.devLog === 'function') {
-      window.devLog("🔧 Image path fixed:", originalText.length, "→", questionText.length);
+      // Cache processed text to avoid reprocessing on mobile navigation
+      question._processedText = questionText;
+
+      // Debug log image processing (only on first processing)
+      if (question.images && Object.keys(question.images).length > 0 && typeof window.devLog === 'function') {
+        window.devLog("🖼️ Processed embedded images:", Object.keys(question.images).length, "images found");
+      }
+      if (originalText !== questionText && typeof window.devLog === 'function') {
+        window.devLog("🔧 Image path fixed:", originalText.length, "→", questionText.length);
+      }
+    } else {
+      // Use cached processed text
+      questionText = question._processedText;
     }
 
     const questionTextElement = document.getElementById("questionText");
@@ -600,21 +658,31 @@ function displayAnswers(question) {
       answersList.removeChild(answersList.firstChild);
     }
 
-    answers.forEach((answer) => {
+    answers.forEach((answer, index) => {
       const answerLetter = answer.charAt(0);
       let answerText = answer.substring(3);
 
-      // Process embedded images in answers
-      if (question.images && Object.keys(question.images).length > 0 && 
-          typeof window.processEmbeddedImages === 'function') {
-        answerText = window.processEmbeddedImages(answerText, question.images);
-      }
+      // Use cached processed text for answers to improve mobile performance
+      const cacheKey = `_processedAnswer_${index}`;
+      if (!question[cacheKey]) {
+        // Process embedded images in answers
+        if (question.images && Object.keys(question.images).length > 0 && 
+            typeof window.processEmbeddedImages === 'function') {
+          answerText = window.processEmbeddedImages(answerText, question.images);  
+        }
 
-      // Fix image paths in answers too (fallback)
-      answerText = answerText.replace(
-        /src="\/assets\/media\/exam-media\//g,
-        'src="https://www.examtopics.com/assets/media/exam-media/'
-      );
+        // Fix image paths in answers too (fallback)
+        answerText = answerText.replace(
+          /src="\/assets\/media\/exam-media\//g,
+          'src="https://www.examtopics.com/assets/media/exam-media/'
+        );
+        
+        // Cache processed answer text
+        question[cacheKey] = answerText;
+      } else {
+        // Use cached processed answer text
+        answerText = question[cacheKey];
+      }
 
       const answerElement = document.createElement("div");
       answerElement.className = "answer-option";
@@ -1210,6 +1278,7 @@ export {
   
   // Question display
   displayCurrentQuestion,
+  displayPlaceholderQuestion,
   displayAnswers,
   toggleAnswerSelection,
   
