@@ -767,77 +767,93 @@ async function handleKeyboardShortcuts(e) {
         break;
         
       case "r":
-        e.preventDefault();
         if (e.ctrlKey || e.metaKey) {
-          // Ctrl+R: Reset current question
+          // Ctrl+R: Reset current question (our custom action)
+          e.preventDefault();
           const resetBtn = document.getElementById("resetBtn");
           if (resetBtn && resetBtn.style.display !== "none") {
             resetBtn.click();
           }
-        } else {
-          // R: Random question
+        } else if (!e.shiftKey && !e.altKey) {
+          // R: Random question (only plain "r", no modifiers)
+          e.preventDefault();
           if (typeof window.navigateToRandomQuestion === 'function') {
             await window.navigateToRandomQuestion();
           }
         }
+        // Let other combinations (like F5 refresh equivalent) pass through
         break;
         
       case "v":
-        e.preventDefault();
-        // V: Validate answers
-        const validateBtn = document.getElementById("validateBtn");
-        if (validateBtn) {
-          validateBtn.click();
-          if (typeof window.showShortcutFeedback === 'function') {
-            window.showShortcutFeedback("V", "Validate Answers");
+        if (!e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+          // V: Validate answers (only plain "v", no modifiers)
+          e.preventDefault();
+          const validateBtn = document.getElementById("validateBtn");
+          if (validateBtn) {
+            validateBtn.click();
+            if (typeof window.showShortcutFeedback === 'function') {
+              window.showShortcutFeedback("V", "Validate Answers");
+            }
           }
         }
+        // Let Ctrl+V (paste), Shift+V, etc. pass through to browser
         break;
         
       case "t":
-        e.preventDefault();
-        // T: Toggle highlight mode
-        const highlightBtn = document.getElementById("highlightBtn");
-        if (highlightBtn) highlightBtn.click();
+        if (!e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+          // T: Toggle highlight mode (only plain "t", no modifiers)
+          e.preventDefault();
+          const highlightBtn = document.getElementById("highlightBtn");
+          if (highlightBtn) highlightBtn.click();
+        }
+        // Let Ctrl+T (new tab), Shift+T, etc. pass through to browser
         break;
         
       case "f":
-        e.preventDefault();
-        // F: Toggle favorite
-        const favoriteBtn = document.getElementById("favoriteBtn");
-        if (favoriteBtn) {
-          favoriteBtn.click();
-          if (typeof window.showShortcutFeedback === 'function') {
-            window.showShortcutFeedback("F", "Toggle Favorite");
+        if (!e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+          // F: Toggle favorite (only plain "f", no modifiers)
+          e.preventDefault();
+          const favoriteBtn = document.getElementById("favoriteBtn");
+          if (favoriteBtn) {
+            favoriteBtn.click();
+            if (typeof window.showShortcutFeedback === 'function') {
+              window.showShortcutFeedback("F", "Toggle Favorite");
+            }
           }
         }
+        // Let Ctrl+F (find), Shift+F, etc. pass through to browser
         break;
         
       case "n":
-        e.preventDefault();
-        // N: Toggle note
-        const noteBtn = document.getElementById("noteBtn");
-        if (noteBtn) {
-          noteBtn.click();
-          if (typeof window.showShortcutFeedback === 'function') {
-            window.showShortcutFeedback("N", "Add/Edit Note");
+        if (!e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+          // N: Toggle note (only plain "n", no modifiers)
+          e.preventDefault();
+          const noteBtn = document.getElementById("noteBtn");
+          if (noteBtn) {
+            noteBtn.click();
+            if (typeof window.showShortcutFeedback === 'function') {
+              window.showShortcutFeedback("N", "Add/Edit Note");
+            }
           }
         }
+        // Let Ctrl+N (new tab), Shift+N, etc. pass through to browser
         break;
         
       case "s":
-        e.preventDefault();
         if (e.ctrlKey || e.metaKey) {
-          // Ctrl+S: Toggle sidebar
+          // Ctrl+S: Toggle sidebar (our custom action) 
+          e.preventDefault();
           toggleSidebar();
-        } else {
-          // S: Focus search input
+        } else if (!e.shiftKey && !e.altKey) {
+          // S: Focus search input (only plain "s", no modifiers)
+          e.preventDefault();
           const searchInput = document.getElementById("searchInput");
           const searchSection = document.getElementById("searchSection");
           if (searchSection?.style.display !== "none" && searchInput) {
             searchInput.focus();
           }
         }
+        // Let other combinations pass through to browser
         break;
         
       case "Escape":
@@ -865,14 +881,17 @@ async function handleKeyboardShortcuts(e) {
         break;
         
       case "e":
-        e.preventDefault();
-        // E: Show export modal
-        if (typeof window.showExportModal === 'function') {
-          window.showExportModal();
-          if (typeof window.showShortcutFeedback === 'function') {
-            window.showShortcutFeedback("E", "Export Modal");
+        if (!e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+          // E: Show export modal (only plain "e", no modifiers)
+          e.preventDefault();
+          if (typeof window.showExportModal === 'function') {
+            window.showExportModal();
+            if (typeof window.showShortcutFeedback === 'function') {
+              window.showShortcutFeedback("E", "Export Modal");
+            }
           }
         }
+        // Let Ctrl+E, Shift+E, etc. pass through to browser/extensions
         break;
         
       case "?":
