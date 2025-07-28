@@ -1,5 +1,5 @@
 // Service Worker for Intelligent Caching with Background Updates
-const CACHE_NAME = 'exams-viewer-v2'; // Bumped version to clear old cache
+const CACHE_NAME = 'exams-viewer-v3'; // Removed exam preloading system
 
 // Development mode detection
 const isDev = () => {
@@ -256,31 +256,5 @@ async function getCacheTimestamp(url) {
   return null;
 }
 
-// Preload popular exams
-self.addEventListener('message', event => {
-  if (event.data && event.data.type === 'PRELOAD_EXAMS') {
-    preloadPopularExams(event.data.exams);
-  }
-});
-
-async function preloadPopularExams(exams) {
-  if (isDev()) console.log('Preloading popular exams:', exams);
-  const cache = await caches.open(CACHE_NAME);
-  
-  for (const examCode of exams.slice(0, 5)) { // Limit to top 5
-    try {
-      const url = `data/${examCode}/exam.json`;
-      const cachedResponse = await cache.match(url);
-      
-      if (!cachedResponse) {
-        if (isDev()) console.log('Preloading exam:', examCode);
-        const response = await fetch(url);
-        if (response.ok) {
-          await updateCache(cache, new Request(url), response);
-        }
-      }
-    } catch (error) {
-      if (isDev()) console.log('Failed to preload exam:', examCode, error);
-    }
-  }
-}
+// Note: Exam preloading system removed in favor of on-demand loading strategy
+// This optimizes performance and reduces unnecessary bandwidth usage
