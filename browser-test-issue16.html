@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue #16 - Keyboard Shortcuts Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-header h1 {
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+        
+        .test-header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        .test-instructions {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-instructions h3 {
+            margin-top: 0;
+            color: #1e40af;
+        }
+        
+        .test-list {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .test-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .test-item:hover {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+        }
+        
+        .test-item.completed {
+            background: #ecfdf5;
+            border-color: #10b981;
+        }
+        
+        .test-item.failed {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+        
+        .test-number {
+            background: #2563eb;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+        
+        .test-item.completed .test-number {
+            background: #10b981;
+        }
+        
+        .test-item.failed .test-number {
+            background: #ef4444;
+        }
+        
+        .test-content {
+            flex: 1;
+        }
+        
+        .test-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #111827;
+        }
+        
+        .test-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .test-result {
+            margin-left: 16px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .test-result.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .test-result.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .test-result.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+        
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+        
+        .iframe-container {
+            margin-top: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .iframe-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+        
+        .kbd {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🧪 Issue #16 Test Suite</h1>
+            <p>Enhanced Keyboard Shortcuts Implementation Testing</p>
+        </div>
+        
+        <div class="test-instructions">
+            <h3>📋 Test Instructions</h3>
+            <p>This page tests the implementation of enhanced keyboard shortcuts for Issue #16. The main application will load below, and you can manually test each feature:</p>
+            <ol>
+                <li>Load an exam (select from dropdown)</li>
+                <li>Test each keyboard shortcut listed below</li>
+                <li>Verify visual feedback appears</li>
+                <li>Check that input field prevention works</li>
+            </ol>
+        </div>
+        
+        <div class="test-list">
+            <div class="test-item" id="test-1">
+                <div class="test-number">1</div>
+                <div class="test-content">
+                    <div class="test-title">Export Shortcut (<span class="kbd">E</span>)</div>
+                    <div class="test-description">Press E to open the export modal. Should work when an exam is loaded.</div>
+                </div>
+                <div class="test-result pending">Pending</div>
+            </div>
+            
+            <div class="test-item" id="test-2">
+                <div class="test-number">2</div>
+                <div class="test-content">
+                    <div class="test-title">Visual Feedback System</div>
+                    <div class="test-description">Test shortcuts: <span class="kbd">E</span>, <span class="kbd">F</span>, <span class="kbd">N</span>, <span class="kbd">V</span> should show visual feedback in top-right corner.</div>
+                </div>
+                <div class="test-result pending">Pending</div>
+            </div>
+            
+            <div class="test-item" id="test-3">
+                <div class="test-number">3</div>
+                <div class="test-content">
+                    <div class="test-title">Help Modal (<span class="kbd">?</span>)</div>
+                    <div class="test-description">Press ? to open help modal. Check that E shortcut is documented in Actions section.</div>
+                </div>
+                <div class="test-result pending">Pending</div>
+            </div>
+            
+            <div class="test-item" id="test-4">
+                <div class="test-number">4</div>
+                <div class="test-content">
+                    <div class="test-title">Input Field Prevention</div>
+                    <div class="test-description">Focus on search box or question jump input, type E - should not open export modal.</div>
+                </div>
+                <div class="test-result pending">Pending</div>
+            </div>
+            
+            <div class="test-item" id="test-5">
+                <div class="test-number">5</div>
+                <div class="test-content">
+                    <div class="test-title">Existing Shortcuts Regression</div>
+                    <div class="test-description">Test: <span class="kbd">F</span> (favorite), <span class="kbd">N</span> (notes), <span class="kbd">V</span> (validate), <span class="kbd">←</span><span class="kbd">→</span> (navigation)</div>
+                </div>
+                <div class="test-result pending">Pending</div>
+            </div>
+            
+            <div class="test-item" id="test-6">
+                <div class="test-number">6</div>
+                <div class="test-content">
+                    <div class="test-title">Edge Cases</div>
+                    <div class="test-description">Test <span class="kbd">Escape</span> closes modals, <span class="kbd">Ctrl+E</span> doesn't trigger export.</div>
+                </div>
+                <div class="test-result pending">Pending</div>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="runAutomatedTest()" id="runTestBtn">
+                🤖 Run Automated Test
+            </button>
+            <button class="btn btn-secondary" onclick="resetTests()">
+                🔄 Reset Tests
+            </button>
+            <button class="btn btn-secondary" onclick="toggleIframe()">
+                👁️ Toggle App View
+            </button>
+        </div>
+        
+        <div class="iframe-container" id="appContainer" style="display: none;">
+            <iframe src="http://localhost:3000" id="appFrame"></iframe>
+            <div class="status-bar">
+                <span>🔗 Embedded Exams Viewer Application</span>
+                <span id="lastTest">No tests run yet</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let testsVisible = false;
+        
+        function toggleIframe() {
+            const container = document.getElementById('appContainer');
+            testsVisible = !testsVisible;
+            container.style.display = testsVisible ? 'block' : 'none';
+            
+            const btn = document.querySelector('button[onclick="toggleIframe()"]');
+            btn.textContent = testsVisible ? '🙈 Hide App View' : '👁️ Show App View';
+        }
+        
+        function updateTestResult(testId, status, message = '') {
+            const testItem = document.getElementById(`test-${testId}`);
+            const resultSpan = testItem.querySelector('.test-result');
+            
+            testItem.classList.remove('completed', 'failed');
+            resultSpan.classList.remove('success', 'error', 'pending');
+            
+            if (status === 'success') {
+                testItem.classList.add('completed');
+                resultSpan.classList.add('success');
+                resultSpan.textContent = 'Passed';
+            } else if (status === 'error') {
+                testItem.classList.add('failed');
+                resultSpan.classList.add('error');
+                resultSpan.textContent = 'Failed';
+            } else {
+                resultSpan.classList.add('pending');
+                resultSpan.textContent = 'Pending';
+            }
+            
+            if (message) {
+                testItem.querySelector('.test-description').innerHTML += `<br><small><strong>${message}</strong></small>`;
+            }
+        }
+        
+        function resetTests() {
+            for (let i = 1; i <= 6; i++) {
+                updateTestResult(i, 'pending');
+                const testItem = document.getElementById(`test-${i}`);
+                const description = testItem.querySelector('.test-description');
+                // Remove any added message
+                const small = description.querySelector('small');
+                if (small) {
+                    small.remove();
+                }
+            }
+            
+            document.getElementById('lastTest').textContent = 'Tests reset';
+        }
+        
+        async function runAutomatedTest() {
+            const runBtn = document.getElementById('runTestBtn');
+            runBtn.textContent = '🔄 Running Tests...';
+            runBtn.disabled = true;
+            
+            try {
+                // Show the iframe if not visible
+                if (!testsVisible) {
+                    toggleIframe();
+                }
+                
+                // Wait for iframe to load
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                const iframe = document.getElementById('appFrame');
+                const iframeWindow = iframe.contentWindow;
+                
+                // Check if test script is available
+                if (typeof iframeWindow.runKeyboardShortcutsTests === 'function') {
+                    // Run the automated test
+                    const results = await iframeWindow.runKeyboardShortcutsTests();
+                    
+                    // Update UI based on results
+                    let testIndex = 1;
+                    
+                    // Map results to test items (this is a simplified mapping)
+                    const passedTests = results.details.passed;
+                    const failedTests = results.details.failed;
+                    
+                    // Update tests based on results
+                    for (let i = 1; i <= 6; i++) {
+                        const hasPassedTest = passedTests.some(test => 
+                            (i === 1 && test.includes('Export')) ||
+                            (i === 2 && test.includes('Visual feedback')) ||
+                            (i === 3 && test.includes('Help modal')) ||
+                            (i === 4 && test.includes('prevented')) ||
+                            (i === 5 && test.includes('exists')) ||
+                            (i === 6 && test.includes('Edge'))
+                        );
+                        
+                        const hasFailedTest = failedTests.some(test => 
+                            (i === 1 && test.includes('Export')) ||
+                            (i === 2 && test.includes('Visual feedback')) ||
+                            (i === 3 && test.includes('Help modal')) ||
+                            (i === 4 && test.includes('prevented')) ||
+                            (i === 5 && test.includes('exists')) ||
+                            (i === 6 && test.includes('Edge'))
+                        );
+                        
+                        if (hasPassedTest && !hasFailedTest) {
+                            updateTestResult(i, 'success');
+                        } else if (hasFailedTest) {
+                            updateTestResult(i, 'error');
+                        } else {
+                            updateTestResult(i, 'pending', 'No specific test data');
+                        }
+                    }
+                    
+                    document.getElementById('lastTest').textContent = 
+                        `Test completed: ${results.passed}/${results.passed + results.failed} passed (${results.successRate}%)`;
+                        
+                } else {
+                    // Fallback: manual testing instructions
+                    alert('Automated testing not available. Please test manually:\n\n' +
+                          '1. Select an exam from dropdown\n' +
+                          '2. Press E - should open export modal\n' +
+                          '3. Press ? - should open help modal\n' +
+                          '4. Press F, N, V - should show visual feedback\n' +
+                          '5. Test in input fields - shortcuts should not work');
+                    
+                    document.getElementById('lastTest').textContent = 'Manual testing required';
+                }
+                
+            } catch (error) {
+                console.error('Test execution error:', error);
+                document.getElementById('lastTest').textContent = `Test error: ${error.message}`;
+            }
+            
+            runBtn.textContent = '🤖 Run Automated Test';
+            runBtn.disabled = false;
+        }
+        
+        // Show iframe by default for testing
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                toggleIframe();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

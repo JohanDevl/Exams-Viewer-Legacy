@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Shortcuts Test - Exams Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .test-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .console-output {
+            background: #1e1e1e;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 20px 0;
+            white-space: pre-wrap;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-ready { background: #4caf50; }
+        .status-running { background: #ff9800; animation: pulse 1s infinite; }
+        .status-error { background: #f44336; }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .keyboard-shortcuts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .shortcut-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .shortcut-key {
+            background: #343a40;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            min-width: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🧪 Keyboard Shortcuts Test</h1>
+            <p>Test the fix for keyboard shortcuts that stop working after first use</p>
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ Prerequisites:</strong>
+            <ul>
+                <li>This test requires the main Exams Viewer application to be loaded</li>
+                <li>An exam must be loaded with multiple questions</li>
+                <li>Open browser developer console to see detailed test output</li>
+            </ul>
+        </div>
+        
+        <div class="instructions">
+            <h3>🎯 What This Test Validates:</h3>
+            <ul>
+                <li><strong>Repeated Usage:</strong> Shortcuts work consecutively (F, V, N, E)</li>
+                <li><strong>No Focus Capture:</strong> Feedback elements don't block subsequent shortcuts</li>
+                <li><strong>Multiple Feedback:</strong> Only one feedback overlay at a time</li>
+                <li><strong>Navigation:</strong> Arrow keys and vim-style navigation work after feedback</li>
+                <li><strong>Input Fields:</strong> Shortcuts ignored in inputs, work after blur</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center;">
+            <button id="loadMainApp" class="test-button">
+                <span class="status-indicator status-ready"></span>
+                Load Main Application
+            </button>
+            
+            <button id="runFullTest" class="test-button" disabled>
+                <span class="status-indicator status-ready"></span>
+                Run Full Test Suite
+            </button>
+            
+            <button id="runQuickTest" class="test-button" disabled>
+                <span class="status-indicator status-ready"></span>
+                Quick Test
+            </button>
+            
+            <button id="clearOutput" class="test-button">
+                🗑️ Clear Output
+            </button>
+        </div>
+        
+        <div class="instructions">
+            <h3>🔧 Manual Testing Shortcuts:</h3>
+            <div class="keyboard-shortcuts">
+                <div class="shortcut-item">
+                    <span class="shortcut-key">F</span>
+                    <span>Toggle Favorite</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">V</span>
+                    <span>Validate Answers</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">N</span>
+                    <span>Add/Edit Note</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">E</span>
+                    <span>Export Modal</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">→</span>
+                    <span>Next Question</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">←</span>
+                    <span>Previous Question</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">L</span>
+                    <span>Next (Vim)</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">H</span>
+                    <span>Previous (Vim)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="testOutput" class="console-output"></div>
+    </div>
+
+    <script>
+        let testOutput = document.getElementById('testOutput');
+        let originalConsoleLog = console.log;
+        let originalConsoleError = console.error;
+        let originalConsoleWarn = console.warn;
+        
+        // Capture console output
+        function logToOutput(type, ...args) {
+            const timestamp = new Date().toLocaleTimeString();
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            
+            const colorClass = type === 'error' ? 'color: #ff6b6b;' : 
+                              type === 'warn' ? 'color: #ffd93d;' : 
+                              'color: #ffffff;';
+            
+            testOutput.innerHTML += `<div style="${colorClass}">[${timestamp}] ${message}</div>`;
+            testOutput.scrollTop = testOutput.scrollHeight;
+            
+            // Call original console method
+            if (type === 'error') originalConsoleError(...args);
+            else if (type === 'warn') originalConsoleWarn(...args);
+            else originalConsoleLog(...args);
+        }
+        
+        console.log = (...args) => logToOutput('log', ...args);
+        console.error = (...args) => logToOutput('error', ...args);
+        console.warn = (...args) => logToOutput('warn', ...args);
+        
+        // Button handlers
+        document.getElementById('loadMainApp').addEventListener('click', async function() {
+            const btn = this;
+            const indicator = btn.querySelector('.status-indicator');
+            
+            try {
+                indicator.className = 'status-indicator status-running';
+                btn.disabled = true;
+                btn.innerHTML = '<span class="status-indicator status-running"></span> Loading...';
+                
+                console.log('🚀 Loading main application...');
+                
+                // Check if we're already in the main app
+                if (window.location.pathname.includes('test-keyboard-shortcuts.html')) {
+                    // We're in the test page, redirect to main app
+                    window.location.href = '/';
+                    return;
+                }
+                
+                // If we're already in main app, just load the test script
+                if (document.getElementById('examSelection')) {
+                    console.log('✅ Main application detected');
+                    await loadTestScript();
+                    enableTestButtons();
+                } else {
+                    console.log('⚠️ Main application not detected. Please navigate to the main app first.');
+                    console.log('Open: http://localhost:8000/');
+                }
+                
+            } catch (error) {
+                console.error('❌ Failed to load main application:', error);
+                indicator.className = 'status-indicator status-error';
+                btn.innerHTML = '<span class="status-indicator status-error"></span> Error';
+            }
+        });
+        
+        document.getElementById('runFullTest').addEventListener('click', async function() {
+            const btn = this;
+            const indicator = btn.querySelector('.status-indicator');
+            
+            try {
+                indicator.className = 'status-indicator status-running';
+                btn.disabled = true;
+                btn.innerHTML = '<span class="status-indicator status-running"></span> Running...';
+                
+                console.log('🧪 Starting full keyboard shortcuts test suite...');
+                
+                if (typeof window.runKeyboardShortcutsTests === 'function') {
+                    const results = await window.runKeyboardShortcutsTests();
+                    console.log('✅ Full test suite completed!');
+                    console.log(`Results: ${results.passedTests}/${results.totalTests} passed`);
+                } else {
+                    console.error('❌ Test function not available. Make sure main app is loaded.');
+                }
+                
+            } catch (error) {
+                console.error('❌ Test execution failed:', error);
+                indicator.className = 'status-indicator status-error';
+            } finally {
+                btn.disabled = false;
+                indicator.className = 'status-indicator status-ready';
+                btn.innerHTML = '<span class="status-indicator status-ready"></span> Run Full Test Suite';
+            }
+        });
+        
+        document.getElementById('runQuickTest').addEventListener('click', async function() {
+            const btn = this;
+            const indicator = btn.querySelector('.status-indicator');
+            
+            try {
+                indicator.className = 'status-indicator status-running';
+                btn.disabled = true;
+                btn.innerHTML = '<span class="status-indicator status-running"></span> Running...';
+                
+                console.log('⚡ Starting quick keyboard test...');
+                
+                if (typeof window.quickKeyboardTest === 'function') {
+                    await window.quickKeyboardTest();
+                    console.log('✅ Quick test completed!');
+                } else {
+                    console.error('❌ Test function not available. Make sure main app is loaded.');
+                }
+                
+            } catch (error) {
+                console.error('❌ Quick test failed:', error);
+                indicator.className = 'status-indicator status-error';
+            } finally {
+                btn.disabled = false;
+                indicator.className = 'status-indicator status-ready';
+                btn.innerHTML = '<span class="status-indicator status-ready"></span> Quick Test';
+            }
+        });
+        
+        document.getElementById('clearOutput').addEventListener('click', function() {
+            testOutput.innerHTML = '';
+            console.log('🗑️ Output cleared');
+        });
+        
+        async function loadTestScript() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = '/keyboard-shortcuts-test.js';
+                script.onload = () => {
+                    console.log('✅ Test script loaded successfully');
+                    resolve();
+                };
+                script.onerror = () => {
+                    console.error('❌ Failed to load test script');
+                    reject(new Error('Failed to load test script'));
+                };
+                document.head.appendChild(script);
+            });
+        }
+        
+        function enableTestButtons() {
+            document.getElementById('runFullTest').disabled = false;
+            document.getElementById('runQuickTest').disabled = false;
+            console.log('✅ Test buttons enabled');
+        }
+        
+        // Initial setup
+        console.log('🔧 Keyboard Shortcuts Test Page Loaded');
+        console.log('📋 Instructions:');
+        console.log('1. Click "Load Main Application" to load the Exams Viewer');
+        console.log('2. Load an exam with multiple questions');
+        console.log('3. Run the automated tests or try manual testing');
+        console.log('4. Watch this console for detailed output');
+        
+        // Check if we're already in main app context
+        if (window.currentQuestions || document.getElementById('examSelection')) {
+            console.log('🎯 Main application context detected!');
+            loadTestScript().then(() => {
+                enableTestButtons();
+            }).catch(error => {
+                console.error('Failed to load test script:', error);
+            });
+        }
+    </script>
+</body>
+</html>

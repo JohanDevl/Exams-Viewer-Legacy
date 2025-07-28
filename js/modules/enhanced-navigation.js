@@ -660,6 +660,9 @@ async function handleKeyboardShortcuts(e) {
         e.preventDefault();
         if (typeof window.navigateQuestion === 'function') {
           await window.navigateQuestion(-1);
+          if (typeof window.showShortcutFeedback === 'function') {
+            window.showShortcutFeedback(e.key === "ArrowLeft" ? "←" : "H", "Previous Question");
+          }
         }
         break;
         
@@ -668,6 +671,9 @@ async function handleKeyboardShortcuts(e) {
         e.preventDefault();
         if (typeof window.navigateQuestion === 'function') {
           await window.navigateQuestion(1);
+          if (typeof window.showShortcutFeedback === 'function') {
+            window.showShortcutFeedback(e.key === "ArrowRight" ? "→" : "L", "Next Question");
+          }
         }
         break;
         
@@ -780,7 +786,12 @@ async function handleKeyboardShortcuts(e) {
         e.preventDefault();
         // V: Validate answers
         const validateBtn = document.getElementById("validateBtn");
-        if (validateBtn) validateBtn.click();
+        if (validateBtn) {
+          validateBtn.click();
+          if (typeof window.showShortcutFeedback === 'function') {
+            window.showShortcutFeedback("V", "Validate Answers");
+          }
+        }
         break;
         
       case "t":
@@ -794,14 +805,24 @@ async function handleKeyboardShortcuts(e) {
         e.preventDefault();
         // F: Toggle favorite
         const favoriteBtn = document.getElementById("favoriteBtn");
-        if (favoriteBtn) favoriteBtn.click();
+        if (favoriteBtn) {
+          favoriteBtn.click();
+          if (typeof window.showShortcutFeedback === 'function') {
+            window.showShortcutFeedback("F", "Toggle Favorite");
+          }
+        }
         break;
         
       case "n":
         e.preventDefault();
         // N: Toggle note
         const noteBtn = document.getElementById("noteBtn");
-        if (noteBtn) noteBtn.click();
+        if (noteBtn) {
+          noteBtn.click();
+          if (typeof window.showShortcutFeedback === 'function') {
+            window.showShortcutFeedback("N", "Add/Edit Note");
+          }
+        }
         break;
         
       case "s":
@@ -839,6 +860,17 @@ async function handleKeyboardShortcuts(e) {
           const clearBtn = document.getElementById("clearSearchBtn");
           if (clearBtn && clearBtn.style.display !== "none") {
             clearBtn.click();
+          }
+        }
+        break;
+        
+      case "e":
+        e.preventDefault();
+        // E: Show export modal
+        if (typeof window.showExportModal === 'function') {
+          window.showExportModal();
+          if (typeof window.showShortcutFeedback === 'function') {
+            window.showShortcutFeedback("E", "Export Modal");
           }
         }
         break;

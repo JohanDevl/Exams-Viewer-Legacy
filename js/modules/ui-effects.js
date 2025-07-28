@@ -373,6 +373,9 @@ function showKeyboardHelp() {
               <div class="shortcut-item">
                 <kbd>T</kbd> <span>Toggle Highlight</span>
               </div>
+              <div class="shortcut-item">
+                <kbd>E</kbd> <span>Export Modal</span>
+              </div>
             </div>
             
             <div class="shortcut-section" style="padding: 15px;">
@@ -411,6 +414,109 @@ function closeKeyboardHelp() {
     modal.style.display = 'none';
     modal.classList.remove('fade-in');
   }
+}
+
+/**
+ * Show visual feedback when a keyboard shortcut is used
+ * @param {string} shortcutKey - The key that was pressed
+ * @param {string} action - The action description
+ */
+function showShortcutFeedback(shortcutKey, action) {
+  // Remove any existing feedback
+  const existingFeedback = document.getElementById('shortcut-feedback');
+  if (existingFeedback) {
+    existingFeedback.remove();
+  }
+
+  // Create feedback element
+  const feedback = document.createElement('div');
+  feedback.id = 'shortcut-feedback';
+  feedback.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 12px 16px;
+    box-shadow: var(--glass-shadow);
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: slideInRight 0.3s ease-out;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    max-width: 250px;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  `;
+
+  // Ensure the element cannot receive focus
+  feedback.setAttribute('tabindex', '-1');
+  feedback.setAttribute('aria-hidden', 'true');
+  
+  feedback.innerHTML = `
+    <div style="
+      background: var(--primary-color);
+      color: white;
+      padding: 4px 8px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.8rem;
+      min-width: 24px;
+      text-align: center;
+    ">${shortcutKey.toUpperCase()}</div>
+    <span style="opacity: 0.9;">${action}</span>
+  `;
+
+  // Add CSS animation if not already present
+  if (!document.getElementById('shortcut-feedback-styles')) {
+    const style = document.createElement('style');
+    style.id = 'shortcut-feedback-styles';
+    style.textContent = `
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes slideOutRight {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  document.body.appendChild(feedback);
+
+  // Auto-remove after 2 seconds
+  setTimeout(() => {
+    if (feedback && feedback.parentNode) {
+      feedback.style.animation = 'slideOutRight 0.3s ease-in forwards';
+      setTimeout(() => {
+        if (feedback && feedback.parentNode) {
+          feedback.remove();
+        }
+      }, 300);
+    }
+  }, 2000);
 }
 
 /**
@@ -855,6 +961,7 @@ export {
   hideExportModal,
   showKeyboardHelp,
   closeKeyboardHelp,
+  showShortcutFeedback,
   displayChangelog,
   
   // Toggle functions

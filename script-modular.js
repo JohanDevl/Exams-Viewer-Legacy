@@ -102,6 +102,7 @@ import {
   hideMainProgressBar,
   showKeyboardHelp,
   closeKeyboardHelp,
+  showShortcutFeedback,
   displayChangelog,
   updateMainProgressBarVisibility,
   showValidationResults,
@@ -315,6 +316,7 @@ function exposeGlobalFunctions() {
   window.hideMainProgressBar = hideMainProgressBar;
   window.showKeyboardHelp = showKeyboardHelp;
   window.closeKeyboardHelp = closeKeyboardHelp;
+  window.showShortcutFeedback = showShortcutFeedback;
   window.displayChangelog = displayChangelog;
   window.showValidationResults = showValidationResults;
   window.toggleLegalInfo = toggleLegalInfo;
@@ -3852,5 +3854,38 @@ function downloadFile(content, filename, mimeType) {
 window.updateExportPreview = updateExportPreview;
 window.performExport = performExport;
 // hideExportModal is already defined in ui-effects.js module
+
+// ===========================
+// DEVELOPMENT TESTING SUPPORT
+// ===========================
+
+// Load test script for Issue #16 in development environment
+if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:") {
+  // Dynamic import of test script
+  import('./test-keyboard-shortcuts-issue16.js')
+    .then(() => {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🧪 Issue #16 test suite loaded");
+      }
+    })
+    .catch(error => {
+      if (typeof window.devError === 'function') {
+        window.devError("Failed to load test suite:", error);
+      }
+    });
+    
+  // Dynamic import of demo script
+  import('./demo-issue16.js')
+    .then(() => {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🎬 Issue #16 demo suite loaded");
+      }
+    })
+    .catch(error => {
+      if (typeof window.devError === 'function') {
+        window.devError("Failed to load demo suite:", error);
+      }
+    });
+}
 
 devLog("📦 script-modular.js loaded successfully");
