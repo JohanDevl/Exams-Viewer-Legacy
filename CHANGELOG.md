@@ -6,13 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Summary
 
-- [4.0.0] - {PR_MERGE_DATE}: Performance Revolution & Simplified UX
+- [4.0.0] - 2025-07-28: Performance Revolution & Simplified UX
 - [3.1.0] - 2025-07-27: Modern Redesign & Comprehensive Improvements
 - [3.0.0] - 2025-07-26: Modular ES6 Architecture Migration  
 - [2.10.0] - 2025-07-21: Enhanced Export System
 - [2.9.0] - 2025-07-14: Resume Study Position System
 
-## [4.0.0] - {PR_MERGE_DATE}
+## [4.0.0] - 2025-07-28
 
 ### Added
 - **🔬 Comprehensive Testing System**: Advanced development and quality assurance tools
