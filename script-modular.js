@@ -848,6 +848,11 @@ function setupMainEventListeners() {
           }, 100);
         }
         
+        // Update main progress bar to reflect favorites count change
+        if (typeof window.updateMainProgressBar === 'function') {
+          window.updateMainProgressBar();
+        }
+        
         // Show feedback to user
         if (typeof window.isQuestionFavorite === 'function') {
           const isFav = window.isQuestionFavorite(window.currentQuestionIndex);
