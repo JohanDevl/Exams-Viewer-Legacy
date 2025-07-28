@@ -843,21 +843,10 @@ function setupMainEventListeners() {
         if (typeof window.updateProgressSidebar === 'function') {
           window.updateProgressSidebar();
           // Force sidebar update after a small delay to ensure favorites state is synchronized
+          // This also updates the main progress bar automatically
           setTimeout(() => {
             window.updateProgressSidebar();
           }, 100);
-        }
-        
-        // Update main progress bar to reflect favorites count change
-        // Add delay to ensure favorites data is synchronized
-        if (typeof window.updateMainProgressBar === 'function') {
-          setTimeout(() => {
-            // Clear any cached data that might affect favorites count
-            if (typeof window.clearQuestionStatusCache === 'function') {
-              window.clearQuestionStatusCache();
-            }
-            window.updateMainProgressBar();
-          }, 150);
         }
         
         // Show feedback to user

@@ -476,23 +476,11 @@ function updateProgressBar() {
  */
 function updateMainProgressBar() {
   try {
-    if (typeof window.devLog === 'function') {
-      window.devLog("🔄 updateMainProgressBar() called");
-    }
-    
     const mainProgressSection = document.getElementById("mainProgressSection");
-    if (!mainProgressSection || !window.currentQuestions?.length) {
-      if (typeof window.devLog === 'function') {
-        window.devLog("❌ updateMainProgressBar() early return - no section or questions");
-      }
-      return;
-    }
+    if (!mainProgressSection || !window.currentQuestions?.length) return;
 
     // Check if the main progress bar is enabled in settings
     if (!window.settings?.showMainProgressBar) {
-      if (typeof window.devLog === 'function') {
-        window.devLog("❌ updateMainProgressBar() disabled in settings");
-      }
       mainProgressSection.style.display = "none";
       return;
     }
@@ -523,11 +511,6 @@ function updateMainProgressBar() {
     const favoritesCount = getFavoritesCount();
     const remainingCount = totalQuestions - answeredCount;
     const answerPercentage = (answeredCount / totalQuestions) * 100;
-    
-    // Debug log for favorites count
-    if (typeof window.devLog === 'function') {
-      window.devLog(`📊 Main progress bar update - Favorites count: ${favoritesCount}`);
-    }
 
     // Update progress bar with smooth animation
     progressFill.style.width = `${answerPercentage}%`;
@@ -629,16 +612,7 @@ function getFavoritesCount() {
         count++;
       }
       
-      // Debug first few questions
-      if (index < 3 && typeof window.devLog === 'function') {
-        window.devLog(`🔍 Current Question ${index} (Q${question.question_number}): isFavorite = ${isFav}`);
-      }
     });
-    
-    // Debug log for favorites count calculation
-    if (typeof window.devLog === 'function') {
-      window.devLog(`⭐ getFavoritesCount() calculated: ${count} favorites from currentQuestions`);
-    }
     
     return count;
   } catch (error) {
