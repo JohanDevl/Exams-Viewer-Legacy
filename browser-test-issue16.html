@@ -289,7 +289,7 @@
         
         <div class="buttons">
             <button class="btn btn-primary" onclick="runAutomatedTest()" id="runTestBtn">
-                🤖 Run Automated Test
+                🌐 Open App & Test Manually
             </button>
             <button class="btn btn-secondary" onclick="resetTests()">
                 🔄 Reset Tests
@@ -360,85 +360,66 @@
             document.getElementById('lastTest').textContent = 'Tests reset';
         }
         
-        async function runAutomatedTest() {
+        function runAutomatedTest() {
             const runBtn = document.getElementById('runTestBtn');
-            runBtn.textContent = '🔄 Running Tests...';
+            runBtn.textContent = '🌐 Opening App...';
             runBtn.disabled = true;
             
-            try {
-                // Show the iframe if not visible
-                if (!testsVisible) {
-                    toggleIframe();
+            // Due to CORS restrictions, we cannot run automated tests from this frame
+            // Instead, provide clear instructions and open the app directly
+            
+            const instructions = `
+🧪 Manuel Testing Instructions for Issue #16
+
+Due to browser security (CORS), automated testing from this page is blocked.
+Please follow these steps to test the keyboard shortcuts:
+
+📋 STEP 1: Open the main application
+The app will open in a new tab automatically.
+
+📋 STEP 2: Load an exam  
+Select any exam from the dropdown (e.g., CAD, CIS-PPM)
+
+📋 STEP 3: Test the new features
+• Press E → Export modal should open ✅
+• Press ? → Help modal should show E shortcut documented ✅
+• Press F → Favorite toggle with visual feedback in top-right ✅  
+• Press N → Note editor with visual feedback ✅
+• Press V → Validate answers with visual feedback ✅
+
+📋 STEP 4: Test edge cases
+• Focus search box, press E → Should NOT open export (blocked) ✅
+• Press Escape → Should close any open modal ✅
+• Try multiple shortcuts in sequence → All should work ✅
+
+📋 STEP 5: Run automated test in console
+Open browser console (F12) and run:
+runKeyboardShortcutsTests()
+
+This will run the full automated test suite with detailed results.
+
+✨ Expected: All tests should pass at 100% success rate
+            `;
+            
+            // Show instructions
+            alert(instructions);
+            
+            // Open the main app in a new tab
+            const newWindow = window.open('http://localhost:8000', '_blank');
+            
+            if (newWindow) {
+                // Update test status to indicate manual testing
+                for (let i = 1; i <= 6; i++) {
+                    updateTestResult(i, 'pending', 'Test manually in main app');
                 }
                 
-                // Wait for iframe to load
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                const iframe = document.getElementById('appFrame');
-                const iframeWindow = iframe.contentWindow;
-                
-                // Check if test script is available
-                if (typeof iframeWindow.runKeyboardShortcutsTests === 'function') {
-                    // Run the automated test
-                    const results = await iframeWindow.runKeyboardShortcutsTests();
-                    
-                    // Update UI based on results
-                    let testIndex = 1;
-                    
-                    // Map results to test items (this is a simplified mapping)
-                    const passedTests = results.details.passed;
-                    const failedTests = results.details.failed;
-                    
-                    // Update tests based on results
-                    for (let i = 1; i <= 6; i++) {
-                        const hasPassedTest = passedTests.some(test => 
-                            (i === 1 && test.includes('Export')) ||
-                            (i === 2 && test.includes('Visual feedback')) ||
-                            (i === 3 && test.includes('Help modal')) ||
-                            (i === 4 && test.includes('prevented')) ||
-                            (i === 5 && test.includes('exists')) ||
-                            (i === 6 && test.includes('Edge'))
-                        );
-                        
-                        const hasFailedTest = failedTests.some(test => 
-                            (i === 1 && test.includes('Export')) ||
-                            (i === 2 && test.includes('Visual feedback')) ||
-                            (i === 3 && test.includes('Help modal')) ||
-                            (i === 4 && test.includes('prevented')) ||
-                            (i === 5 && test.includes('exists')) ||
-                            (i === 6 && test.includes('Edge'))
-                        );
-                        
-                        if (hasPassedTest && !hasFailedTest) {
-                            updateTestResult(i, 'success');
-                        } else if (hasFailedTest) {
-                            updateTestResult(i, 'error');
-                        } else {
-                            updateTestResult(i, 'pending', 'No specific test data');
-                        }
-                    }
-                    
-                    document.getElementById('lastTest').textContent = 
-                        `Test completed: ${results.passed}/${results.passed + results.failed} passed (${results.successRate}%)`;
-                        
-                } else {
-                    // Fallback: manual testing instructions
-                    alert('Automated testing not available. Please test manually:\n\n' +
-                          '1. Select an exam from dropdown\n' +
-                          '2. Press E - should open export modal\n' +
-                          '3. Press ? - should open help modal\n' +
-                          '4. Press F, N, V - should show visual feedback\n' +
-                          '5. Test in input fields - shortcuts should not work');
-                    
-                    document.getElementById('lastTest').textContent = 'Manual testing required';
-                }
-                
-            } catch (error) {
-                console.error('Test execution error:', error);
-                document.getElementById('lastTest').textContent = `Test error: ${error.message}`;
+                document.getElementById('lastTest').textContent = 'App opened - test manually or run console command';
+            } else {
+                alert('Please enable popups and try again, or manually navigate to http://localhost:8000');
+                document.getElementById('lastTest').textContent = 'Popup blocked - navigate manually to localhost:8000';
             }
             
-            runBtn.textContent = '🤖 Run Automated Test';
+            runBtn.textContent = '🌐 Open App & Test Manually';
             runBtn.disabled = false;
         }
         
