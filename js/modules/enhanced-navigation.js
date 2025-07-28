@@ -896,6 +896,12 @@ function initializeEnhancedNavigation() {
     // Clear navigation history for fresh start
     clearNavigationHistory();
 
+    // Setup mobile sidebar swipe-to-close now that sidebar is available
+    if (typeof window.isMobileDevice === 'function' && window.isMobileDevice() && 
+        typeof window.setupSidebarSwipeToClose === 'function') {
+      window.setupSidebarSwipeToClose();
+    }
+
     if (typeof window.devLog === 'function') {
       window.devLog("🧭 Enhanced navigation system initialized");
     }

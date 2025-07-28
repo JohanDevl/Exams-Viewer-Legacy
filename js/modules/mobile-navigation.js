@@ -549,10 +549,11 @@ function createMobileBottomNavigation() {
  */
 function setupSidebarSwipeToClose() {
   try {
-    const sidebar = document.getElementById('sidebar');
+    const sidebar = document.getElementById('progressSidebar');
     if (!sidebar) {
-      if (typeof window.devError === 'function') {
-        window.devError("Sidebar not found for swipe-to-close setup");
+      // Sidebar might not be created yet during early initialization - setup later
+      if (typeof window.devLog === 'function') {
+        window.devLog("📱 Sidebar not ready yet, will setup swipe-to-close when sidebar is available");
       }
       return;
     }
@@ -1132,7 +1133,7 @@ function initializeMobileNavigation() {
     // Setup touch feedback
     setupTouchFeedback();
     
-    // Setup sidebar swipe-to-close
+    // Setup sidebar swipe-to-close (will be retried later if sidebar isn't ready)
     setupSidebarSwipeToClose();
     
     // Setup mobile bottom navigation
