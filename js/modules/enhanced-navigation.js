@@ -612,9 +612,23 @@ function getFavoritesCount() {
     
     let count = 0;
     allQuestions.forEach((question, index) => {
-      if (typeof window.isQuestionFavorite === 'function' && 
-          window.isQuestionFavorite(index)) {
+      // Use getQuestionStatus like the sidebar does, instead of isQuestionFavorite directly
+      const questionStatus = typeof window.getQuestionStatus === 'function'
+        ? window.getQuestionStatus(index)
+        : { isFavorite: false };
+      
+      const isFav = questionStatus.isFavorite;
+      if (isFav) {
         count++;
+      }
+      
+      // Debug first few questions
+      if (index < 3 && typeof window.devLog === 'function') {
+        window.devLog(`🔍 Question ${index}: getQuestionStatus.isFavorite = ${isFav}`);
+        // Also check the direct method for comparison
+        const directFav = typeof window.isQuestionFavorite === 'function' && 
+                          window.isQuestionFavorite(index);
+        window.devLog(`🔍 Question ${index}: isQuestionFavorite direct = ${directFav}`);
       }
     });
     
