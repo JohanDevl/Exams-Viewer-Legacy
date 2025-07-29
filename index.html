@@ -445,6 +445,31 @@
                     </label>
                   </div>
                 </div>
+                
+                <!-- Difficulty Filters -->
+                <div class="filter-group">
+                  <label class="filter-label">Difficulty Filters:</label>
+                  <div class="filter-options">
+                    <label class="filter-checkbox">
+                      <input type="checkbox" id="filterDifficultyEasy" />
+                      <span class="checkmark"></span>
+                      <span class="filter-text">Easy</span>
+                      <span class="filter-count" id="easyCount">0</span>
+                    </label>
+                    <label class="filter-checkbox">
+                      <input type="checkbox" id="filterDifficultyMedium" />
+                      <span class="checkmark"></span>
+                      <span class="filter-text">Medium</span>
+                      <span class="filter-count" id="mediumCount">0</span>
+                    </label>
+                    <label class="filter-checkbox">
+                      <input type="checkbox" id="filterDifficultyHard" />
+                      <span class="checkmark"></span>
+                      <span class="filter-text">Hard</span>
+                      <span class="filter-count" id="hardCount">0</span>
+                    </label>
+                  </div>
+                </div>
 
                 <!-- Category Filters -->
                 <div
@@ -517,6 +542,48 @@
               >
                 <i class="far fa-sticky-note"></i>
               </button>
+            </div>
+            
+            <!-- Difficulty Rating Section -->
+            <div class="difficulty-rating">
+              <div class="difficulty-label">Difficulty Rating:</div>
+              <div class="difficulty-controls">
+                <button
+                  id="easyBtn"
+                  class="difficulty-btn easy"
+                  data-tooltip="Mark as Easy (1)&#10;Question was simple to understand"
+                  data-tooltip-position="top"
+                >
+                  <i class="fas fa-thumbs-up"></i>
+                  <span>Easy</span>
+                </button>
+                <button
+                  id="mediumBtn"
+                  class="difficulty-btn medium"
+                  data-tooltip="Mark as Medium (2)&#10;Moderate difficulty level"
+                  data-tooltip-position="top"
+                >
+                  <i class="fas fa-minus"></i>
+                  <span>Medium</span>
+                </button>
+                <button
+                  id="hardBtn"
+                  class="difficulty-btn hard"
+                  data-tooltip="Mark as Hard (3)&#10;Challenging question"
+                  data-tooltip-position="top"
+                >
+                  <i class="fas fa-thumbs-down"></i>
+                  <span>Hard</span>
+                </button>
+                <button
+                  id="clearDifficultyBtn"
+                  class="difficulty-btn clear"
+                  data-tooltip="Clear Rating (0)&#10;Remove difficulty rating"
+                  data-tooltip-position="top"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -815,6 +882,20 @@
                         <div class="metric-label">Favorites Saved</div>
                         <div class="metric-trend" id="favoritesTrend">
                           <small>Important questions</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Difficulty Rating Card -->
+                    <div class="metric-card accent">
+                      <div class="metric-icon">
+                        <i class="fas fa-signal"></i>
+                      </div>
+                      <div class="metric-content">
+                        <div class="metric-value" id="totalDifficultyRated">0</div>
+                        <div class="metric-label">Difficulty Rated</div>
+                        <div class="metric-trend" id="difficultyTrend">
+                          <small id="difficultyBreakdown">0 easy, 0 medium, 0 hard</small>
                         </div>
                       </div>
                     </div>

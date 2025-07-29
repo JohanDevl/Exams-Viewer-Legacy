@@ -621,6 +621,9 @@ function displayCurrentQuestion(fromToggleAction = false) {
     if (typeof window.updateFavoritesUI === 'function') {
       window.updateFavoritesUI();
     }
+    if (typeof window.updateDifficultyButtons === 'function') {
+      window.updateDifficultyButtons();
+    }
 
     // Ensure question jump field max value is always up to date
     updateQuestionJumpMaxValue();

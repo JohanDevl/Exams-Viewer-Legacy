@@ -6,11 +6,56 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Summary
 
+- [4.3.0] - 2025-07-29: User-Perceived Difficulty Rating System
 - [4.2.0] - 2025-07-28: Enhanced Keyboard Shortcuts with Visual Feedback
 - [4.1.2] - 2025-07-28: Mobile Navigation & Performance Fixes
 - [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
 - [4.1.0] - 2025-07-28: Smart Cache Strategy & Deployment Optimization
-- [4.0.0] - 2025-07-28: Performance Revolution & Simplified UX
+
+## [4.3.0] - 2025-07-29
+
+### ✨ New Features
+- **🎯 User-Perceived Difficulty Rating System**: Comprehensive difficulty assessment and filtering (Issue #17)
+  - 3-level difficulty rating system (Easy, Medium, Hard) with color-coded indicators
+  - Quick rating interface in question toolbar with visual feedback
+  - Advanced search integration with difficulty filtering capabilities
+  - Visual indicators in progress sidebar showing question difficulty
+  - Difficulty statistics in statistics modal with metric cards
+  - Persistent difficulty ratings stored in localStorage with favorites system
+  - Keyboard shortcuts (1=Easy, 2=Medium, 3=Hard, 0=Clear) for rapid rating
+  - Responsive mobile layout with optimized touch interactions
+
+### 🎨 User Experience Enhancements
+- **📱 Mobile-First Design**: Optimized difficulty rating interface for mobile devices
+  - Difficulty section positioned below favorites on mobile for better accessibility
+  - Full-width clear button on mobile for improved touch targets
+  - Responsive layout with proper spacing and visual hierarchy
+  - Touch-friendly difficulty buttons with hover states and transitions
+- **🔍 Enhanced Search Experience**: Integrated difficulty filtering with existing search system
+  - OR logic for difficulty filters allowing multiple difficulty levels
+  - Dynamic filter counts showing available questions per difficulty
+  - Seamless integration with existing text search and status filters
+- **📊 Visual Feedback System**: Comprehensive visual indicators across the interface
+  - Color-coded difficulty badges (Green=Easy, Orange=Medium, Red=Hard)
+  - Progress sidebar badges with difficulty indicators
+  - Statistics modal cards showing difficulty distribution
+  - Real-time button state updates with visual feedback
+
+### 🔧 Technical Improvements
+- **🏗️ Modular Architecture**: Extended existing favorites system for difficulty ratings
+  - Reused localStorage structure and caching mechanisms
+  - Integrated with existing search and filter infrastructure
+  - Extended statistics calculations to include difficulty metrics
+  - Maintained backward compatibility with existing data structures
+- **⚡ Performance Optimizations**: Efficient difficulty data management
+  - Leveraged existing caching systems for optimal performance
+  - Minimal DOM updates with targeted element refreshes
+  - Memory-efficient storage using compressed data structures
+- **♿ Accessibility**: Full accessibility support for difficulty rating features
+  - Keyboard shortcuts for all difficulty rating actions
+  - Screen reader compatible with proper ARIA labels
+  - High contrast support in dark mode with optimized colors
+  - Focus management for keyboard navigation
 
 ## [4.2.0] - 2025-07-28
 
@@ -964,6 +1009,7 @@ When adding entries to this changelog:
 
 ## Version History Summary
 
+- [4.3.0] - 2025-07-29: User-Perceived Difficulty Rating System
 - [4.2.0] - 2025-07-28: Enhanced Keyboard Shortcuts with Visual Feedback
 - [4.1.2] - 2025-07-28: Mobile Navigation & Performance Fixes
 - [4.1.1] - 2025-07-28: Performance Optimization - Removed Obsolete Exam Preloading
