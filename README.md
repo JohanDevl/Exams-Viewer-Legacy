@@ -14,7 +14,7 @@ An advanced web application for practicing exam questions from ExamTopics.com wi
 
 ### 🎯 Modern Learning Experience
 - **📱 Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **⌨️ Advanced Navigation**: Vim-style shortcuts, keyboard navigation, and navigation history
+- **⌨️ Enhanced Keyboard Shortcuts**: Complete shortcut system with visual feedback notifications
 - **📊 Visual Progress Tracking**: Interactive sidebar with real-time progress indicators
 - **🎨 Smart Status System**: Color-coded question states (new, answered, correct, incorrect)
 - **🏷️ Organization Tools**: Favorites, categories, personal notes, and bookmarking
@@ -22,7 +22,8 @@ An advanced web application for practicing exam questions from ExamTopics.com wi
 
 ### 🔍 Advanced Search & Filtering
 - **🔎 Intelligent Search**: Text-based search across questions, answers, and comments
-- **🏷️ Status Filters**: Filter by answered, unanswered, favorites, and categories
+- **🎯 Difficulty Rating System**: 3-level difficulty rating (Easy, Medium, Hard) with color-coded indicators
+- **🏷️ Status Filters**: Filter by answered, unanswered, favorites, categories, and difficulty levels
 - **💡 Auto-completion**: Smart suggestions for question numbers and search terms
 - **📊 Dynamic Counters**: Real-time counts for each filter category
 
@@ -154,10 +155,11 @@ Exams-Viewer/
 
 ### Advanced Features
 - **📊 Progress Sidebar**: Press `Ctrl+S` or click menu to see detailed question overview
-- **⌨️ Keyboard Shortcuts**: Press `?` for complete shortcut reference
-- **🔍 Search & Filter**: Use advanced search to find specific questions
+- **⌨️ Keyboard Shortcuts**: Press `?` for complete shortcut reference with visual feedback
+- **🎯 Difficulty Rating**: Rate questions as Easy/Medium/Hard using buttons or keys (1/2/3/0)
+- **🔍 Search & Filter**: Use advanced search to find specific questions and filter by difficulty
 - **🏷️ Organization**: Add favorites, categories, and personal notes
-- **📈 Statistics**: View detailed analytics in the Statistics panel
+- **📈 Statistics**: View detailed analytics including difficulty distribution
 - **📄 Export**: Export questions and data in multiple formats (PDF, JSON, CSV)
 - **🎯 Highlight Mode**: Preview correct answers before validation
 - **🔄 Resume Sessions**: Continue studying where you left off

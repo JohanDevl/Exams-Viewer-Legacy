@@ -5,7 +5,7 @@
 ### Web Interface
 
 - **🌐 Modern responsive design** for all devices with mobile-first approach
-- **🔍 Advanced search and filtering** with multiple criteria
+- **🔍 Advanced search and filtering** with multiple criteria including difficulty levels
 - **📊 Intuitive exam navigation** with smart controls
 - **💬 Community discussions** and answer explanations
 - **🎯 Random question practice** for varied learning
@@ -18,6 +18,7 @@
 - **📊 Comprehensive Statistics System** - Track performance, study patterns, and progress with 60-80% storage optimization
 - **🌙 Complete Dark Mode Support** - Automatic theme switching with system preference detection and manual toggle
 - **🎯 Highlight Mode** - Preview correct answers with detailed usage tracking
+- **🎯 Difficulty Rating System** - 3-level rating system (Easy/Medium/Hard) with color-coded indicators, keyboard shortcuts, and filtering capabilities
 - **📈 Visual Progress Tracking** - Interactive charts and detailed session analytics with performance trends
 - **💾 Storage Optimization** - Advanced compression algorithms with backward compatibility
 - **🔄 Automatic Data Migration** - Seamless upgrade from older data formats

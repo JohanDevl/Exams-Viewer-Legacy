@@ -73,6 +73,10 @@ The enhanced navigation system provides multiple ways to move through exam quest
 |----------|--------|-------------|
 | `f` | Toggle favorite | Add/remove question from favorites |
 | `n` | Toggle note | Open/close note editor |
+| `1` | Rate as Easy | Mark question as Easy difficulty |
+| `2` | Rate as Medium | Mark question as Medium difficulty |
+| `3` | Rate as Hard | Mark question as Hard difficulty |
+| `0` | Clear difficulty | Remove difficulty rating |
 
 #### Interface Control
 | Shortcut | Action | Description |
