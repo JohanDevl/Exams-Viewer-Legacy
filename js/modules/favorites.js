@@ -463,6 +463,232 @@ function updateQuestionCategory(questionIndex, newCategory) {
 }
 
 // ===========================
+// DIFFICULTY RATING MANAGEMENT
+// ===========================
+
+/**
+ * Set difficulty rating for a question
+ * @param {number} questionIndex - Question index (0-based)
+ * @param {string} difficulty - Difficulty level: "easy", "medium", or "hard"
+ * @returns {boolean} Success status
+ */
+function setQuestionDifficultyRating(questionIndex, difficulty) {
+  try {
+    if (!window.currentExam) {
+      if (typeof window.devError === 'function') {
+        window.devError("Cannot set difficulty rating: no exam loaded");
+      }
+      return false;
+    }
+
+    // Validate difficulty value
+    const validDifficulties = ['easy', 'medium', 'hard'];
+    if (!validDifficulties.includes(difficulty)) {
+      if (typeof window.devError === 'function') {
+        window.devError(`Invalid difficulty level: ${difficulty}. Must be one of: ${validDifficulties.join(', ')}`);
+      }
+      return false;
+    }
+
+    const examCode = window.currentExam.exam_code || window.currentExam.code;
+    if (!examCode) {
+      if (typeof window.devError === 'function') {
+        window.devError("Cannot set difficulty rating: exam code not found");
+      }
+      return false;
+    }
+
+    // Initialize favorites for exam if not exists
+    if (!window.favoritesData.favorites[examCode]) {
+      window.favoritesData.favorites[examCode] = {};
+    }
+
+    const questionNumber = questionIndex + 1; // Convert to 1-based
+    let currentFavorite = window.favoritesData.favorites[examCode][questionNumber];
+
+    if (currentFavorite) {
+      // Update existing entry
+      currentFavorite.difficultyRating = difficulty;
+      currentFavorite.difficultyTimestamp = Date.now();
+      currentFavorite.lastModified = Date.now();
+    } else {
+      // Create new entry (not favorited by default)
+      window.favoritesData.favorites[examCode][questionNumber] = {
+        isFavorite: false,
+        category: null,
+        note: '',
+        dateAdded: Date.now(),
+        lastModified: Date.now(),
+        difficultyRating: difficulty,
+        difficultyTimestamp: Date.now(),
+      };
+    }
+
+    // Save to localStorage
+    if (typeof window.saveFavorites === 'function') {
+      window.saveFavorites();
+    }
+
+    // Update UI if functions available
+    if (typeof window.updateProgressSidebar === 'function') {
+      window.updateProgressSidebar();
+    }
+    if (typeof window.updateFilterCounts === 'function') {
+      window.updateFilterCounts();
+    }
+
+    if (typeof window.devLog === 'function') {
+      window.devLog(`🎯 Set difficulty rating for question ${questionNumber}: ${difficulty}`);
+    }
+
+    return true;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error setting question difficulty rating:", error);
+    }
+    return false;
+  }
+}
+
+/**
+ * Get difficulty rating for a question
+ * @param {number} questionIndex - Question index (0-based)
+ * @returns {string|null} Difficulty level or null if not set
+ */
+function getQuestionDifficultyRating(questionIndex) {
+  try {
+    if (!window.currentExam || !window.favoritesData?.favorites) {
+      return null;
+    }
+
+    const examCode = window.currentExam.exam_code || window.currentExam.code;
+    if (!examCode) return null;
+
+    const questionNumber = questionIndex + 1; // Convert to 1-based
+    const favorite = window.favoritesData.favorites[examCode]?.[questionNumber];
+    
+    return favorite?.difficultyRating || null;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error getting question difficulty rating:", error);
+    }
+    return null;
+  }
+}
+
+/**
+ * Clear difficulty rating for a question
+ * @param {number} questionIndex - Question index (0-based)
+ * @returns {boolean} Success status
+ */
+function clearQuestionDifficultyRating(questionIndex) {
+  try {
+    if (!window.currentExam || !window.favoritesData?.favorites) {
+      return false;
+    }
+
+    const examCode = window.currentExam.exam_code || window.currentExam.code;
+    if (!examCode) return false;
+
+    const questionNumber = questionIndex + 1; // Convert to 1-based
+    const favorite = window.favoritesData.favorites[examCode]?.[questionNumber];
+    
+    if (favorite) {
+      delete favorite.difficultyRating;
+      delete favorite.difficultyTimestamp;
+      favorite.lastModified = Date.now();
+
+      // If the entry has no meaningful data left, remove it entirely
+      if (!favorite.isFavorite && !favorite.category && (!favorite.note || favorite.note.trim() === '')) {
+        delete window.favoritesData.favorites[examCode][questionNumber];
+      }
+
+      // Save to localStorage
+      if (typeof window.saveFavorites === 'function') {
+        window.saveFavorites();
+      }
+
+      // Update UI if functions available
+      if (typeof window.updateProgressSidebar === 'function') {
+        window.updateProgressSidebar();
+      }
+      if (typeof window.updateFilterCounts === 'function') {
+        window.updateFilterCounts();
+      }
+
+      if (typeof window.devLog === 'function') {
+        window.devLog(`🎯 Cleared difficulty rating for question ${questionNumber}`);
+      }
+
+      return true;
+    }
+
+    return false;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error clearing question difficulty rating:", error);
+    }
+    return false;
+  }
+}
+
+/**
+ * Get difficulty statistics for an exam
+ * @param {string} examCode - Exam code (optional, defaults to current exam)
+ * @returns {object} Difficulty statistics
+ */
+function getDifficultyStatsForExam(examCode = null) {
+  try {
+    const targetExamCode = examCode || (window.currentExam?.exam_code || window.currentExam?.code);
+    if (!targetExamCode || !window.favoritesData?.favorites) {
+      return {
+        easy: 0,
+        medium: 0,
+        hard: 0,
+        total: 0,
+        averageRating: null
+      };
+    }
+
+    const examFavorites = window.favoritesData.favorites[targetExamCode] || {};
+    const stats = {
+      easy: 0,
+      medium: 0,
+      hard: 0,
+      total: 0,
+      averageRating: null
+    };
+
+    // Count difficulty ratings
+    Object.values(examFavorites).forEach(favorite => {
+      if (favorite.difficultyRating) {
+        stats[favorite.difficultyRating]++;
+        stats.total++;
+      }
+    });
+
+    // Calculate average rating (easy=1, medium=2, hard=3)
+    if (stats.total > 0) {
+      const weightedSum = (stats.easy * 1) + (stats.medium * 2) + (stats.hard * 3);
+      stats.averageRating = weightedSum / stats.total;
+    }
+
+    return stats;
+  } catch (error) {
+    if (typeof window.devError === 'function') {
+      window.devError("Error getting difficulty stats for exam:", error);
+    }
+    return {
+      easy: 0,
+      medium: 0,
+      hard: 0,
+      total: 0,
+      averageRating: null
+    };
+  }
+}
+
+// ===========================
 // STATISTICS & ANALYTICS
 // ===========================
 
@@ -636,6 +862,12 @@ export {
   removeCustomCategory,
   getAllCategories,
   updateQuestionCategory,
+  
+  // Difficulty rating management
+  setQuestionDifficultyRating,
+  getQuestionDifficultyRating,
+  clearQuestionDifficultyRating,
+  getDifficultyStatsForExam,
   
   // Statistics & analytics
   getFavoritesStats,

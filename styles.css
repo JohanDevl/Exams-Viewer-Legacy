@@ -2660,6 +2660,7 @@ button.discussion-toggle:hover {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .note-btn:hover {
@@ -2930,25 +2931,186 @@ button.discussion-toggle:hover {
   background-color: #c82333;
 }
 
+/* Difficulty Rating System */
+.difficulty-rating {
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.difficulty-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.difficulty-label::before {
+  content: "🎯";
+  font-size: 0.9rem;
+}
+
+.difficulty-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.difficulty-btn {
+  padding: 0.35rem 0.6rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  min-width: 65px;
+  justify-content: center;
+  position: relative;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.difficulty-btn:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.difficulty-btn i {
+  font-size: 0.9rem;
+}
+
+/* Easy Button Styles */
+.difficulty-btn.easy.active {
+  background-color: rgba(34, 197, 94, 0.2) !important;
+  color: var(--success-color) !important;
+  border-color: var(--success-color) !important;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3) !important;
+  font-weight: 600 !important;
+}
+
+.difficulty-btn.easy.active:hover {
+  background-color: rgba(34, 197, 94, 0.25);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Medium Button Styles */
+.difficulty-btn.medium.active {
+  background-color: rgba(251, 146, 60, 0.2) !important;
+  color: var(--warning-color) !important;
+  border-color: var(--warning-color) !important;
+  box-shadow: 0 2px 8px rgba(251, 146, 60, 0.3) !important;
+  font-weight: 600 !important;
+}
+
+.difficulty-btn.medium.active:hover {
+  background-color: rgba(251, 146, 60, 0.25);
+  box-shadow: 0 4px 12px rgba(251, 146, 60, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Hard Button Styles */
+.difficulty-btn.hard.active {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  color: var(--error-color) !important;
+  border-color: var(--error-color) !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3) !important;
+  font-weight: 600 !important;
+}
+
+.difficulty-btn.hard.active:hover {
+  background-color: rgba(239, 68, 68, 0.25);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Clear Button Styles */
+.difficulty-btn.clear {
+  min-width: 28px;
+  padding: 0.35rem;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.difficulty-btn.clear:hover {
+  background-color: var(--error-bg);
+  color: var(--error-color);
+  border-color: var(--error-color);
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .difficulty-btn.easy.active {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
+
+[data-theme="dark"] .difficulty-btn.medium.active {
+  background-color: rgba(251, 146, 60, 0.2);
+  color: #fb923c;
+  border-color: rgba(251, 146, 60, 0.5);
+  box-shadow: 0 2px 8px rgba(251, 146, 60, 0.3);
+}
+
+[data-theme="dark"] .difficulty-btn.hard.active {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .difficulty-btn.clear:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
 /* Responsive Design for Favorites */
 @media (max-width: 768px) {
+  /* Keep favorites controls horizontal on tablets */
   .favorites-controls {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
   }
-
-  .favorites-controls > * {
-    width: 100%;
-    justify-content: center;
+  
+  /* Difficulty Rating Tablet Styles - only this section changes */
+  .difficulty-rating {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.5rem !important;
   }
-
-
-  .category-input-group {
-    flex-direction: column;
+  
+  .difficulty-label {
+    text-align: center;
+    justify-content: center !important;
   }
-
-  .add-new-category-btn {
-    justify-content: center;
+  
+  .difficulty-controls {
+    justify-content: center !important;
+    flex-wrap: wrap;
   }
 }
 
@@ -2973,6 +3135,62 @@ button.discussion-toggle:hover {
     justify-content: center;
     min-touch-target: 44px;
     font-size: 1.1rem;
+  }
+
+  /* Difficulty Rating Mobile Styles */
+  .difficulty-rating {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+    justify-content: flex-start !important;
+  }
+
+  .difficulty-label {
+    font-size: 0.8rem;
+    margin: 0 !important;
+    text-align: center;
+    justify-content: center !important;
+    white-space: normal;
+  }
+
+  .difficulty-controls {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: stretch !important;
+    flex: none !important;
+  }
+
+  .difficulty-btn {
+    padding: 0.75rem 0.5rem;
+    min-width: 0;
+    min-height: 44px;
+    font-size: 0.8rem;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .difficulty-btn i {
+    font-size: 1rem;
+  }
+
+  .difficulty-btn span {
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  .difficulty-btn.clear {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+  }
+
+  .difficulty-btn.clear span {
+    display: none;
   }
 
   .note-btn {
@@ -3718,6 +3936,51 @@ button.discussion-toggle:hover {
   background-color: rgba(156, 39, 176, 0.2);
   color: #9c27b0;
   border: 1px solid rgba(156, 39, 176, 0.4);
+}
+
+/* Difficulty Badge Styles */
+.status-badge.difficulty {
+  font-weight: 600;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-badge.difficulty.easy {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: var(--success-color);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.status-badge.difficulty.medium {
+  background-color: rgba(251, 146, 60, 0.15);
+  color: var(--warning-color);
+  border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.status-badge.difficulty.hard {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--error-color);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Dark mode difficulty badges */
+[data-theme="dark"] .status-badge.difficulty.easy {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+[data-theme="dark"] .status-badge.difficulty.medium {
+  background-color: rgba(251, 146, 60, 0.2);
+  color: #fb923c;
+  border: 1px solid rgba(251, 146, 60, 0.4);
+}
+
+[data-theme="dark"] .status-badge.difficulty.hard {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.4);
 }
 
 [data-theme="dark"] .status-badge.categorized {

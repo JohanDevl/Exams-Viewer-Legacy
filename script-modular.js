@@ -129,6 +129,8 @@ import {
 import {
   toggleQuestionFavorite,
   isQuestionFavorite,
+  getQuestionFavoriteData,
+  getCurrentExamFavorites,
   updateQuestionNote,
   getQuestionNote,
   getQuestionCategory,
@@ -136,6 +138,10 @@ import {
   removeCustomCategory,
   getAllCategories,
   updateQuestionCategory,
+  setQuestionDifficultyRating,
+  getQuestionDifficultyRating,
+  clearQuestionDifficultyRating,
+  getDifficultyStatsForExam,
   getFavoritesStats,
   cleanupObsoleteData,
 } from './js/modules/favorites.js';
@@ -338,6 +344,8 @@ function exposeGlobalFunctions() {
   // Favorites and notes
   window.toggleQuestionFavorite = toggleQuestionFavorite;
   window.isQuestionFavorite = isQuestionFavorite;
+  window.getQuestionFavoriteData = getQuestionFavoriteData;
+  window.getCurrentExamFavorites = getCurrentExamFavorites;
   window.updateQuestionNote = updateQuestionNote;
   window.getQuestionNote = getQuestionNote;
   window.getQuestionCategory = getQuestionCategory;
@@ -345,6 +353,11 @@ function exposeGlobalFunctions() {
   window.removeCustomCategory = removeCustomCategory;
   window.getAllCategories = getAllCategories;
   window.updateQuestionCategory = updateQuestionCategory;
+  // Difficulty rating functions
+  window.setQuestionDifficultyRating = setQuestionDifficultyRating;
+  window.getQuestionDifficultyRating = getQuestionDifficultyRating;
+  window.clearQuestionDifficultyRating = clearQuestionDifficultyRating;
+  window.getDifficultyStatsForExam = getDifficultyStatsForExam;
   window.getFavoritesStats = getFavoritesStats;
   // Note: resetFavoritesData, exportFavorites, importFavorites not implemented in favorites module yet
   // window.resetFavoritesData = resetFavoritesData;
@@ -1005,6 +1018,150 @@ function setupMainEventListeners() {
     });
   }
 
+  // ===========================
+  // DIFFICULTY RATING BUTTONS
+  // ===========================
+  // Easy difficulty button
+  const easyBtn = document.getElementById("easyBtn");
+  if (easyBtn) {
+    if (typeof window.devLog === 'function') {
+      window.devLog("✅ Easy difficulty button found and event listener attached");
+    }
+    easyBtn.addEventListener("click", () => {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🎯 Easy button clicked!");
+      }
+      if (!window.currentExam || !window.currentQuestions?.length) {
+        if (typeof window.devLog === 'function') {
+          window.devLog("❌ No exam or questions loaded");
+        }
+        return;
+      }
+      if (typeof window.setQuestionDifficultyRating === 'function') {
+        window.setQuestionDifficultyRating(window.currentQuestionIndex, 'easy');
+        updateDifficultyButtons();
+        
+        // Update progress sidebar
+        if (typeof window.updateProgressSidebar === 'function') {
+          setTimeout(() => {
+            window.updateProgressSidebar();
+          }, 50);
+        }
+        
+        if (typeof window.showSuccess === 'function') {
+          window.showSuccess("Question marked as Easy");
+        }
+      } else {
+        if (typeof window.devLog === 'function') {
+          window.devLog("❌ setQuestionDifficultyRating function not found");
+        }
+      }
+    });
+  } else {
+    if (typeof window.devLog === 'function') {
+      window.devLog("❌ Easy difficulty button NOT found!");
+    }
+  }
+
+  // Medium difficulty button
+  const mediumBtn = document.getElementById("mediumBtn");
+  if (mediumBtn) {
+    if (typeof window.devLog === 'function') {
+      window.devLog("✅ Medium difficulty button found and event listener attached");
+    }
+    mediumBtn.addEventListener("click", () => {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🎯 Medium button clicked!");
+      }
+      if (!window.currentExam || !window.currentQuestions?.length) return;
+      if (typeof window.setQuestionDifficultyRating === 'function') {
+        window.setQuestionDifficultyRating(window.currentQuestionIndex, 'medium');
+        updateDifficultyButtons();
+        
+        // Update progress sidebar
+        if (typeof window.updateProgressSidebar === 'function') {
+          setTimeout(() => {
+            window.updateProgressSidebar();
+          }, 50);
+        }
+        
+        if (typeof window.showSuccess === 'function') {
+          window.showSuccess("Question marked as Medium");
+        }
+      }
+    });
+  } else {
+    if (typeof window.devLog === 'function') {
+      window.devLog("❌ Medium difficulty button NOT found!");
+    }
+  }
+
+  // Hard difficulty button
+  const hardBtn = document.getElementById("hardBtn");
+  if (hardBtn) {
+    if (typeof window.devLog === 'function') {
+      window.devLog("✅ Hard difficulty button found and event listener attached");
+    }
+    hardBtn.addEventListener("click", () => {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🎯 Hard button clicked!");
+      }
+      if (!window.currentExam || !window.currentQuestions?.length) return;
+      if (typeof window.setQuestionDifficultyRating === 'function') {
+        window.setQuestionDifficultyRating(window.currentQuestionIndex, 'hard');
+        updateDifficultyButtons();
+        
+        // Update progress sidebar
+        if (typeof window.updateProgressSidebar === 'function') {
+          setTimeout(() => {
+            window.updateProgressSidebar();
+          }, 50);
+        }
+        
+        if (typeof window.showSuccess === 'function') {
+          window.showSuccess("Question marked as Hard");
+        }
+      }
+    });
+  } else {
+    if (typeof window.devLog === 'function') {
+      window.devLog("❌ Hard difficulty button NOT found!");
+    }
+  }
+
+  // Clear difficulty button
+  const clearDifficultyBtn = document.getElementById("clearDifficultyBtn");
+  if (clearDifficultyBtn) {
+    if (typeof window.devLog === 'function') {
+      window.devLog("✅ Clear difficulty button found and event listener attached");
+    }
+    clearDifficultyBtn.addEventListener("click", () => {
+      if (typeof window.devLog === 'function') {
+        window.devLog("🎯 Clear difficulty button clicked!");
+      }
+      if (!window.currentExam || !window.currentQuestions?.length) return;
+      if (typeof window.clearQuestionDifficultyRating === 'function') {
+        window.clearQuestionDifficultyRating(window.currentQuestionIndex);
+        updateDifficultyButtons();
+        
+        // Update progress sidebar
+        if (typeof window.updateProgressSidebar === 'function') {
+          setTimeout(() => {
+            window.updateProgressSidebar();
+          }, 50);
+        }
+        
+        if (typeof window.showSuccess === 'function') {
+          window.showSuccess("Difficulty rating cleared");
+        }
+      }
+    });
+  } else {
+    if (typeof window.devLog === 'function') {
+      window.devLog("❌ Clear difficulty button NOT found!");
+    }
+  }
+
   // Close category modal
   const closeCategoryModal = document.getElementById("closeCategoryModal");
   if (closeCategoryModal) {
@@ -1405,6 +1562,77 @@ function setupMainEventListeners() {
       }
     });
 
+    // Difficulty rating keyboard shortcuts
+    document.addEventListener('keydown', (event) => {
+      // Only handle difficulty shortcuts when no modal is open and not typing in input
+      const activeElement = document.activeElement;
+      const isTyping = activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA' || activeElement.contentEditable === 'true';
+      
+      if (isTyping) return;
+      
+      // Check if any modal is open
+      const isModalOpen = modals.some(modalInfo => {
+        const modal = document.getElementById(modalInfo.id);
+        return modal && modal.style.display === 'flex';
+      });
+      
+      if (isModalOpen) return;
+      
+      // Handle difficulty shortcuts
+      if (window.currentExam && window.currentQuestions?.length && window.currentQuestionIndex !== undefined) {
+        switch (event.key) {
+          case '1':
+            if (typeof window.setQuestionDifficultyRating === 'function') {
+              window.setQuestionDifficultyRating(window.currentQuestionIndex, 'easy');
+              if (typeof window.updateDifficultyButtons === 'function') {
+                window.updateDifficultyButtons();
+              }
+              if (typeof window.showSuccess === 'function') {
+                window.showSuccess("Question marked as Easy (Shortcut: 1)");
+              }
+              event.preventDefault();
+            }
+            break;
+          case '2':
+            if (typeof window.setQuestionDifficultyRating === 'function') {
+              window.setQuestionDifficultyRating(window.currentQuestionIndex, 'medium');
+              if (typeof window.updateDifficultyButtons === 'function') {
+                window.updateDifficultyButtons();
+              }
+              if (typeof window.showSuccess === 'function') {
+                window.showSuccess("Question marked as Medium (Shortcut: 2)");
+              }
+              event.preventDefault();
+            }
+            break;
+          case '3':
+            if (typeof window.setQuestionDifficultyRating === 'function') {
+              window.setQuestionDifficultyRating(window.currentQuestionIndex, 'hard');
+              if (typeof window.updateDifficultyButtons === 'function') {
+                window.updateDifficultyButtons();
+              }
+              if (typeof window.showSuccess === 'function') {
+                window.showSuccess("Question marked as Hard (Shortcut: 3)");
+              }
+              event.preventDefault();
+            }
+            break;
+          case '0':
+            if (typeof window.clearQuestionDifficultyRating === 'function') {
+              window.clearQuestionDifficultyRating(window.currentQuestionIndex);
+              if (typeof window.updateDifficultyButtons === 'function') {
+                window.updateDifficultyButtons();
+              }
+              if (typeof window.showSuccess === 'function') {
+                window.showSuccess("Difficulty rating cleared (Shortcut: 0)");
+              }
+              event.preventDefault();
+            }
+            break;
+        }
+      }
+    });
+
     // Click outside modal handler
     modals.forEach(modalInfo => {
       const modal = document.getElementById(modalInfo.id);
@@ -1645,6 +1873,37 @@ function updateOverviewTab() {
     window.devLog(`📊 Favorites data structure:`, window.favoritesData?.favorites);
   }
   
+  // Calculate difficulty rating statistics
+  let totalDifficultyRated = 0;
+  let easyCount = 0, mediumCount = 0, hardCount = 0;
+  
+  if (window.favoritesData && window.favoritesData.favorites && typeof window.favoritesData.favorites === 'object') {
+    Object.values(window.favoritesData.favorites).forEach(examFavorites => {
+      if (examFavorites && typeof examFavorites === 'object') {
+        Object.values(examFavorites).forEach(favoriteData => {
+          if (favoriteData && favoriteData.difficultyRating) {
+            totalDifficultyRated++;
+            switch (favoriteData.difficultyRating) {
+              case 'easy':
+                easyCount++;
+                break;
+              case 'medium':
+                mediumCount++;
+                break;
+              case 'hard':
+                hardCount++;
+                break;
+            }
+          }
+        });
+      }
+    });
+  }
+  
+  if (typeof window.devLog === 'function') {
+    window.devLog(`🎯 Calculating difficulty: found ${totalDifficultyRated} rated questions (${easyCount} easy, ${mediumCount} medium, ${hardCount} hard)`);
+  }
+  
   // Format time display
   const formatTime = (seconds) => {
     if (seconds < 60) return `${seconds}s`;
@@ -1670,6 +1929,8 @@ function updateOverviewTab() {
     totalTimeSpent: document.getElementById("totalTimeSpent"),
     totalSessions: document.getElementById("totalSessions"),
     totalFavorites: document.getElementById("totalFavorites"),
+    totalDifficultyRated: document.getElementById("totalDifficultyRated"),
+    difficultyBreakdown: document.getElementById("difficultyBreakdown"),
     
     // Percentages and trends
     correctPercentage: document.getElementById("correctPercentage"),
@@ -1699,6 +1960,8 @@ function updateOverviewTab() {
   if (elements.totalTimeSpent) elements.totalTimeSpent.textContent = formatTime(globalStats.totalTime);
   if (elements.totalSessions) elements.totalSessions.textContent = globalStats.totalSessions;
   if (elements.totalFavorites) elements.totalFavorites.textContent = totalFavorites;
+  if (elements.totalDifficultyRated) elements.totalDifficultyRated.textContent = totalDifficultyRated;
+  if (elements.difficultyBreakdown) elements.difficultyBreakdown.textContent = `${easyCount} easy, ${mediumCount} medium, ${hardCount} hard`;
   
   // Update percentage displays
   if (elements.correctPercentage) elements.correctPercentage.textContent = `${correctPercentage}% correct`;
@@ -2591,6 +2854,11 @@ function updateFavoritesUI() {
       showNoteReadView();
     }
   }
+  
+  // Update difficulty rating buttons
+  if (typeof window.updateDifficultyButtons === 'function') {
+    window.updateDifficultyButtons();
+  }
 }
 
 /**
@@ -2774,9 +3042,46 @@ function removeCategoryAndRefreshUI(categoryName) {
   }
 }
 
+/**
+ * Update difficulty rating buttons for current question
+ */
+function updateDifficultyButtons() {
+  if (!window.currentExam || !window.currentQuestions?.length || window.currentQuestionIndex === undefined) {
+    return;
+  }
+  
+  // Get current difficulty rating
+  const currentRating = typeof window.getQuestionDifficultyRating === 'function' 
+    ? window.getQuestionDifficultyRating(window.currentQuestionIndex) 
+    : null;
+  
+  // Update easy button
+  const easyBtn = document.getElementById("easyBtn");
+  if (easyBtn) {
+    easyBtn.classList.toggle("active", currentRating === 'easy');
+  }
+  
+  // Update medium button
+  const mediumBtn = document.getElementById("mediumBtn");
+  if (mediumBtn) {
+    mediumBtn.classList.toggle("active", currentRating === 'medium');
+  }
+  
+  // Update hard button
+  const hardBtn = document.getElementById("hardBtn");
+  if (hardBtn) {
+    hardBtn.classList.toggle("active", currentRating === 'hard');
+  }
+  
+  if (typeof window.devLog === 'function') {
+    window.devLog(`🎯 Updated difficulty buttons for question ${window.currentQuestionIndex + 1}, rating: ${currentRating || 'none'}`);
+  }
+}
+
 // Attach favorites and category UI functions to window
 window.getQuestionData = getQuestionData;
 window.updateFavoritesUI = updateFavoritesUI;
+window.updateDifficultyButtons = updateDifficultyButtons;
 window.updateCategoryDropdown = updateCategoryDropdown;
 window.updateCategoryModal = updateCategoryModal;
 window.removeCategoryAndRefreshUI = removeCategoryAndRefreshUI;

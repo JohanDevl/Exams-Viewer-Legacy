@@ -393,6 +393,21 @@ function updateProgressSidebar() {
           `);
         }
         
+        // Add difficulty badge if rated
+        if (questionStatus.difficultyRating) {
+          const difficultyIcons = {
+            'easy': '<i class="fas fa-thumbs-up"></i>',
+            'medium': '<i class="fas fa-minus"></i>',
+            'hard': '<i class="fas fa-thumbs-down"></i>'
+          };
+          
+          badges.push(`
+            <span class="status-badge difficulty ${questionStatus.difficultyRating}" aria-label="${questionStatus.difficultyRating} difficulty">
+              ${difficultyIcons[questionStatus.difficultyRating]}
+            </span>
+          `);
+        }
+        
         statusBadges = `
           <div class="question-status-indicators">
             <div class="primary-status">

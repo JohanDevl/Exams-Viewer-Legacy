@@ -40,7 +40,7 @@ function resetSearchInterface() {
     }
     
     // Reset all filter checkboxes
-    const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites'];
+    const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites', 'filterDifficultyEasy', 'filterDifficultyMedium', 'filterDifficultyHard'];
     filterCheckboxes.forEach(id => {
       const checkbox = document.getElementById(id);
       if (checkbox) {
@@ -189,7 +189,7 @@ function resetSearchUI() {
     }
     
     // Clear filter checkboxes
-    const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites'];
+    const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites', 'filterDifficultyEasy', 'filterDifficultyMedium', 'filterDifficultyHard'];
     filterCheckboxes.forEach(id => {
       const checkbox = document.getElementById(id);
       if (checkbox) {
@@ -326,6 +326,11 @@ function applyStatusFilters(baseQuestions = null) {
     const showUnanswered = document.getElementById("filterUnanswered")?.checked || false;
     const showFavorites = document.getElementById("filterFavorites")?.checked || false;
     
+    // Get difficulty filter states
+    const showEasy = document.getElementById("filterDifficultyEasy")?.checked || false;
+    const showMedium = document.getElementById("filterDifficultyMedium")?.checked || false;
+    const showHard = document.getElementById("filterDifficultyHard")?.checked || false;
+    
     if (typeof window.devLog === 'function') {
       window.devLog(`🔍 applyStatusFilters: ${questionsToFilter.length} questions to filter, showFavorites=${showFavorites}`);
     }
@@ -341,9 +346,10 @@ function applyStatusFilters(baseQuestions = null) {
     
     // If no filters are active, return all questions
     const hasStatusFilters = showAnswered || showUnanswered || showFavorites;
+    const hasDifficultyFilters = showEasy || showMedium || showHard;
     const hasCategoryFilters = activeCategoryFilters.length > 0;
     
-    if (!hasStatusFilters && !hasCategoryFilters) {
+    if (!hasStatusFilters && !hasDifficultyFilters && !hasCategoryFilters) {
       return questionsToFilter;
     }
     
@@ -357,6 +363,7 @@ function applyStatusFilters(baseQuestions = null) {
       if (originalIndex === -1) return false;
       
       let shouldIncludeByStatus = !hasStatusFilters; // Include by default if no status filters
+      let shouldIncludeByDifficulty = !hasDifficultyFilters; // Include by default if no difficulty filters
       let shouldIncludeByCategory = !hasCategoryFilters; // Include by default if no category filters
       
       // Check status filters (OR logic)
@@ -381,6 +388,21 @@ function applyStatusFilters(baseQuestions = null) {
         }
       }
       
+      // Check difficulty filters (OR logic)
+      if (hasDifficultyFilters) {
+        const questionDifficulty = typeof window.getQuestionDifficultyRating === 'function' ? 
+          window.getQuestionDifficultyRating(originalIndex) : null;
+        
+        shouldIncludeByDifficulty = 
+          (showEasy && questionDifficulty === 'easy') ||
+          (showMedium && questionDifficulty === 'medium') ||
+          (showHard && questionDifficulty === 'hard');
+          
+        if (typeof window.devLog === 'function') {
+          window.devLog(`🎯 Q${originalIndex} difficulty=${questionDifficulty}, shouldIncludeByDifficulty: ${shouldIncludeByDifficulty}`);
+        }
+      }
+      
       // Check category filters (OR logic)
       if (hasCategoryFilters) {
         const questionCategory = typeof window.getQuestionCategory === 'function' ? 
@@ -393,8 +415,8 @@ function applyStatusFilters(baseQuestions = null) {
         }
       }
       
-      // Both status and category filters must pass (AND logic between filter types)
-      const finalResult = shouldIncludeByStatus && shouldIncludeByCategory;
+      // All filter types must pass (AND logic between filter types)
+      const finalResult = shouldIncludeByStatus && shouldIncludeByDifficulty && shouldIncludeByCategory;
       
       if (typeof window.devLog === 'function') {
         window.devLog(`🔍 Q${originalIndex} FINAL RESULT: ${finalResult} (status: ${shouldIncludeByStatus}, category: ${shouldIncludeByCategory})`);
@@ -519,11 +541,17 @@ function updateResetFiltersButtonVisibility() {
       return checkbox?.checked;
     });
     
+    const difficultyCheckboxes = ['filterDifficultyEasy', 'filterDifficultyMedium', 'filterDifficultyHard'];
+    const hasDifficultyFilters = difficultyCheckboxes.some(id => {
+      const checkbox = document.getElementById(id);
+      return checkbox?.checked;
+    });
+    
     const categoryCheckboxes = document.querySelectorAll('#categoryFilterOptions input[type="checkbox"]:checked');
     const hasCategoryFilters = categoryCheckboxes.length > 0;
     
     // Show button if any filters are active
-    if (hasSearchText || hasStatusFilters || hasCategoryFilters) {
+    if (hasSearchText || hasStatusFilters || hasDifficultyFilters || hasCategoryFilters) {
       resetFiltersBtn.style.display = 'inline-flex';
     } else {
       resetFiltersBtn.style.display = 'none';
@@ -547,7 +575,7 @@ function resetAllFilters() {
     }
     
     // Clear filter checkboxes
-    const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites'];
+    const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites', 'filterDifficultyEasy', 'filterDifficultyMedium', 'filterDifficultyHard'];
     filterCheckboxes.forEach(id => {
       const checkbox = document.getElementById(id);
       if (checkbox) {
@@ -766,6 +794,9 @@ function updateFilterCounts() {
     let answeredCount = 0;
     let unansweredCount = 0;
     let favoritesCount = 0;
+    let easyCount = 0;
+    let mediumCount = 0;
+    let hardCount = 0;
     const categoryCounts = {};
     
     // For status filters, always count based on search results (not applied filters)
@@ -809,12 +840,26 @@ function updateFilterCounts() {
       if (category) {
         categoryCounts[category] = (categoryCounts[category] || 0) + 1;
       }
+      
+      // Count difficulty ratings
+      const difficulty = typeof window.getQuestionDifficultyRating === 'function' ? 
+        window.getQuestionDifficultyRating(originalIndex) : null;
+      if (difficulty === 'easy') {
+        easyCount++;
+      } else if (difficulty === 'medium') {
+        mediumCount++;
+      } else if (difficulty === 'hard') {
+        hardCount++;
+      }
     });
     
     // Update filter counts in spans
     const answeredCountSpan = document.getElementById('answeredCount');
     const unansweredCountSpan = document.getElementById('unansweredCount');
     const favoritesCountSpan = document.getElementById('favoritesCount');
+    const easyCountSpan = document.getElementById('easyCount');
+    const mediumCountSpan = document.getElementById('mediumCount');
+    const hardCountSpan = document.getElementById('hardCount');
     
     if (answeredCountSpan) {
       answeredCountSpan.textContent = answeredCount;
@@ -824,6 +869,15 @@ function updateFilterCounts() {
     }
     if (favoritesCountSpan) {
       favoritesCountSpan.textContent = favoritesCount;
+    }
+    if (easyCountSpan) {
+      easyCountSpan.textContent = easyCount;
+    }
+    if (mediumCountSpan) {
+      mediumCountSpan.textContent = mediumCount;
+    }
+    if (hardCountSpan) {
+      hardCountSpan.textContent = hardCount;
     }
     
     // Update category filters
@@ -1079,7 +1133,7 @@ function setupSearchEventListeners() {
     }
     
     // Filter checkboxes
-    const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites'];
+    const filterCheckboxes = ['filterAnswered', 'filterUnanswered', 'filterFavorites', 'filterDifficultyEasy', 'filterDifficultyMedium', 'filterDifficultyHard'];
     filterCheckboxes.forEach(id => {
       const checkbox = document.getElementById(id);
       if (checkbox) {

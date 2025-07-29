@@ -877,6 +877,11 @@ function getQuestionStatus(questionIndex) {
     : '';
   const hasNotes = questionNote && questionNote.trim().length > 0;
   
+  // Check difficulty rating
+  const difficultyRating = typeof window.getQuestionDifficultyRating === 'function'
+    ? window.getQuestionDifficultyRating(questionIndex) // Already 0-based index
+    : null;
+  
   // For now, assume not categorized (can be enhanced later)
   const isCategorized = false;
 
@@ -889,7 +894,8 @@ function getQuestionStatus(questionIndex) {
     primaryStatus,
     isFavorite,
     hasNotes,
-    isCategorized
+    isCategorized,
+    difficultyRating
   };
 
   if (typeof window.devLog === 'function') {
