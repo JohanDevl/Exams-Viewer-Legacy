@@ -3118,6 +3118,9 @@ button.discussion-toggle:hover {
   .favorites-section {
     padding: 0.75rem;
     margin-bottom: 1rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
   }
 
   .favorites-controls {
@@ -3184,9 +3187,11 @@ button.discussion-toggle:hover {
   }
 
   .difficulty-btn.clear {
-    grid-column: 2;
+    grid-column: 1 / -1;
     grid-row: 2;
     min-width: 0;
+    width: 100%;
+    justify-self: stretch;
   }
 
   .difficulty-btn.clear span {
