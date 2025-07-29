@@ -6542,8 +6542,7 @@ button.discussion-toggle:hover {
   .question-section {
     padding-bottom: calc(60px + var(--safe-area-inset-bottom));
   }
-}
-
+  
   .question-jump {
     min-width: 140px;
   }
