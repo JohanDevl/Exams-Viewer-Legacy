@@ -3185,7 +3185,7 @@ button.discussion-toggle:hover {
 }
 
 @media (max-width: 480px) {
-  .favorites-section {
+  .favorites-section:not([style*="display: none"]) {
     padding: 0.75rem;
     margin-bottom: 1rem;
     display: flex !important;
