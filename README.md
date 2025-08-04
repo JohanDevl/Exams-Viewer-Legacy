@@ -2,7 +2,9 @@
 
 > **⚠️ ARCHIVED REPOSITORY - NO LONGER MAINTAINED**
 > 
-> This repository has been archived and will no longer receive updates. It contains the legacy version of Exams Viewer with the original technology stack. For the latest version and ongoing development, please refer to the main active repository.
+> This repository has been archived and will no longer receive updates. It contains the legacy version of Exams Viewer with the original technology stack. 
+> 
+> **🔗 For the latest version and ongoing development, visit:** [https://github.com/JohanDevl/Exams-Viewer](https://github.com/JohanDevl/Exams-Viewer)
 
 > **Modern exam practice platform with automated scraping and intelligent features**
 
