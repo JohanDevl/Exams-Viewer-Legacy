@@ -61,8 +61,8 @@ Exams-Viewer/
 
 1. **Clone and Initialize**
    ```bash
-   git clone https://github.com/JohanDevl/Exams-Viewer.git
-   cd Exams-Viewer
+   git clone https://github.com/JohanDevl/Exams-Viewer-Legacy.git
+   cd Exams-Viewer-Legacy
    
    # Install Python dependencies
    pip install -r requirements.txt

@@ -6,7 +6,7 @@
 
 **No installation needed!** Just visit the GitHub Pages URL:
 
-- **Live Demo**: [https://JohanDevl.github.io/Exams-Viewer/](https://JohanDevl.github.io/Exams-Viewer/)
+- **Live Demo**: [https://JohanDevl.github.io/Exams-Viewer-Legacy/](https://JohanDevl.github.io/Exams-Viewer-Legacy/)
 - The interface automatically detects your system theme preference
 - Includes full statistics tracking and all features
 - Works on all modern browsers and mobile devices
@@ -17,8 +17,8 @@ If you want to run the scraper or contribute to development:
 
 ```bash
 # Clone the repository
-git clone https://github.com/JohanDevl/Exams-Viewer.git
-cd Exams-Viewer
+git clone https://github.com/JohanDevl/Exams-Viewer-Legacy.git
+cd Exams-Viewer-Legacy
 
 # Install Python dependencies
 pip install -r requirements.txt

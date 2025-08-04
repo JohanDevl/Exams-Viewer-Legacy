@@ -1,12 +1,16 @@
 # 🎓 Exams Viewer
 
+> **⚠️ ARCHIVED REPOSITORY - NO LONGER MAINTAINED**
+> 
+> This repository has been archived and will no longer receive updates. It contains the legacy version of Exams Viewer with the original technology stack. For the latest version and ongoing development, please refer to the main active repository.
+
 > **Modern exam practice platform with automated scraping and intelligent features**
 
 An advanced web application for practicing exam questions from ExamTopics.com with a modern modular architecture, comprehensive statistics, and enhanced user experience.
 
 ## 🌐 Live Demo
 
-**🚀 Web Interface**: [https://JohanDevl.github.io/Exams-Viewer/](https://JohanDevl.github.io/Exams-Viewer/)
+**🚀 Web Interface**: [https://JohanDevl.github.io/Exams-Viewer-Legacy/](https://JohanDevl.github.io/Exams-Viewer-Legacy/)
 
 > No installation required! Responsive design, dark mode, and all features work directly in your browser.
 
@@ -84,7 +88,7 @@ Currently supporting **20+ exams** across multiple ServiceNow certification trac
 ## 🚀 Quick Start
 
 ### For Study & Practice
-1. **Visit** [https://JohanDevl.github.io/Exams-Viewer/](https://JohanDevl.github.io/Exams-Viewer/)
+1. **Visit** [https://JohanDevl.github.io/Exams-Viewer-Legacy/](https://JohanDevl.github.io/Exams-Viewer-Legacy/)
 2. **Select** an exam from the dropdown
 3. **Start studying** with our enhanced interface
 4. **Track progress** with real-time statistics
@@ -92,8 +96,8 @@ Currently supporting **20+ exams** across multiple ServiceNow certification trac
 ### For Development
 ```bash
 # Clone the repository
-git clone https://github.com/JohanDevl/Exams-Viewer.git
-cd Exams-Viewer
+git clone https://github.com/JohanDevl/Exams-Viewer-Legacy.git
+cd Exams-Viewer-Legacy
 
 # Install Python dependencies for scraping
 pip install -r requirements.txt
@@ -237,8 +241,8 @@ We welcome contributions! Here's how to get started:
 ### Development Setup
 ```bash
 # Clone your fork
-git clone https://github.com/yourusername/Exams-Viewer.git
-cd Exams-Viewer
+git clone https://github.com/yourusername/Exams-Viewer-Legacy.git
+cd Exams-Viewer-Legacy
 
 # Install dependencies
 pip install -r requirements.txt
